@@ -32,7 +32,7 @@ interface PartnerDetailScreenProps {
   onBack: () => void;
 }
 
-function SectionHeader({ icon, label }: { icon: React.ReactNode; label: string }) {
+function SectionHeader({ icon, label, bg }: { icon: React.ReactNode; label: string; bg?: string }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
       <div
@@ -40,7 +40,7 @@ function SectionHeader({ icon, label }: { icon: React.ReactNode; label: string }
           width: 32,
           height: 32,
           borderRadius: 8,
-          background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+          background: bg ?? 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -389,6 +389,7 @@ export function PartnerDetailScreen({
             <SectionHeader
               icon={<UserCircle size={16} style={{ color: 'var(--white)' }} />}
               label="Profile"
+              bg={`var(--style-${partner.persona.style})`}
             />
             <p style={{ fontSize: 13, color: 'var(--grey-600)', lineHeight: 1.55, marginBottom: 14 }}>
               {partner.persona.description}
