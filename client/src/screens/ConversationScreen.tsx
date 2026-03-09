@@ -110,14 +110,14 @@ export function ConversationScreen({
               width: 40,
               height: 40,
               borderRadius: 10,
-              background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+              background: styleColors[partner.persona.style] ?? 'var(--brand-navy)',
               color: 'var(--white)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               fontSize: 13,
               fontWeight: 800,
-              boxShadow: `0 2px 8px rgba(0,53,128,0.25), 0 0 0 2.5px ${styleColors[partner.persona.style] ?? 'transparent'}`,
+              boxShadow: '0 2px 8px rgba(0,53,128,0.25)',
             }}
           >
             {partner.persona.avatar}
@@ -198,7 +198,7 @@ export function ConversationScreen({
                 width: 44,
                 height: 44,
                 borderRadius: 12,
-                background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+                background: styleColors[partner.persona.style] ?? 'var(--brand-navy)',
                 color: 'var(--white)',
                 display: 'flex',
                 alignItems: 'center',
@@ -206,7 +206,7 @@ export function ConversationScreen({
                 fontSize: 14,
                 fontWeight: 800,
                 flexShrink: 0,
-                boxShadow: `0 3px 12px rgba(0,53,128,0.2), 0 0 0 2.5px ${styleColors[partner.persona.style] ?? 'transparent'}`,
+                boxShadow: '0 3px 12px rgba(0,0,0,0.15)',
               }}
             >
               {partner.persona.avatar}

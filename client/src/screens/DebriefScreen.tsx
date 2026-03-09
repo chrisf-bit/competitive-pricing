@@ -157,7 +157,7 @@ export function DebriefScreen({
                         width: 32,
                         height: 32,
                         borderRadius: '50%',
-                        background: 'var(--brand-navy)',
+                        background: `var(--style-${partner.persona.style})`,
                         color: 'var(--white)',
                         display: 'flex',
                         alignItems: 'center',

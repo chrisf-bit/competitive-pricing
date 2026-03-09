@@ -190,17 +190,6 @@ export function PortfolioScreen({
                   {/* Left: host info */}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
-                      <div
-                        style={{
-                          width: 8,
-                          height: 8,
-                          borderRadius: '50%',
-                          background: `var(--style-${partner.persona.style})`,
-                          flexShrink: 0,
-                          boxShadow: `0 0 4px var(--style-${partner.persona.style})`,
-                        }}
-                        title="Communication style"
-                      />
                       <h3 style={{ fontSize: 14, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {partner.persona.name}
                       </h3>
