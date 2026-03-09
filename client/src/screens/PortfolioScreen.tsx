@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   MapPin,
   Building2,
@@ -7,11 +6,16 @@ import {
   Globe,
   ArrowRight,
   Zap,
-  X,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
 import { getRPDLevel, getTrend } from '../engine/gameEngine';
 import { RPDBadge, RelationshipBadge, TrendIcon } from '../components/MetricBadge';
+
+const demandLabels: Record<string, string> = {
+  up: 'Rising',
+  flat: 'Stable',
+  down: 'Falling',
+};
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
@@ -32,7 +36,6 @@ export function PortfolioScreen({
   onSelectPartner,
   onAdvanceRound,
 }: PortfolioScreenProps) {
-  const [showMarketBar, setShowMarketBar] = useState(true);
   const canAdvance = actionsRemaining === 0;
 
   return (
@@ -47,61 +50,40 @@ export function PortfolioScreen({
       }}
     >
       {/* Market context bar */}
-      {showMarketBar && (
-        <div
-          data-tutorial="market-bar"
+      <div
+        data-tutorial="market-bar"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 12,
+          padding: '10px 16px',
+          background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+          borderRadius: 'var(--radius-md)',
+          fontSize: 13,
+          color: 'rgba(255,255,255,0.85)',
+          animation: 'fadeIn 0.3s ease',
+          boxShadow: 'var(--shadow-md)',
+        }}
+      >
+        <Globe size={16} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
+        <span style={{ flex: 1 }}>
+          <strong style={{ color: 'var(--white)' }}>Market Update:</strong>{' '}
+          {marketContext.seasonalNote}
+        </span>
+        <span
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 12,
-            padding: '10px 16px',
-            background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
-            borderRadius: 'var(--radius-md)',
-            fontSize: 13,
-            color: 'rgba(255,255,255,0.85)',
-            animation: 'fadeIn 0.3s ease',
-            boxShadow: 'var(--shadow-md)',
+            fontSize: 11,
+            fontWeight: 700,
+            color: 'rgba(255,255,255,0.6)',
+            background: 'rgba(255,255,255,0.1)',
+            padding: '4px 10px',
+            borderRadius: 'var(--radius-pill)',
+            whiteSpace: 'nowrap',
           }}
         >
-          <Globe size={16} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
-          <span style={{ flex: 1 }}>
-            <strong style={{ color: 'var(--white)' }}>Market Update:</strong>{' '}
-            {marketContext.seasonalNote}
-          </span>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 5,
-              fontSize: 12,
-              color: 'rgba(255,255,255,0.6)',
-              background: 'rgba(255,255,255,0.1)',
-              padding: '3px 10px',
-              borderRadius: 'var(--radius-pill)',
-            }}
-          >
-            Demand <TrendIcon direction={marketContext.demand} size={14} />
-          </div>
-          <button
-            onClick={() => setShowMarketBar(false)}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: 'rgba(255,255,255,0.4)',
-              cursor: 'pointer',
-              padding: 4,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              borderRadius: 4,
-              flexShrink: 0,
-            }}
-            title="Dismiss market update"
-          >
-            <X size={14} />
-          </button>
-        </div>
-      )}
+          Demand: {demandLabels[marketContext.demand] ?? 'Stable'}
+        </span>
+      </div>
 
       {/* Partner cards */}
       <div
