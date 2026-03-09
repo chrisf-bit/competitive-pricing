@@ -83,6 +83,8 @@ export function startConversation(state: GameState, partnerId: string): GameStat
       phaseIndex: 0,
       choices: [],
       currentResponse: null,
+      currentEmotion: null,
+      styleMatchScore: null,
     },
   };
 }
@@ -174,6 +176,8 @@ export function processConversationChoice(
         phaseIndex: conv.phaseIndex,
         choices: newChoices,
         currentResponse: response.text,
+        currentEmotion: response.emotion,
+        styleMatchScore,
       },
     };
   }
@@ -187,6 +191,8 @@ export function processConversationChoice(
       phaseIndex: conv.phaseIndex + 1,
       choices: newChoices,
       currentResponse: response.text,
+      currentEmotion: response.emotion,
+      styleMatchScore,
     },
   };
 }

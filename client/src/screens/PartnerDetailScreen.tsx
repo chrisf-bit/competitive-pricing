@@ -128,9 +128,21 @@ export function PartnerDetailScreen({
               />
             </div>
             <div>
-              <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>
-                {partner.persona.name}
-              </h2>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>
+                  {partner.persona.name}
+                </h2>
+                <div
+                  style={{
+                    width: 10,
+                    height: 10,
+                    borderRadius: '50%',
+                    background: `var(--style-${partner.persona.style})`,
+                    boxShadow: `0 0 6px var(--style-${partner.persona.style})`,
+                    flexShrink: 0,
+                  }}
+                />
+              </div>
               <div
                 style={{
                   display: 'flex',

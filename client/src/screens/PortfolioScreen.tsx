@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   MapPin,
   Building2,
@@ -6,6 +7,7 @@ import {
   Globe,
   ArrowRight,
   Zap,
+  X,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
 import { getRPDLevel, getTrend } from '../engine/gameEngine';
@@ -30,6 +32,7 @@ export function PortfolioScreen({
   onSelectPartner,
   onAdvanceRound,
 }: PortfolioScreenProps) {
+  const [showMarketBar, setShowMarketBar] = useState(true);
   const canAdvance = actionsRemaining === 0;
 
   return (
@@ -44,41 +47,61 @@ export function PortfolioScreen({
       }}
     >
       {/* Market context bar */}
-      <div
-        data-tutorial="market-bar"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          padding: '10px 16px',
-          background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
-          borderRadius: 'var(--radius-md)',
-          fontSize: 13,
-          color: 'rgba(255,255,255,0.85)',
-          animation: 'fadeIn 0.3s ease',
-          boxShadow: 'var(--shadow-md)',
-        }}
-      >
-        <Globe size={16} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
-        <span style={{ flex: 1 }}>
-          <strong style={{ color: 'var(--white)' }}>Market Update:</strong>{' '}
-          {marketContext.seasonalNote}
-        </span>
+      {showMarketBar && (
         <div
+          data-tutorial="market-bar"
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 5,
-            fontSize: 12,
-            color: 'rgba(255,255,255,0.6)',
-            background: 'rgba(255,255,255,0.1)',
-            padding: '3px 10px',
-            borderRadius: 'var(--radius-pill)',
+            gap: 12,
+            padding: '10px 16px',
+            background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+            borderRadius: 'var(--radius-md)',
+            fontSize: 13,
+            color: 'rgba(255,255,255,0.85)',
+            animation: 'fadeIn 0.3s ease',
+            boxShadow: 'var(--shadow-md)',
           }}
         >
-          Demand <TrendIcon direction={marketContext.demand} size={14} />
+          <Globe size={16} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
+          <span style={{ flex: 1 }}>
+            <strong style={{ color: 'var(--white)' }}>Market Update:</strong>{' '}
+            {marketContext.seasonalNote}
+          </span>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 5,
+              fontSize: 12,
+              color: 'rgba(255,255,255,0.6)',
+              background: 'rgba(255,255,255,0.1)',
+              padding: '3px 10px',
+              borderRadius: 'var(--radius-pill)',
+            }}
+          >
+            Demand <TrendIcon direction={marketContext.demand} size={14} />
+          </div>
+          <button
+            onClick={() => setShowMarketBar(false)}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: 'rgba(255,255,255,0.4)',
+              cursor: 'pointer',
+              padding: 4,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderRadius: 4,
+              flexShrink: 0,
+            }}
+            title="Dismiss market update"
+          >
+            <X size={14} />
+          </button>
         </div>
-      </div>
+      )}
 
       {/* Partner cards */}
       <div
@@ -185,6 +208,17 @@ export function PortfolioScreen({
                   {/* Left: host info */}
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
+                      <div
+                        style={{
+                          width: 8,
+                          height: 8,
+                          borderRadius: '50%',
+                          background: `var(--style-${partner.persona.style})`,
+                          flexShrink: 0,
+                          boxShadow: `0 0 4px var(--style-${partner.persona.style})`,
+                        }}
+                        title="Communication style"
+                      />
                       <h3 style={{ fontSize: 14, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                         {partner.persona.name}
                       </h3>

@@ -167,6 +167,8 @@ export interface GameState {
     phaseIndex: number;
     choices: string[];
     currentResponse: string | null;
+    currentEmotion: 'positive' | 'neutral' | 'cautious' | 'negative' | null;
+    styleMatchScore: number | null;
   } | null;
   gameComplete: boolean;
 }

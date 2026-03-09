@@ -82,7 +82,8 @@ export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
             You are an Account Manager at Booking.com. Your portfolio of six accommodation
             partners is underperforming on Experienced RPD. Over the next six weeks, you must
             diagnose pricing problems, choose the right strategy, and adapt your conversations
-            to each partner's style — all while balancing competitiveness, revenue, and trust.
+            to each partner — all while balancing competitiveness, revenue, and trust. Pay
+            attention to how each partner responds. Not everyone communicates the same way.
           </p>
 
           {/* Info cards */}
@@ -98,7 +99,7 @@ export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
             <InfoCard
               icon={<Users size={20} />}
               title="6 Partners"
-              text="Each with different pricing challenges and communication styles"
+              text="Each with different pricing challenges — and different ways of communicating"
             />
             <InfoCard
               icon={<TrendingUp size={20} />}

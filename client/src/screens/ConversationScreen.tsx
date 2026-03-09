@@ -11,9 +11,34 @@ interface ConversationScreenProps {
     phaseIndex: number;
     choices: string[];
     currentResponse: string | null;
+    currentEmotion: 'positive' | 'neutral' | 'cautious' | 'negative' | null;
+    styleMatchScore: number | null;
   };
   onChoice: (optionId: string) => void;
   onEnd: () => void;
+}
+
+const styleColors: Record<string, string> = {
+  red: 'var(--style-red)',
+  yellow: 'var(--style-yellow)',
+  green: 'var(--style-green)',
+  blue: 'var(--style-blue)',
+};
+
+function getReactionLabel(emotion: string, styleMatch: number): { text: string; color: string; bg: string } | null {
+  if (styleMatch >= 2 && emotion === 'positive') {
+    return { text: 'Really connected with that approach', color: 'var(--success)', bg: 'var(--success-bg)' };
+  }
+  if (styleMatch >= 1 && (emotion === 'positive' || emotion === 'neutral')) {
+    return { text: 'Responded well', color: 'var(--success)', bg: 'var(--success-bg)' };
+  }
+  if (styleMatch <= -2 || emotion === 'negative') {
+    return { text: 'That didn\'t land well', color: 'var(--danger)', bg: 'var(--danger-bg)' };
+  }
+  if (styleMatch <= -1 || emotion === 'cautious') {
+    return { text: 'Seemed hesitant', color: 'var(--warning)', bg: 'var(--warning-bg)' };
+  }
+  return null;
 }
 
 const phaseLabels = ['Opening', 'Recommendation', 'Objection Handling'];
@@ -92,7 +117,7 @@ export function ConversationScreen({
               justifyContent: 'center',
               fontSize: 13,
               fontWeight: 800,
-              boxShadow: '0 2px 8px rgba(0,53,128,0.25)',
+              boxShadow: `0 2px 8px rgba(0,53,128,0.25), 0 0 0 2.5px ${styleColors[partner.persona.style] ?? 'transparent'}`,
             }}
           >
             {partner.persona.avatar}
@@ -181,7 +206,7 @@ export function ConversationScreen({
                 fontSize: 14,
                 fontWeight: 800,
                 flexShrink: 0,
-                boxShadow: '0 3px 12px rgba(0,53,128,0.2)',
+                boxShadow: `0 3px 12px rgba(0,53,128,0.2), 0 0 0 2.5px ${styleColors[partner.persona.style] ?? 'transparent'}`,
               }}
             >
               {partner.persona.avatar}
@@ -215,6 +240,37 @@ export function ConversationScreen({
                   ? conversation.currentResponse
                   : partnerPrompt}
               </div>
+              {conversation.currentEmotion && conversation.styleMatchScore !== null && (() => {
+                const reaction = getReactionLabel(conversation.currentEmotion, conversation.styleMatchScore);
+                if (!reaction) return null;
+                return (
+                  <div
+                    style={{
+                      marginTop: 8,
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: 6,
+                      padding: '5px 12px',
+                      borderRadius: 'var(--radius-pill)',
+                      background: reaction.bg,
+                      color: reaction.color,
+                      fontSize: 11,
+                      fontWeight: 700,
+                      animation: 'fadeIn 0.4s ease',
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: 6,
+                        height: 6,
+                        borderRadius: '50%',
+                        background: reaction.color,
+                      }}
+                    />
+                    {reaction.text}
+                  </div>
+                );
+              })()}
             </div>
           </div>
         </div>
