@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: competitive-pricing
+    runtime: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/dist
+    envVars: []
