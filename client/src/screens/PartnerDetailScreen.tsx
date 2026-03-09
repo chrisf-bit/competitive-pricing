@@ -118,6 +118,7 @@ export function PartnerDetailScreen({
                 borderRadius: 12,
                 overflow: 'hidden',
                 flexShrink: 0,
+                border: `3px solid var(--style-${partner.persona.style})`,
                 boxShadow: '0 3px 12px rgba(0,53,128,0.3)',
               }}
             >

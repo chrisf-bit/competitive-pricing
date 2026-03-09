@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, ChevronRight, AlertTriangle, CheckCircle2, Shield } from 'lucide-react';
+import { User, ChevronRight, AlertTriangle, CheckCircle2, Shield, ArrowLeft } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getConversationTree } from '../data/conversations';
 
@@ -16,6 +16,7 @@ interface ConversationScreenProps {
   };
   onChoice: (optionId: string) => void;
   onEnd: () => void;
+  onBack: () => void;
 }
 
 const styleColors: Record<string, string> = {
@@ -49,6 +50,7 @@ export function ConversationScreen({
   conversation,
   onChoice,
   onEnd,
+  onBack,
 }: ConversationScreenProps) {
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
@@ -105,6 +107,28 @@ export function ConversationScreen({
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          {conversation.choices.length === 0 && (
+            <button
+              onClick={onBack}
+              style={{
+                background: 'var(--white)',
+                border: '2px solid var(--grey-100)',
+                borderRadius: 'var(--radius-sm)',
+                padding: '7px 12px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                fontSize: 12,
+                fontWeight: 700,
+                color: 'var(--grey-500)',
+                cursor: 'pointer',
+                boxShadow: 'var(--shadow-sm)',
+              }}
+            >
+              <ArrowLeft size={13} />
+              Back
+            </button>
+          )}
           <div
             style={{
               width: 40,

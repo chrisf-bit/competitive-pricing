@@ -98,6 +98,7 @@ export default function App() {
               conversation={state.conversationInProgress}
               onChoice={game.onConversationChoice}
               onEnd={game.onEndConversation}
+              onBack={game.onBackToPortfolio}
             />
           )}
           {state.screen === 'round-transition' && (
