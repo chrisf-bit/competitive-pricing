@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Minus, Activity, Heart, Settings, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Activity, Heart, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
 import type { TrendDirection, RPDLevel, RelationshipStatus, DiscountStatus } from '../types';
 
 export function TrendIcon({ direction, size = 14 }: { direction: TrendDirection; size?: number }) {

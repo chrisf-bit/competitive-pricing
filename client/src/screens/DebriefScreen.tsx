@@ -1,5 +1,4 @@
 import {
-  Award,
   TrendingUp,
   DollarSign,
   Heart,

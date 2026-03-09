@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MessageSquare, User, ChevronRight, AlertTriangle, CheckCircle2, Shield } from 'lucide-react';
+import { User, ChevronRight, AlertTriangle, CheckCircle2, Shield } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getConversationTree } from '../data/conversations';
 

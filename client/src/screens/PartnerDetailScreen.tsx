@@ -56,7 +56,7 @@ function SectionHeader({ icon, label }: { icon: React.ReactNode; label: string }
 
 export function PartnerDetailScreen({
   partner,
-  currentRound,
+  currentRound: _currentRound,
   actionsRemaining,
   alreadyEngaged,
   onStartConversation,

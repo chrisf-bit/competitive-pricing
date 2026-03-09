@@ -179,9 +179,6 @@ export function processConversationChoice(
   }
 
   // Move to next phase
-  const nextPhasePrompt = node.nextPhasePrompt;
-  const nextPhaseData = tree.phases[conv.phaseIndex + 1];
-
   return {
     ...state,
     partners: newPartners,
