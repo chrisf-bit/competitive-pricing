@@ -104,14 +104,7 @@ export function PortfolioScreen({
               ? partner.metricHistory[partner.metricHistory.length - 1].metrics
               : partner.metrics;
           const rpdLevel = getRPDLevel(partner.metrics.experiencedRPD);
-          const borderColor =
-            engaged
-              ? 'var(--success)'
-              : rpdLevel === 'poor'
-                ? 'var(--danger)'
-                : rpdLevel === 'below'
-                  ? '#e67e22'
-                  : 'transparent';
+          const borderColor = engaged ? 'var(--success)' : 'var(--grey-100)';
 
           return (
             <div
