@@ -143,28 +143,6 @@ export function PortfolioScreen({
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
-              {/* Status ribbon */}
-              {!engaged && rpdLevel === 'poor' && (
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: 12,
-                    right: -28,
-                    background: 'var(--danger)',
-                    color: 'var(--white)',
-                    fontSize: 9,
-                    fontWeight: 800,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.08em',
-                    padding: '3px 32px',
-                    transform: 'rotate(35deg)',
-                    zIndex: 1,
-                  }}
-                >
-                  Urgent
-                </div>
-              )}
-
               {engaged && (
                 <div
                   style={{
