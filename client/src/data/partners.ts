@@ -1,7 +1,7 @@
 import type { PartnerState } from '../types';
 
 export const initialPartners: PartnerState[] = [
-  // ── Marina — Boutique City Hotel (Blue/Thinker) ──
+  // ── Marina - Boutique City Hotel (Blue/Thinker) ──
   {
     persona: {
       id: 'marina',
@@ -47,7 +47,7 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Stavros — Large Resort Hotel (Red/Director) ──
+  // ── Stavros - Large Resort Hotel (Red/Director) ──
   {
     persona: {
       id: 'stavros',
@@ -61,10 +61,10 @@ export const initialPartners: PartnerState[] = [
       style: 'red',
       styleSecondary: 'red',
       description:
-        'High-volume operator under revenue pressure. Wants fast answers and clear ROI. Will challenge you if your reasoning is weak — but acts decisively once convinced.',
+        'High-volume operator under revenue pressure. Wants fast answers and clear ROI. Will challenge you if your reasoning is weak - but acts decisively once convinced.',
       commercialGoal: 'Recover declining occupancy and revenue fast',
       profileNotes: [
-        'Impatient with preamble — gets straight to business',
+        'Impatient with preamble - gets straight to business',
         'Compares Booking.com performance against Expedia weekly',
         'Has blamed the platform for poor results in previous calls',
         'Responds well to competitive benchmarks and revenue projections',
@@ -93,7 +93,7 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Hannah — Country Guesthouse (Green/Nurturer) ──
+  // ── Hannah - Country Guesthouse (Green/Nurturer) ──
   {
     persona: {
       id: 'hannah',
@@ -139,7 +139,7 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Carlos — City Apartment Complex (Yellow/Socialiser) ──
+  // ── Carlos - City Apartment Complex (Yellow/Socialiser) ──
   {
     persona: {
       id: 'carlos',
@@ -154,7 +154,7 @@ export const initialPartners: PartnerState[] = [
       styleSecondary: 'red',
       description:
         'Energetic apartment operator who loves innovation and new trends. Makes quick decisions but sometimes acts before thinking. Relationship-first communicator who thrives on enthusiasm.',
-      commercialGoal: 'Aggressive growth — maximise bookings across all channels',
+      commercialGoal: 'Aggressive growth - maximise bookings across all channels',
       profileNotes: [
         'Loves talking about trends and innovation',
         'Makes quick decisions but sometimes regrets them',
@@ -185,7 +185,7 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Priya — Budget Hotel Chain (Red/Director) ──
+  // ── Priya - Budget Hotel Chain (Red/Director) ──
   {
     persona: {
       id: 'priya',
@@ -200,7 +200,7 @@ export const initialPartners: PartnerState[] = [
       styleSecondary: 'blue',
       description:
         'Sharp, results-focused GM who manages by numbers. Expects structured conversations with clear action items. Benchmarks obsessively against her chain\'s other properties.',
-      commercialGoal: 'Rapid revenue recovery — RPD is critically low',
+      commercialGoal: 'Rapid revenue recovery - RPD is critically low',
       profileNotes: [
         'Expects structured agendas and clear action items',
         'Challenges weak reasoning with sharp questions',
@@ -231,7 +231,7 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Yuki — Luxury Ryokan (Green/Nurturer) ──
+  // ── Yuki - Luxury Ryokan (Green/Nurturer) ──
   {
     persona: {
       id: 'yuki',

@@ -1,4 +1,4 @@
-// ── Rate Right — Core Types ──
+// ── Rate Right - Core Types ──
 
 export type CommunicationStyle = 'red' | 'yellow' | 'green' | 'blue';
 

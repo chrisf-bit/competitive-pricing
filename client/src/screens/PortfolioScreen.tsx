@@ -104,8 +104,6 @@ export function PortfolioScreen({
               ? partner.metricHistory[partner.metricHistory.length - 1].metrics
               : partner.metrics;
           const rpdLevel = getRPDLevel(partner.metrics.experiencedRPD);
-          const borderColor = engaged ? 'var(--success)' : 'var(--grey-100)';
-
           return (
             <div
               key={partner.persona.id}
@@ -113,7 +111,6 @@ export function PortfolioScreen({
               onClick={() => onSelectPartner(partner.persona.id)}
               style={{
                 background: 'var(--white)',
-                border: `2px solid ${borderColor}`,
                 borderRadius: 'var(--radius-lg)',
                 boxShadow: 'var(--shadow-md)',
                 cursor: 'pointer',

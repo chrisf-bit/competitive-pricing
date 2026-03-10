@@ -156,7 +156,7 @@ export function ConversationScreen({
           </div>
         </div>
 
-        {/* Phase progress — bolder */}
+        {/* Phase progress */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
           {phaseLabels.map((label, i) => {
             const isActive = i === conversation.phaseIndex && !isComplete;

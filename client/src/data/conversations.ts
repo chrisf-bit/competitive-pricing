@@ -4,7 +4,7 @@ import { priyaR1, priyaR2, priyaR3 } from './conversations-priya';
 import { yukiR1, yukiR2, yukiR3 } from './conversations-yuki';
 
 // ════════════════════════════════════════════════════════════
-//  MARINA — Round 1
+//  MARINA - Round 1
 // ════════════════════════════════════════════════════════════
 const marinaR1: ConversationTree = {
   partnerId: 'marina',
@@ -15,7 +15,7 @@ const marinaR1: ConversationTree = {
         id: 'opening',
         label: 'Opening',
         partnerPrompt:
-          "Hello. I've got a few minutes — what did you want to discuss?",
+          "Hello. I've got a few minutes - what did you want to discuss?",
         options: [
           {
             id: 'marina-r1-open-data',
@@ -32,7 +32,7 @@ const marinaR1: ConversationTree = {
             label: 'Lead with relationship',
             description: 'Start with rapport and ask how business is going.',
             playerDialogue:
-              "Hi Marina, thanks for making time. Before I get into anything — how have things been going at the Castellana recently? How's the season looking?",
+              "Hi Marina, thanks for making time. Before I get into anything - how have things been going at the Castellana recently? How's the season looking?",
             styleMatch: { blue: -1, green: 2, red: -1, yellow: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -54,8 +54,8 @@ const marinaR1: ConversationTree = {
           optionId: 'marina-r1-open-data',
           responses: [
             { trustThreshold: 'low', text: "Alright. What patterns are you seeing? I'd want to understand the methodology though.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "I appreciate that. I've been looking at my numbers too — go ahead, show me what you've found.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good — I was actually going to call you about this. Let's compare notes.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "I appreciate that. I've been looking at my numbers too - go ahead, show me what you've found.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Good - I was actually going to call you about this. Let's compare notes.", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 3,
@@ -63,7 +63,7 @@ const marinaR1: ConversationTree = {
         {
           optionId: 'marina-r1-open-relationship',
           responses: [
-            { trustThreshold: 'low', text: "Things are fine. But I assume you're calling for a reason — what is it?", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Things are fine. But I assume you're calling for a reason - what is it?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Season's been steady. Occupancy is okay but I know we could be doing better. Was there something specific?", emotion: 'neutral' },
             { trustThreshold: 'high', text: "That's kind of you to ask. Things are decent but I have some concerns about our online positioning. What's on your mind?", emotion: 'positive' },
           ],
@@ -74,7 +74,7 @@ const marinaR1: ConversationTree = {
           optionId: 'marina-r1-open-opportunity',
           responses: [
             { trustThreshold: 'low', text: "I'm open to hearing it, but I'd need to see the numbers before I commit to anything.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Go on — what kind of opportunity? I'd want to understand the specifics.", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "Go on - what kind of opportunity? I'd want to understand the specifics.", emotion: 'neutral' },
             { trustThreshold: 'high', text: "Interesting. I'm always looking at ways to optimise. What have you found?", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -87,7 +87,7 @@ const marinaR1: ConversationTree = {
         id: 'recommendation',
         label: 'Recommendation',
         partnerPrompt:
-          "Okay, so what are you recommending I do? And more importantly — what's the evidence it will work?",
+          "Okay, so what are you recommending I do? And more importantly - what's the evidence it will work?",
         options: [
           {
             id: 'marina-r1-rec-mobile',
@@ -149,11 +149,11 @@ const marinaR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Yes, I'd prefer that. Let's look at the data together before we decide anything.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "That's a good approach. I'd rather understand the full picture before making changes. Go ahead.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect — I was hoping you'd suggest that. I've got some questions about the RPD calculation too. Let's dig in.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Perfect - I was hoping you'd suggest that. I've got some questions about the RPD calculation too. Let's dig in.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, visibility: 2 },
           trustChange: 6,
-          nextPhasePrompt: "Okay, the data makes sense. But before I commit to anything — what happens if it doesn't work? Can I reverse it easily?",
+          nextPhasePrompt: "Okay, the data makes sense. But before I commit to anything - what happens if it doesn't work? Can I reverse it easily?",
         },
       ],
     },
@@ -211,7 +211,7 @@ const marinaR1: ConversationTree = {
           optionId: 'marina-r1-obj-trial',
           responses: [
             { trustThreshold: 'low', text: "A trial... that's more reasonable. Let me think about it and I'll let you know.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "A 30-day trial with clear measurement — I can get behind that. Let's set it up.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "A 30-day trial with clear measurement - I can get behind that. Let's set it up.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes, that works for me. I like that there's an easy off-ramp. Let's start next week.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, visibility: 2 },
@@ -233,7 +233,7 @@ const marinaR1: ConversationTree = {
 };
 
 // ════════════════════════════════════════════════════════════
-//  STAVROS — Round 1
+//  STAVROS - Round 1
 // ════════════════════════════════════════════════════════════
 const stavrosR1: ConversationTree = {
   partnerId: 'stavros',
@@ -244,14 +244,14 @@ const stavrosR1: ConversationTree = {
         id: 'opening',
         label: 'Opening',
         partnerPrompt:
-          "Yeah, hi — look, I'm busy. Occupancy is down 15% and I need answers, not another check-in call. What have you got for me?",
+          "Yeah, hi - look, I'm busy. Occupancy is down 15% and I need answers, not another check-in call. What have you got for me?",
         options: [
           {
             id: 'stavros-r1-open-direct',
-            label: 'Match his energy — be direct',
+            label: 'Match his energy - be direct',
             description: 'Get straight to the point with a clear, confident opening.',
             playerDialogue:
-              "Stavros, I hear you. I've been digging into your numbers and I've found the root cause of your visibility drop. I want to walk you through it — it's fixable, but it's not what you might expect.",
+              "Stavros, I hear you. I've been digging into your numbers and I've found the root cause of your visibility drop. I want to walk you through it - it's fixable, but it's not what you might expect.",
             styleMatch: { red: 2, blue: 1, yellow: 0, green: -1 },
             assertiveness: 3,
             compliance: 'safe',
@@ -271,7 +271,7 @@ const stavrosR1: ConversationTree = {
             label: 'Lead with a competitor benchmark',
             description: 'Open with how his competitors are performing to grab attention.',
             playerDialogue:
-              "Stavros — quick question. Are you aware that three comparable resorts on Kos have improved their booking volume by 20% in the last quarter? I've looked at why, and I think there's something you can do about it.",
+              "Stavros - quick question. Are you aware that three comparable resorts on Kos have improved their booking volume by 20% in the last quarter? I've looked at why, and I think there's something you can do about it.",
             styleMatch: { red: 2, blue: 1, yellow: 1, green: -1 },
             assertiveness: 3,
             compliance: 'safe',
@@ -302,7 +302,7 @@ const stavrosR1: ConversationTree = {
         {
           optionId: 'stavros-r1-open-benchmark',
           responses: [
-            { trustThreshold: 'low', text: "20%? Which resorts? Don't give me vague numbers — names.", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "20%? Which resorts? Don't give me vague numbers - names.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "20% improvement? That's significant. What are they doing that I'm not?", emotion: 'positive' },
             { trustThreshold: 'high', text: "That's exactly the kind of competitive intelligence I need. Break it down for me.", emotion: 'positive' },
           ],
@@ -316,14 +316,14 @@ const stavrosR1: ConversationTree = {
         id: 'recommendation',
         label: 'Recommendation',
         partnerPrompt:
-          "Right. So what do I actually need to do? And don't tell me to add more discounts — I'm already discounting.",
+          "Right. So what do I actually need to do? And don't tell me to add more discounts - I'm already discounting.",
         options: [
           {
             id: 'stavros-r1-rec-parity',
             label: 'Diagnose the rate parity issue',
             description: 'Explain that the real problem is rate parity, not discount levels.',
             playerDialogue:
-              "Here's the thing, Stavros — your discounts are active, but they're not the problem. I've found a significant rate parity issue. Your rates on at least two other OTAs are undercutting your Booking.com rate. That means even with your Genius and Mobile discounts, travellers see a cheaper price elsewhere. Until that's resolved, more discounts won't help.",
+              "Here's the thing, Stavros - your discounts are active, but they're not the problem. I've found a significant rate parity issue. Your rates on at least two other OTAs are undercutting your Booking.com rate. That means even with your Genius and Mobile discounts, travellers see a cheaper price elsewhere. Until that's resolved, more discounts won't help.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -343,7 +343,7 @@ const stavrosR1: ConversationTree = {
             label: 'Suggest lowering the base rate',
             description: 'Recommend a direct rate reduction to become more competitive.',
             playerDialogue:
-              "To be straightforward — your base rate is significantly above the market for comparable resorts on Kos right now. If you brought it down by 8–10%, combined with your existing discounts, you'd likely see a meaningful jump in visibility and bookings.",
+              "To be straightforward - your base rate is significantly above the market for comparable resorts on Kos right now. If you brought it down by 8–10%, combined with your existing discounts, you'd likely see a meaningful jump in visibility and bookings.",
             styleMatch: { red: 1, blue: 0, yellow: 0, green: -2 },
             assertiveness: 3,
             compliance: 'risky',
@@ -365,7 +365,7 @@ const stavrosR1: ConversationTree = {
         {
           optionId: 'stavros-r1-rec-more-discounts',
           responses: [
-            { trustThreshold: 'low', text: "I told you — I'm already discounting. Adding another discount on top of discounts? That's not strategy, that's desperation.", emotion: 'negative' },
+            { trustThreshold: 'low', text: "I told you - I'm already discounting. Adding another discount on top of discounts? That's not strategy, that's desperation.", emotion: 'negative' },
             { trustThreshold: 'medium', text: "I can try it, but I'm sceptical. I've been adding discounts and nothing's moving. Are you sure more discounts is the answer?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "Fine, I'll try it. But if this doesn't move the needle, we're having a different conversation next time.", emotion: 'cautious' },
           ],
@@ -376,7 +376,7 @@ const stavrosR1: ConversationTree = {
         {
           optionId: 'stavros-r1-rec-lower-rate',
           responses: [
-            { trustThreshold: 'low', text: "Hold on — are you telling me what to charge? That's my decision, not yours.", emotion: 'negative' },
+            { trustThreshold: 'low', text: "Hold on - are you telling me what to charge? That's my decision, not yours.", emotion: 'negative' },
             { trustThreshold: 'medium', text: "Look, I know my rate is my decision. But you're essentially telling me to drop my price. That's a big ask.", emotion: 'negative' },
             { trustThreshold: 'high', text: "That's a bold recommendation. I'll look at the numbers, but I'm not comfortable being told what to charge.", emotion: 'cautious' },
           ],
@@ -408,7 +408,7 @@ const stavrosR1: ConversationTree = {
             label: 'Share a success story',
             description: 'Reference a similar resort that fixed parity and saw results.',
             playerDialogue:
-              "I worked with a similar resort in Crete — 200 rooms, similar market. They had the same parity issue. Once resolved, their visibility improved by 30% within three weeks and bookings followed. I can't guarantee identical results, but the pattern is consistent.",
+              "I worked with a similar resort in Crete - 200 rooms, similar market. They had the same parity issue. Once resolved, their visibility improved by 30% within three weeks and bookings followed. I can't guarantee identical results, but the pattern is consistent.",
             styleMatch: { red: 1, blue: 1, yellow: 2, green: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -439,7 +439,7 @@ const stavrosR1: ConversationTree = {
         {
           optionId: 'stavros-r1-obj-case-study',
           responses: [
-            { trustThreshold: 'low', text: "Crete isn't Kos. But fine — 30% visibility improvement is worth investigating. What exactly did they do?", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Crete isn't Kos. But fine - 30% visibility improvement is worth investigating. What exactly did they do?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "That's a good example. If they saw those results in three weeks, I'm willing to try. Walk me through the steps.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Good. Real examples, not theory. Let's do it.", emotion: 'positive' },
           ],
@@ -462,7 +462,7 @@ const stavrosR1: ConversationTree = {
 };
 
 // ════════════════════════════════════════════════════════════
-//  HANNAH — Round 1
+//  HANNAH - Round 1
 // ════════════════════════════════════════════════════════════
 const hannahR1: ConversationTree = {
   partnerId: 'hannah',
@@ -480,7 +480,7 @@ const hannahR1: ConversationTree = {
             label: 'Match her warmth',
             description: 'Build rapport before transitioning to business.',
             playerDialogue:
-              "Hi Hannah! I'm well, thanks for asking. Welcome packs — that's such a lovely personal touch. How's everything going at Meadow Lane? I wanted to catch up and also share some thoughts about your bookings if you have a few minutes.",
+              "Hi Hannah! I'm well, thanks for asking. Welcome packs - that's such a lovely personal touch. How's everything going at Meadow Lane? I wanted to catch up and also share some thoughts about your bookings if you have a few minutes.",
             styleMatch: { green: 2, yellow: 2, blue: -1, red: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -498,9 +498,9 @@ const hannahR1: ConversationTree = {
           {
             id: 'hannah-r1-open-guest',
             label: 'Connect through guest experience',
-            description: 'Start with what she cares about — her guests — then bridge to bookings.',
+            description: 'Start with what she cares about - her guests - then bridge to bookings.',
             playerDialogue:
-              "Hi Hannah, lovely to catch up. I can see your reviews are wonderful — guests clearly love the experience at Meadow Lane. I was actually thinking about how we could help more travellers discover what you offer. Would you be open to exploring that?",
+              "Hi Hannah, lovely to catch up. I can see your reviews are wonderful - guests clearly love the experience at Meadow Lane. I was actually thinking about how we could help more travellers discover what you offer. Would you be open to exploring that?",
             styleMatch: { green: 2, yellow: 1, blue: 0, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -513,7 +513,7 @@ const hannahR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Oh that's nice of you. Yes, I've got a few minutes. What were you thinking about?", emotion: 'positive' },
             { trustThreshold: 'medium', text: "Thank you! Yes, things are good. A bit quiet midweek to be honest, but weekends are lovely. What did you want to chat about?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "How kind! Things are well. I've been wondering actually — I noticed we've been less visible on the site. Is that something you can help with?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "How kind! Things are well. I've been wondering actually - I noticed we've been less visible on the site. Is that something you can help with?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 4,
@@ -522,7 +522,7 @@ const hannahR1: ConversationTree = {
           optionId: 'hannah-r1-open-data',
           responses: [
             { trustThreshold: 'low', text: "Oh. That sounds a bit... serious. My visibility dropped? I didn't realise. What's happened?", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Performance data... right. I'm not really a numbers person to be honest, but go on — what's the concern?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Performance data... right. I'm not really a numbers person to be honest, but go on - what's the concern?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "Oh okay. That's concerning. I had noticed fewer bookings coming through. What does the data say?", emotion: 'neutral' },
           ],
           metricEffects: {},
@@ -532,7 +532,7 @@ const hannahR1: ConversationTree = {
           optionId: 'hannah-r1-open-guest',
           responses: [
             { trustThreshold: 'low', text: "That's a lovely way to put it. I do worry sometimes that more bookings means the wrong kind of guest though...", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Oh, that's so nice of you to say! I do put my heart into it. I'd love more people to experience Meadow Lane — what did you have in mind?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Oh, that's so nice of you to say! I do put my heart into it. I'd love more people to experience Meadow Lane - what did you have in mind?", emotion: 'positive' },
             { trustThreshold: 'high', text: "What a wonderful thought! I'd absolutely be open to that. The right kind of traveller would love it here. What are you thinking?", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -545,14 +545,14 @@ const hannahR1: ConversationTree = {
         id: 'recommendation',
         label: 'Recommendation',
         partnerPrompt:
-          "I'm open to hearing your ideas... but I should say upfront — I'm not really keen on big discounts. I don't want to cheapen what we offer here.",
+          "I'm open to hearing your ideas... but I should say upfront - I'm not really keen on big discounts. I don't want to cheapen what we offer here.",
         options: [
           {
             id: 'hannah-r1-rec-lastminute',
             label: 'Suggest Last-Minute Deal only',
             description: 'A targeted, small discount for unfilled rooms close to check-in.',
             playerDialogue:
-              "I completely understand that, and I wouldn't suggest anything that feels wrong for your brand. What about a Last-Minute Deal that only applies to rooms that would otherwise go empty? It's a small, targeted discount for bookings made 1–2 days before arrival. Your regular guests and advance bookers see no change at all — it just fills those last empty rooms.",
+              "I completely understand that, and I wouldn't suggest anything that feels wrong for your brand. What about a Last-Minute Deal that only applies to rooms that would otherwise go empty? It's a small, targeted discount for bookings made 1–2 days before arrival. Your regular guests and advance bookers see no change at all - it just fills those last empty rooms.",
             styleMatch: { green: 2, yellow: 1, blue: 1, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -596,7 +596,7 @@ const hannahR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Genius members leave better reviews? I'd need to see evidence of that. It still feels like discounting to me.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Higher-quality travellers... that's interesting. I do care more about the right guest than the most guests. Tell me more about how it works.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Oh, I like the sound of that! Experienced travellers who appreciate quality — that's exactly who I want. How do I sign up?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Oh, I like the sound of that! Experienced travellers who appreciate quality - that's exactly who I want. How do I sign up?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2 },
           trustChange: 4,
@@ -627,7 +627,7 @@ const hannahR1: ConversationTree = {
             label: 'Reassure and validate',
             description: 'Acknowledge her values and show the discount protects her brand.',
             playerDialogue:
-              "And you're absolutely right — that's what makes Meadow Lane wonderful. Nothing we're talking about changes the experience you offer. This is just about making sure the right travellers can find you. Your reviews, your photos, your personal touches — those are what sell the stay. The discount just helps you appear in the search results where those travellers are looking.",
+              "And you're absolutely right - that's what makes Meadow Lane wonderful. Nothing we're talking about changes the experience you offer. This is just about making sure the right travellers can find you. Your reviews, your photos, your personal touches - those are what sell the stay. The discount just helps you appear in the search results where those travellers are looking.",
             styleMatch: { green: 2, yellow: 1, blue: 1, red: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -637,7 +637,7 @@ const hannahR1: ConversationTree = {
             label: 'Share a similar success story',
             description: 'Tell her about another guesthouse that had the same concern and succeeded.',
             playerDialogue:
-              "I worked with a guesthouse owner in the Lake District who had exactly the same concern. She was worried discounts would attract the wrong guests. She tried a Last-Minute Deal as an experiment and found that the guests who booked through it were actually lovely — they were spontaneous travellers, couples looking for a last-minute escape. Her reviews stayed excellent and her midweek occupancy improved significantly.",
+              "I worked with a guesthouse owner in the Lake District who had exactly the same concern. She was worried discounts would attract the wrong guests. She tried a Last-Minute Deal as an experiment and found that the guests who booked through it were actually lovely - they were spontaneous travellers, couples looking for a last-minute escape. Her reviews stayed excellent and her midweek occupancy improved significantly.",
             styleMatch: { green: 2, yellow: 2, blue: 0, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -660,7 +660,7 @@ const hannahR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "That's a nice way to think about it. I do want more people to find us... Let me sleep on it and I'll let you know.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "You know what, when you put it that way, it makes sense. It's not changing the experience, just the discoverability. Okay, I'll give it a try.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you for understanding. That really helps. Let's do it — I'll try the Last-Minute Deal and see how it goes.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Thank you for understanding. That really helps. Let's do it - I'll try the Last-Minute Deal and see how it goes.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2 },
           trustChange: 6,
@@ -669,7 +669,7 @@ const hannahR1: ConversationTree = {
           optionId: 'hannah-r1-obj-story',
           responses: [
             { trustThreshold: 'low', text: "The Lake District... that is quite similar. Spontaneous travellers, couples... I like the sound of that actually.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Oh, that's a lovely story! Couples looking for a last-minute escape — that's exactly the kind of guest I'd want. Let's try it!", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Oh, that's a lovely story! Couples looking for a last-minute escape - that's exactly the kind of guest I'd want. Let's try it!", emotion: 'positive' },
             { trustThreshold: 'high', text: "That's so reassuring! If she managed to keep her quality and fill rooms, there's no reason I can't too. Count me in.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 5, visibility: 3, conversion: 3 },
@@ -691,7 +691,7 @@ const hannahR1: ConversationTree = {
 };
 
 // ════════════════════════════════════════════════════════════
-//  Round 2 & 3 — Continuation trees
+//  Round 2 & 3 - Continuation trees
 //  (Responses adapt based on prior conversation outcomes)
 // ════════════════════════════════════════════════════════════
 
@@ -731,7 +731,7 @@ const marinaR2: ConversationTree = {
             label: 'Check her experience',
             description: 'Ask how the change has felt from her side before pushing forward.',
             playerDialogue:
-              "Hi Marina. Before we look at the numbers, I wanted to ask — how has the change felt from your side? Have you noticed anything different in your bookings or guest profile?",
+              "Hi Marina. Before we look at the numbers, I wanted to ask - how has the change felt from your side? Have you noticed anything different in your bookings or guest profile?",
             styleMatch: { blue: 0, green: 2, red: -1, yellow: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -742,7 +742,7 @@ const marinaR2: ConversationTree = {
         {
           optionId: 'marina-r2-open-results',
           responses: [
-            { trustThreshold: 'low', text: "I've been tracking them too. Let's compare notes — I have some questions about the methodology.", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "I've been tracking them too. Let's compare notes - I have some questions about the methodology.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Good. I noticed some movement. Walk me through what you're seeing on your end.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes, I've been pleased with the early signs. Let's review and plan the next move.", emotion: 'positive' },
           ],
@@ -763,7 +763,7 @@ const marinaR2: ConversationTree = {
           optionId: 'marina-r2-open-check',
           responses: [
             { trustThreshold: 'low', text: "It's been fine. Nothing dramatic yet. Are the numbers showing anything?", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Actually, yes — I've noticed a few more mobile bookings. Nothing huge, but it's a positive sign.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Actually, yes - I've noticed a few more mobile bookings. Nothing huge, but it's a positive sign.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Honestly, it's been better than I expected. I'm curious to see the full data.", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -848,7 +848,7 @@ const marinaR2: ConversationTree = {
         id: 'objection',
         label: 'Objection Handling',
         partnerPrompt:
-          "One thing — I'm still watching the margin impact closely. Can you reassure me on that?",
+          "One thing - I'm still watching the margin impact closely. Can you reassure me on that?",
         options: [
           {
             id: 'marina-r2-obj-data',
@@ -865,7 +865,7 @@ const marinaR2: ConversationTree = {
             label: 'Offer ongoing monitoring',
             description: 'Propose regular check-ins to track the margin impact together.',
             playerDialogue:
-              "How about this — let's set up a fortnightly check-in where we review the margin impact together. If at any point the numbers don't work, we adjust immediately. You're always in control.",
+              "How about this - let's set up a fortnightly check-in where we review the margin impact together. If at any point the numbers don't work, we adjust immediately. You're always in control.",
             styleMatch: { blue: 1, green: 2, red: -1, yellow: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -875,7 +875,7 @@ const marinaR2: ConversationTree = {
             label: 'Downplay the concern',
             description: 'Suggest the margin concern is less important than the growth opportunity.',
             playerDialogue:
-              "Honestly Marina, margin on incremental bookings is almost always positive. I wouldn't worry too much about it — the bigger risk is leaving money on the table by not being visible.",
+              "Honestly Marina, margin on incremental bookings is almost always positive. I wouldn't worry too much about it - the bigger risk is leaving money on the table by not being visible.",
             styleMatch: { blue: -2, green: -1, red: 1, yellow: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -887,7 +887,7 @@ const marinaR2: ConversationTree = {
           optionId: 'marina-r2-obj-data',
           responses: [
             { trustThreshold: 'low', text: "8% increase... I'll verify that against my own numbers. If it checks out, I'm comfortable continuing.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "That's exactly what I needed to hear. Volume up, net revenue up — that's the right trajectory. Let's keep going.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's exactly what I needed to hear. Volume up, net revenue up - that's the right trajectory. Let's keep going.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Excellent. That's conclusive. I'm fully on board with the next step.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, revenue: 3 },
@@ -934,7 +934,7 @@ const stavrosR2: ConversationTree = {
             label: 'Show progress',
             description: 'Lead with what has improved since the last conversation.',
             playerDialogue:
-              "Stavros, good news — the parity fix is starting to take effect. I can see your Experienced RPD improving and visibility is trending upward. Let me walk you through the specifics.",
+              "Stavros, good news - the parity fix is starting to take effect. I can see your Experienced RPD improving and visibility is trending upward. Let me walk you through the specifics.",
             styleMatch: { red: 2, blue: 1, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -944,7 +944,7 @@ const stavrosR2: ConversationTree = {
             label: 'Be transparent about mixed results',
             description: 'Acknowledge progress but flag remaining issues.',
             playerDialogue:
-              "I'll be straight with you — we've seen some improvement, but we're not where we need to be yet. There are still some parity issues on one channel and I want to address that today.",
+              "I'll be straight with you - we've seen some improvement, but we're not where we need to be yet. There are still some parity issues on one channel and I want to address that today.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -966,7 +966,7 @@ const stavrosR2: ConversationTree = {
           optionId: 'stavros-r2-open-progress',
           responses: [
             { trustThreshold: 'low', text: "Improving how much? Give me percentages, not adjectives.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Good. Walk me through it — I want to see the trend.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Good. Walk me through it - I want to see the trend.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Now that's what I like to hear. Show me the numbers.", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -977,7 +977,7 @@ const stavrosR2: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Still parity issues? You said fixing it would help. When is 'fixed' actually fixed?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "I appreciate the honesty. Most people would try to spin that. What's the remaining issue?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good — I'd rather hear the truth than a sales pitch. What do we need to do?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Good - I'd rather hear the truth than a sales pitch. What do we need to do?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 5,
@@ -985,7 +985,7 @@ const stavrosR2: ConversationTree = {
         {
           optionId: 'stavros-r2-open-deflect',
           responses: [
-            { trustThreshold: 'low', text: "Wait — I want to see results from what we already did before you pitch me something new.", emotion: 'negative' },
+            { trustThreshold: 'low', text: "Wait - I want to see results from what we already did before you pitch me something new.", emotion: 'negative' },
             { trustThreshold: 'medium', text: "Hang on, let's not skip past the results. What happened with the parity fix?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "I appreciate looking forward, but I need to see what happened first. Show me the progress.", emotion: 'cautious' },
           ],
@@ -1005,7 +1005,7 @@ const stavrosR2: ConversationTree = {
             label: 'Add Country Rate for key markets',
             description: 'Target specific source markets to boost competitive position.',
             playerDialogue:
-              "Now that parity is improving, let's layer in a Country Rate targeting your top source markets — Germany and the UK. This targets the highest-volume travellers with a competitive rate without changing your base price.",
+              "Now that parity is improving, let's layer in a Country Rate targeting your top source markets - Germany and the UK. This targets the highest-volume travellers with a competitive rate without changing your base price.",
             styleMatch: { red: 2, blue: 1, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1015,7 +1015,7 @@ const stavrosR2: ConversationTree = {
             label: 'Fix the misconfigured Last-Minute Deal',
             description: 'Clean up the existing discount that is not working properly.',
             playerDialogue:
-              "Before we add anything new, I noticed your Last-Minute Deal is active but misconfigured — it's set too far in advance and the discount level isn't competitive enough. Let's fix that first. It's already costing you without delivering results.",
+              "Before we add anything new, I noticed your Last-Minute Deal is active but misconfigured - it's set too far in advance and the discount level isn't competitive enough. Let's fix that first. It's already costing you without delivering results.",
             styleMatch: { red: 1, blue: 2, yellow: 0, green: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1046,8 +1046,8 @@ const stavrosR2: ConversationTree = {
         {
           optionId: 'stavros-r2-rec-fix-lastminute',
           responses: [
-            { trustThreshold: 'low', text: "Misconfigured? Why wasn't I told about this before? Fine — fix it.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Wait — it's been costing me money and not working? Show me what's wrong and let's fix it now.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Misconfigured? Why wasn't I told about this before? Fine - fix it.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Wait - it's been costing me money and not working? Show me what's wrong and let's fix it now.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Good catch. I didn't realise it was misconfigured. Let's sort it out immediately.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, discountQuality: 15, visibility: 3, revenue: 2 },
@@ -1108,7 +1108,7 @@ const stavrosR2: ConversationTree = {
           optionId: 'stavros-r2-obj-investigate',
           responses: [
             { trustThreshold: 'low', text: "Fine. I'll send you screenshots. But I expect a solution, not just an investigation.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Good — a proper investigation. I'll pull the examples together today. How quickly can you turn it around?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Good - a proper investigation. I'll pull the examples together today. How quickly can you turn it around?", emotion: 'positive' },
             { trustThreshold: 'high', text: "That's the right approach. I'll send everything over. Let's nail this.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, rateParity: -1 as unknown as undefined },
@@ -1155,7 +1155,7 @@ const hannahR2: ConversationTree = {
             label: 'Celebrate early wins',
             description: 'Start with positive news about any improvements.',
             playerDialogue:
-              "Hi Hannah! I'm great, thanks. I've been looking at your numbers and there's some lovely progress to share — I thought you'd want to hear about it.",
+              "Hi Hannah! I'm great, thanks. I've been looking at your numbers and there's some lovely progress to share - I thought you'd want to hear about it.",
             styleMatch: { green: 2, yellow: 2, blue: 0, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1165,7 +1165,7 @@ const hannahR2: ConversationTree = {
             label: 'Ask about her experience',
             description: 'Let her share how things have been going before presenting data.',
             playerDialogue:
-              "Lovely to hear from you too! Before I share anything, I'd love to hear — have you noticed any changes in your bookings since we last spoke?",
+              "Lovely to hear from you too! Before I share anything, I'd love to hear - have you noticed any changes in your bookings since we last spoke?",
             styleMatch: { green: 2, yellow: 1, blue: -1, red: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1198,7 +1198,7 @@ const hannahR2: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Hmm, it's hard to tell yet. Maybe a few more enquiries? I'm not sure if it's related though.", emotion: 'neutral' },
             { trustThreshold: 'medium', text: "Actually, yes! I had two lovely couples book midweek, which is unusual. They mentioned finding us on Booking.com.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Oh yes! It's been noticeably busier, especially midweek. And the guests have been wonderful — exactly the kind of people we love hosting!", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Oh yes! It's been noticeably busier, especially midweek. And the guests have been wonderful - exactly the kind of people we love hosting!", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 3,
@@ -1247,7 +1247,7 @@ const hannahR2: ConversationTree = {
             label: 'Push for full activation',
             description: 'Recommend activating all remaining discount products.',
             playerDialogue:
-              "You're seeing great results. I think now's the time to go all in — activate Genius, Mobile Rate, and Early Booker. The momentum is there and I don't want you to lose it.",
+              "You're seeing great results. I think now's the time to go all in - activate Genius, Mobile Rate, and Early Booker. The momentum is there and I don't want you to lose it.",
             styleMatch: { green: -2, yellow: 0, blue: -1, red: 2 },
             assertiveness: 3,
             compliance: 'safe',
@@ -1268,7 +1268,7 @@ const hannahR2: ConversationTree = {
         {
           optionId: 'hannah-r2-rec-seasonal',
           responses: [
-            { trustThreshold: 'low', text: "That's interesting — only off-peak? So weekends and summer stays the same? I could consider that.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "That's interesting - only off-peak? So weekends and summer stays the same? I could consider that.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "Oh, that's clever! I do hate having empty rooms midweek. And it doesn't affect my best periods. I like it.", emotion: 'positive' },
             { trustThreshold: 'high', text: "That's brilliant! It feels very tailored to how Meadow Lane actually works. Let's look at the numbers together.", emotion: 'positive' },
           ],
@@ -1292,14 +1292,14 @@ const hannahR2: ConversationTree = {
         id: 'objection',
         label: 'Objection Handling',
         partnerPrompt:
-          "I do have one concern — I had a guest last week who mentioned they got a deal. I don't want my regular guests feeling they paid too much.",
+          "I do have one concern - I had a guest last week who mentioned they got a deal. I don't want my regular guests feeling they paid too much.",
         options: [
           {
             id: 'hannah-r2-obj-explain',
             label: 'Explain how it works',
             description: 'Clarify that discounts are targeted and regulars see normal rates.',
             playerDialogue:
-              "That's a great question, and I completely understand the concern. The discount is only visible to specific traveller segments — for example, Genius members or mobile app users. Your regular guests booking through your website or at your standard rate see your normal pricing. There's no public display of a reduced rate.",
+              "That's a great question, and I completely understand the concern. The discount is only visible to specific traveller segments - for example, Genius members or mobile app users. Your regular guests booking through your website or at your standard rate see your normal pricing. There's no public display of a reduced rate.",
             styleMatch: { green: 2, yellow: 0, blue: 2, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1309,7 +1309,7 @@ const hannahR2: ConversationTree = {
             label: 'Reframe as smart revenue management',
             description: 'Position it as what all smart properties do.',
             playerDialogue:
-              "Think of it this way — airlines have been doing this for decades. The person in seat 14A paid a different price than the person in 14B. It's not about devaluing the experience — it's smart revenue management that fills your rooms without undermining your brand.",
+              "Think of it this way - airlines have been doing this for decades. The person in seat 14A paid a different price than the person in 14B. It's not about devaluing the experience - it's smart revenue management that fills your rooms without undermining your brand.",
             styleMatch: { green: 0, yellow: 1, blue: 1, red: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1319,7 +1319,7 @@ const hannahR2: ConversationTree = {
             label: 'Minimise the concern',
             description: 'Suggest it is unlikely to be an issue in practice.',
             playerDialogue:
-              "Honestly Hannah, it's very rare for guests to compare notes on prices. I wouldn't worry about it — it's a non-issue for the vast majority of properties.",
+              "Honestly Hannah, it's very rare for guests to compare notes on prices. I wouldn't worry about it - it's a non-issue for the vast majority of properties.",
             styleMatch: { green: -2, yellow: -1, blue: -1, red: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1330,9 +1330,9 @@ const hannahR2: ConversationTree = {
         {
           optionId: 'hannah-r2-obj-explain',
           responses: [
-            { trustThreshold: 'low', text: "Oh, I see — so it's not visible to everyone? That does make me feel better.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Oh, I see - so it's not visible to everyone? That does make me feel better.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "That's really reassuring. I didn't realise it was so targeted. Thank you for explaining.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect — that's exactly what I needed to hear. I feel much better about it now.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Perfect - that's exactly what I needed to hear. I feel much better about it now.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, conversion: 2 },
           trustChange: 5,
@@ -1363,7 +1363,7 @@ const hannahR2: ConversationTree = {
 };
 
 // ════════════════════════════════════════════════════════════
-//  Round 3 — Final round trees
+//  Round 3 - Final round trees
 // ════════════════════════════════════════════════════════════
 
 const marinaR3: ConversationTree = {
@@ -1375,14 +1375,14 @@ const marinaR3: ConversationTree = {
         id: 'opening',
         label: 'Opening',
         partnerPrompt:
-          "Good timing — I was about to reach out. I've been preparing my quarterly pricing review and wanted your input.",
+          "Good timing - I was about to reach out. I've been preparing my quarterly pricing review and wanted your input.",
         options: [
           {
             id: 'marina-r3-open-strategic',
             label: 'Take a strategic view',
             description: 'Frame this as a long-term partnership discussion.',
             playerDialogue:
-              "That's great to hear, Marina. I'd love to help with that. I think this is a good moment to look at the bigger picture — not just the tactical discount level, but your overall competitive positioning going into next quarter.",
+              "That's great to hear, Marina. I'd love to help with that. I think this is a good moment to look at the bigger picture - not just the tactical discount level, but your overall competitive positioning going into next quarter.",
             styleMatch: { blue: 2, green: 0, red: 1, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1413,7 +1413,7 @@ const marinaR3: ConversationTree = {
         {
           optionId: 'marina-r3-open-strategic',
           responses: [
-            { trustThreshold: 'low', text: "Bigger picture — yes, that's what I need. Let's look at the data together.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Bigger picture - yes, that's what I need. Let's look at the data together.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "Exactly what I was hoping to discuss. Strategic positioning, not just tactics. Go on.", emotion: 'positive' },
             { trustThreshold: 'high', text: "This is why I value our conversations. Let's build a proper plan.", emotion: 'positive' },
           ],
@@ -1425,7 +1425,7 @@ const marinaR3: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Thank you. I've been pleased with the direction. Now, let's talk about what's next.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "I appreciate you saying that. It feels like we've built a good foundation. What do you recommend for next quarter?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you — it's been a genuine partnership. I'm ready to be more ambitious now. What do you suggest?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Thank you - it's been a genuine partnership. I'm ready to be more ambitious now. What do you suggest?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 3,
@@ -1473,7 +1473,7 @@ const marinaR3: ConversationTree = {
             label: 'Suggest a pricing experiment',
             description: 'Propose testing different rate strategies across room types.',
             playerDialogue:
-              "Here's an idea — what if we run a structured experiment? Keep your standard rooms at current pricing, but test a more aggressive discount on your superior rooms which have lower occupancy. We measure the impact over 4 weeks and use the data to inform your full Q2 strategy.",
+              "Here's an idea - what if we run a structured experiment? Keep your standard rooms at current pricing, but test a more aggressive discount on your superior rooms which have lower occupancy. We measure the impact over 4 weeks and use the data to inform your full Q2 strategy.",
             styleMatch: { blue: 2, green: 0, red: 0, yellow: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1485,7 +1485,7 @@ const marinaR3: ConversationTree = {
           optionId: 'marina-r3-rec-holistic',
           responses: [
             { trustThreshold: 'low', text: "That's a well-structured plan. I'll review the numbers and come back to you within the week.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "I like the coherence of the approach. It's not just random discounts — it's a strategy. Let's implement it.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "I like the coherence of the approach. It's not just random discounts - it's a strategy. Let's implement it.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Excellent. This is exactly the kind of strategic thinking I've been looking for. Let's execute it.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 6, visibility: 5, conversion: 4, revenue: 4 },
@@ -1504,7 +1504,7 @@ const marinaR3: ConversationTree = {
         {
           optionId: 'marina-r3-rec-experiment',
           responses: [
-            { trustThreshold: 'low', text: "A structured experiment with clear measurement — that appeals to me. How would we set it up?", emotion: 'positive' },
+            { trustThreshold: 'low', text: "A structured experiment with clear measurement - that appeals to me. How would we set it up?", emotion: 'positive' },
             { trustThreshold: 'medium', text: "I love that idea. Data-driven, controlled, measurable. That's exactly how I like to work.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Brilliant. A proper test with proper measurement. Let's design it together.", emotion: 'positive' },
           ],
@@ -1544,7 +1544,7 @@ const marinaR3: ConversationTree = {
             label: 'Set a stretch target',
             description: 'Challenge her to aim for top-tier performance.',
             playerDialogue:
-              "One thought — what if we set a target of getting Hotel Castellana into the top 10% for Experienced RPD in Madrid by end of Q2? It's ambitious, but based on your trajectory, I think it's achievable.",
+              "One thought - what if we set a target of getting Hotel Castellana into the top 10% for Experienced RPD in Madrid by end of Q2? It's ambitious, but based on your trajectory, I think it's achievable.",
             styleMatch: { blue: 1, green: -1, red: 2, yellow: 1 },
             assertiveness: 3,
             compliance: 'safe',
@@ -1557,7 +1557,7 @@ const marinaR3: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Thank you. I do feel more confident about our approach now. Talk soon.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "That's mutual. It's refreshing to work with someone who respects the process. Let's keep it going.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you — this has been the most productive partnership I've had with Booking.com. I'm genuinely excited about next quarter.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Thank you - this has been the most productive partnership I've had with Booking.com. I'm genuinely excited about next quarter.", emotion: 'positive' },
           ],
           metricEffects: { revenue: 2 },
           trustChange: 5,
@@ -1566,7 +1566,7 @@ const marinaR3: ConversationTree = {
           optionId: 'marina-r3-close-summary',
           responses: [
             { trustThreshold: 'low', text: "Yes, a written summary would be helpful. Thank you for being organised about this.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Perfect — clear actions, clear timeline. That's exactly how I like to work. Thanks.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Perfect - clear actions, clear timeline. That's exactly how I like to work. Thanks.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Excellent. I'll review the email and come back with any questions. This has been very productive.", emotion: 'positive' },
           ],
           metricEffects: { revenue: 1 },
@@ -1577,7 +1577,7 @@ const marinaR3: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Top 10%? That's a stretch. I'd rather set realistic targets we can definitely hit.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "That's ambitious... but I like having a clear target. Let's see if the data supports it.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "I love it. Give me a target and I'll chase it. Top 10% in Madrid — let's make it happen.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "I love it. Give me a target and I'll chase it. Top 10% in Madrid - let's make it happen.", emotion: 'positive' },
           ],
           metricEffects: { revenue: 2 },
           trustChange: 2,
@@ -1612,7 +1612,7 @@ const stavrosR3: ConversationTree = {
             label: 'Acknowledge remaining gaps',
             description: 'Be honest about what is still unresolved.',
             playerDialogue:
-              "We've made real progress, but I want to be upfront — there are still gaps. Your RPD has improved but you're not yet where your top competitors are. Let me show you what's left to address.",
+              "We've made real progress, but I want to be upfront - there are still gaps. Your RPD has improved but you're not yet where your top competitors are. Let me show you what's left to address.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1622,7 +1622,7 @@ const stavrosR3: ConversationTree = {
             label: 'Praise his action',
             description: 'Acknowledge that his quick decisions drove the improvement.',
             playerDialogue:
-              "Stavros, credit where it's due — the speed at which you acted on the parity fix and the discount adjustments is the reason the numbers are recovering. Not every partner moves that fast.",
+              "Stavros, credit where it's due - the speed at which you acted on the parity fix and the discount adjustments is the reason the numbers are recovering. Not every partner moves that fast.",
             styleMatch: { red: 2, blue: 0, yellow: 2, green: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1634,8 +1634,8 @@ const stavrosR3: ConversationTree = {
           optionId: 'stavros-r3-open-results',
           responses: [
             { trustThreshold: 'low', text: "Show me. Numbers. Now.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Good. Let me see the full trajectory — I want to see the trend, not just the current number.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Finally, some good news. Walk me through it — and tell me what's next.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Good. Let me see the full trajectory - I want to see the trend, not just the current number.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Finally, some good news. Walk me through it - and tell me what's next.", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 3,
@@ -1645,7 +1645,7 @@ const stavrosR3: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Gaps? After six weeks? What's left?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "I appreciate the honesty. Show me the gaps and what it'll take to close them.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good — I want the full picture, not the highlights reel. What do we need to do?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Good - I want the full picture, not the highlights reel. What do we need to do?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 4,
@@ -1666,7 +1666,7 @@ const stavrosR3: ConversationTree = {
       phase: {
         id: 'recommendation',
         label: 'Recommendation',
-        partnerPrompt: "So what's the play for next season? High season is coming — I need a plan.",
+        partnerPrompt: "So what's the play for next season? High season is coming - I need a plan.",
         options: [
           {
             id: 'stavros-r3-rec-seasonal',
@@ -1693,7 +1693,7 @@ const stavrosR3: ConversationTree = {
             label: 'Recommend reducing discounts',
             description: 'Suggest pulling back now that parity is fixed.',
             playerDialogue:
-              "Now that parity is resolved, you could actually consider reducing some of your discounts. The parity fix is doing the heavy lifting — you might not need as much discounting as before.",
+              "Now that parity is resolved, you could actually consider reducing some of your discounts. The parity fix is doing the heavy lifting - you might not need as much discounting as before.",
             styleMatch: { red: -1, blue: 1, yellow: -1, green: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1715,7 +1715,7 @@ const stavrosR3: ConversationTree = {
           optionId: 'stavros-r3-rec-compete',
           responses: [
             { trustThreshold: 'low', text: "Beat them on value, not price... I like that framing. What specifically do I need to set up?", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Good — competitive intelligence is exactly what I need. If they're doing this, I should be too. Walk me through the setup.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Good - competitive intelligence is exactly what I need. If they're doing this, I should be too. Walk me through the setup.", emotion: 'positive' },
             { trustThreshold: 'high', text: "That's the mindset. Beat them. I'm in. Let's set it up today.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 6, visibility: 5, conversion: 3, revenue: 4 },
@@ -1744,7 +1744,7 @@ const stavrosR3: ConversationTree = {
             label: 'Express confidence',
             description: 'End with a strong, confident close.',
             playerDialogue:
-              "Just this — you've made more progress in six weeks than most properties make in a quarter. If you execute this plan for high season, I expect the Aegean Grand to be one of the top-performing resorts on Kos by September.",
+              "Just this - you've made more progress in six weeks than most properties make in a quarter. If you execute this plan for high season, I expect the Aegean Grand to be one of the top-performing resorts on Kos by September.",
             styleMatch: { red: 2, blue: 0, yellow: 2, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1754,7 +1754,7 @@ const stavrosR3: ConversationTree = {
             label: 'Offer ongoing support',
             description: 'Promise to stay closely involved.',
             playerDialogue:
-              "I'll be monitoring your metrics closely over the coming weeks and I'll flag anything that needs attention. You've got my direct line — if anything looks off, call me.",
+              "I'll be monitoring your metrics closely over the coming weeks and I'll flag anything that needs attention. You've got my direct line - if anything looks off, call me.",
             styleMatch: { red: 1, blue: 1, yellow: 0, green: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1764,7 +1764,7 @@ const stavrosR3: ConversationTree = {
             label: 'Set a competitive target',
             description: 'Challenge him to beat a specific competitor.',
             playerDialogue:
-              "One last thought — your closest competitor, the one that's been outperforming you, is within striking distance. With this plan, you could overtake them by end of summer. That's the benchmark I'd be aiming for.",
+              "One last thought - your closest competitor, the one that's been outperforming you, is within striking distance. With this plan, you could overtake them by end of summer. That's the benchmark I'd be aiming for.",
             styleMatch: { red: 2, blue: 1, yellow: 1, green: -1 },
             assertiveness: 3,
             compliance: 'safe',
@@ -1823,7 +1823,7 @@ const hannahR3: ConversationTree = {
             label: 'Let her share first',
             description: 'Give her the floor to share her news.',
             playerDialogue:
-              "Oh wonderful — I'd love to hear it! Go ahead, what's your news?",
+              "Oh wonderful - I'd love to hear it! Go ahead, what's your news?",
             styleMatch: { green: 2, yellow: 2, blue: 0, red: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1874,8 +1874,8 @@ const hannahR3: ConversationTree = {
         {
           optionId: 'hannah-r3-open-mutual',
           responses: [
-            { trustThreshold: 'low', text: "Oh how fun! Okay — well, we've had our best midweek bookings in months! Your turn!", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "I love that! Okay — my news is that we've had the most wonderful feedback from new guests. And bookings are up! Now you!", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Oh how fun! Okay - well, we've had our best midweek bookings in months! Your turn!", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "I love that! Okay - my news is that we've had the most wonderful feedback from new guests. And bookings are up! Now you!", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes! This does feel like a celebration! We're busier than ever and the guests are wonderful. I can't wait to hear what the data says!", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -1894,7 +1894,7 @@ const hannahR3: ConversationTree = {
             label: 'Suggest gentle growth',
             description: 'Recommend one small additional step that builds on success.',
             playerDialogue:
-              "You've built something really special, Hannah. My suggestion would be one small addition — an Early Booker Deal for next quarter. It would help fill your calendar further in advance, giving you more certainty, while keeping the guest quality high. It's a natural extension of what's already working.",
+              "You've built something really special, Hannah. My suggestion would be one small addition - an Early Booker Deal for next quarter. It would help fill your calendar further in advance, giving you more certainty, while keeping the guest quality high. It's a natural extension of what's already working.",
             styleMatch: { green: 2, yellow: 1, blue: 1, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1914,7 +1914,7 @@ const hannahR3: ConversationTree = {
             label: 'Push for maximum impact',
             description: 'Recommend adding multiple new products to capitalise on momentum.',
             playerDialogue:
-              "The momentum is incredible. I think now is the time to capitalise — add Early Booker, activate Mobile Rate fully, and consider Country Rate for your top markets. Let's make the most of this while things are going well.",
+              "The momentum is incredible. I think now is the time to capitalise - add Early Booker, activate Mobile Rate fully, and consider Country Rate for your top markets. Let's make the most of this while things are going well.",
             styleMatch: { green: -2, yellow: 0, blue: 0, red: 2 },
             assertiveness: 3,
             compliance: 'safe',
@@ -1925,9 +1925,9 @@ const hannahR3: ConversationTree = {
         {
           optionId: 'hannah-r3-rec-gentle-growth',
           responses: [
-            { trustThreshold: 'low', text: "Just one thing? I can handle that. Early Booker sounds sensible — more planning time is always good.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That's perfect. One step at a time — and advance bookings would give me peace of mind. Let's set it up.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "I love that you understand my pace. Early Booker is exactly right — it fits how I think about my business. Absolutely, let's do it!", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Just one thing? I can handle that. Early Booker sounds sensible - more planning time is always good.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's perfect. One step at a time - and advance bookings would give me peace of mind. Let's set it up.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "I love that you understand my pace. Early Booker is exactly right - it fits how I think about my business. Absolutely, let's do it!", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 5, visibility: 4, conversion: 3, revenue: 4 },
           trustChange: 6,
@@ -1935,8 +1935,8 @@ const hannahR3: ConversationTree = {
         {
           optionId: 'hannah-r3-rec-empower',
           responses: [
-            { trustThreshold: 'low', text: "I appreciate you giving me the choice. I think I'll try the Early Booker — it feels the safest.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "What a lovely approach. I think I'd like to try seasonal pricing — it feels the most natural for how we work.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "I appreciate you giving me the choice. I think I'll try the Early Booker - it feels the safest.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "What a lovely approach. I think I'd like to try seasonal pricing - it feels the most natural for how we work.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Do you know what? I'm feeling brave. I'd actually like to try two of those. Let's do Early Booker AND seasonal pricing!", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 3, revenue: 3 },
@@ -1975,7 +1975,7 @@ const hannahR3: ConversationTree = {
             label: 'End with next steps',
             description: 'Finish with a clear plan and timeline.',
             playerDialogue:
-              "Thank you, Hannah. So to confirm — I'll set up the Early Booker Deal this week, and we'll check in again in two weeks to see how it's performing. Sound good?",
+              "Thank you, Hannah. So to confirm - I'll set up the Early Booker Deal this week, and we'll check in again in two weeks to see how it's performing. Sound good?",
             styleMatch: { green: 0, yellow: 0, blue: 2, red: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1998,7 +1998,7 @@ const hannahR3: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "That means a lot. Thank you. I'm glad I trusted the process.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "Oh, how kind! I feel like we've really built a lovely working relationship. Talk soon!", emotion: 'positive' },
-            { trustThreshold: 'high', text: "You've been wonderful. I used to dread these calls, you know — but now I look forward to them. Thank you!", emotion: 'positive' },
+            { trustThreshold: 'high', text: "You've been wonderful. I used to dread these calls, you know - but now I look forward to them. Thank you!", emotion: 'positive' },
           ],
           metricEffects: { revenue: 2 },
           trustChange: 7,
@@ -2017,7 +2017,7 @@ const hannahR3: ConversationTree = {
           optionId: 'hannah-r3-close-vision',
           responses: [
             { trustThreshold: 'low', text: "What a lovely thought. I hope we get there. Thank you.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Oh, that's a beautiful vision! Fully booked with the right guests — that's the dream. Thank you!", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Oh, that's a beautiful vision! Fully booked with the right guests - that's the dream. Thank you!", emotion: 'positive' },
             { trustThreshold: 'high', text: "Stop, you'll make me cry! That's exactly what I've always wanted for Meadow Lane. Thank you so much!", emotion: 'positive' },
           ],
           metricEffects: { revenue: 2 },

@@ -85,7 +85,7 @@ const STEPS: TutorialStep[] = [
     target: 'actions-counter',
     title: 'Action Budget',
     description:
-      'You get 3 actions per round. Each conversation uses 1 action. You can only engage 3 of your 6 partners — the rest will be neglected.',
+      'You get 3 actions per round. Each conversation uses 1 action. You can only engage 3 of your 6 partners, so the rest will be neglected.',
     icon: <Zap size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (
@@ -252,7 +252,7 @@ const STEPS: TutorialStep[] = [
       >
         <AlertTriangle size={14} style={{ color: 'var(--danger)', flexShrink: 0 }} />
         <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-          Watch for the red alert icon — it means a discount is misconfigured and needs attention.
+          Watch for the red alert icon. It means a discount is misconfigured and needs attention.
         </span>
       </div>
     ),

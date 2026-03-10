@@ -100,7 +100,7 @@ function getNeglectedDetail(partnerId: string, round: number): string {
     },
     stavros: {
       1: 'Stavros\'s frustration is growing. Without guidance, he has not identified the root cause of his performance issues.',
-      2: 'Stavros has been making changes independently — some helpful, some counterproductive. His approach is uncoordinated.',
+      2: 'Stavros has been making changes independently - some helpful, some counterproductive. His approach is uncoordinated.',
       3: 'Stavros expressed frustration about the lack of support. His relationship with Booking.com has cooled further.',
     },
     hannah: {
