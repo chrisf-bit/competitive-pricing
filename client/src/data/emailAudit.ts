@@ -58,9 +58,9 @@ export const emailAudit: EmailAuditScenario = {
     subject: 'Booking.com pricing review - opportunities for Q3',
     body: [
       'Hi Maria,\n\n',
-      'Following our call last week, I wanted to share a few thoughts on your Q3 numbers and where we see opportunities to recover the conversion drop.\n\n',
+      'Following our call last week, I wanted to share a few thoughts on your Q3 numbers and where we see opportunities to recover the conversion drop.\n\nFirst, the headline: ',
       { phraseId: 'p1' },
-      '\n\n',
+      '.\n\n',
       "We've seen your conversion trending down across the last six weeks. As you know, ",
       { phraseId: 'p2' },
       ', so the goal here is really to find the right balance for your business.\n\n',

@@ -154,12 +154,12 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
             width: '100%',
             aspectRatio: '16 / 10',
             maxHeight: 'calc(100vh - 80px)',
-            background: '#1a1f2c',
+            background: 'linear-gradient(to bottom, #d4d8df 0%, #b8bdc6 100%)',
             borderRadius: '14px 14px 4px 4px',
             padding: 14,
             paddingBottom: 18,
             boxShadow:
-              '0 30px 80px rgba(0,0,0,0.55), 0 0 0 1.5px rgba(255,255,255,0.06)',
+              '0 30px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.10), inset 0 1px 0 rgba(255,255,255,0.7)',
             position: 'relative',
             display: 'flex',
             flexDirection: 'column',
@@ -175,8 +175,8 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
               width: 6,
               height: 6,
               borderRadius: '50%',
-              background: '#000',
-              boxShadow: 'inset 0 0 2px rgba(255,255,255,0.3)',
+              background: '#1a1a1a',
+              boxShadow: 'inset 0 0 2px rgba(255,255,255,0.25)',
             }}
           />
           {/* Inner screen */}
@@ -189,6 +189,7 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
               overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
+              boxShadow: 'inset 0 0 0 1px rgba(0,0,0,0.4)',
             }}
           >
             {children}
@@ -200,9 +201,10 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
           style={{
             width: '108%',
             height: 12,
-            background: 'linear-gradient(to bottom, #262c3a 0%, #181c26 100%)',
+            background: 'linear-gradient(to bottom, #c5c9d1 0%, #9aa0aa 100%)',
             borderRadius: '0 0 14px 14px',
-            boxShadow: '0 6px 16px rgba(0,0,0,0.4)',
+            boxShadow:
+              '0 6px 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.5)',
             position: 'relative',
           }}
         >
@@ -215,8 +217,9 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
               transform: 'translateX(-50%)',
               width: 80,
               height: 5,
-              background: '#0d1018',
+              background: '#7a7e87',
               borderRadius: '0 0 6px 6px',
+              boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.4)',
             }}
           />
         </div>

@@ -67,8 +67,8 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 14,
-          padding: '18px 28px',
+          gap: 12,
+          padding: '10px 22px',
           borderBottom: '1px solid rgba(255,255,255,0.08)',
           background: 'rgba(0,0,0,0.18)',
           flexShrink: 0,
@@ -76,22 +76,32 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
       >
         <div
           style={{
-            width: 38,
-            height: 38,
-            borderRadius: 10,
+            width: 32,
+            height: 32,
+            borderRadius: 8,
             background: 'rgba(254, 186, 2, 0.14)',
             color: 'var(--brand-yellow)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
-          <FileText size={20} />
+          <FileText size={16} />
         </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 15, fontWeight: 700 }}>{emailAudit.setupHeadline}</div>
-          <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)' }}>
-            {emailAudit.setupBody}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 13.5, fontWeight: 700, lineHeight: 1.25 }}>
+            {emailAudit.setupHeadline}
+          </div>
+          <div
+            style={{
+              fontSize: 11.5,
+              color: 'rgba(255,255,255,0.6)',
+              lineHeight: 1.35,
+              marginTop: 2,
+            }}
+          >
+            Click each highlighted phrase to judge whether it's safe to send.
           </div>
         </div>
         <div
@@ -101,18 +111,20 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
             color: 'var(--brand-yellow)',
             textTransform: 'uppercase',
             letterSpacing: '0.18em',
+            flexShrink: 0,
           }}
         >
           Email Audit
         </div>
         <div
           style={{
-            fontSize: 13,
+            fontSize: 12,
             fontWeight: 600,
             color: 'rgba(255,255,255,0.7)',
             background: 'rgba(255,255,255,0.07)',
-            padding: '6px 12px',
+            padding: '4px 10px',
             borderRadius: 100,
+            flexShrink: 0,
           }}
         >
           {reviewedCount} / {totalPhrases} reviewed
@@ -123,16 +135,20 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
       <div
         style={{
           flex: 1,
+          minHeight: 0,
           display: 'grid',
-          gridTemplateColumns: 'minmax(0, 3fr) minmax(360px, 2fr)',
+          gridTemplateColumns: 'minmax(0, 3fr) minmax(340px, 2fr)',
           overflow: 'hidden',
         }}
       >
         {/* Left: email card */}
         <div
           style={{
-            overflowY: 'auto',
-            padding: '32px 32px 32px 40px',
+            overflow: 'hidden',
+            padding: '14px 14px 14px 22px',
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: 0,
           }}
         >
           <EmailCard
@@ -231,17 +247,19 @@ function EmailCard({
       style={{
         background: 'var(--white)',
         color: 'var(--grey-700)',
-        borderRadius: 'var(--radius-lg)',
-        boxShadow: '0 12px 40px rgba(0,0,0,0.25)',
-        maxWidth: 760,
+        borderRadius: 10,
+        boxShadow: '0 8px 24px rgba(0,0,0,0.18)',
+        maxWidth: 720,
+        width: '100%',
         margin: '0 auto',
         overflow: 'hidden',
+        flexShrink: 0,
       }}
     >
       {/* Email header */}
       <div
         style={{
-          padding: '20px 28px 16px',
+          padding: '12px 20px 10px',
           borderBottom: '1px solid var(--grey-100)',
         }}
       >
@@ -249,30 +267,30 @@ function EmailCard({
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 8,
-            fontSize: 11,
+            gap: 6,
+            fontSize: 10,
             fontWeight: 700,
             color: 'var(--grey-400)',
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
-            marginBottom: 12,
+            marginBottom: 8,
           }}
         >
-          <Mail size={14} />
+          <Mail size={12} />
           Draft - not yet sent
         </div>
         <table
           style={{
             width: '100%',
-            fontSize: 13,
+            fontSize: 12,
             color: 'var(--grey-600)',
             borderCollapse: 'collapse',
           }}
         >
           <tbody>
             <tr>
-              <td style={{ width: 70, paddingBottom: 4, color: 'var(--grey-400)' }}>From</td>
-              <td style={{ paddingBottom: 4 }}>
+              <td style={{ width: 56, paddingBottom: 2, color: 'var(--grey-400)' }}>From</td>
+              <td style={{ paddingBottom: 2 }}>
                 {emailAudit.email.fromName}{' '}
                 <span style={{ color: 'var(--grey-400)' }}>
                   ({emailAudit.email.fromRole})
@@ -280,8 +298,8 @@ function EmailCard({
               </td>
             </tr>
             <tr>
-              <td style={{ paddingBottom: 4, color: 'var(--grey-400)' }}>To</td>
-              <td style={{ paddingBottom: 4 }}>{emailAudit.email.toName}</td>
+              <td style={{ paddingBottom: 2, color: 'var(--grey-400)' }}>To</td>
+              <td style={{ paddingBottom: 2 }}>{emailAudit.email.toName}</td>
             </tr>
             <tr>
               <td style={{ color: 'var(--grey-400)' }}>Subject</td>
@@ -296,9 +314,9 @@ function EmailCard({
       {/* Email body */}
       <div
         style={{
-          padding: '24px 28px 30px',
-          fontSize: 14,
-          lineHeight: 1.65,
+          padding: '14px 20px 18px',
+          fontSize: 12.5,
+          lineHeight: 1.5,
           color: 'var(--grey-700)',
           whiteSpace: 'pre-wrap',
         }}
@@ -360,9 +378,9 @@ function PhraseToken({
       onClick={onClick}
       style={{
         display: 'inline',
-        padding: '2px 6px',
-        margin: '0 1px',
-        borderRadius: 5,
+        padding: '1px 4px',
+        margin: 0,
+        borderRadius: 4,
         background,
         borderBottom: `2px solid ${borderColor}`,
         color: textColor,
