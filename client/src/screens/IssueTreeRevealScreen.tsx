@@ -92,7 +92,39 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         </p>
       </div>
 
-      {/* Active phase content - hero of the screen */}
+      {/* Phase pipeline - sits between intro and step explanation, clickable */}
+      <div
+        style={{
+          padding: '24px 24px 8px',
+          overflowX: 'auto',
+          flexShrink: 0,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            gap: 8,
+            justifyContent: 'center',
+            minWidth: 'fit-content',
+            margin: '0 auto',
+            alignItems: 'center',
+          }}
+        >
+          {issueTreePhases.map((phase, i) => (
+            <PhaseChip
+              key={phase.id}
+              phase={phase}
+              index={i}
+              total={issueTreePhases.length}
+              isActive={i === activeIndex}
+              isVisited={visited.has(i)}
+              onClick={() => handleChipClick(i)}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Active phase explanation */}
       <div
         style={{
           flex: 1,
@@ -154,38 +186,6 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
             </p>
           </motion.div>
         </AnimatePresence>
-      </div>
-
-      {/* Phase pipeline - lower-middle, clickable */}
-      <div
-        style={{
-          padding: '24px 24px 12px',
-          overflowX: 'auto',
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            gap: 8,
-            justifyContent: 'center',
-            minWidth: 'fit-content',
-            margin: '0 auto',
-            alignItems: 'center',
-          }}
-        >
-          {issueTreePhases.map((phase, i) => (
-            <PhaseChip
-              key={phase.id}
-              phase={phase}
-              index={i}
-              total={issueTreePhases.length}
-              isActive={i === activeIndex}
-              isVisited={visited.has(i)}
-              onClick={() => handleChipClick(i)}
-            />
-          ))}
-        </div>
       </div>
 
       {/* Narration + Continue/Next */}
