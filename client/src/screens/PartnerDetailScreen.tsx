@@ -350,7 +350,6 @@ export function PartnerDetailScreen({
                     marginBottom: i < partner.conversationLog.length - 1 ? 8 : 0,
                     fontSize: 13,
                     lineHeight: 1.5,
-                    borderLeft: '3px solid var(--brand-blue)',
                   }}
                 >
                   <div style={{ fontWeight: 700, color: 'var(--brand-navy)', marginBottom: 3, fontSize: 12 }}>
@@ -425,7 +424,6 @@ export function PartnerDetailScreen({
                     padding: '5px 10px',
                     background: 'var(--off-white)',
                     borderRadius: 4,
-                    borderLeft: '2px solid var(--grey-200)',
                   }}
                 >
                   {note}

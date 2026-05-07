@@ -295,7 +295,6 @@ export function GuidePanel({
                       padding: '10px 12px',
                       background: 'rgba(255,255,255,0.04)',
                       borderRadius: 8,
-                      borderLeft: '3px solid var(--brand-yellow)',
                     }}
                   >
                     <div

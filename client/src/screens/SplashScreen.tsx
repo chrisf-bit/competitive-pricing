@@ -11,7 +11,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
   const [showBegin, setShowBegin] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setShowBegin(true), 3200);
+    const t = setTimeout(() => setShowBegin(true), 4800);
     return () => clearTimeout(t);
   }, []);
 
@@ -45,27 +45,29 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
         }}
       />
 
-      {/* Subtle vignette to lift the title off the image */}
+      {/* Soft vignette to lift the title and centre piece off the image */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse at center top, rgba(0,15,40,0.0) 30%, rgba(0,15,40,0.45) 80%)',
+            'radial-gradient(ellipse at center, rgba(0,15,40,0.3) 0%, rgba(0,15,40,0.0) 55%, rgba(0,15,40,0.5) 100%)',
         }}
       />
 
-      {/* Title block */}
+      {/* Title block (top) */}
       <div
         style={{
-          position: 'relative',
+          position: 'absolute',
+          top: 'clamp(48px, 12vh, 120px)',
+          left: 0,
+          right: 0,
           zIndex: 2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
           padding: '0 32px',
-          marginTop: '-8vh',
         }}
       >
         <motion.div
@@ -78,7 +80,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
             color: 'var(--white)',
             letterSpacing: '-0.03em',
             lineHeight: 1,
-            textShadow: '0 4px 32px rgba(0,15,40,0.4)',
+            textShadow: '0 4px 32px rgba(0,15,40,0.45)',
           }}
         >
           Rate Right
@@ -114,10 +116,10 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
         </motion.div>
       </div>
 
-      {/* Plane + contrail loading animation */}
+      {/* Centred plane with rotating dot-ring loader */}
       <PlaneLoader />
 
-      {/* Begin button (appears after plane has crossed) */}
+      {/* Begin button (appears after the dot ring has had a moment to play) */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={showBegin ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
@@ -144,7 +146,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
             border: 'none',
             cursor: showBegin ? 'pointer' : 'default',
             boxShadow: '0 8px 24px rgba(254, 186, 2, 0.25)',
-            transition: 'background 0.15s ease, transform 0.15s ease',
+            transition: 'background 0.15s ease',
             pointerEvents: showBegin ? 'auto' : 'none',
           }}
           onMouseEnter={(e) => {
@@ -163,72 +165,73 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
 }
 
 function PlaneLoader() {
+  const dotCount = 12;
+  const radius = 70; // px from centre
+  const cycleSeconds = 1.8;
+
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.2, duration: 0.8, ease: 'easeOut' }}
       style={{
         position: 'absolute',
-        top: '58%',
-        left: 0,
-        right: 0,
-        height: 80,
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 200,
+        height: 200,
         zIndex: 2,
         pointerEvents: 'none',
-        overflow: 'hidden',
       }}
     >
-      {/* The plane + its trail travel together */}
+      {/* The plane in the centre, gently bobbing */}
       <motion.div
-        initial={{ x: '-12vw' }}
-        animate={{ x: '110vw' }}
-        transition={{
-          duration: 3.0,
-          delay: 1.2,
-          ease: [0.42, 0, 0.4, 1],
-          repeat: Infinity,
-          repeatDelay: 1.0,
-        }}
+        animate={{ y: [-3, 3, -3] }}
+        transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           top: '50%',
-          transform: 'translateY(-50%)',
-          display: 'flex',
-          alignItems: 'center',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          color: 'var(--brand-yellow)',
+          filter: 'drop-shadow(0 4px 18px rgba(254, 186, 2, 0.5))',
         }}
       >
-        {/* Dotted contrail behind the plane */}
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            marginRight: 10,
-          }}
-        >
-          {[...Array(14)].map((_, i) => (
-            <div
-              key={i}
-              style={{
-                width: 4,
-                height: 4,
-                borderRadius: '50%',
-                background: 'rgba(255,255,255,0.7)',
-                opacity: 0.15 + (i / 14) * 0.55,
-              }}
-            />
-          ))}
-        </div>
-
-        {/* The plane itself, tilted slightly up as if climbing */}
-        <div
-          style={{
-            transform: 'rotate(-12deg)',
-            color: 'var(--brand-yellow)',
-            filter: 'drop-shadow(0 2px 12px rgba(254, 186, 2, 0.45))',
-          }}
-        >
-          <Plane size={28} fill="currentColor" strokeWidth={1.4} />
+        <div style={{ transform: 'rotate(-12deg)' }}>
+          <Plane size={48} fill="currentColor" strokeWidth={1.4} />
         </div>
       </motion.div>
-    </div>
+
+      {/* Dot ring around the plane — wave of opacity travels around */}
+      {Array.from({ length: dotCount }).map((_, i) => {
+        const angleRad = ((i / dotCount) * 2 - 0.5) * Math.PI; // start at top, go clockwise
+        const x = Math.cos(angleRad) * radius;
+        const y = Math.sin(angleRad) * radius;
+        return (
+          <motion.div
+            key={i}
+            animate={{ opacity: [0.15, 1, 0.15] }}
+            transition={{
+              duration: cycleSeconds,
+              repeat: Infinity,
+              delay: (i / dotCount) * cycleSeconds,
+              ease: 'easeInOut',
+            }}
+            style={{
+              position: 'absolute',
+              top: `calc(50% + ${y}px)`,
+              left: `calc(50% + ${x}px)`,
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: 'rgba(255,255,255,0.9)',
+              transform: 'translate(-50%, -50%)',
+              boxShadow: '0 0 8px rgba(255,255,255,0.4)',
+            }}
+          />
+        );
+      })}
+    </motion.div>
   );
 }
