@@ -1,5 +1,11 @@
 import { useState, useCallback } from 'react';
-import type { GameState, LearnerMarket, LearnerStrength, CharacterArchetype } from '../types';
+import type {
+  GameState,
+  LearnerMarket,
+  LearnerStrength,
+  CharacterArchetype,
+  KnowledgeCheckResult,
+} from '../types';
 import {
   createInitialState,
   selectPartner,
@@ -73,6 +79,16 @@ export function useGame() {
     }));
   }, []);
 
+  const recordKnowledgeCheckResults = useCallback((results: KnowledgeCheckResult[]) => {
+    setState((s) => ({
+      ...s,
+      level0Progress: {
+        ...s.level0Progress,
+        knowledgeCheckResults: [...s.level0Progress.knowledgeCheckResults, ...results],
+      },
+    }));
+  }, []);
+
   const score = state.gameComplete ? calculateScore(state) : null;
 
   return {
@@ -89,5 +105,6 @@ export function useGame() {
     setLearnerMarket,
     setLearnerStrengths,
     setLearnerArchetype,
+    recordKnowledgeCheckResults,
   };
 }

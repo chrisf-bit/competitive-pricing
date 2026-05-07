@@ -7,6 +7,7 @@ import { TutorialOverlay } from './components/TutorialOverlay';
 import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
+import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -76,7 +77,15 @@ export default function App() {
             <MarketSelectScreen
               selected={state.learnerProfile.market}
               onSelect={game.setLearnerMarket}
-              onContinue={() => game.goToScreen('portfolio')}
+              onContinue={() => game.goToScreen('l0-gm-chat')}
+            />
+          )}
+          {state.screen === 'l0-gm-chat' && (
+            <GameMasterChatScreen
+              onComplete={(results) => {
+                game.recordKnowledgeCheckResults(results);
+                game.goToScreen('portfolio');
+              }}
             />
           )}
           {state.screen === 'portfolio' && (
