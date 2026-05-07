@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Check } from 'lucide-react';
 import {
@@ -26,11 +25,7 @@ export function CharacterBuildScreen({
   onSelectArchetype,
   onContinue,
 }: CharacterBuildScreenProps) {
-  const [hoveredPersonaId, setHoveredPersonaId] = useState<string | null>(null);
-
   const bothPicked = !!selectedAvatarId && !!selectedArchetype;
-  const detailPersona =
-    superPowerPersonas.find((p) => p.id === (hoveredPersonaId ?? selectedArchetype?.id)) ?? null;
 
   function handleArchetypeSelect(persona: SuperPowerPersona) {
     onSelectArchetype({
@@ -92,7 +87,7 @@ export function CharacterBuildScreen({
               letterSpacing: '-0.02em',
             }}
           >
-            Pick a face and a super power
+            Pick an avatar and a super power
           </h1>
           <p
             style={{
@@ -103,13 +98,13 @@ export function CharacterBuildScreen({
               margin: '0 auto',
             }}
           >
-            Your face is just visual identity. Your super power is the way you'll naturally lean
-            into commercial conversations - everyone has equal potential to succeed.
+            Your avatar is just visual identity. Your super power is the way you'll naturally
+            lean into commercial conversations - everyone has equal potential to succeed.
           </p>
         </motion.div>
 
         {/* Avatars */}
-        <SectionHeading label="Choose your face" complete={!!selectedAvatarId} />
+        <SectionHeading label="Choose your avatar" complete={!!selectedAvatarId} />
         <div
           style={{
             display: 'grid',
@@ -147,49 +142,10 @@ export function CharacterBuildScreen({
               persona={p}
               index={i}
               isSelected={selectedArchetype?.id === p.id}
-              isHovered={hoveredPersonaId === p.id}
               onClick={() => handleArchetypeSelect(p)}
-              onHover={(hover) => setHoveredPersonaId(hover ? p.id : null)}
             />
           ))}
         </div>
-
-        {/* Persona detail (preview) */}
-        {detailPersona && (
-          <motion.div
-            key={`detail-${detailPersona.id}`}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            style={{
-              width: '100%',
-              padding: '14px 18px',
-              background: `var(--style-${detailPersona.accent}-bg)`,
-              border: `1px solid var(--style-${detailPersona.accent})`,
-              borderRadius: 10,
-              marginBottom: 24,
-              fontSize: 13,
-              color: 'rgba(0,0,0,0.85)',
-              lineHeight: 1.55,
-            }}
-          >
-            <div
-              style={{
-                fontSize: 11,
-                fontWeight: 800,
-                color: `var(--style-${detailPersona.accent})`,
-                textTransform: 'uppercase',
-                letterSpacing: '0.14em',
-                marginBottom: 6,
-              }}
-            >
-              {detailPersona.gameplayStyle}
-            </div>
-            <div style={{ fontWeight: 600, color: 'var(--brand-navy)' }}>
-              {detailPersona.identity}
-            </div>
-          </motion.div>
-        )}
 
         {/* Footer */}
         <div
@@ -210,9 +166,9 @@ export function CharacterBuildScreen({
                 {selectedArchetype?.name}. Ready when you are.
               </>
             ) : !selectedAvatarId && !selectedArchetype ? (
-              'Pick a face and a super power to continue.'
+              'Pick an avatar and a super power to continue.'
             ) : !selectedAvatarId ? (
-              'Pick a face to continue.'
+              'Pick an avatar to continue.'
             ) : (
               'Pick a super power to continue.'
             )}
@@ -367,16 +323,12 @@ function PersonaCard({
   persona,
   index,
   isSelected,
-  isHovered,
   onClick,
-  onHover,
 }: {
   persona: SuperPowerPersona;
   index: number;
   isSelected: boolean;
-  isHovered: boolean;
   onClick: () => void;
-  onHover: (hover: boolean) => void;
 }) {
   const Icon = persona.icon;
   const accentColor = `var(--style-${persona.accent})`;
@@ -387,99 +339,156 @@ function PersonaCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.45 + index * 0.06, duration: 0.4, ease: 'easeOut' }}
       onClick={onClick}
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
       style={{
         position: 'relative',
         textAlign: 'left',
-        padding: '16px 18px',
-        background: isSelected
-          ? `var(--style-${persona.accent}-bg)`
-          : isHovered
-            ? 'rgba(255,255,255,0.08)'
-            : 'rgba(255,255,255,0.05)',
+        padding: '18px 20px',
+        background: isSelected ? 'rgba(254, 186, 2, 0.10)' : 'rgba(255,255,255,0.05)',
         border: isSelected
-          ? `2px solid ${accentColor}`
+          ? '2px solid var(--brand-yellow)'
           : '2px solid rgba(255,255,255,0.10)',
         borderRadius: 12,
         color: 'var(--white)',
         cursor: 'pointer',
         transition: 'background 0.18s ease, border-color 0.18s ease',
         display: 'flex',
-        alignItems: 'flex-start',
+        flexDirection: 'column',
         gap: 14,
+        boxShadow: isSelected ? '0 6px 18px rgba(254, 186, 2, 0.18)' : 'none',
+      }}
+      onMouseEnter={(e) => {
+        if (!isSelected) {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.20)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isSelected) {
+          e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+          e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
+        }
       }}
     >
-      <div
-        style={{
-          width: 40,
-          height: 40,
-          borderRadius: 10,
-          background: isSelected ? accentColor : `${accentColor}30`,
-          color: isSelected ? 'var(--white)' : accentColor,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-          transition: 'background 0.18s ease',
-        }}
-      >
-        <Icon size={20} strokeWidth={2.2} />
-      </div>
-      <div style={{ flex: 1, minWidth: 0 }}>
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            color: isSelected ? accentColor : 'rgba(255,255,255,0.55)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            marginBottom: 4,
-          }}
-        >
-          Super power: {persona.superPower}
-        </div>
-        <div
-          style={{
-            fontSize: 16,
-            fontWeight: 800,
-            color: isSelected ? 'var(--brand-navy)' : 'var(--white)',
-            lineHeight: 1.2,
-            marginBottom: 6,
-          }}
-        >
-          {persona.name}
-        </div>
-        <div
-          style={{
-            fontSize: 12.5,
-            color: isSelected ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)',
-            lineHeight: 1.5,
-            fontStyle: 'italic',
-          }}
-        >
-          {persona.succeedsBy}
-        </div>
-      </div>
+      {/* Selected check */}
       {isSelected && (
         <div
           style={{
             position: 'absolute',
-            top: 10,
-            right: 10,
-            width: 22,
-            height: 22,
+            top: 12,
+            right: 12,
+            width: 24,
+            height: 24,
             borderRadius: '50%',
-            background: accentColor,
-            color: 'var(--white)',
+            background: 'var(--brand-yellow)',
+            color: 'var(--brand-navy)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
           }}
         >
-          <Check size={11} strokeWidth={3.5} />
+          <Check size={13} strokeWidth={3.5} />
         </div>
       )}
+
+      {/* Top row: icon + name + super power label */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+        <div
+          style={{
+            width: 42,
+            height: 42,
+            borderRadius: 10,
+            background: `${accentColor}1f`,
+            color: accentColor,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            border: `1.5px solid ${accentColor}50`,
+          }}
+        >
+          <Icon size={20} strokeWidth={2.2} />
+        </div>
+        <div style={{ flex: 1, minWidth: 0, paddingRight: 28 }}>
+          <div
+            style={{
+              fontSize: 10.5,
+              fontWeight: 700,
+              color: accentColor,
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+              marginBottom: 3,
+            }}
+          >
+            Super power: {persona.superPower}
+          </div>
+          <div
+            style={{
+              fontSize: 17,
+              fontWeight: 800,
+              color: 'var(--white)',
+              lineHeight: 1.2,
+            }}
+          >
+            {persona.name}
+          </div>
+        </div>
+      </div>
+
+      {/* Succeeds by */}
+      <div
+        style={{
+          fontSize: 13,
+          color: 'rgba(255,255,255,0.85)',
+          lineHeight: 1.5,
+          fontStyle: 'italic',
+        }}
+      >
+        {persona.succeedsBy}
+      </div>
+
+      {/* Wins by bullets */}
+      <div>
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 800,
+            color: 'rgba(255,255,255,0.5)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.10em',
+            marginBottom: 6,
+          }}
+        >
+          Wins by
+        </div>
+        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+          {persona.winsBy.map((item, i) => (
+            <li
+              key={i}
+              style={{
+                fontSize: 12.5,
+                lineHeight: 1.45,
+                color: 'rgba(255,255,255,0.78)',
+                marginBottom: 3,
+                paddingLeft: 14,
+                position: 'relative',
+              }}
+            >
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 7,
+                  width: 5,
+                  height: 5,
+                  borderRadius: '50%',
+                  background: accentColor,
+                }}
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
     </motion.button>
   );
 }
