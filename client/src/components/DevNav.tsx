@@ -38,8 +38,8 @@ const screenJumps: ScreenJump[] = [
 ];
 
 const groupLabels: Record<ScreenJump['group'], string> = {
-  level0: 'Level 0 - Clearance',
-  level1: 'Level 1',
+  level0: 'Clearance',
+  level1: 'Partner Sim',
   wrap: 'Wrap',
 };
 

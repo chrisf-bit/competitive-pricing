@@ -66,7 +66,7 @@ export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
               animation: 'fadeIn 0.5s ease 0.1s backwards',
             }}
           >
-            Partner Pricing Competitiveness Simulation
+            Competitive Pricing Simulation
           </h1>
 
           <p
@@ -79,11 +79,13 @@ export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
               animation: 'fadeIn 0.5s ease 0.2s backwards',
             }}
           >
-            You are an Account Manager at Booking.com. Your portfolio of six accommodation
-            partners is underperforming on Experienced RPD. Over the next six weeks, you must
-            diagnose pricing problems, choose the right strategy, and adapt your conversations
-            to each partner, all while balancing competitiveness, revenue, and trust. Pay
-            attention to how each partner responds. Not everyone communicates the same way.
+            So, you want to manage partner accounts at Booking.com? Let's see if you've got
+            what it takes. You'll be given some partner accounts to look after, but they're
+            not in great shape. Your mission is to diagnose pricing problems, choose the
+            right strategy, and adapt your conversations to each partner, all while balancing
+            competitiveness, revenue, and trust. Pay attention to how each partner responds.
+            Not everyone communicates in the same way. Before you get started, you'll need
+            to gain clearance to take on the mission. Ready?
           </p>
 
           {/* Info cards */}
@@ -145,7 +147,7 @@ export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
                 (e.currentTarget.style.background = 'var(--brand-yellow)')
               }
             >
-              Open your portfolio
+              Get clearance for mission
               <ChevronRight size={18} />
             </button>
             <button
