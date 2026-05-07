@@ -11,6 +11,7 @@ import { MarketSelectScreen } from './screens/MarketSelectScreen';
 import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
 import { EmailAuditScreen } from './screens/EmailAuditScreen';
 import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
+import { IssueTreeRevealScreen } from './screens/IssueTreeRevealScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -111,11 +112,15 @@ export default function App() {
             <EmailAuditScreen
               onComplete={(results) => {
                 game.recordKnowledgeCheckResults(results);
-                // Dashboard Hotspot is parked - skipping straight to Portfolio
-                // until the team confirms what real dashboards LPS use.
-                game.goToScreen('portfolio');
+                // Dashboard Hotspot is parked - jumping straight to the
+                // Issue Tree reveal until the team confirms what real
+                // dashboards LPS use.
+                game.goToScreen('l0-issue-tree-reveal');
               }}
             />
+          )}
+          {state.screen === 'l0-issue-tree-reveal' && (
+            <IssueTreeRevealScreen onComplete={() => game.goToScreen('portfolio')} />
           )}
           {/*
             Dashboard Hotspot is currently parked. The screen still routes
