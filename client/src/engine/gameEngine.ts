@@ -27,6 +27,22 @@ export function createInitialState(): GameState {
 
   return {
     screen: 'briefing',
+    currentLevel: 0,
+    learnerProfile: {
+      market: null,
+      strengths: [],
+      archetype: null,
+      completedLevels: [],
+      xp: 0,
+    },
+    level0Progress: {
+      knowledgeCheckResults: [],
+      signalVsProofCompleted: false,
+      emailAuditCompleted: false,
+      inboxTriageCompleted: false,
+      cleared: false,
+    },
+    currentDiagnosis: null,
     currentRound: 1,
     actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],

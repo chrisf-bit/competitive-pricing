@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import type { GameState } from '../types';
+import type { GameState, LearnerMarket, LearnerStrength, CharacterArchetype } from '../types';
 import {
   createInitialState,
   selectPartner,
@@ -50,6 +50,29 @@ export function useGame() {
     setState(createInitialState());
   }, []);
 
+  // ── Level 0 learner-profile setters ──
+
+  const setLearnerMarket = useCallback((market: LearnerMarket) => {
+    setState((s) => ({
+      ...s,
+      learnerProfile: { ...s.learnerProfile, market },
+    }));
+  }, []);
+
+  const setLearnerStrengths = useCallback((strengths: LearnerStrength[]) => {
+    setState((s) => ({
+      ...s,
+      learnerProfile: { ...s.learnerProfile, strengths },
+    }));
+  }, []);
+
+  const setLearnerArchetype = useCallback((archetype: CharacterArchetype) => {
+    setState((s) => ({
+      ...s,
+      learnerProfile: { ...s.learnerProfile, archetype },
+    }));
+  }, []);
+
   const score = state.gameComplete ? calculateScore(state) : null;
 
   return {
@@ -63,5 +86,8 @@ export function useGame() {
     onAdvanceRound,
     onBackToPortfolio,
     onRestart,
+    setLearnerMarket,
+    setLearnerStrengths,
+    setLearnerArchetype,
   };
 }
