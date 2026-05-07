@@ -6,6 +6,7 @@ import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
 import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
+import { MarketSelectScreen } from './screens/MarketSelectScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -22,7 +23,9 @@ export default function App() {
     return <SplashScreen onBegin={() => setShowSplash(false)} />;
   }
 
-  const showGuide = state.screen !== 'briefing';
+  // Level 0 screens (and briefing) run chrome-free — no Header, no GuidePanel.
+  const isLevel0Chrome = state.screen === 'briefing' || state.screen.startsWith('l0-');
+  const showGuide = !isLevel0Chrome;
   const selectedPartner =
     state.selectedPartnerId
       ? state.partners.find((p) => p.persona.id === state.selectedPartnerId) ?? null
@@ -32,7 +35,7 @@ export default function App() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
-      {state.screen !== 'briefing' && (
+      {!isLevel0Chrome && (
         <Header
           currentRound={state.currentRound}
           actionsRemaining={state.actionsRemaining}
@@ -62,11 +65,18 @@ export default function App() {
         <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           {state.screen === 'briefing' && (
             <BriefingScreen
-              onStart={() => game.goToScreen('portfolio')}
+              onStart={() => game.goToScreen('l0-market-select')}
               onTutorial={() => {
-                game.goToScreen('portfolio');
+                game.goToScreen('l0-market-select');
                 setShowTutorial(true);
               }}
+            />
+          )}
+          {state.screen === 'l0-market-select' && (
+            <MarketSelectScreen
+              selected={state.learnerProfile.market}
+              onSelect={game.setLearnerMarket}
+              onContinue={() => game.goToScreen('portfolio')}
             />
           )}
           {state.screen === 'portfolio' && (
