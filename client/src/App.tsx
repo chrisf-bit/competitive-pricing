@@ -4,6 +4,7 @@ import { useGame } from './hooks/useGame';
 import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
+import { DevNav } from './components/DevNav';
 import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
@@ -22,7 +23,23 @@ export default function App() {
   const [showSplash, setShowSplash] = useState(true);
 
   if (showSplash) {
-    return <SplashScreen onBegin={() => setShowSplash(false)} />;
+    return (
+      <>
+        <SplashScreen onBegin={() => setShowSplash(false)} />
+        <DevNav
+          currentScreen={state.screen}
+          onJump={(screen) => {
+            setShowSplash(false);
+            game.goToScreen(screen);
+          }}
+          onShowSplash={() => setShowSplash(true)}
+          onRestart={() => {
+            game.onRestart();
+            setShowSplash(true);
+          }}
+        />
+      </>
+    );
   }
 
   // Level 0 screens (and briefing) run chrome-free - no Header, no GuidePanel.
@@ -163,6 +180,16 @@ export default function App() {
           onStartGame={() => setShowTutorial(false)}
         />
       )}
+
+      <DevNav
+        currentScreen={state.screen}
+        onJump={(screen) => game.goToScreen(screen)}
+        onShowSplash={() => setShowSplash(true)}
+        onRestart={() => {
+          game.onRestart();
+          setShowSplash(true);
+        }}
+      />
     </div>
   );
 }
