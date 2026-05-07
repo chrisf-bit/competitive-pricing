@@ -40,59 +40,69 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         overflow: 'hidden',
       }}
     >
-      {/* Top label */}
+      {/* Top zone: pushes heading to bottom of zone, putting pipeline at vertical centre */}
       <div
         style={{
-          padding: '20px 28px 6px',
-          flexShrink: 0,
+          flex: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: 0,
         }}
       >
         <div
           style={{
-            fontSize: 11,
-            fontWeight: 700,
-            color: 'var(--brand-yellow)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.18em',
+            padding: '20px 28px 6px',
+            flexShrink: 0,
           }}
         >
-          How we diagnose
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              color: 'var(--brand-yellow)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.18em',
+            }}
+          >
+            How we diagnose
+          </div>
+        </div>
+
+        {/* Heading - pinned to bottom of top zone via marginTop:auto */}
+        <div
+          style={{
+            textAlign: 'center',
+            padding: '0 32px 18px',
+            flexShrink: 0,
+            marginTop: 'auto',
+          }}
+        >
+          <h1
+            style={{
+              fontSize: 28,
+              fontWeight: 800,
+              color: 'var(--white)',
+              letterSpacing: '-0.02em',
+              marginBottom: 6,
+            }}
+          >
+            The shape of a pricing diagnosis
+          </h1>
+          <p
+            style={{
+              fontSize: 13,
+              color: 'rgba(255,255,255,0.6)',
+              maxWidth: 560,
+              margin: '0 auto',
+              lineHeight: 1.55,
+            }}
+          >
+            Click each step to walk through how Alex would diagnose a pricing problem on a partner account.
+          </p>
         </div>
       </div>
 
-      {/* Heading */}
-      <div
-        style={{
-          textAlign: 'center',
-          padding: '8px 32px 0',
-          flexShrink: 0,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: 28,
-            fontWeight: 800,
-            color: 'var(--white)',
-            letterSpacing: '-0.02em',
-            marginBottom: 6,
-          }}
-        >
-          The shape of a pricing diagnosis
-        </h1>
-        <p
-          style={{
-            fontSize: 13,
-            color: 'rgba(255,255,255,0.6)',
-            maxWidth: 560,
-            margin: '0 auto',
-            lineHeight: 1.55,
-          }}
-        >
-          Click each step to walk through how Alex would diagnose a pricing problem on a partner account.
-        </p>
-      </div>
-
-      {/* Phase pipeline - sits between intro and step explanation, clickable */}
+      {/* Phase pipeline - sits at vertical centre (between top and bottom zones), clickable */}
       <div
         style={{
           padding: '20px 24px 8px',
@@ -143,7 +153,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         </div>
       </div>
 
-      {/* Active phase explanation */}
+      {/* Bottom zone: explanation at top, bottom bar pushed to bottom */}
       <div
         style={{
           flex: 1,
@@ -151,7 +161,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'flex-start',
-          padding: '36px 32px 0',
+          padding: '28px 32px 0',
           minHeight: 0,
         }}
       >
@@ -321,7 +331,7 @@ function PhaseChip({
     labelColor = 'rgba(255,255,255,0.78)';
   }
 
-  const showCheck = isVisited && !isActive;
+  const showCheck = isVisited;
 
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
