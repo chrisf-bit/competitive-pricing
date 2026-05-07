@@ -101,7 +101,7 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
             letterSpacing: '0.18em',
           }}
         >
-          Level 0 - Email Audit
+          Email Audit
         </div>
         <div
           style={{

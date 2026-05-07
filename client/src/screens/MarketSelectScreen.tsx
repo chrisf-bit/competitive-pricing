@@ -50,7 +50,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
               marginBottom: 14,
             }}
           >
-            Level 0 - Set the Scene
+            Set the Scene
           </div>
           <h1
             style={{

@@ -193,7 +193,7 @@ export function GameMasterChatScreen({ onComplete }: GameMasterChatScreenProps) 
             letterSpacing: '0.18em',
           }}
         >
-          Level 0 - Briefing
+          Day one
         </div>
       </div>
 

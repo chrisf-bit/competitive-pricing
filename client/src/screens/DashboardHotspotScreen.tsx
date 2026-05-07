@@ -113,7 +113,7 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
               letterSpacing: '0.18em',
             }}
           >
-            Level 0 - Dashboard Tour
+            Dashboard Tour
           </div>
           <div style={{ flex: 1 }} />
           <ProgressDots
