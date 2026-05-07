@@ -30,7 +30,7 @@ const screenJumps: ScreenJump[] = [
   { screen: 'l0-market-select', label: 'Market Select', group: 'level0' },
   { screen: 'l0-gm-chat', label: 'GM Chat', group: 'level0' },
   { screen: 'l0-email-audit', label: 'Email Audit', group: 'level0' },
-  { screen: 'l0-dashboard-hotspot', label: 'Dashboard Hotspot', group: 'level0' },
+  { screen: 'l0-dashboard-hotspot', label: 'Dashboard Hotspot (parked)', group: 'level0' },
   { screen: 'portfolio', label: 'Portfolio', group: 'level1' },
   { screen: 'debrief', label: 'Debrief', group: 'wrap' },
 ];

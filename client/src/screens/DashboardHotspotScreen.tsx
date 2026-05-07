@@ -1,3 +1,19 @@
+/**
+ * PARKED 2026-05-07.
+ *
+ * This screen makes specific click-where claims about a stylised mock
+ * dashboard, but in real life LPS access several different existing
+ * tools - each with their own layout. Training learners on "the eRPD
+ * tile" of OUR mock would embed a wrong mental model.
+ *
+ * Also: the original copy framed eRPD at country level, but for daily
+ * LPS work eRPD is observed at partner-account level (country-level
+ * is only the rollup objective).
+ *
+ * Resume work once the team confirms which real dashboards LPS
+ * actually use day-to-day, what each surfaces, and how to embed
+ * click-where exercises that map onto the real tools.
+ */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {

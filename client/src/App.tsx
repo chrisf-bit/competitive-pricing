@@ -111,10 +111,16 @@ export default function App() {
             <EmailAuditScreen
               onComplete={(results) => {
                 game.recordKnowledgeCheckResults(results);
-                game.goToScreen('l0-dashboard-hotspot');
+                // Dashboard Hotspot is parked - skipping straight to Portfolio
+                // until the team confirms what real dashboards LPS use.
+                game.goToScreen('portfolio');
               }}
             />
           )}
+          {/*
+            Dashboard Hotspot is currently parked. The screen still routes
+            via DevNav for inspection, but the linear flow skips it.
+          */}
           {state.screen === 'l0-dashboard-hotspot' && (
             <DashboardHotspotScreen
               onComplete={(results) => {
