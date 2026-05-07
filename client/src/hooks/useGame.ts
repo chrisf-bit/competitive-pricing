@@ -115,6 +115,19 @@ export function useGame() {
     [],
   );
 
+  /** Mark the partner-sim tutorial as having been auto-shown. */
+  const markTutorialShown = useCallback(() => {
+    setState((s) => ({ ...s, tutorialShown: true }));
+  }, []);
+
+  /** Mark Level 0 as cleared so the Briefing button adapts on a return visit. */
+  const markLevel0Cleared = useCallback(() => {
+    setState((s) => ({
+      ...s,
+      level0Progress: { ...s.level0Progress, cleared: true },
+    }));
+  }, []);
+
   /**
    * Mark an activity for retry from the Clearance Summary: clears any
    * stored results matching the given prefix, sets the return-to to the
@@ -160,5 +173,7 @@ export function useGame() {
     recordKnowledgeCheckResults,
     finishLevel0Activity,
     requestLevel0Retry,
+    markTutorialShown,
+    markLevel0Cleared,
   };
 }

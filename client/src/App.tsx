@@ -62,6 +62,7 @@ export default function App() {
           currentRound={state.currentRound}
           actionsRemaining={state.actionsRemaining}
           screen={state.screen}
+          onTutorial={() => setShowTutorial(true)}
         />
       )}
 
@@ -87,10 +88,13 @@ export default function App() {
         <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
           {state.screen === 'briefing' && (
             <BriefingScreen
-              onStart={() => game.goToScreen('l0-market-select')}
-              onTutorial={() => {
-                game.goToScreen('l0-market-select');
-                setShowTutorial(true);
+              hasCleared={state.level0Progress.cleared}
+              onStart={() => {
+                if (state.level0Progress.cleared) {
+                  game.goToScreen('portfolio');
+                } else {
+                  game.goToScreen('l0-market-select');
+                }
               }}
             />
           )}
@@ -124,7 +128,14 @@ export default function App() {
           {state.screen === 'l0-clearance-summary' && (
             <ClearanceSummaryScreen
               results={state.level0Progress.knowledgeCheckResults}
-              onContinue={() => game.goToScreen('portfolio')}
+              onContinue={() => {
+                game.markLevel0Cleared();
+                game.goToScreen('portfolio');
+                if (!state.tutorialShown) {
+                  setShowTutorial(true);
+                  game.markTutorialShown();
+                }
+              }}
               onRetry={(activityScreen, itemMatcher) =>
                 game.requestLevel0Retry(activityScreen, itemMatcher)
               }

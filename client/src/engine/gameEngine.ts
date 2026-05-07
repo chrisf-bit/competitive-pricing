@@ -44,6 +44,7 @@ export function createInitialState(): GameState {
     },
     currentDiagnosis: null,
     level0ReturnTo: null,
+    tutorialShown: false,
     currentRound: 1,
     actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],

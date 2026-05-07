@@ -1,10 +1,12 @@
-import { BarChart3, Zap } from 'lucide-react';
+import { BarChart3, Zap, HelpCircle } from 'lucide-react';
 import type { GameScreen } from '../types';
 
 interface HeaderProps {
   currentRound: number;
   actionsRemaining: number;
   screen: GameScreen;
+  /** Optional callback to re-open the partner-sim tutorial. */
+  onTutorial?: () => void;
 }
 
 const roundLabels: Record<number, string> = {
@@ -13,7 +15,7 @@ const roundLabels: Record<number, string> = {
   3: 'Week 6',
 };
 
-export function Header({ currentRound, actionsRemaining, screen }: HeaderProps) {
+export function Header({ currentRound, actionsRemaining, screen, onTutorial }: HeaderProps) {
   const showActions = screen === 'portfolio' || screen === 'partner-detail';
 
   return (
@@ -121,6 +123,36 @@ export function Header({ currentRound, actionsRemaining, screen }: HeaderProps) 
               {actionsRemaining}
             </strong>
           </div>
+        )}
+
+        {onTutorial && (
+          <button
+            onClick={onTutorial}
+            aria-label="How to play"
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 8,
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              color: 'rgba(255,255,255,0.75)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              transition: 'background 0.12s ease, color 0.12s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
+              e.currentTarget.style.color = 'var(--white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+              e.currentTarget.style.color = 'rgba(255,255,255,0.75)';
+            }}
+          >
+            <HelpCircle size={16} />
+          </button>
         )}
       </div>
     </header>

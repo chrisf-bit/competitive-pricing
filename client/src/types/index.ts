@@ -317,6 +317,8 @@ export interface GameState {
    * returns the learner to the summary rather than rolling forward.
    */
   level0ReturnTo: GameScreen | null;
+  /** Whether the partner-sim tutorial has been auto-shown to the learner already. */
+  tutorialShown: boolean;
   currentRound: number;         // 1, 2, 3
   actionsRemaining: number;     // starts at 2 per round
   actionsThisRound: string[];   // partner IDs engaged this round

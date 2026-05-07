@@ -1,11 +1,12 @@
-import { BarChart3, Users, MessageSquare, TrendingUp, ChevronRight, BookOpen } from 'lucide-react';
+import { BarChart3, Users, MessageSquare, TrendingUp, ChevronRight } from 'lucide-react';
 
 interface BriefingScreenProps {
   onStart: () => void;
-  onTutorial: () => void;
+  /** True if the learner has already completed clearance in this session. */
+  hasCleared: boolean;
 }
 
-export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
+export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
   return (
     <div
       style={{
@@ -147,36 +148,8 @@ export function BriefingScreen({ onStart, onTutorial }: BriefingScreenProps) {
                 (e.currentTarget.style.background = 'var(--brand-yellow)')
               }
             >
-              Get clearance for mission
+              {hasCleared ? 'Open your portfolio' : 'Get clearance for mission'}
               <ChevronRight size={18} />
-            </button>
-            <button
-              onClick={onTutorial}
-              style={{
-                background: 'rgba(255,255,255,0.08)',
-                color: 'var(--white)',
-                padding: '14px 28px',
-                borderRadius: 'var(--radius-sm)',
-                fontSize: 15,
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                border: '1.5px solid rgba(255,255,255,0.15)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.15)';
-              }}
-            >
-              <BookOpen size={17} />
-              How to Play
             </button>
           </div>
         </div>
