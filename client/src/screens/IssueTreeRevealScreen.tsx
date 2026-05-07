@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Check } from 'lucide-react';
 import {
   issueTreePhases,
   type IssueTreePhase,
@@ -95,7 +95,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
       {/* Phase pipeline - sits between intro and step explanation, clickable */}
       <div
         style={{
-          padding: '24px 24px 8px',
+          padding: '20px 24px 8px',
           overflowX: 'auto',
           flexShrink: 0,
         }}
@@ -121,6 +121,25 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
               onClick={() => handleChipClick(i)}
             />
           ))}
+        </div>
+        <div
+          style={{
+            textAlign: 'center',
+            fontSize: 11,
+            fontWeight: 600,
+            color: allVisited ? 'var(--success)' : 'rgba(255,255,255,0.5)',
+            letterSpacing: '0.08em',
+            textTransform: 'uppercase',
+            marginTop: 14,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 6,
+          }}
+        >
+          {allVisited && <Check size={12} strokeWidth={3} />}
+          {visited.size} of {issueTreePhases.length} steps viewed
+          {!allVisited && ' - walk through all steps to continue'}
         </div>
       </div>
 
@@ -302,6 +321,8 @@ function PhaseChip({
     labelColor = 'rgba(255,255,255,0.78)';
   }
 
+  const showCheck = isVisited && !isActive;
+
   return (
     <div style={{ display: 'flex', alignItems: 'center' }}>
       <motion.button
@@ -311,6 +332,7 @@ function PhaseChip({
         animate={{ scale: isActive ? 1.04 : 1 }}
         transition={{ duration: 0.25, ease: 'easeOut' }}
         style={{
+          position: 'relative',
           width: 116,
           height: 96,
           background,
@@ -327,6 +349,27 @@ function PhaseChip({
           boxShadow: isActive ? '0 6px 18px rgba(254, 186, 2, 0.18)' : 'none',
         }}
       >
+        {showCheck && (
+          <div
+            style={{
+              position: 'absolute',
+              top: -6,
+              right: -6,
+              width: 20,
+              height: 20,
+              borderRadius: '50%',
+              background: 'var(--success)',
+              color: 'var(--white)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              border: '2px solid var(--brand-navy-dark)',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.35)',
+            }}
+          >
+            <Check size={11} strokeWidth={3.5} />
+          </div>
+        )}
         <Icon size={20} style={{ color: iconColor }} />
         <div
           style={{
