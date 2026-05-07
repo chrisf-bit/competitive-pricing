@@ -131,8 +131,8 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          justifyContent: 'center',
-          padding: '0 32px',
+          justifyContent: 'flex-start',
+          padding: '36px 32px 0',
           minHeight: 0,
         }}
       >
@@ -144,7 +144,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.4, ease: 'easeOut' }}
             style={{
-              maxWidth: 720,
+              maxWidth: 680,
               width: '100%',
               textAlign: 'center',
             }}
@@ -156,28 +156,28 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
                 color: 'var(--brand-yellow)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.18em',
-                marginBottom: 12,
+                marginBottom: 10,
               }}
             >
               {activePhase.label} - Step {activeIndex + 1} of {issueTreePhases.length}
             </div>
             <h2
               style={{
-                fontSize: 32,
-                fontWeight: 800,
+                fontSize: 22,
+                fontWeight: 700,
                 color: 'var(--white)',
-                lineHeight: 1.2,
-                letterSpacing: '-0.02em',
-                marginBottom: 16,
+                lineHeight: 1.3,
+                letterSpacing: '-0.01em',
+                marginBottom: 12,
               }}
             >
               {activePhase.headline}
             </h2>
             <p
               style={{
-                fontSize: 15,
+                fontSize: 14.5,
                 color: 'rgba(255,255,255,0.78)',
-                lineHeight: 1.65,
+                lineHeight: 1.6,
                 maxWidth: 560,
                 margin: '0 auto',
               }}
