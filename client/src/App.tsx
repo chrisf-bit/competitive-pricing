@@ -12,6 +12,7 @@ import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
 import { EmailAuditScreen } from './screens/EmailAuditScreen';
 import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
 import { IssueTreeRevealScreen } from './screens/IssueTreeRevealScreen';
+import { ClearanceSummaryScreen } from './screens/ClearanceSummaryScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -102,25 +103,32 @@ export default function App() {
           )}
           {state.screen === 'l0-gm-chat' && (
             <GameMasterChatScreen
-              onComplete={(results) => {
-                game.recordKnowledgeCheckResults(results);
-                game.goToScreen('l0-email-audit');
-              }}
+              onComplete={(results) =>
+                game.finishLevel0Activity('l0-email-audit', results)
+              }
             />
           )}
           {state.screen === 'l0-email-audit' && (
             <EmailAuditScreen
-              onComplete={(results) => {
-                game.recordKnowledgeCheckResults(results);
-                // Dashboard Hotspot is parked - jumping straight to the
-                // Issue Tree reveal until the team confirms what real
-                // dashboards LPS use.
-                game.goToScreen('l0-issue-tree-reveal');
-              }}
+              onComplete={(results) =>
+                // Dashboard Hotspot is parked - linear flow skips it.
+                game.finishLevel0Activity('l0-issue-tree-reveal', results)
+              }
             />
           )}
           {state.screen === 'l0-issue-tree-reveal' && (
-            <IssueTreeRevealScreen onComplete={() => game.goToScreen('portfolio')} />
+            <IssueTreeRevealScreen
+              onComplete={() => game.finishLevel0Activity('l0-clearance-summary', [])}
+            />
+          )}
+          {state.screen === 'l0-clearance-summary' && (
+            <ClearanceSummaryScreen
+              results={state.level0Progress.knowledgeCheckResults}
+              onContinue={() => game.goToScreen('portfolio')}
+              onRetry={(activityScreen, itemMatcher) =>
+                game.requestLevel0Retry(activityScreen, itemMatcher)
+              }
+            />
           )}
           {/*
             Dashboard Hotspot is currently parked. The screen still routes
@@ -128,10 +136,9 @@ export default function App() {
           */}
           {state.screen === 'l0-dashboard-hotspot' && (
             <DashboardHotspotScreen
-              onComplete={(results) => {
-                game.recordKnowledgeCheckResults(results);
-                game.goToScreen('portfolio');
-              }}
+              onComplete={(results) =>
+                game.finishLevel0Activity('l0-clearance-summary', results)
+              }
             />
           )}
           {state.screen === 'portfolio' && (

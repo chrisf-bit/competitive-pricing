@@ -89,6 +89,58 @@ export function useGame() {
     }));
   }, []);
 
+  /**
+   * Record results from a Level 0 activity AND navigate. If a return-to
+   * screen is set (via requestLevel0Retry), navigates there instead of
+   * the activity's default next screen, then clears the return-to.
+   */
+  const finishLevel0Activity = useCallback(
+    (defaultNext: GameState['screen'], results: KnowledgeCheckResult[]) => {
+      setState((s) => {
+        const target = s.level0ReturnTo ?? defaultNext;
+        return {
+          ...s,
+          screen: target,
+          level0ReturnTo: null,
+          level0Progress: {
+            ...s.level0Progress,
+            knowledgeCheckResults: [
+              ...s.level0Progress.knowledgeCheckResults,
+              ...results,
+            ],
+          },
+        };
+      });
+    },
+    [],
+  );
+
+  /**
+   * Mark an activity for retry from the Clearance Summary: clears any
+   * stored results matching the given prefix, sets the return-to to the
+   * summary, and navigates the learner to the activity. When they finish
+   * the activity, finishLevel0Activity navigates them back to the summary.
+   */
+  const requestLevel0Retry = useCallback(
+    (
+      activityScreen: GameState['screen'],
+      itemMatcher: (itemId: string) => boolean,
+    ) => {
+      setState((s) => ({
+        ...s,
+        screen: activityScreen,
+        level0ReturnTo: 'l0-clearance-summary',
+        level0Progress: {
+          ...s.level0Progress,
+          knowledgeCheckResults: s.level0Progress.knowledgeCheckResults.filter(
+            (r) => !itemMatcher(r.itemId),
+          ),
+        },
+      }));
+    },
+    [],
+  );
+
   const score = state.gameComplete ? calculateScore(state) : null;
 
   return {
@@ -106,5 +158,7 @@ export function useGame() {
     setLearnerStrengths,
     setLearnerArchetype,
     recordKnowledgeCheckResults,
+    finishLevel0Activity,
+    requestLevel0Retry,
   };
 }

@@ -43,6 +43,7 @@ export function createInitialState(): GameState {
       cleared: false,
     },
     currentDiagnosis: null,
+    level0ReturnTo: null,
     currentRound: 1,
     actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],

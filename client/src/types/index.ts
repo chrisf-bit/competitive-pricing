@@ -310,6 +310,13 @@ export interface GameState {
    * Cleared when the engagement ends.
    */
   currentDiagnosis: Level1Diagnosis | null;
+  /**
+   * If set, completing the next Level 0 activity navigates here instead of
+   * the activity's default next screen. Used by the Clearance Summary
+   * retry buttons - they set this to 'l0-clearance-summary' so the retry
+   * returns the learner to the summary rather than rolling forward.
+   */
+  level0ReturnTo: GameScreen | null;
   currentRound: number;         // 1, 2, 3
   actionsRemaining: number;     // starts at 2 per round
   actionsThisRound: string[];   // partner IDs engaged this round
