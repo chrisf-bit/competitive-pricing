@@ -32,6 +32,8 @@ export function createInitialState(): GameState {
       market: null,
       strengths: [],
       archetype: null,
+      avatarId: null,
+      playerName: 'Name_Var',
       completedLevels: [],
       xp: 0,
     },

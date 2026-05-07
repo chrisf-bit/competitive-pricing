@@ -39,7 +39,7 @@ export const gmCharacter = {
 export const gmScript: GMBeat[] = [
   {
     type: 'message',
-    text: "Hey - you must be the new starter. I'm Alex. I run point on price competitiveness around here.",
+    text: "Hey {{name}} - good to meet you. I'm Alex. I run point on price competitiveness around here.",
   },
   {
     type: 'message',

@@ -60,6 +60,17 @@ export interface LearnerProfile {
   market: LearnerMarket | null;
   strengths: LearnerStrength[];
   archetype: CharacterArchetype | null;
+  /**
+   * Selected avatar id from the character library. Visual identity only -
+   * the gameplay/persona impact is carried by the archetype.
+   */
+  avatarId: string | null;
+  /**
+   * Player's first name. Pre-SCORM default is the literal placeholder
+   * "Name_Var" so it's obvious in tests when the LMS-provided name is
+   * not yet wired up. Once wrapped, SCORM cmi.core.student_name overrides this.
+   */
+  playerName: string;
   /** Levels the learner has cleared. */
   completedLevels: Level[];
   /** Aggregate XP across all activities. */

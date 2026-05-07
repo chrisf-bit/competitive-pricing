@@ -13,6 +13,13 @@ import { PhoneFrame } from '../components/DeviceFrame';
 
 interface GameMasterChatScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
+  /** Player's first name. Used to personalise Alex's intro line. */
+  playerName: string;
+}
+
+/** Replace simple {{name}} tokens in script text. */
+function interpolate(text: string, vars: Record<string, string>): string {
+  return text.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] ?? `{{${key}}}`);
 }
 
 type ChatMessage =
@@ -33,7 +40,7 @@ interface ScriptCursor {
 const TYPING_DELAY_MS = 750;
 const MESSAGE_PAUSE_MS = 350;
 
-export function GameMasterChatScreen({ onComplete }: GameMasterChatScreenProps) {
+export function GameMasterChatScreen({ onComplete, playerName }: GameMasterChatScreenProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [cursor, setCursor] = useState<ScriptCursor>({ beatIndex: 0, phase: 'awaiting' });
   const [isTyping, setIsTyping] = useState(false);
@@ -68,7 +75,7 @@ export function GameMasterChatScreen({ onComplete }: GameMasterChatScreenProps) 
         appendMessage({
           id: `m-${cursor.beatIndex}`,
           from: 'gm',
-          text: beat.text,
+          text: interpolate(beat.text, { name: playerName }),
         });
         // Auto-advance to the next beat.
         await wait(MESSAGE_PAUSE_MS);

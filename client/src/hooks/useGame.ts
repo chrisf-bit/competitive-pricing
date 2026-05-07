@@ -79,6 +79,20 @@ export function useGame() {
     }));
   }, []);
 
+  const setLearnerAvatar = useCallback((avatarId: string) => {
+    setState((s) => ({
+      ...s,
+      learnerProfile: { ...s.learnerProfile, avatarId },
+    }));
+  }, []);
+
+  const setLearnerName = useCallback((playerName: string) => {
+    setState((s) => ({
+      ...s,
+      learnerProfile: { ...s.learnerProfile, playerName },
+    }));
+  }, []);
+
   const recordKnowledgeCheckResults = useCallback((results: KnowledgeCheckResult[]) => {
     setState((s) => ({
       ...s,
@@ -170,6 +184,8 @@ export function useGame() {
     setLearnerMarket,
     setLearnerStrengths,
     setLearnerArchetype,
+    setLearnerAvatar,
+    setLearnerName,
     recordKnowledgeCheckResults,
     finishLevel0Activity,
     requestLevel0Retry,

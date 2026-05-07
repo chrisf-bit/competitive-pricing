@@ -8,6 +8,7 @@ import { DevNav } from './components/DevNav';
 import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
+import { CharacterBuildScreen } from './screens/CharacterBuildScreen';
 import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
 import { EmailAuditScreen } from './screens/EmailAuditScreen';
 import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
@@ -102,11 +103,22 @@ export default function App() {
             <MarketSelectScreen
               selected={state.learnerProfile.market}
               onSelect={game.setLearnerMarket}
+              onContinue={() => game.goToScreen('l0-character-build')}
+            />
+          )}
+          {state.screen === 'l0-character-build' && (
+            <CharacterBuildScreen
+              selectedAvatarId={state.learnerProfile.avatarId}
+              selectedArchetype={state.learnerProfile.archetype}
+              playerName={state.learnerProfile.playerName}
+              onSelectAvatar={game.setLearnerAvatar}
+              onSelectArchetype={game.setLearnerArchetype}
               onContinue={() => game.goToScreen('l0-gm-chat')}
             />
           )}
           {state.screen === 'l0-gm-chat' && (
             <GameMasterChatScreen
+              playerName={state.learnerProfile.playerName}
               onComplete={(results) =>
                 game.finishLevel0Activity('l0-email-audit', results)
               }
