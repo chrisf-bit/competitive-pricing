@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Plane, ChevronRight } from 'lucide-react';
 import splashImage from '../assets/splash-dark.png';
 
@@ -11,7 +11,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
   const [showBegin, setShowBegin] = useState(false);
 
   useEffect(() => {
-    const t = setTimeout(() => setShowBegin(true), 4800);
+    const t = setTimeout(() => setShowBegin(true), 4000);
     return () => clearTimeout(t);
   }, []);
 
@@ -22,10 +22,6 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
         inset: 0,
         background: 'var(--brand-navy-dark)',
         overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
       }}
     >
       {/* Background image */}
@@ -51,23 +47,24 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse at center, rgba(0,15,40,0.3) 0%, rgba(0,15,40,0.0) 55%, rgba(0,15,40,0.5) 100%)',
+            'radial-gradient(ellipse at center, rgba(0,15,40,0.35) 0%, rgba(0,15,40,0.0) 55%, rgba(0,15,40,0.5) 100%)',
         }}
       />
 
-      {/* Title block (top) */}
+      {/* Title block — centred vertically */}
       <div
         style={{
           position: 'absolute',
-          top: 'clamp(48px, 12vh, 120px)',
-          left: 0,
-          right: 0,
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
           zIndex: 2,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
           padding: '0 32px',
+          width: '100%',
         }}
       >
         <motion.div
@@ -80,7 +77,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
             color: 'var(--white)',
             letterSpacing: '-0.03em',
             lineHeight: 1,
-            textShadow: '0 4px 32px rgba(0,15,40,0.45)',
+            textShadow: '0 4px 32px rgba(0,15,40,0.55)',
           }}
         >
           Rate Right
@@ -116,102 +113,124 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
         </motion.div>
       </div>
 
-      {/* Centred plane with rotating dot-ring loader */}
-      <PlaneLoader />
-
-      {/* Begin button (appears after the dot ring has had a moment to play) */}
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={showBegin ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+      {/* Loader / Begin slot — sits below the title and swaps from one to the other at 4s */}
+      <div
         style={{
           position: 'absolute',
-          bottom: 'clamp(48px, 9vh, 96px)',
+          top: 'calc(50% + 130px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
           zIndex: 3,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 200,
         }}
       >
-        <button
-          onClick={onBegin}
-          disabled={!showBegin}
-          style={{
-            background: 'var(--brand-yellow)',
-            color: 'var(--brand-navy)',
-            padding: '14px 36px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: 16,
-            fontWeight: 700,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            border: 'none',
-            cursor: showBegin ? 'pointer' : 'default',
-            boxShadow: '0 8px 24px rgba(254, 186, 2, 0.25)',
-            transition: 'background 0.15s ease',
-            pointerEvents: showBegin ? 'auto' : 'none',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'var(--brand-yellow-light)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'var(--brand-yellow)';
-          }}
-        >
-          Begin
-          <ChevronRight size={18} />
-        </button>
-      </motion.div>
+        <AnimatePresence mode="wait">
+          {showBegin ? (
+            <motion.button
+              key="begin"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+              onClick={onBegin}
+              style={{
+                background: 'var(--brand-yellow)',
+                color: 'var(--brand-navy)',
+                padding: '14px 36px',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: 16,
+                fontWeight: 700,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 8px 24px rgba(254, 186, 2, 0.25)',
+                transition: 'background 0.15s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'var(--brand-yellow-light)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'var(--brand-yellow)';
+              }}
+            >
+              Begin
+              <ChevronRight size={18} />
+            </motion.button>
+          ) : (
+            <motion.div
+              key="loader"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: 'easeOut' }}
+            >
+              <PlaneLoader />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
 
+/**
+ * Plane sitting in the centre of a 12-dot ring. The ring runs an
+ * opacity-wave animation that travels clockwise around the plane.
+ * Sized as a self-contained square; layout above positions it.
+ */
 function PlaneLoader() {
   const dotCount = 12;
-  const radius = 70; // px from centre
-  const cycleSeconds = 1.8;
+  const radius = 56; // px from centre of the loader square
+  const cycleSeconds = 1.6;
+  const size = 160;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.92 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 1.2, duration: 0.8, ease: 'easeOut' }}
+    <div
       style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: 200,
-        height: 200,
-        zIndex: 2,
+        position: 'relative',
+        width: size,
+        height: size,
         pointerEvents: 'none',
       }}
     >
-      {/* The plane in the centre, gently bobbing */}
-      <motion.div
-        animate={{ y: [-3, 3, -3] }}
-        transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+      {/* Static centring wrapper for the bobbing plane (avoids framer-motion
+          animate prop conflicting with our centring transform) */}
+      <div
         style={{
           position: 'absolute',
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          color: 'var(--brand-yellow)',
-          filter: 'drop-shadow(0 4px 18px rgba(254, 186, 2, 0.5))',
         }}
       >
-        <div style={{ transform: 'rotate(-12deg)' }}>
-          <Plane size={48} fill="currentColor" strokeWidth={1.4} />
-        </div>
-      </motion.div>
+        <motion.div
+          animate={{ y: [-3, 3, -3] }}
+          transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
+          style={{
+            color: 'var(--brand-yellow)',
+            filter: 'drop-shadow(0 4px 18px rgba(254, 186, 2, 0.5))',
+          }}
+        >
+          <div style={{ transform: 'rotate(-12deg)', display: 'flex' }}>
+            <Plane size={44} fill="currentColor" strokeWidth={1.4} />
+          </div>
+        </motion.div>
+      </div>
 
-      {/* Dot ring around the plane — wave of opacity travels around */}
+      {/* Dot ring — wave of opacity travels clockwise around the plane */}
       {Array.from({ length: dotCount }).map((_, i) => {
-        const angleRad = ((i / dotCount) * 2 - 0.5) * Math.PI; // start at top, go clockwise
+        const angleRad = ((i / dotCount) * 2 - 0.5) * Math.PI; // start at top
         const x = Math.cos(angleRad) * radius;
         const y = Math.sin(angleRad) * radius;
         return (
           <motion.div
             key={i}
-            animate={{ opacity: [0.15, 1, 0.15] }}
+            animate={{ opacity: [0.18, 1, 0.18] }}
             transition={{
               duration: cycleSeconds,
               repeat: Infinity,
@@ -220,18 +239,17 @@ function PlaneLoader() {
             }}
             style={{
               position: 'absolute',
-              top: `calc(50% + ${y}px)`,
-              left: `calc(50% + ${x}px)`,
+              top: `calc(50% + ${y}px - 3px)`,
+              left: `calc(50% + ${x}px - 3px)`,
               width: 6,
               height: 6,
               borderRadius: '50%',
               background: 'rgba(255,255,255,0.9)',
-              transform: 'translate(-50%, -50%)',
               boxShadow: '0 0 8px rgba(255,255,255,0.4)',
             }}
           />
         );
       })}
-    </motion.div>
+    </div>
   );
 }
