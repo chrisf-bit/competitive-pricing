@@ -9,6 +9,7 @@ import {
   type GMOption,
 } from '../data/gameMasterScript';
 import type { KnowledgeCheckResult } from '../types';
+import { PhoneFrame } from '../components/DeviceFrame';
 
 interface GameMasterChatScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
@@ -154,9 +155,10 @@ export function GameMasterChatScreen({ onComplete }: GameMasterChatScreenProps) 
   const correctCount = results.filter((r) => r.correct).length;
 
   return (
+    <PhoneFrame>
     <div
       style={{
-        height: '100vh',
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--brand-navy-dark)',
@@ -242,6 +244,7 @@ export function GameMasterChatScreen({ onComplete }: GameMasterChatScreenProps) 
         </div>
       </div>
     </div>
+    </PhoneFrame>
   );
 }
 
@@ -358,6 +361,18 @@ function ReplyOptions({
         gap: 8,
       }}
     >
+      <div
+        style={{
+          fontSize: 11,
+          fontWeight: 700,
+          color: 'rgba(255,255,255,0.55)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.14em',
+          marginBottom: 2,
+        }}
+      >
+        Choose one of the below
+      </div>
       {options.map((opt, i) => (
         <button
           key={i}

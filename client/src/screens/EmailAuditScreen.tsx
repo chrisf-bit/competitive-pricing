@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Check, X, Mail, ShieldCheck, ShieldAlert, FileText } from 'lucide-react';
 import { emailAudit, type EmailPhrase } from '../data/emailAudit';
 import type { KnowledgeCheckResult } from '../types';
+import { LaptopFrame } from '../components/DeviceFrame';
 
 interface EmailAuditScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
@@ -50,9 +51,10 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
   }
 
   return (
+    <LaptopFrame>
     <div
       style={{
-        height: '100vh',
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--brand-navy-dark)',
@@ -206,6 +208,7 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
         </div>
       </div>
     </div>
+    </LaptopFrame>
   );
 }
 
