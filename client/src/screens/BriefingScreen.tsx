@@ -70,24 +70,38 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             Competitive Pricing Simulation
           </h1>
 
-          <p
+          <div
             style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 14,
+              marginBottom: 36,
+              maxWidth: 600,
               fontSize: 16,
               color: 'rgba(255,255,255,0.75)',
               lineHeight: 1.6,
-              marginBottom: 36,
-              maxWidth: 600,
               animation: 'fadeIn 0.5s ease 0.2s backwards',
             }}
           >
-            So, you want to manage partner accounts at Booking.com? Let's see if you've got
-            what it takes. You'll be given some partner accounts to look after, but they're
-            not in great shape. Your mission is to diagnose pricing problems, choose the
-            right strategy, and adapt your conversations to each partner, all while balancing
-            competitiveness, revenue, and trust. Pay attention to how each partner responds.
-            Not everyone communicates in the same way. Before you get started, you'll need
-            to gain clearance to take on the mission. Ready?
-          </p>
+            <p style={{ margin: 0 }}>
+              So, you want to manage partner accounts at Booking.com? Let's see if you've
+              got what it takes.
+            </p>
+            <p style={{ margin: 0 }}>
+              You'll be given some partner accounts to look after, but they're not in great
+              shape.
+            </p>
+            <p style={{ margin: 0 }}>
+              Your mission is to diagnose pricing problems, choose the right strategy, and
+              adapt your conversations to each partner, all while balancing competitiveness,
+              revenue, and trust. Pay attention to how each partner responds - not everyone
+              communicates in the same way.
+            </p>
+            <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontWeight: 500 }}>
+              Before you get started, you'll need to gain clearance to take on the mission.
+              Ready?
+            </p>
+          </div>
 
           {/* Info cards */}
           <div
