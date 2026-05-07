@@ -8,6 +8,7 @@ import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
 import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
+import { EmailAuditScreen } from './screens/EmailAuditScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -82,6 +83,14 @@ export default function App() {
           )}
           {state.screen === 'l0-gm-chat' && (
             <GameMasterChatScreen
+              onComplete={(results) => {
+                game.recordKnowledgeCheckResults(results);
+                game.goToScreen('l0-email-audit');
+              }}
+            />
+          )}
+          {state.screen === 'l0-email-audit' && (
+            <EmailAuditScreen
               onComplete={(results) => {
                 game.recordKnowledgeCheckResults(results);
                 game.goToScreen('portfolio');
