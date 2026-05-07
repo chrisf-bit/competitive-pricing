@@ -10,6 +10,7 @@ import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
 import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
 import { EmailAuditScreen } from './screens/EmailAuditScreen';
+import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -108,6 +109,14 @@ export default function App() {
           )}
           {state.screen === 'l0-email-audit' && (
             <EmailAuditScreen
+              onComplete={(results) => {
+                game.recordKnowledgeCheckResults(results);
+                game.goToScreen('l0-dashboard-hotspot');
+              }}
+            />
+          )}
+          {state.screen === 'l0-dashboard-hotspot' && (
+            <DashboardHotspotScreen
               onComplete={(results) => {
                 game.recordKnowledgeCheckResults(results);
                 game.goToScreen('portfolio');

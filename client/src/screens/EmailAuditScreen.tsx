@@ -28,7 +28,7 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
     [activePhraseId],
   );
 
-  const activeJudgement = activePhrase ? judgements[activePhrase.id] : null;
+  const activeJudgement = activePhrase ? judgements[activePhrase.id] ?? null : null;
 
   function handlePick(phraseId: string, pickedSafe: boolean) {
     const phrase = emailAudit.phrases.find((p) => p.id === phraseId);
