@@ -23,7 +23,7 @@ export default function App() {
     return <SplashScreen onBegin={() => setShowSplash(false)} />;
   }
 
-  // Level 0 screens (and briefing) run chrome-free — no Header, no GuidePanel.
+  // Level 0 screens (and briefing) run chrome-free - no Header, no GuidePanel.
   const isLevel0Chrome = state.screen === 'briefing' || state.screen.startsWith('l0-');
   const showGuide = !isLevel0Chrome;
   const selectedPartner =

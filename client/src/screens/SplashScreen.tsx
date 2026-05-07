@@ -51,7 +51,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
         }}
       />
 
-      {/* Title block — centred vertically */}
+      {/* Title block - centred vertically */}
       <div
         style={{
           position: 'absolute',
@@ -109,11 +109,11 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
             textTransform: 'uppercase',
           }}
         >
-          Pricing Competitiveness Simulation
+          Competitive Pricing Simulation
         </motion.div>
       </div>
 
-      {/* Loader / Begin slot — sits below the title and swaps from one to the other at 4s */}
+      {/* Loader / Begin slot - sits below the title and swaps from one to the other at 4s */}
       <div
         style={{
           position: 'absolute',
@@ -222,7 +222,7 @@ function PlaneLoader() {
         </motion.div>
       </div>
 
-      {/* Dot ring — wave of opacity travels clockwise around the plane */}
+      {/* Dot ring - wave of opacity travels clockwise around the plane */}
       {Array.from({ length: dotCount }).map((_, i) => {
         const angleRad = ((i / dotCount) * 2 - 0.5) * Math.PI; // start at top
         const x = Math.cos(angleRad) * radius;

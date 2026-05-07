@@ -50,7 +50,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
               marginBottom: 14,
             }}
           >
-            Level 0 — Set the Scene
+            Level 0 - Set the Scene
           </div>
           <h1
             style={{
@@ -74,7 +74,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
             }}
           >
             Your market determines the rules of engagement when you speak with partners.
-            Each region has different parity regulations — pick the one you operate in.
+            Each region has different parity regulations - pick the one you operate in.
           </p>
         </motion.div>
 

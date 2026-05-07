@@ -20,7 +20,7 @@ export interface MarketOption {
  * NOTE: Country/region → parity mapping is illustrative and pending SME
  * validation (parity status varies by jurisdiction and contract term, and
  * the steering deck does not enumerate the mapping). The structural
- * decision — three options, each tagged with a ParityRegime — is what
+ * decision - three options, each tagged with a ParityRegime - is what
  * load-bears here.
  */
 export const marketOptions: MarketOption[] = [
@@ -30,7 +30,7 @@ export const marketOptions: MarketOption[] = [
       regionLabel: 'Western Europe',
       parityRegime: 'none' as ParityRegime,
     },
-    ruleSummary: 'No-Parity market — the most constrained set of rules.',
+    ruleSummary: 'No-Parity market - the most constrained set of rules.',
     allowed: [
       'Ask partners for the best price they\'re willing to make available to Booking.com',
       'React with neutral, fact-finding questions if the partner raises external prices',
@@ -38,7 +38,7 @@ export const marketOptions: MarketOption[] = [
     notAllowed: [
       'Use the word "parity" in any conversation',
       'Suggest the partner is required to match external prices',
-      'Open conversations about external pricing — partner-initiated only',
+      'Open conversations about external pricing - partner-initiated only',
     ],
     exampleCountries: ['Germany', 'France', 'Italy', 'Sweden'],
   },
@@ -48,7 +48,7 @@ export const marketOptions: MarketOption[] = [
       regionLabel: 'United States',
       parityRegime: 'narrow' as ParityRegime,
     },
-    ruleSummary: 'Narrow-Parity market — alignment with the partner\'s own site only.',
+    ruleSummary: 'Narrow-Parity market - alignment with the partner\'s own site only.',
     allowed: [
       'Ask partners to align rates and conditions strictly with Brand.com',
       'Use RPD versus Brand.com data to show on-platform price gaps',
@@ -65,7 +65,7 @@ export const marketOptions: MarketOption[] = [
       regionLabel: 'Asia-Pacific',
       parityRegime: 'wide' as ParityRegime,
     },
-    ruleSummary: 'Wide-Parity market — full alignment with direct site and key OTAs.',
+    ruleSummary: 'Wide-Parity market - full alignment with direct site and key OTAs.',
     allowed: [
       'Ask partners to provide the same rates, conditions, and availability they offer Brand.com and key OTAs',
       'Proactively use cross-channel data (RPD, EPO) to illustrate performance opportunities',

@@ -22,7 +22,7 @@ export type ParityRegime = 'wide' | 'narrow' | 'none';
  * the load-bearing field downstream.
  */
 export interface LearnerMarket {
-  /** Optional region name if the picker presents regions (e.g. "EMEA — Wide Parity"). */
+  /** Optional region name if the picker presents regions (e.g. "EMEA - Wide Parity"). */
   regionId?: string;
   regionLabel?: string;
   /** The parity regime that applies to the learner's portfolio. Always populated. */
@@ -42,7 +42,7 @@ export interface LearnerStrength {
 }
 
 /**
- * The learner's character archetype — derived from their chosen strengths.
+ * The learner's character archetype - derived from their chosen strengths.
  * Optional until the build is complete.
  */
 export interface CharacterArchetype {
