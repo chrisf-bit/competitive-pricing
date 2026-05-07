@@ -4,6 +4,7 @@ import { useGame } from './hooks/useGame';
 import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
+import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
@@ -15,6 +16,11 @@ export default function App() {
   const game = useGame();
   const { state } = game;
   const [showTutorial, setShowTutorial] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+
+  if (showSplash) {
+    return <SplashScreen onBegin={() => setShowSplash(false)} />;
+  }
 
   const showGuide = state.screen !== 'briefing';
   const selectedPartner =
