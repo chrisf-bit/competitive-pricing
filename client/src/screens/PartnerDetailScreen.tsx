@@ -3,7 +3,6 @@ import {
   MapPin,
   Building2,
   MessageSquare,
-  AlertTriangle,
   CheckCircle2,
   XCircle,
   AlertCircle,
@@ -15,11 +14,10 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import type { PartnerState } from '../types';
-import { getRPDLevel, getTrend } from '../engine/gameEngine';
+import { getRPDLevel } from '../engine/gameEngine';
 import {
   RPDBadge,
   RelationshipBadge,
-  TrendIcon,
   DiscountBadge,
 } from '../components/MetricBadge';
 
@@ -62,11 +60,6 @@ export function PartnerDetailScreen({
   onStartConversation,
   onBack,
 }: PartnerDetailScreenProps) {
-  const prevMetrics =
-    partner.metricHistory.length > 0
-      ? partner.metricHistory[partner.metricHistory.length - 1].metrics
-      : partner.metrics;
-
   const canEngage = !alreadyEngaged && actionsRemaining > 0;
 
   return (
@@ -202,65 +195,42 @@ export function PartnerDetailScreen({
               }}
             >
               <BigMetric
-                label="Exp. RPD"
-                value={partner.metrics.experiencedRPD}
-                trend={getTrend(partner.metrics.experiencedRPD, prevMetrics.experiencedRPD)}
+                label="eRPD"
+                value={`${partner.metrics.erpd.toFixed(1)}%`}
+                changeText={`${partner.metrics.erpdChange < 0 ? '↓' : '↑'}${Math.abs(partner.metrics.erpdChange).toFixed(2)}`}
                 highlight
               />
               <BigMetric
-                label="Visibility"
-                value={partner.metrics.visibility}
-                trend={getTrend(partner.metrics.visibility, prevMetrics.visibility)}
+                label="RPD Public"
+                value={`${partner.metrics.rpdPublic.toFixed(1)}%`}
               />
               <BigMetric
-                label="Conversion"
-                value={partner.metrics.conversion}
-                trend={getTrend(partner.metrics.conversion, prevMetrics.conversion)}
+                label="RPD Loyal"
+                value={`${partner.metrics.rpdLoyal.toFixed(1)}%`}
               />
               <BigMetric
-                label="Revenue"
-                value={partner.metrics.revenue}
-                trend={getTrend(partner.metrics.revenue, prevMetrics.revenue)}
+                label="Lose Price"
+                value={`${partner.metrics.losePricePublic}%`}
               />
             </div>
 
-            {partner.metrics.rateParity !== 'clean' && (
-              <div
-                style={{
-                  marginTop: 14,
-                  padding: '10px 14px',
-                  background:
-                    partner.metrics.rateParity === 'major' ? 'var(--danger-bg)' : 'var(--warning-bg)',
-                  borderRadius: 'var(--radius-sm)',
-                  fontSize: 13,
-                  fontWeight: 600,
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 10,
-                  color:
-                    partner.metrics.rateParity === 'major' ? 'var(--danger)' : 'var(--warning)',
-                  border: `1.5px solid ${partner.metrics.rateParity === 'major' ? 'var(--danger)' : 'var(--warning)'}`,
-                }}
-              >
-                <div
-                  style={{
-                    width: 28,
-                    height: 28,
-                    borderRadius: 7,
-                    background: partner.metrics.rateParity === 'major' ? 'rgba(204,0,0,0.12)' : 'rgba(232,150,12,0.12)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                  }}
-                >
-                  <AlertTriangle size={14} />
-                </div>
-                {partner.metrics.rateParity === 'major'
-                  ? 'Significant rate parity issues across channels'
-                  : 'Minor rate parity discrepancies detected'}
-              </div>
-            )}
+            <div
+              style={{
+                marginTop: 14,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, 1fr)',
+                gap: 12,
+              }}
+            >
+              <BigMetric
+                label="Active Scenarios"
+                value={`${partner.metrics.activeScenarios}`}
+              />
+              <BigMetric
+                label="Top Competitor"
+                value={partner.metrics.competitor === 'brand' ? 'Brand.com' : 'Expedia'}
+              />
+            </div>
           </div>
 
           {/* Discount products */}
@@ -290,9 +260,7 @@ export function PartnerDetailScreen({
                     background: 'var(--off-white)',
                     borderRadius: 'var(--radius-sm)',
                     fontSize: 13,
-                    border: d.status === 'misconfigured'
-                      ? '1.5px solid var(--danger)'
-                      : '1.5px solid transparent',
+                    border: '1.5px solid transparent',
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -302,11 +270,7 @@ export function PartnerDetailScreen({
                         height: 26,
                         borderRadius: 6,
                         background:
-                          d.status === 'active'
-                            ? 'var(--success-bg)'
-                            : d.status === 'misconfigured'
-                              ? 'var(--danger-bg)'
-                              : 'var(--grey-100)',
+                          d.status === 'active' ? 'var(--success-bg)' : 'var(--grey-100)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -314,7 +278,7 @@ export function PartnerDetailScreen({
                     >
                       {d.status === 'active' && <CheckCircle2 size={14} style={{ color: 'var(--success)' }} />}
                       {d.status === 'inactive' && <XCircle size={14} style={{ color: 'var(--grey-300)' }} />}
-                      {d.status === 'misconfigured' && <AlertCircle size={14} style={{ color: 'var(--danger)' }} />}
+                      {d.status === 'misconfigured' && <AlertCircle size={14} style={{ color: 'var(--grey-500)' }} />}
                     </div>
                     <span style={{ fontWeight: 600, color: 'var(--grey-700)' }}>{d.label}</span>
                   </div>
@@ -530,12 +494,12 @@ export function PartnerDetailScreen({
 function BigMetric({
   label,
   value,
-  trend,
+  changeText,
   highlight,
 }: {
   label: string;
-  value: number;
-  trend: string;
+  value: string;
+  changeText?: string;
   highlight?: boolean;
 }) {
   return (
@@ -565,14 +529,14 @@ function BigMetric({
       <div
         style={{
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'baseline',
           justifyContent: 'center',
-          gap: 6,
+          gap: 8,
         }}
       >
         <span
           style={{
-            fontSize: highlight ? 32 : 26,
+            fontSize: highlight ? 28 : 22,
             fontWeight: 900,
             color: 'var(--brand-navy)',
             lineHeight: 1,
@@ -581,7 +545,17 @@ function BigMetric({
         >
           {value}
         </span>
-        <TrendIcon direction={trend as 'up' | 'down' | 'flat'} size={highlight ? 16 : 13} />
+        {changeText && (
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              color: 'var(--grey-500)',
+            }}
+          >
+            {changeText}
+          </span>
+        )}
       </div>
     </div>
   );
