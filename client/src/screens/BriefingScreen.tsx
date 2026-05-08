@@ -115,18 +115,18 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
           >
             <InfoCard
               icon={<Users size={20} />}
-              title="6 Partners"
-              text="Each with different pricing challenges and different ways of communicating"
+              title="A portfolio"
+              text="Real partner accounts, each with different pricing problems and ways of communicating"
             />
             <InfoCard
               icon={<TrendingUp size={20} />}
-              title="3 Rounds"
-              text="Your decisions have consequences that compound over time"
+              title="10 rounds"
+              text="Decisions compound over time - each round shifts what your partners need from you"
             />
             <InfoCard
               icon={<MessageSquare size={20} />}
-              title="3 Actions / Round"
-              text="You can't help everyone. Prioritise wisely"
+              title="One conversation per round"
+              text="Spot the partner who needs you most, then pick the right approach"
             />
           </div>
 

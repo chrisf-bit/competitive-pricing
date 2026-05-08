@@ -73,9 +73,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
               margin: '0 auto',
             }}
           >
-            Parity rules vary by country and dictate what you can and can't say to a partner.
-            Pick the regime your portfolio operates under - we'll show you example partners and
-            rules for that regime.
+            Pick the parity regime your portfolio operates under.
           </p>
         </motion.div>
 
@@ -83,8 +81,8 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: 18,
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: 14,
             width: '100%',
             margin: '40px 0 32px',
           }}
@@ -95,7 +93,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
               option={option}
               index={i}
               isSelected={selected?.parityRegime === option.market.parityRegime}
-              onClick={() => onSelect(option.market)}
+              onClick={() => option.available && onSelect(option.market)}
             />
           ))}
         </div>
@@ -149,37 +147,49 @@ interface MarketCardProps {
 }
 
 function MarketCard({ option, index, isSelected, onClick }: MarketCardProps) {
+  const disabled = !option.available;
+
   return (
     <motion.button
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 + index * 0.08, duration: 0.45, ease: 'easeOut' }}
       onClick={onClick}
+      disabled={disabled}
       style={{
         position: 'relative',
-        textAlign: 'left',
-        padding: '22px 22px 20px',
-        background: isSelected ? 'rgba(254, 186, 2, 0.10)' : 'rgba(255,255,255,0.05)',
+        textAlign: 'center',
+        padding: '32px 18px',
+        background: isSelected
+          ? 'rgba(254, 186, 2, 0.10)'
+          : disabled
+            ? 'rgba(255,255,255,0.025)'
+            : 'rgba(255,255,255,0.05)',
         border: isSelected
           ? '2px solid var(--brand-yellow)'
-          : '2px solid rgba(255,255,255,0.10)',
+          : disabled
+            ? '2px dashed rgba(255,255,255,0.10)'
+            : '2px solid rgba(255,255,255,0.10)',
         borderRadius: 'var(--radius-lg)',
         color: 'var(--white)',
-        cursor: 'pointer',
-        transition: 'background 0.18s ease, border-color 0.18s ease, transform 0.18s ease',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        opacity: disabled ? 0.55 : 1,
+        transition: 'background 0.18s ease, border-color 0.18s ease',
         display: 'flex',
         flexDirection: 'column',
-        gap: 14,
-        minHeight: 320,
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 10,
+        minHeight: 220,
       }}
       onMouseEnter={(e) => {
-        if (!isSelected) {
+        if (!isSelected && !disabled) {
           e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
           e.currentTarget.style.borderColor = 'rgba(255,255,255,0.20)';
         }
       }}
       onMouseLeave={(e) => {
-        if (!isSelected) {
+        if (!isSelected && !disabled) {
           e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
           e.currentTarget.style.borderColor = 'rgba(255,255,255,0.10)';
         }
@@ -206,144 +216,46 @@ function MarketCard({ option, index, isSelected, onClick }: MarketCardProps) {
         </div>
       )}
 
-      {/* Parity name + example countries */}
-      <div>
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 700,
-            color: 'var(--brand-yellow)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.16em',
-            marginBottom: 6,
-          }}
-        >
-          Parity regime
-        </div>
-        <div style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.15, color: 'var(--white)' }}>
-          {option.label}
-        </div>
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 700,
-            color: 'rgba(255,255,255,0.45)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.10em',
-            marginTop: 10,
-            marginBottom: 2,
-          }}
-        >
-          Includes
-        </div>
-        <div
-          style={{
-            fontSize: 12,
-            color: 'rgba(255,255,255,0.7)',
-            lineHeight: 1.4,
-          }}
-        >
-          {option.exampleCountries.join(' · ')}
-        </div>
-      </div>
-
+      {/* Parity regime label */}
       <div
         style={{
-          fontSize: 13,
-          color: 'rgba(255,255,255,0.78)',
-          lineHeight: 1.5,
+          fontSize: 10.5,
+          fontWeight: 700,
+          color: disabled ? 'rgba(255,255,255,0.4)' : 'var(--brand-yellow)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.16em',
         }}
       >
-        {option.ruleSummary}
+        Parity regime
       </div>
-
-      {/* Allowed list */}
-      <div>
+      <div
+        style={{
+          fontSize: 24,
+          fontWeight: 800,
+          lineHeight: 1.15,
+          color: 'var(--white)',
+          letterSpacing: '-0.01em',
+        }}
+      >
+        {option.label}
+      </div>
+      {disabled && (
         <div
           style={{
-            fontSize: 10,
-            fontWeight: 800,
+            marginTop: 6,
+            fontSize: 10.5,
+            fontWeight: 700,
             color: 'rgba(255,255,255,0.55)',
             textTransform: 'uppercase',
-            letterSpacing: '0.10em',
-            marginBottom: 6,
+            letterSpacing: '0.14em',
+            padding: '4px 10px',
+            border: '1px solid rgba(255,255,255,0.18)',
+            borderRadius: 100,
           }}
         >
-          You can
+          Coming soon
         </div>
-        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
-          {option.allowed.map((item, i) => (
-            <li
-              key={i}
-              style={{
-                fontSize: 12.5,
-                lineHeight: 1.45,
-                color: 'rgba(255,255,255,0.82)',
-                marginBottom: 4,
-                paddingLeft: 14,
-                position: 'relative',
-              }}
-            >
-              <span
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 7,
-                  width: 5,
-                  height: 5,
-                  borderRadius: '50%',
-                  background: 'var(--success)',
-                }}
-              />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Not allowed list */}
-      <div>
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 800,
-            color: 'rgba(255,255,255,0.55)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.10em',
-            marginBottom: 6,
-          }}
-        >
-          You cannot
-        </div>
-        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
-          {option.notAllowed.map((item, i) => (
-            <li
-              key={i}
-              style={{
-                fontSize: 12.5,
-                lineHeight: 1.45,
-                color: 'rgba(255,255,255,0.78)',
-                marginBottom: 4,
-                paddingLeft: 14,
-                position: 'relative',
-              }}
-            >
-              <span
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 7,
-                  width: 5,
-                  height: 5,
-                  borderRadius: '50%',
-                  background: 'var(--danger)',
-                }}
-              />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      )}
     </motion.button>
   );
 }

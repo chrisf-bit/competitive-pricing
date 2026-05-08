@@ -15,7 +15,7 @@ import { getConversationTree } from '../data/conversations';
 // ── Constants ──
 // One engagement per round - the learner must spot which partner needs them.
 const ACTIONS_PER_ROUND = 1;
-const TOTAL_ROUNDS = 3;
+const TOTAL_ROUNDS = 10;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 

@@ -77,7 +77,7 @@ const STEPS: TutorialStep[] = [
     target: 'round-tracker',
     title: 'Round Progress',
     description:
-      'The simulation runs over 3 rounds (Weeks 1, 3, and 6). Completed rounds turn green, the current round is highlighted yellow.',
+      'The simulation runs over 10 rounds. Completed rounds turn green, the current round is highlighted yellow.',
     icon: <Clock size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
   },
@@ -85,7 +85,7 @@ const STEPS: TutorialStep[] = [
     target: 'actions-counter',
     title: 'Action Budget',
     description:
-      'You get 3 actions per round. Each conversation uses 1 action. You can only engage 3 of your 6 partners, so the rest will be neglected.',
+      'You get one action per round - one partner conversation. Pick the partner who needs you most; the rest will drift if you leave them too long.',
     icon: <Zap size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (
@@ -224,9 +224,9 @@ const STEPS: TutorialStep[] = [
   },
   {
     target: 'mini-metrics',
-    title: 'Supporting Metrics',
+    title: 'Supporting KPIs',
     description:
-      'VIS (Visibility) = search result appearances. CVR (Conversion) = booking rate. REV (Revenue) = income index. All are driven by pricing competitiveness.',
+      'RPD Public is the gap on what non-logged-in travellers see; RPD Loyal covers Genius members. "Lose Price" is the share of public traffic where the partner is losing on price. "Scenarios" is the count of active pricing scenarios on the account.',
     icon: <Eye size={18} style={{ color: 'var(--brand-blue-light)' }} />,
     position: 'left',
   },

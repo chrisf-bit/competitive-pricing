@@ -11,9 +11,11 @@ export type Level = 0 | 1 | 2;
 
 /**
  * Parity regime for a partner / market. Drives which conversation moves are legal.
- * Sourced from the Booking.com legal compliance guidance: Wide / Narrow / No-Parity.
+ * Sourced from the Booking.com legal compliance guidance: Wide / Narrow / No-Parity,
+ * plus a Cross-Regional bucket for large corporate hotels and chains that operate
+ * under different rules.
  */
-export type ParityRegime = 'wide' | 'narrow' | 'none';
+export type ParityRegime = 'wide' | 'narrow' | 'none' | 'cross-regional';
 
 /**
  * The learner's chosen parity regime, captured at the start of clearance.

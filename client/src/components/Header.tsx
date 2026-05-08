@@ -9,11 +9,7 @@ interface HeaderProps {
   onTutorial?: () => void;
 }
 
-const roundLabels: Record<number, string> = {
-  1: 'Week 1',
-  2: 'Week 3',
-  3: 'Week 6',
-};
+const TOTAL_ROUNDS = 10;
 
 export function Header({ currentRound, actionsRemaining, screen, onTutorial }: HeaderProps) {
   const showActions = screen === 'portfolio' || screen === 'partner-detail';
@@ -60,14 +56,14 @@ export function Header({ currentRound, actionsRemaining, screen, onTutorial }: H
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 13 }}>
         <div data-tutorial="round-tracker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <div style={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-            {[1, 2, 3].map((r) => (
+          <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
+            {Array.from({ length: TOTAL_ROUNDS }, (_, i) => i + 1).map((r) => (
               <div
                 key={r}
                 style={{
-                  width: r === currentRound ? 24 : 8,
-                  height: 8,
-                  borderRadius: 4,
+                  width: r === currentRound ? 18 : 6,
+                  height: 6,
+                  borderRadius: 3,
                   background:
                     r < currentRound
                       ? 'var(--success)'
@@ -79,9 +75,6 @@ export function Header({ currentRound, actionsRemaining, screen, onTutorial }: H
               />
             ))}
           </div>
-          <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12 }}>
-            Round {currentRound}
-          </span>
           <span
             style={{
               color: 'var(--brand-yellow)',
@@ -92,7 +85,7 @@ export function Header({ currentRound, actionsRemaining, screen, onTutorial }: H
               borderRadius: 'var(--radius-pill)',
             }}
           >
-            {roundLabels[currentRound] ?? `Round ${currentRound}`}
+            Round {currentRound} of {TOTAL_ROUNDS}
           </span>
         </div>
 
