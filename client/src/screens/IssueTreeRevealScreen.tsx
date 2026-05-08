@@ -208,58 +208,70 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
                 color: 'rgba(255,255,255,0.78)',
                 lineHeight: 1.6,
                 maxWidth: 560,
-                margin: '0 auto',
+                margin: '0 auto 18px',
               }}
             >
               {activePhase.body}
             </p>
+
+            {/* Alex's insight - inline within the step explanation so the
+                additional context isn't easy to miss at the bottom of the
+                screen. */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: 12,
+                padding: '14px 16px',
+                background: 'rgba(254, 186, 2, 0.08)',
+                border: '1px solid rgba(254, 186, 2, 0.28)',
+                borderRadius: 12,
+                maxWidth: 600,
+                margin: '0 auto',
+                textAlign: 'left',
+              }}
+            >
+              <Avatar />
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div
+                  style={{
+                    fontSize: 10.5,
+                    fontWeight: 700,
+                    color: 'var(--brand-yellow)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.14em',
+                    marginBottom: 4,
+                  }}
+                >
+                  Alex's take
+                </div>
+                <div
+                  style={{
+                    fontSize: 13.5,
+                    color: 'rgba(255,255,255,0.92)',
+                    lineHeight: 1.5,
+                  }}
+                >
+                  {activePhase.narration}
+                </div>
+              </div>
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Narration + Continue/Next */}
+      {/* Continue/Next button bar */}
       <div
         style={{
-          padding: '20px 28px 24px',
+          padding: '16px 28px 22px',
           flexShrink: 0,
           background: 'rgba(0,0,0,0.22)',
           borderTop: '1px solid rgba(255,255,255,0.06)',
           display: 'flex',
           alignItems: 'center',
-          gap: 18,
+          justifyContent: 'flex-end',
         }}
       >
-        <Avatar />
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: 'rgba(255,255,255,0.55)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.14em',
-              marginBottom: 4,
-            }}
-          >
-            Alex
-          </div>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`n-${activePhase.id}`}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              style={{
-                fontSize: 14,
-                color: 'rgba(255,255,255,0.92)',
-                lineHeight: 1.5,
-              }}
-            >
-              {activePhase.narration}
-            </motion.div>
-          </AnimatePresence>
-        </div>
         {!isLast ? (
           <button
             onClick={handleNext}

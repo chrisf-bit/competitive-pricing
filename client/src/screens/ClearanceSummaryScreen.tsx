@@ -228,13 +228,14 @@ export function ClearanceSummaryScreen({
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', maxWidth: 480 }}>
           {cleared
             ? "You're cleared. Time to put it into practice with real partners."
-            : 'You can continue, but a quick retry on the items below will set you up better for the partner sim.'}
+            : 'You need 80% or higher to clear. Use the Retry buttons above to revisit the items you missed.'}
         </div>
         <button
           onClick={() => onContinue(cleared)}
+          disabled={!cleared}
           style={{
-            background: cleared ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.08)',
-            color: cleared ? 'var(--brand-navy)' : 'var(--white)',
+            background: cleared ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.06)',
+            color: cleared ? 'var(--brand-navy)' : 'rgba(255,255,255,0.4)',
             padding: '12px 26px',
             borderRadius: 'var(--radius-sm)',
             fontSize: 15,
@@ -242,22 +243,20 @@ export function ClearanceSummaryScreen({
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            border: cleared ? 'none' : '1.5px solid rgba(255,255,255,0.18)',
-            cursor: 'pointer',
+            border: cleared ? 'none' : '1.5px solid rgba(255,255,255,0.10)',
+            cursor: cleared ? 'pointer' : 'not-allowed',
             boxShadow: cleared ? '0 6px 18px rgba(254, 186, 2, 0.25)' : 'none',
             transition: 'background 0.15s ease',
             flexShrink: 0,
           }}
           onMouseEnter={(e) => {
             if (cleared) e.currentTarget.style.background = 'var(--brand-yellow-light)';
-            else e.currentTarget.style.background = 'rgba(255,255,255,0.14)';
           }}
           onMouseLeave={(e) => {
             if (cleared) e.currentTarget.style.background = 'var(--brand-yellow)';
-            else e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
           }}
         >
-          {cleared ? 'Continue to the partner sim' : 'Continue anyway'}
+          {cleared ? 'Continue to the partner sim' : 'Locked - retry to clear'}
           <ChevronRight size={17} />
         </button>
       </div>
