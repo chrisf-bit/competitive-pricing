@@ -131,10 +131,12 @@ export function ClearedCelebrationScreen({
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0, duration: 0.6, ease: 'easeOut' }}
           style={{
-            fontSize: 'clamp(14px, 1.4vw, 17px)',
-            color: 'rgba(255,255,255,0.82)',
+            fontSize: 'clamp(15px, 1.5vw, 18px)',
+            fontWeight: 600,
+            color: 'var(--white)',
             lineHeight: 1.55,
-            maxWidth: 540,
+            maxWidth: 580,
+            textShadow: '0 2px 14px rgba(0,15,40,0.95), 0 0 24px rgba(0,15,40,0.7)',
           }}
         >
           You're cleared to take on the mission. Time to put it into practice.
