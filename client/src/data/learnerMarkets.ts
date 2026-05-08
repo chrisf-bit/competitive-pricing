@@ -2,37 +2,34 @@ import type { LearnerMarket, ParityRegime } from '../types';
 
 export interface MarketOption {
   market: LearnerMarket;
-  /** Short summary of the parity rules a learner faces in this market. */
+  /** Display label for the parity regime. */
+  label: string;
+  /** Short summary of the rules. */
   ruleSummary: string;
   /** Bullet points outlining what's allowed in conversation. */
   allowed: string[];
   /** Bullet points outlining what is NOT allowed. */
   notAllowed: string[];
-  /** Illustrative country examples shown on the card. SMEs to validate. */
+  /** Illustrative country examples (subset of the canonical list). */
   exampleCountries: string[];
 }
 
 /**
- * The three market options offered at the start of Level 0.
- * Each maps to a parity regime that drives the rules of engagement
- * for any partner the learner meets in Level 1.
+ * The three parity options offered at the start of clearance. Pure
+ * parity selection - no regional framing. The chosen regime drives the
+ * rules of engagement for every partner the learner meets in the sim.
  *
- * NOTE: Country/region → parity mapping is illustrative and pending SME
- * validation (parity status varies by jurisdiction and contract term, and
- * the steering deck does not enumerate the mapping). The structural
- * decision - three options, each tagged with a ParityRegime - is what
- * load-bears here.
+ * Country-to-regime mapping lives in parityCountries.ts (single source
+ * of truth). The example countries below are a representative subset
+ * for visual flavour on each card.
  */
 export const marketOptions: MarketOption[] = [
   {
-    market: {
-      regionId: 'eu-west',
-      regionLabel: 'Western Europe',
-      parityRegime: 'none' as ParityRegime,
-    },
-    ruleSummary: 'No-Parity market - the most constrained set of rules.',
+    market: { parityRegime: 'none' as ParityRegime },
+    label: 'No Parity',
+    ruleSummary: 'The most constrained set of rules. Most of EMEA plus Chile sit here.',
     allowed: [
-      'Ask partners for the best price they\'re willing to make available to Booking.com',
+      "Ask partners for the best price they're willing to make available to Booking.com",
       'React with neutral, fact-finding questions if the partner raises external prices',
     ],
     notAllowed: [
@@ -40,15 +37,12 @@ export const marketOptions: MarketOption[] = [
       'Suggest the partner is required to match external prices',
       'Open conversations about external pricing - partner-initiated only',
     ],
-    exampleCountries: ['Germany', 'France', 'Italy', 'Sweden'],
+    exampleCountries: ['Germany', 'France', 'Spain', 'Italy', 'Netherlands', 'Sweden'],
   },
   {
-    market: {
-      regionId: 'na-us',
-      regionLabel: 'United States',
-      parityRegime: 'narrow' as ParityRegime,
-    },
-    ruleSummary: 'Narrow-Parity market - alignment with the partner\'s own site only.',
+    market: { parityRegime: 'narrow' as ParityRegime },
+    label: 'Narrow Parity',
+    ruleSummary: "Alignment with the partner's own direct site only.",
     allowed: [
       'Ask partners to align rates and conditions strictly with Brand.com',
       'Use RPD versus Brand.com data to show on-platform price gaps',
@@ -57,15 +51,12 @@ export const marketOptions: MarketOption[] = [
       'Ask for the same availability or price alignment with other OTAs',
       'Suggest partners adjust or reduce prices on other channels',
     ],
-    exampleCountries: ['United States', 'Canada', 'Mexico'],
+    exampleCountries: ['United Kingdom', 'Australia', 'Japan', 'Brazil', 'Hong Kong', 'Israel'],
   },
   {
-    market: {
-      regionId: 'apac-emerging',
-      regionLabel: 'Asia-Pacific',
-      parityRegime: 'wide' as ParityRegime,
-    },
-    ruleSummary: 'Wide-Parity market - full alignment with direct site and key OTAs.',
+    market: { parityRegime: 'wide' as ParityRegime },
+    label: 'Wide Parity',
+    ruleSummary: 'Full alignment with the partner direct site and key OTAs.',
     allowed: [
       'Ask partners to provide the same rates, conditions, and availability they offer Brand.com and key OTAs',
       'Proactively use cross-channel data (RPD, EPO) to illustrate performance opportunities',
@@ -74,6 +65,6 @@ export const marketOptions: MarketOption[] = [
       'Promise ranking rewards or threaten penalties based solely on external prices',
       'Recommend the partner switch off other OTAs or wholesalers',
     ],
-    exampleCountries: ['Singapore', 'Thailand', 'Indonesia', 'Vietnam'],
+    exampleCountries: ['India', 'Mexico', 'Canada', 'Argentina', 'Egypt', 'Thailand'],
   },
 ];

@@ -187,7 +187,16 @@ export default function App() {
           )}
           {state.screen === 'portfolio' && (
             <PortfolioScreen
-              partners={state.partners}
+              partners={
+                // Filter to partners whose parityRegime matches the learner's
+                // chosen regime. If no regime is chosen yet (e.g. dev nav
+                // jumped straight here), show all partners.
+                state.learnerProfile.market
+                  ? state.partners.filter(
+                      (p) => p.persona.parityRegime === state.learnerProfile.market!.parityRegime,
+                    )
+                  : state.partners
+              }
               currentRound={state.currentRound}
               actionsRemaining={state.actionsRemaining}
               actionsThisRound={state.actionsThisRound}

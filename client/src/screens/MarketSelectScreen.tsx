@@ -62,7 +62,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
               letterSpacing: '-0.02em',
             }}
           >
-            Where will you be working?
+            Pick your parity regime
           </h1>
           <p
             style={{
@@ -73,8 +73,9 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
               margin: '0 auto',
             }}
           >
-            Your market determines the rules of engagement when you speak with partners.
-            Each region has different parity regulations - pick the one you operate in.
+            Parity rules vary by country and dictate what you can and can't say to a partner.
+            Pick the regime your portfolio operates under - we'll show you example partners and
+            rules for that regime.
           </p>
         </motion.div>
 
@@ -90,10 +91,10 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
         >
           {marketOptions.map((option, i) => (
             <MarketCard
-              key={option.market.regionId}
+              key={option.market.parityRegime}
               option={option}
               index={i}
-              isSelected={selected?.regionId === option.market.regionId}
+              isSelected={selected?.parityRegime === option.market.parityRegime}
               onClick={() => onSelect(option.market)}
             />
           ))}
@@ -205,7 +206,7 @@ function MarketCard({ option, index, isSelected, onClick }: MarketCardProps) {
         </div>
       )}
 
-      {/* Region name */}
+      {/* Parity name + example countries */}
       <div>
         <div
           style={{
@@ -217,16 +218,29 @@ function MarketCard({ option, index, isSelected, onClick }: MarketCardProps) {
             marginBottom: 6,
           }}
         >
-          {parityRegimeLabel(option.market.parityRegime)}
+          Parity regime
         </div>
         <div style={{ fontSize: 22, fontWeight: 800, lineHeight: 1.15, color: 'var(--white)' }}>
-          {option.market.regionLabel}
+          {option.label}
+        </div>
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            color: 'rgba(255,255,255,0.45)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.10em',
+            marginTop: 10,
+            marginBottom: 2,
+          }}
+        >
+          Includes
         </div>
         <div
           style={{
             fontSize: 12,
-            color: 'rgba(255,255,255,0.55)',
-            marginTop: 4,
+            color: 'rgba(255,255,255,0.7)',
+            lineHeight: 1.4,
           }}
         >
           {option.exampleCountries.join(' · ')}
@@ -334,13 +348,3 @@ function MarketCard({ option, index, isSelected, onClick }: MarketCardProps) {
   );
 }
 
-function parityRegimeLabel(regime: 'wide' | 'narrow' | 'none'): string {
-  switch (regime) {
-    case 'wide':
-      return 'Wide Parity';
-    case 'narrow':
-      return 'Narrow Parity';
-    case 'none':
-      return 'No Parity';
-  }
-}

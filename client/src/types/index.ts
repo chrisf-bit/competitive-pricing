@@ -16,16 +16,11 @@ export type Level = 0 | 1 | 2;
 export type ParityRegime = 'wide' | 'narrow' | 'none';
 
 /**
- * The learner's chosen "where I work" context, captured at the start of Level 0.
- * The exact mechanic (region picker vs parity picker) is TBD with stakeholders;
- * this shape supports either by carrying both fields, with parityRegime as
- * the load-bearing field downstream.
+ * The learner's chosen parity regime, captured at the start of clearance.
+ * Drives which partners they see in the portfolio (filtered to that
+ * regime's countries) and which conversation moves are legal.
  */
 export interface LearnerMarket {
-  /** Optional region name if the picker presents regions (e.g. "EMEA - Wide Parity"). */
-  regionId?: string;
-  regionLabel?: string;
-  /** The parity regime that applies to the learner's portfolio. Always populated. */
   parityRegime: ParityRegime;
 }
 
