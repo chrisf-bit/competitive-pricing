@@ -15,7 +15,8 @@ import { emailAudit } from '../data/emailAudit';
 
 interface ClearanceSummaryScreenProps {
   results: KnowledgeCheckResult[];
-  onContinue: () => void;
+  /** Called when the learner clicks Continue. `cleared` reflects whether they actually passed the threshold (vs continuing anyway). */
+  onContinue: (cleared: boolean) => void;
   onRetry: (
     activityScreen: GameState['screen'],
     itemMatcher: (itemId: string) => boolean,
@@ -230,7 +231,7 @@ export function ClearanceSummaryScreen({
             : 'You can continue, but a quick retry on the items below will set you up better for the partner sim.'}
         </div>
         <button
-          onClick={onContinue}
+          onClick={() => onContinue(cleared)}
           style={{
             background: cleared ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.08)',
             color: cleared ? 'var(--brand-navy)' : 'var(--white)',

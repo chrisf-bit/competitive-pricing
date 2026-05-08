@@ -14,6 +14,7 @@ import { EmailAuditScreen } from './screens/EmailAuditScreen';
 import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
 import { IssueTreeRevealScreen } from './screens/IssueTreeRevealScreen';
 import { ClearanceSummaryScreen } from './screens/ClearanceSummaryScreen';
+import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
@@ -140,17 +141,37 @@ export default function App() {
           {state.screen === 'l0-clearance-summary' && (
             <ClearanceSummaryScreen
               results={state.level0Progress.knowledgeCheckResults}
-              onContinue={() => {
+              onContinue={(cleared) => {
                 game.markLevel0Cleared();
+                if (cleared) {
+                  // Show the celebration before the tutorial fires.
+                  game.goToScreen('l0-cleared-celebration');
+                } else {
+                  // "Continue anyway" path - skip the celebration.
+                  game.goToScreen('portfolio');
+                  if (!state.tutorialShown) {
+                    setShowTutorial(true);
+                    game.markTutorialShown();
+                  }
+                }
+              }}
+              onRetry={(activityScreen, itemMatcher) =>
+                game.requestLevel0Retry(activityScreen, itemMatcher)
+              }
+            />
+          )}
+          {state.screen === 'l0-cleared-celebration' && (
+            <ClearedCelebrationScreen
+              playerName={state.learnerProfile.playerName}
+              archetype={state.learnerProfile.archetype}
+              avatarId={state.learnerProfile.avatarId}
+              onContinue={() => {
                 game.goToScreen('portfolio');
                 if (!state.tutorialShown) {
                   setShowTutorial(true);
                   game.markTutorialShown();
                 }
               }}
-              onRetry={(activityScreen, itemMatcher) =>
-                game.requestLevel0Retry(activityScreen, itemMatcher)
-              }
             />
           )}
           {/*

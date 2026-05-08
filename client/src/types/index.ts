@@ -283,6 +283,7 @@ export type GameScreen =
   | 'l0-signal-vs-proof'
   | 'l0-issue-tree-reveal'
   | 'l0-clearance-summary'
+  | 'l0-cleared-celebration'
   // ── Level 1 (existing partner-portfolio sim, plus new outcome stage) ──
   | 'portfolio'
   | 'partner-detail'
