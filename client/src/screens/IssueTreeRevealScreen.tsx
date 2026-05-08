@@ -185,10 +185,19 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
                 color: 'var(--brand-yellow)',
                 textTransform: 'uppercase',
                 letterSpacing: '0.18em',
-                marginBottom: 10,
+                marginBottom: 14,
               }}
             >
               {activePhase.label} - Step {activeIndex + 1} of {issueTreePhases.length}
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                marginBottom: 16,
+              }}
+            >
+              <PhaseVisual phaseId={activePhase.id} />
             </div>
             <h2
               style={{
@@ -386,6 +395,330 @@ function PhaseChip({
         />
       )}
     </div>
+  );
+}
+
+// ───────────────────────── Phase visuals ─────────────────────────
+
+/**
+ * Small contextual visual for each step. Grounds the abstract concept
+ * (eRPD trend, misconfig, RPD gap, hook, pitch, objection) in something
+ * the learner can see, not just read about.
+ */
+function PhaseVisual({ phaseId }: { phaseId: string }) {
+  switch (phaseId) {
+    case 'trigger':
+      return <TriggerVisual />;
+    case 'intent':
+      return <IntentVisual />;
+    case 'root-cause':
+      return <RootCauseVisual />;
+    case 'metric':
+      return <MetricVisual />;
+    case 'hook':
+      return <HookVisual />;
+    case 'pitch':
+      return <PitchVisual />;
+    case 'objection':
+      return <ObjectionVisual />;
+    default:
+      return null;
+  }
+}
+
+const VISUAL_WIDTH = 320;
+const VISUAL_BG = 'rgba(255,255,255,0.04)';
+const VISUAL_BORDER = '1px solid rgba(255,255,255,0.10)';
+
+function VisualCard({ children, label }: { children: React.ReactNode; label: string }) {
+  return (
+    <div
+      style={{
+        width: VISUAL_WIDTH,
+        background: VISUAL_BG,
+        border: VISUAL_BORDER,
+        borderRadius: 12,
+        padding: 14,
+        textAlign: 'left',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 10,
+          fontWeight: 800,
+          color: 'rgba(255,255,255,0.45)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.10em',
+          marginBottom: 10,
+        }}
+      >
+        {label}
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function TriggerVisual() {
+  // Sparkline showing eRPD trending up (worsening) over 4 weeks
+  const points = [4.5, 5.8, 6.6, 7.7];
+  const max = Math.max(...points);
+  const min = Math.min(...points);
+  const range = max - min;
+  const w = 280;
+  const h = 64;
+  const path = points
+    .map((p, i) => {
+      const x = (i / (points.length - 1)) * w;
+      const y = h - ((p - min) / range) * h;
+      return `${i === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
+    })
+    .join(' ');
+  const lastX = w;
+  const lastY = h - ((points[points.length - 1] - min) / range) * h;
+
+  return (
+    <VisualCard label="eRPD - last 4 weeks">
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, marginBottom: 8 }}>
+        <span style={{ fontSize: 24, fontWeight: 800, color: 'var(--white)' }}>
+          {points[points.length - 1].toFixed(1)}%
+        </span>
+        <span style={{ fontSize: 11, fontWeight: 700, color: 'var(--danger)' }}>
+          ↑ {(points[points.length - 1] - points[0]).toFixed(2)} vs start
+        </span>
+      </div>
+      <svg width="100%" height={h} viewBox={`0 0 ${w} ${h}`} preserveAspectRatio="none">
+        <path d={path} fill="none" stroke="var(--brand-yellow)" strokeWidth={2.4} strokeLinecap="round" />
+        <circle cx={lastX} cy={lastY} r={4} fill="var(--brand-yellow)" />
+      </svg>
+    </VisualCard>
+  );
+}
+
+function IntentVisual() {
+  return (
+    <VisualCard label="Mandate axis">
+      <div style={{ display: 'flex', gap: 8 }}>
+        <Pill label="Intentional" active={false} />
+        <Pill label="Unintentional" active={true} />
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          color: 'rgba(255,255,255,0.5)',
+          marginTop: 10,
+          fontStyle: 'italic',
+        }}
+      >
+        Looks technical, not strategic.
+      </div>
+    </VisualCard>
+  );
+}
+
+function Pill({ label, active }: { label: string; active: boolean }) {
+  return (
+    <div
+      style={{
+        flex: 1,
+        padding: '8px 10px',
+        textAlign: 'center',
+        background: active ? 'rgba(254, 186, 2, 0.16)' : 'rgba(255,255,255,0.05)',
+        border: active ? '1.5px solid var(--brand-yellow)' : '1.5px solid rgba(255,255,255,0.10)',
+        borderRadius: 8,
+        fontSize: 11.5,
+        fontWeight: 700,
+        color: active ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.55)',
+      }}
+    >
+      {label}
+    </div>
+  );
+}
+
+function RootCauseVisual() {
+  const products = [
+    { label: 'Genius Programme', state: 'misconfig' as const },
+    { label: 'Mobile Rate', state: 'active' as const },
+    { label: 'Country Rate', state: 'inactive' as const },
+  ];
+  return (
+    <VisualCard label="Discount products">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {products.map((p) => (
+          <div
+            key={p.label}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '7px 10px',
+              borderRadius: 6,
+              background:
+                p.state === 'misconfig'
+                  ? 'rgba(254, 186, 2, 0.10)'
+                  : 'rgba(255,255,255,0.04)',
+              border:
+                p.state === 'misconfig'
+                  ? '1px solid rgba(254, 186, 2, 0.45)'
+                  : '1px solid transparent',
+              fontSize: 12,
+              color: 'rgba(255,255,255,0.85)',
+            }}
+          >
+            <span>{p.label}</span>
+            <span
+              style={{
+                fontSize: 10,
+                fontWeight: 700,
+                color:
+                  p.state === 'active'
+                    ? 'var(--success)'
+                    : p.state === 'misconfig'
+                      ? 'var(--brand-yellow)'
+                      : 'rgba(255,255,255,0.4)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.08em',
+              }}
+            >
+              {p.state === 'misconfig' ? 'Look here' : p.state === 'active' ? 'Active' : 'Off'}
+            </span>
+          </div>
+        ))}
+      </div>
+    </VisualCard>
+  );
+}
+
+function MetricVisual() {
+  const rows = [
+    { label: 'Public RPD', value: 18.5, color: 'var(--brand-yellow)' },
+    { label: 'Loyal RPD', value: 4.2, color: 'var(--brand-blue)' },
+  ];
+  const max = 25;
+  return (
+    <VisualCard label="RPD breakdown">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {rows.map((r) => (
+          <div key={r.label}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                fontSize: 11,
+                fontWeight: 600,
+                color: 'rgba(255,255,255,0.78)',
+                marginBottom: 4,
+              }}
+            >
+              <span>{r.label}</span>
+              <span style={{ color: 'var(--white)' }}>{r.value.toFixed(1)}%</span>
+            </div>
+            <div
+              style={{
+                height: 8,
+                background: 'rgba(255,255,255,0.08)',
+                borderRadius: 100,
+                overflow: 'hidden',
+              }}
+            >
+              <div
+                style={{
+                  width: `${(r.value / max) * 100}%`,
+                  height: '100%',
+                  background: r.color,
+                  borderRadius: 100,
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+    </VisualCard>
+  );
+}
+
+function HookVisual() {
+  return (
+    <VisualCard label="Opening line">
+      <div
+        style={{
+          padding: '10px 13px',
+          background: 'rgba(255,255,255,0.07)',
+          border: '1px solid rgba(255,255,255,0.10)',
+          borderRadius: 12,
+          borderTopLeftRadius: 4,
+          fontSize: 12.5,
+          color: 'rgba(255,255,255,0.85)',
+          lineHeight: 1.45,
+          fontStyle: 'italic',
+        }}
+      >
+        "Hi Maria - quick one on what we've been seeing on visibility this month..."
+      </div>
+    </VisualCard>
+  );
+}
+
+function PitchVisual() {
+  return (
+    <VisualCard label="Recommended action">
+      <div
+        style={{
+          padding: '10px 13px',
+          background: 'rgba(254, 186, 2, 0.10)',
+          border: '1px solid rgba(254, 186, 2, 0.30)',
+          borderRadius: 8,
+          fontSize: 13,
+          fontWeight: 700,
+          color: 'var(--brand-yellow)',
+        }}
+      >
+        Genius audit + reset
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          color: 'rgba(255,255,255,0.55)',
+          marginTop: 8,
+          lineHeight: 1.45,
+        }}
+      >
+        Low-effort fix. Restores public visibility without changing the base rate.
+      </div>
+    </VisualCard>
+  );
+}
+
+function ObjectionVisual() {
+  return (
+    <VisualCard label="Likely pushback">
+      <div
+        style={{
+          padding: '10px 13px',
+          background: 'rgba(255,255,255,0.07)',
+          border: '1px solid rgba(255,255,255,0.10)',
+          borderRadius: 12,
+          borderTopRightRadius: 4,
+          fontSize: 12.5,
+          color: 'rgba(255,255,255,0.85)',
+          lineHeight: 1.45,
+          fontStyle: 'italic',
+        }}
+      >
+        "We already discount enough."
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          color: 'rgba(255,255,255,0.45)',
+          marginTop: 6,
+          textAlign: 'right',
+        }}
+      >
+        - Maria
+      </div>
+    </VisualCard>
   );
 }
 
