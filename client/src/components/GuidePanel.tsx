@@ -86,26 +86,31 @@ export function GuidePanel({
       style={{
         width: 320,
         minWidth: 320,
-        background: 'var(--brand-navy-dark)',
+        margin: '12px 0 12px 12px',
+        background: 'linear-gradient(180deg, var(--brand-navy) 0%, var(--brand-navy-dark) 100%)',
         color: 'var(--white)',
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        borderRight: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 14,
+        border: '1px solid rgba(255,255,255,0.12)',
+        boxShadow: '0 12px 32px rgba(0, 12, 35, 0.5), 0 0 0 1px rgba(254, 186, 2, 0.18)',
+        position: 'relative',
       }}
     >
       {/* Guide header */}
       <div
         style={{
           padding: '16px 18px 14px',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          borderBottom: '1px solid rgba(255,255,255,0.10)',
+          background: 'rgba(254, 186, 2, 0.06)',
           display: 'flex',
           alignItems: 'center',
           gap: 10,
         }}
       >
-        <IconBox bg="rgba(0,159,227,0.2)" size={32}>
-          <BookOpen size={16} style={{ color: 'var(--brand-blue-light)' }} />
+        <IconBox bg="rgba(254, 186, 2, 0.20)" size={32}>
+          <BookOpen size={16} style={{ color: 'var(--brand-yellow)' }} />
         </IconBox>
         <div>
           <div style={{ fontSize: 14, fontWeight: 800, letterSpacing: '0.01em' }}>

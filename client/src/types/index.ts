@@ -141,11 +141,31 @@ export interface DiscountProduct {
 }
 
 export interface PartnerMetrics {
-  experiencedRPD: number;       // 0–100 index
-  visibility: number;           // 0–100
-  conversion: number;           // 0–100
-  revenue: number;              // indexed 0–100
-  discountQuality: number;      // 0–100 (hidden from player)
+  // ── New KPI structure (what the learner sees - sourced from the
+  // KPI spec PFRs work with day-to-day) ──
+  /** Experienced RPD percentage. Higher = less competitive. */
+  erpd: number;
+  /** Change vs prior period; negative = improving, positive = worsening. */
+  erpdChange: number;
+  /** Public RPD percentage - what non-logged-in travellers see. */
+  rpdPublic: number;
+  /** Loyal RPD percentage - what Genius members see. */
+  rpdLoyal: number;
+  /** Share of public traffic where the partner loses on price (0-100). */
+  losePricePublic: number;
+  /** Number of active pricing scenarios on this partner. */
+  activeScenarios: number;
+  /** Top competitor for this partner. */
+  competitor: 'brand' | 'expedia';
+
+  // ── Legacy fields (drive conversation effects and scoring internally;
+  // not surfaced on the new KPI cards). Will be retired post-MVP once
+  // the conversation system is rewired onto the new KPIs. ──
+  experiencedRPD: number;
+  visibility: number;
+  conversion: number;
+  revenue: number;
+  discountQuality: number;
   rateParity: RateParityStatus;
 }
 

@@ -8,8 +8,8 @@ import {
   Zap,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
-import { getRPDLevel, getTrend } from '../engine/gameEngine';
-import { RPDBadge, RelationshipBadge, TrendIcon } from '../components/MetricBadge';
+import { getRPDLevel } from '../engine/gameEngine';
+import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
 
 const demandLabels: Record<string, string> = {
   up: 'Rising',
@@ -49,36 +49,69 @@ export function PortfolioScreen({
         gap: 12,
       }}
     >
-      {/* Market context bar */}
+      {/* Market context bar - stands out as a distinct call-out band */}
       <div
         data-tutorial="market-bar"
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: 12,
-          padding: '10px 16px',
-          background: 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+          gap: 14,
+          padding: '14px 18px',
+          background:
+            'linear-gradient(135deg, rgba(254, 186, 2, 0.96) 0%, rgba(255, 210, 77, 0.96) 100%)',
           borderRadius: 'var(--radius-md)',
-          fontSize: 13,
-          color: 'rgba(255,255,255,0.85)',
+          fontSize: 13.5,
+          color: 'var(--brand-navy)',
           animation: 'fadeIn 0.3s ease',
-          boxShadow: 'var(--shadow-md)',
+          boxShadow: '0 6px 22px rgba(254, 186, 2, 0.30)',
+          border: '1.5px solid rgba(254, 186, 2, 0.7)',
         }}
       >
-        <Globe size={16} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
-        <span style={{ flex: 1 }}>
-          <strong style={{ color: 'var(--white)' }}>Market Update:</strong>{' '}
+        <div
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: 8,
+            background: 'var(--brand-navy)',
+            color: 'var(--brand-yellow)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+            boxShadow: '0 2px 6px rgba(0,0,0,0.18)',
+          }}
+        >
+          <Globe size={17} strokeWidth={2.4} />
+        </div>
+        <span style={{ flex: 1, fontWeight: 600, lineHeight: 1.4 }}>
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: 'var(--brand-navy)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+              display: 'block',
+              opacity: 0.7,
+              marginBottom: 1,
+            }}
+          >
+            Market Update
+          </span>
           {marketContext.seasonalNote}
         </span>
         <span
           style={{
             fontSize: 11,
-            fontWeight: 700,
-            color: 'rgba(255,255,255,0.6)',
-            background: 'rgba(255,255,255,0.1)',
-            padding: '4px 10px',
+            fontWeight: 800,
+            color: 'var(--brand-navy)',
+            background: 'rgba(0, 53, 128, 0.10)',
+            padding: '5px 12px',
             borderRadius: 'var(--radius-pill)',
             whiteSpace: 'nowrap',
+            border: '1px solid rgba(0, 53, 128, 0.15)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
           }}
         >
           Demand: {demandLabels[marketContext.demand] ?? 'Stable'}
@@ -99,10 +132,6 @@ export function PortfolioScreen({
       >
         {partners.map((partner, i) => {
           const engaged = actionsThisRound.includes(partner.persona.id);
-          const prevMetrics =
-            partner.metricHistory.length > 0
-              ? partner.metricHistory[partner.metricHistory.length - 1].metrics
-              : partner.metrics;
           const rpdLevel = getRPDLevel(partner.metrics.experiencedRPD);
           return (
             <div
@@ -262,44 +291,68 @@ export function PortfolioScreen({
                   >
                     Experienced RPD
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
                     <span
                       style={{
                         fontSize: 26,
                         fontWeight: 900,
-                        color: 'var(--brand-navy)',
+                        color:
+                          partner.metrics.erpd >= 12
+                            ? 'var(--danger)'
+                            : partner.metrics.erpd >= 6
+                              ? 'var(--warning)'
+                              : 'var(--brand-navy)',
                         lineHeight: 1,
                         letterSpacing: '-0.02em',
                       }}
                     >
-                      {partner.metrics.experiencedRPD}
+                      {partner.metrics.erpd.toFixed(1)}%
                     </span>
-                    <TrendIcon
-                      direction={getTrend(
-                        partner.metrics.experiencedRPD,
-                        prevMetrics.experiencedRPD,
-                      )}
-                      size={18}
-                    />
+                    <span
+                      style={{
+                        fontSize: 12,
+                        fontWeight: 700,
+                        color:
+                          partner.metrics.erpdChange < 0 ? 'var(--success)' : 'var(--danger)',
+                      }}
+                    >
+                      {partner.metrics.erpdChange < 0 ? '↓' : '↑'}
+                      {Math.abs(partner.metrics.erpdChange).toFixed(2)}
+                    </span>
                   </div>
                 </div>
 
-                {/* Mini metrics */}
-                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 12 }}>
+                {/* KPI mini-row */}
+                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 14 }}>
                   <MiniMetric
-                    label="VIS"
-                    value={partner.metrics.visibility}
-                    trend={getTrend(partner.metrics.visibility, prevMetrics.visibility)}
+                    label="RPD Pub"
+                    valueText={`${partner.metrics.rpdPublic.toFixed(1)}%`}
                   />
                   <MiniMetric
-                    label="CVR"
-                    value={partner.metrics.conversion}
-                    trend={getTrend(partner.metrics.conversion, prevMetrics.conversion)}
+                    label="RPD Loyal"
+                    valueText={`${partner.metrics.rpdLoyal.toFixed(1)}%`}
                   />
                   <MiniMetric
-                    label="REV"
-                    value={partner.metrics.revenue}
-                    trend={getTrend(partner.metrics.revenue, prevMetrics.revenue)}
+                    label="Lose Price"
+                    valueText={`${partner.metrics.losePricePublic}%`}
+                    severity={
+                      partner.metrics.losePricePublic >= 90
+                        ? 'danger'
+                        : partner.metrics.losePricePublic >= 70
+                          ? 'warning'
+                          : 'normal'
+                    }
+                  />
+                  <MiniMetric
+                    label="Scenarios"
+                    valueText={`${partner.metrics.activeScenarios}`}
+                    severity={
+                      partner.metrics.activeScenarios >= 3
+                        ? 'danger'
+                        : partner.metrics.activeScenarios >= 2
+                          ? 'warning'
+                          : 'normal'
+                    }
                   />
                 </div>
               </div>
@@ -428,13 +481,19 @@ export function PortfolioScreen({
 
 function MiniMetric({
   label,
-  value,
-  trend,
+  valueText,
+  severity = 'normal',
 }: {
   label: string;
-  value: number;
-  trend: string;
+  valueText: string;
+  severity?: 'normal' | 'warning' | 'danger';
 }) {
+  const valueColor =
+    severity === 'danger'
+      ? 'var(--danger)'
+      : severity === 'warning'
+        ? 'var(--warning)'
+        : 'var(--grey-700)';
   return (
     <div style={{ textAlign: 'center' }}>
       <div
@@ -450,10 +509,9 @@ function MiniMetric({
         {label}
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'center' }}>
-        <span style={{ fontSize: 16, fontWeight: 800, color: 'var(--grey-700)' }}>
-          {value}
+        <span style={{ fontSize: 14, fontWeight: 800, color: valueColor }}>
+          {valueText}
         </span>
-        <TrendIcon direction={trend as 'up' | 'down' | 'flat'} size={11} />
       </div>
     </div>
   );

@@ -13,7 +13,8 @@ import { marketContextByRound, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
 
 // ── Constants ──
-const ACTIONS_PER_ROUND = 3;
+// One engagement per round - the learner must spot which partner needs them.
+const ACTIONS_PER_ROUND = 1;
 const TOTAL_ROUNDS = 3;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
@@ -400,6 +401,16 @@ function applyMetricEffects(
   effects: Partial<PartnerMetrics>,
 ): PartnerMetrics {
   return {
+    // New KPIs - pass through unchanged for now; conversation effects
+    // still operate on the legacy fields. Will be rewired post-MVP.
+    erpd: metrics.erpd,
+    erpdChange: metrics.erpdChange,
+    rpdPublic: metrics.rpdPublic,
+    rpdLoyal: metrics.rpdLoyal,
+    losePricePublic: metrics.losePricePublic,
+    activeScenarios: metrics.activeScenarios,
+    competitor: metrics.competitor,
+    // Legacy fields - effects still land here
     experiencedRPD: clamp(
       metrics.experiencedRPD + (effects.experiencedRPD ?? 0),
       0,
