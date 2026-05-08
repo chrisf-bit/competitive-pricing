@@ -121,6 +121,13 @@ export default function App() {
             <GameMasterChatScreen
               playerName={state.learnerProfile.playerName}
               onComplete={(results) =>
+                game.finishLevel0Activity('l0-dashboard-hotspot', results)
+              }
+            />
+          )}
+          {state.screen === 'l0-dashboard-hotspot' && (
+            <DashboardHotspotScreen
+              onComplete={(results) =>
                 game.finishLevel0Activity('l0-email-audit', results)
               }
             />
@@ -128,7 +135,6 @@ export default function App() {
           {state.screen === 'l0-email-audit' && (
             <EmailAuditScreen
               onComplete={(results) =>
-                // Dashboard Hotspot is parked - linear flow skips it.
                 game.finishLevel0Activity('l0-issue-tree-reveal', results)
               }
             />
@@ -172,17 +178,6 @@ export default function App() {
                   game.markTutorialShown();
                 }
               }}
-            />
-          )}
-          {/*
-            Dashboard Hotspot is currently parked. The screen still routes
-            via DevNav for inspection, but the linear flow skips it.
-          */}
-          {state.screen === 'l0-dashboard-hotspot' && (
-            <DashboardHotspotScreen
-              onComplete={(results) =>
-                game.finishLevel0Activity('l0-clearance-summary', results)
-              }
             />
           )}
           {state.screen === 'portfolio' && (
