@@ -86,7 +86,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
               marginBottom: 6,
             }}
           >
-            The shape of a pricing diagnosis
+            Diagnosing pricing issues
           </h1>
           <p
             style={{
