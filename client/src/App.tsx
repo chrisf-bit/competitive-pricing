@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
 import { DevNav } from './components/DevNav';
+import { ClearanceShell } from './components/ClearanceShell';
 import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
@@ -101,70 +102,84 @@ export default function App() {
             />
           )}
           {state.screen === 'l0-market-select' && (
-            <MarketSelectScreen
-              selected={state.learnerProfile.market}
-              onSelect={game.setLearnerMarket}
-              onContinue={() => game.goToScreen('l0-character-build')}
-            />
+            <ClearanceShell currentScreen={state.screen}>
+              <MarketSelectScreen
+                selected={state.learnerProfile.market}
+                onSelect={game.setLearnerMarket}
+                onContinue={() => game.goToScreen('l0-character-build')}
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-character-build' && (
-            <CharacterBuildScreen
-              selectedAvatarId={state.learnerProfile.avatarId}
-              selectedArchetype={state.learnerProfile.archetype}
-              playerName={state.learnerProfile.playerName}
-              onSelectAvatar={game.setLearnerAvatar}
-              onSelectArchetype={game.setLearnerArchetype}
-              onContinue={() => game.goToScreen('l0-gm-chat')}
-            />
+            <ClearanceShell currentScreen={state.screen}>
+              <CharacterBuildScreen
+                selectedAvatarId={state.learnerProfile.avatarId}
+                selectedArchetype={state.learnerProfile.archetype}
+                playerName={state.learnerProfile.playerName}
+                onSelectAvatar={game.setLearnerAvatar}
+                onSelectArchetype={game.setLearnerArchetype}
+                onContinue={() => game.goToScreen('l0-gm-chat')}
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-gm-chat' && (
-            <GameMasterChatScreen
-              playerName={state.learnerProfile.playerName}
-              onComplete={(results) =>
-                game.finishLevel0Activity('l0-dashboard-hotspot', results)
-              }
-            />
+            <ClearanceShell currentScreen={state.screen}>
+              <GameMasterChatScreen
+                playerName={state.learnerProfile.playerName}
+                onComplete={(results) =>
+                  game.finishLevel0Activity('l0-dashboard-hotspot', results)
+                }
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-dashboard-hotspot' && (
-            <DashboardHotspotScreen
-              onComplete={(results) =>
-                game.finishLevel0Activity('l0-email-audit', results)
-              }
-            />
+            <ClearanceShell currentScreen={state.screen}>
+              <DashboardHotspotScreen
+                onComplete={(results) =>
+                  game.finishLevel0Activity('l0-email-audit', results)
+                }
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-email-audit' && (
-            <EmailAuditScreen
-              onComplete={(results) =>
-                game.finishLevel0Activity('l0-issue-tree-reveal', results)
-              }
-            />
+            <ClearanceShell currentScreen={state.screen}>
+              <EmailAuditScreen
+                onComplete={(results) =>
+                  game.finishLevel0Activity('l0-issue-tree-reveal', results)
+                }
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-issue-tree-reveal' && (
-            <IssueTreeRevealScreen
-              onComplete={() => game.finishLevel0Activity('l0-clearance-summary', [])}
-            />
+            <ClearanceShell currentScreen={state.screen}>
+              <IssueTreeRevealScreen
+                onComplete={() => game.finishLevel0Activity('l0-clearance-summary', [])}
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-clearance-summary' && (
-            <ClearanceSummaryScreen
-              results={state.level0Progress.knowledgeCheckResults}
-              onContinue={(cleared) => {
-                game.markLevel0Cleared();
-                if (cleared) {
-                  // Show the celebration before the tutorial fires.
-                  game.goToScreen('l0-cleared-celebration');
-                } else {
-                  // "Continue anyway" path - skip the celebration.
-                  game.goToScreen('portfolio');
-                  if (!state.tutorialShown) {
-                    setShowTutorial(true);
-                    game.markTutorialShown();
+            <ClearanceShell currentScreen={state.screen}>
+              <ClearanceSummaryScreen
+                results={state.level0Progress.knowledgeCheckResults}
+                onContinue={(cleared) => {
+                  game.markLevel0Cleared();
+                  if (cleared) {
+                    // Show the celebration before the tutorial fires.
+                    game.goToScreen('l0-cleared-celebration');
+                  } else {
+                    // "Continue anyway" path - skip the celebration.
+                    game.goToScreen('portfolio');
+                    if (!state.tutorialShown) {
+                      setShowTutorial(true);
+                      game.markTutorialShown();
+                    }
                   }
+                }}
+                onRetry={(activityScreen, itemMatcher) =>
+                  game.requestLevel0Retry(activityScreen, itemMatcher)
                 }
-              }}
-              onRetry={(activityScreen, itemMatcher) =>
-                game.requestLevel0Retry(activityScreen, itemMatcher)
-              }
-            />
+              />
+            </ClearanceShell>
           )}
           {state.screen === 'l0-cleared-celebration' && (
             <ClearedCelebrationScreen

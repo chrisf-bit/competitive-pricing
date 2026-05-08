@@ -13,7 +13,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
   return (
     <div
       style={{
-        height: '100vh',
+        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--brand-navy)',

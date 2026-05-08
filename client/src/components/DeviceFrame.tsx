@@ -20,7 +20,7 @@ export function PhoneFrame({ children }: { children: ReactNode }) {
   return (
     <div
       style={{
-        position: 'fixed',
+        position: 'absolute',
         inset: 0,
         background: FRAME_BACKDROP,
         display: 'flex',
@@ -130,7 +130,7 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
   return (
     <div
       style={{
-        position: 'fixed',
+        position: 'absolute',
         inset: 0,
         background: FRAME_BACKDROP,
         display: 'flex',
