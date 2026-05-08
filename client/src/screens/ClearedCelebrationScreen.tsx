@@ -40,7 +40,7 @@ export function ClearedCelebrationScreen({
         justifyContent: 'center',
       }}
     >
-      {/* Background image */}
+      {/* Background image - darkened for legibility */}
       <motion.img
         src={clearedImage}
         alt=""
@@ -54,16 +54,17 @@ export function ClearedCelebrationScreen({
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center',
+          filter: 'brightness(0.55)',
         }}
       />
 
-      {/* Vignette to lift the title off the image */}
+      {/* Additional vignette for extra contrast around the title */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse at center, rgba(0,15,40,0.30) 0%, rgba(0,15,40,0.0) 50%, rgba(0,15,40,0.55) 100%)',
+            'radial-gradient(ellipse at center, rgba(0,15,40,0.30) 0%, rgba(0,15,40,0.10) 45%, rgba(0,15,40,0.55) 100%)',
         }}
       />
 
@@ -136,7 +137,7 @@ export function ClearedCelebrationScreen({
             maxWidth: 540,
           }}
         >
-          You're cleared for the partner sim. Time to put it into practice.
+          You're cleared to take on the mission. Time to put it into practice.
         </motion.div>
 
         {/* Avatar + persona pill */}
