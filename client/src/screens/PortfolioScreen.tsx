@@ -2,7 +2,6 @@ import {
   MapPin,
   Building2,
   ChevronRight,
-  AlertCircle,
   Globe,
   ArrowRight,
   Zap,
@@ -296,12 +295,7 @@ export function PortfolioScreen({
                       style={{
                         fontSize: 26,
                         fontWeight: 900,
-                        color:
-                          partner.metrics.erpd >= 12
-                            ? 'var(--danger)'
-                            : partner.metrics.erpd >= 6
-                              ? 'var(--warning)'
-                              : 'var(--brand-navy)',
+                        color: 'var(--brand-navy)',
                         lineHeight: 1,
                         letterSpacing: '-0.02em',
                       }}
@@ -312,8 +306,7 @@ export function PortfolioScreen({
                       style={{
                         fontSize: 12,
                         fontWeight: 700,
-                        color:
-                          partner.metrics.erpdChange < 0 ? 'var(--success)' : 'var(--danger)',
+                        color: 'var(--grey-500)',
                       }}
                     >
                       {partner.metrics.erpdChange < 0 ? '↓' : '↑'}
@@ -322,7 +315,7 @@ export function PortfolioScreen({
                   </div>
                 </div>
 
-                {/* KPI mini-row */}
+                {/* KPI mini-row - intentionally neutral; learners read and decide */}
                 <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 14 }}>
                   <MiniMetric
                     label="RPD Pub"
@@ -335,24 +328,10 @@ export function PortfolioScreen({
                   <MiniMetric
                     label="Lose Price"
                     valueText={`${partner.metrics.losePricePublic}%`}
-                    severity={
-                      partner.metrics.losePricePublic >= 90
-                        ? 'danger'
-                        : partner.metrics.losePricePublic >= 70
-                          ? 'warning'
-                          : 'normal'
-                    }
                   />
                   <MiniMetric
                     label="Scenarios"
                     valueText={`${partner.metrics.activeScenarios}`}
-                    severity={
-                      partner.metrics.activeScenarios >= 3
-                        ? 'danger'
-                        : partner.metrics.activeScenarios >= 2
-                          ? 'warning'
-                          : 'normal'
-                    }
                   />
                 </div>
               </div>
@@ -373,9 +352,6 @@ export function PortfolioScreen({
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                   {partner.discounts.filter((d) => d.status === 'active').length}/
                   {partner.discounts.length} discounts
-                  {partner.discounts.some((d) => d.status === 'misconfigured') && (
-                    <AlertCircle size={12} style={{ color: 'var(--danger)' }} />
-                  )}
                 </div>
                 <span>
                   {partner.lastContactedRound
