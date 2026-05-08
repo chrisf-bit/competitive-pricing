@@ -205,57 +205,14 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
             <p
               style={{
                 fontSize: 14.5,
-                color: 'rgba(255,255,255,0.78)',
+                color: 'rgba(255,255,255,0.82)',
                 lineHeight: 1.6,
-                maxWidth: 560,
-                margin: '0 auto 18px',
-              }}
-            >
-              {activePhase.body}
-            </p>
-
-            {/* Alex's insight - inline within the step explanation so the
-                additional context isn't easy to miss at the bottom of the
-                screen. */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: 12,
-                padding: '14px 16px',
-                background: 'rgba(254, 186, 2, 0.08)',
-                border: '1px solid rgba(254, 186, 2, 0.28)',
-                borderRadius: 12,
                 maxWidth: 600,
                 margin: '0 auto',
-                textAlign: 'left',
               }}
             >
-              <Avatar />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div
-                  style={{
-                    fontSize: 10.5,
-                    fontWeight: 700,
-                    color: 'var(--brand-yellow)',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.14em',
-                    marginBottom: 4,
-                  }}
-                >
-                  Alex's take
-                </div>
-                <div
-                  style={{
-                    fontSize: 13.5,
-                    color: 'rgba(255,255,255,0.92)',
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {activePhase.narration}
-                </div>
-              </div>
-            </div>
+              {activePhase.body} {activePhase.narration}
+            </p>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -453,25 +410,3 @@ function primaryButton(active: boolean): React.CSSProperties {
   };
 }
 
-function Avatar() {
-  return (
-    <div
-      style={{
-        width: 38,
-        height: 38,
-        borderRadius: '50%',
-        background: 'var(--brand-yellow)',
-        color: 'var(--brand-navy)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontWeight: 800,
-        fontSize: 16,
-        flexShrink: 0,
-        boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
-      }}
-    >
-      A
-    </div>
-  );
-}
