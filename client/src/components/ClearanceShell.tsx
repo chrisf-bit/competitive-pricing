@@ -65,14 +65,19 @@ function ClearanceIntro({
       transition={{ duration: 0.35, ease: 'easeOut' }}
       style={{
         flexShrink: 0,
-        padding: '20px 32px 18px',
-        borderBottom: '1px solid rgba(254, 186, 2, 0.28)',
+        margin: '12px 16px 0',
+        padding: '18px 28px',
+        borderRadius: 12,
+        border: '1px solid rgba(255,255,255,0.12)',
         background:
-          'linear-gradient(180deg, rgba(0, 53, 128, 0.30) 0%, rgba(0, 53, 128, 0.12) 100%)',
-        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.20)',
+          'linear-gradient(180deg, rgba(255, 255, 255, 0.10) 0%, rgba(255, 255, 255, 0.04) 100%)',
+        boxShadow:
+          '0 8px 24px rgba(0, 0, 0, 0.40), 0 0 0 1px rgba(254, 186, 2, 0.28), inset 0 1px 0 rgba(255,255,255,0.08)',
         textAlign: 'center',
         position: 'relative',
         zIndex: 2,
+        backdropFilter: 'blur(6px)',
+        WebkitBackdropFilter: 'blur(6px)',
       }}
     >
       <div
