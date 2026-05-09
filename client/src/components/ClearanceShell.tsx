@@ -66,9 +66,13 @@ function ClearanceIntro({
       style={{
         flexShrink: 0,
         padding: '20px 32px 18px',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
-        background: 'rgba(255,255,255,0.02)',
+        borderBottom: '1px solid rgba(254, 186, 2, 0.28)',
+        background:
+          'linear-gradient(180deg, rgba(0, 53, 128, 0.30) 0%, rgba(0, 53, 128, 0.12) 100%)',
+        boxShadow: '0 4px 14px rgba(0, 0, 0, 0.20)',
         textAlign: 'center',
+        position: 'relative',
+        zIndex: 2,
       }}
     >
       <div

@@ -145,15 +145,17 @@ export function LaptopFrame({ children }: { children: ReactNode }) {
           flexDirection: 'column',
           alignItems: 'center',
           width: '100%',
-          maxWidth: 1280,
+          maxWidth: 1100,
         }}
       >
-        {/* Screen */}
+        {/* Screen - sized to fit inside the ClearanceShell content area
+            (which sits below the progress strip and intro block) rather
+            than 100vh, so it doesn't overlap the intro on shorter viewports. */}
         <div
           style={{
             width: '100%',
             aspectRatio: '16 / 10',
-            maxHeight: 'calc(100vh - 80px)',
+            maxHeight: 'calc(100vh - 260px)',
             background: 'linear-gradient(to bottom, #d4d8df 0%, #b8bdc6 100%)',
             borderRadius: '14px 14px 4px 4px',
             padding: 14,
