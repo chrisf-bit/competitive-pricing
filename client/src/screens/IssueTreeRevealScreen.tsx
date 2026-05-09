@@ -40,69 +40,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         overflow: 'hidden',
       }}
     >
-      {/* Top zone: pushes heading to bottom of zone, putting pipeline at vertical centre */}
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: 0,
-        }}
-      >
-        <div
-          style={{
-            padding: '20px 28px 6px',
-            flexShrink: 0,
-          }}
-        >
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: 'var(--brand-yellow)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.18em',
-            }}
-          >
-            How we diagnose
-          </div>
-        </div>
-
-        {/* Heading - pinned to bottom of top zone via marginTop:auto */}
-        <div
-          style={{
-            textAlign: 'center',
-            padding: '0 32px 18px',
-            flexShrink: 0,
-            marginTop: 'auto',
-          }}
-        >
-          <h1
-            style={{
-              fontSize: 28,
-              fontWeight: 800,
-              color: 'var(--white)',
-              letterSpacing: '-0.02em',
-              marginBottom: 6,
-            }}
-          >
-            Diagnosing pricing issues
-          </h1>
-          <p
-            style={{
-              fontSize: 13,
-              color: 'rgba(255,255,255,0.6)',
-              maxWidth: 560,
-              margin: '0 auto',
-              lineHeight: 1.55,
-            }}
-          >
-            Click each step to walk through how Alex would diagnose a pricing problem on a partner account.
-          </p>
-        </div>
-      </div>
-
-      {/* Phase pipeline - sits at vertical centre (between top and bottom zones), clickable */}
+      {/* Phase pipeline - clickable */}
       <div
         style={{
           padding: '20px 24px 8px',
@@ -132,28 +70,9 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
             />
           ))}
         </div>
-        <div
-          style={{
-            textAlign: 'center',
-            fontSize: 11,
-            fontWeight: 600,
-            color: allVisited ? 'var(--success)' : 'rgba(255,255,255,0.5)',
-            letterSpacing: '0.08em',
-            textTransform: 'uppercase',
-            marginTop: 14,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: 6,
-          }}
-        >
-          {allVisited && <Check size={12} strokeWidth={3} />}
-          {visited.size} of {issueTreePhases.length} steps viewed
-          {!allVisited && ' - walk through all steps to continue'}
-        </div>
       </div>
 
-      {/* Bottom zone: explanation at top, bottom bar pushed to bottom */}
+      {/* Active phase explanation */}
       <div
         style={{
           flex: 1,
@@ -161,7 +80,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'flex-start',
-          padding: '28px 32px 0',
+          padding: '18px 32px 0',
           minHeight: 0,
         }}
       >
@@ -184,29 +103,34 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
                 fontWeight: 700,
                 color: 'var(--brand-yellow)',
                 textTransform: 'uppercase',
-                letterSpacing: '0.18em',
-                marginBottom: 14,
+                letterSpacing: '0.16em',
+                marginBottom: 12,
               }}
             >
-              {activePhase.label} - Step {activeIndex + 1} of {issueTreePhases.length}
+              {activePhase.label} · Step {activeIndex + 1} of {issueTreePhases.length}
+              {!allVisited && (
+                <span style={{ color: 'rgba(255,255,255,0.5)', fontWeight: 600 }}>
+                  {' '}· Walk through all steps to continue
+                </span>
+              )}
             </div>
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'center',
-                marginBottom: 16,
+                marginBottom: 14,
               }}
             >
               <PhaseVisual phaseId={activePhase.id} />
             </div>
             <h2
               style={{
-                fontSize: 22,
-                fontWeight: 700,
+                fontSize: 17,
+                fontWeight: 600,
                 color: 'var(--white)',
                 lineHeight: 1.3,
-                letterSpacing: '-0.01em',
-                marginBottom: 12,
+                letterSpacing: '-0.005em',
+                marginBottom: 10,
               }}
             >
               {activePhase.headline}

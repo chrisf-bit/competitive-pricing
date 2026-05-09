@@ -80,95 +80,42 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
         overflow: 'hidden',
       }}
     >
-      {/* Top bar */}
+      {/* Question + answers / feedback - sits ABOVE the table */}
       <div
         style={{
-          padding: '14px 28px',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          background: 'rgba(0,0,0,0.18)',
           flexShrink: 0,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 14,
+          padding: '16px 28px 14px',
+          borderBottom: '1px solid rgba(255,255,255,0.08)',
+          background: 'rgba(0,0,0,0.20)',
         }}
       >
         <div
           style={{
-            fontSize: 11,
-            fontWeight: 700,
-            color: 'var(--brand-yellow)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.18em',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12,
+            marginBottom: 10,
           }}
         >
-          Data & Insights
+          <ProgressDots
+            total={dataInsightsChallenges.length}
+            current={currentIndex}
+            results={results}
+          />
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 700,
+              color: 'rgba(255,255,255,0.55)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.14em',
+            }}
+          >
+            {isDone
+              ? `${correctCount} of ${dataInsightsChallenges.length} correct`
+              : `Question ${currentIndex + 1} of ${dataInsightsChallenges.length}`}
+          </span>
         </div>
-        <div style={{ flex: 1 }} />
-        <ProgressDots
-          total={dataInsightsChallenges.length}
-          current={currentIndex}
-          results={results}
-        />
-      </div>
-
-      {/* Heading */}
-      <div
-        style={{
-          textAlign: 'center',
-          padding: '20px 32px 12px',
-          flexShrink: 0,
-        }}
-      >
-        <h1
-          style={{
-            fontSize: 24,
-            fontWeight: 800,
-            color: 'var(--white)',
-            letterSpacing: '-0.02em',
-            marginBottom: 4,
-          }}
-        >
-          What does the data tell you?
-        </h1>
-        <p
-          style={{
-            fontSize: 13,
-            color: 'rgba(255,255,255,0.6)',
-            maxWidth: 640,
-            margin: '0 auto',
-            lineHeight: 1.5,
-          }}
-        >
-          A partial view of what you'd typically see across our pricing tools. Spotting where
-          attention is needed is half the job.
-        </p>
-      </div>
-
-      {/* Table */}
-      <div
-        style={{
-          flex: 1,
-          padding: '8px 28px 16px',
-          overflow: 'auto',
-          minHeight: 0,
-        }}
-      >
-        <KpiTable
-          rows={samplePartnerData}
-          highlightedHotelId={result?.pickedId ?? null}
-          correctHotelId={result ? challenge?.correctHotelId ?? null : null}
-        />
-      </div>
-
-      {/* Question + answers OR feedback OR done */}
-      <div
-        style={{
-          flexShrink: 0,
-          padding: '14px 28px 20px',
-          borderTop: '1px solid rgba(255,255,255,0.08)',
-          background: 'rgba(0,0,0,0.22)',
-        }}
-      >
         <AnimatePresence mode="wait">
           {!isDone && challenge && !result && (
             <motion.div
@@ -180,12 +127,11 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
             >
               <div
                 style={{
-                  fontSize: 14,
+                  fontSize: 15,
                   fontWeight: 600,
                   color: 'var(--white)',
                   lineHeight: 1.4,
                   marginBottom: 10,
-                  maxWidth: 800,
                 }}
               >
                 {challenge.prompt}
@@ -243,8 +189,8 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
             >
               <div
                 style={{
-                  width: 36,
-                  height: 36,
+                  width: 32,
+                  height: 32,
                   borderRadius: '50%',
                   background: result.isCorrect ? 'var(--success)' : 'var(--danger)',
                   color: 'var(--white)',
@@ -255,9 +201,9 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
                 }}
               >
                 {result.isCorrect ? (
-                  <Check size={18} strokeWidth={3} />
+                  <Check size={16} strokeWidth={3} />
                 ) : (
-                  <X size={18} strokeWidth={3} />
+                  <X size={16} strokeWidth={3} />
                 )}
               </div>
               <div
@@ -294,13 +240,9 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
-                gap: 16,
+                justifyContent: 'flex-end',
               }}
             >
-              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.7)' }}>
-                {correctCount} of {dataInsightsChallenges.length} correct
-              </div>
               <button
                 onClick={handleContinue}
                 style={primaryBtn(true)}
@@ -317,6 +259,22 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
             </motion.div>
           )}
         </AnimatePresence>
+      </div>
+
+      {/* Table - below the question, fills remaining space */}
+      <div
+        style={{
+          flex: 1,
+          padding: '14px 28px 18px',
+          overflow: 'auto',
+          minHeight: 0,
+        }}
+      >
+        <KpiTable
+          rows={samplePartnerData}
+          highlightedHotelId={result?.pickedId ?? null}
+          correctHotelId={result ? challenge?.correctHotelId ?? null : null}
+        />
       </div>
     </div>
   );

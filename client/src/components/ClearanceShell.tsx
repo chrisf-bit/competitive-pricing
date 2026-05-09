@@ -5,6 +5,7 @@ import type { GameScreen } from '../types';
 import {
   clearanceActivities,
   clearanceIndexOf,
+  clearanceActivityFor,
 } from '../data/clearanceActivities';
 
 /**
@@ -22,6 +23,8 @@ interface ClearanceShellProps {
 }
 
 export function ClearanceShell({ currentScreen, children }: ClearanceShellProps) {
+  const activity = clearanceActivityFor(currentScreen);
+
   return (
     <div
       style={{
@@ -33,6 +36,7 @@ export function ClearanceShell({ currentScreen, children }: ClearanceShellProps)
       }}
     >
       <ClearanceProgressStrip currentScreen={currentScreen} />
+      {activity && <ClearanceIntro activity={activity} />}
       <div
         style={{
           flex: 1,
@@ -45,6 +49,64 @@ export function ClearanceShell({ currentScreen, children }: ClearanceShellProps)
         {children}
       </div>
     </div>
+  );
+}
+
+function ClearanceIntro({
+  activity,
+}: {
+  activity: { label: string; title: string; subtitle: string };
+}) {
+  return (
+    <motion.div
+      key={activity.label}
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      style={{
+        flexShrink: 0,
+        padding: '20px 32px 18px',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        background: 'rgba(255,255,255,0.02)',
+        textAlign: 'center',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 11,
+          fontWeight: 700,
+          color: 'var(--brand-yellow)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.18em',
+          marginBottom: 6,
+        }}
+      >
+        {activity.label}
+      </div>
+      <h1
+        style={{
+          fontSize: 22,
+          fontWeight: 800,
+          color: 'var(--white)',
+          letterSpacing: '-0.01em',
+          lineHeight: 1.2,
+          marginBottom: 6,
+        }}
+      >
+        {activity.title}
+      </h1>
+      <p
+        style={{
+          fontSize: 13.5,
+          color: 'rgba(255,255,255,0.7)',
+          lineHeight: 1.5,
+          maxWidth: 720,
+          margin: '0 auto',
+        }}
+      >
+        {activity.subtitle}
+      </p>
+    </motion.div>
   );
 }
 

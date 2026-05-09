@@ -33,50 +33,6 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
           margin: '0 auto',
         }}
       >
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          style={{ textAlign: 'center', marginBottom: 12 }}
-        >
-          <div
-            style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: 'var(--brand-yellow)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.18em',
-              marginBottom: 14,
-            }}
-          >
-            Set the Scene
-          </div>
-          <h1
-            style={{
-              fontSize: 36,
-              fontWeight: 800,
-              color: 'var(--white)',
-              lineHeight: 1.15,
-              marginBottom: 12,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Pick your parity regime
-          </h1>
-          <p
-            style={{
-              fontSize: 15,
-              color: 'rgba(255,255,255,0.72)',
-              lineHeight: 1.6,
-              maxWidth: 600,
-              margin: '0 auto',
-            }}
-          >
-            Pick the parity regime your portfolio operates under.
-          </p>
-        </motion.div>
-
         {/* Cards */}
         <div
           style={{

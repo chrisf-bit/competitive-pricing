@@ -58,51 +58,6 @@ export function CharacterBuildScreen({
           margin: '0 auto',
         }}
       >
-        {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: 'easeOut' }}
-          style={{ textAlign: 'center', marginBottom: 24 }}
-        >
-          <div
-            style={{
-              fontSize: 11,
-              fontWeight: 700,
-              color: 'var(--brand-yellow)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.18em',
-              marginBottom: 12,
-            }}
-          >
-            Build your character
-          </div>
-          <h1
-            style={{
-              fontSize: 32,
-              fontWeight: 800,
-              color: 'var(--white)',
-              lineHeight: 1.15,
-              marginBottom: 10,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            Pick an avatar and a super power
-          </h1>
-          <p
-            style={{
-              fontSize: 14,
-              color: 'rgba(255,255,255,0.7)',
-              lineHeight: 1.55,
-              maxWidth: 600,
-              margin: '0 auto',
-            }}
-          >
-            Your avatar is just visual identity. Your super power is the way you'll naturally
-            lean into commercial conversations - everyone has equal potential to succeed.
-          </p>
-        </motion.div>
-
         {/* Avatars */}
         <SectionHeading label="Choose your avatar" complete={!!selectedAvatarId} />
         <div
