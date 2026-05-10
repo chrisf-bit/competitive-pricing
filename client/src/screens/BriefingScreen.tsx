@@ -84,22 +84,23 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             }}
           >
             <p style={{ margin: 0 }}>
-              So, you want to manage partner accounts at Booking.com? Let's see if you've
-              got what it takes.
+              We're looking for the best of the best to take on a portfolio of partners that
+              have lost their way.
             </p>
             <p style={{ margin: 0 }}>
-              You'll be given some partner accounts to look after, but they're not in great
-              shape.
+              Visibility is slipping. Prices are off-pitch. Travellers are choosing
+              competitors. And most of it is fixable - if you know what to look for, what to
+              ask, and how to say it.
             </p>
             <p style={{ margin: 0 }}>
-              Your mission is to diagnose pricing problems, choose the right strategy, and
-              adapt your conversations to each partner, all while balancing competitiveness,
-              revenue, and trust. Pay attention to how each partner responds - not everyone
-              communicates in the same way.
+              You'll get a portfolio of accounts that need someone like you. Each round, one
+              partner will be in worse shape than the others. Read the signals. Choose your
+              move. Have the conversation. Pay attention to how each partner responds - not
+              everyone communicates the same way.
             </p>
             <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontWeight: 500 }}>
-              Before you get started, you'll need to gain clearance to take on the mission.
-              Ready?
+              First, we need to know you're up to it. Earn your clearance and we'll hand you
+              the mission.
             </p>
           </div>
 
