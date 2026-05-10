@@ -8,12 +8,53 @@ interface SplashScreenProps {
 }
 
 export function SplashScreen({ onBegin }: SplashScreenProps) {
+  const [imageReady, setImageReady] = useState(false);
   const [showBegin, setShowBegin] = useState(false);
 
+  // Preload + decode the splash image before mounting the rest of the
+  // splash. Stops the browser progressively painting the PNG strip-by-strip
+  // and gives us a clean fade-in once the bitmap is fully ready.
   useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    img.src = splashImage;
+    const markReady = () => {
+      if (!cancelled) setImageReady(true);
+    };
+    if (img.decode) {
+      img.decode().then(markReady).catch(markReady);
+    } else {
+      img.onload = markReady;
+      img.onerror = markReady;
+    }
+    // Safety net: if the image somehow hangs, show the splash anyway after
+    // 2.5 seconds rather than leaving the user on a black screen.
+    const fallback = setTimeout(markReady, 2500);
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!imageReady) return;
     const t = setTimeout(() => setShowBegin(true), 4000);
     return () => clearTimeout(t);
-  }, []);
+  }, [imageReady]);
+
+  // While the image is being prepared, show a clean dark navy holding
+  // screen so there's no flash of a partially-rendered bitmap.
+  if (!imageReady) {
+    return (
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          background: 'var(--brand-navy-dark)',
+        }}
+      />
+    );
+  }
 
   return (
     <div
