@@ -19,11 +19,21 @@ export const correctPartnerPerRound: Partial<
   Record<ParityRegime, Record<number, string>>
 > = {
   none: {
-    1: 'stavros',  // Worst headline numbers: parity breach + misconfigured Last-Minute Deal
-    2: 'marina',   // Mobile gap is the next biggest leak once Stavros has had attention
-    3: 'carlos',   // Country Rate misconfigured - cleanup round
+    // Stavros stays the right call across all three rounds because his
+    // metrics stay the worst across all three rounds. The engine's
+    // metricEffects move him by a few points per conversation - not
+    // enough to drop him out of "clearly the worst" - and the R1/R2/R3
+    // conversation trees for Stavros were already written as a
+    // sustained follow-up arc (parity breach -> fix the broken Last-
+    // Minute Deal -> plan the high season). Marina and Carlos act as
+    // distractors: visible on the portfolio, mildly concerning, but
+    // Stavros is the clear correct call each time.
+    1: 'stavros',
+    2: 'stavros',
+    3: 'stavros',
   },
-  // narrow / wide / cross-regional: pending partner data
+  // narrow / wide / cross-regional: pending partner data. The
+  // partner-data drop will introduce per-regime crisis partners.
 };
 
 /**
