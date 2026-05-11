@@ -20,7 +20,17 @@ const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 
 // ── Create initial game state ──
-export function createInitialState(): GameState {
+/**
+ * Build a fresh game state. Optional overrides let a returning learner
+ * carry forward their persistent profile, clearance status, and
+ * previously-earned round stars without restoring the in-flight
+ * partner / conversation state (which always resets per play).
+ */
+export function createInitialState(overrides?: {
+  learnerProfile?: GameState['learnerProfile'];
+  level0Cleared?: boolean;
+  roundStars?: GameState['roundStars'];
+}): GameState {
   const partners = initialPartners.map((p) => ({
     ...p,
     metricHistory: [{ round: 0, metrics: { ...p.metrics } }],
@@ -29,7 +39,7 @@ export function createInitialState(): GameState {
   return {
     screen: 'briefing',
     currentLevel: 0,
-    learnerProfile: {
+    learnerProfile: overrides?.learnerProfile ?? {
       market: null,
       strengths: [],
       archetype: null,
@@ -43,7 +53,7 @@ export function createInitialState(): GameState {
       signalVsProofCompleted: false,
       emailAuditCompleted: false,
       inboxTriageCompleted: false,
-      cleared: false,
+      cleared: overrides?.level0Cleared ?? false,
     },
     currentDiagnosis: null,
     level0ReturnTo: null,
@@ -55,6 +65,7 @@ export function createInitialState(): GameState {
     partners,
     marketContext: marketContextByRound[1],
     roundSummaries: [],
+    roundStars: overrides?.roundStars ?? {},
     conversationInProgress: null,
     gameComplete: false,
   };

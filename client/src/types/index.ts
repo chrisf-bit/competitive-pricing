@@ -355,6 +355,13 @@ export interface GameState {
   partners: PartnerState[];
   marketContext: MarketContext;
   roundSummaries: RoundSummaryItem[][];
+  /**
+   * Best stars earned per round (1-indexed). 0 means attempted but failed,
+   * 1 = pass (compliant), 2 = strong (style-matched), 3 = optimal
+   * (matched the partner's actual root cause + pitch). Persisted across
+   * sessions; a replay can only raise the value, never lower it.
+   */
+  roundStars: Record<number, 0 | 1 | 2 | 3>;
   conversationInProgress: {
     partnerId: string;
     phaseIndex: number;

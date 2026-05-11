@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import type {
   GameState,
   LearnerMarket,
@@ -15,9 +15,41 @@ import {
   advanceRound,
   calculateScore,
 } from '../engine/gameEngine';
+import {
+  loadPersistedState,
+  savePersistedState,
+  clearPersistedState,
+} from '../util/persistence';
 
 export function useGame() {
-  const [state, setState] = useState<GameState>(createInitialState);
+  const [state, setState] = useState<GameState>(() => {
+    const persisted = loadPersistedState();
+    return createInitialState(
+      persisted
+        ? {
+            learnerProfile: persisted.learnerProfile,
+            level0Cleared: persisted.level0Cleared,
+            roundStars: persisted.roundStars,
+          }
+        : undefined,
+    );
+  });
+
+  // Persist the durable slice of state whenever any of its inputs change.
+  // Tracked fields are intentionally narrow so we don't write to storage on
+  // every screen transition.
+  const lastPersistedRef = useRef<string>('');
+  useEffect(() => {
+    const snapshot = JSON.stringify({
+      profile: state.learnerProfile,
+      cleared: state.level0Progress.cleared,
+      stars: state.roundStars,
+    });
+    if (snapshot !== lastPersistedRef.current) {
+      lastPersistedRef.current = snapshot;
+      savePersistedState(state);
+    }
+  }, [state.learnerProfile, state.level0Progress.cleared, state.roundStars, state]);
 
   const goToScreen = useCallback((screen: GameState['screen']) => {
     setState((s) => ({ ...s, screen }));
@@ -53,6 +85,7 @@ export function useGame() {
   }, []);
 
   const onRestart = useCallback(() => {
+    clearPersistedState();
     setState(createInitialState());
   }, []);
 
