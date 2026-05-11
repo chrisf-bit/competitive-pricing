@@ -12,6 +12,7 @@ import {
 import type { GameState, KnowledgeCheckResult } from '../types';
 import { gmScript } from '../data/gameMasterScript';
 import { emailAudit } from '../data/emailAudit';
+import { dataInsightsChallenges } from '../data/dashboardHotspot';
 
 interface ClearanceSummaryScreenProps {
   results: KnowledgeCheckResult[];
@@ -26,7 +27,7 @@ interface ClearanceSummaryScreenProps {
 const PASS_THRESHOLD = 0.8;
 
 interface ActivityDef {
-  id: 'gm-chat' | 'email-audit' | 'issue-tree';
+  id: 'gm-chat' | 'data-insights' | 'email-audit' | 'issue-tree';
   label: string;
   description: string;
   screen: GameState['screen'];
@@ -46,6 +47,14 @@ const activities: ActivityDef[] = [
     screen: 'l0-gm-chat',
     itemMatcher: (id) => /^[AB]\d$/.test(id),
     totalItems: 5,
+  },
+  {
+    id: 'data-insights',
+    label: 'Data & Insights',
+    description: 'Reading partner KPI snapshots and spotting where attention is needed',
+    screen: 'l0-dashboard-hotspot',
+    itemMatcher: (id) => id.startsWith('data-insights-'),
+    totalItems: dataInsightsChallenges.length,
   },
   {
     id: 'email-audit',
@@ -148,6 +157,22 @@ function getMissedItemDetail(itemId: string): MissedItemDetail | null {
         correctText: phrase.isSafe ? 'Safe to send' : 'Unsafe - rewrite',
         rationale: phrase.rationale.incorrect,
         source: phrase.source,
+      };
+    }
+  }
+  // Data & Insights challenges
+  if (itemId.startsWith('data-insights-')) {
+    const challengeId = itemId.replace('data-insights-', '');
+    const challenge = dataInsightsChallenges.find((c) => c.id === challengeId);
+    if (challenge) {
+      const correctOption = challenge.options.find(
+        (o) => o.hotelId === challenge.correctHotelId,
+      );
+      return {
+        itemId,
+        prompt: challenge.prompt,
+        correctText: correctOption?.label ?? '',
+        rationale: challenge.feedback.incorrect,
       };
     }
   }
