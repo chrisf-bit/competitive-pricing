@@ -315,6 +315,80 @@ const stavrosR1: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Right - so what have you actually found? Cut to it.",
+        options: [
+          {
+            id: 'stavros-r1-diag-broad',
+            label: 'Frame it as a broad slump',
+            description: 'Acknowledge bookings are down without pinpointing a cause.',
+            playerDialogue:
+              "Things are clearly under pressure - bookings are off, visibility is down, and you're trailing the comparable resort set on Kos. There are a few moving parts, but the headline is your competitive position has slipped.",
+            styleMatch: { red: 0, blue: -1, yellow: 0, green: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'stavros-r1-diag-discount-volume',
+            label: 'Blame the discount stack',
+            description: "Argue Expedia is out-discounting him and he needs more products active.",
+            playerDialogue:
+              "Your visibility is down and you're losing the price comparison on most searches. The story I'd tell is your discount stack isn't doing enough work - Expedia partners on Kos have more products active than you do. That's where the visibility gap is opening up.",
+            styleMatch: { red: 1, blue: 0, yellow: 1, green: -1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'stavros-r1-diag-parity-and-config',
+            label: 'Name parity breach and misconfigured discount',
+            description:
+              'Pinpoint the rate parity breach and the misconfigured Last-Minute Deal, and explain why they compound.',
+            playerDialogue:
+              "Two things are happening together and they're compounding. One: you've got a clear rate parity breach - travellers are seeing you cheaper on at least two other channels, so even your Genius and Mobile discounts get undermined before the booking decision. Two: your Last-Minute Deal is currently misconfigured, so it's not firing when it should. Combined effect: you're losing the price comparison on almost every search.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: -1 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'stavros-r1-diag-broad',
+          responses: [
+            { trustThreshold: 'low', text: "'Slipped'? I can see that from my own dashboard. I need to know WHY, not THAT. Try again.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I already know I've slipped, that's why we're talking. What I need from you is the specific cause.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I know things are under pressure. Tell me something I don't know.", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -3,
+        },
+        {
+          optionId: 'stavros-r1-diag-discount-volume',
+          responses: [
+            { trustThreshold: 'low', text: "More discounts? I'm already discounting. If that was the answer I'd have solved it months ago.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I'm not convinced. Expedia comparisons are useful but I want to know what's actually broken on my side. Anything else?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "Maybe - but my gut says it's something more specific than just product count. What else have you got?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: 0,
+        },
+        {
+          optionId: 'stavros-r1-diag-parity-and-config',
+          responses: [
+            { trustThreshold: 'low', text: "Parity breach? My channel manager is supposed to keep that locked. If you can show me where it's broken I'm interested.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now that's the specificity I needed. Parity breach AND a broken Last-Minute Deal - that would explain a lot. Keep going.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Right. That's the kind of analysis I've been waiting for. So I've been throwing more discounts at a problem that wasn't really about discounts. Go on.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 1 },
+          trustChange: 7,
+          nextPhasePrompt: "Alright - so what do I actually do about the parity and the broken deal? And don't tell me to add more discounts - I'm already discounting.",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -467,6 +541,80 @@ const hannahR1: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: 5,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "So what is it you're seeing? I always want to know if there's something I should be aware of.",
+        options: [
+          {
+            id: 'hannah-r1-diag-slow',
+            label: 'Flag a slow patch',
+            description: "Note that bookings look soft midweek without pinpointing why.",
+            playerDialogue:
+              "Things have been a little quiet midweek for you - nothing dramatic, but worth a look together. I thought it'd be good to chat through where the slow patches are coming from.",
+            styleMatch: { green: 1, yellow: 0, blue: -1, red: 0 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'hannah-r1-diag-price-too-high',
+            label: 'Suggest the price is too high',
+            description: "Read it as a pricing problem - guests are choosing cheaper options nearby.",
+            playerDialogue:
+              "What I'm seeing is that your price competitiveness has slipped against nearby guesthouses - on the searches where you're appearing, travellers are choosing the cheaper option. My read is the rate's a little above what the comparable set is showing.",
+            styleMatch: { green: 0, yellow: 0, blue: 1, red: 1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'hannah-r1-diag-visibility-gap',
+            label: 'Frame it as a visibility gap, not a pricing problem',
+            description:
+              "Explain that her rate is fine - the issue is she's missing the filters and segments where travellers are choosing other properties.",
+            playerDialogue:
+              "Here's the encouraging bit - your rate is fine. Your parity is clean and your ADR sits in line with comparable guesthouses. What's happening is more about visibility than price. Because you don't have a Last-Minute Deal or Genius active, you're disappearing from the filters that the travellers most likely to love Meadow Lane are using - last-minute weekend trips, mid-range romantic getaways. They never see you to choose between you and someone cheaper.",
+            styleMatch: { green: 2, yellow: 2, blue: 1, red: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'hannah-r1-diag-slow',
+          responses: [
+            { trustThreshold: 'low', text: "Oh. Well, midweek is always quieter, isn't it? I'm not sure that's something we can really fix.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Quiet midweek - yes, I've noticed. But I was hoping you'd be able to tell me a bit more about why. Is it just the season?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "I trust you, but 'quiet patches' isn't really actionable for me. Anything specific you've spotted?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -1,
+        },
+        {
+          optionId: 'hannah-r1-diag-price-too-high',
+          responses: [
+            { trustThreshold: 'low', text: "Oh dear. I really don't want to lower my prices - the guests we have are happy with them, and I worry about cheapening what we offer.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I see what you're saying, but I'm not comfortable lowering the rate. Meadow Lane isn't a budget property and I don't want to be priced like one. Is there another way to read it?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "Hmm. I understand the data, but I'd want to find another way before touching the rate. The pricing is part of what protects the experience.", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'hannah-r1-diag-visibility-gap',
+          responses: [
+            { trustThreshold: 'low', text: "Oh! That's a relief - I was bracing for you to tell me to drop my prices. So it's more about being found in the right places?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That makes so much more sense. So it's not that my rate is wrong - it's that the right travellers aren't even seeing Meadow Lane to consider it. I like that framing. Tell me more.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes, that's exactly what I needed to hear. I knew the rate wasn't the issue - it's the discoverability. So what do we do about that without compromising the brand?", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 2 },
+          trustChange: 6,
+          nextPhasePrompt: "So if it's visibility, not pricing... what would you suggest? I should say upfront though - I'm not really keen on big discounts. I don't want to cheapen what we offer here.",
         },
       ],
     },
