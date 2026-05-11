@@ -364,8 +364,8 @@ export function GuidePanel({
               Progress
             </span>
           </div>
-          <div style={{ display: 'flex', gap: 4, marginBottom: 8 }}>
-            {[1, 2, 3].map((r) => (
+          <div style={{ display: 'flex', gap: 3, marginBottom: 8 }}>
+            {Array.from({ length: 10 }, (_, i) => i + 1).map((r) => (
               <div
                 key={r}
                 style={{
@@ -387,15 +387,10 @@ export function GuidePanel({
             style={{
               fontSize: 11,
               color: 'rgba(255,255,255,0.4)',
-              display: 'flex',
-              justifyContent: 'space-between',
               fontWeight: 600,
             }}
           >
-            <span>Round {currentRound}/3</span>
-            <span>
-              {currentRound === 1 ? 'Week 1' : currentRound === 2 ? 'Week 3' : 'Week 6'}
-            </span>
+            Round {currentRound}/10
           </div>
         </div>
       </div>
@@ -454,7 +449,7 @@ function getGuideContent(
           {
             icon: <AlertTriangle size={12} />,
             title: 'Prioritise wisely',
-            text: 'Only 3 of 6 partners per round. Neglected partners drift.',
+            text: 'One partner per round. Pick the one whose numbers need you most - neglected partners drift.',
           },
           {
             icon: <Zap size={12} />,

@@ -75,6 +75,13 @@ interface ActivityScore {
   passing: boolean;
 }
 
+/**
+ * Score an activity from its knowledge-check results. Dedupes by
+ * itemId (keeping the latest result per item) so the percentage is
+ * never inflated by stale or duplicate entries - a learner who
+ * retried via DevNav or any future path that re-records results
+ * won't end up over 100% on a card.
+ */
 function scoreActivity(
   activity: ActivityDef,
   results: KnowledgeCheckResult[],
@@ -90,13 +97,18 @@ function scoreActivity(
     };
   }
   const own = results.filter((r) => activity.itemMatcher(r.itemId));
-  const correct = own.filter((r) => r.correct).length;
-  const missed = own.filter((r) => !r.correct);
+  const latestById = new Map<string, KnowledgeCheckResult>();
+  for (const r of own) {
+    latestById.set(r.itemId, r);
+  }
+  const deduped = Array.from(latestById.values());
+  const correct = deduped.filter((r) => r.correct).length;
+  const missed = deduped.filter((r) => !r.correct);
   const total = activity.totalItems;
   const pct = total === 0 ? 0 : correct / total;
   return {
     activity,
-    attempted: own.length,
+    attempted: deduped.length,
     correct,
     missedResults: missed,
     pct,

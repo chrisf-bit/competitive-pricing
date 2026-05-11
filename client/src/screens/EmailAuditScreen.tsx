@@ -171,6 +171,7 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
           <ReviewPanel
             activePhrase={activePhrase}
             activeJudgement={activeJudgement}
+            allReviewed={allReviewed}
             onPick={handlePick}
             onMoveOn={() => setActivePhraseId(null)}
           />
@@ -422,11 +423,13 @@ function PhraseToken({
 function ReviewPanel({
   activePhrase,
   activeJudgement,
+  allReviewed,
   onPick,
   onMoveOn,
 }: {
   activePhrase: EmailPhrase | null;
   activeJudgement: PhraseJudgement | null;
+  allReviewed: boolean;
   onPick: (phraseId: string, pickedSafe: boolean) => void;
   onMoveOn: () => void;
 }) {
@@ -623,32 +626,44 @@ function ReviewPanel({
               >
                 Source: {phrase.source}
               </div>
-              <button
-                onClick={onMoveOn}
-                style={{
-                  background: 'rgba(255,255,255,0.07)',
-                  color: 'var(--white)',
-                  padding: '9px 16px',
-                  borderRadius: 8,
-                  fontSize: 13,
-                  fontWeight: 600,
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  cursor: 'pointer',
-                  transition: 'background 0.15s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
-                }}
-              >
-                Pick another phrase
-                <ChevronRight size={14} />
-              </button>
+              {allReviewed ? (
+                <div
+                  style={{
+                    fontSize: 12.5,
+                    color: 'rgba(255,255,255,0.65)',
+                    fontStyle: 'italic',
+                  }}
+                >
+                  All phrases reviewed. Hit Continue to wrap up.
+                </div>
+              ) : (
+                <button
+                  onClick={onMoveOn}
+                  style={{
+                    background: 'rgba(255,255,255,0.07)',
+                    color: 'var(--white)',
+                    padding: '9px 16px',
+                    borderRadius: 8,
+                    fontSize: 13,
+                    fontWeight: 600,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: 6,
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    cursor: 'pointer',
+                    transition: 'background 0.15s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.07)';
+                  }}
+                >
+                  Pick another phrase
+                  <ChevronRight size={14} />
+                </button>
+              )}
             </motion.div>
           )}
         </AnimatePresence>
