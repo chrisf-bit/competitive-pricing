@@ -83,6 +83,80 @@ export const yukiR1: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Please, share what you have observed. I would like to understand how things look from your perspective.",
+        options: [
+          {
+            id: 'yuki-r1-diag-soft',
+            label: 'Note things are a little soft',
+            description: 'Acknowledge bookings are a bit below where they could be, without specifics.',
+            playerDialogue:
+              "Honestly, things are a little softer than they could be at the moment. Nothing alarming, but there's a sense the property could be reaching more guests. I think there's room to grow.",
+            styleMatch: { green: 1, blue: -1, red: 0, yellow: 0 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'yuki-r1-diag-price-too-high',
+            label: 'Read it as a pricing problem',
+            description: 'Suggest the rate is sitting above what guests are willing to pay.',
+            playerDialogue:
+              "What I'm seeing is that on the searches where Ryokan Komorebi appears, travellers are often choosing properties at a lower price point. My read is the rate may be sitting slightly above what comparable luxury ryokans in Kyoto are showing.",
+            styleMatch: { green: -1, blue: 1, red: 1, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'yuki-r1-diag-discoverability',
+            label: 'Frame it as a discoverability gap, not a price one',
+            description:
+              "Show that her rate is fine - the issue is the right travellers never see her in the filters and quality-signal sets where she'd naturally win.",
+            playerDialogue:
+              "Here is what I find interesting. Your rate is right where it should be for a luxury ryokan in Kyoto - your parity is clean, your ADR is in line with comparable traditional properties. What's happening is more about being found. The travellers who would genuinely value Ryokan Komorebi - experienced, longer-stay, culturally-curious - tend to filter by quality signals before price. Because you have no Genius programme or other visibility marker active, you simply do not appear in the curated set they look at. They are not choosing someone else - they never see you in the first place.",
+            styleMatch: { green: 2, blue: 2, red: 0, yellow: 1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'yuki-r1-diag-soft',
+          responses: [
+            { trustThreshold: 'low', text: "Softer is a feeling, not a diagnosis. I would like to understand what specifically is happening before we discuss what to do.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I appreciate the gentleness, but I would value more precision. Could you tell me specifically what you are seeing in the data?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "I trust you, but 'a little soft' is not something my team and I can act on. Please be more specific.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -1,
+        },
+        {
+          optionId: 'yuki-r1-diag-price-too-high',
+          responses: [
+            { trustThreshold: 'low', text: "I would be very surprised if our rate is the issue. Our pricing reflects the experience we offer, and lowering it would damage what we are. Are you certain that is what the data shows?", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I am not comfortable with that conclusion. Our rate is intentional - it protects the kind of guest we attract. I would want to understand if there is another way to read what you are seeing.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I appreciate the honesty, but I do not believe our price is the problem. The right guest understands what they are paying for. Could the data be pointing somewhere else?", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'yuki-r1-diag-discoverability',
+          responses: [
+            { trustThreshold: 'low', text: "So our rate is appropriate, but the travellers who would value us most never see us. That is a relief - and also troubling. I would like to understand this better.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That is a thoughtful framing. So it is not that we are losing them to a cheaper option - we are not even appearing in their consideration set. Yes, that aligns with what we sense. Please continue.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes. That is exactly the dilemma I have felt but could not put into words. The right traveller would love what we offer, but we are invisible to them. Thank you for naming it.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "Given that, what would you suggest? But I should be clear - I am not interested in discounting. Our rates reflect the quality of the experience we provide.",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -242,6 +316,80 @@ export const yukiR2: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Before you suggest anything, I would like to understand what the data is showing now. We have always preferred to make decisions in context.",
+        options: [
+          {
+            id: 'yuki-r2-diag-broad-good',
+            label: 'Reassure broadly',
+            description: 'Note things are moving in the right direction without specifics.',
+            playerDialogue:
+              "The picture is genuinely encouraging. The Genius programme is starting to bring in the kind of traveller you described - longer stays, higher review scores. Things are moving in the right direction.",
+            styleMatch: { green: 2, blue: 0, red: 0, yellow: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'yuki-r2-diag-rate-still-high',
+            label: 'Reopen the rate question',
+            description: 'Suggest the residual gap is still about price, despite the Genius improvement.',
+            playerDialogue:
+              "Genius is helping, but the residual gap I see is still about price. To pull in more of the right travellers, my read is we may need to look again at where the rate sits.",
+            styleMatch: { green: -2, blue: 0, red: 1, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'yuki-r2-diag-source-market',
+            label: 'Identify the high-value source markets',
+            description:
+              "Show that the bookings already coming in concentrate on specific high-value international source markets where Ryokan Komorebi could be far more visible.",
+            playerDialogue:
+              "Here is what is interesting in the booking data. The guests responding most strongly to the Genius programme cluster around three source markets - Australia, the United States, and the UK. They book longer stays, leave the highest review scores, and they're the closest profile to the guest you described as ideal. Where there is still a gap is visibility to that exact audience: in those markets, comparable luxury ryokans are appearing more prominently in search than Ryokan Komorebi, so even the right travellers from those markets often don't see you. The gap is about being found by a specific audience, not about the rate.",
+            styleMatch: { green: 2, blue: 2, red: 0, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'yuki-r2-diag-broad-good',
+          responses: [
+            { trustThreshold: 'low', text: "That is reassuring, but my team will ask for specifics. Where exactly is the data pointing?", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "I am glad to hear it, but I would like a clearer picture before discussing next steps. What is the data telling you precisely?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Thank you. I would still like to understand where there is more to do - we are never satisfied with 'moving in the right direction' alone.", emotion: 'positive' },
+          ],
+          metricEffects: {},
+          trustChange: 1,
+        },
+        {
+          optionId: 'yuki-r2-diag-rate-still-high',
+          responses: [
+            { trustThreshold: 'low', text: "We had this conversation in our last call. Our rate is intentional. I am surprised to hear you return to this so soon.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I thought we had agreed our rate reflects our positioning. If the data has changed your view, I would want to see it clearly - but I am not comfortable reopening that question.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I would rather not revisit the rate question. If there is a different angle in the data, please share that instead.", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -3,
+        },
+        {
+          optionId: 'yuki-r2-diag-source-market',
+          responses: [
+            { trustThreshold: 'low', text: "Australia, the US, and the UK - those are exactly the markets our best guests come from historically. So we are not being seen by the very people most likely to value us. That is a clearer problem to solve.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That is a beautifully specific observation. So the audience is right, the experience is right, the price is right - but the visibility to that exact audience is missing. I think my team will respond well to that framing.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Thank you - that is exactly the kind of analysis I hoped for. Specific, respectful of the rate, and aligned with the guests we already love. Please tell me what we can do.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "I am open to hearing what you would suggest next. But please remember - we do not want to attract guests who are only motivated by price.",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -396,6 +544,80 @@ export const yukiR3: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: -1,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Before we plan the next stage, please tell me what the data is showing across the year. I want to understand the pattern, not only the headline.",
+        options: [
+          {
+            id: 'yuki-r3-diag-strong-throughout',
+            label: 'Frame the position as strong throughout the year',
+            description: 'Suggest the calendar is broadly healthy and the conversation should be about growth.',
+            playerDialogue:
+              "The picture is genuinely strong across the calendar. The Genius programme and Country Rate have lifted the right kind of bookings, and there isn't a particular soft spot when I look year-round. So the conversation today is more about how to grow gracefully from a healthy base.",
+            styleMatch: { green: 1, blue: 0, red: 0, yellow: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'yuki-r3-diag-needs-more-products-yearround',
+            label: 'Argue more products are needed year-round',
+            description: 'Suggest the residual gap is product coverage, applied across the calendar.',
+            playerDialogue:
+              "What I see in the data is that competing luxury properties have more discount products active than you do. To keep visibility climbing, I think we need to expand your product set and apply them year-round.",
+            styleMatch: { green: -1, blue: 0, red: 1, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'yuki-r3-diag-seasonal-pattern',
+            label: 'Split the read by season',
+            description:
+              "Show that peak Kyoto seasons (cherry blossom, autumn foliage) are at their natural ceiling, while late summer and winter are running well below their potential.",
+            playerDialogue:
+              "When I split it by season the picture is quite different from the headline. Cherry blossom and autumn foliage - your peak seasons - are essentially at their natural ceiling, with occupancy and review scores both excellent. Late summer and winter are where the gap is: in those months you're running well below comparable luxury ryokans on visibility, particularly to your high-value international source markets. So you have a strong base and a clear seasonal pattern - peak does not need more tools, but your quieter seasons could be working much harder.",
+            styleMatch: { green: 2, blue: 2, red: 0, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'yuki-r3-diag-strong-throughout',
+          responses: [
+            { trustThreshold: 'low', text: "Strong everywhere is encouraging, but my team will ask what specifically is left to improve. I am not satisfied with a year-round summary.", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "I appreciate the reassurance, but I am sure the calendar is not uniformly strong. Could you look more closely at the quieter months?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Thank you. But Kyoto has very different seasons - I would be surprised if the data did not reflect that. Could you look season by season?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: 0,
+        },
+        {
+          optionId: 'yuki-r3-diag-needs-more-products-yearround',
+          responses: [
+            { trustThreshold: 'low', text: "More products applied year-round - I worry that is exactly what we have been careful to avoid. We do not want to discount during cherry blossom season when demand is already strong.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I don't think that's right for us. Year-round discounting would feel inconsistent with how we have positioned ourselves. Is there a more nuanced read?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I would push back. Year-round discounting doesn't fit our seasonal identity. Could you tell me where the gap actually is - by season, perhaps?", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'yuki-r3-diag-seasonal-pattern',
+          responses: [
+            { trustThreshold: 'low', text: "Cherry blossom at its ceiling, late summer and winter underperforming - yes, that is exactly the pattern we feel but had not quantified. That is a much more honest read.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "This is the kind of seasonal analysis I have been hoping for. Peak protected, quieter seasons given more help - that aligns with everything we believe. My team will love it.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes - this is exactly the conversation I wanted. The seasons are everything to us, and a strategy that respects them is the only one that fits. Thank you for naming it this way.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 2, revenue: 1 },
+          trustChange: 7,
+          nextPhasePrompt: "Given that pattern, I am ready to hear your recommendation for our longer-term approach. What would a complete strategy look like for Ryokan Komorebi?",
         },
       ],
     },
