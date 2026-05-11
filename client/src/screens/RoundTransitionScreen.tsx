@@ -10,12 +10,6 @@ interface RoundTransitionScreenProps {
   onContinue: () => void;
 }
 
-const roundWeeks: Record<number, string> = {
-  1: 'Week 1',
-  2: 'Week 3',
-  3: 'Week 6',
-};
-
 export function RoundTransitionScreen({
   currentRound,
   previousRound,
@@ -28,15 +22,16 @@ export function RoundTransitionScreen({
     <div
       style={{
         flex: 1,
+        minHeight: 0,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
         padding: '32px 40px',
         gap: 28,
         maxWidth: 720,
         margin: '0 auto',
         width: '100%',
+        overflowY: 'auto',
       }}
     >
       {/* Time skip indicator */}
@@ -54,7 +49,7 @@ export function RoundTransitionScreen({
             Time has passed...
           </div>
           <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--brand-navy)' }}>
-            {roundWeeks[previousRound]} → {roundWeeks[currentRound]}
+            Round {previousRound} -&gt; Round {currentRound}
           </div>
         </div>
       </div>

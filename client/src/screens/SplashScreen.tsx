@@ -176,7 +176,23 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -4 }}
               transition={{ duration: 0.4, ease: 'easeOut' }}
-              onClick={onBegin}
+              onClick={() => {
+                // The Begin click is a user gesture, so this is the
+                // one moment we can request fullscreen without browser
+                // permission prompts. Swallow any error - some browsers
+                // and embed contexts (iframes without allowfullscreen,
+                // for example) reject it, and the sim still works
+                // fine in a non-fullscreen window.
+                try {
+                  const el = document.documentElement;
+                  if (el.requestFullscreen && !document.fullscreenElement) {
+                    el.requestFullscreen().catch(() => {});
+                  }
+                } catch {
+                  // ignore
+                }
+                onBegin();
+              }}
               style={{
                 background: 'var(--brand-yellow)',
                 color: 'var(--brand-navy)',
