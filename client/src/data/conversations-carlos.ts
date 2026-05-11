@@ -82,6 +82,80 @@ export const carlosR1: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Okay, hit me - what's the situation? Where am I leaving money on the table?",
+        options: [
+          {
+            id: 'carlos-r1-diag-headroom',
+            label: 'Frame it as plenty of headroom',
+            description: 'High energy: you have huge room to grow without naming a specific cause.',
+            playerDialogue:
+              "There's massive headroom here, Carlos. Barcelona's hot, your property looks great, and your numbers aren't anywhere near where they could be. The opportunity is enormous - we just need to push.",
+            styleMatch: { yellow: 1, red: 1, blue: -1, green: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'carlos-r1-diag-products-off',
+            label: 'Blame missing discount products',
+            description: 'Argue the issue is too few products active.',
+            playerDialogue:
+              "Where I think you're losing ground is product coverage - some of your competitors in Barcelona have more discount products active than you do. To capture more of the visibility on price-shopping searches, you'd want a broader stack.",
+            styleMatch: { yellow: 0, red: 1, blue: 0, green: -1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'carlos-r1-diag-country-rate-broken',
+            label: 'Pinpoint the misconfigured Country Rate',
+            description:
+              'Show that the stack is mostly right, but Country Rate is targeting the wrong markets and leaking discount.',
+            playerDialogue:
+              "Here's the interesting bit. Your tools are mostly switched on and most of them are firing well - Genius, Mobile, Last-Minute are all earning their keep. But your Country Rate is set up wrong: it's targeting markets that already convert well at full price, while missing the source markets where travellers are actively comparing you with cheaper options. So you're giving discounts to people who'd have booked anyway, and your visibility on price-shopping searches from your real source markets is taking a hit. Same Country Rate budget, wrong direction.",
+            styleMatch: { yellow: 1, red: 1, blue: 2, green: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'carlos-r1-diag-headroom',
+          responses: [
+            { trustThreshold: 'low', text: "Yeah yeah, headroom, opportunity, hot - everyone says that. What specifically is broken?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Love the energy, but I need a specific thing to fix, not just 'push harder'. What's the actual play?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Sure, headroom - I see it too. But where's the actual lever? Get specific.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -1,
+        },
+        {
+          optionId: 'carlos-r1-diag-products-off',
+          responses: [
+            { trustThreshold: 'low', text: "More products? I'm already running most of them. Are you sure that's the issue?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Hmm. I'd want to be sure 'more is better' is right - sometimes more just dilutes. Anything more specific in the data?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Could be - but I'm already pretty broad. What's the most specific thing you'd point at?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: 0,
+        },
+        {
+          optionId: 'carlos-r1-diag-country-rate-broken',
+          responses: [
+            { trustThreshold: 'low', text: "Wait - Country Rate is targeting the WRONG markets? I set that up myself. Show me which ones I've got wrong.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "So I've been giving discounts to people who'd have booked at full price? That's exactly the kind of waste I hate. Now you've got my full attention.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Are you serious? I've been throwing discount money at the wrong source markets this whole time? That's a great catch - tell me how to fix it.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 1 },
+          trustChange: 5,
+          nextPhasePrompt: "Okay you've got me - what do I need to switch on or fix? I want to be aggressive - give me the full package.",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -240,6 +314,80 @@ export const carlosR2: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Alright so what's the data really telling you? I want the headline AND the next move.",
+        options: [
+          {
+            id: 'carlos-r2-diag-broad-up',
+            label: 'Lead with broad uplift',
+            description: 'Highlight that things are moving in the right direction across the board.',
+            playerDialogue:
+              "Honestly the picture is great - visibility is up, bookings are up, you're tracking ahead of where you were a month ago. The Country Rate fix is doing exactly what we hoped.",
+            styleMatch: { yellow: 2, red: 0, blue: 0, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'carlos-r2-diag-push-discounts',
+            label: 'Say push discounts harder',
+            description: 'Read the momentum as a green light to deepen discount levels.',
+            playerDialogue:
+              "Numbers are moving and momentum is real. My read is now's the time to push the discount levels deeper across the stack - lock in market share while travellers are responding.",
+            styleMatch: { yellow: 1, red: 2, blue: -1, green: -1 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+          {
+            id: 'carlos-r2-diag-conversion-gap',
+            label: 'Spot the conversion gap and stack overlap',
+            description:
+              "Show that visibility is outpacing conversion, and the active stack is overlapping in segments - so more eyes aren't translating into more bookings.",
+            playerDialogue:
+              "Here's the more interesting bit. Visibility is up about 18 points since we fixed Country Rate, but conversion has only moved about 4 points - so more travellers are seeing Barceloneta Living but a chunk of them aren't booking. When I look at why, I see two things: your listing content hasn't been refreshed in months, and your discount products are overlapping in some segments - travellers are getting stacked discounts when one would have been enough. Same budget, more wasted euros, and lookers not converting.",
+            styleMatch: { yellow: 1, red: 1, blue: 2, green: 1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'carlos-r2-diag-broad-up',
+          responses: [
+            { trustThreshold: 'low', text: "Yeah, numbers up - but I want a NEXT move, not a 'pat yourself on the back'. What should I actually do?", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "Up is good - but you know I always want the next play. What's the specific lever?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Love the momentum, but I'm wired to find the next thing - where's it?", emotion: 'positive' },
+          ],
+          metricEffects: {},
+          trustChange: 1,
+        },
+        {
+          optionId: 'carlos-r2-diag-push-discounts',
+          responses: [
+            { trustThreshold: 'low', text: "Deeper discounts? Already doing a lot - I don't want to eat my margin on the back of momentum I'm just starting to see.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Tempting but risky. I want volume that pays, not volume that's mostly discount. Is there a smarter cut?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I love the energy, but my gut says there's a more precise move than 'discount harder'. Anything sharper?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -1,
+        },
+        {
+          optionId: 'carlos-r2-diag-conversion-gap',
+          responses: [
+            { trustThreshold: 'low', text: "Wait - more lookers but not enough bookers, AND I'm double-discounting? That's two problems at once. Show me the data.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now that's actually useful. Conversion lagging visibility - that's a clear signal. And overlapping discounts means I'm leaking margin even on the people I am converting. Got it.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes! That's the next problem in line - more eyes but not more bookings AND wasted discount. Two clean things to work on.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, conversion: 1 },
+          trustChange: 5,
+          nextPhasePrompt: "Alright, I'm ready. What's the recommendation? And make it good - I want to see a real jump in bookings this month.",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -393,6 +541,80 @@ export const carlosR3: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: 4,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Okay - so where exactly is the next gear? Show me where the opportunity actually sits.",
+        options: [
+          {
+            id: 'carlos-r3-diag-everywhere',
+            label: 'Frame the position as strong everywhere',
+            description: 'Suggest the property is already competitive across the calendar.',
+            playerDialogue:
+              "Honestly you're competitive across the calendar at this point. Peak, shoulder, off-peak - you're broadly tracking the right level. So the conversation today is more about how big you want to go than where the leakage is.",
+            styleMatch: { yellow: 1, red: 0, blue: 0, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'carlos-r3-diag-push-peak',
+            label: 'Argue peak season is the unlock',
+            description: 'Read peak as the biggest under-priced opportunity.',
+            playerDialogue:
+              "The biggest single lever is peak season. Demand in June through September is the strongest signal in your year and I think you're slightly under-priced there - lift peak and the rest takes care of itself.",
+            styleMatch: { yellow: 1, red: 2, blue: 0, green: -1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'carlos-r3-diag-off-peak-occupancy',
+            label: 'Pinpoint the off-peak occupancy gap',
+            description:
+              "Show that peak is strong but off-peak is running at 50% - the year-round revenue gap is concentrated in the quiet months, not peak.",
+            playerDialogue:
+              "Here's the cut that surprised me. Peak is strong - you're running at 80%-plus and your rate is right where it should be. Shoulder is okay. Off-peak though - November through March - you're running around 50% occupancy with rates that aren't pulling demand from the weekend city-break markets that ARE travelling in those months. The biggest unlock for your annual revenue isn't peak or visibility - it's the seasonal shape of your strategy.",
+            styleMatch: { yellow: 1, red: 1, blue: 2, green: 1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'carlos-r3-diag-everywhere',
+          responses: [
+            { trustThreshold: 'low', text: "Strong everywhere isn't a plan - it's a status report. I want the next step, not a reassurance.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I trust the read but I still want a specific 'here's where to push'. Take another pass.", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Appreciate that, but I'm not here for status quo. Tell me where the next gear is.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -1,
+        },
+        {
+          optionId: 'carlos-r3-diag-push-peak',
+          responses: [
+            { trustThreshold: 'low', text: "Lift peak? Maybe - but my peak is already pretty full. I'm not sure that's the biggest unlock.", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "Possible, but my gut says peak is already doing its job. If anything, off-peak is where I'm leaving the most on the table.", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "I'd push back - peak is great. The real story is the quiet months for me. Have another look.", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 1 },
+          trustChange: 0,
+        },
+        {
+          optionId: 'carlos-r3-diag-off-peak-occupancy',
+          responses: [
+            { trustThreshold: 'low', text: "Off-peak at 50% - yeah I know that's where I'm bleeding. So peak is fine and the answer is reshaping the calendar. That's a different conversation than 'more discounts'.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Now THAT is the cut that's been bugging me. Peak full, off-peak empty, and I've been treating them with the same playbook. Big unlock if we get this right.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes! Off-peak occupancy has been the thing I knew was lurking but hadn't quantified. If we can turn 50% into 65-70%, that's a year-changer. Let's go.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 2, revenue: 2 },
+          trustChange: 6,
+          nextPhasePrompt: "Okay, seasonal strategy - I'm into it. But I need a clear plan. What exactly should I be doing differently for peak versus off-peak?",
         },
       ],
     },
