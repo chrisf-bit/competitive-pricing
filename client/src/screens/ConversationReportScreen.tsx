@@ -26,9 +26,10 @@ export function ConversationReportScreen({
   onRetake,
 }: ConversationReportScreenProps) {
   const partner = partners.find((p) => p.persona.id === grade.partnerId);
-  const expectedPartner = grade.expectedPartnerId
-    ? partners.find((p) => p.persona.id === grade.expectedPartnerId)
-    : null;
+  // Deliberately not naming the expected partner here - revealing
+  // it gives the answer away. The criterion line below just signals
+  // 'you picked the wrong one' and the learner has to re-read the
+  // portfolio data on retake.
 
   const passed = grade.stars > 0;
   const headline = headlineFor(grade);
@@ -119,8 +120,8 @@ export function ConversationReportScreen({
             label="Picked the right partner"
             passed={grade.rightPartner}
             detail={
-              !grade.rightPartner && expectedPartner
-                ? `${expectedPartner.persona.name} was the partner who needed you most this round.`
+              !grade.rightPartner
+                ? 'A different partner needed you more this round. Look again at the data.'
                 : partner
                   ? `${partner.persona.name}.`
                   : null
