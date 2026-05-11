@@ -268,7 +268,10 @@ export default function App() {
             <DebriefScreen
               score={game.score}
               partners={state.partners}
+              roundStars={state.roundStars}
+              regime={state.learnerProfile.market?.parityRegime ?? null}
               onRestart={game.onRestart}
+              onPracticeRound={game.onStartPracticeRound}
             />
           )}
         </div>

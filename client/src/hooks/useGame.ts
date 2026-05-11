@@ -14,6 +14,7 @@ import {
   endConversation,
   advanceRound,
   resetRoundForRetake,
+  startPracticeRound,
   calculateScore,
 } from '../engine/gameEngine';
 import {
@@ -77,12 +78,24 @@ export function useGame() {
   }, []);
 
   /**
-   * Acknowledge the conversation report and continue. For passing rounds
-   * this advances to the next round (or debrief at game end). The grade
-   * itself is cleared so the report screen doesn't re-trigger.
+   * Acknowledge the conversation report and continue. In normal play
+   * this advances to the next round (or debrief at game end). In
+   * Practice Mode it routes straight back to the debrief so the
+   * learner can pick another round to chase a higher star score.
    */
   const onContinueAfterReport = useCallback(() => {
     setState((s) => {
+      if (s.isPracticeMode) {
+        return {
+          ...s,
+          screen: 'debrief',
+          gameComplete: true,
+          isPracticeMode: false,
+          lastConversationGrade: null,
+          conversationInProgress: null,
+          selectedPartnerId: null,
+        };
+      }
       const advanced = advanceRound(s);
       return {
         ...advanced,
@@ -91,6 +104,15 @@ export function useGame() {
         selectedPartnerId: null,
       };
     });
+  }, []);
+
+  /**
+   * From the Debrief screen, replay a specific round with partners
+   * reset to their baseline state. Used by Practice Mode to chase
+   * higher star scores on previously-played rounds.
+   */
+  const onStartPracticeRound = useCallback((round: number) => {
+    setState((s) => startPracticeRound(s, round));
   }, []);
 
   /**
@@ -242,6 +264,7 @@ export function useGame() {
     onAdvanceRound,
     onContinueAfterReport,
     onRetakeAfterReport,
+    onStartPracticeRound,
     onBackToPortfolio,
     onRestart,
     setLearnerMarket,

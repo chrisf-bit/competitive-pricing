@@ -408,6 +408,14 @@ export interface GameState {
    * conversation-report screen, cleared when the learner continues.
    */
   lastConversationGrade: LastConversationGrade | null;
+  /**
+   * True when the learner is replaying a single round from the Debrief
+   * screen's Practice Mode (after completing the sim once). Affects the
+   * post-conversation flow: instead of advancing the round, Continue
+   * routes back to the Debrief so they can pick another round to chase
+   * a higher star score.
+   */
+  isPracticeMode: boolean;
   conversationInProgress: {
     partnerId: string;
     phaseIndex: number;

@@ -6,16 +6,30 @@ import {
   AlertCircle,
   MessageSquare,
   RotateCcw,
+  Lock,
+  Play,
 } from 'lucide-react';
-import type { ScoreBreakdown, PartnerState } from '../types';
+import type { ScoreBreakdown, PartnerState, ParityRegime } from '../types';
 import { getRPDLevel } from '../engine/gameEngine';
 import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
 import { initialPartners } from '../data/partners';
+import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
+
+const PRACTICE_AVAILABLE_ROUNDS = [1, 2, 3] as const;
+const TOTAL_ROUNDS_DISPLAYED = 10;
 
 interface DebriefScreenProps {
   score: ScoreBreakdown;
   partners: PartnerState[];
+  /** Best stars earned per round across all attempts. */
+  roundStars: Record<number, 0 | 1 | 2 | 3>;
+  /**
+   * Learner's parity regime - used to look up the "right partner" name
+   * for each practice round card.
+   */
+  regime: ParityRegime | null;
   onRestart: () => void;
+  onPracticeRound: (round: number) => void;
 }
 
 const gradeConfig: Record<
@@ -31,9 +45,18 @@ const gradeConfig: Record<
 export function DebriefScreen({
   score,
   partners,
+  roundStars,
+  regime,
   onRestart,
+  onPracticeRound,
 }: DebriefScreenProps) {
   const gc = gradeConfig[score.overallGrade];
+
+  const totalStars = Object.values(roundStars).reduce<number>(
+    (sum, s) => sum + s,
+    0,
+  );
+  const maxStars = TOTAL_ROUNDS_DISPLAYED * 3;
 
   return (
     <div
@@ -422,6 +445,99 @@ export function DebriefScreen({
           </div>
         </div>
 
+        {/* Practice Mode - round-select grid */}
+        <div
+          style={{
+            background: 'var(--white)',
+            border: '1px solid var(--grey-100)',
+            borderRadius: 'var(--radius-md)',
+            padding: '20px 24px',
+            marginBottom: 24,
+            boxShadow: 'var(--shadow-sm)',
+            animation: 'fadeIn 0.4s ease 0.45s backwards',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginBottom: 4,
+            }}
+          >
+            <h3
+              style={{
+                margin: 0,
+                fontSize: 18,
+                fontWeight: 700,
+                color: 'var(--brand-navy)',
+              }}
+            >
+              Practice Mode
+            </h3>
+            <div
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: 'var(--brand-navy)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 6,
+              }}
+            >
+              <Star
+                size={14}
+                fill="var(--brand-yellow)"
+                color="var(--brand-yellow)"
+              />
+              {totalStars} / {maxStars}
+            </div>
+          </div>
+          <p
+            style={{
+              margin: '0 0 16px',
+              fontSize: 13,
+              color: 'var(--grey-400)',
+              lineHeight: 1.5,
+            }}
+          >
+            Replay any round to chase a higher star score. Partner state
+            resets to baseline for each practice attempt. Your stars only
+            ever go up.
+          </p>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(5, 1fr)',
+              gap: 10,
+            }}
+          >
+            {Array.from({ length: TOTAL_ROUNDS_DISPLAYED }).map((_, i) => {
+              const round = i + 1;
+              const stars = roundStars[round] ?? 0;
+              const available = (PRACTICE_AVAILABLE_ROUNDS as readonly number[]).includes(
+                round,
+              );
+              const targetPartnerId = regime
+                ? getCorrectPartnerForRound(regime, round)
+                : null;
+              const targetPartner = targetPartnerId
+                ? partners.find((p) => p.persona.id === targetPartnerId)
+                : null;
+              return (
+                <PracticeRoundCard
+                  key={round}
+                  round={round}
+                  stars={stars}
+                  available={available}
+                  targetPartnerName={targetPartner?.persona.name ?? null}
+                  onPlay={() => onPracticeRound(round)}
+                />
+              );
+            })}
+          </div>
+        </div>
+
         {/* Replay button */}
         <div
           style={{
@@ -452,6 +568,132 @@ export function DebriefScreen({
         </div>
       </div>
     </div>
+  );
+}
+
+function PracticeRoundCard({
+  round,
+  stars,
+  available,
+  targetPartnerName,
+  onPlay,
+}: {
+  round: number;
+  stars: 0 | 1 | 2 | 3;
+  available: boolean;
+  targetPartnerName: string | null;
+  onPlay: () => void;
+}) {
+  const isLocked = !available;
+  const isOptimal = stars === 3;
+  return (
+    <button
+      onClick={onPlay}
+      disabled={isLocked}
+      style={{
+        padding: '12px 10px',
+        background: isLocked
+          ? 'var(--grey-100)'
+          : isOptimal
+            ? 'rgba(254, 186, 2, 0.10)'
+            : 'var(--white)',
+        border: `1.5px solid ${
+          isLocked
+            ? 'var(--grey-200)'
+            : isOptimal
+              ? 'var(--brand-yellow)'
+              : 'var(--grey-100)'
+        }`,
+        borderRadius: 'var(--radius-sm)',
+        textAlign: 'left',
+        cursor: isLocked ? 'not-allowed' : 'pointer',
+        opacity: isLocked ? 0.6 : 1,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 6,
+        transition: 'border-color 0.15s ease, background 0.15s ease, transform 0.15s ease',
+      }}
+      onMouseEnter={(e) => {
+        if (!isLocked) {
+          e.currentTarget.style.transform = 'translateY(-1px)';
+          e.currentTarget.style.borderColor = 'var(--brand-yellow)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isLocked) {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.borderColor = isOptimal
+            ? 'var(--brand-yellow)'
+            : 'var(--grey-100)';
+        }
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <span
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            color: 'var(--grey-400)',
+          }}
+        >
+          Round {round}
+        </span>
+        {isLocked && <Lock size={11} color="var(--grey-400)" />}
+      </div>
+      <div style={{ display: 'flex', gap: 2 }}>
+        {[1, 2, 3].map((i) => {
+          const earned = i <= stars;
+          return (
+            <Star
+              key={i}
+              size={13}
+              strokeWidth={1.5}
+              fill={earned ? 'var(--brand-yellow)' : 'transparent'}
+              color={earned ? 'var(--brand-yellow)' : 'var(--grey-200)'}
+            />
+          );
+        })}
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          fontWeight: 600,
+          color: 'var(--brand-navy)',
+          lineHeight: 1.3,
+          minHeight: 26,
+        }}
+      >
+        {isLocked
+          ? 'Coming soon'
+          : targetPartnerName
+            ? targetPartnerName
+            : 'Available'}
+      </div>
+      {!isLocked && (
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 700,
+            color: 'var(--brand-navy)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 4,
+            opacity: 0.7,
+          }}
+        >
+          <Play size={9} fill="currentColor" />
+          {stars === 0 ? 'Retake' : stars < 3 ? 'Chase 3 stars' : 'Replay'}
+        </div>
+      )}
+    </button>
   );
 }
 

@@ -69,7 +69,40 @@ export function createInitialState(overrides?: {
     roundSummaries: [],
     roundStars: overrides?.roundStars ?? {},
     lastConversationGrade: null,
+    isPracticeMode: false,
     conversationInProgress: null,
+    gameComplete: false,
+  };
+}
+
+/**
+ * Drop into Practice Mode on a specific round. Used by the Debrief
+ * screen's round-grid replay. Partners are reset to their baseline
+ * state for the round so the practice attempt is a clean run, not a
+ * continuation of the learner's previous playthrough.
+ */
+export function startPracticeRound(state: GameState, round: number): GameState {
+  const partners = initialPartners.map((p) => ({
+    ...p,
+    metrics: { ...p.metrics },
+    metricHistory: [{ round: 0, metrics: { ...p.metrics } }],
+    discounts: p.discounts.map((d) => ({ ...d })),
+    conversationLog: [],
+    pendingActions: [],
+  }));
+
+  return {
+    ...state,
+    screen: 'portfolio',
+    currentRound: round,
+    actionsRemaining: ACTIONS_PER_ROUND,
+    actionsThisRound: [],
+    selectedPartnerId: null,
+    partners,
+    marketContext: marketContextByRound[round] ?? marketContextByRound[1],
+    conversationInProgress: null,
+    lastConversationGrade: null,
+    isPracticeMode: true,
     gameComplete: false,
   };
 }
