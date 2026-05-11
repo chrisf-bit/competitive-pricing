@@ -82,6 +82,80 @@ export const priyaR1: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Give me the specifics. What exactly is dragging RPD down and where's the evidence?",
+        options: [
+          {
+            id: 'priya-r1-diag-multi-issue',
+            label: 'Flag multiple issues broadly',
+            description: 'Note there are several things to address without quantifying each.',
+            playerDialogue:
+              "There are a few things going on here. Your discount setup needs work, you've got some price competitiveness issues, and there's room to optimise your Genius participation. I'd want to walk through each.",
+            styleMatch: { red: -1, blue: 0, yellow: 0, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'priya-r1-diag-parity-only',
+            label: 'Pin it on parity alone',
+            description: 'Name the rate parity breach but miss the misconfigured Mobile Rate.',
+            playerDialogue:
+              "The single biggest drag is rate parity. Two competing channels are showing you 8-12% cheaper than your rate here. Until that gap closes, no discount will perform properly - you're being undercut before the booking decision even starts.",
+            styleMatch: { red: 1, blue: 1, yellow: 0, green: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'priya-r1-diag-both-issues',
+            label: 'Name both issues with quantified evidence',
+            description:
+              'Identify the parity breach AND the misconfigured Mobile Rate, with specifics and likely impact for each.',
+            playerDialogue:
+              "Two distinct issues, compounding. One: rate parity breach - two competing channels are showing you 8-12% cheaper than your rate here, which is suppressing your visibility on every price-shopping search. Two: Mobile Rate is active but misconfigured, it's not applying to your main room types - so 70% of Mumbai search traffic, which is mobile, is seeing your higher unfiltered rate. Either one in isolation would be material; together they explain almost all of your RPD drag.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'priya-r1-diag-multi-issue',
+          responses: [
+            { trustThreshold: 'low', text: "'A few things' isn't a diagnosis - it's a hedge. Tell me the top two with numbers attached, or send me away.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I don't have time for 'a few things'. Rank them, quantify them, or this conversation is over.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I trust you've done the work, but I need a sharper read than 'a few things'. What are the top two specifically?", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -3,
+        },
+        {
+          optionId: 'priya-r1-diag-parity-only',
+          responses: [
+            { trustThreshold: 'low', text: "Parity at 8-12% is a real number. But is that genuinely the only issue? My RPD is at 30 - that's worse than a single parity breach would explain.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Parity is real and I'll act on it. But my gut says that's not the whole story given how far RPD has slipped. Anything else in the data?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Good, parity is half the answer. But the drag is bigger than 8-12% would explain on its own. What else have you found?", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 2 },
+          trustChange: 2,
+        },
+        {
+          optionId: 'priya-r1-diag-both-issues',
+          responses: [
+            { trustThreshold: 'low', text: "Two specific issues with quantified impact. Show me the evidence for each - the OTA price comparisons and the room types the Mobile Rate isn't applying to.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now THAT is a diagnosis I can act on. Parity at 8-12% plus 70% of traffic seeing the wrong rate - they're independent and compounding. That's exactly the kind of structured analysis I expected.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Two clean issues with specifics and impact. That's the calibre of analysis I needed. Let's get into the action plan.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 2 },
+          trustChange: 6,
+          nextPhasePrompt: "Right. So what specifically needs to change? Give me the actions, the expected impact, and the timeline.",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -240,6 +314,80 @@ export const priyaR2: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Break down the gap. What specifically explains the 15 points my Pune and Bangalore properties are ahead of me on?",
+        options: [
+          {
+            id: 'priya-r2-diag-mostly-recovered',
+            label: 'Frame it as mostly recovered',
+            description: 'Suggest the gap will close naturally with the changes already made.',
+            playerDialogue:
+              "The Mobile Rate fix and parity work are still flowing through. My read is the 15-point gap will close largely on its own over the next month or two as those changes compound.",
+            styleMatch: { red: -1, blue: 0, yellow: 0, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'priya-r2-diag-country-only',
+            label: 'Identify Country Rate gap only',
+            description: 'Name the Country Rate gap but miss the Genius level differential.',
+            playerDialogue:
+              "The biggest gap is Country Rate. Pune and Bangalore both run it at 12% targeting UK, US, Middle East and Southeast Asia - you have it switched off entirely. That alone could explain the lion's share of the international booking gap.",
+            styleMatch: { red: 1, blue: 1, yellow: 0, green: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'priya-r2-diag-genius-and-country',
+            label: 'Name Genius Level + Country Rate, with chain benchmark',
+            description:
+              'Identify both gaps with quantified Pune/Bangalore comparison and clean segmentation argument.',
+            playerDialogue:
+              "Two specific gaps versus your sister properties, both quantifiable. One: Genius programme - you're at Level 1, Pune and Bangalore are at Level 2, which unlocks priority placement and a badge that converts 22% better on repeat traveller traffic. Two: Country Rate - Pune runs 12% targeting UK, US, Middle East and Southeast Asia and sees a 20% international booking uplift; you have it switched off. Importantly, those two products target different traveller segments - Genius for repeat/loyalty, Country Rate for international new-search - so there's minimal overlap and minimal cannibalisation. They explain the bulk of the 15-point gap independently.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'priya-r2-diag-mostly-recovered',
+          responses: [
+            { trustThreshold: 'low', text: "Mostly recovered isn't a plan. I'm presenting to leadership next month - I need a strategy, not 'it'll sort itself out'.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I don't accept 'wait and see' for a 15-point gap. If there's a structural difference between my property and Pune, I want it named.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I trust you, but I'm not closing a 15-point gap by waiting. What's the structural difference between me and Pune?", emotion: 'cautious' },
+          ],
+          metricEffects: {},
+          trustChange: -3,
+        },
+        {
+          optionId: 'priya-r2-diag-country-only',
+          responses: [
+            { trustThreshold: 'low', text: "Country Rate is one lever. But you said earlier my Genius was underperforming too - is that not part of this gap?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Country Rate is half the answer. But 15 points is a lot for one product alone. What else is structurally different between me and my sister properties?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Right, Country Rate is real. But I'd want a second specific gap before I commit - 15 points is rarely one thing alone.", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 2 },
+          trustChange: 2,
+        },
+        {
+          optionId: 'priya-r2-diag-genius-and-country',
+          responses: [
+            { trustThreshold: 'low', text: "Two specific gaps, quantified, with chain benchmarks. Send me the Genius Level 2 ROI model and the Pune Country Rate breakdown before I commit. But this is the analysis I expected.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now that's a structured diagnosis. Two specific gaps, different segments, minimal overlap. That's what I'll take to leadership. Let's price each one.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Two clean gaps with measurable chain benchmarks. That's exactly the level of analysis I need to defend a 15-point catch-up plan. Let's execute.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 2 },
+          trustChange: 6,
+          nextPhasePrompt: "Get to the point. What specifically should I activate, what does it cost me in margin, and what's the projected return?",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -393,6 +541,80 @@ export const priyaR3: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: 6,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Before you pitch me a strategy - tell me where the residual gaps are. I won't take a long-term plan to leadership without that.",
+        options: [
+          {
+            id: 'priya-r3-diag-fully-recovered',
+            label: 'Frame the position as fully recovered',
+            description: 'Suggest there are no structural gaps left - now it is about scaling what works.',
+            playerDialogue:
+              "Honestly the structural gaps are closed. RPD is recovered, parity is monitored, your product stack is mostly aligned with the top of the chain. The conversation now is about scaling, not fixing.",
+            styleMatch: { red: -1, blue: 0, yellow: 0, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'priya-r3-diag-early-booker-only',
+            label: 'Name the Early Booker gap only',
+            description: 'Identify the missing Early Booker product but miss the strategic monitoring/seasonal gaps.',
+            playerDialogue:
+              "One gap remains: Early Booker. Pune runs it at 10% and books 35% of inventory more than 30 days out; you're at 18%. Activating it would lock in advance demand and reduce your reliance on last-minute discounting.",
+            styleMatch: { red: 1, blue: 2, yellow: 0, green: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'priya-r3-diag-three-structural-gaps',
+            label: 'Identify three structural gaps for sustained leadership',
+            description:
+              'Frame the analysis as three distinct gaps - advance demand, parity governance, and seasonal pricing - matching a leadership-deck structure.',
+            playerDialogue:
+              "Three distinct structural gaps remain, each independent. One: Early Booker is your only inactive product - Pune runs it at 10% and locks in 35% of inventory more than 30 days out versus your 18%, which is also why their RPD is more predictable than yours. Two: the parity fix worked, but the breach happened once and could happen again - there's no automated monitoring in place, so a future drift wouldn't be caught for weeks. Three: your discount stack is set the same year-round, but Mumbai demand is highly seasonal - you're under-priced in peak and over-discounted in shoulder. Each gap maps to a pillar for the leadership deck.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'priya-r3-diag-fully-recovered',
+          responses: [
+            { trustThreshold: 'low', text: "Fully recovered? I'm presenting to leadership next month - 'recovered' doesn't justify a 12-month plan. Find the gaps.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I don't believe there are zero structural gaps. There always are. If you can't find them, my revenue director will - and that's how I lose credibility.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I trust we've done good work, but 'no gaps' isn't a 12-month strategy. There has to be more underneath. Look harder.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -3,
+        },
+        {
+          optionId: 'priya-r3-diag-early-booker-only',
+          responses: [
+            { trustThreshold: 'low', text: "Early Booker is fair, but for a leadership deck that's a single bullet point. What's the structural story?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Early Booker is one pillar. But I need three or four for a defensible 12-month strategy. What else?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Good - Early Booker is one. Give me the second and third structural pillar. Single-product plans don't survive leadership scrutiny.", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 2 },
+          trustChange: 2,
+        },
+        {
+          optionId: 'priya-r3-diag-three-structural-gaps',
+          responses: [
+            { trustThreshold: 'low', text: "Three structural gaps - advance demand, parity governance, seasonal pricing. That maps to a real strategy. Send me the data behind each before I commit, but this is the level I need.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now that's a leadership-deck-ready diagnosis. Three independent, defensible pillars. That's what I'll take to the presentation. Build the strategy around this.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Three structural pillars, each measurable, each independent. That's exactly the framework I need for the chain leadership presentation. Let's execute.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 2 },
+          trustChange: 7,
+          nextPhasePrompt: "Give me the long-term play. What should I be doing over the next six to twelve months to sustain this and lead the chain? I need specifics, not generalities.",
         },
       ],
     },
