@@ -362,7 +362,7 @@ export function PortfolioScreen({
                 </div>
                 <span>
                   {partner.lastContactedRound
-                    ? `Contacted R${partner.lastContactedRound}`
+                    ? `Contacted Round ${partner.lastContactedRound}`
                     : 'No contact yet'}
                 </span>
               </div>
