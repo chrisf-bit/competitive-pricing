@@ -386,6 +386,13 @@ export interface GameState {
    * returns the learner to the summary rather than rolling forward.
    */
   level0ReturnTo: GameScreen | null;
+  /**
+   * When non-null, the next Level 0 activity render only includes the
+   * items listed here. Used by the Clearance Summary retry path so
+   * learners only redo the questions they got wrong, not the full
+   * activity from scratch. Cleared when the activity completes.
+   */
+  level0RetryItemIds: string[] | null;
   /** Whether the partner-sim tutorial has been auto-shown to the learner already. */
   tutorialShown: boolean;
   currentRound: number;         // 1, 2, 3

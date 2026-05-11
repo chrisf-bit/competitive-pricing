@@ -127,6 +127,7 @@ export default function App() {
             <ClearanceShell currentScreen={state.screen}>
               <GameMasterChatScreen
                 playerName={state.learnerProfile.playerName}
+                retryItemIds={state.level0RetryItemIds}
                 onComplete={(results) =>
                   game.finishLevel0Activity('l0-dashboard-hotspot', results)
                 }
@@ -136,6 +137,7 @@ export default function App() {
           {state.screen === 'l0-dashboard-hotspot' && (
             <ClearanceShell currentScreen={state.screen}>
               <DashboardHotspotScreen
+                retryItemIds={state.level0RetryItemIds}
                 onComplete={(results) =>
                   game.finishLevel0Activity('l0-email-audit', results)
                 }
@@ -145,6 +147,7 @@ export default function App() {
           {state.screen === 'l0-email-audit' && (
             <ClearanceShell currentScreen={state.screen}>
               <EmailAuditScreen
+                retryItemIds={state.level0RetryItemIds}
                 onComplete={(results) =>
                   game.finishLevel0Activity('l0-issue-tree-reveal', results)
                 }

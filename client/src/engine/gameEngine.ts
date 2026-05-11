@@ -59,6 +59,7 @@ export function createInitialState(overrides?: {
     },
     currentDiagnosis: null,
     level0ReturnTo: null,
+    level0RetryItemIds: null,
     tutorialShown: false,
     currentRound: 1,
     actionsRemaining: ACTIONS_PER_ROUND,

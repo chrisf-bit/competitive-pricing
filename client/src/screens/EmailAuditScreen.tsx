@@ -7,6 +7,12 @@ import { LaptopFrame } from '../components/DeviceFrame';
 
 interface EmailAuditScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
+  /**
+   * When set, restricts the activity to only the listed itemIds. Used
+   * by the Clearance Summary retry path so a learner only redoes the
+   * phrases they got wrong.
+   */
+  retryItemIds?: string[] | null;
 }
 
 type PhraseJudgement = {
@@ -15,24 +21,35 @@ type PhraseJudgement = {
   isCorrect: boolean;
 };
 
-export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
+export function EmailAuditScreen({ onComplete, retryItemIds }: EmailAuditScreenProps) {
   const [activePhraseId, setActivePhraseId] = useState<string | null>(null);
   const [judgements, setJudgements] = useState<Record<string, PhraseJudgement>>({});
 
-  const totalPhrases = emailAudit.phrases.length;
+  // On retry, narrow the phrase list to just the ones the learner got
+  // wrong last time. retryItemIds use the 'email-audit-{phraseId}'
+  // form so we strip the prefix to match phrase ids.
+  const phrases = useMemo(() => {
+    if (!retryItemIds || retryItemIds.length === 0) return emailAudit.phrases;
+    const failedPhraseIds = new Set(
+      retryItemIds.map((id) => id.replace(/^email-audit-/, '')),
+    );
+    return emailAudit.phrases.filter((p) => failedPhraseIds.has(p.id));
+  }, [retryItemIds]);
+
+  const totalPhrases = phrases.length;
   const reviewedCount = Object.keys(judgements).length;
   const correctCount = Object.values(judgements).filter((j) => j.isCorrect).length;
   const allReviewed = reviewedCount === totalPhrases;
 
   const activePhrase = useMemo(
-    () => emailAudit.phrases.find((p) => p.id === activePhraseId) ?? null,
-    [activePhraseId],
+    () => phrases.find((p) => p.id === activePhraseId) ?? null,
+    [activePhraseId, phrases],
   );
 
   const activeJudgement = activePhrase ? judgements[activePhrase.id] ?? null : null;
 
   function handlePick(phraseId: string, pickedSafe: boolean) {
-    const phrase = emailAudit.phrases.find((p) => p.id === phraseId);
+    const phrase = phrases.find((p) => p.id === phraseId);
     if (!phrase) return;
     const isCorrect = pickedSafe === phrase.isSafe;
     setJudgements((prev) => ({
@@ -155,6 +172,7 @@ export function EmailAuditScreen({ onComplete }: EmailAuditScreenProps) {
             activePhraseId={activePhraseId}
             judgements={judgements}
             onPickPhrase={setActivePhraseId}
+            phrases={phrases}
           />
         </div>
 
@@ -235,10 +253,12 @@ function EmailCard({
   activePhraseId,
   judgements,
   onPickPhrase,
+  phrases,
 }: {
   activePhraseId: string | null;
   judgements: Record<string, PhraseJudgement>;
   onPickPhrase: (id: string) => void;
+  phrases: EmailPhrase[];
 }) {
   return (
     <motion.div
@@ -326,8 +346,14 @@ function EmailCard({
           if (typeof token === 'string') {
             return <span key={i}>{token}</span>;
           }
-          const phrase = emailAudit.phrases.find((p) => p.id === token.phraseId);
-          if (!phrase) return null;
+          const phrase = phrases.find((p) => p.id === token.phraseId);
+          // If the phrase isn't in the active set (eg. retry mode
+          // filtered it out), render the original text inline as
+          // plain text so the email still reads naturally.
+          if (!phrase) {
+            const orig = emailAudit.phrases.find((p) => p.id === token.phraseId);
+            return orig ? <span key={i}>{orig.text}</span> : null;
+          }
           const j = judgements[phrase.id];
           const active = activePhraseId === phrase.id;
           return (

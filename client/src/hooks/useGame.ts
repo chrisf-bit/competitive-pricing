@@ -199,6 +199,7 @@ export function useGame() {
           ...s,
           screen: target,
           level0ReturnTo: null,
+          level0RetryItemIds: null,
           level0Progress: {
             ...s.level0Progress,
             knowledgeCheckResults: [
@@ -226,27 +227,39 @@ export function useGame() {
   }, []);
 
   /**
-   * Mark an activity for retry from the Clearance Summary: clears any
-   * stored results matching the given prefix, sets the return-to to the
-   * summary, and navigates the learner to the activity. When they finish
-   * the activity, finishLevel0Activity navigates them back to the summary.
+   * Mark an activity for retry from the Clearance Summary. Identifies
+   * which items the learner got wrong (from existing results), drops
+   * those wrong results so the new attempt can replace them, and
+   * stashes the failed itemIds in level0RetryItemIds so the activity
+   * screen can filter itself to only those questions. Correct results
+   * stay in place - they don't need redoing. Navigates to the activity
+   * with a return-to back to the summary on completion.
    */
   const requestLevel0Retry = useCallback(
     (
       activityScreen: GameState['screen'],
       itemMatcher: (itemId: string) => boolean,
     ) => {
-      setState((s) => ({
-        ...s,
-        screen: activityScreen,
-        level0ReturnTo: 'l0-clearance-summary',
-        level0Progress: {
-          ...s.level0Progress,
-          knowledgeCheckResults: s.level0Progress.knowledgeCheckResults.filter(
-            (r) => !itemMatcher(r.itemId),
-          ),
-        },
-      }));
+      setState((s) => {
+        const activityResults = s.level0Progress.knowledgeCheckResults.filter(
+          (r) => itemMatcher(r.itemId),
+        );
+        const failedItemIds = activityResults
+          .filter((r) => !r.correct)
+          .map((r) => r.itemId);
+        return {
+          ...s,
+          screen: activityScreen,
+          level0ReturnTo: 'l0-clearance-summary',
+          level0RetryItemIds: failedItemIds.length > 0 ? failedItemIds : null,
+          level0Progress: {
+            ...s.level0Progress,
+            knowledgeCheckResults: s.level0Progress.knowledgeCheckResults.filter(
+              (r) => !(itemMatcher(r.itemId) && !r.correct),
+            ),
+          },
+        };
+      });
     },
     [],
   );

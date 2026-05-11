@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight,
@@ -27,6 +27,12 @@ import type { KnowledgeCheckResult } from '../types';
  */
 interface DashboardHotspotScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
+  /**
+   * When set, restricts the activity to only the listed itemIds. Used
+   * by the Clearance Summary retry path so a learner only redoes the
+   * challenges they got wrong last time.
+   */
+  retryItemIds?: string[] | null;
 }
 
 interface ChallengeResult {
@@ -35,13 +41,25 @@ interface ChallengeResult {
   isCorrect: boolean;
 }
 
-export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenProps) {
+export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHotspotScreenProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState<ChallengeResult[]>([]);
   const [pickedId, setPickedId] = useState<string | null>(null);
 
-  const challenge: DataInsightsChallenge | undefined = dataInsightsChallenges[currentIndex];
-  const isDone = currentIndex >= dataInsightsChallenges.length;
+  // On retry, filter to just the challenges the learner got wrong.
+  // itemIds are 'data-insights-{challengeId}' so we strip the prefix.
+  const challenges = useMemo(() => {
+    if (!retryItemIds || retryItemIds.length === 0) {
+      return dataInsightsChallenges;
+    }
+    const failedIds = new Set(
+      retryItemIds.map((id) => id.replace(/^data-insights-/, '')),
+    );
+    return dataInsightsChallenges.filter((c) => failedIds.has(c.id));
+  }, [retryItemIds]);
+
+  const challenge: DataInsightsChallenge | undefined = challenges[currentIndex];
+  const isDone = currentIndex >= challenges.length;
   const result = pickedId ? results.find((r) => r.challengeId === challenge?.id) : null;
   const correctCount = results.filter((r) => r.isCorrect).length;
 
@@ -98,7 +116,7 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
           }}
         >
           <ProgressDots
-            total={dataInsightsChallenges.length}
+            total={challenges.length}
             current={currentIndex}
             results={results}
           />
@@ -112,8 +130,8 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
             }}
           >
             {isDone
-              ? `${correctCount} of ${dataInsightsChallenges.length} correct`
-              : `Question ${currentIndex + 1} of ${dataInsightsChallenges.length}`}
+              ? `${correctCount} of ${challenges.length} correct`
+              : `Question ${currentIndex + 1} of ${challenges.length}`}
           </span>
         </div>
         <AnimatePresence mode="wait">
@@ -226,7 +244,7 @@ export function DashboardHotspotScreen({ onComplete }: DashboardHotspotScreenPro
                   e.currentTarget.style.background = 'var(--brand-yellow)';
                 }}
               >
-                {currentIndex < dataInsightsChallenges.length - 1 ? 'Next' : 'See summary'}
+                {currentIndex < challenges.length - 1 ? 'Next' : 'See summary'}
                 <ChevronRight size={16} />
               </button>
             </motion.div>

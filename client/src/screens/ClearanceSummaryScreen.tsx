@@ -570,37 +570,14 @@ function ActivityCard({
                     </div>
                     <div
                       style={{
-                        fontSize: 11,
-                        fontWeight: 700,
-                        color: 'var(--success)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        marginBottom: 4,
+                        fontSize: 11.5,
+                        color: 'rgba(255,255,255,0.55)',
+                        fontStyle: 'italic',
+                        lineHeight: 1.45,
                       }}
                     >
-                      Right answer: {detail.correctText}
+                      You marked this incorrectly. Hit Retry to have another go.
                     </div>
-                    <div
-                      style={{
-                        fontSize: 12.5,
-                        color: 'rgba(255,255,255,0.78)',
-                        lineHeight: 1.5,
-                      }}
-                    >
-                      {detail.rationale}
-                    </div>
-                    {detail.source && (
-                      <div
-                        style={{
-                          fontSize: 10.5,
-                          color: 'rgba(255,255,255,0.4)',
-                          fontStyle: 'italic',
-                          marginTop: 6,
-                        }}
-                      >
-                        Source: {detail.source}
-                      </div>
-                    )}
                   </div>
                 );
               })}

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Check, X } from 'lucide-react';
 import {
@@ -15,6 +15,13 @@ interface GameMasterChatScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
   /** Player's first name. Used to personalise Alex's intro line. */
   playerName: string;
+  /**
+   * When set, restricts the chat to only the question beats with these
+   * itemIds, wrapped in a brief retry intro. Used by the Clearance
+   * Summary retry path so a learner only redoes the questions they got
+   * wrong, not the whole five-question chat.
+   */
+  retryItemIds?: string[] | null;
 }
 
 /** Replace simple {{name}} tokens in script text. */
@@ -40,13 +47,41 @@ interface ScriptCursor {
 const TYPING_DELAY_MS = 750;
 const MESSAGE_PAUSE_MS = 350;
 
-export function GameMasterChatScreen({ onComplete, playerName }: GameMasterChatScreenProps) {
+export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: GameMasterChatScreenProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [cursor, setCursor] = useState<ScriptCursor>({ beatIndex: 0, phase: 'awaiting' });
   const [isTyping, setIsTyping] = useState(false);
   const [results, setResults] = useState<KnowledgeCheckResult[]>([]);
   const [done, setDone] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // On retry, build a short focused script: a brief intro from Alex
+  // followed by just the question beats the learner got wrong. The
+  // surrounding message beats from the full chat are skipped because
+  // they reference questions that aren't being revisited.
+  const script: GMBeat[] = useMemo(() => {
+    if (!retryItemIds || retryItemIds.length === 0) return gmScript;
+    const failedIds = new Set(retryItemIds);
+    const questionBeats = gmScript.filter(
+      (beat): beat is Extract<GMBeat, { type: 'question' }> =>
+        beat.type === 'question' && failedIds.has(beat.question.itemId),
+    );
+    const intro: GMBeat[] =
+      questionBeats.length > 1
+        ? [
+            {
+              type: 'message',
+              text: `Right - let's take another run at a couple I want to make sure you've got. ${questionBeats.length} quick ones.`,
+            },
+          ]
+        : [
+            {
+              type: 'message',
+              text: "Right - one more I want to double-check. Quick one.",
+            },
+          ];
+    return [...intro, ...questionBeats];
+  }, [retryItemIds]);
 
   // Auto-scroll on every change
   useEffect(() => {
@@ -55,7 +90,7 @@ export function GameMasterChatScreen({ onComplete, playerName }: GameMasterChatS
 
   // Drive the script forward whenever cursor changes.
   useEffect(() => {
-    const beat = gmScript[cursor.beatIndex];
+    const beat = script[cursor.beatIndex];
     if (!beat) {
       // Past the last beat - mark done.
       setDone(true);
@@ -149,7 +184,7 @@ export function GameMasterChatScreen({ onComplete, playerName }: GameMasterChatS
   }
 
   // Determine current options to display (only when on a question beat in 'awaiting' phase)
-  const currentBeat: GMBeat | undefined = gmScript[cursor.beatIndex];
+  const currentBeat: GMBeat | undefined = script[cursor.beatIndex];
   const showOptions =
     !done &&
     !isTyping &&
