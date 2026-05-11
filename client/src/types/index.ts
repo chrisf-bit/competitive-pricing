@@ -221,9 +221,9 @@ export interface PendingAction {
 
 export interface ConversationRecord {
   round: number;
-  openingChoice: string;
-  recommendationChoice: string;
-  objectionChoice: string;
+  hookChoice: string;
+  diagnosisChoice: string;
+  pitchChoice: string;
   partnerReaction: string;
   trustChange: number;
   outcome: string;
@@ -231,8 +231,20 @@ export interface ConversationRecord {
 
 // ── Conversation Tree Types ──
 
+/**
+ * Conversation phases mirror the back half of Alex's diagnostic flow
+ * from the Issue Tree reveal: Hook (how you open), Diagnosis (what you
+ * share about the data and likely cause), Pitch (what you recommend).
+ * The earlier Trigger/Intent/Root Cause/Metric phases happen pre-call
+ * on the portfolio + partner-detail screens, not inside the call.
+ *
+ * Objection handling was removed from the conversation in May 2026 -
+ * the Issue Tree reveal still teaches learners to *anticipate*
+ * objections, but we don't score the response to them until SME-
+ * validated objection-handling content is available.
+ */
 export interface ConversationPhase {
-  id: 'opening' | 'recommendation' | 'objection';
+  id: 'hook' | 'diagnosis' | 'pitch';
   label: string;
   partnerPrompt: string;       // what the partner says to set up choices
   options: ConversationOption[];

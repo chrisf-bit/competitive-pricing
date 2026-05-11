@@ -10,8 +10,8 @@ export const carlosR1: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hey! Great timing - I was just looking at my numbers and thinking about calling you. Listen, I've got big plans for Barceloneta Living this year. Bookings need to go through the roof. What have you got for me?",
         options: [
@@ -82,8 +82,8 @@ export const carlosR1: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Okay I'm listening. What do I need to switch on? I want to be aggressive - give me the full package.",
         options: [
@@ -154,79 +154,7 @@ export const carlosR1: ConversationTree = {
           nextPhasePrompt: "Love the big thinking. But wait - what if doing both at once backfires? How would we even know what's working?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "I hear you, but here's my worry - I don't want to slow down. My competitors are growing right now and I feel like every day I wait, I'm losing bookings. Can't we just go faster?",
-        options: [
-          {
-            id: 'carlos-r1-obj-momentum',
-            label: 'Channel his urgency',
-            description: 'Validate his pace but redirect the energy toward the right actions.',
-            playerDialogue:
-              "I'm with you on speed, Carlos - momentum matters. But here's the thing: moving fast on the wrong configuration is actually slower than getting it right first. Fix the Country Rate today, activate Early Booker tomorrow, and you'll be outpacing competitors by next week. That's fast and smart.",
-            styleMatch: { yellow: 2, red: 1, blue: 1, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'carlos-r1-obj-competitor',
-            label: 'Show what competitors are doing',
-            description: 'Reference similar properties that took a structured approach and won.',
-            playerDialogue:
-              "You know what the fastest-growing city apartment complexes in Barcelona did? They didn't just switch everything on - they fixed their foundations first. The top performer in your comp set corrected their Country Rate targeting, added Early Booker, and saw a 20% booking uplift in three weeks. Structured speed, not scattered speed.",
-            styleMatch: { yellow: 2, red: 1, blue: 1, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'carlos-r1-obj-letloose',
-            label: 'Agree and go all in',
-            description: 'Match his impatience and agree to activate everything immediately.',
-            playerDialogue:
-              "You know what, you're right - let's not overthink this. I'll help you fix the Country Rate, activate Early Booker, and we can look at pushing your other discounts harder too. Let's just get everything optimised and running hot.",
-            styleMatch: { yellow: 1, red: 2, blue: -2, green: -1 },
-            assertiveness: 3,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'carlos-r1-obj-momentum',
-          responses: [
-            { trustThreshold: 'low', text: "Fast and smart... okay, I can live with that. But if I don't see movement in a week, we're changing the plan.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Alright, I like that - fast and smart. Fix it today, activate tomorrow, results by next week. Deal. Let's do it.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Ha! You sound like me. Okay, I trust your judgement on the sequencing. Let's execute - send me the steps.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 3, conversion: 2, revenue: 2 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'carlos-r1-obj-competitor',
-          responses: [
-            { trustThreshold: 'low', text: "Structured speed... fine. But which comp set are you looking at? I want to see the actual data, not just the story.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "20% in three weeks? Okay, that's the kind of result I'm after. If that's the playbook, let's follow it. What's step one?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's brilliant. I want to be that top performer. Let's copy what works and do it better. Walk me through the plan.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2, revenue: 1 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'carlos-r1-obj-letloose',
-          responses: [
-            { trustThreshold: 'low', text: "Wait - I thought you were supposed to help me be strategic? If we just switch everything on randomly, how do we know what's working?", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I appreciate you matching my energy, but... actually, maybe I need someone to tell me when to slow down. What's the right approach?", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "Okay let's - actually, hold on. Last time I went all-in without a plan I regretted it. Maybe we should be a bit more targeted?", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 2, visibility: 1 },
-          trustChange: -4,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -240,8 +168,8 @@ export const carlosR2: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hey! Okay so I've been watching the numbers since we last spoke and things are moving. But I want more. What's next - how do we push even harder?",
         options: [
@@ -312,8 +240,8 @@ export const carlosR2: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Alright, I'm ready. What's the recommendation? And make it good - I want to see a real jump in bookings this month.",
         options: [
@@ -384,79 +312,7 @@ export const carlosR2: ConversationTree = {
           nextPhasePrompt: "I want volume but I also want to make money. How do I get both?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "Look, I get the strategy. But I keep seeing other properties doing crazy promotions and getting loads of bookings. Am I being too cautious? Maybe I should just go all-out with promotions.",
-        options: [
-          {
-            id: 'carlos-r2-obj-reframe',
-            label: 'Reframe the competition',
-            description: 'Help him see that not all promotions are profitable growth.',
-            playerDialogue:
-              "I hear you, and it's tempting to match every promotion out there. But here's what I see behind the scenes - a lot of those properties running crazy deals are actually losing money per booking. They get volume but not profit. Barceloneta Living is in a position to grow bookings AND maintain healthy margins. That's the real competitive advantage.",
-            styleMatch: { yellow: 1, red: 1, blue: 2, green: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'carlos-r2-obj-excitement',
-            label: 'Redirect his excitement',
-            description: 'Channel his competitive energy toward the actions that will actually deliver.',
-            playerDialogue:
-              "I love that competitive fire, Carlos. But think about it this way - instead of copying what everyone else is doing, what if you're the one they're trying to copy? Optimised targeting, strong conversion, smart discounts - that's how the best properties in Barcelona operate. That's the league you want to be in.",
-            styleMatch: { yellow: 2, red: 1, blue: 0, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'carlos-r2-obj-agree',
-            label: 'Agree to go all-out',
-            description: 'Support his desire to run heavy promotions.',
-            playerDialogue:
-              "You know what, maybe you're right. If the market is aggressive, you need to be aggressive. Let's set up a big promotional push - deep discounts, flash deals, the works. We'll worry about margins later.",
-            styleMatch: { yellow: 0, red: 1, blue: -2, green: -2 },
-            assertiveness: 3,
-            compliance: 'risky',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'carlos-r2-obj-reframe',
-          responses: [
-            { trustThreshold: 'low', text: "Losing money per booking? Really? I guess I never thought about what's behind those big promotions. Okay, let's stick to the plan.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Okay, that's a really good perspective. Volume without profit isn't growth, it's just noise. Let's focus on profitable growth.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "You're right. I get caught up in the FOMO sometimes. Profitable growth - that's the goal. I trust your approach. Let's keep going.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, conversion: 3, revenue: 3 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'carlos-r2-obj-excitement',
-          responses: [
-            { trustThreshold: 'low', text: "Be the one they copy... I like the sound of that. But talk is cheap - show me that this approach actually delivers.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Ha! I like that mindset. Lead, don't follow. Okay, you've convinced me. Let's build this the right way.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's exactly how I want to position Barceloneta Living. Top tier. Let's execute this plan - I'm all in.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, conversion: 2, revenue: 2 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'carlos-r2-obj-agree',
-          responses: [
-            { trustThreshold: 'low', text: "'Worry about margins later'? That doesn't sound like good advice. I thought you were supposed to help me be strategic.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "Actually... I was hoping you'd push back on me there. If my advisor is saying go all-out, maybe I should be worried. What's the smarter play?", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "Hmm, you agreed too fast. Last time someone agreed with everything I said, it didn't end well. Give me your honest recommendation.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1, visibility: 1 },
-          trustChange: -5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -470,8 +326,8 @@ export const carlosR3: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hey! So I've been thinking big picture - what does Barceloneta Living look like in six months? A year? I don't just want to be doing well, I want to be dominating the Barcelona city apartment market. Where do we go from here?",
         options: [
@@ -542,8 +398,8 @@ export const carlosR3: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Okay, seasonal strategy - I'm into it. But I need a clear plan. What exactly should I be doing differently for peak versus off-peak?",
         options: [
@@ -614,78 +470,6 @@ export const carlosR3: ConversationTree = {
           nextPhasePrompt: "The premium approach is exciting but I'm worried about scaring off my regular bookers. How do I balance premium pricing with keeping loyal guests?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "This all sounds great as a plan. But honestly? I'm worried I'll set all this up and then forget to adjust it. I tend to get excited, do the setup, and then move on to the next thing. How do I make this actually stick?",
-        options: [
-          {
-            id: 'carlos-r3-obj-system',
-            label: 'Build a system for him',
-            description: 'Propose a simple calendar-based system so he doesn\'t have to remember.',
-            playerDialogue:
-              "That's really honest, Carlos, and it's a smart thing to flag. Here's what I'd suggest - we set up a pricing calendar right now with the seasonal changes pre-planned. Set reminders for the transition dates. That way you're not relying on memory - the system does the thinking. All you have to do is check in once a month and tweak if needed.",
-            styleMatch: { yellow: 2, red: 0, blue: 1, green: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'carlos-r3-obj-accountability',
-            label: 'Offer to be his accountability partner',
-            description: 'Commit to regular check-ins to keep the strategy on track.',
-            playerDialogue:
-              "I get it - you're an ideas person, not a maintenance person. So let's make this easy: I'll schedule quarterly check-ins with you. Each call, we review the seasonal metrics, adjust what needs adjusting, and plan the next quarter. You bring the energy and vision, I'll bring the structure and follow-through. Deal?",
-            styleMatch: { yellow: 2, red: 1, blue: 0, green: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'carlos-r3-obj-dismiss',
-            label: 'Downplay the concern',
-            description: 'Tell him it\'s not that complicated and he\'ll be fine.',
-            playerDialogue:
-              "Don't overthink it, Carlos. It's really not that complicated - set it up once and let it run. You've got more important things to worry about. The tools do most of the work for you.",
-            styleMatch: { yellow: -1, red: 0, blue: -1, green: -2 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'carlos-r3-obj-system',
-          responses: [
-            { trustThreshold: 'low', text: "A pricing calendar with reminders... that could work. But I've tried calendars before and ignored them. Can you make it really simple?", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Yes! That's exactly what I need - a system that does the remembering for me. Let's set it up now while I'm motivated.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect. You know me well - if the system is simple and automatic, I'll actually use it. Let's build it right now. I'm excited about this.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 3, revenue: 4 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'carlos-r3-obj-accountability',
-          responses: [
-            { trustThreshold: 'low', text: "Quarterly check-ins... okay, but will you actually follow through? I've had account managers promise that before.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "'I bring the energy, you bring the structure' - ha! That's a perfect partnership. Yes, let's do it. Book the first one now.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's exactly what I need. Someone who actually cares about my results and holds me to the plan. You're the best account manager I've had. Let's make this happen.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, visibility: 2, conversion: 2, revenue: 3 },
-          trustChange: 7,
-        },
-        {
-          optionId: 'carlos-r3-obj-dismiss',
-          responses: [
-            { trustThreshold: 'low', text: "Not complicated? That's what people say when they haven't thought it through. I was being honest about a real concern and you brushed it off.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "Don't downplay this - I know myself. If I don't have a system, it won't happen. I need a real solution, not 'don't worry about it'.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "Come on, I opened up about a weakness and you dismissed it. I expected better from you. Let's be real about how to make this sustainable.", emotion: 'cautious' },
-          ],
-          metricEffects: { revenue: 1 },
-          trustChange: -6,
-        },
-      ],
-    },
+    }
   ],
 };

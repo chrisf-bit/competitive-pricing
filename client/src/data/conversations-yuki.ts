@@ -11,8 +11,8 @@ export const yukiR1: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Good morning. Thank you for calling. I have set aside some time for our conversation. How may I help you today?",
         options: [
@@ -83,8 +83,8 @@ export const yukiR1: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "I appreciate your thoughts. But I should be clear - I am not interested in discounting. Our rates reflect the quality of the experience we provide. What would you suggest?",
         options: [
@@ -155,79 +155,7 @@ export const yukiR1: ConversationTree = {
           nextPhasePrompt: "I appreciate your approach. But if you do have a specific recommendation, I would like to hear it - as long as it respects what we are trying to build here.",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "My concern is this: once we begin offering discounts, it changes the perception of our property. Our reputation has been built on consistency and quality. How do I protect that?",
-        options: [
-          {
-            id: 'yuki-r1-objection-casestudy',
-            label: 'Share a luxury case study',
-            description: 'Reference another premium property that maintained its brand while using Genius.',
-            playerDialogue:
-              "That is a very valid concern, Yuki. I worked with a boutique heritage hotel in Kyoto - similar size, similar positioning to yours. They had exactly the same worry. After joining the Genius Programme, they found that their average review score actually increased, because Genius members tend to be more respectful, experienced travellers. Their brand perception strengthened, not weakened. I can share the details with you if that would be helpful.",
-            styleMatch: { green: 2, blue: 1, red: 0, yellow: 1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'yuki-r1-objection-control',
-            label: 'Emphasise her control',
-            description: 'Highlight that she can adjust or remove the programme at any time.',
-            playerDialogue:
-              "I understand completely. The important thing to know is that you remain in full control. You can set the discount level, choose which room types to include, and deactivate the programme at any point if it does not feel right. This is not a permanent commitment - it is an experiment that you can shape to fit your standards.",
-            styleMatch: { green: 2, blue: 2, red: 0, yellow: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'yuki-r1-objection-urgency',
-            label: 'Highlight the competitive gap',
-            description: 'Point out that competitor luxury properties are already using these tools.',
-            playerDialogue:
-              "I hear your concern, Yuki, but I should be transparent - several comparable luxury properties in Kyoto are already using the Genius Programme. Each week that passes, they are building visibility with the exact traveller segment you want to reach. The risk of waiting may be greater than the risk of trying.",
-            styleMatch: { green: -2, blue: 0, red: 2, yellow: 0 },
-            assertiveness: 3,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'yuki-r1-objection-casestudy',
-          responses: [
-            { trustThreshold: 'low', text: "A heritage hotel in Kyoto... that is relevant. I would like to see the details before making any decision. Could you send that information to me?", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That is reassuring. If a similar property saw their reviews improve, that addresses my main concern. Please share the details, and I will discuss it with my team this week.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That is exactly the kind of evidence I needed. If their brand was strengthened, not weakened, then I feel more confident. Let us explore this further. I will speak with my operations manager tomorrow.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 4, conversion: 3 },
-          trustChange: 7,
-        },
-        {
-          optionId: 'yuki-r1-objection-control',
-          responses: [
-            { trustThreshold: 'low', text: "The ability to reverse it is important. Let me take this to my team and we will consider it carefully. I will contact you next week.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "That is comforting. Knowing I can shape it and stop it gives me more confidence. I would like to try it on a limited basis first - perhaps just our standard rooms. Can we do that?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you for explaining that so clearly. Full control and the ability to adjust - that is what I needed to hear. Let us set it up together. I will confirm with my team by end of week.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'yuki-r1-objection-urgency',
-          responses: [
-            { trustThreshold: 'low', text: "I appreciate your honesty, but I do not make decisions based on what competitors are doing. I make decisions based on what is right for our guests. I will take my time with this.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I understand the competitive landscape, but rushing is not our way. I would rather be thoughtful and get it right than react out of fear. Let me consider this properly.", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "That is useful context, though I would prefer not to feel pressured. Let me review the programme details with my team and I will come back to you with a decision.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1 },
-          trustChange: -6,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -242,8 +170,8 @@ export const yukiR2: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Good morning. Thank you for following up. I discussed our last conversation with my team and I have some thoughts to share.",
         options: [
@@ -314,8 +242,8 @@ export const yukiR2: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "I am open to hearing what you would suggest next. But please remember - we do not want to attract guests who are only motivated by price. What do you recommend?",
         options: [
@@ -386,79 +314,7 @@ export const yukiR2: ConversationTree = {
           nextPhasePrompt: "I would rather do one thing excellently than three things hastily. Can we focus?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "My worry is about consistency. Our guests expect a certain standard, and I do not want different guests paying different prices for the same experience. How do you address that?",
-        options: [
-          {
-            id: 'yuki-r2-objection-segment',
-            label: 'Explain segmentation clearly',
-            description: 'Walk through how the discount is invisible to other segments, protecting rate integrity.',
-            playerDialogue:
-              "That is a thoughtful concern, and it shows how carefully you protect your guests' experience. The way these tools work is through segmentation - a Country Rate, for example, is only visible to travellers searching from a specific country. A guest in Japan never sees it. A returning guest booking from the same country sees the same rate they saw before. It is not a public discount - it is a private, targeted offer to a specific audience.",
-            styleMatch: { green: 2, blue: 2, red: 0, yellow: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'yuki-r2-objection-luxury',
-            label: 'Reference luxury industry norms',
-            description: 'Explain that premium hotels worldwide use segmented pricing as standard practice.',
-            playerDialogue:
-              "I understand the concern completely. It may help to know that segmented pricing is standard practice across the luxury hospitality industry worldwide. The finest hotels in Tokyo, Paris, and New York all use market-specific and channel-specific rates. It is not seen as discounting - it is seen as sophisticated revenue management. Your guests would never know, and your brand remains exactly as strong.",
-            styleMatch: { green: 1, blue: 2, red: 0, yellow: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'yuki-r2-objection-dismiss',
-            label: 'Minimise the concern',
-            description: 'Suggest she is overthinking it and should just try it.',
-            playerDialogue:
-              "Honestly, Yuki, I think you may be overthinking this. The price differences are very small and guests do not compare rates with each other. Most travellers never notice. I would suggest just trying it for a month and seeing what happens.",
-            styleMatch: { green: -2, blue: -1, red: 1, yellow: 0 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'yuki-r2-objection-segment',
-          responses: [
-            { trustThreshold: 'low', text: "A private, targeted offer... I can accept that framing. Let me review the technical details with my team to make sure I fully understand it before activating.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That explanation puts my mind at ease. If it is truly invisible to other guests, then it does not compromise our integrity. I will discuss the specifics with my operations manager and confirm by end of week.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you for explaining that so clearly. Private and targeted - that is consistent with how we approach everything. Let us proceed. I will confirm the details with my team today.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2, revenue: 2 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'yuki-r2-objection-luxury',
-          responses: [
-            { trustThreshold: 'low', text: "I was not aware it was so widespread in luxury hospitality. That is helpful context. I would like to research this further before committing, but I am more open than before.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "If the finest hotels in the world use this approach, then perhaps I have been too cautious. That is very reassuring. Let us discuss the specifics and I will take it to my team.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That is exactly the kind of context I needed. Sophisticated revenue management, not discounting. I am ready to move forward. Let us set it up.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, visibility: 3, conversion: 2, revenue: 1 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'yuki-r2-objection-dismiss',
-          responses: [
-            { trustThreshold: 'low', text: "I do not believe I am overthinking it. Attention to detail is what makes Ryokan Komorebi special. I would prefer to work with someone who understands that.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "With respect, this is not overthinking - this is how we make decisions. Every detail matters in hospitality. I need to understand it fully before committing.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "I appreciate your confidence, but I would not describe my care for our guests as overthinking. Please give me the details and I will make my own assessment.", emotion: 'cautious' },
-          ],
-          metricEffects: {},
-          trustChange: -6,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -473,8 +329,8 @@ export const yukiR3: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Good morning. I have been looking forward to our conversation. The team and I have noticed some positive changes, and I would like to discuss what comes next.",
         options: [
@@ -545,8 +401,8 @@ export const yukiR3: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "I am ready to hear your recommendation for our longer-term approach. What would a complete strategy look like for Ryokan Komorebi?",
         options: [
@@ -617,78 +473,6 @@ export const yukiR3: ConversationTree = {
           nextPhasePrompt: "Please. Let us focus on one meaningful step rather than overwhelming my team with changes.",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "I want to commit to a longer-term strategy, but I need to know - how do I maintain the soul of Ryokan Komorebi while adopting these commercial tools? That is my final concern.",
-        options: [
-          {
-            id: 'yuki-r3-objection-philosophy',
-            label: 'Connect tools to her values',
-            description: 'Frame the commercial tools as an extension of her hospitality philosophy.',
-            playerDialogue:
-              "Yuki, I think the answer is already in how you have approached this from the beginning. Every decision you have made has been filtered through the question: does this serve our guests? These tools do not change who Ryokan Komorebi is - they simply make sure that the travellers who would most appreciate your experience can find you. The soul of your ryokan lives in the tea ceremony, the garden, the kaiseki dinner, the warmth of your team. No pricing tool can touch that. What it can do is bring more of the right people through your door to experience it.",
-            styleMatch: { green: 2, blue: 1, red: 0, yellow: 1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'yuki-r3-objection-partnership',
-            label: 'Commit to ongoing partnership',
-            description: 'Offer regular reviews and collaborative decision-making going forward.',
-            playerDialogue:
-              "That is the right question to ask, and I want you to know that I see my role as supporting you in that balance, not pushing you away from it. What I would suggest is that we establish a quarterly review - we look at the data together, assess how each tool is performing, and you make the call on what stays and what goes. You will never be locked into anything, and every decision remains yours. My job is to bring you the information and the options.",
-            styleMatch: { green: 2, blue: 2, red: -1, yellow: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'yuki-r3-objection-blunt',
-            label: 'Be blunt about the commercial reality',
-            description: 'Tell her directly that without these tools, she will fall behind.',
-            playerDialogue:
-              "I hear the concern, Yuki, but the reality is that the market is moving. Properties that do not use these tools are being left behind in search results. The soul of your ryokan is important, but so is having guests to share it with. At some point, commercial pragmatism has to come into the picture.",
-            styleMatch: { green: -2, blue: 0, red: 2, yellow: 0 },
-            assertiveness: 3,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'yuki-r3-objection-philosophy',
-          responses: [
-            { trustThreshold: 'low', text: "That is beautifully expressed. You are right - our soul is in the experience, not the pricing. I will take this to my team with a recommendation to proceed. Thank you for understanding what matters to us.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "I am moved by that perspective. Bringing the right people through our door - that is exactly what we want. You have my commitment. Let us build this strategy together, season by season.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you. That is the most important thing anyone has said to us about our business on this platform. You truly understand Ryokan Komorebi. I am fully committed to this partnership. Let us finalise the plan.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 4, conversion: 3, revenue: 3 },
-          trustChange: 8,
-        },
-        {
-          optionId: 'yuki-r3-objection-partnership',
-          responses: [
-            { trustThreshold: 'low', text: "Quarterly reviews with full transparency - that is exactly the kind of partnership I can support. Thank you for offering that structure. I will discuss it with my team and confirm.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That is a mature and respectful approach. Knowing we have regular checkpoints gives me confidence to move forward. Let us schedule the first quarterly review now.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That is exactly what I needed. A true partnership with regular reflection and the freedom to adjust. I am fully on board. Let us plan the year ahead together.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2, revenue: 2 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'yuki-r3-objection-blunt',
-          responses: [
-            { trustThreshold: 'low', text: "I find that perspective reductive. We have operated for many years by staying true to our values. I will not be frightened into abandoning them. I think we should end this conversation here.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I understand the commercial reality, but I do not appreciate the implication that I am ignoring it. We have made significant steps. I need a partner who respects our pace, not one who threatens us with irrelevance.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "I hear the pragmatism in what you are saying, and I know it comes from a good place. But I would prefer encouragement over warnings. Let me consider this on my own terms.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1, revenue: 1 },
-          trustChange: -7,
-        },
-      ],
-    },
+    }
   ],
 };

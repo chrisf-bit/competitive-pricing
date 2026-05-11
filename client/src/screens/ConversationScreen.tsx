@@ -42,8 +42,6 @@ function getReactionLabel(emotion: string, styleMatch: number): { text: string; 
   return null;
 }
 
-const phaseLabels = ['Opening', 'Recommendation', 'Objection Handling'];
-
 export function ConversationScreen({
   partner,
   currentRound,
@@ -58,6 +56,7 @@ export function ConversationScreen({
   const tree = getConversationTree(partner.persona.id, currentRound);
   if (!tree) return null;
 
+  const phaseLabels = tree.phases.map((p) => p.phase.label);
   const isComplete = conversation.choices.length >= tree.phases.length;
   const currentPhaseData = tree.phases[conversation.phaseIndex];
   const phase = currentPhaseData?.phase;

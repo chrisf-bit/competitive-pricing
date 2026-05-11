@@ -184,9 +184,9 @@ export function processConversationChoice(
     // Record the conversation
     const record: ConversationRecord = {
       round: state.currentRound,
-      openingChoice: newChoices[0] ?? '',
-      recommendationChoice: newChoices[1] ?? '',
-      objectionChoice: newChoices[2] ?? '',
+      hookChoice: newChoices[0] ?? '',
+      diagnosisChoice: newChoices[1] ?? '',
+      pitchChoice: newChoices[2] ?? '',
       partnerReaction: response.emotion,
       trustChange: trustDelta,
       outcome: response.text,

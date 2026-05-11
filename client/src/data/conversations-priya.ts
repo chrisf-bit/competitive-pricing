@@ -10,8 +10,8 @@ export const priyaR1: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "I have fifteen minutes before my next call. My RPD is at 30 and dropping. Tell me you have a plan.",
         options: [
@@ -82,8 +82,8 @@ export const priyaR1: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Right. So what specifically needs to change? Give me the actions, the expected impact, and the timeline.",
         options: [
@@ -154,79 +154,7 @@ export const priyaR1: ConversationTree = {
           nextPhasePrompt: "The plan makes sense on paper. But I've seen platform reps promise results before. What makes this time different?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "Look, I've had three account managers in two years. They all had plans. My RPD is still at 30. Why should I believe this time is different?",
-        options: [
-          {
-            id: 'priya-r1-obj-evidence',
-            label: 'Back it with comparable data',
-            description: 'Share specific results from similar properties that implemented these fixes.',
-            playerDialogue:
-              "Fair challenge. Here's a specific example: a 150-room budget hotel in Delhi had the same two issues - major parity breach and misconfigured Mobile Rate. After fixing both, their RPD went from 28 to 52 in three weeks, and revenue increased 18% the following month. I can connect you with that property's GM if you want to verify the numbers.",
-            styleMatch: { red: 1, blue: 2, yellow: 0, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'priya-r1-obj-accountability',
-            label: 'Offer personal accountability',
-            description: 'Commit to a specific follow-up with measurable targets.',
-            playerDialogue:
-              "You're right to be sceptical. Here's what I'll commit to: I'll schedule a follow-up in exactly one week to review your RPD. If the Mobile Rate fix hasn't improved your score by at least 4 points, I'll escalate to our market manager for a full account review. I'm putting my name on this.",
-            styleMatch: { red: 2, blue: 1, yellow: 0, green: 1 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-          {
-            id: 'priya-r1-obj-pressure',
-            label: 'Emphasise the cost of inaction',
-            description: 'Stress what she loses every day she waits.',
-            playerDialogue:
-              "I understand the scepticism. But here's the reality - every day your Mobile Rate stays misconfigured and your parity is broken, you're losing visibility to competitors who have their setup right. At your current RPD, you're being outranked by properties with lower review scores. The fix is straightforward - the only question is how many more bookings you want to lose before implementing it.",
-            styleMatch: { red: 2, blue: 0, yellow: 0, green: -2 },
-            assertiveness: 3,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'priya-r1-obj-evidence',
-          responses: [
-            { trustThreshold: 'low', text: "A Delhi property - different market, different demand profile. I'd need to see Mumbai-specific data before I'm convinced.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "28 to 52 in three weeks - that's significant. Yes, send me the case study. And let's fix the mobile config now.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's the kind of proof point I respect. Let's move. Fix the mobile rate now and send me the parity data so I can action it today.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 3, conversion: 2 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'priya-r1-obj-accountability',
-          responses: [
-            { trustThreshold: 'low', text: "One week, 4 points minimum, escalation if it fails. Write that down. I'll hold you to it.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Good. I respect accountability. Let's set the targets and the follow-up date right now.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's what I needed to hear. Someone who owns the outcome. Let's get started - what do I do first?", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 2, conversion: 2, revenue: 3 },
-          trustChange: 7,
-        },
-        {
-          optionId: 'priya-r1-obj-pressure',
-          responses: [
-            { trustThreshold: 'low', text: "Don't lecture me about lost bookings - I can see my own dashboard. I asked why this time is different, not for a sales pitch.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I know the cost of inaction. What I need is confidence in the solution, not more urgency. Can you stick to the facts?", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "Fair point - the maths is simple enough. But tone down the pressure. I'll move when I'm convinced, not when I'm pushed.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 2 },
-          trustChange: -5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -240,8 +168,8 @@ export const priyaR2: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "The Mobile Rate fix moved the needle - RPD is climbing. But I ran a comparison against our Pune and Bangalore properties last night. They're still 15 points ahead of me. What's the next move?",
         options: [
@@ -312,8 +240,8 @@ export const priyaR2: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Get to the point. What specifically should I activate, what does it cost me in margin, and what's the projected return?",
         options: [
@@ -384,79 +312,7 @@ export const priyaR2: ConversationTree = {
           nextPhasePrompt: "The combined plan is aggressive but logical. My concern is justifying two new discount products to head office simultaneously. They'll question whether we're over-discounting.",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "My chain's head office will scrutinise this. They'll say I'm discounting too aggressively and diluting margin. I need a bulletproof business case. What do you have?",
-        options: [
-          {
-            id: 'priya-r2-obj-data',
-            label: 'Arm her with chain-specific data',
-            description: 'Provide data points she can use to build the internal business case.',
-            playerDialogue:
-              "Here's how I'd build the case. Country Rate targets incremental international demand that wouldn't book at full domestic rate - it expands your addressable market, not discounts your existing one. For Genius, the 5% uplift to Level 2 is an investment in repeat guest acquisition - these guests have a 30% higher lifetime value. I'll generate a report showing your projected incremental revenue versus discount cost for each product. You'll have it before your next internal review.",
-            styleMatch: { red: 1, blue: 2, yellow: 0, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'priya-r2-obj-chain',
-            label: 'Reference Pune and Bangalore results',
-            description: 'Use her own chain properties as internal proof points.',
-            playerDialogue:
-              "Priya, your strongest argument is already inside the chain. Pune and Bangalore are running both products and their revenue directors signed off because the results justified it. Pune's international booking revenue is up 24% year-on-year since activating Country Rate. I can connect you with Pune's GM to compare notes. Going to head office with a peer reference from within the chain is far more powerful than external projections.",
-            styleMatch: { red: 2, blue: 1, yellow: 0, green: 0 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-          {
-            id: 'priya-r2-obj-minimise',
-            label: 'Downplay the concerns',
-            description: 'Suggest the internal pushback is unlikely and she should just activate.',
-            playerDialogue:
-              "Honestly, I think you might be overthinking the internal pushback. These are standard revenue management tools that thousands of properties use. Most revenue directors are fine with it once they see the first month's numbers. I'd suggest just activating and letting the results make the case.",
-            styleMatch: { red: 0, blue: -2, yellow: 1, green: -1 },
-            assertiveness: 2,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'priya-r2-obj-data',
-          responses: [
-            { trustThreshold: 'low', text: "A report would help. But I need it by Wednesday - not next month. Can you turn it around in time for my Friday review?", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Incremental market expansion versus existing market discounting - that's the framing I need. Send that report and I'll present it to head office.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "You're not just giving me a product - you're giving me the ammunition to sell it internally. Send the data pack today. I'll have Country Rate live by end of week.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 4, conversion: 3, revenue: 4 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'priya-r2-obj-chain',
-          responses: [
-            { trustThreshold: 'low', text: "Pune is running both? I didn't know that. Set up the introduction - but I'll verify independently before I go to head office.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "24% international revenue uplift at Pune - that's a hard number to argue with. Make the introduction this week and I'll move forward.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Internal proof of concept beats external projections every time. Connect me with Pune's GM today. I'll have the business case to head office by Monday.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 5, conversion: 4, revenue: 5 },
-          trustChange: 7,
-        },
-        {
-          optionId: 'priya-r2-obj-minimise',
-          responses: [
-            { trustThreshold: 'low', text: "Overthinking? I'm managing a P&L and reporting to a board. I don't 'just activate' anything without a business case. That's an insulting suggestion.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I don't appreciate having my concerns dismissed. I asked for a business case, not permission. Can you actually help me build one?", emotion: 'negative' },
-            { trustThreshold: 'high', text: "I'll decide what's overthinking and what's due diligence. Can you help me build the business case or not?", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1 },
-          trustChange: -6,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -470,8 +326,8 @@ export const priyaR3: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "RPD has improved significantly and I'm presenting to chain leadership next month. I need a long-term strategy I can defend, not just a list of products you've switched on. What's the big picture?",
         options: [
@@ -542,8 +398,8 @@ export const priyaR3: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Give me the long-term play. What should I be doing over the next six to twelve months to sustain this and lead the chain? I need specifics, not generalities.",
         options: [
@@ -614,78 +470,6 @@ export const priyaR3: ConversationTree = {
           nextPhasePrompt: "I need a bolder strategy. What else have you got?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "This is a strong foundation. But here's the question my CEO will ask: what happens when competitors copy the same playbook? How does The Grand Residency stay ahead?",
-        options: [
-          {
-            id: 'priya-r3-obj-execution',
-            label: 'Differentiate on execution and data',
-            description: 'Argue that competitive advantage comes from execution quality, not tools.',
-            playerDialogue:
-              "Your CEO is right to ask. The tools are available to everyone - the moat is in how you use them. The Grand Residency now has clean parity, an optimised discount stack, and a data-driven pricing approach. Most competitors are still running one or two products without coordination. I'll set up a monthly review cadence so we're continuously optimising - faster iteration, better data, sharper execution. That's the competitive advantage no one can copy.",
-            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-          {
-            id: 'priya-r3-obj-partnership',
-            label: 'Offer a strategic partnership',
-            description: 'Position yourself as an ongoing strategic advisor, not a transactional contact.',
-            playerDialogue:
-              "The answer is proactive adaptation. Markets shift, competitors adjust, and the properties that stay ahead are the ones with someone watching the data and adapting before problems emerge. I want to be that strategic partner for The Grand Residency. Quarterly strategy reviews, market intelligence briefings, and pre-emptive rate adjustments. You focus on operations - I'll focus on keeping your competitive position ahead of the curve.",
-            styleMatch: { red: 1, blue: 1, yellow: 0, green: 2 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'priya-r3-obj-aggressive',
-            label: 'Push maximum product adoption',
-            description: 'Suggest she needs to adopt every tool aggressively to maintain edge.',
-            playerDialogue:
-              "Simple - you stay ahead by being first and using everything at maximum levels. Competitors who wait lose. You should be running every discount product at the highest possible level and leveraging every visibility tool available. Properties that commit fully always outperform the ones that hedge. Go all in and don't look back.",
-            styleMatch: { red: 1, blue: -2, yellow: 1, green: -1 },
-            assertiveness: 3,
-            compliance: 'risky',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'priya-r3-obj-execution',
-          responses: [
-            { trustThreshold: 'low', text: "Monthly review cadence - that's a commitment. Are you actually going to follow through? I've had account managers disappear after the first call.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Faster iteration, better data, sharper execution - that's a competitive moat I can articulate to leadership. Lock in the monthly reviews.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Execution speed and data quality as differentiators - that's exactly how I think about competitive advantage. You've earned the ongoing partnership. Let's formalise the review cadence and I'll include you in the leadership presentation as our platform advisor.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 4, conversion: 3, revenue: 5 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'priya-r3-obj-partnership',
-          responses: [
-            { trustThreshold: 'low', text: "Quarterly reviews are fine in theory. But partnerships are earned over quarters, not declared in meetings. Let's see how the next three months go.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Proactive adaptation and market intelligence - that's what I've been missing from this platform relationship. Set up the first quarterly review. I'll attend.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "You've delivered results and you understand how I operate. Set up the quarterly reviews. I'll bring my revenue director to the first one - this needs to be a chain-level relationship, not just property-level.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, visibility: 3, conversion: 2, revenue: 4 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'priya-r3-obj-aggressive',
-          responses: [
-            { trustThreshold: 'low', text: "Every product at maximum levels? That's not a strategy, that's a blunt instrument. I manage a budget hotel chain, not a charity. I expected more from you after three conversations.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "Go all in and don't look back? That's the kind of advice that erodes margin and destroys credibility with leadership. I need surgical precision, not carpet bombing.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "I appreciate the confidence, but that's lazy thinking. My CEO will tear apart 'just use everything at maximum.' Give me a defensible answer.", emotion: 'cautious' },
-          ],
-          metricEffects: { revenue: -3 },
-          trustChange: -7,
-        },
-      ],
-    },
+    }
   ],
 };

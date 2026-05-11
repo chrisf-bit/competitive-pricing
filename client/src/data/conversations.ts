@@ -12,8 +12,8 @@ const marinaR1: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hello. I've got a few minutes - what did you want to discuss?",
         options: [
@@ -84,8 +84,82 @@ const marinaR1: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Okay - what specifically are you seeing? Walk me through the data.",
+        options: [
+          {
+            id: 'marina-r1-diag-vague',
+            label: 'Flag a general concern',
+            description: 'Note that her numbers look soft without naming a specific driver.',
+            playerDialogue:
+              "Your performance has been a bit soft recently and I think there are some pricing levers we could look at together. Nothing alarming, but worth a conversation.",
+            styleMatch: { blue: -2, green: 0, red: -1, yellow: 0 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'marina-r1-diag-baserate',
+            label: 'Name the signal, blame the base rate',
+            description: 'Acknowledge visibility is slipping but attribute it to her overall rate being too high.',
+            playerDialogue:
+              "Your visibility has been slipping for a few weeks now and you're losing the price comparison on around two-thirds of searches. My read is your base rate is sitting a bit above the market, and that's what's pulling things down.",
+            styleMatch: { blue: 1, green: 0, red: 1, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'marina-r1-diag-mobile-gap',
+            label: 'Name the signal, point to the mobile gap',
+            description:
+              'Walk her through where the visibility loss is concentrated and connect it to the missing Mobile Rate.',
+            playerDialogue:
+              "Your visibility is slipping and you're losing the price comparison on about two-thirds of searches. The interesting bit is where the loss is concentrated: your Genius bookings are holding up, but on non-Genius traffic you're being undercut consistently. Your rate parity is clean and you don't have Mobile Rate active - that combination points to mobile users specifically, where most of Madrid's search volume sits.",
+            styleMatch: { blue: 2, green: 1, red: 0, yellow: -1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'marina-r1-diag-vague',
+          responses: [
+            { trustThreshold: 'low', text: "'A bit soft' isn't something I can act on. Can you be more specific about which metrics, and by how much?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I need more than that, sorry. Which numbers, and what's the comparison?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I trust you, but I'd still want the specifics before I do anything about it. What are you actually seeing?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'marina-r1-diag-baserate',
+          responses: [
+            { trustThreshold: 'low', text: "If you think my base rate is wrong, I'd want to see the comparable set you're benchmarking against. I'm not lowering my ADR on a hunch.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I take the visibility point - but I'm not convinced the base rate is the issue. My ADR is in line with the boutique set in central Madrid. What else could it be?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "You're right that visibility is trending the wrong way. But I'd be surprised if it's base rate - I check that monthly. Anything else in the data?", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 1 },
+          trustChange: 1,
+        },
+        {
+          optionId: 'marina-r1-diag-mobile-gap',
+          responses: [
+            { trustThreshold: 'low', text: "Okay, that's a much clearer read. The Public-vs-Loyal split is interesting - I hadn't broken it out that way. Go on.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's exactly the kind of analysis I needed. The Public-vs-Loyal gap is a strong signal - so you're pointing at a mobile-specific issue, not a base rate one. Makes sense.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes - I was looking at the same numbers last week and reaching the same conclusion. Glad we're aligned. What's the fix?", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "Right, so what are you recommending? And what's the evidence it will move the right metric?",
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Okay, so what are you recommending I do? And more importantly - what's the evidence it will work?",
         options: [
@@ -94,7 +168,7 @@ const marinaR1: ConversationTree = {
             label: 'Recommend Mobile Rate',
             description: 'Suggest activating Mobile Rate with data showing mobile booking share.',
             playerDialogue:
-              "Looking at your data, mobile bookings make up over 60% of searches in Madrid. Your property isn't currently offering a Mobile Rate, which means mobile users see higher prices compared to competitors who do. Activating it would improve your Experienced RPD for that segment without changing your base rate.",
+              "Looking at your data, mobile bookings make up over 60% of searches in Madrid. Your property isn't currently offering a Mobile Rate, which means mobile users see higher prices compared to competitors who do. Activating it would close that gap for mobile guests without touching your base rate.",
             styleMatch: { blue: 2, green: 1, red: 1, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -114,7 +188,7 @@ const marinaR1: ConversationTree = {
             label: 'Explore the data together',
             description: 'Walk through the dashboard collaboratively and let her draw conclusions.',
             playerDialogue:
-              "Rather than jumping to a recommendation, I'd like to walk through your Experienced RPD data with you. I think once we look at where you sit versus comparable properties, the right action will become clear. Can I share my screen?",
+              "Rather than jumping to a recommendation, I'd like to walk through your visibility and price-comparison data with you. I think once we look at where you sit versus comparable properties, the right action will become clear. Can I share my screen?",
             styleMatch: { blue: 2, green: 1, red: -1, yellow: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -156,79 +230,7 @@ const marinaR1: ConversationTree = {
           nextPhasePrompt: "Okay, the data makes sense. But before I commit to anything - what happens if it doesn't work? Can I reverse it easily?",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "I hear what you're saying, but what about the margin impact? I can't afford to just give away revenue.",
-        options: [
-          {
-            id: 'marina-r1-obj-evidence',
-            label: 'Provide evidence',
-            description: 'Share data from comparable properties that showed net revenue gain.',
-            playerDialogue:
-              "That's a fair concern, and I'd have the same question. Looking at comparable boutique properties in Madrid that activated Mobile Rate, the average saw a 12% increase in booking volume which more than offset the rate reduction. The net revenue impact was positive within 6 weeks.",
-            styleMatch: { blue: 2, green: 1, red: 1, yellow: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'marina-r1-obj-trial',
-            label: 'Suggest a trial',
-            description: 'Propose a limited trial period to reduce risk.',
-            playerDialogue:
-              "Completely understand. What if we approach this as a 30-day trial? You activate Mobile Rate for one month, we measure the impact together, and if the numbers don't work, you simply switch it off. No long-term commitment.",
-            styleMatch: { blue: 1, green: 2, red: 0, yellow: 1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'marina-r1-obj-push',
-            label: 'Stress the urgency',
-            description: 'Emphasise that competitors are moving and she risks falling further behind.',
-            playerDialogue:
-              "I understand the concern, but the reality is that your competitors in Madrid are already using these tools. Every week you wait, the gap widens. The margin on a booking you don't get is zero.",
-            styleMatch: { blue: -1, green: -2, red: 2, yellow: 0 },
-            assertiveness: 3,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'marina-r1-obj-evidence',
-          responses: [
-            { trustThreshold: 'low', text: "12% uplift... can you send me that data in writing? I'd like to review it properly before deciding.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That's useful. If the comparables are genuinely similar properties, I'd be willing to try it. Send me the details and I'll review by end of week.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's exactly the kind of evidence I needed. Let's do it. Can you walk me through the setup?", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'marina-r1-obj-trial',
-          responses: [
-            { trustThreshold: 'low', text: "A trial... that's more reasonable. Let me think about it and I'll let you know.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "A 30-day trial with clear measurement - I can get behind that. Let's set it up.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Yes, that works for me. I like that there's an easy off-ramp. Let's start next week.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, visibility: 2 },
-          trustChange: 4,
-        },
-        {
-          optionId: 'marina-r1-obj-push',
-          responses: [
-            { trustThreshold: 'low', text: "I don't appreciate being pressured. I make decisions based on data, not fear. I'll review this on my own timeline.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I understand competition is real, but scare tactics aren't how I make decisions. Let's stick to the data.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "Point taken, but I'd still prefer to see the evidence before moving. Can you send me the analysis?", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1 },
-          trustChange: -6,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -241,8 +243,8 @@ const stavrosR1: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Yeah, hi - look, I'm busy. Occupancy is down 15% and I need answers, not another check-in call. What have you got for me?",
         options: [
@@ -313,8 +315,8 @@ const stavrosR1: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "Right. So what do I actually need to do? And don't tell me to add more discounts - I'm already discounting.",
         options: [
@@ -333,7 +335,7 @@ const stavrosR1: ConversationTree = {
             label: 'Suggest adding Country Rate',
             description: 'Recommend another discount product to improve competitiveness.',
             playerDialogue:
-              "One quick win would be activating Country Rate for key source markets. That would target travellers from high-volume countries with a tailored discount, which should improve your Experienced RPD for those segments.",
+              "One quick win would be activating Country Rate for key source markets. That would target travellers from high-volume countries with a tailored discount, which should close the price gap you're currently losing on those segments.",
             styleMatch: { red: 1, blue: 0, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -385,79 +387,7 @@ const stavrosR1: ConversationTree = {
           nextPhasePrompt: "I set my own rates. If you've got a better idea that doesn't involve me cutting my prices, I'm listening.",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "Look, I've heard promises before. How do I know this will actually work?",
-        options: [
-          {
-            id: 'stavros-r1-obj-roi',
-            label: 'Show the ROI projection',
-            description: 'Present a revenue impact model with concrete numbers.',
-            playerDialogue:
-              "Fair question. Let me share a projection based on your current traffic. If we resolve the parity issue and your Experienced RPD improves to market average, the visibility uplift alone could drive an estimated 25–35 additional room nights per month. At your current ADR, that's significant incremental revenue.",
-            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'stavros-r1-obj-case-study',
-            label: 'Share a success story',
-            description: 'Reference a similar resort that fixed parity and saw results.',
-            playerDialogue:
-              "I worked with a similar resort in Crete - 200 rooms, similar market. They had the same parity issue. Once resolved, their visibility improved by 30% within three weeks and bookings followed. I can't guarantee identical results, but the pattern is consistent.",
-            styleMatch: { red: 1, blue: 1, yellow: 2, green: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'stavros-r1-obj-guarantee',
-            label: 'Promise results',
-            description: 'Make a strong commitment to build confidence.',
-            playerDialogue:
-              "I guarantee this will work. Fix the parity issue and your metrics will improve. I've seen it dozens of times. If it doesn't work within a month, I'll personally escalate it with our technical team.",
-            styleMatch: { red: 1, blue: -2, yellow: 1, green: -1 },
-            assertiveness: 3,
-            compliance: 'borderline',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'stavros-r1-obj-roi',
-          responses: [
-            { trustThreshold: 'low', text: "25–35 room nights... alright, that's a language I understand. I'll look into the parity issue. But I'm tracking this.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Now you're talking my language. That's the kind of analysis I need. Let's move on it.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good. Clear numbers, clear action. Let's fix the parity and I'll hold you to those projections.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2, revenue: 2 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'stavros-r1-obj-case-study',
-          responses: [
-            { trustThreshold: 'low', text: "Crete isn't Kos. But fine - 30% visibility improvement is worth investigating. What exactly did they do?", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That's a good example. If they saw those results in three weeks, I'm willing to try. Walk me through the steps.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good. Real examples, not theory. Let's do it.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, visibility: 2, conversion: 1, revenue: 1 },
-          trustChange: 4,
-        },
-        {
-          optionId: 'stavros-r1-obj-guarantee',
-          responses: [
-            { trustThreshold: 'low', text: "You 'guarantee' it? Nobody can guarantee that. You just lost credibility. I'll figure this out myself.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "Don't promise what you can't control. But I appreciate the confidence. I'll try it and we'll see.", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "I'll hold you to that guarantee. Let's see if you deliver.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 2, visibility: 1 },
-          trustChange: -4,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -470,8 +400,8 @@ const hannahR1: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Oh hello! How lovely to hear from you. I was just finishing up some guest welcome packs. How are you?",
         options: [
@@ -542,8 +472,8 @@ const hannahR1: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "I'm open to hearing your ideas... but I should say upfront - I'm not really keen on big discounts. I don't want to cheapen what we offer here.",
         options: [
@@ -614,79 +544,7 @@ const hannahR1: ConversationTree = {
           nextPhasePrompt: "I just don't want Meadow Lane to become a bargain-basement listing. That's not what we are.",
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "I just worry about changing what makes Meadow Lane special. My guests come for the experience, not the price.",
-        options: [
-          {
-            id: 'hannah-r1-obj-reassure',
-            label: 'Reassure and validate',
-            description: 'Acknowledge her values and show the discount protects her brand.',
-            playerDialogue:
-              "And you're absolutely right - that's what makes Meadow Lane wonderful. Nothing we're talking about changes the experience you offer. This is just about making sure the right travellers can find you. Your reviews, your photos, your personal touches - those are what sell the stay. The discount just helps you appear in the search results where those travellers are looking.",
-            styleMatch: { green: 2, yellow: 1, blue: 1, red: -1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'hannah-r1-obj-story',
-            label: 'Share a similar success story',
-            description: 'Tell her about another guesthouse that had the same concern and succeeded.',
-            playerDialogue:
-              "I worked with a guesthouse owner in the Lake District who had exactly the same concern. She was worried discounts would attract the wrong guests. She tried a Last-Minute Deal as an experiment and found that the guests who booked through it were actually lovely - they were spontaneous travellers, couples looking for a last-minute escape. Her reviews stayed excellent and her midweek occupancy improved significantly.",
-            styleMatch: { green: 2, yellow: 2, blue: 0, red: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'hannah-r1-obj-urgency',
-            label: 'Be direct about the risk',
-            description: 'Point out that without action, bookings will continue to decline.',
-            playerDialogue:
-              "I hear that, Hannah, but I want to be honest with you. Your bookings have been declining and your visibility is falling further behind similar properties. If we don't take some action now, the trend will continue. I know discounts feel uncomfortable, but doing nothing has a cost too.",
-            styleMatch: { green: -2, yellow: -1, blue: 1, red: 2 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'hannah-r1-obj-reassure',
-          responses: [
-            { trustThreshold: 'low', text: "That's a nice way to think about it. I do want more people to find us... Let me sleep on it and I'll let you know.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "You know what, when you put it that way, it makes sense. It's not changing the experience, just the discoverability. Okay, I'll give it a try.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you for understanding. That really helps. Let's do it - I'll try the Last-Minute Deal and see how it goes.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2 },
-          trustChange: 6,
-        },
-        {
-          optionId: 'hannah-r1-obj-story',
-          responses: [
-            { trustThreshold: 'low', text: "The Lake District... that is quite similar. Spontaneous travellers, couples... I like the sound of that actually.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Oh, that's a lovely story! Couples looking for a last-minute escape - that's exactly the kind of guest I'd want. Let's try it!", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's so reassuring! If she managed to keep her quality and fill rooms, there's no reason I can't too. Count me in.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 5, visibility: 3, conversion: 3 },
-          trustChange: 7,
-        },
-        {
-          optionId: 'hannah-r1-obj-urgency',
-          responses: [
-            { trustThreshold: 'low', text: "That's... quite alarming. I need some time to think about this. Can we speak again next week?", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I appreciate your honesty, but I'm not going to be rushed into this. I'll think about it and come back to you.", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "I know you're trying to help, and I do hear you. But I need to feel comfortable with this, not pressured. Let me think.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1 },
-          trustChange: -5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -701,8 +559,8 @@ const marinaR2: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hello again. I've had a chance to review the data since our last conversation. Shall we pick up where we left off?",
         options: [
@@ -773,8 +631,8 @@ const marinaR2: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "So where do we go from here? What's the next logical step?",
         options: [
@@ -842,79 +700,7 @@ const marinaR2: ConversationTree = {
           trustChange: -4,
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "One thing - I'm still watching the margin impact closely. Can you reassure me on that?",
-        options: [
-          {
-            id: 'marina-r2-obj-data',
-            label: 'Show the net revenue data',
-            description: 'Present the actual revenue figures showing net positive impact.',
-            playerDialogue:
-              "Absolutely. Looking at the last three weeks since we activated Mobile Rate, your total booking revenue through Booking.com is up 8%. The rate per booking is slightly lower, but the volume increase has more than compensated. Net revenue is positive.",
-            styleMatch: { blue: 2, green: 1, red: 1, yellow: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'marina-r2-obj-monitor',
-            label: 'Offer ongoing monitoring',
-            description: 'Propose regular check-ins to track the margin impact together.',
-            playerDialogue:
-              "How about this - let's set up a fortnightly check-in where we review the margin impact together. If at any point the numbers don't work, we adjust immediately. You're always in control.",
-            styleMatch: { blue: 1, green: 2, red: -1, yellow: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'marina-r2-obj-dismiss',
-            label: 'Downplay the concern',
-            description: 'Suggest the margin concern is less important than the growth opportunity.',
-            playerDialogue:
-              "Honestly Marina, margin on incremental bookings is almost always positive. I wouldn't worry too much about it - the bigger risk is leaving money on the table by not being visible.",
-            styleMatch: { blue: -2, green: -1, red: 1, yellow: 0 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'marina-r2-obj-data',
-          responses: [
-            { trustThreshold: 'low', text: "8% increase... I'll verify that against my own numbers. If it checks out, I'm comfortable continuing.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "That's exactly what I needed to hear. Volume up, net revenue up - that's the right trajectory. Let's keep going.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Excellent. That's conclusive. I'm fully on board with the next step.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, revenue: 3 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'marina-r2-obj-monitor',
-          responses: [
-            { trustThreshold: 'low', text: "Fortnightly check-ins work for me. I want visibility on this.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "I'd like that. Having regular oversight will make me more comfortable with expanding the strategy.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect. I appreciate the partnership approach. Let's do it.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 2, revenue: 1 },
-          trustChange: 4,
-        },
-        {
-          optionId: 'marina-r2-obj-dismiss',
-          responses: [
-            { trustThreshold: 'low', text: "Don't tell me not to worry about my margins. That's my business, not yours.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I understand the logic, but dismissing my concern isn't helpful. I take margins seriously.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "I hear you, but I'd still like to see the data rather than be told not to worry.", emotion: 'cautious' },
-          ],
-          metricEffects: {},
-          trustChange: -5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -924,8 +710,8 @@ const stavrosR2: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Alright, you're back. What's the update? Are the numbers moving?",
         options: [
@@ -934,7 +720,7 @@ const stavrosR2: ConversationTree = {
             label: 'Show progress',
             description: 'Lead with what has improved since the last conversation.',
             playerDialogue:
-              "Stavros, good news - the parity fix is starting to take effect. I can see your Experienced RPD improving and visibility is trending upward. Let me walk you through the specifics.",
+              "Stavros, good news - the parity fix is starting to take effect. Your price competitiveness is improving and visibility is trending upward. Let me walk you through the specifics.",
             styleMatch: { red: 2, blue: 1, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -996,8 +782,8 @@ const stavrosR2: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt: "Right. So what's the next play?",
         options: [
           {
@@ -1064,78 +850,7 @@ const stavrosR2: ConversationTree = {
           trustChange: -4,
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt: "What about Expedia? They're still showing better rates in some searches.",
-        options: [
-          {
-            id: 'stavros-r2-obj-investigate',
-            label: 'Offer to investigate',
-            description: 'Promise to dig into the specific parity issue with Expedia.',
-            playerDialogue:
-              "I want to look into that specifically. Can you share some examples of where you've seen the rate difference? I'll cross-reference with our parity monitoring and we can identify exactly where the leak is.",
-            styleMatch: { red: 1, blue: 2, yellow: 0, green: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'stavros-r2-obj-channel-manager',
-            label: 'Suggest a channel manager review',
-            description: 'Recommend checking the channel manager configuration.',
-            playerDialogue:
-              "That's likely a channel manager configuration issue. Sometimes rate rules create unintended differences across channels. I'd recommend doing a full audit of your channel manager setup. I can help guide you through what to look for.",
-            styleMatch: { red: 1, blue: 2, yellow: 0, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'stavros-r2-obj-match',
-            label: 'Suggest matching Expedia rates',
-            description: 'Recommend lowering Booking.com rates to match.',
-            playerDialogue:
-              "The simplest fix would be to adjust your Booking.com rate to match what you're offering on Expedia. That would immediately resolve the parity issue and boost your competitiveness.",
-            styleMatch: { red: 1, blue: 0, yellow: 0, green: -1 },
-            assertiveness: 3,
-            compliance: 'risky',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'stavros-r2-obj-investigate',
-          responses: [
-            { trustThreshold: 'low', text: "Fine. I'll send you screenshots. But I expect a solution, not just an investigation.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Good - a proper investigation. I'll pull the examples together today. How quickly can you turn it around?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's the right approach. I'll send everything over. Let's nail this.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, rateParity: -1 as unknown as undefined },
-          trustChange: 5,
-        },
-        {
-          optionId: 'stavros-r2-obj-channel-manager',
-          responses: [
-            { trustThreshold: 'low', text: "My channel manager should be handling this automatically. Are you saying it's my fault?", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That's possible. I haven't reviewed the rate rules in a while. What should I be looking for?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good idea. I'll schedule a review with my revenue manager. Can you provide a checklist?", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 2, discountQuality: 5 },
-          trustChange: 3,
-        },
-        {
-          optionId: 'stavros-r2-obj-match',
-          responses: [
-            { trustThreshold: 'low', text: "You're telling me to lower my prices on your platform to match a competitor? That doesn't sound right.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "Hmm, that feels like you're asking me to give Booking.com a better deal. I need to think about that.", emotion: 'cautious' },
-            { trustThreshold: 'high', text: "I see the logic, but I'd rather fix the underlying issue than just patch the rate. Let's go deeper.", emotion: 'cautious' },
-          ],
-          metricEffects: { experiencedRPD: 1 },
-          trustChange: -5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -1145,8 +860,8 @@ const hannahR2: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hello again! I've been thinking about our last chat. How are you?",
         options: [
@@ -1217,8 +932,8 @@ const hannahR2: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt:
           "So what would you suggest as a next step? I'm more open to ideas now, but I still want to be careful.",
         options: [
@@ -1286,79 +1001,7 @@ const hannahR2: ConversationTree = {
           trustChange: -6,
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Objection Handling',
-        partnerPrompt:
-          "I do have one concern - I had a guest last week who mentioned they got a deal. I don't want my regular guests feeling they paid too much.",
-        options: [
-          {
-            id: 'hannah-r2-obj-explain',
-            label: 'Explain how it works',
-            description: 'Clarify that discounts are targeted and regulars see normal rates.',
-            playerDialogue:
-              "That's a great question, and I completely understand the concern. The discount is only visible to specific traveller segments - for example, Genius members or mobile app users. Your regular guests booking through your website or at your standard rate see your normal pricing. There's no public display of a reduced rate.",
-            styleMatch: { green: 2, yellow: 0, blue: 2, red: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'hannah-r2-obj-reframe',
-            label: 'Reframe as smart revenue management',
-            description: 'Position it as what all smart properties do.',
-            playerDialogue:
-              "Think of it this way - airlines have been doing this for decades. The person in seat 14A paid a different price than the person in 14B. It's not about devaluing the experience - it's smart revenue management that fills your rooms without undermining your brand.",
-            styleMatch: { green: 0, yellow: 1, blue: 1, red: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'hannah-r2-obj-minimise',
-            label: 'Minimise the concern',
-            description: 'Suggest it is unlikely to be an issue in practice.',
-            playerDialogue:
-              "Honestly Hannah, it's very rare for guests to compare notes on prices. I wouldn't worry about it - it's a non-issue for the vast majority of properties.",
-            styleMatch: { green: -2, yellow: -1, blue: -1, red: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'hannah-r2-obj-explain',
-          responses: [
-            { trustThreshold: 'low', text: "Oh, I see - so it's not visible to everyone? That does make me feel better.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That's really reassuring. I didn't realise it was so targeted. Thank you for explaining.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect - that's exactly what I needed to hear. I feel much better about it now.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 3, conversion: 2 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'hannah-r2-obj-reframe',
-          responses: [
-            { trustThreshold: 'low', text: "I see the logic, but Meadow Lane isn't an airline... I want it to feel personal, not transactional.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That's a fair point. I suppose hotels do this all the time. I just want to make sure it still feels right.", emotion: 'neutral' },
-            { trustThreshold: 'high', text: "Ha, that's true! I never thought of it that way. Alright, I can get behind that.", emotion: 'positive' },
-          ],
-          metricEffects: { experiencedRPD: 2, conversion: 1 },
-          trustChange: 1,
-        },
-        {
-          optionId: 'hannah-r2-obj-minimise',
-          responses: [
-            { trustThreshold: 'low', text: "It's not a non-issue to me. It literally just happened. I'd appreciate you taking my concerns seriously.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I know it might seem small to you, but it matters to me. These are my guests.", emotion: 'negative' },
-            { trustThreshold: 'high', text: "I'm sure you're right, but it still bothers me. Can we find a way to address it?", emotion: 'cautious' },
-          ],
-          metricEffects: {},
-          trustChange: -5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -1372,8 +1015,8 @@ const marinaR3: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Good timing - I was about to reach out. I've been preparing my quarterly pricing review and wanted your input.",
         options: [
@@ -1392,7 +1035,7 @@ const marinaR3: ConversationTree = {
             label: 'Celebrate the results',
             description: 'Start by acknowledging how far her metrics have come.',
             playerDialogue:
-              "Perfect timing indeed. Marina, before we plan forward, I want to acknowledge how much your numbers have improved. Your Experienced RPD is significantly better, visibility is up, and revenue is trending positively. That's your strategy working.",
+              "Perfect timing indeed. Marina, before we plan forward, I want to acknowledge how much your numbers have improved. Your price competitiveness is significantly better, visibility is up, and revenue is trending positively. That's your strategy working.",
             styleMatch: { blue: 1, green: 1, red: 0, yellow: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1444,8 +1087,8 @@ const marinaR3: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt: "What do you recommend for my Q2 pricing strategy?",
         options: [
           {
@@ -1512,78 +1155,7 @@ const marinaR3: ConversationTree = {
           trustChange: 7,
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Closing',
-        partnerPrompt: "This has been a productive conversation. Any final thoughts before I go?",
-        options: [
-          {
-            id: 'marina-r3-close-partnership',
-            label: 'Affirm the partnership',
-            description: 'End on a collaborative note about working together.',
-            playerDialogue:
-              "Just that I've really valued how you've approached this, Marina. You've been rigorous, methodical, and willing to try new things. The results reflect that. I'm looking forward to seeing what we can achieve next quarter.",
-            styleMatch: { blue: 1, green: 2, red: 0, yellow: 1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'marina-r3-close-summary',
-            label: 'Summarise next steps',
-            description: 'End with clear, documented actions and timelines.',
-            playerDialogue:
-              "Let me quickly summarise: we'll implement the agreed changes by end of week, I'll send you a written summary of the plan, and we'll review the impact together in two weeks. I'll put it all in an email. Sound good?",
-            styleMatch: { blue: 2, green: 1, red: 1, yellow: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'marina-r3-close-ambitious',
-            label: 'Set a stretch target',
-            description: 'Challenge her to aim for top-tier performance.',
-            playerDialogue:
-              "One thought - what if we set a target of getting Hotel Castellana into the top 10% for Experienced RPD in Madrid by end of Q2? It's ambitious, but based on your trajectory, I think it's achievable.",
-            styleMatch: { blue: 1, green: -1, red: 2, yellow: 1 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'marina-r3-close-partnership',
-          responses: [
-            { trustThreshold: 'low', text: "Thank you. I do feel more confident about our approach now. Talk soon.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That's mutual. It's refreshing to work with someone who respects the process. Let's keep it going.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Thank you - this has been the most productive partnership I've had with Booking.com. I'm genuinely excited about next quarter.", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 2 },
-          trustChange: 5,
-        },
-        {
-          optionId: 'marina-r3-close-summary',
-          responses: [
-            { trustThreshold: 'low', text: "Yes, a written summary would be helpful. Thank you for being organised about this.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Perfect - clear actions, clear timeline. That's exactly how I like to work. Thanks.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Excellent. I'll review the email and come back with any questions. This has been very productive.", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 1 },
-          trustChange: 4,
-        },
-        {
-          optionId: 'marina-r3-close-ambitious',
-          responses: [
-            { trustThreshold: 'low', text: "Top 10%? That's a stretch. I'd rather set realistic targets we can definitely hit.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That's ambitious... but I like having a clear target. Let's see if the data supports it.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "I love it. Give me a target and I'll chase it. Top 10% in Madrid - let's make it happen.", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 2 },
-          trustChange: 2,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -1593,8 +1165,8 @@ const stavrosR3: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt: "Right. Final check-in. Where are we at?",
         options: [
           {
@@ -1602,7 +1174,7 @@ const stavrosR3: ConversationTree = {
             label: 'Lead with results',
             description: 'Present the full improvement trajectory.',
             playerDialogue:
-              "Stavros, here's where we stand: since we started working on this six weeks ago, your Experienced RPD has improved significantly, visibility is recovering, and bookings are trending upward. Let me show you the full picture.",
+              "Stavros, here's where we stand: since we started working on this six weeks ago, your price competitiveness has improved significantly, visibility is recovering, and bookings are trending upward. Let me show you the full picture.",
             styleMatch: { red: 2, blue: 2, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1664,8 +1236,8 @@ const stavrosR3: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt: "So what's the play for next season? High season is coming - I need a plan.",
         options: [
           {
@@ -1732,78 +1304,7 @@ const stavrosR3: ConversationTree = {
           trustChange: -3,
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Closing',
-        partnerPrompt: "Alright. I think we have a plan. Anything else?",
-        options: [
-          {
-            id: 'stavros-r3-close-confidence',
-            label: 'Express confidence',
-            description: 'End with a strong, confident close.',
-            playerDialogue:
-              "Just this - you've made more progress in six weeks than most properties make in a quarter. If you execute this plan for high season, I expect the Aegean Grand to be one of the top-performing resorts on Kos by September.",
-            styleMatch: { red: 2, blue: 0, yellow: 2, green: 0 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'stavros-r3-close-support',
-            label: 'Offer ongoing support',
-            description: 'Promise to stay closely involved.',
-            playerDialogue:
-              "I'll be monitoring your metrics closely over the coming weeks and I'll flag anything that needs attention. You've got my direct line - if anything looks off, call me.",
-            styleMatch: { red: 1, blue: 1, yellow: 0, green: 1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'stavros-r3-close-challenge',
-            label: 'Set a competitive target',
-            description: 'Challenge him to beat a specific competitor.',
-            playerDialogue:
-              "One last thought - your closest competitor, the one that's been outperforming you, is within striking distance. With this plan, you could overtake them by end of summer. That's the benchmark I'd be aiming for.",
-            styleMatch: { red: 2, blue: 1, yellow: 1, green: -1 },
-            assertiveness: 3,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'stavros-r3-close-confidence',
-          responses: [
-            { trustThreshold: 'low', text: "We'll see. I'll judge on results.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "That's a bold claim. I like it. Let's make it happen.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That's what I want to hear. One of the top resorts on Kos. I'll hold you to it.", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 2 },
-          trustChange: 4,
-        },
-        {
-          optionId: 'stavros-r3-close-support',
-          responses: [
-            { trustThreshold: 'low', text: "Fine. I'll be in touch if I need anything.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Good to know. Having someone watching the numbers alongside me is useful.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Appreciate it. That's the kind of support that makes a difference. Talk soon.", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 1 },
-          trustChange: 3,
-        },
-        {
-          optionId: 'stavros-r3-close-challenge',
-          responses: [
-            { trustThreshold: 'low', text: "Overtake them? I'd settle for catching up first. But the ambition is noted.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Now you're speaking my language. Give me a target and I'll beat it. Consider it done.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "I love it. They won't know what hit them. Let's go.", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 3 },
-          trustChange: 5,
-        },
-      ],
-    },
+    }
   ],
 };
 
@@ -1813,8 +1314,8 @@ const hannahR3: ConversationTree = {
   phases: [
     {
       phase: {
-        id: 'opening',
-        label: 'Opening',
+        id: 'hook',
+        label: 'Hook',
         partnerPrompt:
           "Hello there! Oh, I've been looking forward to our chat. I've got some news!",
         options: [
@@ -1885,8 +1386,8 @@ const hannahR3: ConversationTree = {
     },
     {
       phase: {
-        id: 'recommendation',
-        label: 'Recommendation',
+        id: 'pitch',
+        label: 'Pitch',
         partnerPrompt: "So, what do you think I should focus on going forward?",
         options: [
           {
@@ -1953,78 +1454,7 @@ const hannahR3: ConversationTree = {
           trustChange: -4,
         },
       ],
-    },
-    {
-      phase: {
-        id: 'objection',
-        label: 'Closing',
-        partnerPrompt: "This has been such a lovely journey. Thank you for understanding what Meadow Lane is about.",
-        options: [
-          {
-            id: 'hannah-r3-close-warmth',
-            label: 'Mirror her warmth',
-            description: 'End on a personal, warm note.',
-            playerDialogue:
-              "It's been a genuine pleasure, Hannah. You've built something really special at Meadow Lane, and I'm glad we've found a way to help more people discover it. I'll always make sure any recommendation fits who you are.",
-            styleMatch: { green: 2, yellow: 2, blue: 0, red: -1 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-          {
-            id: 'hannah-r3-close-practical',
-            label: 'End with next steps',
-            description: 'Finish with a clear plan and timeline.',
-            playerDialogue:
-              "Thank you, Hannah. So to confirm - I'll set up the Early Booker Deal this week, and we'll check in again in two weeks to see how it's performing. Sound good?",
-            styleMatch: { green: 0, yellow: 0, blue: 2, red: 1 },
-            assertiveness: 2,
-            compliance: 'safe',
-          },
-          {
-            id: 'hannah-r3-close-vision',
-            label: 'Paint a picture of the future',
-            description: 'Share an optimistic vision for Meadow Lane.',
-            playerDialogue:
-              "You know what I see for Meadow Lane? A property that's fully booked year-round with guests who truly appreciate what you offer. We're not far from that. Every step we've taken has brought you closer.",
-            styleMatch: { green: 1, yellow: 2, blue: 0, red: 0 },
-            assertiveness: 1,
-            compliance: 'safe',
-          },
-        ],
-      },
-      nodes: [
-        {
-          optionId: 'hannah-r3-close-warmth',
-          responses: [
-            { trustThreshold: 'low', text: "That means a lot. Thank you. I'm glad I trusted the process.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Oh, how kind! I feel like we've really built a lovely working relationship. Talk soon!", emotion: 'positive' },
-            { trustThreshold: 'high', text: "You've been wonderful. I used to dread these calls, you know - but now I look forward to them. Thank you!", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 2 },
-          trustChange: 7,
-        },
-        {
-          optionId: 'hannah-r3-close-practical',
-          responses: [
-            { trustThreshold: 'low', text: "Yes, that works. Thank you for being organised about it. Bye for now.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "Lovely. Clear plan, no fuss. I appreciate that. Speak in two weeks!", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect. I feel in very safe hands. Thank you!", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 1 },
-          trustChange: 2,
-        },
-        {
-          optionId: 'hannah-r3-close-vision',
-          responses: [
-            { trustThreshold: 'low', text: "What a lovely thought. I hope we get there. Thank you.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Oh, that's a beautiful vision! Fully booked with the right guests - that's the dream. Thank you!", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Stop, you'll make me cry! That's exactly what I've always wanted for Meadow Lane. Thank you so much!", emotion: 'positive' },
-          ],
-          metricEffects: { revenue: 2 },
-          trustChange: 6,
-        },
-      ],
-    },
+    }
   ],
 };
 

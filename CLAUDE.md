@@ -70,6 +70,16 @@ Key files:
 - **eRPD is partner-account level for LPS daily work.** Country-level
   is only the rollup objective. Don't say "your country's eRPD" in
   learner copy.
+- **Internal-only metric names never appear in partner dialogue.**
+  eRPD / Experienced RPD, Public RPD, Loyal RPD, and Lose Price Public
+  are LPS-side metric names - partners don't see them and the learner
+  must never say them aloud. Translate to partner-facing language in
+  conversation dialogue: "visibility", "price competitiveness",
+  "you're losing the price comparison on X% of searches", "what
+  Genius members see vs what non-Genius traffic sees". Internal names
+  are fine on the LPS dashboard / partner-detail screens (those are
+  the learner's pre-call data view) and in code/type fields. Only the
+  spoken-to-partner dialogue is gated.
 - **No "parity" in conversations with No-Parity partners.** It's a
   partner-property filter on conversation options.
 - **Role-agnostic copy.** Not all partner-facing roles are AMs - the
