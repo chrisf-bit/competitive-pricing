@@ -128,9 +128,94 @@ Key files:
   to engage; that's the action. Partners they don't pick neglect
   silently between rounds.
 - The "right" partner each round is the one with the worst KPI signals
-  (highest eRPD, highest Lose Price Public, etc). Currently set up so
-  that within each parity regime, one partner is clearly worse than
-  the others.
+  (highest eRPD, highest Lose Price Public, etc). Held as a single
+  source of truth in `data/correctPartnerPerRound.ts` per regime per
+  round. Currently populated for No-Parity rounds 1-3 only; other
+  regimes and rounds 4-10 will plug in once partner data lands.
+- **Conversation data covers rounds 1-3 per partner today.** Rounds
+  4-10 are not yet playable. `getConversationTree` returns undefined
+  past round 3, which Practice Mode handles by locking those cards.
+
+### Conversation structure
+
+- Every conversation is **3 phases: Hook -> Diagnosis -> Pitch.**
+  Mirrors the back half of Alex's Issue Tree flow taught in
+  clearance. The earlier Trigger / Intent / Root Cause / Metric
+  phases of the Issue Tree happen pre-call on the portfolio +
+  partner-detail screens, not inside the conversation.
+- **Objection phase was removed in May 2026.** We don't have SME-
+  validated content for what makes a good objection response, so we
+  pulled it rather than fabricate scoring. The Issue Tree reveal
+  still teaches learners to *anticipate* objections; we just stop
+  short of practising the response.
+- Each phase has 3 options scored on `compliance` ('safe' |
+  'borderline' | 'risky') and `styleMatch` per communication style.
+  The grader uses these directly - **never fabricate a separate
+  ground-truth map.** The "optimal" Diagnosis and Pitch options are
+  derived at grading time as the option with the highest
+  `trustChange` (metricEffects sum as tiebreak), so SME content
+  authoring stays in one place.
+- Conversation files live in `data/conversations.ts` and the three
+  sidecars `conversations-{carlos,priya,yuki}.ts`. 6 partners x 3
+  rounds = 18 trees.
+
+### Star grading and round gating
+
+- Each round is graded **0-3 stars** by `engine/grading.ts` after the
+  conversation completes. Result is shown on the new
+  `ConversationReportScreen`.
+- **Floor for any star (any of these failing = 0):**
+  1. Right partner picked for the round.
+  2. Optimal Diagnosis option chosen.
+  3. Optimal Pitch option chosen.
+  4. All picks `compliance: 'safe'`.
+  5. No active style mismatch (no single phase pick at -2 against
+     partner's primary style).
+- **Above the floor:**
+  - **2 stars:** style sum across Hook + Diagnosis + Pitch >= +5 on
+    partner's primary style.
+  - **3 stars:** style sum >= +6.
+- Pass = >= 1 star. **`advanceRound` is a hard no-op when
+  `roundStars[currentRound] < 1`** - the engine enforces the gate
+  even if a path bypasses the report screen UI.
+- **Retake reset.** On 0 stars, the engine's `resetRoundForRetake`
+  restores the engaged partner from a snapshot captured at
+  `startConversation`, returns the action budget to 1, and routes
+  back to the portfolio. A failed conversation leaves no permanent
+  metric or trust mark on the partner.
+- **`roundStars` only goes up.** A retake or Practice Mode replay
+  can raise the stored score, never lower it.
+
+### Practice Mode (Debrief)
+
+- After completing the sim, the Debrief shows a Practice Mode panel
+  with a 10-card round grid, total stars counter, and target-partner
+  label per card.
+- Tapping a card calls `startPracticeRound(round)` which **resets all
+  partners to baseline** and drops the learner into that round's
+  portfolio. A practice attempt is a clean run, not a continuation
+  of the previous playthrough.
+- `isPracticeMode` is a `GameState` flag. When true,
+  `onContinueAfterReport` routes back to the Debrief instead of
+  advancing the round.
+- Rounds without conversation data (currently 4-10) render as locked
+  "Coming soon" cards. They auto-unlock once the conversation data
+  is extended.
+
+### Persistence (localStorage)
+
+- A slim slice of state survives a page reload via
+  `util/persistence.ts`:
+  - `learnerProfile`
+  - `level0Progress.cleared`
+  - `roundStars`
+- Partner metrics, conversation state, current round, etc. **never
+  persist** - those are per-playthrough and reset each session.
+- Storage key is versioned (`rateRight:state:v1`). Bump the version
+  in the source file if you change the persisted shape; older
+  payloads are then dropped on load rather than crashing.
+- Reset (via DevNav) calls `clearPersistedState` so a true reset is
+  available.
 
 ### Partner KPIs
 
