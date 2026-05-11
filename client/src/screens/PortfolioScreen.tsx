@@ -22,6 +22,8 @@ interface PortfolioScreenProps {
   actionsRemaining: number;
   actionsThisRound: string[];
   marketContext: MarketContext;
+  /** Stars earned per round so far; used to gate round advance. */
+  roundStars: Record<number, 0 | 1 | 2 | 3>;
   onSelectPartner: (id: string) => void;
   onAdvanceRound: () => void;
 }
@@ -32,10 +34,15 @@ export function PortfolioScreen({
   actionsRemaining,
   actionsThisRound,
   marketContext,
+  roundStars,
   onSelectPartner,
   onAdvanceRound,
 }: PortfolioScreenProps) {
-  const canAdvance = actionsRemaining === 0;
+  // Advance only unlocks once the learner has used their action AND
+  // earned at least 1 star this round. The 1-star floor lives in the
+  // engine's grading layer; this is the matching UI gate.
+  const earnedStarsThisRound = roundStars[currentRound] ?? 0;
+  const canAdvance = actionsRemaining === 0 && earnedStarsThisRound >= 1;
 
   return (
     <div
@@ -417,10 +424,15 @@ export function PortfolioScreen({
                 action{actionsRemaining !== 1 ? 's' : ''} remaining this round.
               </span>
             </>
-          ) : (
+          ) : earnedStarsThisRound >= 1 ? (
             <span style={{ color: 'var(--success)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
               <Zap size={15} />
-              All actions used. Ready to advance.
+              Round cleared. Ready to advance.
+            </span>
+          ) : (
+            <span style={{ color: 'var(--error, #b3261e)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
+              <Zap size={15} />
+              Round not cleared. Retake to advance.
             </span>
           )}
         </div>
@@ -447,7 +459,7 @@ export function PortfolioScreen({
             letterSpacing: '0.01em',
           }}
         >
-          {currentRound >= 3 ? 'View Results' : 'Advance Round'}
+          {currentRound >= 10 ? 'View Results' : 'Advance Round'}
           <ArrowRight size={16} />
         </button>
       </div>

@@ -415,6 +415,13 @@ export interface GameState {
     currentResponse: string | null;
     currentEmotion: 'positive' | 'neutral' | 'cautious' | 'negative' | null;
     styleMatchScore: number | null;
+    /**
+     * Snapshot of the partner's state at the moment the conversation
+     * started. Used to revert metric/trust/log changes when the learner
+     * retakes a failed round. Preserved when endConversation routes to
+     * the report screen, cleared when the round ultimately advances.
+     */
+    partnerSnapshot: PartnerState;
   } | null;
   gameComplete: boolean;
 }

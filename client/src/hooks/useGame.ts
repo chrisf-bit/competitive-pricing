@@ -13,6 +13,7 @@ import {
   processConversationChoice,
   endConversation,
   advanceRound,
+  resetRoundForRetake,
   calculateScore,
 } from '../engine/gameEngine';
 import {
@@ -93,20 +94,13 @@ export function useGame() {
   }, []);
 
   /**
-   * Acknowledge a 0-star round and ask for a retake. Routes back to the
-   * portfolio so the learner can re-engage. The proper round-state reset
-   * (restoring actionsRemaining, reverting metric/trust effects) lands
-   * with the round-gating work in the next task - for now this is a
-   * direct-route stub.
+   * Acknowledge a 0-star round and ask for a retake. The engine
+   * restores the engaged partner from the snapshot captured at
+   * conversation start, returns the action budget for the round, and
+   * routes the learner back to the portfolio.
    */
   const onRetakeAfterReport = useCallback(() => {
-    setState((s) => ({
-      ...s,
-      screen: 'portfolio',
-      lastConversationGrade: null,
-      conversationInProgress: null,
-      selectedPartnerId: null,
-    }));
+    setState((s) => resetRoundForRetake(s));
   }, []);
 
   const onBackToPortfolio = useCallback(() => {

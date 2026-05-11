@@ -110,6 +110,23 @@ export function startConversation(state: GameState, partnerId: string): GameStat
   const tree = getConversationTree(partnerId, state.currentRound);
   if (!tree) return state;
 
+  const partner = state.partners.find((p) => p.persona.id === partnerId);
+  if (!partner) return state;
+
+  // Deep-clone the partner so a retake can restore the pre-conversation
+  // metric / trust / log state cleanly.
+  const partnerSnapshot: PartnerState = {
+    ...partner,
+    metrics: { ...partner.metrics },
+    metricHistory: partner.metricHistory.map((h) => ({
+      ...h,
+      metrics: { ...h.metrics },
+    })),
+    discounts: partner.discounts.map((d) => ({ ...d })),
+    conversationLog: partner.conversationLog.map((r) => ({ ...r })),
+    pendingActions: partner.pendingActions.map((p) => ({ ...p })),
+  };
+
   return {
     ...state,
     screen: 'conversation',
@@ -120,6 +137,7 @@ export function startConversation(state: GameState, partnerId: string): GameStat
       currentResponse: null,
       currentEmotion: null,
       styleMatchScore: null,
+      partnerSnapshot,
     },
   };
 }
@@ -286,8 +304,57 @@ export function endConversation(state: GameState): GameState {
   };
 }
 
+// ── Reset the round so the learner can retake it ──
+// Called after a 0-star conversation report. Restores the engaged
+// partner to the state captured at startConversation, returns the
+// learner's action budget for the round, and clears the failed grade.
+// The learner lands back on the portfolio able to engage any partner
+// (typically the one they should have picked) afresh.
+export function resetRoundForRetake(state: GameState): GameState {
+  const conv = state.conversationInProgress;
+  if (!conv) {
+    return {
+      ...state,
+      screen: 'portfolio',
+      lastConversationGrade: null,
+      selectedPartnerId: null,
+    };
+  }
+
+  const snapshot = conv.partnerSnapshot;
+  const newPartners = state.partners.map((p) =>
+    p.persona.id === conv.partnerId ? snapshot : p,
+  );
+
+  return {
+    ...state,
+    screen: 'portfolio',
+    partners: newPartners,
+    actionsRemaining: ACTIONS_PER_ROUND,
+    actionsThisRound: state.actionsThisRound.filter(
+      (id) => id !== conv.partnerId,
+    ),
+    selectedPartnerId: null,
+    conversationInProgress: null,
+    lastConversationGrade: null,
+  };
+}
+
 // ── Advance to the next round ──
+// Gated: requires that the learner earned at least 1 star this round.
+// If they didn't, this is a no-op (the report screen's Retake path is
+// the only way out of a 0-star round). The gate is also enforced by
+// the UI (Continue button only renders on >= 1 star), but the engine
+// guard means programmatic advance attempts can't bypass it.
 export function advanceRound(state: GameState): GameState {
+  // Gate: a round only counts as cleared once the learner has earned
+  // at least 1 star on it. A 0-star attempt or no attempt at all
+  // blocks the advance.
+  const starsThisRound = state.roundStars[state.currentRound] ?? 0;
+  if (starsThisRound < 1) {
+    return state;
+  }
+
   if (state.currentRound >= TOTAL_ROUNDS) {
     return {
       ...state,

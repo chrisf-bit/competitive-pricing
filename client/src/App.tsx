@@ -212,6 +212,7 @@ export default function App() {
               actionsRemaining={state.actionsRemaining}
               actionsThisRound={state.actionsThisRound}
               marketContext={state.marketContext}
+              roundStars={state.roundStars}
               onSelectPartner={game.onSelectPartner}
               onAdvanceRound={game.onAdvanceRound}
             />
