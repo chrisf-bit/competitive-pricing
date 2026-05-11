@@ -264,7 +264,7 @@ export const dataInsightsChallenges: DataInsightsChallenge[] = [
     id: 'public-vs-loyal',
     prompt:
       "Hotel Valle's Public RPD is 10.3% but Loyal RPD is only 0.7%. What's the most likely story here?",
-    correctHotelId: 'hotel-valle',
+    correctHotelId: 'b',
     options: [
       { hotelId: 'a', label: 'The Genius programme is misconfigured' },
       {
