@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { User, ChevronRight, AlertTriangle, CheckCircle2, Shield, ArrowLeft } from 'lucide-react';
+import { User, ChevronRight, CheckCircle2, ArrowLeft } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getConversationTree } from '../data/conversations';
 
@@ -457,62 +457,11 @@ export function ConversationScreen({
                       >
                         {option.label}
                       </span>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        {option.compliance === 'safe' && isHovered && (
-                          <span
-                            style={{
-                              fontSize: 10,
-                              fontWeight: 700,
-                              color: 'var(--success)',
-                              background: 'var(--success-bg)',
-                              padding: '2px 7px',
-                              borderRadius: 'var(--radius-pill)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 3,
-                            }}
-                          >
-                            <Shield size={9} />
-                            Compliant
-                          </span>
-                        )}
-                        {option.compliance === 'risky' && (
-                          <span
-                            style={{
-                              fontSize: 10,
-                              fontWeight: 700,
-                              color: 'var(--danger)',
-                              background: 'var(--danger-bg)',
-                              padding: '2px 7px',
-                              borderRadius: 'var(--radius-pill)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 3,
-                            }}
-                          >
-                            <AlertTriangle size={9} />
-                            Compliance risk
-                          </span>
-                        )}
-                        {option.compliance === 'borderline' && (
-                          <span
-                            style={{
-                              fontSize: 10,
-                              fontWeight: 700,
-                              color: 'var(--warning)',
-                              background: 'var(--warning-bg)',
-                              padding: '2px 7px',
-                              borderRadius: 'var(--radius-pill)',
-                              display: 'flex',
-                              alignItems: 'center',
-                              gap: 3,
-                            }}
-                          >
-                            <AlertTriangle size={9} />
-                            Borderline
-                          </span>
-                        )}
-                      </div>
+                      {/* Compliance is part of what the report card
+                          grades on, so deliberately don't surface a
+                          Compliant / Risky / Borderline badge next to
+                          the option here - the learner has to judge it
+                          from the dialogue text alone. */}
                     </div>
                     <p
                       style={{

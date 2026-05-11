@@ -160,10 +160,9 @@ export function ConversationReportScreen({
             color: 'rgba(255,255,255,0.75)',
           }}
         >
-          <span>Style alignment with {partner?.persona.name ?? 'partner'}</span>
+          <span>Style match with {partner?.persona.name ?? 'partner'}</span>
           <span
             style={{
-              fontFamily: 'var(--font-mono, monospace)',
               fontWeight: 700,
               color:
                 grade.styleSum >= STYLE_OPTIMAL_THRESHOLD
@@ -173,9 +172,13 @@ export function ConversationReportScreen({
                     : 'rgba(255,255,255,0.65)',
             }}
           >
-            {grade.styleSum >= 0 ? '+' : ''}
-            {grade.styleSum} (strong ≥ {STYLE_STRONG_THRESHOLD}, optimal ≥{' '}
-            {STYLE_OPTIMAL_THRESHOLD})
+            {grade.styleSum >= STYLE_OPTIMAL_THRESHOLD
+              ? 'Optimal'
+              : grade.styleSum >= STYLE_STRONG_THRESHOLD
+                ? 'Strong'
+                : grade.stars >= 1
+                  ? 'Neutral'
+                  : 'Off-pitch'}
           </span>
         </div>
 

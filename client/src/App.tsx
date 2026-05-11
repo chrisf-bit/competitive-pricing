@@ -51,7 +51,11 @@ export default function App() {
 
   // Level 0 screens (and briefing) run chrome-free - no Header, no GuidePanel.
   const isLevel0Chrome = state.screen === 'briefing' || state.screen.startsWith('l0-');
-  const showGuide = !isLevel0Chrome;
+  // The conversation-report screen is a moment, not a panel. The Guide
+  // doesn't have anything relevant to say while it's up, so hide it -
+  // otherwise it sits beside the report showing empty section headers.
+  const isReportMoment = state.screen === 'conversation-report';
+  const showGuide = !isLevel0Chrome && !isReportMoment;
   const selectedPartner =
     state.selectedPartnerId
       ? state.partners.find((p) => p.persona.id === state.selectedPartnerId) ?? null
