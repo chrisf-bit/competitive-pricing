@@ -19,24 +19,26 @@ export const correctPartnerPerRound: Partial<
   Record<ParityRegime, Record<number, string>>
 > = {
   none: {
-    // Stavros stays the right call across every round because his
-    // metrics stay the worst across every round. The engine's
-    // metricEffects move him by a few points per conversation - not
-    // enough to drop him out of "clearly the worst" - and the R1/R2/R3
-    // conversation trees for Stavros were already written as a
-    // sustained follow-up arc (parity breach -> fix the broken Last-
-    // Minute Deal -> plan the high season). Marina and Carlos act as
-    // distractors: visible on the portfolio, mildly concerning, but
-    // Stavros is the clear correct call each time.
+    // Right call per round follows the scripted state arc in
+    // data/partnerStateByRound.ts. Each round one partner is clearly
+    // the worst on visible KPIs:
     //
-    // Rounds 4-10 are populated below so the grading layer has an
-    // answer even before the matching conversation trees ship. Those
-    // entries should be revisited once the partner-data drop extends
-    // the conversation content to 10 rounds - the right call for a
-    // later round may shift based on whatever new crisis arrives.
+    //   R1 - Stavros (eRPD 17.2, parity breach + broken Last-Minute,
+    //                 lose-price 96%)
+    //   R2 - Marina (eRPD 9.4 trending sharply up, mobile gap
+    //                escalating, lose-price 82%; Stavros's parity fix
+    //                has dropped his numbers below Marina's)
+    //   R3 - Carlos (eRPD 10.8 trending sharply up, misconfigured
+    //                Country Rate now compounding)
+    //
+    // Rounds 4-10 will need both new conversation content and new
+    // baselines once the partner-data drop lands. Until then they're
+    // placeheld with Stavros so the grading layer has an answer; the
+    // sim today isn't playable past R3 because getConversationTree
+    // returns undefined beyond R3.
     1: 'stavros',
-    2: 'stavros',
-    3: 'stavros',
+    2: 'marina',
+    3: 'carlos',
     4: 'stavros',
     5: 'stavros',
     6: 'stavros',

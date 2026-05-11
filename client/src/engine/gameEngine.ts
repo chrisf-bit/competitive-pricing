@@ -12,7 +12,31 @@ import type {
 import { initialPartners } from '../data/partners';
 import { marketContextByRound, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
+import { getPartnerBaseline } from '../data/partnerStateByRound';
 import { gradeRound } from './grading';
+
+/**
+ * Apply the per-round scripted baseline to a single partner. The
+ * baseline overwrites the headline KPI fields the learner reads on
+ * the portfolio so the "spot the worst partner" mechanic actually
+ * works round to round - without this, conversation outcomes only
+ * nudge a couple of legacy fields and the same partner stays worst
+ * forever.
+ *
+ * Returns the partner unchanged if no baseline is defined for this
+ * round (which is the case for rounds 4-10 today).
+ */
+function applyRoundBaseline(
+  partner: PartnerState,
+  round: number,
+): PartnerState {
+  const baseline = getPartnerBaseline(partner.persona.id, round);
+  if (!baseline) return partner;
+  return {
+    ...partner,
+    metrics: { ...baseline.metrics },
+  };
+}
 
 // ── Constants ──
 // One engagement per round - the learner must spot which partner needs them.
@@ -33,10 +57,17 @@ export function createInitialState(overrides?: {
   level0Cleared?: boolean;
   roundStars?: GameState['roundStars'];
 }): GameState {
-  const partners = initialPartners.map((p) => ({
-    ...p,
-    metricHistory: [{ round: 0, metrics: { ...p.metrics } }],
-  }));
+  const partners = initialPartners.map((p) => {
+    // Apply the Round 1 baseline so the partner data the learner sees
+    // on first portfolio render matches the scripted narrative arc.
+    // For partners without a baseline (currently anyone outside No-
+    // Parity), this just passes the partner through unchanged.
+    const withBaseline = applyRoundBaseline(p, 1);
+    return {
+      ...withBaseline,
+      metricHistory: [{ round: 0, metrics: { ...withBaseline.metrics } }],
+    };
+  });
 
   return {
     screen: 'briefing',
@@ -83,14 +114,17 @@ export function createInitialState(overrides?: {
  * continuation of the learner's previous playthrough.
  */
 export function startPracticeRound(state: GameState, round: number): GameState {
-  const partners = initialPartners.map((p) => ({
-    ...p,
-    metrics: { ...p.metrics },
-    metricHistory: [{ round: 0, metrics: { ...p.metrics } }],
-    discounts: p.discounts.map((d) => ({ ...d })),
-    conversationLog: [],
-    pendingActions: [],
-  }));
+  const partners = initialPartners.map((p) => {
+    const withBaseline = applyRoundBaseline(p, round);
+    return {
+      ...withBaseline,
+      metrics: { ...withBaseline.metrics },
+      metricHistory: [{ round: 0, metrics: { ...withBaseline.metrics } }],
+      discounts: p.discounts.map((d) => ({ ...d })),
+      conversationLog: [],
+      pendingActions: [],
+    };
+  });
 
   return {
     ...state,
@@ -399,8 +433,10 @@ export function advanceRound(state: GameState): GameState {
 
   const nextRound = state.currentRound + 1;
 
-  // Apply neglect penalties and drift to unengaged partners
-  const updatedPartners = state.partners.map((partner) => {
+  // First, do the engine-level updates from this round's play:
+  // neglect drift for unengaged partners, history snapshot for the
+  // engaged one.
+  const partnersWithRoundEffects = state.partners.map((partner) => {
     const wasEngaged = state.actionsThisRound.includes(partner.persona.id);
 
     if (!wasEngaged) {
@@ -431,6 +467,15 @@ export function advanceRound(state: GameState): GameState {
       ],
     };
   });
+
+  // Then apply the scripted baseline for the next round. The baseline
+  // overrides the headline KPI fields so the portfolio data evolves
+  // along the authored arc (Stavros recovers, Marina's gap escalates,
+  // Carlos's misconfig compounds). Partners without a baseline for
+  // this round (e.g. rounds 4-10 today) pass through unchanged.
+  const updatedPartners = partnersWithRoundEffects.map((p) =>
+    applyRoundBaseline(p, nextRound),
+  );
 
   // Generate round summary
   const roundSummary = generateRoundSummary(
