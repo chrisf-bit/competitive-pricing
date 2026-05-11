@@ -779,6 +779,80 @@ const marinaR2: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "So what does the data actually show? Walk me through what's moved and what hasn't.",
+        options: [
+          {
+            id: 'marina-r2-diag-progress-only',
+            label: 'Show overall progress',
+            description: 'Highlight that the headline numbers are trending up.',
+            playerDialogue:
+              "The headline is positive - visibility is up, conversion is improving, and bookings are tracking ahead of where you were a month ago. The Mobile Rate change is doing what we hoped.",
+            styleMatch: { blue: 1, green: 1, red: 0, yellow: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'marina-r2-diag-rpd-broad',
+            label: 'Note RPD still has room - more discounts needed',
+            description: 'Acknowledge progress but argue the broader discount stack should now be opened up.',
+            playerDialogue:
+              "Mobile Rate has helped, but your overall RPD still has room to improve. My read is the mobile fix on its own isn't enough - we should be looking at broader discount adoption to push it further.",
+            styleMatch: { blue: 0, green: -1, red: 1, yellow: 1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'marina-r2-diag-source-market-gap',
+            label: 'Pinpoint a source-market visibility gap',
+            description:
+              'Identify that the remaining gap is concentrated on inbound traffic from her top source markets.',
+            playerDialogue:
+              "Mobile is closing - your mobile booking share is up about 8 points since we activated it. Where you're still losing the price comparison is on inbound traffic from France, Germany, and the UK. Those three account for over 60% of your non-domestic search volume and you're being undercut on them specifically. Domestic Spanish travellers and mobile users are now fine; the gap is now country-specific.",
+            styleMatch: { blue: 2, green: 1, red: 0, yellow: -1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'marina-r2-diag-progress-only',
+          responses: [
+            { trustThreshold: 'low', text: "Good headlines - but I want to know what's NOT working as much as what is. Anything still off?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "That's good to hear, but it's not the whole picture. Where is there still a gap?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Encouraging. But you know me - I'd rather discuss what's still off than just celebrate what's working.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: 0,
+        },
+        {
+          optionId: 'marina-r2-diag-rpd-broad',
+          responses: [
+            { trustThreshold: 'low', text: "'Broader discount adoption' is vague. I'm not adding products just because the dashboard says I should - tell me which segment is actually losing and why.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I'd want a more precise read than 'open up discounts'. Where exactly is the leakage?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "I hear you, but blanket discounting isn't my style. Can you point me at the specific segment?", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 1 },
+          trustChange: 0,
+        },
+        {
+          optionId: 'marina-r2-diag-source-market-gap',
+          responses: [
+            { trustThreshold: 'low', text: "That's much more useful. Source-market specific - I can work with that. Can you send me the breakdown by country?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Now that's the kind of analysis I value. So mobile is sorted, and the next leakage is country-specific. That makes sense given my booking mix.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes - I was looking at the same breakdown last week and reaching the same conclusion. Glad we're aligned on the next move.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "Right - so where do we go from here? What's the next logical step?",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt:
@@ -930,6 +1004,79 @@ const stavrosR2: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt: "So where do we actually stand? Be specific.",
+        options: [
+          {
+            id: 'stavros-r2-diag-mostly-fine',
+            label: 'Frame it as mostly back on track',
+            description: "Suggest the parity fix has done the heavy lifting and the rest will follow.",
+            playerDialogue:
+              "Honestly, the parity fix has done most of the heavy lifting. The numbers are still climbing but the worst is behind us. I'd say we're in recovery mode now.",
+            styleMatch: { red: 0, blue: -1, yellow: 1, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'stavros-r2-diag-need-deeper-discount',
+            label: 'Argue the discount levels are too shallow',
+            description: 'Read the residual gap as needing harder discounts across the stack.',
+            playerDialogue:
+              "Parity is sorted. Where I think you're still losing ground is the depth of your discounts - your Genius and Mobile discount levels are sitting at the conservative end of the range. To pull back the volume you've lost, you'd want to push those harder.",
+            styleMatch: { red: 1, blue: 0, yellow: 1, green: -1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'stavros-r2-diag-broken-lastminute',
+            label: 'Pinpoint the misconfigured Last-Minute Deal',
+            description:
+              'Show that the residual leakage is your Last-Minute Deal misfiring - eligible too early, discount too small.',
+            playerDialogue:
+              "Parity is fixed - that's working. What's still bleeding is your Last-Minute Deal. It's active, but it's misconfigured: the booking window is set seven days out instead of one to two, so you're discounting bookings that would have come in at full price anyway, and you're missing the empty-room conversions it's actually designed to catch. It's costing you on both sides at once.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'stavros-r2-diag-mostly-fine',
+          responses: [
+            { trustThreshold: 'low', text: "'Recovery mode' is exactly the kind of phrase I don't want to hear. I need to know where I'm still losing money, not be told everything's fine.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "That's not specific enough for me. If there's residual leakage, find it. Don't tell me to wait it out.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I appreciate the confidence, but I want to know where I'm STILL losing - because I am. What's the residual problem?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'stavros-r2-diag-need-deeper-discount',
+          responses: [
+            { trustThreshold: 'low', text: "More discount, again. I've already discounted. If that was the answer, parity wouldn't have been the diagnosis last time.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I'd push back on that. Deeper discounting feels like throwing money at the problem. Anything more specific?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "Maybe - but my instinct says there's something more specific than 'discount harder'. Look again.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: 0,
+        },
+        {
+          optionId: 'stavros-r2-diag-broken-lastminute',
+          responses: [
+            { trustThreshold: 'low', text: "Wait - my Last-Minute Deal has been misconfigured this whole time? How did this get missed? Show me what 'misconfigured' looks like exactly.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now THAT is the kind of specific diagnosis I needed. A broken setup discounting full-price bookings - that's costing me twice. Let's fix it.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Right. So we fixed the visibility problem but the product itself is broken. That's actually useful - it means there's a clear next move.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "Right - so what's the next play? Fix what's broken, then what?",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt: "Right. So what's the next play?",
@@ -1075,6 +1222,80 @@ const hannahR2: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: -1,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "So what's the data actually telling you? I always like to understand the bigger picture.",
+        options: [
+          {
+            id: 'hannah-r2-diag-broad-uplift',
+            label: 'Celebrate the broad uplift',
+            description: 'Highlight that bookings are up across the board.',
+            playerDialogue:
+              "The data is looking lovely - bookings are up, visibility is up, conversion is moving in the right direction. The change we made is doing its job and you're being seen by more travellers.",
+            styleMatch: { green: 1, yellow: 2, blue: 0, red: 0 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'hannah-r2-diag-needs-more-products',
+            label: 'Argue the next gap is more products',
+            description: 'Read the residual softness as needing additional discount products.',
+            playerDialogue:
+              "It's working, but I don't think we're done. Your overall price competitiveness has improved but it's not yet on a par with the comparable set. The shape of the gap suggests we need more products active to keep pulling visibility up.",
+            styleMatch: { green: -1, yellow: 0, blue: 0, red: 1 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+          {
+            id: 'hannah-r2-diag-midweek-pattern',
+            label: 'Spot the midweek pattern',
+            description:
+              'Show that the uplift is concentrated on weekends; weekday/off-peak is still soft and reflects a seasonal-pricing gap, not a product gap.',
+            playerDialogue:
+              "Here's the interesting bit: the uplift is concentrated on weekends and peak nights - those are now competitive. Where there's still softness is weekday and shoulder-season nights. The pattern says it's a seasonal pricing question, not another discount product - on weekends your rate is fine, but on quieter nights you're appearing alongside properties that have softer midweek pricing.",
+            styleMatch: { green: 2, yellow: 1, blue: 2, red: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'hannah-r2-diag-broad-uplift',
+          responses: [
+            { trustThreshold: 'low', text: "Oh that's wonderful to hear! But is there anything I should still be watching out for?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Lovely. But I always like to know where I should be paying attention next - what's still soft?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "I'm so pleased. Is there anywhere you think we could keep building though? I'd rather not coast.", emotion: 'positive' },
+          ],
+          metricEffects: {},
+          trustChange: 1,
+        },
+        {
+          optionId: 'hannah-r2-diag-needs-more-products',
+          responses: [
+            { trustThreshold: 'low', text: "Oh no - 'more products' sounds like 'more discounts' to me. That's what I was worried about. Is there really nothing else to read in the data?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I'm not sure about that, to be honest. It feels like a leap. Is the data actually pointing at product count, or is there something more specific?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I'd want a more specific read than that before I add another product. Where exactly is the softness?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'hannah-r2-diag-midweek-pattern',
+          responses: [
+            { trustThreshold: 'low', text: "Oh, that's a relief - weekends are doing well. So it's specifically about my quieter nights? That feels like something I can actually do something about.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That makes so much sense. My peak nights have always been strong - it's the slow midweek stretches that I worry about. So it's really a pricing-shape question.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes - and that's exactly the bit that bothers me. Midweek empty rooms feel like a waste. Tell me what you'd do.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "So what would you suggest as a next step? I'm more open to ideas now, but I still want to be careful.",
         },
       ],
     },
