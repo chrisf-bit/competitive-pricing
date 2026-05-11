@@ -1456,6 +1456,80 @@ const marinaR3: ConversationTree = {
     },
     {
       phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "Before we talk strategy - where's the data telling you the residual gap actually is?",
+        options: [
+          {
+            id: 'marina-r3-diag-aggregate',
+            label: 'Frame it at the aggregate level',
+            description: 'Note that headline competitiveness is strong; rest is general fine-tuning.',
+            playerDialogue:
+              "At the aggregate level your position is genuinely strong - you're well inside the competitive band against the boutique set in Madrid. Anything else is fine-tuning rather than fixing.",
+            styleMatch: { blue: 1, green: 1, red: 0, yellow: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'marina-r3-diag-base-rate-lift',
+            label: 'Suggest the next move is a base rate lift',
+            description: 'Read the strong position as headroom to lift the base rate.',
+            playerDialogue:
+              "Your position is strong enough that I think there's room to test a small base rate lift in peak. The data suggests you're slightly under-priced now that visibility has caught up - we could capture more revenue per booking.",
+            styleMatch: { blue: 1, green: 0, red: 2, yellow: 1 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+          {
+            id: 'marina-r3-diag-room-type-mix',
+            label: 'Pinpoint the room-type performance gap',
+            description:
+              'Show that the aggregate hides a meaningful gap between standard and superior room performance.',
+            playerDialogue:
+              "Headline numbers are great. But when I break it down by room type, the story is different: your standard rooms are tracking at the top of the boutique set, but your superior rooms are running materially below them on occupancy. You're pricing them as if they perform identically - the data says they don't. That's the next meaningful gap.",
+            styleMatch: { blue: 2, green: 1, red: 0, yellow: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'marina-r3-diag-aggregate',
+          responses: [
+            { trustThreshold: 'low', text: "Strong is good, but 'fine-tuning' isn't a recommendation. I'm preparing a quarterly review - I need more than that.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I'd push back gently - aggregate fine, but I always assume there's a more granular cut. What does the segment-level view show?", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Aggregate-level is encouraging, but I want to know what the breakdown by segment shows. There's always something underneath the headline.", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: 0,
+        },
+        {
+          optionId: 'marina-r3-diag-base-rate-lift',
+          responses: [
+            { trustThreshold: 'low', text: "A base rate lift? That feels like the opposite of what got us here. I'd want to be very careful about that.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Interesting, but risky. We worked hard to get visibility back - a rate lift now could undo it. Is the segment-level data really that strong, or is this an aggregate read?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "Possible, but the risk-reward feels off. I'd want a much sharper signal than aggregate before lifting price. Anything more specific?", emotion: 'neutral' },
+          ],
+          metricEffects: { experiencedRPD: 1 },
+          trustChange: -1,
+        },
+        {
+          optionId: 'marina-r3-diag-room-type-mix',
+          responses: [
+            { trustThreshold: 'low', text: "Standard versus superior - now that's interesting. I had a feeling my superior rooms were under-performing but I hadn't quantified it. Show me the gap.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's exactly the kind of segment-level cut I was hoping for. Pricing my room types identically when they perform differently - that's a real gap.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes - I've been suspicious of my superior room performance for a while. This is what I want to talk about in the quarterly review. Go on.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 3, visibility: 1, revenue: 1 },
+          trustChange: 7,
+          nextPhasePrompt: "Right - so what would you recommend for my Q2 pricing strategy given that?",
+        },
+      ],
+    },
+    {
+      phase: {
         id: 'pitch',
         label: 'Pitch',
         partnerPrompt: "What do you recommend for my Q2 pricing strategy?",
@@ -1600,6 +1674,79 @@ const stavrosR3: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: 2,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt: "So before we plan for high season - where are we still leaking? Be specific.",
+        options: [
+          {
+            id: 'stavros-r3-diag-good-everywhere',
+            label: 'Suggest the position is solid across the board',
+            description: 'Frame current performance as broadly competitive in every period.',
+            playerDialogue:
+              "Honestly, you're now competitive across the board - peak, shoulder and off-peak. There isn't a screaming gap anywhere. The conversation today is more about how we capitalise from a strong position than how we patch a problem.",
+            styleMatch: { red: 0, blue: 0, yellow: 1, green: 1 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'stavros-r3-diag-deeper-discounts',
+            label: 'Argue we should discount harder going into peak',
+            description: 'Read the recovery as a signal to lean harder on discounts.',
+            playerDialogue:
+              "We've got momentum and high season is coming. My read is we should push the existing discounts harder across the board to lock in volume before competitors do the same.",
+            styleMatch: { red: 1, blue: -1, yellow: 1, green: -1 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+          {
+            id: 'stavros-r3-diag-peak-vs-shoulder',
+            label: 'Split the read by peak vs shoulder',
+            description:
+              'Show that peak demand is robust enough to capture advance bookings while shoulder season still needs visibility help.',
+            playerDialogue:
+              "When I split it by season the picture changes. For high season - June through August - your demand signal is strong and you're not capturing enough advance bookings, you're leaving peak revenue on the table waiting for late traffic. For shoulder season - April-May and September - you're still being undercut on price-shopping searches, so volume needs a push. They're different problems in different periods, not one blanket discount question.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'stavros-r3-diag-good-everywhere',
+          responses: [
+            { trustThreshold: 'low', text: "If I'm competitive everywhere then why am I not seeing the booking volume I want yet? Don't tell me everything's fine - tell me what's still off.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Mostly true, but I don't believe there's nothing left to find. Look harder.", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "I appreciate the confidence, but high season is too important for 'broadly fine'. What's the next real opportunity?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -1,
+        },
+        {
+          optionId: 'stavros-r3-diag-deeper-discounts',
+          responses: [
+            { trustThreshold: 'low', text: "Discount harder going into peak? On the highest-margin nights of my year? That's exactly when I should be tightening, not loosening.", emotion: 'negative' },
+            { trustThreshold: 'medium', text: "I don't agree. Peak is when I make my margin. Heavier discounts there would be giving away revenue I don't need to give away.", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I'd push back on that hard. Peak is my best window - I'm not going to over-discount it. Anything sharper than a blanket push?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -2,
+        },
+        {
+          optionId: 'stavros-r3-diag-peak-vs-shoulder',
+          responses: [
+            { trustThreshold: 'low', text: "Now THAT is two different problems I can actually plan around. Peak too late, shoulder too pricey. Good. Walk me through it.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Yes - that matches my gut. I've been treating it like one strategy when it should be two. Different periods, different plays. Good read.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "That's exactly the kind of strategic separation I needed. Two different problems, two different plays - I can plan around that. Go on.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 4, visibility: 2 },
+          trustChange: 7,
+          nextPhasePrompt: "Right - so what's the play for next season? High season is coming - I need a plan.",
         },
       ],
     },
@@ -1750,6 +1897,80 @@ const hannahR3: ConversationTree = {
           ],
           metricEffects: {},
           trustChange: 4,
+        },
+      ],
+    },
+    {
+      phase: {
+        id: 'diagnosis',
+        label: 'Diagnosis',
+        partnerPrompt:
+          "So what does it look like in the numbers? You know I always like to hear what the data says alongside the stories.",
+        options: [
+          {
+            id: 'hannah-r3-diag-broad-rosy',
+            label: 'Stay broad and celebratory',
+            description: "Confirm everything's trending up without getting into specifics.",
+            playerDialogue:
+              "Honestly, the picture is lovely across the board. Bookings, visibility, conversion - all trending up. The numbers are matching the stories your guests are telling you.",
+            styleMatch: { green: 2, yellow: 2, blue: 0, red: 0 },
+            assertiveness: 1,
+            compliance: 'safe',
+          },
+          {
+            id: 'hannah-r3-diag-now-push-more',
+            label: 'Argue the momentum says push harder',
+            description: 'Suggest the strong results are a sign to layer in more discount products.',
+            playerDialogue:
+              "The momentum is real - my read is now's the moment to capitalise. Numbers like these suggest we should add more products and accelerate while travellers are responding so well.",
+            styleMatch: { green: -1, yellow: 0, blue: 0, red: 2 },
+            assertiveness: 3,
+            compliance: 'safe',
+          },
+          {
+            id: 'hannah-r3-diag-advance-window-gap',
+            label: 'Spot the advance-booking window gap',
+            description:
+              "Show that current strength is in close-in bookings; she's still under-represented in advance-window searches.",
+            playerDialogue:
+              "The current strength is mostly close-in - travellers booking within two weeks. Where you're still under-represented is the advance window: people planning trips one to three months ahead. Your direct and Genius guests already book early, but on Booking.com you barely appear in those advance searches. That's the next gentle gap - calendar certainty, not visibility-versus-price.",
+            styleMatch: { green: 2, yellow: 1, blue: 2, red: 0 },
+            assertiveness: 2,
+            compliance: 'safe',
+          },
+        ],
+      },
+      nodes: [
+        {
+          optionId: 'hannah-r3-diag-broad-rosy',
+          responses: [
+            { trustThreshold: 'low', text: "Oh wonderful! Is there anywhere I should still be looking though? I'd hate to take my eye off something important.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's lovely to hear. But you know me - I always like to know where I could still be paying attention.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "I'm so pleased. Anywhere you think we could keep building, without overdoing it?", emotion: 'positive' },
+          ],
+          metricEffects: {},
+          trustChange: 1,
+        },
+        {
+          optionId: 'hannah-r3-diag-now-push-more',
+          responses: [
+            { trustThreshold: 'low', text: "Oh dear - 'capitalise' and 'more products' is exactly what worries me. I've felt comfortable with what we've done. I don't want to overdo it.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I appreciate the enthusiasm but that's not how I want to grow. Gentle and right-fit, not 'accelerate'. Is there a softer read of the data?", emotion: 'cautious' },
+            { trustThreshold: 'high', text: "I know you mean well - but 'add more products' feels like the wrong direction for me. I'd rather one thoughtful step than several at once. What does the data actually suggest specifically?", emotion: 'neutral' },
+          ],
+          metricEffects: {},
+          trustChange: -3,
+        },
+        {
+          optionId: 'hannah-r3-diag-advance-window-gap',
+          responses: [
+            { trustThreshold: 'low', text: "Oh, I'd never thought about that gap. So my close-in is doing well, but I'm just not visible to advance planners. That feels like something we can fix without changing what works.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That makes so much sense. Advance planners are exactly the kind of guests I'd love more of - they're organised, they value certainty. And it doesn't undermine what we've built. Tell me more.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes - advance bookings would give me such peace of mind about my calendar! And it sounds like a gentle, well-fitting next step. I love it.", emotion: 'positive' },
+          ],
+          metricEffects: { experiencedRPD: 2, visibility: 1, revenue: 1 },
+          trustChange: 6,
+          nextPhasePrompt: "So given that, what would you suggest I focus on going forward?",
         },
       ],
     },
