@@ -19,8 +19,8 @@ export const correctPartnerPerRound: Partial<
   Record<ParityRegime, Record<number, string>>
 > = {
   none: {
-    // Stavros stays the right call across all three rounds because his
-    // metrics stay the worst across all three rounds. The engine's
+    // Stavros stays the right call across every round because his
+    // metrics stay the worst across every round. The engine's
     // metricEffects move him by a few points per conversation - not
     // enough to drop him out of "clearly the worst" - and the R1/R2/R3
     // conversation trees for Stavros were already written as a
@@ -28,9 +28,22 @@ export const correctPartnerPerRound: Partial<
     // Minute Deal -> plan the high season). Marina and Carlos act as
     // distractors: visible on the portfolio, mildly concerning, but
     // Stavros is the clear correct call each time.
+    //
+    // Rounds 4-10 are populated below so the grading layer has an
+    // answer even before the matching conversation trees ship. Those
+    // entries should be revisited once the partner-data drop extends
+    // the conversation content to 10 rounds - the right call for a
+    // later round may shift based on whatever new crisis arrives.
     1: 'stavros',
     2: 'stavros',
     3: 'stavros',
+    4: 'stavros',
+    5: 'stavros',
+    6: 'stavros',
+    7: 'stavros',
+    8: 'stavros',
+    9: 'stavros',
+    10: 'stavros',
   },
   // narrow / wide / cross-regional: pending partner data. The
   // partner-data drop will introduce per-regime crisis partners.
