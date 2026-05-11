@@ -343,7 +343,7 @@ export function ConversationScreen({
                 boxShadow: '0 3px 14px rgba(254,186,2,0.35)',
               }}
             >
-              Return to Portfolio
+              See round report
               <ChevronRight size={16} />
             </button>
           </div>

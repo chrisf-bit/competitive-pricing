@@ -75,6 +75,40 @@ export function useGame() {
     setState((s) => advanceRound(s));
   }, []);
 
+  /**
+   * Acknowledge the conversation report and continue. For passing rounds
+   * this advances to the next round (or debrief at game end). The grade
+   * itself is cleared so the report screen doesn't re-trigger.
+   */
+  const onContinueAfterReport = useCallback(() => {
+    setState((s) => {
+      const advanced = advanceRound(s);
+      return {
+        ...advanced,
+        lastConversationGrade: null,
+        conversationInProgress: null,
+        selectedPartnerId: null,
+      };
+    });
+  }, []);
+
+  /**
+   * Acknowledge a 0-star round and ask for a retake. Routes back to the
+   * portfolio so the learner can re-engage. The proper round-state reset
+   * (restoring actionsRemaining, reverting metric/trust effects) lands
+   * with the round-gating work in the next task - for now this is a
+   * direct-route stub.
+   */
+  const onRetakeAfterReport = useCallback(() => {
+    setState((s) => ({
+      ...s,
+      screen: 'portfolio',
+      lastConversationGrade: null,
+      conversationInProgress: null,
+      selectedPartnerId: null,
+    }));
+  }, []);
+
   const onBackToPortfolio = useCallback(() => {
     setState((s) => ({
       ...s,
@@ -212,6 +246,8 @@ export function useGame() {
     onConversationChoice,
     onEndConversation,
     onAdvanceRound,
+    onContinueAfterReport,
+    onRetakeAfterReport,
     onBackToPortfolio,
     onRestart,
     setLearnerMarket,

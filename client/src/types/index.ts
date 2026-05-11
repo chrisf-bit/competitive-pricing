@@ -320,6 +320,7 @@ export type GameScreen =
   | 'l1-action-plan'
   | 'l1-escalate'
   | 'conversation'
+  | 'conversation-report'
   | 'l1-outcome'
   | 'round-transition'
   // ── Wrap-up ──
@@ -336,6 +337,33 @@ export interface RoundSummaryItem {
   headline: string;
   detail: string;
   metricChange: TrendDirection;
+}
+
+/**
+ * Outcome of the most recently completed conversation - written by the
+ * engine when the last phase resolves and consumed by the
+ * ConversationReportScreen. Mirrors the GradingResult shape from
+ * engine/grading.ts but lives here so the type is part of the shared
+ * domain rather than buried in the engine.
+ */
+export interface LastConversationGrade {
+  partnerId: string;
+  round: number;
+  stars: 0 | 1 | 2 | 3;
+  rightPartner: boolean;
+  expectedPartnerId: string | null;
+  allCompliant: boolean;
+  diagnosisCorrect: boolean;
+  pitchCorrect: boolean;
+  noActiveMismatch: boolean;
+  styleSum: number;
+  failureReason:
+    | 'wrong-partner'
+    | 'wrong-diagnosis'
+    | 'wrong-pitch'
+    | 'unsafe-pick'
+    | 'style-mismatch'
+    | null;
 }
 
 export interface GameState {
@@ -374,6 +402,12 @@ export interface GameState {
    * sessions; a replay can only raise the value, never lower it.
    */
   roundStars: Record<number, 0 | 1 | 2 | 3>;
+  /**
+   * Grading result from the most recently completed conversation.
+   * Populated when a conversation ends, consumed by the
+   * conversation-report screen, cleared when the learner continues.
+   */
+  lastConversationGrade: LastConversationGrade | null;
   conversationInProgress: {
     partnerId: string;
     phaseIndex: number;

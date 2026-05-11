@@ -7,10 +7,12 @@ import type {
   ScoreBreakdown,
   RPDLevel,
   TrendDirection,
+  LastConversationGrade,
 } from '../types';
 import { initialPartners } from '../data/partners';
 import { marketContextByRound, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
+import { gradeRound } from './grading';
 
 // ── Constants ──
 // One engagement per round - the learner must spot which partner needs them.
@@ -66,6 +68,7 @@ export function createInitialState(overrides?: {
     marketContext: marketContextByRound[1],
     roundSummaries: [],
     roundStars: overrides?.roundStars ?? {},
+    lastConversationGrade: null,
     conversationInProgress: null,
     gameComplete: false,
   };
@@ -198,11 +201,45 @@ export function processConversationChoice(
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
     const newActionsRemaining = state.actionsRemaining - 1;
 
+    // Grade the round - 0/1/2/3 stars - and route to the report screen
+    // so the learner sees their result before the round transition.
+    // Stars never go down: a replay can only improve the stored score.
+    const regime = state.learnerProfile.market?.parityRegime ?? null;
+    let grade: LastConversationGrade | null = null;
+    let newRoundStars = state.roundStars;
+    if (regime) {
+      const result = gradeRound({
+        tree,
+        choices: newChoices,
+        selectedPartnerId: conv.partnerId,
+        regime,
+        partnerPrimaryStyle: partner.persona.style,
+      });
+      grade = {
+        partnerId: conv.partnerId,
+        round: state.currentRound,
+        ...result,
+      };
+      const previousBest = state.roundStars[state.currentRound] ?? 0;
+      if (result.stars > previousBest) {
+        newRoundStars = {
+          ...state.roundStars,
+          [state.currentRound]: result.stars,
+        };
+      }
+    }
+
+    // Stay on the conversation screen so the learner can read the
+    // final partner response. The conversation-complete UI button there
+    // calls onEndConversation, which routes to the report screen via
+    // endConversation below.
     return {
       ...state,
       partners: newPartners,
       actionsRemaining: newActionsRemaining,
       actionsThisRound: newActionsThisRound,
+      roundStars: newRoundStars,
+      lastConversationGrade: grade,
       conversationInProgress: {
         ...conv,
         phaseIndex: conv.phaseIndex,
@@ -229,16 +266,23 @@ export function processConversationChoice(
   };
 }
 
-// ── End a conversation and return to portfolio ──
+// ── End a conversation ──
+// If a grade was computed (the conversation actually finished), route to
+// the conversation-report screen so the learner sees their 0-3 star
+// outcome. If there's no grade (the learner backed out mid-conversation
+// via the dev nav or hit the abandon path), drop them back to the
+// portfolio as before.
 export function endConversation(state: GameState): GameState {
   const conv = state.conversationInProgress;
   if (!conv) return state;
 
+  const hasGrade = state.lastConversationGrade !== null;
+
   return {
     ...state,
-    screen: 'portfolio',
-    conversationInProgress: null,
-    selectedPartnerId: null,
+    screen: hasGrade ? 'conversation-report' : 'portfolio',
+    conversationInProgress: hasGrade ? state.conversationInProgress : null,
+    selectedPartnerId: hasGrade ? state.selectedPartnerId : null,
   };
 }
 

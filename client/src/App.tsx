@@ -19,6 +19,7 @@ import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
+import { ConversationReportScreen } from './screens/ConversationReportScreen';
 import { RoundTransitionScreen } from './screens/RoundTransitionScreen';
 import { DebriefScreen } from './screens/DebriefScreen';
 
@@ -240,6 +241,14 @@ export default function App() {
               onChoice={game.onConversationChoice}
               onEnd={game.onEndConversation}
               onBack={game.onBackToPortfolio}
+            />
+          )}
+          {state.screen === 'conversation-report' && state.lastConversationGrade && (
+            <ConversationReportScreen
+              grade={state.lastConversationGrade}
+              partners={state.partners}
+              onContinue={game.onContinueAfterReport}
+              onRetake={game.onRetakeAfterReport}
             />
           )}
           {state.screen === 'round-transition' && (
