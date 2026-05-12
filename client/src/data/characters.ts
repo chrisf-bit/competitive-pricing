@@ -40,6 +40,14 @@ export interface CharacterAvatar {
    * row reads as a varied set rather than a uniform wall of tiles.
    */
   bgColor: string;
+  /**
+   * Optional CSS object-position for the avatar img element. Most
+   * illustrations sit fine at the default 'center', but some PNGs
+   * have the character framed higher in the source and lose hair to
+   * objectFit: 'cover' cropping. Setting this to e.g. 'center top'
+   * anchors the top of the image and crops from the bottom instead.
+   */
+  objectPosition?: string;
 }
 
 /**
@@ -63,7 +71,15 @@ export const characterAvatars: CharacterAvatar[] = [
   // Masc-presenting cluster
   { id: 'avatar-felix', label: 'Felix', dataUri: felixImg, bgColor: '#fef3c7' },
   { id: 'avatar-noah', label: 'Noah', dataUri: noahImg, bgColor: '#bae6fd' },
-  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg, bgColor: '#93c5fd' },
+  {
+    id: 'avatar-marcus',
+    label: 'Marcus',
+    dataUri: marcusImg,
+    bgColor: '#93c5fd',
+    // Marcus's PNG is framed slightly higher than the others - default
+    // centre crop lost his hair under objectFit: cover. Anchor to top.
+    objectPosition: 'center top',
+  },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];
 

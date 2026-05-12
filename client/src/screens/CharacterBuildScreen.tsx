@@ -248,12 +248,11 @@ function AvatarTile({
         style={{
           width: '100%',
           height: '100%',
-          // 'contain' (vs 'cover') means each illustration fits the
-          // tile in full rather than getting cropped at the top or
-          // sides - a few of the PNGs are framed slightly higher and
-          // were losing hair under 'cover'. The per-avatar bgColor
-          // shows around the edges as the tile frame.
-          objectFit: 'contain',
+          objectFit: 'cover',
+          // Defaults to centre. Per-avatar override (Marcus's PNG is
+          // framed slightly higher than the rest, so he anchors to
+          // 'center top' to keep his hair in frame).
+          objectPosition: avatar.objectPosition ?? 'center',
           borderRadius: 8,
         }}
       />
