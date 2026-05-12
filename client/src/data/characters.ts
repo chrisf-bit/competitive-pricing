@@ -76,9 +76,10 @@ export const characterAvatars: CharacterAvatar[] = [
     label: 'Marcus',
     dataUri: marcusImg,
     bgColor: '#93c5fd',
-    // Marcus's PNG is framed slightly higher than the others - default
-    // centre crop lost his hair under objectFit: cover. Anchor to top.
-    objectPosition: 'center top',
+    // Marcus's PNG is framed slightly higher than the others. Pure
+    // 'center top' cropped his shoulders off; 'center 25%' is a
+    // softer top-anchor that keeps his hair AND his collar in frame.
+    objectPosition: 'center 25%',
   },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];
