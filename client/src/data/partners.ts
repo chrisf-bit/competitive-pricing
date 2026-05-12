@@ -111,60 +111,6 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Hannah - Country Guesthouse (Green/Nurturer) ──
-  {
-    persona: {
-      id: 'hannah',
-      name: 'Hannah Whitfield',
-      propertyName: 'Meadow Lane Guesthouse',
-      propertyType: 'Country Guesthouse',
-      roomCount: 8,
-      location: 'Cotswolds, England',
-      parityRegime: 'narrow',
-      avatar: 'HW',
-      propertyImage: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&h=250&fit=crop',
-      style: 'green',
-      styleSecondary: 'yellow',
-      description:
-        'Passionate host who values guest experience above volume. Sees discounting as potentially cheapening her brand. Needs reassurance and a gentle approach.',
-      commercialGoal: 'Maintain reputation while improving off-peak bookings',
-      profileNotes: [
-        'Mentions guest reviews and personal touches frequently',
-        'Uncomfortable with aggressive sales language',
-        'Has turned down discount recommendations before',
-        'Responds to stories about similar properties that succeeded',
-      ],
-    },
-    metrics: {
-      erpd: 14.8,
-      erpdChange: 4.5,
-      rpdPublic: 15.6,
-      rpdLoyal: 12.8,
-      losePricePublic: 91,
-      activeScenarios: 2,
-      competitor: 'brand',
-      experiencedRPD: 42,
-      visibility: 35,
-      conversion: 28,
-      revenue: 38,
-      discountQuality: 0,
-      rateParity: 'clean',
-    },
-    metricHistory: [],
-    trust: 50,
-    relationship: 'neutral',
-    discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'inactive' },
-      { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
-      { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
-      { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
-      { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
-    ],
-    lastContactedRound: null,
-    conversationLog: [],
-    pendingActions: [],
-  },
-
   // ── Carlos - City Apartment Complex (Yellow/Socialiser) ──
   {
     persona: {
@@ -219,7 +165,73 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Priya - Budget Hotel Chain (Red/Director) ──
+];
+
+/**
+ * Partners parked until their parity regimes go live in Market Select.
+ * Kept here so the persona data and the conversation trees in
+ * conversations-*.ts stay easy to re-merge - just splice these back
+ * into initialPartners when Narrow / Wide / Cross Regional become
+ * selectable. Not exported into the active roster today, so the
+ * portfolio filter has nothing to surface even if a future bug were
+ * to bypass it.
+ */
+export const pendingPartners: PartnerState[] = [
+  // ── Hannah - Country Guesthouse (Green/Nurturer) - Narrow regime ──
+  {
+    persona: {
+      id: 'hannah',
+      name: 'Hannah Whitfield',
+      propertyName: 'Meadow Lane Guesthouse',
+      propertyType: 'Country Guesthouse',
+      roomCount: 8,
+      location: 'Cotswolds, England',
+      parityRegime: 'narrow',
+      avatar: 'HW',
+      propertyImage: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&h=250&fit=crop',
+      style: 'green',
+      styleSecondary: 'yellow',
+      description:
+        'Passionate host who values guest experience above volume. Sees discounting as potentially cheapening her brand. Needs reassurance and a gentle approach.',
+      commercialGoal: 'Maintain reputation while improving off-peak bookings',
+      profileNotes: [
+        'Mentions guest reviews and personal touches frequently',
+        'Uncomfortable with aggressive sales language',
+        'Has turned down discount recommendations before',
+        'Responds to stories about similar properties that succeeded',
+      ],
+    },
+    metrics: {
+      erpd: 14.8,
+      erpdChange: 4.5,
+      rpdPublic: 15.6,
+      rpdLoyal: 12.8,
+      losePricePublic: 91,
+      activeScenarios: 2,
+      competitor: 'brand',
+      experiencedRPD: 42,
+      visibility: 35,
+      conversion: 28,
+      revenue: 38,
+      discountQuality: 0,
+      rateParity: 'clean',
+    },
+    metricHistory: [],
+    trust: 50,
+    relationship: 'neutral',
+    discounts: [
+      { id: 'genius', label: 'Genius Programme', status: 'inactive' },
+      { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
+      { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
+      { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
+      { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
+    ],
+    lastContactedRound: null,
+    conversationLog: [],
+    pendingActions: [],
+  },
+
+  // ── Priya - Budget Hotel Chain (Red/Director) - Wide regime ──
   {
     persona: {
       id: 'priya',
@@ -273,7 +285,7 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Yuki - Luxury Ryokan (Green/Nurturer) ──
+  // ── Yuki - Luxury Ryokan (Green/Nurturer) - Narrow regime ──
   {
     persona: {
       id: 'yuki',
