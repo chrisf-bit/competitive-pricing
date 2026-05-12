@@ -1,13 +1,20 @@
-import { createAvatar } from '@dicebear/core';
-import { personas } from '@dicebear/collection';
 import type { LucideIcon } from 'lucide-react';
 import { MessageCircle, Shield, Sparkles, Search } from 'lucide-react';
+
+import avaImg from '../assets/avatars/ava.png';
+import sofiaImg from '../assets/avatars/sofia.png';
+import mayaImg from '../assets/avatars/maya.png';
+import zaraImg from '../assets/avatars/zara.png';
+import felixImg from '../assets/avatars/felix.png';
+import noahImg from '../assets/avatars/noah.png';
+import marcusImg from '../assets/avatars/marcus.png';
+import rajImg from '../assets/avatars/raj.png';
 
 /**
  * Character library for the Build Your Character screen.
  *
  * Two independent picks:
- *   - Avatar (visual identity, 8 curated DiceBear seeds, 4 femme + 4 masc)
+ *   - Avatar (visual identity, 8 hand-illustrated PNGs, 4 femme + 4 masc)
  *   - Super Power persona (one of 4, content sourced from the persona PDF)
  *
  * Super powers are flavour-only for MVP - they surface in the GM intro
@@ -20,43 +27,34 @@ import { MessageCircle, Shield, Sparkles, Search } from 'lucide-react';
 export interface CharacterAvatar {
   id: string;
   label: string;
-  /** DiceBear seed string. Same seed produces the same avatar deterministically. */
-  seed: string;
-  /** Generated data URI (computed at module load). */
+  /**
+   * Imported image URL (resolved by the bundler). The previous
+   * DiceBear seed has been dropped now that we use static assets;
+   * keeping the field name dataUri so consumers don't need updating.
+   */
   dataUri: string;
 }
 
 /**
- * 8 curated DiceBear Personas avatars. Seeds are intentional - if any
- * doesn't render the way we want, swap the seed string. The style
- * (Personas) is illustrated, professional, and works well in a
- * corporate learning context.
+ * 8 curated hand-illustrated avatars. Files live under
+ * src/assets/avatars/ and are imported as static URLs - swap any image
+ * by replacing the file on disk (same name) or updating the import.
+ *
+ * IDs are stable across the DiceBear migration so any saved
+ * learnerProfile.avatarId values continue to resolve.
  */
-const AVATAR_SEEDS = [
+export const characterAvatars: CharacterAvatar[] = [
   // Femme-presenting cluster
-  { id: 'avatar-ava', label: 'Ava', seed: 'Ava-pricing-2026' },
-  { id: 'avatar-sofia', label: 'Sofia', seed: 'Sofia-pricing-2026' },
-  { id: 'avatar-maya', label: 'Maya', seed: 'Maya-pricing-2026' },
-  { id: 'avatar-zara', label: 'Zara', seed: 'Zara-pricing-2026' },
+  { id: 'avatar-ava', label: 'Ava', dataUri: avaImg },
+  { id: 'avatar-sofia', label: 'Sofia', dataUri: sofiaImg },
+  { id: 'avatar-maya', label: 'Maya', dataUri: mayaImg },
+  { id: 'avatar-zara', label: 'Zara', dataUri: zaraImg },
   // Masc-presenting cluster
-  { id: 'avatar-felix', label: 'Felix', seed: 'Felix-pricing-2026' },
-  { id: 'avatar-noah', label: 'Noah', seed: 'Noah-pricing-2026' },
-  { id: 'avatar-marcus', label: 'Marcus', seed: 'Marcus-pricing-2026' },
-  { id: 'avatar-raj', label: 'Raj', seed: 'Raj-pricing-2026' },
+  { id: 'avatar-felix', label: 'Felix', dataUri: felixImg },
+  { id: 'avatar-noah', label: 'Noah', dataUri: noahImg },
+  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg },
+  { id: 'avatar-raj', label: 'Raj', dataUri: rajImg },
 ];
-
-function generateAvatar(seed: string): string {
-  return createAvatar(personas, {
-    seed,
-    backgroundColor: ['fcd34d', '93c5fd', 'f9a8d4', 'a7f3d0', 'fdba74', 'ddd6fe'],
-    backgroundType: ['solid'],
-  }).toDataUri();
-}
-
-export const characterAvatars: CharacterAvatar[] = AVATAR_SEEDS.map((a) => ({
-  ...a,
-  dataUri: generateAvatar(a.seed),
-}));
 
 export function getAvatarById(id: string | null): CharacterAvatar | null {
   if (!id) return null;
