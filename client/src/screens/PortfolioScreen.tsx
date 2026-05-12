@@ -5,16 +5,11 @@ import {
   Globe,
   ArrowRight,
   Zap,
+  Check,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
 import { getRPDLevel } from '../engine/gameEngine';
 import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
-
-const demandLabels: Record<string, string> = {
-  up: 'Rising',
-  flat: 'Stable',
-  down: 'Falling',
-};
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
@@ -24,8 +19,10 @@ interface PortfolioScreenProps {
   marketContext: MarketContext;
   /** Stars earned per round so far; used to gate round advance. */
   roundStars: Record<number, 0 | 1 | 2 | 3>;
+  marketUpdateAcknowledged: boolean;
   onSelectPartner: (id: string) => void;
   onAdvanceRound: () => void;
+  onAcknowledgeMarketUpdate: () => void;
 }
 
 export function PortfolioScreen({
@@ -35,8 +32,10 @@ export function PortfolioScreen({
   actionsThisRound,
   marketContext,
   roundStars,
+  marketUpdateAcknowledged,
   onSelectPartner,
   onAdvanceRound,
+  onAcknowledgeMarketUpdate,
 }: PortfolioScreenProps) {
   // Advance only unlocks once the learner has used their action AND
   // earned at least 1 star this round. The 1-star floor lives in the
@@ -89,7 +88,19 @@ export function PortfolioScreen({
         >
           <Globe size={17} strokeWidth={2.4} />
         </div>
-        <span style={{ flex: 1, fontWeight: 600, lineHeight: 1.4 }}>
+        <span
+          style={{
+            flex: 1,
+            fontWeight: 600,
+            lineHeight: 1.4,
+            // Strike through once the learner has acknowledged the
+            // banner - mirrors the 'Check the market update' step on
+            // the Simulation Guide marking itself done.
+            textDecoration: marketUpdateAcknowledged ? 'line-through' : 'none',
+            opacity: marketUpdateAcknowledged ? 0.55 : 1,
+            transition: 'opacity 0.2s ease',
+          }}
+        >
           <span
             style={{
               fontSize: 10,
@@ -106,22 +117,56 @@ export function PortfolioScreen({
           </span>
           {marketContext.seasonalNote}
         </span>
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 800,
-            color: 'var(--brand-navy)',
-            background: 'rgba(0, 53, 128, 0.10)',
-            padding: '5px 12px',
-            borderRadius: 'var(--radius-pill)',
-            whiteSpace: 'nowrap',
-            border: '1px solid rgba(0, 53, 128, 0.15)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.06em',
-          }}
-        >
-          Demand: {demandLabels[marketContext.demand] ?? 'Stable'}
-        </span>
+        {marketUpdateAcknowledged ? (
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 800,
+              color: 'var(--brand-navy)',
+              background: 'rgba(0, 53, 128, 0.10)',
+              padding: '5px 12px',
+              borderRadius: 'var(--radius-pill)',
+              whiteSpace: 'nowrap',
+              border: '1px solid rgba(0, 53, 128, 0.15)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
+            <Check size={11} strokeWidth={3} />
+            Acknowledged
+          </span>
+        ) : (
+          <button
+            onClick={onAcknowledgeMarketUpdate}
+            style={{
+              fontSize: 11,
+              fontWeight: 800,
+              color: 'var(--brand-navy)',
+              background: 'var(--white)',
+              padding: '6px 14px',
+              borderRadius: 'var(--radius-pill)',
+              whiteSpace: 'nowrap',
+              border: '1.5px solid var(--brand-navy)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.06em',
+              cursor: 'pointer',
+              transition: 'background 0.15s ease, color 0.15s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--brand-navy)';
+              e.currentTarget.style.color = 'var(--white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--white)';
+              e.currentTarget.style.color = 'var(--brand-navy)';
+            }}
+          >
+            Acknowledge
+          </button>
+        )}
       </div>
 
       {/* Partner cards */}

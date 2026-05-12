@@ -25,6 +25,8 @@ interface GuidePanelProps {
   selectedPartner: PartnerState | null;
   conversationPhase: number;
   conversationComplete: boolean;
+  /** True once the learner has clicked Acknowledge on the market banner. */
+  marketUpdateAcknowledged: boolean;
 }
 
 interface GuideStep {
@@ -67,6 +69,7 @@ export function GuidePanel({
   selectedPartner,
   conversationPhase,
   conversationComplete,
+  marketUpdateAcknowledged,
 }: GuidePanelProps) {
   const [tipsOpen, setTipsOpen] = useState(true);
 
@@ -78,6 +81,7 @@ export function GuidePanel({
     selectedPartner,
     conversationPhase,
     conversationComplete,
+    marketUpdateAcknowledged,
   );
 
   return (
@@ -406,6 +410,7 @@ function getGuideContent(
   selectedPartner: PartnerState | null,
   conversationPhase: number,
   conversationComplete: boolean,
+  marketUpdateAcknowledged: boolean,
 ): {
   screenLabel: string;
   objective: string;
@@ -424,13 +429,16 @@ function getGuideContent(
           {
             icon: <Eye size={13} />,
             text: 'Check the market update',
-            done: true,
-            active: false,
+            done: marketUpdateAcknowledged,
+            active: !marketUpdateAcknowledged,
           },
           {
             icon: <BarChart3 size={13} />,
             text: 'Compare RPD across partners',
-            active: actionsRemaining > 0 && actionsThisRound.length === 0,
+            active:
+              marketUpdateAcknowledged &&
+              actionsRemaining > 0 &&
+              actionsThisRound.length === 0,
             done: actionsThisRound.length > 0,
           },
           {

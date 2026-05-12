@@ -395,6 +395,13 @@ export interface GameState {
   level0RetryItemIds: string[] | null;
   /** Whether the partner-sim tutorial has been auto-shown to the learner already. */
   tutorialShown: boolean;
+  /**
+   * Whether the learner has clicked the Acknowledge button on the
+   * Portfolio's market update banner this round. Resets on round
+   * advance and on practice-round entry. Drives the strikethrough on
+   * the Simulation Guide's 'Check the market update' step.
+   */
+  marketUpdateAcknowledged: boolean;
   currentRound: number;         // 1, 2, 3
   actionsRemaining: number;     // starts at 2 per round
   actionsThisRound: string[];   // partner IDs engaged this round

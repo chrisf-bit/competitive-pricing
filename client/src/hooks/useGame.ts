@@ -218,6 +218,11 @@ export function useGame() {
     setState((s) => ({ ...s, tutorialShown: true }));
   }, []);
 
+  /** Acknowledge the round's market update banner on the portfolio. */
+  const acknowledgeMarketUpdate = useCallback(() => {
+    setState((s) => ({ ...s, marketUpdateAcknowledged: true }));
+  }, []);
+
   /** Mark Level 0 as cleared so the Briefing button adapts on a return visit. */
   const markLevel0Cleared = useCallback(() => {
     setState((s) => ({
@@ -289,6 +294,7 @@ export function useGame() {
     finishLevel0Activity,
     requestLevel0Retry,
     markTutorialShown,
+    acknowledgeMarketUpdate,
     markLevel0Cleared,
   };
 }
