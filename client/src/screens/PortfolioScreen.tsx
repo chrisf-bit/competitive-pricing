@@ -88,19 +88,7 @@ export function PortfolioScreen({
         >
           <Globe size={17} strokeWidth={2.4} />
         </div>
-        <span
-          style={{
-            flex: 1,
-            fontWeight: 600,
-            lineHeight: 1.4,
-            // Strike through once the learner has acknowledged the
-            // banner - mirrors the 'Check the market update' step on
-            // the Simulation Guide marking itself done.
-            textDecoration: marketUpdateAcknowledged ? 'line-through' : 'none',
-            opacity: marketUpdateAcknowledged ? 0.55 : 1,
-            transition: 'opacity 0.2s ease',
-          }}
-        >
+        <span style={{ flex: 1, fontWeight: 600, lineHeight: 1.4 }}>
           <span
             style={{
               fontSize: 10,

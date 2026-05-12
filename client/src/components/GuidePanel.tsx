@@ -13,6 +13,7 @@ import {
   Zap,
   Eye,
   Users,
+  Check,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -242,19 +243,29 @@ export function GuidePanel({
                 </IconBox>
                 <span
                   style={{
+                    flex: 1,
                     fontSize: 12,
                     lineHeight: 1.4,
-                    fontWeight: step.active ? 600 : 400,
+                    fontWeight: step.active ? 600 : step.done ? 500 : 400,
                     color: step.active
                       ? 'var(--white)'
                       : step.done
-                        ? 'rgba(255,255,255,0.45)'
+                        ? 'rgba(255,255,255,0.85)'
                         : 'rgba(255,255,255,0.6)',
-                    textDecoration: step.done ? 'line-through' : 'none',
                   }}
                 >
                   {step.text}
                 </span>
+                {step.done && (
+                  <Check
+                    size={13}
+                    strokeWidth={3}
+                    style={{
+                      color: 'var(--success)',
+                      flexShrink: 0,
+                    }}
+                  />
+                )}
               </div>
             ))}
           </div>
