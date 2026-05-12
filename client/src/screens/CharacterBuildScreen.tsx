@@ -284,12 +284,12 @@ function AvatarTile({
         style={{
           width: '100%',
           height: '100%',
-          objectFit: 'cover',
+          // Per-avatar fit/position/scale overrides. Defaults are
+          // 'cover' centred, which suits the seven square-framed
+          // illustrations. Marcus's WebP isn't quite square so uses
+          // 'contain' to avoid cover cropping his hair flat.
+          objectFit: avatar.objectFit ?? 'cover',
           objectPosition: avatar.objectPosition ?? 'center',
-          // Per-avatar scale + translate overrides. Marcus is framed
-          // closer-up than the others so renders at 0.9 with a slight
-          // downward nudge to keep his head on the same line as the
-          // rest of the row. bgColor shows around as the frame.
           transform:
             avatar.scale || avatar.translateY
               ? `scale(${avatar.scale ?? 1}) translateY(${avatar.translateY ?? 0}%)`

@@ -62,6 +62,14 @@ export interface CharacterAvatar {
    * matching the rest of the row.
    */
   translateY?: number;
+  /**
+   * Optional CSS object-fit override. Default is 'cover' (fills
+   * the tile and crops as needed). Use 'contain' for an avatar
+   * whose source image isn't quite square - cover would chop the
+   * hair flat, contain shows the full illustration with bgColor
+   * around it instead.
+   */
+  objectFit?: 'cover' | 'contain';
 }
 
 /**
@@ -90,12 +98,11 @@ export const characterAvatars: CharacterAvatar[] = [
     label: 'Marcus',
     dataUri: marcusImg,
     bgColor: '#93c5fd',
-    // Marcus's WebP is framed closer-up than the others, so at the
-    // same tile size his head/beard read as larger. Shrink him to
-    // 90% and nudge a few percent down so his head sits on the
-    // same line as the rest of the row.
-    scale: 0.9,
-    translateY: 5,
+    // Marcus's WebP isn't perfectly square, so 'cover' was cropping
+    // the top of his hair flat. 'contain' fits the full illustration
+    // inside the tile (bgColor shows around it). No scale/translate
+    // needed - the natural fit looks right at this size.
+    objectFit: 'contain',
   },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];
