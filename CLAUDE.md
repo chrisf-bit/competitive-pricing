@@ -300,12 +300,25 @@ Key files:
 
 ### Character build
 
-- 8 hand-illustrated PNG avatars under `src/assets/avatars/`
-  (`ava.png` etc.), 4 femme-presenting and 4 masc-presenting. Each
-  carries its own `bgColor` in `data/characters.ts` so the pick grid
-  reads as a varied set rather than a uniform wall of tiles. The IDs
-  are stable across the earlier DiceBear migration so any previously-
-  saved `learnerProfile.avatarId` values still resolve.
+- 8 hand-illustrated **WebP** avatars under `src/assets/avatars/`
+  (`ava.webp` etc.), 4 femme-presenting and 4 masc-presenting. The
+  files are 1024x1536 portrait (2:3) - the character-pick tile
+  matches that aspect ratio (`aspectRatio: '2 / 3'`) so each
+  illustration fills its tile exactly with no cropping, scaling, or
+  per-avatar position workarounds. Each avatar carries its own
+  `bgColor` in `data/characters.ts` so the pick grid reads as a
+  varied set rather than a uniform wall of tiles. The IDs are stable
+  across the earlier DiceBear migration so any previously-saved
+  `learnerProfile.avatarId` values still resolve.
+- **Avatars preload before the grid paints.** `CharacterBuildScreen`
+  runs `img.decode()` over all eight at mount and only fades the
+  grid in (opacity 0 -> 1) once `Promise.all` resolves. A 2.5s
+  safety fallback flips ready anyway if any decode hangs. Stops the
+  row painting tile-by-tile on first visit.
+- Optional escape-hatch fields on `CharacterAvatar` -
+  `objectPosition`, `scale`, `translateY`, `objectFit` - are kept
+  for future images that don't share the 1024x1536 ratio. All eight
+  current avatars leave them unset.
 - `@dicebear/core` and `@dicebear/collection` are no longer imported
   anywhere; they can be removed from `package.json` in a tidy-up pass.
 - 4 super-power personas (Conversation Architect, Objection Navigator,
