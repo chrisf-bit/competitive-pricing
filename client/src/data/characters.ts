@@ -93,17 +93,7 @@ export const characterAvatars: CharacterAvatar[] = [
   // Masc-presenting cluster
   { id: 'avatar-felix', label: 'Felix', dataUri: felixImg, bgColor: '#fef3c7' },
   { id: 'avatar-noah', label: 'Noah', dataUri: noahImg, bgColor: '#bae6fd' },
-  {
-    id: 'avatar-marcus',
-    label: 'Marcus',
-    dataUri: marcusImg,
-    bgColor: '#93c5fd',
-    // Marcus's WebP isn't perfectly square, so 'cover' was cropping
-    // the top of his hair flat. 'contain' fits the full illustration
-    // inside the tile (bgColor shows around it). No scale/translate
-    // needed - the natural fit looks right at this size.
-    objectFit: 'contain',
-  },
+  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg, bgColor: '#93c5fd' },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];
 

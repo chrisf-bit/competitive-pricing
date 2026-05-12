@@ -263,7 +263,10 @@ function AvatarTile({
       onClick={onClick}
       style={{
         position: 'relative',
-        aspectRatio: '1 / 1',
+        // Match the source artwork ratio (1024x1536 = 2:3) so each
+        // illustration fills the tile without crop, scale or position
+        // workarounds.
+        aspectRatio: '2 / 3',
         background: avatar.bgColor,
         border: isSelected
           ? '2.5px solid var(--brand-yellow)'
