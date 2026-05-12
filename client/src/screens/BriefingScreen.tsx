@@ -78,7 +78,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               marginBottom: 36,
               maxWidth: 600,
               fontSize: 16,
-              color: 'rgba(255,255,255,0.75)',
+              color: 'rgba(255,255,255,0.92)',
               lineHeight: 1.6,
               animation: 'fadeIn 0.5s ease 0.2s backwards',
             }}
@@ -98,7 +98,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               move. Have the conversation. Pay attention to how each partner responds - not
               everyone communicates the same way.
             </p>
-            <p style={{ margin: 0, color: 'rgba(255,255,255,0.92)', fontWeight: 500 }}>
+            <p style={{ margin: 0, color: 'var(--white)', fontWeight: 600 }}>
               First, we need to know you're up to it. Earn your clearance and we'll hand you
               the mission.
             </p>
@@ -215,7 +215,7 @@ function InfoCard({
         {icon}
       </div>
       <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{title}</div>
-      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', lineHeight: 1.4 }}>
+      <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.82)', lineHeight: 1.4 }}>
         {text}
       </div>
     </div>
