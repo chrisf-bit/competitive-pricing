@@ -81,7 +81,6 @@ export default function App() {
             screen={state.screen}
             currentRound={state.currentRound}
             actionsRemaining={state.actionsRemaining}
-            actionsThisRound={state.actionsThisRound}
             selectedPartner={selectedPartner}
             conversationPhase={state.conversationInProgress?.phaseIndex ?? 0}
             conversationComplete={

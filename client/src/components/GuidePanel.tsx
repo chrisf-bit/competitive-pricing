@@ -22,7 +22,6 @@ interface GuidePanelProps {
   screen: GameScreen;
   currentRound: number;
   actionsRemaining: number;
-  actionsThisRound: string[];
   selectedPartner: PartnerState | null;
   conversationPhase: number;
   conversationComplete: boolean;
@@ -66,7 +65,6 @@ export function GuidePanel({
   screen,
   currentRound,
   actionsRemaining,
-  actionsThisRound,
   selectedPartner,
   conversationPhase,
   conversationComplete,
@@ -78,7 +76,6 @@ export function GuidePanel({
     screen,
     currentRound,
     actionsRemaining,
-    actionsThisRound,
     selectedPartner,
     conversationPhase,
     conversationComplete,
@@ -421,7 +418,6 @@ function getGuideContent(
   screen: GameScreen,
   currentRound: number,
   actionsRemaining: number,
-  actionsThisRound: string[],
   selectedPartner: PartnerState | null,
   conversationPhase: number,
   conversationComplete: boolean,
