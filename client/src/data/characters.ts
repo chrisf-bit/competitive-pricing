@@ -1,14 +1,14 @@
 import type { LucideIcon } from 'lucide-react';
 import { MessageCircle, Shield, Sparkles, Search } from 'lucide-react';
 
-import avaImg from '../assets/avatars/ava.png';
-import sofiaImg from '../assets/avatars/sofia.png';
-import mayaImg from '../assets/avatars/maya.png';
-import zaraImg from '../assets/avatars/zara.png';
-import felixImg from '../assets/avatars/felix.png';
-import noahImg from '../assets/avatars/noah.png';
-import marcusImg from '../assets/avatars/marcus.png';
-import rajImg from '../assets/avatars/raj.png';
+import avaImg from '../assets/avatars/ava.webp';
+import sofiaImg from '../assets/avatars/sofia.webp';
+import mayaImg from '../assets/avatars/maya.webp';
+import zaraImg from '../assets/avatars/zara.webp';
+import felixImg from '../assets/avatars/felix.webp';
+import noahImg from '../assets/avatars/noah.webp';
+import marcusImg from '../assets/avatars/marcus.webp';
+import rajImg from '../assets/avatars/raj.webp';
 
 /**
  * Character library for the Build Your Character screen.
