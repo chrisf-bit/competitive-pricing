@@ -228,15 +228,17 @@ function AvatarTile({
       style={{
         position: 'relative',
         aspectRatio: '1 / 1',
-        background: isSelected ? 'rgba(254, 186, 2, 0.15)' : 'rgba(255,255,255,0.06)',
+        background: avatar.bgColor,
         border: isSelected
           ? '2.5px solid var(--brand-yellow)'
           : '2.5px solid rgba(255,255,255,0.10)',
         borderRadius: 14,
         padding: 6,
         cursor: 'pointer',
-        transition: 'background 0.18s ease, border-color 0.18s ease',
-        boxShadow: isSelected ? '0 6px 18px rgba(254, 186, 2, 0.22)' : 'none',
+        transition: 'border-color 0.18s ease, box-shadow 0.18s ease',
+        boxShadow: isSelected
+          ? '0 6px 18px rgba(254, 186, 2, 0.32), 0 0 0 3px rgba(254, 186, 2, 0.18)'
+          : '0 2px 6px rgba(0,0,0,0.25)',
         overflow: 'hidden',
       }}
     >

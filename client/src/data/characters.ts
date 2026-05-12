@@ -33,6 +33,13 @@ export interface CharacterAvatar {
    * keeping the field name dataUri so consumers don't need updating.
    */
   dataUri: string;
+  /**
+   * Soft-pastel tile background tuned to suit each illustration's
+   * palette. Used by the character-pick grid (and any other surface
+   * that frames the avatar). Each avatar gets its own colour so the
+   * row reads as a varied set rather than a uniform wall of tiles.
+   */
+  bgColor: string;
 }
 
 /**
@@ -42,18 +49,22 @@ export interface CharacterAvatar {
  *
  * IDs are stable across the DiceBear migration so any saved
  * learnerProfile.avatarId values continue to resolve.
+ *
+ * Background colours are picked to complement each illustration's
+ * dominant accents without clashing - warm yellows / oranges for the
+ * sunlit set, cooler blues / violets for the rest.
  */
 export const characterAvatars: CharacterAvatar[] = [
   // Femme-presenting cluster
-  { id: 'avatar-ava', label: 'Ava', dataUri: avaImg },
-  { id: 'avatar-sofia', label: 'Sofia', dataUri: sofiaImg },
-  { id: 'avatar-maya', label: 'Maya', dataUri: mayaImg },
-  { id: 'avatar-zara', label: 'Zara', dataUri: zaraImg },
+  { id: 'avatar-ava', label: 'Ava', dataUri: avaImg, bgColor: '#fde68a' },
+  { id: 'avatar-sofia', label: 'Sofia', dataUri: sofiaImg, bgColor: '#fdba74' },
+  { id: 'avatar-maya', label: 'Maya', dataUri: mayaImg, bgColor: '#fca5a5' },
+  { id: 'avatar-zara', label: 'Zara', dataUri: zaraImg, bgColor: '#c4b5fd' },
   // Masc-presenting cluster
-  { id: 'avatar-felix', label: 'Felix', dataUri: felixImg },
-  { id: 'avatar-noah', label: 'Noah', dataUri: noahImg },
-  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg },
-  { id: 'avatar-raj', label: 'Raj', dataUri: rajImg },
+  { id: 'avatar-felix', label: 'Felix', dataUri: felixImg, bgColor: '#fef3c7' },
+  { id: 'avatar-noah', label: 'Noah', dataUri: noahImg, bgColor: '#bae6fd' },
+  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg, bgColor: '#93c5fd' },
+  { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];
 
 export function getAvatarById(id: string | null): CharacterAvatar | null {

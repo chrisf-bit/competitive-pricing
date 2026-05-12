@@ -127,14 +127,32 @@ Key files:
 - **One action per round.** Each round, the learner picks ONE partner
   to engage; that's the action. Partners they don't pick neglect
   silently between rounds.
-- The "right" partner each round is the one with the worst KPI signals
-  (highest eRPD, highest Lose Price Public, etc). Held as a single
-  source of truth in `data/correctPartnerPerRound.ts` per regime per
-  round. Currently populated for No-Parity rounds 1-3 only; other
-  regimes and rounds 4-10 will plug in once partner data lands.
+- The "right" partner each round is held in
+  `data/correctPartnerPerRound.ts` per regime per round. For
+  No-Parity the rotation is **Stavros R1, Marina R2, Carlos R3** -
+  matched to the per-round state baselines (below) so each round one
+  partner is genuinely the worst on visible KPIs.
+- **Per-round partner state is scripted** in
+  `data/partnerStateByRound.ts` and applied as an overlay by
+  `applyRoundBaseline` in three places: `createInitialState` (R1
+  starting state), `advanceRound` (after the round's neglect /
+  history updates, so the new round's baseline takes precedence),
+  and `startPracticeRound` (the baseline for whichever round is
+  being practised). The engine's conversation outcomes only nudge a
+  couple of legacy metric fields; without this overlay the headline
+  KPIs never move and the same partner stays worst forever. The
+  scripted arc for No-Parity: R1 Stavros crisis (eRPD 17.2, broken
+  Last-Minute Deal); R2 Stavros recovering, Marina's gap escalates;
+  R3 Marina recovering, Carlos's misconfig compounds.
 - **Conversation data covers rounds 1-3 per partner today.** Rounds
   4-10 are not yet playable. `getConversationTree` returns undefined
   past round 3, which Practice Mode handles by locking those cards.
+- **Only No-Parity is selectable today.** Marina, Stavros, Carlos
+  are the active No-Parity roster in `initialPartners`. Hannah,
+  Priya, Yuki are parked in a separate `pendingPartners` export in
+  the same file - their persona data and conversation trees are
+  intact and ready to be spliced back into the active roster when
+  Narrow / Wide / Cross Regional become selectable.
 
 ### Conversation structure
 
@@ -244,6 +262,14 @@ Key files:
   `parityRegime` matches the learner's chosen market. Picking a regime
   with no partners shows an empty portfolio.
 
+### Conversation choice surfacing
+
+- **Compliance labels (Compliant / Risky / Borderline) are NOT shown
+  next to options on the conversation screen.** Compliance is part
+  of what the report card grades on, so surfacing the tag gives the
+  test answer away. The option's `compliance` value still drives
+  grading - the UI just doesn't reveal it pre-pick.
+
 ### Hard-gate at clearance
 
 - Pass threshold is **80%** across attempted KC items, with all scorable
@@ -257,11 +283,31 @@ Key files:
 - Tutorial fires automatically (once per session) when the learner
   first lands on the Portfolio, regardless of cleared/non-cleared
   path. Reachable later via the Help icon in the Header.
+- **Scored activities are Day one with Alex, Data & Insights, and
+  Email Audit.** The Issue Tree reveal is completion-only. The
+  Clearance Summary dedupes results by itemId before scoring so any
+  re-record path can't inflate the percentage.
+- **The summary does not reveal the correct answer for missed
+  items.** Each missed-item card shows only the prompt plus a
+  "marked incorrectly, hit Retry" hint. Revealing the answer pre-
+  empts the retake.
+- **Retry only re-runs the questions the learner got wrong.**
+  `requestLevel0Retry` writes the failed itemIds to
+  `level0RetryItemIds`, the activity screen filters its content to
+  just those items, and `finishLevel0Activity` clears the flag.
+  Correct answers from previous attempts stay in the results -
+  they're not re-asked.
 
 ### Character build
 
-- 8 avatars (DiceBear Personas style, fixed seeds, 4 femme-presenting
-  and 4 masc-presenting).
+- 8 hand-illustrated PNG avatars under `src/assets/avatars/`
+  (`ava.png` etc.), 4 femme-presenting and 4 masc-presenting. Each
+  carries its own `bgColor` in `data/characters.ts` so the pick grid
+  reads as a varied set rather than a uniform wall of tiles. The IDs
+  are stable across the earlier DiceBear migration so any previously-
+  saved `learnerProfile.avatarId` values still resolve.
+- `@dicebear/core` and `@dicebear/collection` are no longer imported
+  anywhere; they can be removed from `package.json` in a tidy-up pass.
 - 4 super-power personas (Conversation Architect, Objection Navigator,
   Storyteller, Data Detective).
 - For MVP, super-power impact is **flavour-only** - they're surfaced in
@@ -280,6 +326,31 @@ Key files:
 - Both frames use `position: absolute, inset: 0` (not `fixed`) so they
   fit inside the ClearanceShell's content area below the progress
   strip.
+
+### Portfolio market banner
+
+- The market update banner on the Portfolio has an **Acknowledge
+  button**, not a Demand pill. The button toggles a per-round
+  `marketUpdateAcknowledged` flag on GameState (resets on advance
+  and on practice-round entry). On click the button swaps to an
+  'Acknowledged' check pill; the banner text itself stays normal
+  (no strikethrough).
+- The Simulation Guide's 'Check the market update' step reads
+  `marketUpdateAcknowledged` for its `done` state. The next step
+  ('Pick the partner who needs you most') only becomes `active`
+  once acknowledged, encouraging read-then-decide. Completed Guide
+  steps don't strikethrough - text stays readable and a green check
+  icon appears on the right.
+
+### Fullscreen on launch
+
+- The Splash 'Begin' button calls
+  `document.documentElement.requestFullscreen()` inside the click
+  handler. The click satisfies the API's user-gesture requirement
+  so no permission prompt. Wrapped in try/catch with silent failure
+  - some embed contexts (iframes without `allowfullscreen`,
+  locked-down browsers) reject it, and the sim must still work in
+  a normal window if so. Esc exits as expected.
 
 ### Briefing button adapts
 
