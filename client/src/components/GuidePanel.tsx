@@ -258,11 +258,15 @@ export function GuidePanel({
                 </span>
                 {step.done && (
                   <Check
-                    size={13}
-                    strokeWidth={3}
+                    size={14}
+                    strokeWidth={3.5}
                     style={{
-                      color: 'var(--success)',
+                      // --success (#008a0e) reads too muddy on the navy
+                      // panel - using a brighter tone so the tick pops
+                      // against the dark background.
+                      color: '#3ee27a',
                       flexShrink: 0,
+                      filter: 'drop-shadow(0 0 6px rgba(62, 226, 122, 0.4))',
                     }}
                   />
                 )}
