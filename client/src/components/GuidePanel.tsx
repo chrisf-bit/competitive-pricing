@@ -448,18 +448,10 @@ function getGuideContent(
             active: !marketUpdateAcknowledged,
           },
           {
-            icon: <BarChart3 size={13} />,
-            text: 'Compare RPD across partners',
-            active:
-              marketUpdateAcknowledged &&
-              actionsRemaining > 0 &&
-              actionsThisRound.length === 0,
-            done: actionsThisRound.length > 0,
-          },
-          {
             icon: <Target size={13} />,
-            text: `Select a partner (${actionsRemaining} left)`,
-            active: actionsRemaining > 0 && actionsThisRound.length > 0,
+            text: 'Pick the partner who needs you most',
+            active:
+              marketUpdateAcknowledged && actionsRemaining > 0,
             done: actionsRemaining === 0,
           },
           {
