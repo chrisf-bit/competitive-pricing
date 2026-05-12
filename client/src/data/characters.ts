@@ -48,6 +48,13 @@ export interface CharacterAvatar {
    * anchors the top of the image and crops from the bottom instead.
    */
   objectPosition?: string;
+  /**
+   * Optional CSS transform scale for the avatar img. Useful when one
+   * illustration is rendered larger than the rest at the same tile
+   * size (e.g. Marcus is framed closer up than the others); a value
+   * like 0.9 shrinks the image so its apparent size matches the row.
+   */
+  scale?: number;
 }
 
 /**
@@ -76,11 +83,11 @@ export const characterAvatars: CharacterAvatar[] = [
     label: 'Marcus',
     dataUri: marcusImg,
     bgColor: '#93c5fd',
-    // Marcus's WebP is framed slightly lower than the rest, so his
-    // head reads as sitting low in the tile. A small top-anchor
-    // (center 20%) nudges him up to match the others without being
-    // aggressive enough to crop his collar.
-    objectPosition: 'center 20%',
+    // Marcus's WebP is framed closer-up than the others, so at the
+    // same tile size his head/beard read as larger. Shrink him to
+    // 90% so his apparent size matches the rest of the row. Keeps
+    // default centre positioning.
+    scale: 0.9,
   },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];

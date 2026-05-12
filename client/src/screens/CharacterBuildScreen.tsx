@@ -249,10 +249,12 @@ function AvatarTile({
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          // Defaults to centre. Per-avatar override (Marcus's PNG is
-          // framed slightly higher than the rest, so he anchors to
-          // 'center top' to keep his hair in frame).
           objectPosition: avatar.objectPosition ?? 'center',
+          // Per-avatar scale override (Marcus's WebP is framed
+          // closer-up than the rest, so he renders at 0.9 to match
+          // the apparent size of the row). The bgColor shows around
+          // the shrunk image as a clean frame.
+          transform: avatar.scale ? `scale(${avatar.scale})` : undefined,
           borderRadius: 8,
         }}
       />
