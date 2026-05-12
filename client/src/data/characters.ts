@@ -55,6 +55,13 @@ export interface CharacterAvatar {
    * like 0.9 shrinks the image so its apparent size matches the row.
    */
   scale?: number;
+  /**
+   * Optional vertical translate, expressed as a percentage of the
+   * tile height (positive = down, negative = up). Used to fine-tune
+   * the head position when scale alone doesn't get the centre line
+   * matching the rest of the row.
+   */
+  translateY?: number;
 }
 
 /**
@@ -85,9 +92,10 @@ export const characterAvatars: CharacterAvatar[] = [
     bgColor: '#93c5fd',
     // Marcus's WebP is framed closer-up than the others, so at the
     // same tile size his head/beard read as larger. Shrink him to
-    // 90% so his apparent size matches the rest of the row. Keeps
-    // default centre positioning.
+    // 90% and nudge a few percent down so his head sits on the
+    // same line as the rest of the row.
     scale: 0.9,
+    translateY: 5,
   },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];

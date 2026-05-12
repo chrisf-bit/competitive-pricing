@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Check } from 'lucide-react';
 import {
@@ -26,6 +27,39 @@ export function CharacterBuildScreen({
   onContinue,
 }: CharacterBuildScreenProps) {
   const bothPicked = !!selectedAvatarId && !!selectedArchetype;
+
+  // Preload every avatar before painting the grid. Otherwise each
+  // <img> hits the network independently and the tiles fill in one
+  // by one, which looks janky. Once all eight have decoded we flip
+  // imagesReady to true and the grid fades in as a complete row.
+  const [imagesReady, setImagesReady] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const loaders = characterAvatars.map((a) => {
+      const img = new Image();
+      img.src = a.dataUri;
+      // decode() returns a promise that resolves once the image is
+      // fully decoded and ready to paint without jank. Fall back to
+      // the onload event for older browsers.
+      return img.decode
+        ? img.decode().catch(() => undefined)
+        : new Promise<void>((resolve) => {
+            img.onload = () => resolve();
+            img.onerror = () => resolve();
+          });
+    });
+    // 2.5s safety net so the screen never gets stuck if a fetch hangs.
+    const fallback = setTimeout(() => {
+      if (!cancelled) setImagesReady(true);
+    }, 2500);
+    Promise.all(loaders).then(() => {
+      if (!cancelled) setImagesReady(true);
+    });
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
 
   function handleArchetypeSelect(persona: SuperPowerPersona) {
     onSelectArchetype({
@@ -67,6 +101,8 @@ export function CharacterBuildScreen({
             gap: 12,
             width: '100%',
             marginBottom: 36,
+            opacity: imagesReady ? 1 : 0,
+            transition: 'opacity 0.3s ease',
           }}
         >
           {characterAvatars.map((a, i) => (
@@ -250,11 +286,14 @@ function AvatarTile({
           height: '100%',
           objectFit: 'cover',
           objectPosition: avatar.objectPosition ?? 'center',
-          // Per-avatar scale override (Marcus's WebP is framed
-          // closer-up than the rest, so he renders at 0.9 to match
-          // the apparent size of the row). The bgColor shows around
-          // the shrunk image as a clean frame.
-          transform: avatar.scale ? `scale(${avatar.scale})` : undefined,
+          // Per-avatar scale + translate overrides. Marcus is framed
+          // closer-up than the others so renders at 0.9 with a slight
+          // downward nudge to keep his head on the same line as the
+          // rest of the row. bgColor shows around as the frame.
+          transform:
+            avatar.scale || avatar.translateY
+              ? `scale(${avatar.scale ?? 1}) translateY(${avatar.translateY ?? 0}%)`
+              : undefined,
           borderRadius: 8,
         }}
       />
