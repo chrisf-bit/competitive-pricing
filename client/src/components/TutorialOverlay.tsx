@@ -193,7 +193,7 @@ const STEPS: TutorialStep[] = [
     target: 'rpd-number',
     title: 'Experienced RPD',
     description:
-      'The headline metric. RPD (Rank-Price-Distance) measures how competitively priced this partner is vs. comparable properties. Higher is better.',
+      'The headline metric. RPD (Relative Price Difference) measures how competitively priced this partner is versus comparable properties. Lower RPD means more competitive.',
     icon: <BarChart3 size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (

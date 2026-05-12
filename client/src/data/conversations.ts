@@ -223,7 +223,7 @@ const marinaR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "Yes, I'd prefer that. Let's look at the data together before we decide anything.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "That's a good approach. I'd rather understand the full picture before making changes. Go ahead.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Perfect - I was hoping you'd suggest that. I've got some questions about the RPD calculation too. Let's dig in.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Perfect - I was hoping you'd suggest that. I've got some questions about how my price compares to the boutique set too. Let's dig in.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, visibility: 2 },
           trustChange: 6,
@@ -341,12 +341,12 @@ const stavrosR1: ConversationTree = {
             compliance: 'safe',
           },
           {
-            id: 'stavros-r1-diag-parity-and-config',
-            label: 'Name parity breach and misconfigured discount',
+            id: 'stavros-r1-diag-product-and-visibility',
+            label: 'Name the broken product and visibility crash',
             description:
-              'Pinpoint the rate parity breach and the misconfigured Last-Minute Deal, and explain why they compound.',
+              'Pinpoint the misconfigured Last-Minute Deal and the on-platform visibility crash, and explain why they compound.',
             playerDialogue:
-              "Two things are happening together and they're compounding. One: you've got a clear rate parity breach - travellers are seeing you cheaper on at least two other channels, so even your Genius and Mobile discounts get undermined before the booking decision. Two: your Last-Minute Deal is currently misconfigured, so it's not firing when it should. Combined effect: you're losing the price comparison on almost every search.",
+              "Two things are happening together and they're compounding. One: your Last-Minute Deal is active but misconfigured - the booking window is set seven days out instead of one to two, so you're discounting bookings that would've come in at full price anyway and missing the empty-room conversions it's actually designed to catch. Two: on-platform, your visibility on price-shopping searches has collapsed - you're showing further down in the results, and your overall price competitiveness is being read as weak. Combined effect: you're losing on both fronts at once.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: -1 },
             assertiveness: 3,
             compliance: 'safe',
@@ -375,15 +375,15 @@ const stavrosR1: ConversationTree = {
           trustChange: 0,
         },
         {
-          optionId: 'stavros-r1-diag-parity-and-config',
+          optionId: 'stavros-r1-diag-product-and-visibility',
           responses: [
-            { trustThreshold: 'low', text: "Parity breach? My channel manager is supposed to keep that locked. If you can show me where it's broken I'm interested.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Now that's the specificity I needed. Parity breach AND a broken Last-Minute Deal - that would explain a lot. Keep going.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Misconfigured booking window? My team set that up months ago. If you can show me where it's wrong I'm interested.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now that's the specificity I needed. A broken Last-Minute Deal AND a visibility crash - that would explain a lot. Keep going.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Right. That's the kind of analysis I've been waiting for. So I've been throwing more discounts at a problem that wasn't really about discounts. Go on.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, visibility: 1 },
           trustChange: 7,
-          nextPhasePrompt: "Alright - so what do I actually do about the parity and the broken deal? And don't tell me to add more discounts - I'm already discounting.",
+          nextPhasePrompt: "Alright - so what do I actually do about the broken deal and getting my visibility back? And don't tell me to add more discounts - I'm already discounting.",
         },
       ],
     },
@@ -395,11 +395,11 @@ const stavrosR1: ConversationTree = {
           "Right. So what do I actually need to do? And don't tell me to add more discounts - I'm already discounting.",
         options: [
           {
-            id: 'stavros-r1-rec-parity',
-            label: 'Diagnose the rate parity issue',
-            description: 'Explain that the real problem is rate parity, not discount levels.',
+            id: 'stavros-r1-rec-product-fix',
+            label: 'Fix the misconfigured Last-Minute Deal',
+            description: 'Sort out the broken product before adding new ones.',
             playerDialogue:
-              "Here's the thing, Stavros - your discounts are active, but they're not the problem. I've found a significant rate parity issue. Your rates on at least two other OTAs are undercutting your Booking.com rate. That means even with your Genius and Mobile discounts, travellers see a cheaper price elsewhere. Until that's resolved, more discounts won't help.",
+              "Here's the thing, Stavros - your discounts are active, but the Last-Minute Deal isn't doing what you think it's doing. The booking window is set seven days out, so it's discounting bookings that would've come in at full price anyway, and missing the empty-room conversions it's actually designed to catch. Fixing that one setting will recover your visibility on price-shopping searches and stop the leak before we even think about adding new products.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -428,15 +428,15 @@ const stavrosR1: ConversationTree = {
       },
       nodes: [
         {
-          optionId: 'stavros-r1-rec-parity',
+          optionId: 'stavros-r1-rec-product-fix',
           responses: [
-            { trustThreshold: 'low', text: "Rate parity? Are you sure? My channel manager is supposed to keep everything in sync. Which OTAs?", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That's... actually not what I expected to hear. If that's true, I need to deal with it. Can you show me exactly where the parity breaks are?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Well that explains a lot. I've been throwing money at discounts and the problem was elsewhere. What do I need to do?", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Wait - the Last-Minute Deal has been miswired the whole time? Show me exactly what's wrong with the setup.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "That's... actually not what I expected to hear. If we've been bleeding margin on full-price bookings I need to deal with it. Can you walk me through the exact setting that's wrong?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Well that explains a lot. I've been throwing money at new discounts and the issue was a broken old one. What's the change I need to make?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 2 },
           trustChange: 7,
-          nextPhasePrompt: "Okay, let's say I fix the parity. How long before I see results? Because I can't afford to wait months.",
+          nextPhasePrompt: "Okay, let's say I fix the deal. How long before I see results? Because I can't afford to wait months.",
         },
         {
           optionId: 'stavros-r1-rec-more-discounts',
@@ -942,7 +942,7 @@ const stavrosR2: ConversationTree = {
             label: 'Show progress',
             description: 'Lead with what has improved since the last conversation.',
             playerDialogue:
-              "Stavros, good news - the parity fix is starting to take effect. Your price competitiveness is improving and visibility is trending upward. Let me walk you through the specifics.",
+              "Stavros, good news - the product fix is starting to take effect. Your price competitiveness is improving and visibility is trending upward. Let me walk you through the specifics.",
             styleMatch: { red: 2, blue: 1, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -952,7 +952,7 @@ const stavrosR2: ConversationTree = {
             label: 'Be transparent about mixed results',
             description: 'Acknowledge progress but flag remaining issues.',
             playerDialogue:
-              "I'll be straight with you - we've seen some improvement, but we're not where we need to be yet. There are still some parity issues on one channel and I want to address that today.",
+              "I'll be straight with you - we've seen some improvement, but we're not where we need to be yet. There's still a gap I want to address today, particularly on your international source-market traffic.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -983,7 +983,7 @@ const stavrosR2: ConversationTree = {
         {
           optionId: 'stavros-r2-open-honest',
           responses: [
-            { trustThreshold: 'low', text: "Still parity issues? You said fixing it would help. When is 'fixed' actually fixed?", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Still a gap after the fix? You said it would help. What's left?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "I appreciate the honesty. Most people would try to spin that. What's the remaining issue?", emotion: 'positive' },
             { trustThreshold: 'high', text: "Good - I'd rather hear the truth than a sales pitch. What do we need to do?", emotion: 'positive' },
           ],
@@ -994,7 +994,7 @@ const stavrosR2: ConversationTree = {
           optionId: 'stavros-r2-open-deflect',
           responses: [
             { trustThreshold: 'low', text: "Wait - I want to see results from what we already did before you pitch me something new.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "Hang on, let's not skip past the results. What happened with the parity fix?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Hang on, let's not skip past the results. What happened with the product fix?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "I appreciate looking forward, but I need to see what happened first. Show me the progress.", emotion: 'cautious' },
           ],
           metricEffects: {},
@@ -1011,9 +1011,9 @@ const stavrosR2: ConversationTree = {
           {
             id: 'stavros-r2-diag-mostly-fine',
             label: 'Frame it as mostly back on track',
-            description: "Suggest the parity fix has done the heavy lifting and the rest will follow.",
+            description: "Suggest the product fix has done the heavy lifting and the rest will follow.",
             playerDialogue:
-              "Honestly, the parity fix has done most of the heavy lifting. The numbers are still climbing but the worst is behind us. I'd say we're in recovery mode now.",
+              "Honestly, the product fix has done most of the heavy lifting. The numbers are still climbing but the worst is behind us. I'd say we're in recovery mode now.",
             styleMatch: { red: 0, blue: -1, yellow: 1, green: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1023,18 +1023,18 @@ const stavrosR2: ConversationTree = {
             label: 'Argue the discount levels are too shallow',
             description: 'Read the residual gap as needing harder discounts across the stack.',
             playerDialogue:
-              "Parity is sorted. Where I think you're still losing ground is the depth of your discounts - your Genius and Mobile discount levels are sitting at the conservative end of the range. To pull back the volume you've lost, you'd want to push those harder.",
+              "The product fix is in. Where I think you're still losing ground is the depth of your discounts - your Genius and Mobile discount levels are sitting at the conservative end of the range. To pull back the volume you've lost, you'd want to push those harder.",
             styleMatch: { red: 1, blue: 0, yellow: 1, green: -1 },
             assertiveness: 2,
             compliance: 'safe',
           },
           {
-            id: 'stavros-r2-diag-broken-lastminute',
-            label: 'Pinpoint the misconfigured Last-Minute Deal',
+            id: 'stavros-r2-diag-source-market-gap',
+            label: 'Pinpoint the international source-market gap',
             description:
-              'Show that the residual leakage is your Last-Minute Deal misfiring - eligible too early, discount too small.',
+              'Show that with the product fix in, residual leakage is on inbound traffic from his top international source markets.',
             playerDialogue:
-              "Parity is fixed - that's working. What's still bleeding is your Last-Minute Deal. It's active, but it's misconfigured: the booking window is set seven days out instead of one to two, so you're discounting bookings that would have come in at full price anyway, and you're missing the empty-room conversions it's actually designed to catch. It's costing you on both sides at once.",
+              "The Last-Minute Deal fix is doing its job - visibility is climbing and the empty-room conversions are picking up. What's still soft is your international demand: Germany and the UK are your top two source markets, and on that traffic specifically you're being read as less competitive than comparable resorts on Kos. That's where the next meaningful gap is.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -1055,7 +1055,7 @@ const stavrosR2: ConversationTree = {
         {
           optionId: 'stavros-r2-diag-need-deeper-discount',
           responses: [
-            { trustThreshold: 'low', text: "More discount, again. I've already discounted. If that was the answer, parity wouldn't have been the diagnosis last time.", emotion: 'negative' },
+            { trustThreshold: 'low', text: "More discount, again. I've already discounted. If that was the answer, the diagnosis last time wouldn't have been a single product fix.", emotion: 'negative' },
             { trustThreshold: 'medium', text: "I'd push back on that. Deeper discounting feels like throwing money at the problem. Anything more specific?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "Maybe - but my instinct says there's something more specific than 'discount harder'. Look again.", emotion: 'neutral' },
           ],
@@ -1063,15 +1063,15 @@ const stavrosR2: ConversationTree = {
           trustChange: 0,
         },
         {
-          optionId: 'stavros-r2-diag-broken-lastminute',
+          optionId: 'stavros-r2-diag-source-market-gap',
           responses: [
-            { trustThreshold: 'low', text: "Wait - my Last-Minute Deal has been misconfigured this whole time? How did this get missed? Show me what 'misconfigured' looks like exactly.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Now THAT is the kind of specific diagnosis I needed. A broken setup discounting full-price bookings - that's costing me twice. Let's fix it.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Right. So we fixed the visibility problem but the product itself is broken. That's actually useful - it means there's a clear next move.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Germany and UK specifically? That's a sharper read. Show me the source-market breakdown - I want to see how my numbers compare on each.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Now THAT is the kind of specific diagnosis I needed. Two named source markets where I'm under-competing - that's something I can act on.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Right. So the broken product is sorted but the next gap is who's looking and where they're from. That's a clear next move.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, visibility: 1 },
           trustChange: 6,
-          nextPhasePrompt: "Right - so what's the next play? Fix what's broken, then what?",
+          nextPhasePrompt: "Right - so what's the next play? How do I close that source-market gap?",
         },
       ],
     },
@@ -1084,29 +1084,29 @@ const stavrosR2: ConversationTree = {
           {
             id: 'stavros-r2-rec-country',
             label: 'Add Country Rate for key markets',
-            description: 'Target specific source markets to boost competitive position.',
+            description: 'Target the international source markets where the visibility gap sits.',
             playerDialogue:
-              "Now that parity is improving, let's layer in a Country Rate targeting your top source markets - Germany and the UK. This targets the highest-volume travellers with a competitive rate without changing your base price.",
-            styleMatch: { red: 2, blue: 1, yellow: 0, green: 0 },
+              "Now that the product fix is in, let's layer in a Country Rate targeting your top source markets - Germany and the UK. That gives those travellers a more competitive rate without changing your base price, and closes the specific gap we just identified.",
+            styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
           },
           {
-            id: 'stavros-r2-rec-fix-lastminute',
-            label: 'Fix the misconfigured Last-Minute Deal',
-            description: 'Clean up the existing discount that is not working properly.',
+            id: 'stavros-r2-rec-genius-deeper',
+            label: 'Push Genius participation harder',
+            description: 'Recommend deepening the Genius discount to attract more repeat travellers.',
             playerDialogue:
-              "Before we add anything new, I noticed your Last-Minute Deal is active but misconfigured - it's set too far in advance and the discount level isn't competitive enough. Let's fix that first. It's already costing you without delivering results.",
-            styleMatch: { red: 1, blue: 2, yellow: 0, green: 1 },
+              "Before we add a new product, I'd push your Genius participation harder. You're at the conservative end of the range - moving to a deeper Genius discount unlocks priority placement for repeat travellers, which is a different audience to the source-market one we just talked about.",
+            styleMatch: { red: 1, blue: 1, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
           },
           {
             id: 'stavros-r2-rec-patience',
             label: 'Recommend patience',
-            description: 'Suggest waiting for the parity fix to fully take effect.',
+            description: 'Suggest waiting for the product fix to fully take effect.',
             playerDialogue:
-              "Honestly, Stavros, I think the best move right now is patience. The parity fix is working but it takes time to flow through to visibility and bookings. I'd say give it another two to three weeks before adding anything else.",
+              "Honestly, Stavros, I think the best move right now is patience. The product fix is working but it takes time to flow through to visibility and bookings. I'd say give it another two to three weeks before adding anything else.",
             styleMatch: { red: -2, blue: 1, yellow: -1, green: 2 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1117,22 +1117,22 @@ const stavrosR2: ConversationTree = {
         {
           optionId: 'stavros-r2-rec-country',
           responses: [
-            { trustThreshold: 'low', text: "Germany and UK... what percentage discount, and what's the expected volume uplift?", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "That's targeted. I like it. What level of discount are we talking?", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Germany and UK... what percentage rate, and what's the expected volume uplift?", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "That's targeted, and it lines up with the source-market gap you just showed me. What level are we talking?", emotion: 'positive' },
             { trustThreshold: 'high', text: "Smart. Layer it in while the momentum is building. Set it up.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 6, visibility: 5, conversion: 3, revenue: 3 },
-          trustChange: 4,
+          trustChange: 6,
         },
         {
-          optionId: 'stavros-r2-rec-fix-lastminute',
+          optionId: 'stavros-r2-rec-genius-deeper',
           responses: [
-            { trustThreshold: 'low', text: "Misconfigured? Why wasn't I told about this before? Fine - fix it.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Wait - it's been costing me money and not working? Show me what's wrong and let's fix it now.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Good catch. I didn't realise it was misconfigured. Let's sort it out immediately.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Deeper Genius? That's giving away more margin on guests already coming in. Not sure that's the right move right now.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "Genius repeat traveller versus the source-market gap - they're different audiences. I'd want to be sure we're picking the right one first.", emotion: 'neutral' },
+            { trustThreshold: 'high', text: "Reasonable, but I'd rather close the source-market gap we just named first. Genius after that maybe.", emotion: 'neutral' },
           ],
-          metricEffects: { experiencedRPD: 4, discountQuality: 15, visibility: 3, revenue: 2 },
-          trustChange: 5,
+          metricEffects: { experiencedRPD: 2, visibility: 1 },
+          trustChange: 1,
         },
         {
           optionId: 'stavros-r2-rec-patience',
@@ -1637,7 +1637,7 @@ const stavrosR3: ConversationTree = {
             label: 'Praise his action',
             description: 'Acknowledge that his quick decisions drove the improvement.',
             playerDialogue:
-              "Stavros, credit where it's due - the speed at which you acted on the parity fix and the discount adjustments is the reason the numbers are recovering. Not every partner moves that fast.",
+              "Stavros, credit where it's due - the speed at which you acted on the product fix and the discount adjustments is the reason the numbers are recovering. Not every partner moves that fast.",
             styleMatch: { red: 2, blue: 0, yellow: 2, green: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1779,9 +1779,9 @@ const stavrosR3: ConversationTree = {
           {
             id: 'stavros-r3-rec-scale-back',
             label: 'Recommend reducing discounts',
-            description: 'Suggest pulling back now that parity is fixed.',
+            description: 'Suggest pulling back now that the product fix is in.',
             playerDialogue:
-              "Now that parity is resolved, you could actually consider reducing some of your discounts. The parity fix is doing the heavy lifting - you might not need as much discounting as before.",
+              "Now that the discount stack is in order, you could actually consider reducing some of your discounts. The product fix is doing the heavy lifting - you might not need as much discounting as before.",
             styleMatch: { red: -1, blue: 1, yellow: -1, green: 1 },
             assertiveness: 1,
             compliance: 'safe',

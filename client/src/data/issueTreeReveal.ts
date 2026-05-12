@@ -83,7 +83,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     label: 'Hook',
     shortName: 'Hook',
     icon: MessageSquare,
-    headline: 'Un-platform competitiveness narrative',
+    headline: 'On-platform competitiveness narrative',
     body:
       "Open with what you see on Booking.com - falling visibility, conversion softening - without claiming you know what's happening on her direct site or other OTAs.",
     narration:

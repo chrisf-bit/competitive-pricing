@@ -276,9 +276,9 @@ export const dataInsightsChallenges: DataInsightsChallenge[] = [
     ],
     feedback: {
       correct:
-        "Spot on. Public RPD is what non-logged-in travellers see; Loyal RPD is what Genius members see. The gap means Genius is doing its job - travellers using it get a competitive price - but the underlying public price is weak. Lift the base, and the gap closes.",
+        "Spot on. Public RPD is what non-logged-in travellers see; Loyal RPD is what Genius members see. The gap means Genius is doing its job - travellers using it get a competitive price - but the underlying public price is weak. The take-away here is that the public price is masking the real issue; how you act on that with the partner is a separate compliance question.",
       incorrect:
-        "It's the base-price-masked-by-Genius story. Non-logged-in travellers (Public RPD) see Booking.com as 10.3% off-pitch, but Genius members (Loyal RPD) get a near-perfect 0.7% - because the Genius discount lowers what they actually see. The base public price is the problem.",
+        "It's the base-price-masked-by-Genius story. Non-logged-in travellers (Public RPD) see Booking.com as 10.3% off-pitch, but Genius members (Loyal RPD) get a near-perfect 0.7% - because the Genius discount lowers what they actually see. The internal read is that the public price is the problem; whether and how to raise that with the partner is a separate compliance question.",
     },
   },
 ];

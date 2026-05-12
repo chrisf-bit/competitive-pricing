@@ -94,7 +94,7 @@ export const initialPartners: PartnerState[] = [
       conversion: 32,
       revenue: 42,
       discountQuality: 25,
-      rateParity: 'major',
+      rateParity: 'clean',
     },
     metricHistory: [],
     trust: 40,
