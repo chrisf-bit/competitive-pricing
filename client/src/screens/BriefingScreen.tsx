@@ -84,23 +84,27 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             }}
           >
             <p style={{ margin: 0 }}>
-              We're looking for the best of the best to take on a portfolio of partners that
-              have lost their way.
+              We're looking for the best of the best!
             </p>
             <p style={{ margin: 0 }}>
-              Visibility is slipping. Prices are off-pitch. Travellers are choosing
-              competitors. And most of it is fixable - if you know what to look for, what to
-              ask, and how to say it.
+              A portfolio of partner accounts is under pressure on Booking.com. Their
+              visibility on Booking.com is slipping. Their prices are less competitive than
+              they could be. Travellers are choosing other options. Much of it is fixable,
+              if you know what to look for, what to ask, and how to help the partner find
+              the right next step for their performance on Booking.com.
             </p>
             <p style={{ margin: 0 }}>
-              You'll get a portfolio of accounts that need someone like you. Each round, one
-              partner will be in worse shape than the others. Read the signals. Choose your
-              move. Have the conversation. Pay attention to how each partner responds - not
-              everyone communicates the same way.
+              You'll take ownership of a portfolio of partner accounts that need your
+              judgement. In each round, one partner will need your attention most. Read the
+              signals. Decide what matters. Adjust your Action Plans. Choose your partner
+              actions. Have the conversation. Pay attention to how each partner responds,
+              not every situation is the same, and not every partner sees the issue in the
+              same way.
             </p>
             <p style={{ margin: 0, color: 'var(--white)', fontWeight: 600 }}>
-              First, we need to know you're up to it. Earn your clearance and we'll hand you
-              the mission.
+              First, you need to earn your clearance. Show that you understand why price
+              competitiveness matters, know how to work within the guardrails, and make
+              sound decisions, then we'll hand you the mission.
             </p>
           </div>
 
