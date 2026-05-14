@@ -183,7 +183,7 @@ export const johnR1: BranchingConversationTree = {
             "I've got a rule about that - I don't let any OTA go above 30% of my business. So 'lower' is exactly where I want it.",
           styleMatch: { red: -1, yellow: -2, green: -2, blue: 0 },
           assertiveness: 3,
-          compliance: 'borderline',
+          compliance: 'risky',
           trustChange: -6,
         },
         {
@@ -286,7 +286,7 @@ export const johnR1: BranchingConversationTree = {
             "That's not happening. My direct channel needs a price advantage - that's the whole point of it.",
           styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
           assertiveness: 3,
-          compliance: 'borderline',
+          compliance: 'risky',
           trustChange: -8,
         },
         {
