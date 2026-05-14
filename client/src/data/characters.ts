@@ -178,7 +178,7 @@ export const superPowerPersonas: SuperPowerPersona[] = [
       retroOnWin:
         'Your Architect lens built trust quickly; the partner heard you out and the diagnosis landed.',
       retroOnLoss:
-        'Your Architect lens kept things harmonious, but a sharper data lead would have surfaced the root cause faster. Trade-off bit you here.',
+        'Your Architect lens kept things harmonious, but a sharper data lead would have surfaced the root cause faster. The trade-off hurt you a little here.',
       aggregateCoaching:
         'Next playthrough, push past the rapport when the numbers ask for it.',
     },

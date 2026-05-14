@@ -159,7 +159,7 @@ export function ConversationReportScreen({
             passed={grade.allCompliant}
           />
           <Criterion
-            label="No active style mismatch"
+            label="Avoided a style mismatch"
             passed={grade.noActiveMismatch}
           />
         </div>
