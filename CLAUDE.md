@@ -206,9 +206,13 @@ DO list and the regime's specific constraints.
   silently between rounds.
 - The "right" partner each round is held in
   `data/correctPartnerPerRound.ts` per regime per round. For
-  No-Parity the rotation is **Stavros R1, Marina R2, Carlos R3** -
+  No-Parity the rotation is **John R1, Marina R2, Carlos R3** -
   matched to the per-round state baselines (below) so each round one
-  partner is genuinely the worst on visible KPIs.
+  partner is genuinely the worst on visible KPIs. John replaced
+  Stavros as the R1 target in May 2026; Stavros's persona +
+  conversation trees are moved to `pendingPartners` so they remain
+  on disk for future reuse without filtering into the active
+  portfolio.
 - **Per-round partner state is scripted** in
   `data/partnerStateByRound.ts` and applied as an overlay by
   `applyRoundBaseline` in three places: `createInitialState` (R1
@@ -218,26 +222,28 @@ DO list and the regime's specific constraints.
   being practised). The engine's conversation outcomes only nudge a
   couple of legacy metric fields; without this overlay the headline
   KPIs never move and the same partner stays worst forever. The
-  scripted arc for No-Parity: R1 Stavros crisis (eRPD 17.2, broken
-  Last-Minute Deal); R2 Stavros recovering, Marina's gap escalates;
-  R3 Marina recovering, Carlos's misconfig compounds.
+  scripted arc for No-Parity today: R1 John in brand-first crisis
+  (PACE -43% roomnights / -37% revenue YoY, ADR +10%, eRPD 9.5,
+  lose-price 81%); R2 Marina's mobile gap escalates; R3 Marina
+  recovering, Carlos's misconfigured Country Rate compounds.
 - **Conversation data covers rounds 1-3 per partner today.** Rounds
   4-10 are not yet playable. `getConversationTree` returns undefined
   past round 3, which Practice Mode handles by locking those cards.
-- **Only No-Parity is selectable today.** Marina, Stavros, Carlos
-  are the active No-Parity roster in `initialPartners`. Hannah,
-  Priya, Yuki are parked in a separate `pendingPartners` export in
-  the same file - their persona data and conversation trees are
-  intact and ready to be spliced back into the active roster when
-  Narrow / Wide / Cross Regional become selectable.
+- **Only No-Parity is selectable today.** Marina, John, Carlos are
+  the active No-Parity roster in `initialPartners`. Stavros,
+  Hannah, Priya, Yuki are parked in a separate `pendingPartners`
+  export in the same file - their persona data and conversation
+  trees are intact and ready to be spliced back into the active
+  roster if needed.
 
 ### Conversation structure
 
 Two shapes coexist in the engine while partners are migrated from
 the legacy 3-phase model to the new branching model. SME has
 confirmed all scenarios will eventually be branching - the 3-phase
-trees stay only as long as the existing Marina/Stavros/Carlos R1-R3
-content hasn't been rewritten.
+trees stay only as long as the existing Marina/Carlos R1-R3
+content hasn't been rewritten (and John R1 is already in the new
+branching shape).
 
 **Shape detection.** `conversationInProgress.shape` discriminates at
 engine and screen-routing level. `startConversation` checks
@@ -435,9 +441,12 @@ SME authors know the slot they're filling):
 - Data Detective - unlocks biggest anomaly highlighted; mutes style
   cue
 
-**Coverage today:** R1 only, for the active No-Parity trio (Marina,
-Stavros, Carlos) - 12 hint pairs. R2/R3 to follow once R1 is
-reviewed in the UI; R4+ blocked on SME content for those rounds.
+**Coverage today:** R1 only, for the now-retired No-Parity trio
+(Marina, Stavros, Carlos) authored before John replaced Stavros as
+R1 target. **John has no personaHints content yet** - the persona
+insight + blind-spot cards won't render for him until R1 hints are
+authored. R2/R3 hints for Marina/Carlos and a full set for John
+land alongside the next SME drop.
 
 **State (`expandedBlindSpots: string[]` on `GameState`):** keys are
 `${partnerId}-${round}` strings. Resets on full restart
@@ -514,6 +523,15 @@ debate:
   `PartnerMetrics` - they drive the conversation system and scoring
   internally. They're not displayed; they'll be retired post-MVP when
   the conversation system is rewired onto the new KPIs.
+- **Year-on-Year (PACE) performance** is an optional partner-scoped
+  block: `PartnerMetrics.pace?` with `period`, `roomnights`,
+  `revenue`, `adr` (each carrying current / lastYear / relativeChange,
+  plus currency for revenue and ADR). Rendered as a dedicated
+  "Year-on-Year Performance" card on Partner Detail when present.
+  Only authored for partners whose scenario depends on the YoY
+  framing (e.g. John, where the brand-first signature is "ADR up,
+  volume + revenue down vs last year"). Marina and Carlos don't
+  carry PACE today and don't show the card.
 
 ### Parity regimes
 
@@ -522,15 +540,15 @@ debate:
   screen. Narrow / Wide / Cross Regional are visually disabled
   ("Coming soon" pill, dashed border, not-allowed cursor) until the
   matching partner data lands (expected next week).
-- **John (Wide Parity, branching) is parked** under
-  `johnPartner` in `data/partners.ts`. Not in `initialPartners`,
-  not surfaced via Market Select. Reachable via DevNav's
-  **Branching scenarios > John (Wide Parity)** entry, which
-  injects him into `state.partners`, sets the learner's regime to
-  Wide, and routes to his Partner Detail. Used for testing the
-  branching engine + Issue Tree Helper end-to-end while client
-  decides where John formally lives (new Wide regime partner pool
-  vs other options).
+- **John is the No-Parity R1 target** as of May 2026. He sits in
+  `initialPartners` alongside Marina and Carlos with
+  `parityRegime: 'none'`. His R1 conversation is in the new
+  branching shape (`data/scenarios/john-r1.ts`); the dialogue is
+  written to be No-Parity compliant - the AM never proactively
+  raises cross-channel pricing, cross-channel framing only kicks
+  in after John self-discloses his lower direct rate, and the
+  close asks for "the best price you're willing to make available
+  to Booking.com" rather than "syncing competitiveness".
 - Country-to-regime mapping is the single source of truth in
   `data/parityCountries.ts`. Wide is the default for any country not
   listed under No or Narrow. Cross Regional is tagged per-partner, not

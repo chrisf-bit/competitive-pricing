@@ -3,7 +3,7 @@ import type { BranchingConversationTree } from '../../types';
 /**
  * John - "The Brand.com Loyalist" - Round 1
  *
- * Wide Parity scenario. John runs a hotel with a brand-first
+ * No-Parity scenario. John runs a hotel with a brand-first
  * distribution strategy and a hard mental rule ("never let an OTA
  * have more than 30% of my business"). The AM's job is to reframe
  * his view of Booking.com from "competitor for direct guests" to
@@ -12,6 +12,17 @@ import type { BranchingConversationTree } from '../../types';
  * Source: SME-authored dialogue (PDF, Competitive Pricing Learning
  * Game Personas). Uses the Gemini-shortened version of the script
  * to keep on-screen copy minimal.
+ *
+ * No-Parity compliance:
+ *   - The AM never proactively raises cross-channel pricing. Cross-
+ *     channel framing only kicks in AFTER John self-discloses lower
+ *     direct rates (step 3 partnerResponse).
+ *   - The AM does not ask John to match, sync, or align with any
+ *     other channel. The close asks for "the best price you're
+ *     willing to make available to Booking.com" - the SME-prescribed
+ *     No-Parity wording.
+ *   - External-price knowledge is used internally for prioritisation;
+ *     not asserted to the partner as fact.
  *
  * Issue Tree path the learner should land on via the Helper:
  *   Trigger: Performance Outcome or Pricing Signal
@@ -152,9 +163,9 @@ export const johnR1: BranchingConversationTree = {
           description:
             'Use the 3M impressions data to reframe his view of Booking.com.',
           playerDialogue:
-            "Volume is great. But we're seeing a 40% revenue drop on our end. You've had three million impressions on Booking.com recently. Plenty of those guests find you on our platform, then book directly because of the price gap.",
+            "Volume is great. But we're seeing a 40% revenue drop on our end. You've had three million impressions on Booking.com recently. A lot of those guests are finding you here, then choosing to book somewhere else.",
           partnerResponse:
-            "True. And honestly, I prefer that. Eighteen per cent commission is a heavy hit on my margins - I'd rather they book direct after seeing us.",
+            "Honestly, I prefer that. Most of them find me on Booking.com and then book directly with me - my direct rate is lower, and I'd rather not pay 18% commission on top. The impact on my margins is too high.",
           styleMatch: { red: 1, yellow: 2, green: 0, blue: 2 },
           assertiveness: 2,
           compliance: 'safe',
@@ -200,13 +211,13 @@ export const johnR1: BranchingConversationTree = {
       options: [
         {
           id: 'john-r1-math-net',
-          label: 'Walk through the effective commission',
+          label: 'Ask him to price his direct acquisition cost',
           description:
-            'Show that with a 10% ADR gap, the real commission is closer to 8%.',
+            "Help him quantify what a direct guest actually costs once campaigns and discounts are included.",
           playerDialogue:
-            "I hear you. But if your rate on your own site is roughly 10% lower than your Booking.com rate, the effective commission on a Booking.com guest is closer to 8% - and that 8% gets you three million 'free' impressions a month. Does your direct marketing cost less than that per booking?",
+            "Fair point. Can I ask, though - once you add up your sponsored campaigns, the XML provider fees, and the direct-only discounts, what does a direct guest actually cost you? Eighteen per cent isn't free, but neither is your direct channel. How close do they get?",
           partnerResponse:
-            "Hmm. I have a fixed fee for the website and a budget for campaigns. I don't know exactly what the per-booking cost ends up at - it might be closer than I'd assumed.",
+            "Honestly, I haven't done that maths in a while. I have a fixed fee for the website and a budget for campaigns. The per-booking cost might be closer to that 18% than I'd assumed.",
           styleMatch: { red: 1, yellow: 1, green: 0, blue: 2 },
           assertiveness: 2,
           compliance: 'safe',
@@ -254,11 +265,11 @@ export const johnR1: BranchingConversationTree = {
           id: 'john-r1-close-test',
           label: 'Propose a slow-month test on the platform',
           description:
-            'Soft close: align rates on the months his direct channel under-performs.',
+            "Soft close: ask for the best price he's willing to make available on his weaker months.",
           playerDialogue:
-            "Why not use our reach to recover some of that 40% drop during your slower months specifically? You set the months. We sync your competitiveness on those, leave the strong months alone, and reconnect in four weeks to look at the result.",
+            "Why not use our reach to recover some of that 40% drop during your slower months specifically? You set the months. On those months, you decide what's the best price you're willing to make available on Booking.com. Strong months we leave alone. Then we reconnect in four weeks to look at the result.",
           partnerResponse:
-            "That's a fairer way to frame it. Let's test it on the months where my site is underperforming. Send me the months you'd want to align and I'll come back to you.",
+            "That's a fairer way to frame it. Let's test it on the months where my site is underperforming. Send me the months you'd want to focus on and I'll come back to you with a price I'm comfortable with.",
           styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
           assertiveness: 2,
           compliance: 'safe',

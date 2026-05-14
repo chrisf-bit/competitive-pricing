@@ -15,8 +15,13 @@ import {
   ChevronRight,
   ChevronDown,
   GitBranch,
+  TrendingUp,
 } from 'lucide-react';
-import type { PartnerState, IssueTreeHelperState } from '../types';
+import type {
+  PartnerState,
+  IssueTreeHelperState,
+  PacePerformance,
+} from '../types';
 import { getRPDLevel } from '../engine/gameEngine';
 import {
   RPDBadge,
@@ -335,6 +340,14 @@ export function PartnerDetailScreen({
               />
             </div>
           </div>
+
+          {/* Year-on-Year (PACE) performance - only rendered for
+              partners with a `pace` block on their metrics (e.g. John,
+              the brand-first scenario). Neutral tones; learner reads
+              the numbers and decides what they mean. */}
+          {partner.metrics.pace && (
+            <PacePerformanceCard pace={partner.metrics.pace} />
+          )}
 
           {/* Discount products */}
           <div
@@ -814,4 +827,140 @@ function BigMetric({
       </div>
     </div>
   );
+}
+
+function PacePerformanceCard({ pace }: { pace: PacePerformance }) {
+  return (
+    <div
+      style={{
+        background: 'var(--white)',
+        border: '2px solid var(--grey-100)',
+        borderRadius: 'var(--radius-lg)',
+        padding: 18,
+        boxShadow: 'var(--shadow-md)',
+        animation: 'fadeIn 0.3s ease 0.15s backwards',
+      }}
+    >
+      <div style={{ marginBottom: 14 }}>
+        <SectionHeader
+          icon={<TrendingUp size={16} style={{ color: 'var(--white)' }} />}
+          label="Year-on-Year Performance"
+        />
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            color: 'var(--grey-400)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.08em',
+            marginTop: -6,
+            marginLeft: 42,
+          }}
+        >
+          {pace.period} (PACE)
+        </div>
+      </div>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 12,
+        }}
+      >
+        <PaceRow
+          label="Net roomnights"
+          current={formatNumber(pace.roomnights.current)}
+          lastYear={formatNumber(pace.roomnights.lastYear)}
+          change={pace.roomnights.relativeChange}
+        />
+        <PaceRow
+          label={`Net revenue (${pace.revenue.currency})`}
+          current={formatNumber(pace.revenue.current)}
+          lastYear={formatNumber(pace.revenue.lastYear)}
+          change={pace.revenue.relativeChange}
+        />
+        <PaceRow
+          label={`Net ADR (${pace.adr.currency})`}
+          current={formatNumber(pace.adr.current)}
+          lastYear={formatNumber(pace.adr.lastYear)}
+          change={pace.adr.relativeChange}
+        />
+      </div>
+    </div>
+  );
+}
+
+function PaceRow({
+  label,
+  current,
+  lastYear,
+  change,
+}: {
+  label: string;
+  current: string;
+  lastYear: string;
+  change: number;
+}) {
+  const arrow = change < 0 ? '↓' : '↑';
+  const sign = change < 0 ? '' : '+';
+  return (
+    <div
+      style={{
+        padding: '14px 12px',
+        background: 'var(--off-white)',
+        borderRadius: 'var(--radius-md)',
+        border: '1.5px solid transparent',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 9,
+          fontWeight: 800,
+          color: 'var(--grey-400)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.08em',
+          marginBottom: 8,
+        }}
+      >
+        {label}
+      </div>
+      <div
+        style={{
+          fontSize: 22,
+          fontWeight: 900,
+          color: 'var(--brand-navy)',
+          lineHeight: 1,
+          letterSpacing: '-0.02em',
+          marginBottom: 6,
+        }}
+      >
+        {current}
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          fontWeight: 600,
+          color: 'var(--grey-500)',
+          marginBottom: 4,
+        }}
+      >
+        ly {lastYear}
+      </div>
+      <div
+        style={{
+          fontSize: 12,
+          fontWeight: 700,
+          color: 'var(--grey-600)',
+        }}
+      >
+        {arrow}
+        {sign}
+        {change.toFixed(2)}%
+      </div>
+    </div>
+  );
+}
+
+function formatNumber(n: number): string {
+  return n.toLocaleString('en-GB');
 }

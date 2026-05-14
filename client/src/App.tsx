@@ -45,10 +45,6 @@ export default function App() {
             game.onRestart();
             setShowSplash(true);
           }}
-          onTestScenario={(partnerId) => {
-            setShowSplash(false);
-            game.startTestScenario(partnerId);
-          }}
         />
       </>
     );
@@ -330,7 +326,6 @@ export default function App() {
           game.onRestart();
           setShowSplash(true);
         }}
-        onTestScenario={game.startTestScenario}
       />
     </div>
   );

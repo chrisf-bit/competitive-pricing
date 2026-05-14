@@ -11,7 +11,7 @@ import { johnR1 } from './scenarios/john-r1';
  * both.
  *
  * Coverage today:
- *   - John R1 (Brand.com loyalist - Wide Parity scenario)
+ *   - John R1 (Brand.com loyalist - No-Parity scenario)
  *
  * As SME content lands per partner-round, add the scenario file under
  * `data/scenarios/` and register it below.

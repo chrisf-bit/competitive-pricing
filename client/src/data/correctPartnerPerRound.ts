@@ -23,29 +23,29 @@ export const correctPartnerPerRound: Partial<
     // data/partnerStateByRound.ts. Each round one partner is clearly
     // the worst on visible KPIs:
     //
-    //   R1 - Stavros (eRPD 17.2, parity breach + broken Last-Minute,
-    //                 lose-price 96%)
+    //   R1 - John (brand-first strategy; PACE -43% roomnights / -37%
+    //              revenue YoY, eRPD 9.5, lose-price 81%, ADR up 10%
+    //              YoY. Replaced Stavros as the R1 target in May 2026.)
     //   R2 - Marina (eRPD 9.4 trending sharply up, mobile gap
-    //                escalating, lose-price 82%; Stavros's parity fix
-    //                has dropped his numbers below Marina's)
+    //                escalating, lose-price 82%)
     //   R3 - Carlos (eRPD 10.8 trending sharply up, misconfigured
     //                Country Rate now compounding)
     //
     // Rounds 4-10 will need both new conversation content and new
     // baselines once the partner-data drop lands. Until then they're
-    // placeheld with Stavros so the grading layer has an answer; the
+    // placeheld with John so the grading layer has an answer; the
     // sim today isn't playable past R3 because getConversationTree
-    // returns undefined beyond R3.
-    1: 'stavros',
+    // and getBranchingScenario both return undefined beyond R3.
+    1: 'john',
     2: 'marina',
     3: 'carlos',
-    4: 'stavros',
-    5: 'stavros',
-    6: 'stavros',
-    7: 'stavros',
-    8: 'stavros',
-    9: 'stavros',
-    10: 'stavros',
+    4: 'john',
+    5: 'john',
+    6: 'john',
+    7: 'john',
+    8: 'john',
+    9: 'john',
+    10: 'john',
   },
   // narrow / wide / cross-regional: pending partner data. The
   // partner-data drop will introduce per-regime crisis partners.

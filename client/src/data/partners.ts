@@ -57,53 +57,72 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── Stavros - Large Resort Hotel (Red/Director) ──
+  // ── John - Brand-first Boutique Hotel (Red/Driver) ──
+  // No-Parity scenario, branching conversation shape. Replaces
+  // Stavros as the R1 target in the No-Parity rotation.
   {
     persona: {
-      id: 'stavros',
-      name: 'Stavros Papadopoulos',
-      propertyName: 'Aegean Grand Resort & Spa',
-      propertyType: 'Large Resort Hotel',
-      roomCount: 180,
-      location: 'Kos, Greece',
+      id: 'john',
+      name: 'John Marston',
+      propertyName: 'Marston House',
+      propertyType: 'Boutique Hotel',
+      roomCount: 60,
+      location: 'York, England',
       parityRegime: 'none',
-      avatar: 'SP',
-      propertyImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+      avatar: 'JM',
+      propertyImage:
+        'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop',
       style: 'red',
-      styleSecondary: 'red',
+      styleSecondary: 'green',
       description:
-        'High-volume operator under revenue pressure. Wants fast answers and clear ROI. Will challenge you if your reasoning is weak - but acts decisively once convinced.',
-      commercialGoal: 'Recover declining occupancy and revenue fast',
+        "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
+      commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
       profileNotes: [
-        'Impatient with preamble - gets straight to business',
-        'Compares Booking.com performance against Expedia weekly',
-        'Has blamed the platform for poor results in previous calls',
-        'Responds well to competitive benchmarks and revenue projections',
+        'Believes OTAs erode his brand and direct channel',
+        'Runs sponsored campaigns on meta-search via an XML provider',
+        'PACE Jun-Dec: roomnights -43% YoY, revenue -37% YoY, ADR +10% YoY',
+        'Three million Booking.com impressions in the last 90 days',
       ],
     },
     metrics: {
-      erpd: 17.2,
-      erpdChange: 6.8,
-      rpdPublic: 18.5,
-      rpdLoyal: 14.2,
-      losePricePublic: 96,
-      activeScenarios: 3,
-      competitor: 'expedia',
-      experiencedRPD: 38,
-      visibility: 40,
-      conversion: 32,
-      revenue: 42,
-      discountQuality: 25,
+      erpd: 9.5,
+      erpdChange: 0.4,
+      rpdPublic: 10.8,
+      rpdLoyal: 7.2,
+      losePricePublic: 81,
+      activeScenarios: 2,
+      competitor: 'brand',
+      pace: {
+        period: 'Jun-Dec 2026',
+        roomnights: { current: 876, lastYear: 1546, relativeChange: -43.34 },
+        revenue: {
+          current: 244679,
+          lastYear: 391585,
+          relativeChange: -37.52,
+          currency: 'EUR',
+        },
+        adr: {
+          current: 279,
+          lastYear: 253,
+          relativeChange: 10.27,
+          currency: 'EUR',
+        },
+      },
+      experiencedRPD: 42,
+      visibility: 48,
+      conversion: 36,
+      revenue: 38,
+      discountQuality: 30,
       rateParity: 'clean',
     },
     metricHistory: [],
-    trust: 40,
-    relationship: 'cool',
+    trust: 45,
+    relationship: 'neutral',
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'active' },
-      { id: 'mobile-rate', label: 'Mobile Rate', status: 'active' },
+      { id: 'genius', label: 'Genius Programme', status: 'inactive' },
+      { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
       { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
-      { id: 'last-minute', label: 'Last-Minute Deal', status: 'misconfigured' },
+      { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
       { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
     ],
     lastContactedRound: null,
@@ -168,72 +187,6 @@ export const initialPartners: PartnerState[] = [
 ];
 
 /**
- * John - Wide Parity branching scenario partner. Parked (not in
- * initialPartners) until the Wide regime is activated in Market
- * Select. Accessible via DevNav for testing the branching flow
- * while client is still confirming where John formally lives.
- *
- * Metric values are placeholders consistent with the SME-provided
- * narrative (down on volume + revenue, up on ADR vs same date last
- * year, eRPD not competitive) but use the existing PartnerMetrics
- * field shape. New metric fields (Net roomnights, Net revenue, Net
- * ADR with YoY) land when Q2 with the client is settled.
- */
-export const johnPartner: PartnerState = {
-  persona: {
-    id: 'john',
-    name: 'John Marston',
-    propertyName: 'Marston House',
-    propertyType: 'Boutique Hotel',
-    roomCount: 60,
-    location: 'York, England',
-    parityRegime: 'wide',
-    avatar: 'JM',
-    propertyImage:
-      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop',
-    style: 'red',
-    styleSecondary: 'green',
-    description:
-      "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
-    commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
-    profileNotes: [
-      'Believes OTAs erode his brand and direct channel',
-      'Runs sponsored campaigns on meta-search via an XML provider',
-      'PACE Jun-Dec: roomnights -43% YoY, revenue -37% YoY, ADR +10% YoY',
-      'Three million Booking.com impressions in the last 90 days',
-    ],
-  },
-  metrics: {
-    erpd: 7.5,
-    erpdChange: 4.2,
-    rpdPublic: 9.1,
-    rpdLoyal: 5.8,
-    losePricePublic: 72,
-    activeScenarios: 2,
-    competitor: 'brand',
-    experiencedRPD: 45,
-    visibility: 52,
-    conversion: 38,
-    revenue: 35,
-    discountQuality: 30,
-    rateParity: 'clean',
-  },
-  metricHistory: [],
-  trust: 45,
-  relationship: 'neutral',
-  discounts: [
-    { id: 'genius', label: 'Genius Programme', status: 'inactive' },
-    { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
-    { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
-    { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
-    { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
-  ],
-  lastContactedRound: null,
-  conversationLog: [],
-  pendingActions: [],
-};
-
-/**
  * Partners parked until their parity regimes go live in Market Select.
  * Kept here so the persona data and the conversation trees in
  * conversations-*.ts stay easy to re-merge - just splice these back
@@ -243,6 +196,65 @@ export const johnPartner: PartnerState = {
  * to bypass it.
  */
 export const pendingPartners: PartnerState[] = [
+  // ── Stavros - Large Resort Hotel (Red/Director) ──
+  // Was the No-Parity R1 target before John replaced him in May 2026.
+  // Persona + 3-phase conversation trees (rounds 1-3) are still on
+  // disk in conversations.ts; can be brought back into the active
+  // roster later if needed for a different scenario.
+  {
+    persona: {
+      id: 'stavros',
+      name: 'Stavros Papadopoulos',
+      propertyName: 'Aegean Grand Resort & Spa',
+      propertyType: 'Large Resort Hotel',
+      roomCount: 180,
+      location: 'Kos, Greece',
+      parityRegime: 'none',
+      avatar: 'SP',
+      propertyImage:
+        'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+      style: 'red',
+      styleSecondary: 'red',
+      description:
+        'High-volume operator under revenue pressure. Wants fast answers and clear ROI. Will challenge you if your reasoning is weak - but acts decisively once convinced.',
+      commercialGoal: 'Recover declining occupancy and revenue fast',
+      profileNotes: [
+        'Impatient with preamble - gets straight to business',
+        'Compares Booking.com performance against Expedia weekly',
+        'Has blamed the platform for poor results in previous calls',
+        'Responds well to competitive benchmarks and revenue projections',
+      ],
+    },
+    metrics: {
+      erpd: 17.2,
+      erpdChange: 6.8,
+      rpdPublic: 18.5,
+      rpdLoyal: 14.2,
+      losePricePublic: 96,
+      activeScenarios: 3,
+      competitor: 'expedia',
+      experiencedRPD: 38,
+      visibility: 40,
+      conversion: 32,
+      revenue: 42,
+      discountQuality: 25,
+      rateParity: 'clean',
+    },
+    metricHistory: [],
+    trust: 40,
+    relationship: 'cool',
+    discounts: [
+      { id: 'genius', label: 'Genius Programme', status: 'active' },
+      { id: 'mobile-rate', label: 'Mobile Rate', status: 'active' },
+      { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
+      { id: 'last-minute', label: 'Last-Minute Deal', status: 'misconfigured' },
+      { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
+    ],
+    lastContactedRound: null,
+    conversationLog: [],
+    pendingActions: [],
+  },
+
   // ── Hannah - Country Guesthouse (Green/Nurturer) - Narrow regime ──
   {
     persona: {

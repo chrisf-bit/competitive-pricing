@@ -17,21 +17,23 @@ import type { PartnerMetrics } from '../types';
  *
  * The narrative arc the baselines tell for No-Parity partners:
  *
- *   Round 1 - Stavros is in crisis (parity breach + broken Last-
- *             Minute Deal). Clearly the worst by a wide margin.
- *             Marina is mid-pack with a slow mobile gap. Carlos
- *             is broadly OK and even improving.
+ *   Round 1 - John is in a structural brand-first crisis. Booking.com
+ *             roomnights -43% YoY, revenue -37%, ADR +10% (the
+ *             classic signature of a partner who's pushed rates up
+ *             and lost OTA volume on purpose). eRPD 9.5, lose-price
+ *             81%. Marina is mid-pack with a slow mobile gap.
+ *             Carlos is broadly OK and even improving.
  *
- *   Round 2 - Stavros's parity has been fixed (clean) and his
- *             numbers are sharply improving. Marina's slow mobile
- *             gap has now escalated - Public RPD jumped, Lose
- *             Price Public is over 80%. Marina is now clearest
- *             worst. Carlos still mild but starting to drift.
+ *   Round 2 - John not yet baselined (R2 conversation content TBD;
+ *             see correctPartnerPerRound.ts). Marina's slow mobile
+ *             gap has now escalated - Public RPD jumped, Lose Price
+ *             Public is over 80%. Marina is now clearest worst.
+ *             Carlos still mild but starting to drift.
  *
- *   Round 3 - Marina improving (mobile addressed). Stavros stable.
- *             Carlos's misconfigured Country Rate has been
- *             compounding silently - he's now the worst with
- *             a 10.8 eRPD trending sharply up.
+ *   Round 3 - Marina improving (mobile addressed). Carlos's
+ *             misconfigured Country Rate has been compounding
+ *             silently - he's now the worst with a 10.8 eRPD
+ *             trending sharply up.
  *
  * Rounds 4-10 are not yet baselined. They'll be filled in alongside
  * the conversation-tree drop for those rounds; until then the
@@ -45,59 +47,6 @@ export const partnerStateByRound: Record<
   string,
   Record<number, PartnerStateBaseline>
 > = {
-  stavros: {
-    1: {
-      metrics: {
-        erpd: 17.2,
-        erpdChange: 6.8,
-        rpdPublic: 18.5,
-        rpdLoyal: 14.2,
-        losePricePublic: 96,
-        activeScenarios: 3,
-        competitor: 'expedia',
-        experiencedRPD: 38,
-        visibility: 40,
-        conversion: 32,
-        revenue: 42,
-        discountQuality: 25,
-        rateParity: 'clean',
-      },
-    },
-    2: {
-      metrics: {
-        erpd: 8.4,
-        erpdChange: -8.8,
-        rpdPublic: 9.1,
-        rpdLoyal: 7.2,
-        losePricePublic: 71,
-        activeScenarios: 2,
-        competitor: 'expedia',
-        experiencedRPD: 48,
-        visibility: 54,
-        conversion: 42,
-        revenue: 50,
-        discountQuality: 35,
-        rateParity: 'clean',
-      },
-    },
-    3: {
-      metrics: {
-        erpd: 5.2,
-        erpdChange: -3.2,
-        rpdPublic: 5.6,
-        rpdLoyal: 4.5,
-        losePricePublic: 48,
-        activeScenarios: 1,
-        competitor: 'expedia',
-        experiencedRPD: 58,
-        visibility: 64,
-        conversion: 52,
-        revenue: 60,
-        discountQuality: 55,
-        rateParity: 'clean',
-      },
-    },
-  },
   marina: {
     1: {
       metrics: {
@@ -147,6 +96,41 @@ export const partnerStateByRound: Record<
         conversion: 52,
         revenue: 60,
         discountQuality: 55,
+        rateParity: 'clean',
+      },
+    },
+  },
+  john: {
+    1: {
+      metrics: {
+        erpd: 9.5,
+        erpdChange: 0.4,
+        rpdPublic: 10.8,
+        rpdLoyal: 7.2,
+        losePricePublic: 81,
+        activeScenarios: 2,
+        competitor: 'brand',
+        pace: {
+          period: 'Jun-Dec 2026',
+          roomnights: { current: 876, lastYear: 1546, relativeChange: -43.34 },
+          revenue: {
+            current: 244679,
+            lastYear: 391585,
+            relativeChange: -37.52,
+            currency: 'EUR',
+          },
+          adr: {
+            current: 279,
+            lastYear: 253,
+            relativeChange: 10.27,
+            currency: 'EUR',
+          },
+        },
+        experiencedRPD: 42,
+        visibility: 48,
+        conversion: 36,
+        revenue: 38,
+        discountQuality: 30,
         rateParity: 'clean',
       },
     },

@@ -142,6 +142,35 @@ export interface DiscountProduct {
   status: DiscountStatus;
 }
 
+/**
+ * PACE-period year-on-year performance for a partner.
+ *
+ * Optional - only authored for partners whose scenario depends on
+ * the PACE-vs-LY framing (e.g. John, the brand-first scenario,
+ * where the story is "ADR up, roomnights down" YoY). Rendered as a
+ * dedicated card on Partner Detail when present.
+ *
+ * Net Average Daily Rate (ADR) and revenue carry their own currency
+ * so the PACE card can render the right symbol.
+ */
+export interface PacePerformance {
+  /** Period label shown above the card, e.g. "Jun-Dec 2026". */
+  period: string;
+  roomnights: { current: number; lastYear: number; relativeChange: number };
+  revenue: {
+    current: number;
+    lastYear: number;
+    relativeChange: number;
+    currency: string;
+  };
+  adr: {
+    current: number;
+    lastYear: number;
+    relativeChange: number;
+    currency: string;
+  };
+}
+
 export interface PartnerMetrics {
   // ── New KPI structure (what the learner sees - sourced from the
   // KPI spec PFRs work with day-to-day) ──
@@ -159,6 +188,13 @@ export interface PartnerMetrics {
   activeScenarios: number;
   /** Top competitor for this partner. */
   competitor: 'brand' | 'expedia';
+  /**
+   * Optional PACE-period YoY performance. Authored per partner-round
+   * for scenarios where the YoY decline / shift is part of the story
+   * (e.g. brand-first partners). Rendered as a dedicated card on
+   * Partner Detail when present.
+   */
+  pace?: PacePerformance;
 
   // ── Legacy fields (drive conversation effects and scoring internally;
   // not surfaced on the new KPI cards). Will be retired post-MVP once
