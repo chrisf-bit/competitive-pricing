@@ -34,6 +34,15 @@ export const initialPartners: PartnerState[] = [
       losePricePublic: 68,
       activeScenarios: 1,
       competitor: 'brand',
+      // PACE schema reserved; values pending SME input. Card hides
+      // until dataPending flips to false.
+      pace: {
+        period: 'Jun-Dec 2026',
+        roomnights: { current: 0, lastYear: 0, relativeChange: 0 },
+        revenue: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
+        adr: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
+        dataPending: true,
+      },
       // Legacy
       experiencedRPD: 58,
       visibility: 62,
@@ -162,6 +171,15 @@ export const initialPartners: PartnerState[] = [
       losePricePublic: 48,
       activeScenarios: 1,
       competitor: 'brand',
+      // PACE schema reserved; values pending SME input. Card hides
+      // until dataPending flips to false.
+      pace: {
+        period: 'Jun-Dec 2026',
+        roomnights: { current: 0, lastYear: 0, relativeChange: 0 },
+        revenue: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
+        adr: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
+        dataPending: true,
+      },
       experiencedRPD: 65,
       visibility: 70,
       conversion: 55,

@@ -33,9 +33,13 @@ function applyRoundBaseline(
 ): PartnerState {
   const baseline = getPartnerBaseline(partner.persona.id, round);
   if (!baseline) return partner;
+  // Merge rather than replace so partner-level "static" metrics that
+  // don't change per round (e.g. the PACE block) survive baseline
+  // application. Baseline fields override partner fields where both
+  // are set; partner-only fields persist.
   return {
     ...partner,
-    metrics: { ...baseline.metrics },
+    metrics: { ...partner.metrics, ...baseline.metrics },
   };
 }
 

@@ -145,13 +145,15 @@ export interface DiscountProduct {
 /**
  * PACE-period year-on-year performance for a partner.
  *
- * Optional - only authored for partners whose scenario depends on
- * the PACE-vs-LY framing (e.g. John, the brand-first scenario,
- * where the story is "ADR up, roomnights down" YoY). Rendered as a
- * dedicated card on Partner Detail when present.
+ * Rendered as a dedicated card on Partner Detail when present. Net
+ * Average Daily Rate (ADR) and revenue carry their own currency so
+ * the PACE card can render the right symbol.
  *
- * Net Average Daily Rate (ADR) and revenue carry their own currency
- * so the PACE card can render the right symbol.
+ * `dataPending: true` signals the schema is reserved for this
+ * partner but the SME hasn't supplied real values yet. The PACE
+ * card hides itself in that case so the learner doesn't see a row
+ * of zeros - once the SME fills in real numbers, flip dataPending
+ * to false (or drop the field) and the card renders.
  */
 export interface PacePerformance {
   /** Period label shown above the card, e.g. "Jun-Dec 2026". */
@@ -169,6 +171,12 @@ export interface PacePerformance {
     relativeChange: number;
     currency: string;
   };
+  /**
+   * True while the schema is reserved but SME hasn't provided real
+   * values. The PACE card returns null in this state so we don't
+   * show a row of zeros. Default false / undefined = render normally.
+   */
+  dataPending?: boolean;
 }
 
 export interface PartnerMetrics {

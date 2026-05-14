@@ -816,6 +816,12 @@ function BigMetric({
 }
 
 function PacePerformanceCard({ pace }: { pace: PacePerformance }) {
+  // Schema reserved but no real data yet - hide the card so the
+  // learner doesn't see a row of zeros. Once the SME provides
+  // values, flip dataPending to false (or drop it) and the card
+  // appears.
+  if (pace.dataPending) return null;
+
   return (
     <div
       style={{
