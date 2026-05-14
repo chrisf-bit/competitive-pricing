@@ -496,6 +496,55 @@ function PersonaCard({
           ))}
         </ul>
       </div>
+
+      {/* Blind spots - shown so the learner picks a persona with eyes
+          open about the trade-off, not just the strength. */}
+      <div>
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 800,
+            color: 'rgba(255,255,255,0.5)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.10em',
+            marginBottom: 6,
+          }}
+        >
+          Blind spots
+        </div>
+        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+          {persona.weaknesses.map((w, i) => (
+            <li
+              key={i}
+              style={{
+                fontSize: 12.5,
+                lineHeight: 1.45,
+                color: 'rgba(255,255,255,0.78)',
+                marginBottom: 6,
+                paddingLeft: 14,
+                position: 'relative',
+              }}
+            >
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 0,
+                  top: 6,
+                  width: 6,
+                  height: 6,
+                  borderRadius: '50%',
+                  border: `1.5px solid ${accentColor}`,
+                  background: 'transparent',
+                }}
+              />
+              <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.88)' }}>
+                {w.headline}.
+              </span>{' '}
+              <span style={{ color: 'rgba(255,255,255,0.62)' }}>{w.detail}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </motion.button>
   );
 }
