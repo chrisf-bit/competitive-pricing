@@ -207,35 +207,6 @@ export function PartnerDetailScreen({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <button
-            onClick={() => setHelperOpen(true)}
-            title="Walk through the Pricing Issue Tree for this partner"
-            style={{
-              background: 'var(--white)',
-              border: '2px solid var(--brand-navy)',
-              borderRadius: 'var(--radius-sm)',
-              padding: '6px 12px',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              fontSize: 12,
-              fontWeight: 700,
-              color: 'var(--brand-navy)',
-              cursor: 'pointer',
-              boxShadow: 'var(--shadow-sm)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--brand-navy)';
-              e.currentTarget.style.color = 'var(--white)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'var(--white)';
-              e.currentTarget.style.color = 'var(--brand-navy)';
-            }}
-          >
-            <GitBranch size={13} />
-            Issue Tree Helper
-          </button>
           <RPDBadge level={getRPDLevel(partner.metrics.experiencedRPD)} />
           <RelationshipBadge status={partner.relationship} />
         </div>
@@ -604,6 +575,15 @@ export function PartnerDetailScreen({
         </div>
       </div>
 
+      {/* Issue Tree Helper - vertical tab on the right edge opens
+          the drawer. Tab hides while the drawer is open so the user
+          doesn't see two affordances at once. */}
+      {!helperOpen && (
+        <HelperLauncherTab
+          hasProgress={helperState.path.trigger !== undefined}
+          onOpen={() => setHelperOpen(true)}
+        />
+      )}
       {helperOpen && (
         <IssueTreeHelper
           partnerName={partner.persona.name}
@@ -963,4 +943,73 @@ function PaceRow({
 
 function formatNumber(n: number): string {
   return n.toLocaleString('en-GB');
+}
+
+function HelperLauncherTab({
+  hasProgress,
+  onOpen,
+}: {
+  hasProgress: boolean;
+  onOpen: () => void;
+}) {
+  return (
+    <button
+      onClick={onOpen}
+      aria-label="Open Issue Tree Helper"
+      style={{
+        position: 'fixed',
+        top: '50%',
+        right: 0,
+        transform: 'translateY(-50%)',
+        background:
+          'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
+        color: 'var(--white)',
+        border: 'none',
+        borderTopLeftRadius: 'var(--radius-md)',
+        borderBottomLeftRadius: 'var(--radius-md)',
+        padding: '14px 8px 14px 10px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 6,
+        cursor: 'pointer',
+        boxShadow: '-4px 6px 16px rgba(0,15,40,0.22)',
+        zIndex: 95,
+        animation: 'fadeIn 0.3s ease',
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.paddingRight = '12px';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.paddingRight = '8px';
+      }}
+    >
+      <GitBranch size={16} style={{ color: 'var(--brand-yellow)' }} />
+      <span
+        style={{
+          writingMode: 'vertical-rl',
+          transform: 'rotate(180deg)',
+          fontSize: 11,
+          fontWeight: 800,
+          letterSpacing: '0.10em',
+          textTransform: 'uppercase',
+          lineHeight: 1,
+        }}
+      >
+        Issue Tree Helper
+      </span>
+      {hasProgress && (
+        <span
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: '50%',
+            background: 'var(--brand-yellow)',
+            boxShadow: '0 0 0 2px rgba(254,186,2,0.25)',
+          }}
+          aria-label="In progress"
+        />
+      )}
+    </button>
+  );
 }

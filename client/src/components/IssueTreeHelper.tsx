@@ -104,22 +104,27 @@ export function IssueTreeHelper({
 
   return (
     <div
-      // Right-side drawer. Pinned, no backdrop, so the learner can
-      // still read the metrics, discount cards, and profile while
-      // walking through the diagnosis.
+      // Right-side floating drawer. Sized like a chatbot window
+      // (not full-height) so it leaves most of the Partner Detail
+      // content visible while the learner walks through the
+      // diagnosis. Anchored vertically centred on the right edge
+      // with a small gap from the screen edge.
       style={{
         position: 'fixed',
-        top: 0,
-        right: 0,
-        bottom: 0,
-        width: 'min(420px, 92vw)',
+        top: '50%',
+        right: 16,
+        transform: 'translateY(-50%)',
+        width: 'min(400px, 92vw)',
+        height: 'min(640px, calc(100vh - 64px))',
         background: 'var(--white)',
-        boxShadow: '-8px 0 32px rgba(0,15,40,0.18)',
-        borderLeft: '1px solid var(--grey-100)',
+        boxShadow: '-12px 16px 40px rgba(0,15,40,0.22)',
+        border: '1px solid var(--grey-100)',
+        borderRadius: 'var(--radius-lg)',
         zIndex: 100,
         display: 'flex',
         flexDirection: 'column',
         animation: 'slideInRight 0.22s ease-out',
+        overflow: 'hidden',
       }}
     >
       {/* Header */}
