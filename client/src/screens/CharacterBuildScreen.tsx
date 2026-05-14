@@ -86,7 +86,7 @@ export function CharacterBuildScreen({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: '40px 32px 32px',
+          padding: '24px 32px 20px',
           maxWidth: 1180,
           width: '100%',
           margin: '0 auto',
@@ -100,7 +100,7 @@ export function CharacterBuildScreen({
             gridTemplateColumns: 'repeat(8, 1fr)',
             gap: 12,
             width: '100%',
-            marginBottom: 36,
+            marginBottom: 18,
             opacity: imagesReady ? 1 : 0,
             transition: 'opacity 0.3s ease',
           }}
@@ -124,7 +124,7 @@ export function CharacterBuildScreen({
             gridTemplateColumns: 'repeat(2, 1fr)',
             gap: 12,
             width: '100%',
-            marginBottom: 24,
+            marginBottom: 12,
           }}
         >
           {superPowerPersonas.map((p, i) => (
@@ -208,7 +208,7 @@ function SectionHeading({ label, complete }: { label: string; complete: boolean 
         display: 'flex',
         alignItems: 'center',
         gap: 8,
-        marginBottom: 14,
+        marginBottom: 10,
       }}
     >
       <div
@@ -349,7 +349,7 @@ function PersonaCard({
       style={{
         position: 'relative',
         textAlign: 'left',
-        padding: '18px 20px',
+        padding: '14px 16px',
         background: isSelected ? 'rgba(254, 186, 2, 0.10)' : 'rgba(255,255,255,0.05)',
         border: isSelected
           ? '2px solid var(--brand-yellow)'
@@ -360,7 +360,7 @@ function PersonaCard({
         transition: 'background 0.18s ease, border-color 0.18s ease',
         display: 'flex',
         flexDirection: 'column',
-        gap: 14,
+        gap: 10,
         boxShadow: isSelected ? '0 6px 18px rgba(254, 186, 2, 0.18)' : 'none',
       }}
       onMouseEnter={(e) => {
@@ -453,97 +453,105 @@ function PersonaCard({
         {persona.succeedsBy}
       </div>
 
-      {/* Wins by bullets */}
-      <div>
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 800,
-            color: 'rgba(255,255,255,0.5)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.10em',
-            marginBottom: 6,
-          }}
-        >
-          Wins by
-        </div>
-        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
-          {persona.winsBy.map((item, i) => (
-            <li
-              key={i}
-              style={{
-                fontSize: 12.5,
-                lineHeight: 1.45,
-                color: 'rgba(255,255,255,0.78)',
-                marginBottom: 3,
-                paddingLeft: 14,
-                position: 'relative',
-              }}
-            >
-              <span
+      {/* Wins by + Blind spots side-by-side - keeps the card short
+          enough that all four personas fit on a standard laptop
+          viewport without scroll. */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: 16,
+        }}
+      >
+        <div>
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: 'rgba(255,255,255,0.5)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.10em',
+              marginBottom: 6,
+            }}
+          >
+            Wins by
+          </div>
+          <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+            {persona.winsBy.map((item, i) => (
+              <li
+                key={i}
                 style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 7,
-                  width: 5,
-                  height: 5,
-                  borderRadius: '50%',
-                  background: accentColor,
+                  fontSize: 12,
+                  lineHeight: 1.4,
+                  color: 'rgba(255,255,255,0.78)',
+                  marginBottom: 3,
+                  paddingLeft: 12,
+                  position: 'relative',
                 }}
-              />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+              >
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 6,
+                    width: 5,
+                    height: 5,
+                    borderRadius: '50%',
+                    background: accentColor,
+                  }}
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      {/* Blind spots - shown so the learner picks a persona with eyes
-          open about the trade-off, not just the strength. */}
-      <div>
-        <div
-          style={{
-            fontSize: 10,
-            fontWeight: 800,
-            color: 'rgba(255,255,255,0.5)',
-            textTransform: 'uppercase',
-            letterSpacing: '0.10em',
-            marginBottom: 6,
-          }}
-        >
-          Blind spots
-        </div>
-        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
-          {persona.weaknesses.map((w, i) => (
-            <li
-              key={i}
-              style={{
-                fontSize: 12.5,
-                lineHeight: 1.45,
-                color: 'rgba(255,255,255,0.78)',
-                marginBottom: 6,
-                paddingLeft: 14,
-                position: 'relative',
-              }}
-            >
-              <span
+        <div>
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 800,
+              color: 'rgba(255,255,255,0.5)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.10em',
+              marginBottom: 6,
+            }}
+          >
+            Blind spots
+          </div>
+          <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+            {persona.weaknesses.map((w, i) => (
+              <li
+                key={i}
                 style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 6,
-                  width: 6,
-                  height: 6,
-                  borderRadius: '50%',
-                  border: `1.5px solid ${accentColor}`,
-                  background: 'transparent',
+                  fontSize: 12,
+                  lineHeight: 1.4,
+                  color: 'rgba(255,255,255,0.78)',
+                  marginBottom: 5,
+                  paddingLeft: 12,
+                  position: 'relative',
                 }}
-              />
-              <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.88)' }}>
-                {w.headline}.
-              </span>{' '}
-              <span style={{ color: 'rgba(255,255,255,0.62)' }}>{w.detail}</span>
-            </li>
-          ))}
-        </ul>
+              >
+                <span
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 5,
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    border: `1.5px solid ${accentColor}`,
+                    background: 'transparent',
+                  }}
+                />
+                <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.88)' }}>
+                  {w.headline}.
+                </span>{' '}
+                <span style={{ color: 'rgba(255,255,255,0.62)' }}>{w.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </motion.button>
   );
