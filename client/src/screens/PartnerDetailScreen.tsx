@@ -61,12 +61,12 @@ interface PartnerDetailScreenProps {
 
 function SectionHeader({ icon, label, bg }: { icon: React.ReactNode; label: string; bg?: string }) {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
       <div
         style={{
-          width: 32,
-          height: 32,
-          borderRadius: 8,
+          width: 26,
+          height: 26,
+          borderRadius: 7,
           background: bg ?? 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
           display: 'flex',
           alignItems: 'center',
@@ -76,7 +76,7 @@ function SectionHeader({ icon, label, bg }: { icon: React.ReactNode; label: stri
       >
         {icon}
       </div>
-      <h4 style={{ margin: 0, fontSize: 14, fontWeight: 800, letterSpacing: '-0.01em' }}>{label}</h4>
+      <h4 style={{ margin: 0, fontSize: 13, fontWeight: 800, letterSpacing: '-0.01em' }}>{label}</h4>
     </div>
   );
 }
@@ -130,8 +130,8 @@ export function PartnerDetailScreen({
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        padding: '16px 20px',
-        gap: 12,
+        padding: '12px 16px',
+        gap: 10,
       }}
     >
       {/* Back nav + Partner header */}
@@ -218,8 +218,8 @@ export function PartnerDetailScreen({
         style={{
           flex: 1,
           display: 'grid',
-          gridTemplateColumns: '1fr 320px',
-          gap: 14,
+          gridTemplateColumns: '1fr 300px',
+          gap: 10,
           minHeight: 0,
           overflow: 'hidden',
         }}
@@ -229,7 +229,7 @@ export function PartnerDetailScreen({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 14,
+            gap: 10,
             overflow: 'auto',
           }}
         >
@@ -258,7 +258,7 @@ export function PartnerDetailScreen({
               background: 'var(--white)',
               border: '2px solid var(--grey-100)',
               borderRadius: 'var(--radius-lg)',
-              padding: 18,
+              padding: 14,
               boxShadow: 'var(--shadow-md)',
               animation: 'fadeIn 0.3s ease 0.1s backwards',
             }}
@@ -270,8 +270,8 @@ export function PartnerDetailScreen({
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(4, 1fr)',
-                gap: 12,
+                gridTemplateColumns: 'repeat(6, 1fr)',
+                gap: 8,
               }}
             >
               <BigMetric
@@ -292,22 +292,12 @@ export function PartnerDetailScreen({
                 label="Lose Price"
                 value={`${partner.metrics.losePricePublic}%`}
               />
-            </div>
-
-            <div
-              style={{
-                marginTop: 14,
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: 12,
-              }}
-            >
               <BigMetric
-                label="Active Scenarios"
+                label="Scenarios"
                 value={`${partner.metrics.activeScenarios}`}
               />
               <BigMetric
-                label="Top Competitor"
+                label="Competitor"
                 value={partner.metrics.competitor === 'brand' ? 'Brand.com' : 'Expedia'}
               />
             </div>
@@ -327,7 +317,7 @@ export function PartnerDetailScreen({
               background: 'var(--white)',
               border: '2px solid var(--grey-100)',
               borderRadius: 'var(--radius-lg)',
-              padding: 18,
+              padding: 14,
               boxShadow: 'var(--shadow-md)',
               animation: 'fadeIn 0.3s ease 0.2s backwards',
             }}
@@ -336,7 +326,7 @@ export function PartnerDetailScreen({
               icon={<Tag size={16} style={{ color: 'var(--white)' }} />}
               label="Discount Products"
             />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
               {partner.discounts.map((d) => (
                 <div
                   key={d.id}
@@ -344,18 +334,18 @@ export function PartnerDetailScreen({
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '10px 14px',
+                    padding: '6px 12px',
                     background: 'var(--off-white)',
                     borderRadius: 'var(--radius-sm)',
-                    fontSize: 13,
+                    fontSize: 12.5,
                     border: '1.5px solid transparent',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <div
                       style={{
-                        width: 26,
-                        height: 26,
+                        width: 22,
+                        height: 22,
                         borderRadius: 6,
                         background:
                           d.status === 'active' ? 'var(--success-bg)' : 'var(--grey-100)',
@@ -364,9 +354,9 @@ export function PartnerDetailScreen({
                         justifyContent: 'center',
                       }}
                     >
-                      {d.status === 'active' && <CheckCircle2 size={14} style={{ color: 'var(--success)' }} />}
-                      {d.status === 'inactive' && <XCircle size={14} style={{ color: 'var(--grey-300)' }} />}
-                      {d.status === 'misconfigured' && <AlertCircle size={14} style={{ color: 'var(--grey-500)' }} />}
+                      {d.status === 'active' && <CheckCircle2 size={12} style={{ color: 'var(--success)' }} />}
+                      {d.status === 'inactive' && <XCircle size={12} style={{ color: 'var(--grey-300)' }} />}
+                      {d.status === 'misconfigured' && <AlertCircle size={12} style={{ color: 'var(--grey-500)' }} />}
                     </div>
                     <span style={{ fontWeight: 600, color: 'var(--grey-700)' }}>{d.label}</span>
                   </div>
@@ -383,7 +373,7 @@ export function PartnerDetailScreen({
                 background: 'var(--white)',
                 border: '2px solid var(--grey-100)',
                 borderRadius: 'var(--radius-lg)',
-                padding: 18,
+                padding: 14,
                 boxShadow: 'var(--shadow-md)',
                 animation: 'fadeIn 0.3s ease 0.3s backwards',
               }}
@@ -421,7 +411,7 @@ export function PartnerDetailScreen({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            gap: 14,
+            gap: 10,
             overflow: 'auto',
           }}
         >
@@ -431,7 +421,7 @@ export function PartnerDetailScreen({
               background: 'var(--white)',
               border: '2px solid var(--grey-100)',
               borderRadius: 'var(--radius-lg)',
-              padding: 18,
+              padding: 14,
               boxShadow: 'var(--shadow-md)',
               animation: 'fadeIn 0.3s ease 0.15s backwards',
             }}
@@ -624,7 +614,7 @@ function PersonaInsightCard({
         border: '2px solid var(--grey-100)',
         borderLeft: `4px solid ${accent}`,
         borderRadius: 'var(--radius-lg)',
-        padding: 16,
+        padding: '10px 14px',
         boxShadow: 'var(--shadow-md)',
         animation: 'fadeIn 0.3s ease 0.05s backwards',
       }}
@@ -633,25 +623,25 @@ function PersonaInsightCard({
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          gap: 6,
-          padding: '4px 10px',
+          gap: 5,
+          padding: '3px 9px',
           borderRadius: 999,
           background: accent,
           color: 'var(--white)',
-          fontSize: 11,
+          fontSize: 10.5,
           fontWeight: 800,
           letterSpacing: '0.02em',
-          marginBottom: 10,
+          marginBottom: 6,
         }}
       >
-        <Icon size={12} />
+        <Icon size={11} />
         {persona.powerEffect.unlockedChip}
       </div>
       <p
         style={{
-          fontSize: 13.5,
+          fontSize: 12.5,
           color: 'var(--grey-700)',
-          lineHeight: 1.55,
+          lineHeight: 1.5,
           margin: 0,
         }}
       >
@@ -682,7 +672,7 @@ function PersonaBlindSpotCard({
         background: isOpen ? 'var(--white)' : 'var(--off-white)',
         border: `1.5px dashed ${isOpen ? 'var(--grey-200)' : 'var(--grey-300)'}`,
         borderRadius: 'var(--radius-lg)',
-        padding: 16,
+        padding: '10px 14px',
         boxShadow: isOpen ? 'var(--shadow-sm)' : 'none',
         animation: 'fadeIn 0.3s ease 0.08s backwards',
         opacity: isOpen ? 1 : 0.78,
@@ -694,26 +684,26 @@ function PersonaBlindSpotCard({
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 6,
-            padding: '4px 10px',
+            gap: 5,
+            padding: '3px 9px',
             borderRadius: 999,
             background: 'rgba(0,0,0,0.05)',
             color: accent,
-            fontSize: 11,
+            fontSize: 10.5,
             fontWeight: 800,
             letterSpacing: '0.02em',
-            marginBottom: 10,
+            marginBottom: 6,
           }}
         >
-          <Icon size={12} />
+          <Icon size={11} />
           {persona.powerEffect.mutedChip}
         </div>
       )}
       <p
         style={{
-          fontSize: 13,
+          fontSize: 12.5,
           color: isOpen ? 'var(--grey-700)' : 'var(--grey-500)',
-          lineHeight: 1.55,
+          lineHeight: 1.5,
           margin: 0,
           fontStyle: isOpen ? 'normal' : 'italic',
         }}
@@ -724,21 +714,21 @@ function PersonaBlindSpotCard({
         <button
           onClick={onExpand}
           style={{
-            marginTop: 10,
+            marginTop: 6,
             display: 'inline-flex',
             alignItems: 'center',
             gap: 4,
             background: 'transparent',
             border: 'none',
             color: 'var(--brand-navy)',
-            fontSize: 12,
+            fontSize: 11.5,
             fontWeight: 700,
             cursor: 'pointer',
             padding: 0,
           }}
         >
           Reveal blind spot
-          <ChevronDown size={14} />
+          <ChevronDown size={13} />
         </button>
       )}
     </div>
@@ -760,7 +750,7 @@ function BigMetric({
     <div
       style={{
         textAlign: 'center',
-        padding: '14px 8px',
+        padding: '9px 6px',
         background: highlight
           ? 'linear-gradient(135deg, rgba(0,53,128,0.06) 0%, rgba(0,74,153,0.1) 100%)'
           : 'var(--off-white)',
@@ -775,7 +765,7 @@ function BigMetric({
           color: 'var(--grey-400)',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
-          marginBottom: 6,
+          marginBottom: 4,
         }}
       >
         {label}
@@ -785,12 +775,12 @@ function BigMetric({
           display: 'flex',
           alignItems: 'baseline',
           justifyContent: 'center',
-          gap: 8,
+          gap: 6,
         }}
       >
         <span
           style={{
-            fontSize: highlight ? 28 : 22,
+            fontSize: highlight ? 22 : 18,
             fontWeight: 900,
             color: 'var(--brand-navy)',
             lineHeight: 1,
@@ -802,7 +792,7 @@ function BigMetric({
         {changeText && (
           <span
             style={{
-              fontSize: 11,
+              fontSize: 10.5,
               fontWeight: 700,
               color: 'var(--grey-500)',
             }}
@@ -828,25 +818,30 @@ function PacePerformanceCard({ pace }: { pace: PacePerformance }) {
         background: 'var(--white)',
         border: '2px solid var(--grey-100)',
         borderRadius: 'var(--radius-lg)',
-        padding: 18,
+        padding: 14,
         boxShadow: 'var(--shadow-md)',
         animation: 'fadeIn 0.3s ease 0.15s backwards',
       }}
     >
-      <div style={{ marginBottom: 14 }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          marginBottom: 10,
+        }}
+      >
         <SectionHeader
           icon={<TrendingUp size={16} style={{ color: 'var(--white)' }} />}
           label="Year-on-Year Performance"
         />
         <div
           style={{
-            fontSize: 11,
+            fontSize: 10.5,
             fontWeight: 700,
             color: 'var(--grey-400)',
             textTransform: 'uppercase',
             letterSpacing: '0.08em',
-            marginTop: -6,
-            marginLeft: 42,
           }}
         >
           {pace.period} (PACE)
@@ -856,7 +851,7 @@ function PacePerformanceCard({ pace }: { pace: PacePerformance }) {
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 12,
+          gap: 8,
         }}
       >
         <PaceRow
@@ -898,7 +893,7 @@ function PaceRow({
   return (
     <div
       style={{
-        padding: '14px 12px',
+        padding: '10px 10px',
         background: 'var(--off-white)',
         borderRadius: 'var(--radius-md)',
         border: '1.5px solid transparent',
@@ -911,36 +906,36 @@ function PaceRow({
           color: 'var(--grey-400)',
           textTransform: 'uppercase',
           letterSpacing: '0.08em',
-          marginBottom: 8,
+          marginBottom: 5,
         }}
       >
         {label}
       </div>
       <div
         style={{
-          fontSize: 22,
+          fontSize: 18,
           fontWeight: 900,
           color: 'var(--brand-navy)',
           lineHeight: 1,
           letterSpacing: '-0.02em',
-          marginBottom: 6,
+          marginBottom: 4,
         }}
       >
         {current}
       </div>
       <div
         style={{
-          fontSize: 11,
+          fontSize: 10.5,
           fontWeight: 600,
           color: 'var(--grey-500)',
-          marginBottom: 4,
+          marginBottom: 2,
         }}
       >
         ly {lastYear}
       </div>
       <div
         style={{
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: 700,
           color: 'var(--grey-600)',
         }}
