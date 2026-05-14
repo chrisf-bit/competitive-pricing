@@ -12,8 +12,9 @@ import type {
 import { initialPartners } from '../data/partners';
 import { marketContextByRound, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
+import { getBranchingScenario } from '../data/branchingScenarios';
 import { getPartnerBaseline } from '../data/partnerStateByRound';
-import { gradeRound } from './grading';
+import { gradeRound, gradeBranchingRound } from './grading';
 
 /**
  * Apply the per-round scripted baseline to a single partner. The
@@ -179,7 +180,12 @@ export function selectPartner(state: GameState, partnerId: string): GameState {
 
 // ── Start a conversation ──
 export function startConversation(state: GameState, partnerId: string): GameState {
-  const tree = getConversationTree(partnerId, state.currentRound);
+  // Branching scenarios take precedence over the legacy 3-phase trees,
+  // so partners that have been migrated (or new partners authored in
+  // the new shape) use the branching engine. Falls back to the 3-phase
+  // lookup for partners still on the old shape.
+  const branching = getBranchingScenario(partnerId, state.currentRound);
+  const tree = branching ?? getConversationTree(partnerId, state.currentRound);
   if (!tree) return state;
 
   const partner = state.partners.find((p) => p.persona.id === partnerId);
@@ -204,6 +210,7 @@ export function startConversation(state: GameState, partnerId: string): GameStat
     screen: 'conversation',
     conversationInProgress: {
       partnerId,
+      shape: branching ? 'branching' : 'three-phase',
       phaseIndex: 0,
       choices: [],
       currentResponse: null,
@@ -221,6 +228,11 @@ export function processConversationChoice(
 ): GameState {
   const conv = state.conversationInProgress;
   if (!conv) return state;
+
+  // Dispatch on the conversation shape captured at startConversation.
+  if (conv.shape === 'branching') {
+    return processBranchingChoice(state, optionId);
+  }
 
   const tree = getConversationTree(conv.partnerId, state.currentRound);
   if (!tree) return state;
@@ -351,6 +363,139 @@ export function processConversationChoice(
       choices: newChoices,
       currentResponse: response.text,
       currentEmotion: response.emotion,
+      styleMatchScore,
+    },
+  };
+}
+
+// ── Process a branching conversation choice ──
+// Branching scenarios drive a step-by-step exchange model. Each step
+// has its own partner prompt + three learner options; each option
+// carries its own partner response, style scores, compliance tag, and
+// trust change. The next step's prompt may be overridden by the
+// picked option's `nextPrompt`. At the last step we route to the
+// grader and into the conversation report, mirroring the 3-phase
+// end-of-pitch path.
+function processBranchingChoice(
+  state: GameState,
+  optionId: string,
+): GameState {
+  const conv = state.conversationInProgress;
+  if (!conv) return state;
+
+  const tree = getBranchingScenario(conv.partnerId, state.currentRound);
+  if (!tree) return state;
+
+  const step = tree.steps[conv.phaseIndex];
+  if (!step) return state;
+
+  const option = step.options.find((o) => o.id === optionId);
+  if (!option) return state;
+
+  const partnerIndex = state.partners.findIndex(
+    (p) => p.persona.id === conv.partnerId,
+  );
+  if (partnerIndex === -1) return state;
+
+  const partner = state.partners[partnerIndex];
+
+  // Style match on partner's primary communication style. Same shape
+  // as the 3-phase grader so the scoring scaffolding is consistent.
+  const styleMatchScore = option.styleMatch[partner.persona.style] ?? 0;
+  const trustDelta = option.trustChange + styleMatchScore;
+  const newTrust = clamp(partner.trust + trustDelta, 0, 100);
+
+  const updatedPartner: PartnerState = {
+    ...partner,
+    trust: newTrust,
+    relationship: getRelationshipFromTrust(newTrust),
+  };
+
+  const newPartners = [...state.partners];
+  newPartners[partnerIndex] = updatedPartner;
+
+  const isLastStep = conv.phaseIndex >= tree.steps.length - 1;
+  const newChoices = [...conv.choices, optionId];
+
+  if (isLastStep) {
+    // Record the conversation in a compact form. The legacy
+    // ConversationRecord shape is hook/diagnosis/pitch-shaped, so we
+    // collapse the first/last picks into those slots and stash the
+    // joined choice ids as outcome text for future reference. A
+    // proper branching-aware log shape can land alongside the grader
+    // rework once multiple branching scenarios exist.
+    const record: ConversationRecord = {
+      round: state.currentRound,
+      hookChoice: newChoices[0] ?? '',
+      diagnosisChoice: newChoices[Math.floor(newChoices.length / 2)] ?? '',
+      pitchChoice: newChoices[newChoices.length - 1] ?? '',
+      partnerReaction: 'neutral',
+      trustChange: trustDelta,
+      outcome: option.partnerResponse,
+    };
+
+    updatedPartner.conversationLog.push(record);
+    updatedPartner.lastContactedRound = state.currentRound;
+
+    const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
+    const newActionsRemaining = state.actionsRemaining - 1;
+
+    // Grade with the branching-aware grader. Minimal pass for v1:
+    // floor = safe picks + no active style mismatch; 2 stars at
+    // styleSum >= 5; 3 stars at styleSum >= 6. No "optimal diag /
+    // pitch" gate since branching has no fixed phase semantics yet.
+    const regime = state.learnerProfile.market?.parityRegime ?? null;
+    let grade: LastConversationGrade | null = null;
+    let newRoundStars = state.roundStars;
+    if (regime) {
+      const result = gradeBranchingRound({
+        tree,
+        choices: newChoices,
+        selectedPartnerId: conv.partnerId,
+        regime,
+        partnerPrimaryStyle: partner.persona.style,
+      });
+      grade = {
+        partnerId: conv.partnerId,
+        round: state.currentRound,
+        ...result,
+      };
+      const previousBest = state.roundStars[state.currentRound] ?? 0;
+      if (result.stars > previousBest) {
+        newRoundStars = {
+          ...state.roundStars,
+          [state.currentRound]: result.stars,
+        };
+      }
+    }
+
+    return {
+      ...state,
+      partners: newPartners,
+      actionsRemaining: newActionsRemaining,
+      actionsThisRound: newActionsThisRound,
+      roundStars: newRoundStars,
+      lastConversationGrade: grade,
+      conversationInProgress: {
+        ...conv,
+        phaseIndex: conv.phaseIndex,
+        choices: newChoices,
+        currentResponse: option.partnerResponse,
+        currentEmotion: 'neutral',
+        styleMatchScore,
+      },
+    };
+  }
+
+  return {
+    ...state,
+    partners: newPartners,
+    conversationInProgress: {
+      ...conv,
+      phaseIndex: conv.phaseIndex + 1,
+      choices: newChoices,
+      currentResponse: option.partnerResponse,
+      currentEmotion: 'neutral',
       styleMatchScore,
     },
   };

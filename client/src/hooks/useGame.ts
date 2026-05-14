@@ -22,6 +22,7 @@ import {
   savePersistedState,
   clearPersistedState,
 } from '../util/persistence';
+import { johnPartner } from '../data/partners';
 
 export function useGame() {
   const [state, setState] = useState<GameState>(() => {
@@ -240,6 +241,48 @@ export function useGame() {
     [],
   );
 
+  /**
+   * Dev-only entry point for testing parked branching scenarios.
+   * Injects the scenario's partner into `state.partners`, sets the
+   * learner's regime to whatever the scenario requires, and routes
+   * to partner-detail for that partner. Used while client is still
+   * confirming where new partners like John formally live (Wide
+   * regime activation / new partner pool / etc).
+   */
+  const startTestScenario = useCallback((partnerId: string) => {
+    setState((s) => {
+      if (partnerId !== 'john') return s;
+      const alreadyPresent = s.partners.some(
+        (p) => p.persona.id === 'john',
+      );
+      const partners = alreadyPresent
+        ? s.partners
+        : [
+            ...s.partners,
+            {
+              ...johnPartner,
+              metrics: { ...johnPartner.metrics },
+              discounts: johnPartner.discounts.map((d) => ({ ...d })),
+              conversationLog: [],
+              pendingActions: [],
+            },
+          ];
+      return {
+        ...s,
+        screen: 'partner-detail',
+        selectedPartnerId: 'john',
+        partners,
+        // John is a Wide Parity scenario; conversation options
+        // reference Brand.com directly which would breach compliance
+        // in No-Parity. Set regime to wide for the test session.
+        learnerProfile: {
+          ...s.learnerProfile,
+          market: { parityRegime: 'wide' },
+        },
+      };
+    });
+  }, []);
+
   /** Mark Level 0 as cleared so the Briefing button adapts on a return visit. */
   const markLevel0Cleared = useCallback(() => {
     setState((s) => ({
@@ -314,5 +357,6 @@ export function useGame() {
     acknowledgeMarketUpdate,
     markBlindSpotExpanded,
     markLevel0Cleared,
+    startTestScenario,
   };
 }

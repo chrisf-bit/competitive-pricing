@@ -168,6 +168,72 @@ export const initialPartners: PartnerState[] = [
 ];
 
 /**
+ * John - Wide Parity branching scenario partner. Parked (not in
+ * initialPartners) until the Wide regime is activated in Market
+ * Select. Accessible via DevNav for testing the branching flow
+ * while client is still confirming where John formally lives.
+ *
+ * Metric values are placeholders consistent with the SME-provided
+ * narrative (down on volume + revenue, up on ADR vs same date last
+ * year, eRPD not competitive) but use the existing PartnerMetrics
+ * field shape. New metric fields (Net roomnights, Net revenue, Net
+ * ADR with YoY) land when Q2 with the client is settled.
+ */
+export const johnPartner: PartnerState = {
+  persona: {
+    id: 'john',
+    name: 'John Marston',
+    propertyName: 'Marston House',
+    propertyType: 'Boutique Hotel',
+    roomCount: 60,
+    location: 'York, England',
+    parityRegime: 'wide',
+    avatar: 'JM',
+    propertyImage:
+      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop',
+    style: 'red',
+    styleSecondary: 'green',
+    description:
+      "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
+    commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
+    profileNotes: [
+      'Believes OTAs erode his brand and direct channel',
+      'Runs sponsored campaigns on meta-search via an XML provider',
+      'PACE Jun-Dec: roomnights -43% YoY, revenue -37% YoY, ADR +10% YoY',
+      'Three million Booking.com impressions in the last 90 days',
+    ],
+  },
+  metrics: {
+    erpd: 7.5,
+    erpdChange: 4.2,
+    rpdPublic: 9.1,
+    rpdLoyal: 5.8,
+    losePricePublic: 72,
+    activeScenarios: 2,
+    competitor: 'brand',
+    experiencedRPD: 45,
+    visibility: 52,
+    conversion: 38,
+    revenue: 35,
+    discountQuality: 30,
+    rateParity: 'clean',
+  },
+  metricHistory: [],
+  trust: 45,
+  relationship: 'neutral',
+  discounts: [
+    { id: 'genius', label: 'Genius Programme', status: 'inactive' },
+    { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
+    { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
+    { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
+    { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
+  ],
+  lastContactedRound: null,
+  conversationLog: [],
+  pendingActions: [],
+};
+
+/**
  * Partners parked until their parity regimes go live in Market Select.
  * Kept here so the persona data and the conversation trees in
  * conversations-*.ts stay easy to re-merge - just splice these back

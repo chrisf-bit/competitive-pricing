@@ -297,6 +297,109 @@ export interface ConversationPhaseData {
   nodes: ConversationNode[];
 }
 
+// ── Branching Conversation Types ──
+
+/**
+ * Trigger-type categories from the Pricing Issue Tree (column 1).
+ * Used to classify the root of a diagnosis path.
+ */
+export type IssueTreeTrigger =
+  | 'performance-outcome'
+  | 'pricing-signal'
+  | 'interaction'
+  | 'programme';
+
+/**
+ * Whether the partner's pricing pattern looks deliberate or accidental.
+ * Drives which root-cause family applies.
+ */
+export type IssueTreeIntent = 'intentional' | 'unintentional';
+
+/**
+ * The SME-prescribed path through the Pricing Issue Tree for a given
+ * branching scenario. Encodes "this is what the diagnostic should
+ * land on if the learner reads the data correctly." Used by the
+ * Issue Tree Helper to validate picks and by the grader to gate
+ * scoring on the right diagnostic outcome.
+ */
+export interface IssueTreePath {
+  /** Which trigger category surfaced this issue. */
+  trigger: IssueTreeTrigger;
+  /** Primary pricing issue id (e.g. 'brand-com-erpd-not-competitive'). */
+  issueId: string;
+  /** Intent reading. */
+  intent: IssueTreeIntent;
+  /** Root cause id within the issue+intent group. */
+  rootCauseId: string;
+  /** Metric insight id ("The diagnose" column). */
+  metricInsightId: string;
+  /** Hook id ("The hook" column). */
+  hookId: string;
+}
+
+/**
+ * A branching conversation is a sequence of exchanges. At each
+ * exchange the partner sets up a prompt, the learner picks one of
+ * three options, and the partner gives a tailored response to that
+ * pick. The next exchange's prompt may be defaulted by the step or
+ * overridden by the learner's prior `nextPrompt` selection.
+ *
+ * Different shape from the 3-phase Hook/Diagnosis/Pitch model.
+ * `conversationShape: 'branching'` discriminates at the engine and
+ * render-routing level. Both shapes coexist while older partners
+ * remain on 3-phase trees.
+ */
+export interface BranchingConversationTree {
+  conversationShape: 'branching';
+  partnerId: string;
+  round: number;
+  /** Ordered list of exchanges in this scenario. Typically 4-6 steps. */
+  steps: BranchingStep[];
+  /**
+   * The SME-prescribed path through the Pricing Issue Tree. The
+   * Issue Tree Helper uses this to validate the learner's
+   * pre-call diagnosis. Optional only until the SME provides it
+   * for every scenario.
+   */
+  issueTreePath?: IssueTreePath;
+}
+
+export interface BranchingStep {
+  /** Short id (e.g. 'open', 'probe-cost', 'reframe-revenue'). */
+  id: string;
+  /** Optional short label shown in the report card / coaching. */
+  label?: string;
+  /** Partner's opening line for this exchange. May be overridden by a
+   * prior option's `nextPrompt`. */
+  partnerPrompt: string;
+  /** Three learner options at this exchange. */
+  options: BranchingOption[];
+}
+
+export interface BranchingOption {
+  id: string;
+  label: string;
+  description: string;
+  /** What the learner "says" if this option is picked. */
+  playerDialogue: string;
+  /** Partner's tailored response to this specific pick. Shown after
+   * the learner clicks the option, before the next step's prompt. */
+  partnerResponse: string;
+  styleMatch: Record<CommunicationStyle, number>;
+  assertiveness: number;
+  compliance: 'safe' | 'borderline' | 'risky';
+  /** Effect on hidden trust at this step. */
+  trustChange: number;
+  /** Optional - if set, the NEXT step's `partnerPrompt` is replaced
+   * with this string. Lightweight way to branch the partner's tone
+   * without authoring full alternate steps. */
+  nextPrompt?: string;
+  /** Optional - SME marks the option they consider the strongest
+   * Issue Tree-aligned move at this step. Drives "stretch" scoring
+   * once the branching grader is in. */
+  optimal?: boolean;
+}
+
 // ── Game State ──
 
 export type GameScreen =
@@ -441,6 +544,19 @@ export interface GameState {
   isPracticeMode: boolean;
   conversationInProgress: {
     partnerId: string;
+    /**
+     * Shape of the conversation tree being played. Drives engine
+     * dispatch and screen rendering. Defaults to 'three-phase' for
+     * backward compatibility with existing data files; 'branching'
+     * means the conversation uses BranchingConversationTree.
+     */
+    shape?: 'three-phase' | 'branching';
+    /**
+     * Index into the current shape's step/phase list. For 3-phase
+     * trees this is 0..2 (hook/diagnosis/pitch). For branching trees
+     * it's 0..(steps.length-1). Kept named `phaseIndex` to avoid a
+     * disruptive rename across consumers.
+     */
     phaseIndex: number;
     choices: string[];
     currentResponse: string | null;

@@ -14,6 +14,7 @@ import {
   UserCircle,
   ChevronRight,
   ChevronDown,
+  GitBranch,
 } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getRPDLevel } from '../engine/gameEngine';
@@ -24,6 +25,7 @@ import {
 } from '../components/MetricBadge';
 import { getPersonaById, type SuperPowerPersona } from '../data/characters';
 import { getPersonaHint } from '../data/personaHints';
+import { IssueTreeHelper } from '../components/IssueTreeHelper';
 
 interface PartnerDetailScreenProps {
   partner: PartnerState;
@@ -90,6 +92,10 @@ export function PartnerDetailScreen({
     setBlindSpotOpen(true);
     onMarkBlindSpotExpanded(partner.persona.id, currentRound);
   }
+
+  // Issue Tree Helper - opens the guided diagnostic wizard for this
+  // partner. Teach-mode only; no scoring or impact on grading.
+  const [helperOpen, setHelperOpen] = useState(false);
 
   return (
     <div
@@ -176,6 +182,35 @@ export function PartnerDetailScreen({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <button
+            onClick={() => setHelperOpen(true)}
+            title="Walk through the Pricing Issue Tree for this partner"
+            style={{
+              background: 'var(--white)',
+              border: '2px solid var(--brand-navy)',
+              borderRadius: 'var(--radius-sm)',
+              padding: '6px 12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              fontSize: 12,
+              fontWeight: 700,
+              color: 'var(--brand-navy)',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--brand-navy)';
+              e.currentTarget.style.color = 'var(--white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--white)';
+              e.currentTarget.style.color = 'var(--brand-navy)';
+            }}
+          >
+            <GitBranch size={13} />
+            Issue Tree Helper
+          </button>
           <RPDBadge level={getRPDLevel(partner.metrics.experiencedRPD)} />
           <RelationshipBadge status={partner.relationship} />
         </div>
@@ -535,6 +570,13 @@ export function PartnerDetailScreen({
           </div>
         </div>
       </div>
+
+      {helperOpen && (
+        <IssueTreeHelper
+          partnerName={partner.persona.name}
+          onClose={() => setHelperOpen(false)}
+        />
+      )}
     </div>
   );
 }

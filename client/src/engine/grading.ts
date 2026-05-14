@@ -4,6 +4,7 @@ import type {
   ConversationOption,
   CommunicationStyle,
   ParityRegime,
+  BranchingConversationTree,
 } from '../types';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 
@@ -169,6 +170,107 @@ export function gradeRound(input: GradingInput): GradingResult {
     failureReason = 'wrong-diagnosis';
   } else if (!pitchCorrect) {
     failureReason = 'wrong-pitch';
+  } else if (!allCompliant) {
+    failureReason = 'unsafe-pick';
+  } else if (!noActiveMismatch) {
+    failureReason = 'style-mismatch';
+  }
+
+  let stars: 0 | 1 | 2 | 3;
+  if (failureReason !== null) {
+    stars = 0;
+  } else if (styleSum >= 6) {
+    stars = 3;
+  } else if (styleSum >= 5) {
+    stars = 2;
+  } else {
+    stars = 1;
+  }
+
+  return {
+    stars,
+    rightPartner,
+    expectedPartnerId,
+    allCompliant,
+    diagnosisCorrect,
+    pitchCorrect,
+    noActiveMismatch,
+    styleSum,
+    failureReason,
+  };
+}
+
+// ── Branching-conversation grader ────────────────────────────────
+/**
+ * 0-3 star grader for branching scenarios.
+ *
+ * Minimal pass for v1. Branching has no fixed Diagnosis/Pitch
+ * semantics yet, so the "optimal diag" and "optimal pitch" floor
+ * criteria are dropped. The grader keeps the rest of the floor and
+ * the same star thresholds, so a learner who runs a 5-exchange
+ * branching scenario sees the same outcome shape on the Conversation
+ * Report (0-3 stars + criterion checklist + style readout).
+ *
+ * Floor:
+ *   1. Right partner picked for this round (when a correct-partner
+ *      mapping is defined for the regime/round). Same check as 3-phase.
+ *   2. Every pick `compliance: 'safe'`.
+ *   3. No active style mismatch (no single pick <= -2 on the
+ *      partner's primary style).
+ *
+ * Above the floor: 2 stars if styleSum >= 5, 3 stars if styleSum >= 6.
+ *
+ * `diagnosisCorrect` and `pitchCorrect` on the result are filled with
+ * a heuristic until SME content tags per-step "optimal" picks
+ * consistently: diagnosisCorrect = true when at least half of the
+ * non-final picks are `optimal`; pitchCorrect = true when the final
+ * pick is `optimal`. These flags only feed the Report criterion
+ * readout, not the floor.
+ */
+export function gradeBranchingRound(input: {
+  tree: BranchingConversationTree;
+  choices: string[];
+  selectedPartnerId: string;
+  regime: ParityRegime;
+  partnerPrimaryStyle: CommunicationStyle;
+}): GradingResult {
+  const { tree, choices, selectedPartnerId, regime, partnerPrimaryStyle } = input;
+
+  // Right partner check - same model as the 3-phase grader. A regime
+  // without a correct-partner mapping (e.g. Wide while it's still
+  // pending) treats any pick as right so the scenario is gradeable.
+  const expectedPartnerId = getCorrectPartnerForRound(regime, tree.round);
+  const rightPartner =
+    expectedPartnerId === null || selectedPartnerId === expectedPartnerId;
+
+  // Resolve every option the learner picked across the steps.
+  const pickedOptions = choices
+    .map((choiceId, idx) =>
+      tree.steps[idx]?.options.find((o) => o.id === choiceId),
+    )
+    .filter((o): o is NonNullable<typeof o> => !!o);
+
+  const allCompliant = pickedOptions.every((o) => o.compliance === 'safe');
+
+  const styleScores = pickedOptions.map(
+    (o) => o.styleMatch[partnerPrimaryStyle] ?? 0,
+  );
+  const styleSum = styleScores.reduce((a, b) => a + b, 0);
+  const noActiveMismatch = styleScores.every((s) => s > -2);
+
+  // Heuristic diag/pitch correctness for the Report criterion readout.
+  // The grader's floor does NOT use these - they're informational.
+  const nonFinalPicks = pickedOptions.slice(0, -1);
+  const finalPick = pickedOptions[pickedOptions.length - 1];
+  const optimalNonFinal = nonFinalPicks.filter((o) => o.optimal).length;
+  const diagnosisCorrect =
+    nonFinalPicks.length === 0 ||
+    optimalNonFinal >= Math.ceil(nonFinalPicks.length / 2);
+  const pitchCorrect = !!finalPick?.optimal;
+
+  let failureReason: GradingFailureReason | null = null;
+  if (!rightPartner) {
+    failureReason = 'wrong-partner';
   } else if (!allCompliant) {
     failureReason = 'unsafe-pick';
   } else if (!noActiveMismatch) {

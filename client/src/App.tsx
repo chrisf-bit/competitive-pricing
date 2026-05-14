@@ -19,6 +19,7 @@ import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
+import { BranchingConversationScreen } from './screens/BranchingConversationScreen';
 import { ConversationReportScreen } from './screens/ConversationReportScreen';
 import { RoundTransitionScreen } from './screens/RoundTransitionScreen';
 import { DebriefScreen } from './screens/DebriefScreen';
@@ -43,6 +44,10 @@ export default function App() {
           onRestart={() => {
             game.onRestart();
             setShowSplash(true);
+          }}
+          onTestScenario={(partnerId) => {
+            setShowSplash(false);
+            game.startTestScenario(partnerId);
           }}
         />
       </>
@@ -243,19 +248,36 @@ export default function App() {
               onBack={game.onBackToPortfolio}
             />
           )}
-          {state.screen === 'conversation' && state.conversationInProgress && (
-            <ConversationScreen
-              partner={state.partners.find(
-                (p) =>
-                  p.persona.id === state.conversationInProgress!.partnerId,
-              )!}
-              currentRound={state.currentRound}
-              conversation={state.conversationInProgress}
-              onChoice={game.onConversationChoice}
-              onEnd={game.onEndConversation}
-              onBack={game.onBackToPortfolio}
-            />
-          )}
+          {state.screen === 'conversation' &&
+            state.conversationInProgress &&
+            state.conversationInProgress.shape !== 'branching' && (
+              <ConversationScreen
+                partner={state.partners.find(
+                  (p) =>
+                    p.persona.id === state.conversationInProgress!.partnerId,
+                )!}
+                currentRound={state.currentRound}
+                conversation={state.conversationInProgress}
+                onChoice={game.onConversationChoice}
+                onEnd={game.onEndConversation}
+                onBack={game.onBackToPortfolio}
+              />
+            )}
+          {state.screen === 'conversation' &&
+            state.conversationInProgress &&
+            state.conversationInProgress.shape === 'branching' && (
+              <BranchingConversationScreen
+                partner={state.partners.find(
+                  (p) =>
+                    p.persona.id === state.conversationInProgress!.partnerId,
+                )!}
+                currentRound={state.currentRound}
+                conversation={state.conversationInProgress}
+                onChoice={game.onConversationChoice}
+                onEnd={game.onEndConversation}
+                onBack={game.onBackToPortfolio}
+              />
+            )}
           {state.screen === 'conversation-report' && state.lastConversationGrade && (
             <ConversationReportScreen
               grade={state.lastConversationGrade}
@@ -306,6 +328,7 @@ export default function App() {
           game.onRestart();
           setShowSplash(true);
         }}
+        onTestScenario={game.startTestScenario}
       />
     </div>
   );

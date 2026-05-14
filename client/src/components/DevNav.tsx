@@ -17,6 +17,8 @@ interface DevNavProps {
   onJump: (screen: GameState['screen']) => void;
   onShowSplash: () => void;
   onRestart: () => void;
+  /** Dev-only: jump straight into a parked test scenario. */
+  onTestScenario: (partnerId: string) => void;
 }
 
 interface ScreenJump {
@@ -51,7 +53,13 @@ function shouldShowDevNav(): boolean {
   return new URLSearchParams(window.location.search).has('dev');
 }
 
-export function DevNav({ currentScreen, onJump, onShowSplash, onRestart }: DevNavProps) {
+export function DevNav({
+  currentScreen,
+  onJump,
+  onShowSplash,
+  onRestart,
+  onTestScenario,
+}: DevNavProps) {
   const [open, setOpen] = useState(false);
 
   if (!shouldShowDevNav()) return null;
@@ -164,6 +172,29 @@ export function DevNav({ currentScreen, onJump, onShowSplash, onRestart }: DevNa
                   })}
               </div>
             ))}
+
+            <div style={{ marginBottom: 4 }}>
+              <div
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  color: 'rgba(255,255,255,0.4)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.14em',
+                  padding: '8px 10px 4px',
+                }}
+              >
+                Branching scenarios
+              </div>
+              <JumpRow
+                label="John (Wide Parity)"
+                active={false}
+                onClick={() => {
+                  onTestScenario('john');
+                  setOpen(false);
+                }}
+              />
+            </div>
 
             <div
               style={{

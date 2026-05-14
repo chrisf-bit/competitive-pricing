@@ -233,26 +233,60 @@ DO list and the regime's specific constraints.
 
 ### Conversation structure
 
+Two shapes coexist in the engine while partners are migrated from
+the legacy 3-phase model to the new branching model. SME has
+confirmed all scenarios will eventually be branching - the 3-phase
+trees stay only as long as the existing Marina/Stavros/Carlos R1-R3
+content hasn't been rewritten.
+
+**Shape detection.** `conversationInProgress.shape` discriminates at
+engine and screen-routing level. `startConversation` checks
+`getBranchingScenario(partnerId, round)` first; if a branching
+scenario exists, shape is set to `'branching'`. Otherwise falls back
+to the 3-phase lookup (`getConversationTree`). `App.tsx` routes to
+either `ConversationScreen` (3-phase) or `BranchingConversationScreen`
+based on the shape flag.
+
+**3-phase (legacy):**
 - Every conversation is **3 phases: Hook -> Diagnosis -> Pitch.**
   Mirrors the back half of Alex's Issue Tree flow taught in
-  clearance. The earlier Trigger / Intent / Root Cause / Metric
-  phases of the Issue Tree happen pre-call on the portfolio +
-  partner-detail screens, not inside the conversation.
-- **Objection phase was removed in May 2026.** We don't have SME-
-  validated content for what makes a good objection response, so we
-  pulled it rather than fabricate scoring. The Issue Tree reveal
-  still teaches learners to *anticipate* objections; we just stop
-  short of practising the response.
-- Each phase has 3 options scored on `compliance` ('safe' |
-  'borderline' | 'risky') and `styleMatch` per communication style.
-  The grader uses these directly - **never fabricate a separate
-  ground-truth map.** The "optimal" Diagnosis and Pitch options are
-  derived at grading time as the option with the highest
-  `trustChange` (metricEffects sum as tiebreak), so SME content
-  authoring stays in one place.
-- Conversation files live in `data/conversations.ts` and the three
-  sidecars `conversations-{carlos,priya,yuki}.ts`. 6 partners x 3
-  rounds = 18 trees.
+  clearance.
+- **Objection phase was removed in May 2026.** No SME-validated
+  content for objection responses, so we pulled it rather than
+  fabricate scoring.
+- Each phase has 3 options scored on `compliance` and `styleMatch`.
+  "Optimal" Diagnosis / Pitch are derived at grading time as the
+  highest-`trustChange` option (metricEffects sum as tiebreak), so
+  SME content authoring stays in one place.
+- Files in `data/conversations.ts` + sidecars
+  `conversations-{carlos,priya,yuki}.ts`. 6 partners x 3 rounds.
+
+**Branching (SME-confirmed forward direction):**
+- A `BranchingConversationTree` is a sequence of **steps** (typically
+  4-6 exchanges). Each step has a partner prompt + 3 learner options.
+  Each option carries its own `partnerResponse` (no trust-banded
+  alternates), `styleMatch`, `compliance`, and `trustChange`.
+- Optional **lightweight branching** via `option.nextPrompt`: if set,
+  the next step's `partnerPrompt` is replaced with this string. Lets
+  the partner's tone change based on the prior pick without authoring
+  full alternate-step trees.
+- Optional **per-step "optimal"** tag (`option.optimal: true`) marks
+  the SME-preferred move at each step. Drives the heuristic
+  diagnosis/pitch-correct readout on the Conversation Report; doesn't
+  affect the floor.
+- Each tree carries `issueTreePath` mapping the scenario to the
+  Pricing Issue Tree leaf (trigger, issue, intent, root cause,
+  metric insight, hook). Consumed by the Issue Tree Helper and -
+  eventually - by a stricter grader that scores the learner's
+  Helper pick against the prescribed path.
+- Branching scenarios live in `data/scenarios/{partner}-r{n}.ts`,
+  registered via `data/branchingScenarios.ts`. Coverage today: John
+  R1 (Wide Parity, Brand.com loyalist).
+- Grading uses `gradeBranchingRound` in `engine/grading.ts`. Minimal
+  pass for v1: floor = right partner + all picks `compliance: 'safe'`
+  + no -2 style mismatch. No "optimal diag / pitch" gate yet (will
+  tighten once 3+ branching scenarios exist and per-step `optimal`
+  tagging is consistent).
 
 ### Star grading and round gating
 
@@ -296,6 +330,39 @@ DO list and the regime's specific constraints.
 - Rounds without conversation data (currently 4-10) render as locked
   "Coming soon" cards. They auto-unlock once the conversation data
   is extended.
+
+### Issue Tree Helper (guided diagnostic on Partner Detail)
+
+A pre-call wizard that walks the learner through the Pricing Issue
+Tree to land on a hook. Launched from the **Issue Tree Helper**
+button in the Partner Detail header.
+
+**Teach-mode in v1.** No scoring, no "you got it wrong." The wizard
+walks the learner one column at a time, narrows option sets by prior
+picks, and ends with a summary card listing the path + the suggested
+hook with a one-line description. Scoring/validation against
+`BranchingConversationTree.issueTreePath` can layer on later once
+more scenarios land.
+
+**Six steps**, mirroring the Issue Tree columns:
+1. Trigger (Performance Outcome / Pricing Signal / Interaction / Programme)
+2. Primary pricing issue (e.g. Brand.com eRPD not competitive)
+3. Intent (Intentional / Unintentional)
+4. Root cause (filtered by issue + intent)
+5. Pricing metric insight ("the diagnose")
+6. Pricing scenario hook ("the pitch angle")
+
+**Data lives in `data/issueTree.ts`.** Each column is a flat list of
+options with `valid*` arrays that gate downstream filtering. Coverage
+today is full for the trigger + issue + intent columns and complete
+for the Brand.com eRPD branch downstream. Key OTA eRPD branches are
+stubbed with one representative option per column so the wizard
+always offers plausible alternates; SME content for those branches
+lands later.
+
+**Lives on Partner Detail only.** Not in the Conversation screen -
+keeps the call surface clean and positions the Helper as a
+pre-call think-time tool.
 
 ### Persona power effects (subtle gameplay)
 
@@ -441,6 +508,15 @@ debate:
   screen. Narrow / Wide / Cross Regional are visually disabled
   ("Coming soon" pill, dashed border, not-allowed cursor) until the
   matching partner data lands (expected next week).
+- **John (Wide Parity, branching) is parked** under
+  `johnPartner` in `data/partners.ts`. Not in `initialPartners`,
+  not surfaced via Market Select. Reachable via DevNav's
+  **Branching scenarios > John (Wide Parity)** entry, which
+  injects him into `state.partners`, sets the learner's regime to
+  Wide, and routes to his Partner Detail. Used for testing the
+  branching engine + Issue Tree Helper end-to-end while client
+  decides where John formally lives (new Wide regime partner pool
+  vs other options).
 - Country-to-regime mapping is the single source of truth in
   `data/parityCountries.ts`. Wide is the default for any country not
   listed under No or Narrow. Cross Regional is tagged per-partner, not
