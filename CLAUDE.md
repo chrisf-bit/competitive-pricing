@@ -340,8 +340,13 @@ based on the shape flag.
 ### Issue Tree Helper (guided diagnostic on Partner Detail)
 
 A pre-call wizard that walks the learner through the Pricing Issue
-Tree to land on a hook. Launched from the **Issue Tree Helper**
-button in the Partner Detail header.
+Tree to land on a hook. Launched from a **vertical tab handle**
+pinned to the right edge of the Partner Detail screen (navy
+gradient, GitBranch icon, "Issue Tree Helper" label rotated 90deg).
+The tab carries a small yellow dot when the learner has any saved
+picks for the current partner-round, signalling unfinished progress.
+Tab hides while the drawer is open so the two affordances don't
+compete for attention.
 
 **Teach-mode in v1.** No scoring, no "you got it wrong." The wizard
 walks the learner one column at a time, narrows option sets by prior
@@ -366,11 +371,15 @@ stubbed with one representative option per column so the wizard
 always offers plausible alternates; SME content for those branches
 lands later.
 
-**Renders as a right-side drawer**, not a centered modal. The
-learner can read the metrics, discount cards, and profile on
-Partner Detail while picking their way through the diagnosis. No
-backdrop, only the drawer itself overlays. Closing the drawer
-does not lose picks - see persistence below.
+**Chatbot-style floating drawer.** ~400x640 panel anchored to the
+right edge, 16px gap from the screen edge, vertically centred.
+Rounded corners all around with a shadow. NOT full-height and NOT
+a modal - the learner can read the metrics, discount cards, PACE
+card, and profile on Partner Detail while picking their way
+through. No backdrop. Framer-motion handles enter/exit so the slide
+animation and the vertical centring don't fight each other
+(combining transforms in a plain CSS keyframe clobbered the y
+centring during the slide). Closing does not lose picks.
 
 **Picks persist per partner-round.** The Helper is a controlled
 component; its `path` and `stepIndex` live in
@@ -526,12 +535,28 @@ debate:
 - **Year-on-Year (PACE) performance** is an optional partner-scoped
   block: `PartnerMetrics.pace?` with `period`, `roomnights`,
   `revenue`, `adr` (each carrying current / lastYear / relativeChange,
-  plus currency for revenue and ADR). Rendered as a dedicated
-  "Year-on-Year Performance" card on Partner Detail when present.
-  Only authored for partners whose scenario depends on the YoY
-  framing (e.g. John, where the brand-first signature is "ADR up,
-  volume + revenue down vs last year"). Marina and Carlos don't
-  carry PACE today and don't show the card.
+  plus currency for revenue and ADR), and an optional `dataPending`
+  flag. Rendered as a dedicated "Year-on-Year Performance" card on
+  Partner Detail when present, unless `dataPending: true` (in which
+  case the card hides itself so the learner doesn't see rows of
+  zeros). The card shows neutral tones - no severity colouring -
+  per the no-spoonfeeding rule.
+- **Three distinct PACE signatures** today, one per active No-Parity
+  partner:
+  - **John**: roomnights -43.34%, revenue -37.52%, ADR +10.27%.
+    Classic brand-first collapse (pushing rates up, losing OTA
+    volume). The R1 priority.
+  - **Marina**: roomnights -11.44%, revenue -12.39%, ADR -1.41%.
+    Moderate slow leak, consistent with the slow mobile gap.
+  - **Carlos**: roomnights +4.28%, revenue +4.75%, ADR +0.94%.
+    Surface-healthy growth - the Country Rate misconfig hasn't bitten
+    PACE yet, which is exactly the trap that surfaces by R3.
+- **`applyRoundBaseline` merges metrics** rather than replacing them
+  (`{ ...partner.metrics, ...baseline.metrics }`). This is so
+  partner-level "static" fields like the PACE block survive baseline
+  application without having to be duplicated into every per-round
+  baseline entry. Don't switch this back to a full replace - it
+  would silently drop PACE on baseline-driven rounds.
 
 ### Parity regimes
 
@@ -719,3 +744,14 @@ from `main` branch).
   regulatory hazard (especially in No-Parity markets). The internal
   `rateParity` field on `PartnerMetrics` is fine - it's not surfaced
   to the learner.
+- Don't restore the Issue Tree Helper to a centred full-height
+  modal. The chatbot-style right-side drawer (~400x640) is
+  intentional - it lets the learner peek at the metrics and PACE
+  card while running the diagnosis. If it grows enough to need
+  more space, scroll inside the drawer rather than expanding the
+  drawer footprint.
+- Don't switch `applyRoundBaseline` back to a full replace
+  (`metrics: { ...baseline.metrics }`). It merges
+  (`{ ...partner.metrics, ...baseline.metrics }`) so partner-level
+  static fields like the PACE block survive baseline application
+  without being duplicated in every round entry.
