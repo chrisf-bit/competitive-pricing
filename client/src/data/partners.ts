@@ -34,14 +34,25 @@ export const initialPartners: PartnerState[] = [
       losePricePublic: 68,
       activeScenarios: 1,
       competitor: 'brand',
-      // PACE schema reserved; values pending SME input. Card hides
-      // until dataPending flips to false.
+      // Story: moderate YoY decline across volume + revenue, ADR
+      // essentially flat. Consistent with a small mobile-traffic
+      // gap that's been bleeding bookings without changing rate
+      // strategy. Not a crisis (compare with John); slow leak.
       pace: {
         period: 'Jun-Dec 2026',
-        roomnights: { current: 0, lastYear: 0, relativeChange: 0 },
-        revenue: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
-        adr: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
-        dataPending: true,
+        roomnights: { current: 4180, lastYear: 4720, relativeChange: -11.44 },
+        revenue: {
+          current: 587000,
+          lastYear: 670000,
+          relativeChange: -12.39,
+          currency: 'EUR',
+        },
+        adr: {
+          current: 140,
+          lastYear: 142,
+          relativeChange: -1.41,
+          currency: 'EUR',
+        },
       },
       // Legacy
       experiencedRPD: 58,
@@ -171,14 +182,27 @@ export const initialPartners: PartnerState[] = [
       losePricePublic: 48,
       activeScenarios: 1,
       competitor: 'brand',
-      // PACE schema reserved; values pending SME input. Card hides
-      // until dataPending flips to false.
+      // Story: slight YoY growth on roomnights + revenue, ADR
+      // basically flat. Surface picture looks healthy and matches
+      // his "aggressive growth" goal. The Country Rate misconfig
+      // hasn't bitten PACE yet - that's the trap: nothing in this
+      // card flags him as the priority, even though the misconfig
+      // is compounding silently and surfaces by R3.
       pace: {
         period: 'Jun-Dec 2026',
-        roomnights: { current: 0, lastYear: 0, relativeChange: 0 },
-        revenue: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
-        adr: { current: 0, lastYear: 0, relativeChange: 0, currency: 'EUR' },
-        dataPending: true,
+        roomnights: { current: 6820, lastYear: 6540, relativeChange: 4.28 },
+        revenue: {
+          current: 728000,
+          lastYear: 695000,
+          relativeChange: 4.75,
+          currency: 'EUR',
+        },
+        adr: {
+          current: 107,
+          lastYear: 106,
+          relativeChange: 0.94,
+          currency: 'EUR',
+        },
       },
       experiencedRPD: 65,
       visibility: 70,
