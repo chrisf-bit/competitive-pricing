@@ -85,6 +85,83 @@ Key files:
 - **Role-agnostic copy.** Not all partner-facing roles are AMs - the
   briefing says "manage partner accounts" without naming the role.
 
+### Compliance guardrails (legal)
+
+Source: **Stay legally compliant | Content writing guidance** PDF.
+These are hard rules for every piece of learner-facing or partner-
+facing copy in the sim - dialogue options, hook text, pitch text,
+email audit content, GM script, briefing copy, clearance feedback,
+everything. If a proposed line breaks any rule below, rewrite it.
+
+**General (applies to all regimes):**
+- DO stay factual and neutral; advise on the partner's performance
+  on Booking.com.
+- DO make it explicit that the partner is **free to choose their
+  own pricing and distribution strategy**.
+- DO frame pricing as **one of several performance drivers**
+  (alongside reviews, content, etc.), not the only lever.
+- DON'T pressure parity or imply ranking changes will follow from
+  pricing decisions.
+- DON'T promise specific ranking rewards or visibility guarantees
+  in exchange for a price or product change.
+- DON'T require a partner to lower prices just because cheaper
+  rates exist elsewhere.
+- DON'T dictate the partner's external pricing or distribution
+  strategy on other channels.
+
+**Internal objective framing (LPS-side copy, dashboard, GM lines):**
+- DO position **On-platform growth (ABRN)** as the only hard,
+  incentivised KPI for partner-facing roles.
+- DO use **e-RPD objectives at country-level or above**, and only
+  for Area Manager+ roles.
+- DO position pricing as **one of 5 pillars** of on-platform growth.
+- DON'T set quantitative, incentivised, or hard targets for e-RPD
+  in any learner objective text.
+- DON'T (in No-Parity context) frame objectives like "increase
+  competitive partner share from x to y%" for partner-facing roles.
+  Competitive Partner Share / Price Bucket distribution is for
+  **internal prioritisation only**, never a SMART objective.
+
+**Wide Parity markets:**
+- DO ask partners to provide the **same rates, conditions, and
+  availability** they give to Brand.com and key OTAs.
+- DO explain that less competitive prices can **reduce conversion
+  and visibility** on Booking.com (this is fact-based, not a threat).
+- DO proactively use **on-platform competitiveness AND cross-
+  channel data** (RPD, EPO) to illustrate opportunities.
+- DON'T promise ranking rewards or threaten penalties based solely
+  on external prices.
+- DON'T recommend the partner switch off other OTAs or wholesalers.
+
+**Narrow Parity markets:**
+- DO ask partners to align rates and conditions **strictly with
+  Brand.com**.
+- DO use **RPD vs Brand.com** data to show where Booking.com is
+  more expensive than the partner's direct site.
+- DON'T ask for same availability or price alignment with other OTAs.
+- DON'T suggest the partner adjust or reduce prices on other channels.
+
+**No-Parity markets:**
+- DO ask for the **"best price the partner is willing to make
+  available to Booking.com"** to remain competitive on the platform.
+- DO ask **reactively and neutrally** if a discrepancy is noticed
+  (e.g. "If your prices are more attractive on other platforms, is
+  that intentional and part of your strategy?").
+- DO use external-price knowledge **only for internal prioritisation**
+  of who to call.
+- DON'T use the **word "parity"** anywhere in No-Parity dialogue,
+  hooks, pitches, or partner-facing copy.
+- DON'T suggest the partner is **required** to match external prices.
+- DON'T write that external price gaps will lead to punishment,
+  worse ranking, or reduced visibility.
+
+When authoring new conversation options, the `compliance` field
+('safe' | 'borderline' | 'risky') should reflect these rules:
+**risky** is any line that breaks a DON'T above; **borderline** is a
+line that flirts with one (e.g. proactive cross-channel framing in a
+No-Parity market); **safe** is everything that stays inside both the
+DO list and the regime's specific constraints.
+
 ### Clearance UI consistency
 
 - Every clearance activity renders inside `<ClearanceShell>` which provides:
@@ -220,6 +297,116 @@ Key files:
   "Coming soon" cards. They auto-unlock once the conversation data
   is extended.
 
+### Persona power effects (subtle gameplay)
+
+Super-power personas (Conversation Architect, Objection Navigator,
+Storyteller, Data Detective) used to be flavour-only. They now have
+a subtle gameplay impact via **information asymmetry**, not grading
+change. The grader doesn't see the persona at all - star scoring
+stays transparent regardless of which persona was picked.
+
+**Three surfaces:**
+
+- **Partner Detail** - two new cards above the metrics block:
+  - **Insight card** (full prominence, accent-coloured left border)
+    surfaces the persona's strength applied to *this* partner-round.
+    Always visible.
+  - **Blind-spot card** (dimmed, dashed border, one-line teaser plus
+    a "Reveal blind spot" button) holds the same persona's trade-off,
+    collapsed by default. Tapping reveals the full content inline.
+    Per the "hide when seen once" rule, once the learner has expanded
+    the card for a given partner-round, it disappears entirely on
+    subsequent visits to that partner-round.
+
+- **Conversation Report** - a post-round persona retro line:
+  - **`retroOnWin`** when the round earns >= 2 stars (strength
+    credited).
+  - **`retroOnLoss`** when the round earns 0 stars (trade-off named).
+  - **Nothing** for 1-star scrappy passes - the persona didn't clearly
+    carry or cost.
+
+- **Debrief** - an aggregate persona block:
+  - Counts strength-rounds (>= 2 stars) and trade-off-rounds (0 stars)
+    across all 10 round slots from `roundStars`.
+  - Renders as "As [persona] you played **X of 10** rounds where your
+    strength carried, and **Y of 10** where the trade-off slowed you
+    down. [coaching line]."
+
+**Authoring lives in two places:**
+
+- `SuperPowerPersona.powerEffect` in `data/characters.ts` -
+  persona-fixed copy (`unlockedChip`, `mutedChip`, `retroOnWin`,
+  `retroOnLoss`, `aggregateCoaching`).
+- `data/personaHints.ts` - partner-specific content keyed by
+  `partnerId x round x personaId`. Each entry has:
+  - `unlocked` - the strength card body
+  - `mutedTeaser` - the one-line collapsed prompt
+  - `mutedFull` - the full reveal content
+
+**Themes per persona** (consistent across all partner-rounds, so
+SME authors know the slot they're filling):
+- Conversation Architect - unlocks how-to-approach; mutes anomaly
+  callout
+- Objection Navigator - unlocks likely-objections preview; mutes
+  relationship-tone hint
+- Storyteller - unlocks one-line narrative summary; mutes raw-trend
+  detail
+- Data Detective - unlocks biggest anomaly highlighted; mutes style
+  cue
+
+**Coverage today:** R1 only, for the active No-Parity trio (Marina,
+Stavros, Carlos) - 12 hint pairs. R2/R3 to follow once R1 is
+reviewed in the UI; R4+ blocked on SME content for those rounds.
+
+**State (`expandedBlindSpots: string[]` on `GameState`):** keys are
+`${partnerId}-${round}` strings. Resets on full restart
+(`onRestart`) and on practice-round entry (`startPracticeRound`),
+so a clean attempt gets the hint surfaced again. Does **not**
+currently survive a page reload; bump the persisted-state shape
+in `util/persistence.ts` and `engine/gameEngine.ts` if you want
+that.
+
+**Don't bend grading numerically based on persona.** The effect is
+informational only, by design. Adding a style-sum bump or a
+floor-criterion exception for a persona breaks the "every learner
+sees the same right answer" pedagogy.
+
+**Colour tokens:** persona accents render via `--style-{red,yellow,
+green,blue}` on white surfaces (Partner Detail, Debrief) and via
+the brighter `--style-{red,yellow,green,blue}-bright` variants on
+dark surfaces (CharacterBuild persona cards, Conversation Report
+retro). The base red/blue tokens are tuned for light surfaces and
+are unreadable on navy; the bright variants exist for exactly this
+reason.
+
+### Compliance + copy guardrails for in-game text
+
+The legal compliance ruleset (Wide / Narrow / No-Parity / general
+DOs and DON'Ts) is captured under [Compliance guardrails (legal)]
+above. Beyond that, a few learner-facing wording shifts have landed
+across the UI - log them here so the next agent doesn't re-do the
+debate:
+
+- **"Rate parity" wording has been retired from learner-facing
+  copy** in favour of "**price competitiveness**". The legal
+  guidance treats parity language as a regulatory hazard, especially
+  in No-Parity markets. Where the Simulation Guide or the on-screen
+  tips used to say "Check rate parity and discounts", they now read
+  "Check pricing competitiveness and discounts"; the Dig deeper tip
+  on RPD now lists "discounts, config issues, or price
+  competitiveness" rather than "rate parity". The internal field
+  `rateParity` on `PartnerMetrics` is unchanged - it's not surfaced
+  to the learner, just used by the engine.
+- **Data & Insights challenge 3-of-3 take-away** (in
+  `data/dashboardHotspot.ts`) reads "loyal price is masking the
+  underneath issue and the partner is using Genius rate as base
+  price" - phrased as a story about the partner's behaviour, not as
+  a generic "the public price is the problem" line.
+- **Briefing copy** sits in `BriefingScreen.tsx` as four paragraphs:
+  hook, situation, mission, clearance pre-condition. Voice is
+  "we / you" with no role naming (see the role-agnostic copy rule
+  in Voice and copy above).
+
 ### Persistence (localStorage)
 
 - A slim slice of state survives a page reload via
@@ -323,9 +510,12 @@ Key files:
   anywhere; they can be removed from `package.json` in a tidy-up pass.
 - 4 super-power personas (Conversation Architect, Objection Navigator,
   Storyteller, Data Detective).
-- For MVP, super-power impact is **flavour-only** - they're surfaced in
-  the GM intro and Debrief but do not affect scoring. Mechanic
-  differentiation is post-MVP.
+- Super-powers now have **a subtle gameplay impact** via the persona
+  insight + blind-spot cards on Partner Detail, the post-round retro
+  on the Conversation Report, and the aggregate block on the Debrief.
+  The effect is informational, not numeric - the grader stays
+  persona-blind. See **Persona power effects (subtle gameplay)**
+  above for the full spec.
 - Player name lives on `learnerProfile.playerName`; default is
   `Name_Var` pre-SCORM. Once SCORM-wrapped, `cmi.core.student_name`
   populates this. The GM chat interpolates `{{name}}` in script lines.
@@ -407,3 +597,17 @@ from `main` branch).
 - Don't add a screen-level intro/heading inside a clearance activity -
   that's the ClearanceShell's job. The activity should focus on the
   activity-specific content.
+- Don't bend grading numerically based on the learner's persona pick.
+  The persona power effects are informational only - adding a style-
+  sum bump or a floor-criterion exception for a persona breaks the
+  "every learner sees the same right answer" pedagogy.
+- Don't reuse `--style-red` or `--style-blue` on dark navy
+  backgrounds - they're tuned for light surfaces and read as muddy.
+  Use the `--style-{accent}-bright` variants for any persona accent
+  rendered on a dark surface.
+- Don't use the phrase "rate parity" in any learner-facing copy.
+  It's been replaced everywhere with "price competitiveness" because
+  the legal compliance guidance treats parity language as a
+  regulatory hazard (especially in No-Parity markets). The internal
+  `rateParity` field on `PartnerMetrics` is fine - it's not surfaced
+  to the learner.

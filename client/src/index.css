@@ -41,6 +41,13 @@
   --style-yellow-bg: #fef5e0;
   --style-green-bg: #e6f5ed;
   --style-blue-bg: #e6f0f8;
+  /* Brighter variants for use on dark backgrounds (navy splash, character
+     build, conversation report retro, debrief persona block). The base
+     tokens above stay tuned for white/light surfaces. */
+  --style-red-bright: #f47568;
+  --style-yellow-bright: #ffc94d;
+  --style-green-bright: #58d68d;
+  --style-blue-bright: #62b6ff;
 
   --radius-sm: 6px;
   --radius-md: 10px;

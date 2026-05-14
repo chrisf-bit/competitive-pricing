@@ -402,6 +402,15 @@ export interface GameState {
    * the Simulation Guide's 'Check the market update' step.
    */
   marketUpdateAcknowledged: boolean;
+  /**
+   * Set of `${partnerId}-${round}` keys for which the learner has
+   * expanded the persona blind-spot card on Partner Detail. Once a key
+   * lands here, the card stays hidden on subsequent visits to that
+   * partner-round (per the "hide when seen once" rule). Reset on full
+   * restart and on practice-round entry so a clean attempt gets the
+   * hint surfaced again.
+   */
+  expandedBlindSpots: string[];
   currentRound: number;         // 1, 2, 3
   actionsRemaining: number;     // starts at 2 per round
   actionsThisRound: string[];   // partner IDs engaged this round

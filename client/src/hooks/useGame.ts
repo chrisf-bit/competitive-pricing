@@ -223,6 +223,23 @@ export function useGame() {
     setState((s) => ({ ...s, marketUpdateAcknowledged: true }));
   }, []);
 
+  /**
+   * Mark the persona blind-spot card as expanded for a partner-round.
+   * After this fires the card is hidden on subsequent visits to that
+   * partner-round (until restart or practice-round entry).
+   */
+  const markBlindSpotExpanded = useCallback(
+    (partnerId: string, round: number) => {
+      const key = `${partnerId}-${round}`;
+      setState((s) =>
+        s.expandedBlindSpots.includes(key)
+          ? s
+          : { ...s, expandedBlindSpots: [...s.expandedBlindSpots, key] },
+      );
+    },
+    [],
+  );
+
   /** Mark Level 0 as cleared so the Briefing button adapts on a return visit. */
   const markLevel0Cleared = useCallback(() => {
     setState((s) => ({
@@ -295,6 +312,7 @@ export function useGame() {
     requestLevel0Retry,
     markTutorialShown,
     acknowledgeMarketUpdate,
+    markBlindSpotExpanded,
     markLevel0Cleared,
   };
 }

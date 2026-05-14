@@ -117,6 +117,27 @@ export interface SuperPowerPersona {
   /** CSS color name token used for accent (matches existing --style-* vars). */
   accent: 'green' | 'red' | 'yellow' | 'blue';
   icon: LucideIcon;
+  /**
+   * Subtle gameplay effects tied to the persona. Drives the
+   * insight/blind-spot card on Partner Detail and the post-round
+   * retrospective on the Conversation Report + Debrief.
+   *
+   * Authoring rule: chip labels and retro lines are persona-fixed
+   * (same string every round). Partner-specific hint content lives
+   * in data/personaHints.ts and is keyed by persona x partner x round.
+   */
+  powerEffect: {
+    /** Short label on the unlocked card (e.g. "Architect insight"). */
+    unlockedChip: string;
+    /** Short label on the dimmed/collapsed card (e.g. "Architect blind spot"). */
+    mutedChip: string;
+    /** Shown on the Conversation Report when the round earned >= 2 stars. */
+    retroOnWin: string;
+    /** Shown on the Conversation Report when the round earned 0 stars. */
+    retroOnLoss: string;
+    /** Coaching tail on the Debrief aggregate block. */
+    aggregateCoaching: string;
+  };
 }
 
 export const superPowerPersonas: SuperPowerPersona[] = [
@@ -142,7 +163,7 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     weaknesses: [
       {
         headline: 'Avoids conflict',
-        detail: 'Can spend too much time maintaining harmony instead of progressing decisions.',
+        detail: 'Can burn time harmonising instead of deciding.',
       },
       {
         headline: 'Less data-oriented',
@@ -151,6 +172,16 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     ],
     accent: 'green',
     icon: MessageCircle,
+    powerEffect: {
+      unlockedChip: 'Architect insight',
+      mutedChip: 'Architect blind spot',
+      retroOnWin:
+        'Your Architect lens built trust quickly; the partner heard you out and the diagnosis landed.',
+      retroOnLoss:
+        'Your Architect lens kept things harmonious, but a sharper data lead would have surfaced the root cause faster. Trade-off bit you here.',
+      aggregateCoaching:
+        'Next playthrough, push past the rapport when the numbers ask for it.',
+    },
   },
   {
     id: 'objection-navigator',
@@ -175,16 +206,26 @@ export const superPowerPersonas: SuperPowerPersona[] = [
       {
         headline: 'Can become defensive',
         detail:
-          'May focus too heavily on overcoming resistance instead of exploring root causes.',
+          'Can focus too much on beating resistance than finding root causes.',
       },
       {
-        headline: 'Pushes conversations forward too quickly',
+        headline: 'Can push conversations too quickly',
         detail:
-          'Sometimes moves into solution mode before fully understanding the partner perspective.',
+          'Can jump to solution before understanding the issue.',
       },
     ],
     accent: 'red',
     icon: Shield,
+    powerEffect: {
+      unlockedChip: 'Navigator insight',
+      mutedChip: 'Navigator blind spot',
+      retroOnWin:
+        'Your Navigator lens held momentum through resistance; you got to the pitch cleanly.',
+      retroOnLoss:
+        'Your Navigator lens pushed ahead before fully understanding the issue. Watch for that next round.',
+      aggregateCoaching:
+        'Next playthrough, slow down for one more diagnostic question before pitching.',
+    },
   },
   {
     id: 'storyteller',
@@ -207,16 +248,26 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     ],
     weaknesses: [
       {
-        headline: 'Can oversimplify',
-        detail: 'May remove too much detail when simplifying information.',
+        headline: 'Can oversimplify things',
+        detail: 'Can remove important details.',
       },
       {
         headline: 'Relies on strong inputs',
-        detail: 'Less effective when the underlying analysis or data quality is weak.',
+        detail: 'Can struggle when data or signals are weak.',
       },
     ],
     accent: 'yellow',
     icon: Sparkles,
+    powerEffect: {
+      unlockedChip: 'Storyteller insight',
+      mutedChip: 'Storyteller blind spot',
+      retroOnWin:
+        'Your Storyteller lens turned the data into a clear story; the partner could see the picture.',
+      retroOnLoss:
+        "Your Storyteller lens simplified too far this time. There was a detail you couldn't afford to lose.",
+      aggregateCoaching:
+        'Next playthrough, leave the supporting detail in when it changes the story.',
+    },
   },
   {
     id: 'data-detective',
@@ -239,16 +290,26 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     ],
     weaknesses: [
       {
-        headline: 'Overcomplicates conversations',
-        detail: 'Can overwhelm others with too much detail.',
+        headline: 'Can overcomplicate conversations',
+        detail: 'Can overwhelm people with details.',
       },
       {
-        headline: 'Misses emotional signals',
-        detail: 'May focus on metrics instead of relationship dynamics.',
+        headline: 'Can miss emotional signals',
+        detail: 'Can focus on metrics over relationships.',
       },
     ],
     accent: 'blue',
     icon: Search,
+    powerEffect: {
+      unlockedChip: 'Detective insight',
+      mutedChip: 'Detective blind spot',
+      retroOnWin:
+        'Your Detective lens caught the anomaly fast; the diagnosis was airtight.',
+      retroOnLoss:
+        "Your Detective lens stayed in the numbers; the partner's style cues were the missing piece this round.",
+      aggregateCoaching:
+        'Next playthrough, look up from the dashboard for the partner\'s style signals.',
+    },
   },
 ];
 

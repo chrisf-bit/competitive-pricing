@@ -336,7 +336,9 @@ function PersonaCard({
   onClick: () => void;
 }) {
   const Icon = persona.icon;
-  const accentColor = `var(--style-${persona.accent})`;
+  // Bright variant - the persona cards sit on dark navy and the base
+  // --style-red/--style-blue tokens are tuned for light surfaces.
+  const accentColor = `var(--style-${persona.accent}-bright)`;
 
   return (
     <motion.button

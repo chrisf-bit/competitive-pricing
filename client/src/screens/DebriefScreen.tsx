@@ -14,6 +14,7 @@ import { getRPDLevel } from '../engine/gameEngine';
 import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
 import { initialPartners } from '../data/partners';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
+import { getPersonaById } from '../data/characters';
 
 const PRACTICE_AVAILABLE_ROUNDS = [1, 2, 3] as const;
 const TOTAL_ROUNDS_DISPLAYED = 10;
@@ -28,6 +29,12 @@ interface DebriefScreenProps {
    * for each practice round card.
    */
   regime: ParityRegime | null;
+  /**
+   * The learner's selected super-power persona id, or null if none picked.
+   * Drives the aggregate persona block ("X of 10 rounds your strength
+   * carried...") shown at the end of the run.
+   */
+  personaId: string | null;
   onRestart: () => void;
   onPracticeRound: (round: number) => void;
 }
@@ -47,6 +54,7 @@ export function DebriefScreen({
   partners,
   roundStars,
   regime,
+  personaId,
   onRestart,
   onPracticeRound,
 }: DebriefScreenProps) {
@@ -57,6 +65,14 @@ export function DebriefScreen({
     0,
   );
   const maxStars = TOTAL_ROUNDS_DISPLAYED * 3;
+
+  // Aggregate persona block: count strength-rounds (>= 2 stars) and
+  // trade-off-rounds (0 stars) across all attempted rounds. 1-star
+  // passes count as neither - the persona didn't clearly carry or cost.
+  const persona = getPersonaById(personaId);
+  const attemptedRounds = Object.values(roundStars);
+  const strengthRounds = attemptedRounds.filter((s) => s >= 2).length;
+  const tradeOffRounds = attemptedRounds.filter((s) => s === 0).length;
 
   return (
     <div
@@ -136,6 +152,17 @@ export function DebriefScreen({
             />
           </div>
         </div>
+
+        {/* Persona aggregate block - subtle gameplay readback for the
+            learner's chosen super-power. Hidden if no persona picked. */}
+        {persona && attemptedRounds.length > 0 && (
+          <PersonaAggregateBlock
+            persona={persona}
+            totalRounds={TOTAL_ROUNDS_DISPLAYED}
+            strengthRounds={strengthRounds}
+            tradeOffRounds={tradeOffRounds}
+          />
+        )}
 
         {/* Partner outcomes */}
         <div
@@ -694,6 +721,79 @@ function PracticeRoundCard({
         </div>
       )}
     </button>
+  );
+}
+
+function PersonaAggregateBlock({
+  persona,
+  totalRounds,
+  strengthRounds,
+  tradeOffRounds,
+}: {
+  persona: NonNullable<ReturnType<typeof getPersonaById>>;
+  totalRounds: number;
+  strengthRounds: number;
+  tradeOffRounds: number;
+}) {
+  const Icon = persona.icon;
+  const accent = `var(--style-${persona.accent})`;
+  return (
+    <div
+      style={{
+        background: 'var(--white)',
+        border: '1px solid var(--grey-100)',
+        borderLeft: `4px solid ${accent}`,
+        borderRadius: 'var(--radius-md)',
+        padding: 20,
+        marginBottom: 20,
+        animation: 'fadeIn 0.4s ease 0.18s backwards',
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          marginBottom: 10,
+        }}
+      >
+        <div
+          style={{
+            width: 32,
+            height: 32,
+            borderRadius: 8,
+            background: accent,
+            color: 'var(--white)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Icon size={16} />
+        </div>
+        <h4 style={{ fontSize: 14, margin: 0 }}>
+          As {persona.name}
+        </h4>
+      </div>
+      <p
+        style={{
+          fontSize: 13,
+          color: 'var(--grey-700)',
+          lineHeight: 1.55,
+          margin: 0,
+        }}
+      >
+        You played{' '}
+        <strong style={{ color: 'var(--brand-navy)' }}>
+          {strengthRounds} of {totalRounds}
+        </strong>{' '}
+        rounds where your strength carried, and{' '}
+        <strong style={{ color: 'var(--brand-navy)' }}>
+          {tradeOffRounds} of {totalRounds}
+        </strong>{' '}
+        where the trade-off slowed you down. {persona.powerEffect.aggregateCoaching}
+      </p>
+    </div>
   );
 }
 

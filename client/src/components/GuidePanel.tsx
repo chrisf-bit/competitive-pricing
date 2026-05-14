@@ -465,7 +465,7 @@ function getGuideContent(
           {
             icon: <Zap size={12} />,
             title: 'Dig deeper',
-            text: 'Low RPD can stem from discounts, config issues, or rate parity.',
+            text: 'Low RPD can stem from discounts, config issues, or price competitiveness.',
           },
           ...(currentRound > 1
             ? [{
@@ -493,7 +493,7 @@ function getGuideContent(
           },
           {
             icon: <AlertTriangle size={13} />,
-            text: 'Check rate parity and discounts',
+            text: 'Check pricing competitiveness and discounts',
             active: true,
           },
           {

@@ -236,6 +236,9 @@ export default function App() {
               alreadyEngaged={state.actionsThisRound.includes(
                 state.selectedPartnerId,
               )}
+              personaId={state.learnerProfile.archetype?.id ?? null}
+              expandedBlindSpots={state.expandedBlindSpots}
+              onMarkBlindSpotExpanded={game.markBlindSpotExpanded}
               onStartConversation={game.onStartConversation}
               onBack={game.onBackToPortfolio}
             />
@@ -257,6 +260,7 @@ export default function App() {
             <ConversationReportScreen
               grade={state.lastConversationGrade}
               partners={state.partners}
+              personaId={state.learnerProfile.archetype?.id ?? null}
               onContinue={game.onContinueAfterReport}
               onRetake={game.onRetakeAfterReport}
             />
@@ -279,6 +283,7 @@ export default function App() {
               partners={state.partners}
               roundStars={state.roundStars}
               regime={state.learnerProfile.market?.parityRegime ?? null}
+              personaId={state.learnerProfile.archetype?.id ?? null}
               onRestart={game.onRestart}
               onPracticeRound={game.onStartPracticeRound}
             />

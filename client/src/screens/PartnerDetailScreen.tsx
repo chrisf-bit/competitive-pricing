@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ArrowLeft,
   MapPin,
@@ -12,6 +13,7 @@ import {
   History,
   UserCircle,
   ChevronRight,
+  ChevronDown,
 } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getRPDLevel } from '../engine/gameEngine';
@@ -20,12 +22,20 @@ import {
   RelationshipBadge,
   DiscountBadge,
 } from '../components/MetricBadge';
+import { getPersonaById, type SuperPowerPersona } from '../data/characters';
+import { getPersonaHint } from '../data/personaHints';
 
 interface PartnerDetailScreenProps {
   partner: PartnerState;
   currentRound: number;
   actionsRemaining: number;
   alreadyEngaged: boolean;
+  /** The learner's selected super-power persona id, or null if none picked. */
+  personaId: string | null;
+  /** Set of `${partnerId}-${round}` keys whose blind-spot card has been opened. */
+  expandedBlindSpots: string[];
+  /** Called when the learner expands the blind-spot card. */
+  onMarkBlindSpotExpanded: (partnerId: string, round: number) => void;
   onStartConversation: (id: string) => void;
   onBack: () => void;
 }
@@ -54,13 +64,32 @@ function SectionHeader({ icon, label, bg }: { icon: React.ReactNode; label: stri
 
 export function PartnerDetailScreen({
   partner,
-  currentRound: _currentRound,
+  currentRound,
   actionsRemaining,
   alreadyEngaged,
+  personaId,
+  expandedBlindSpots,
+  onMarkBlindSpotExpanded,
   onStartConversation,
   onBack,
 }: PartnerDetailScreenProps) {
   const canEngage = !alreadyEngaged && actionsRemaining > 0;
+
+  // Resolve the learner's persona + the partner-round hint pair, if any.
+  const persona = getPersonaById(personaId);
+  const hint = getPersonaHint(partner.persona.id, currentRound, personaId);
+  const blindSpotKey = `${partner.persona.id}-${currentRound}`;
+  const blindSpotAlreadySeen = expandedBlindSpots.includes(blindSpotKey);
+  // Local expand state for the current view. Once expanded, content stays
+  // visible until the learner navigates away; on next visit
+  // expandedBlindSpots already contains the key and the card is hidden.
+  const [blindSpotOpen, setBlindSpotOpen] = useState(false);
+  const showBlindSpotCard = !!hint && !blindSpotAlreadySeen;
+
+  function handleExpandBlindSpot() {
+    setBlindSpotOpen(true);
+    onMarkBlindSpotExpanded(partner.persona.id, currentRound);
+  }
 
   return (
     <div
@@ -172,6 +201,25 @@ export function PartnerDetailScreen({
             overflow: 'auto',
           }}
         >
+          {/* Persona insight + blind-spot cards. Only render when the
+              learner picked a persona AND a hint exists for this
+              partner-round. */}
+          {persona && hint && (
+            <PersonaInsightCard
+              persona={persona}
+              copy={hint.unlocked}
+            />
+          )}
+          {persona && hint && showBlindSpotCard && (
+            <PersonaBlindSpotCard
+              persona={persona}
+              teaser={hint.mutedTeaser}
+              full={hint.mutedFull}
+              isOpen={blindSpotOpen}
+              onExpand={handleExpandBlindSpot}
+            />
+          )}
+
           {/* Metrics card */}
           <div
             style={{
@@ -487,6 +535,143 @@ export function PartnerDetailScreen({
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function PersonaInsightCard({
+  persona,
+  copy,
+}: {
+  persona: SuperPowerPersona;
+  copy: string;
+}) {
+  const Icon = persona.icon;
+  const accent = `var(--style-${persona.accent})`;
+  return (
+    <div
+      style={{
+        background: 'var(--white)',
+        border: '2px solid var(--grey-100)',
+        borderLeft: `4px solid ${accent}`,
+        borderRadius: 'var(--radius-lg)',
+        padding: 16,
+        boxShadow: 'var(--shadow-md)',
+        animation: 'fadeIn 0.3s ease 0.05s backwards',
+      }}
+    >
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 6,
+          padding: '4px 10px',
+          borderRadius: 999,
+          background: accent,
+          color: 'var(--white)',
+          fontSize: 11,
+          fontWeight: 800,
+          letterSpacing: '0.02em',
+          marginBottom: 10,
+        }}
+      >
+        <Icon size={12} />
+        {persona.powerEffect.unlockedChip}
+      </div>
+      <p
+        style={{
+          fontSize: 13.5,
+          color: 'var(--grey-700)',
+          lineHeight: 1.55,
+          margin: 0,
+        }}
+      >
+        {copy}
+      </p>
+    </div>
+  );
+}
+
+function PersonaBlindSpotCard({
+  persona,
+  teaser,
+  full,
+  isOpen,
+  onExpand,
+}: {
+  persona: SuperPowerPersona;
+  teaser: string;
+  full: string;
+  isOpen: boolean;
+  onExpand: () => void;
+}) {
+  const Icon = persona.icon;
+  const accent = `var(--style-${persona.accent})`;
+  return (
+    <div
+      style={{
+        background: isOpen ? 'var(--white)' : 'var(--off-white)',
+        border: `1.5px dashed ${isOpen ? 'var(--grey-200)' : 'var(--grey-300)'}`,
+        borderRadius: 'var(--radius-lg)',
+        padding: 16,
+        boxShadow: isOpen ? 'var(--shadow-sm)' : 'none',
+        animation: 'fadeIn 0.3s ease 0.08s backwards',
+        opacity: isOpen ? 1 : 0.78,
+        transition: 'opacity 0.2s ease, background 0.2s ease',
+      }}
+    >
+      {!isOpen && (
+        <div
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            padding: '4px 10px',
+            borderRadius: 999,
+            background: 'rgba(0,0,0,0.05)',
+            color: accent,
+            fontSize: 11,
+            fontWeight: 800,
+            letterSpacing: '0.02em',
+            marginBottom: 10,
+          }}
+        >
+          <Icon size={12} />
+          {persona.powerEffect.mutedChip}
+        </div>
+      )}
+      <p
+        style={{
+          fontSize: 13,
+          color: isOpen ? 'var(--grey-700)' : 'var(--grey-500)',
+          lineHeight: 1.55,
+          margin: 0,
+          fontStyle: isOpen ? 'normal' : 'italic',
+        }}
+      >
+        {isOpen ? full : teaser}
+      </p>
+      {!isOpen && (
+        <button
+          onClick={onExpand}
+          style={{
+            marginTop: 10,
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+            background: 'transparent',
+            border: 'none',
+            color: 'var(--brand-navy)',
+            fontSize: 12,
+            fontWeight: 700,
+            cursor: 'pointer',
+            padding: 0,
+          }}
+        >
+          Reveal blind spot
+          <ChevronDown size={14} />
+        </button>
+      )}
     </div>
   );
 }

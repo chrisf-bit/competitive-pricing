@@ -1,11 +1,18 @@
 import { motion } from 'framer-motion';
 import { Star, Check, X, ChevronRight, RotateCcw } from 'lucide-react';
 import type { LastConversationGrade, PartnerState } from '../types';
+import { getPersonaById } from '../data/characters';
 
 interface ConversationReportScreenProps {
   grade: LastConversationGrade;
   /** All partners in the current run, used to resolve names from ids. */
   partners: PartnerState[];
+  /**
+   * The learner's selected super-power persona id, or null if none picked.
+   * Drives the persona retro line that surfaces on >= 2-star wins and
+   * 0-star losses. Nothing rendered for 1-star scrappy passes.
+   */
+  personaId: string | null;
   /** Called when the learner clicks Continue (only enabled when stars >= 1). */
   onContinue: () => void;
   /**
@@ -22,10 +29,22 @@ const STYLE_OPTIMAL_THRESHOLD = 6;
 export function ConversationReportScreen({
   grade,
   partners,
+  personaId,
   onContinue,
   onRetake,
 }: ConversationReportScreenProps) {
   const partner = partners.find((p) => p.persona.id === grade.partnerId);
+  const persona = getPersonaById(personaId);
+  // Persona retro: name the strength on wins (>=2 stars), name the
+  // trade-off on losses (0 stars). 1-star scrappy passes get nothing -
+  // the persona didn't clearly carry or cost the round.
+  const personaRetro = persona
+    ? grade.stars >= 2
+      ? persona.powerEffect.retroOnWin
+      : grade.stars === 0
+        ? persona.powerEffect.retroOnLoss
+        : null
+    : null;
   // Deliberately not naming the expected partner here - revealing
   // it gives the answer away. The criterion line below just signals
   // 'you picked the wrong one' and the learner has to re-read the
@@ -182,6 +201,9 @@ export function ConversationReportScreen({
                   : 'Off-pitch'}
           </span>
         </div>
+
+        {/* Persona retro - shown on wins and losses, hidden on 1-star passes */}
+        {persona && personaRetro && <PersonaRetro persona={persona} text={personaRetro} />}
 
         {/* CTA */}
         <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
@@ -350,6 +372,47 @@ function sublineFor(grade: LastConversationGrade): string {
     default:
       return 'Retake the round and try a different approach.';
   }
+}
+
+function PersonaRetro({
+  persona,
+  text,
+}: {
+  persona: NonNullable<ReturnType<typeof getPersonaById>>;
+  text: string;
+}) {
+  const Icon = persona.icon;
+  return (
+    <div
+      style={{
+        width: '100%',
+        background: 'rgba(255,255,255,0.06)',
+        borderLeft: `3px solid var(--style-${persona.accent}-bright)`,
+        borderTop: '1px solid rgba(255,255,255,0.10)',
+        borderRight: '1px solid rgba(255,255,255,0.10)',
+        borderBottom: '1px solid rgba(255,255,255,0.10)',
+        borderRadius: 10,
+        padding: '12px 18px',
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 12,
+        fontSize: 13,
+        color: 'rgba(255,255,255,0.92)',
+        lineHeight: 1.55,
+      }}
+    >
+      <Icon
+        size={16}
+        style={{
+          color: 'var(--white)',
+          marginTop: 2,
+          flexShrink: 0,
+          opacity: 0.85,
+        }}
+      />
+      <span>{text}</span>
+    </div>
+  );
 }
 
 function primaryButtonStyle(): React.CSSProperties {
