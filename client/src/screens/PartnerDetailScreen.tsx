@@ -16,7 +16,7 @@ import {
   ChevronDown,
   GitBranch,
 } from 'lucide-react';
-import type { PartnerState } from '../types';
+import type { PartnerState, IssueTreeHelperState } from '../types';
 import { getRPDLevel } from '../engine/gameEngine';
 import {
   RPDBadge,
@@ -38,6 +38,17 @@ interface PartnerDetailScreenProps {
   expandedBlindSpots: string[];
   /** Called when the learner expands the blind-spot card. */
   onMarkBlindSpotExpanded: (partnerId: string, round: number) => void;
+  /**
+   * Saved Issue Tree Helper state per partner-round. Lets the learner
+   * close the drawer to peek at metrics and reopen without losing
+   * their picks.
+   */
+  issueTreeHelperStates: Record<string, IssueTreeHelperState>;
+  onSetIssueTreeHelperState: (
+    partnerId: string,
+    round: number,
+    state: IssueTreeHelperState,
+  ) => void;
   onStartConversation: (id: string) => void;
   onBack: () => void;
 }
@@ -72,6 +83,8 @@ export function PartnerDetailScreen({
   personaId,
   expandedBlindSpots,
   onMarkBlindSpotExpanded,
+  issueTreeHelperStates,
+  onSetIssueTreeHelperState,
   onStartConversation,
   onBack,
 }: PartnerDetailScreenProps) {
@@ -94,8 +107,15 @@ export function PartnerDetailScreen({
   }
 
   // Issue Tree Helper - opens the guided diagnostic wizard for this
-  // partner. Teach-mode only; no scoring or impact on grading.
+  // partner. Teach-mode only; no scoring or impact on grading. Drawer
+  // open/closed state is local; the learner's picks are persisted in
+  // GameState so closing and reopening resumes them.
   const [helperOpen, setHelperOpen] = useState(false);
+  const helperKey = `${partner.persona.id}-${currentRound}`;
+  const helperState = issueTreeHelperStates[helperKey] ?? {
+    path: {},
+    stepIndex: 0,
+  };
 
   return (
     <div
@@ -574,6 +594,14 @@ export function PartnerDetailScreen({
       {helperOpen && (
         <IssueTreeHelper
           partnerName={partner.persona.name}
+          helperState={helperState}
+          onUpdate={(next) =>
+            onSetIssueTreeHelperState(
+              partner.persona.id,
+              currentRound,
+              next,
+            )
+          }
           onClose={() => setHelperOpen(false)}
         />
       )}

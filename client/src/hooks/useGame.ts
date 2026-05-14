@@ -5,6 +5,7 @@ import type {
   LearnerStrength,
   CharacterArchetype,
   KnowledgeCheckResult,
+  IssueTreeHelperState,
 } from '../types';
 import {
   createInitialState,
@@ -242,6 +243,26 @@ export function useGame() {
   );
 
   /**
+   * Persist Issue Tree Helper picks for a partner-round so the
+   * learner can close the drawer to peek at data and resume their
+   * picks on reopen. Resets only on full restart / practice-round
+   * entry (handled by the engine).
+   */
+  const setIssueTreeHelperState = useCallback(
+    (partnerId: string, round: number, helperState: IssueTreeHelperState) => {
+      const key = `${partnerId}-${round}`;
+      setState((s) => ({
+        ...s,
+        issueTreeHelperStates: {
+          ...s.issueTreeHelperStates,
+          [key]: helperState,
+        },
+      }));
+    },
+    [],
+  );
+
+  /**
    * Dev-only entry point for testing parked branching scenarios.
    * Injects the scenario's partner into `state.partners`, sets the
    * learner's regime to whatever the scenario requires, and routes
@@ -356,6 +377,7 @@ export function useGame() {
     markTutorialShown,
     acknowledgeMarketUpdate,
     markBlindSpotExpanded,
+    setIssueTreeHelperState,
     markLevel0Cleared,
     startTestScenario,
   };

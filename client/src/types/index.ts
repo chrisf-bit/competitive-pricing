@@ -376,6 +376,27 @@ export interface BranchingStep {
   options: BranchingOption[];
 }
 
+/**
+ * Persisted state for the Issue Tree Helper drawer, keyed in
+ * `GameState.issueTreeHelperStates` by `${partnerId}-${round}`.
+ *
+ * The Helper is a step-by-step wizard the learner can close to peek
+ * at the partner data and reopen without losing their place. Picks
+ * accumulate on `path`; `stepIndex` resumes them at the step they
+ * left off (or the summary if all six picks are made).
+ */
+export interface IssueTreeHelperState {
+  path: {
+    trigger?: IssueTreeTrigger;
+    issueId?: string;
+    intent?: IssueTreeIntent;
+    rootCauseId?: string;
+    metricInsightId?: string;
+    hookId?: string;
+  };
+  stepIndex: number;
+}
+
 export interface BranchingOption {
   id: string;
   label: string;
@@ -514,6 +535,14 @@ export interface GameState {
    * hint surfaced again.
    */
   expandedBlindSpots: string[];
+  /**
+   * Issue Tree Helper progress per partner-round. The Helper drawer
+   * is intentionally close-and-reopenable (learner pops out to check
+   * data, comes back without losing picks). Keys are
+   * `${partnerId}-${round}`. Reset on full restart and on practice-
+   * round entry.
+   */
+  issueTreeHelperStates: Record<string, IssueTreeHelperState>;
   currentRound: number;         // 1, 2, 3
   actionsRemaining: number;     // starts at 2 per round
   actionsThisRound: string[];   // partner IDs engaged this round

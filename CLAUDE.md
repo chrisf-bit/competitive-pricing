@@ -360,6 +360,20 @@ stubbed with one representative option per column so the wizard
 always offers plausible alternates; SME content for those branches
 lands later.
 
+**Renders as a right-side drawer**, not a centered modal. The
+learner can read the metrics, discount cards, and profile on
+Partner Detail while picking their way through the diagnosis. No
+backdrop, only the drawer itself overlays. Closing the drawer
+does not lose picks - see persistence below.
+
+**Picks persist per partner-round.** The Helper is a controlled
+component; its `path` and `stepIndex` live in
+`GameState.issueTreeHelperStates` keyed by `${partnerId}-${round}`.
+Closing and reopening the drawer resumes the learner where they
+left off rather than starting over. Reset only happens on full
+restart (`onRestart`) and on practice-round entry
+(`startPracticeRound`).
+
 **Lives on Partner Detail only.** Not in the Conversation screen -
 keeps the call surface clean and positions the Helper as a
 pre-call think-time tool.

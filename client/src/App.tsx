@@ -244,6 +244,8 @@ export default function App() {
               personaId={state.learnerProfile.archetype?.id ?? null}
               expandedBlindSpots={state.expandedBlindSpots}
               onMarkBlindSpotExpanded={game.markBlindSpotExpanded}
+              issueTreeHelperStates={state.issueTreeHelperStates}
+              onSetIssueTreeHelperState={game.setIssueTreeHelperState}
               onStartConversation={game.onStartConversation}
               onBack={game.onBackToPortfolio}
             />
