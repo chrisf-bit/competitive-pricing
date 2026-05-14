@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight, GitBranch, Lightbulb, RotateCcw } from 'lucide-react';
 import type { IssueTreeHelperState } from '../types';
 import {
@@ -103,17 +104,22 @@ export function IssueTreeHelper({
   }
 
   return (
-    <div
+    <motion.div
       // Right-side floating drawer. Sized like a chatbot window
       // (not full-height) so it leaves most of the Partner Detail
       // content visible while the learner walks through the
-      // diagnosis. Anchored vertically centred on the right edge
-      // with a small gap from the screen edge.
+      // diagnosis. Anchored vertically centred on the right edge.
+      // Framer-motion handles entrance + exit; combining x slide
+      // with the y centring requires both transforms to live in the
+      // same animation (a plain CSS keyframe would clobber the y).
+      initial={{ opacity: 0, x: 28, y: '-50%' }}
+      animate={{ opacity: 1, x: 0, y: '-50%' }}
+      exit={{ opacity: 0, x: 28, y: '-50%' }}
+      transition={{ duration: 0.24, ease: [0.32, 0.72, 0.32, 1] }}
       style={{
         position: 'fixed',
         top: '50%',
         right: 16,
-        transform: 'translateY(-50%)',
         width: 'min(400px, 92vw)',
         height: 'min(640px, calc(100vh - 64px))',
         background: 'var(--white)',
@@ -123,7 +129,6 @@ export function IssueTreeHelper({
         zIndex: 100,
         display: 'flex',
         flexDirection: 'column',
-        animation: 'slideInRight 0.22s ease-out',
         overflow: 'hidden',
       }}
     >
@@ -434,7 +439,7 @@ export function IssueTreeHelper({
           </button>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 

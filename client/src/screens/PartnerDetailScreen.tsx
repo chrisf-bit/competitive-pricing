@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
   MapPin,
@@ -577,27 +578,32 @@ export function PartnerDetailScreen({
 
       {/* Issue Tree Helper - vertical tab on the right edge opens
           the drawer. Tab hides while the drawer is open so the user
-          doesn't see two affordances at once. */}
-      {!helperOpen && (
-        <HelperLauncherTab
-          hasProgress={helperState.path.trigger !== undefined}
-          onOpen={() => setHelperOpen(true)}
-        />
-      )}
-      {helperOpen && (
-        <IssueTreeHelper
-          partnerName={partner.persona.name}
-          helperState={helperState}
-          onUpdate={(next) =>
-            onSetIssueTreeHelperState(
-              partner.persona.id,
-              currentRound,
-              next,
-            )
-          }
-          onClose={() => setHelperOpen(false)}
-        />
-      )}
+          doesn't see two affordances at once. AnimatePresence runs
+          the drawer's exit animation when helperOpen flips to false. */}
+      <AnimatePresence>
+        {!helperOpen && (
+          <HelperLauncherTab
+            key="launcher"
+            hasProgress={helperState.path.trigger !== undefined}
+            onOpen={() => setHelperOpen(true)}
+          />
+        )}
+        {helperOpen && (
+          <IssueTreeHelper
+            key="helper-drawer"
+            partnerName={partner.persona.name}
+            helperState={helperState}
+            onUpdate={(next) =>
+              onSetIssueTreeHelperState(
+                partner.persona.id,
+                currentRound,
+                next,
+              )
+            }
+            onClose={() => setHelperOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -953,14 +959,17 @@ function HelperLauncherTab({
   onOpen: () => void;
 }) {
   return (
-    <button
+    <motion.button
       onClick={onOpen}
       aria-label="Open Issue Tree Helper"
+      initial={{ opacity: 0, x: 12, y: '-50%' }}
+      animate={{ opacity: 1, x: 0, y: '-50%' }}
+      exit={{ opacity: 0, x: 12, y: '-50%' }}
+      transition={{ duration: 0.18, ease: 'easeOut' }}
       style={{
         position: 'fixed',
         top: '50%',
         right: 0,
-        transform: 'translateY(-50%)',
         background:
           'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
         color: 'var(--white)',
@@ -975,7 +984,6 @@ function HelperLauncherTab({
         cursor: 'pointer',
         boxShadow: '-4px 6px 16px rgba(0,15,40,0.22)',
         zIndex: 95,
-        animation: 'fadeIn 0.3s ease',
       }}
       onMouseEnter={(e) => {
         e.currentTarget.style.paddingRight = '12px';
@@ -1010,6 +1018,6 @@ function HelperLauncherTab({
           aria-label="In progress"
         />
       )}
-    </button>
+    </motion.button>
   );
 }
