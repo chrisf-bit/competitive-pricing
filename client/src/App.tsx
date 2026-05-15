@@ -90,7 +90,6 @@ export default function App() {
                 : false
             }
             marketUpdateAcknowledged={state.marketUpdateAcknowledged}
-            hasOpenedIssueTreeHelper={state.hasOpenedIssueTreeHelper}
           />
         )}
 

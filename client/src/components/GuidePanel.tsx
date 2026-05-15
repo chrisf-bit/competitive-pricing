@@ -28,13 +28,6 @@ interface GuidePanelProps {
   conversationComplete: boolean;
   /** True once the learner has clicked Acknowledge on the market banner. */
   marketUpdateAcknowledged: boolean;
-  /**
-   * True once the learner has opened the Issue Tree Helper at least
-   * once. The Partner Detail guide flags an "Open the Issue Tree
-   * Helper" step in Round 1 only; it switches from active to done
-   * once this flips true.
-   */
-  hasOpenedIssueTreeHelper: boolean;
 }
 
 interface GuideStep {
@@ -77,7 +70,6 @@ export function GuidePanel({
   conversationPhase,
   conversationComplete,
   marketUpdateAcknowledged,
-  hasOpenedIssueTreeHelper,
 }: GuidePanelProps) {
   const [tipsOpen, setTipsOpen] = useState(true);
 
@@ -89,7 +81,6 @@ export function GuidePanel({
     conversationPhase,
     conversationComplete,
     marketUpdateAcknowledged,
-    hasOpenedIssueTreeHelper,
   );
 
   return (
@@ -432,7 +423,6 @@ function getGuideContent(
   conversationPhase: number,
   conversationComplete: boolean,
   marketUpdateAcknowledged: boolean,
-  hasOpenedIssueTreeHelper: boolean,
 ): {
   screenLabel: string;
   objective: string;
@@ -489,6 +479,14 @@ function getGuideContent(
       };
 
     case 'partner-detail':
+      // Partner Detail steps render in a neutral list style with no
+      // active highlight and no done check. Most steps here can't be
+      // tracked programmatically (the engine doesn't know if the
+      // learner has actually read the metrics or notes), so showing
+      // any one item ticked would imply the rest are incomplete and
+      // make the panel feel stuck. The Issue Tree Helper open is
+      // tracked separately - the gate lives on the Begin Conversation
+      // button, not in the guide list.
       return {
         screenLabel: selectedPartner
           ? `${selectedPartner.persona.name.split(' ')[0]}'s Profile`
@@ -500,17 +498,14 @@ function getGuideContent(
           {
             icon: <BarChart3 size={13} />,
             text: 'Review metrics and trends',
-            active: true,
           },
           {
             icon: <AlertTriangle size={13} />,
             text: 'Check pricing competitiveness and discounts',
-            active: true,
           },
           {
             icon: <Eye size={13} />,
             text: 'Read profile notes',
-            active: true,
           },
           // Round 1 introduces the Issue Tree Helper as a mandatory
           // pre-call step. The yellow tree tab to the right is the
@@ -519,14 +514,11 @@ function getGuideContent(
             ? [{
                 icon: <TreeDeciduous size={13} />,
                 text: 'Open the Issue Tree Helper',
-                active: !hasOpenedIssueTreeHelper,
-                done: hasOpenedIssueTreeHelper,
               }]
             : []),
           {
             icon: <MessageSquare size={13} />,
             text: 'Begin conversation',
-            active: false,
           },
         ],
         tips: selectedPartner ? getPartnerSpecificTips(selectedPartner) : [],
