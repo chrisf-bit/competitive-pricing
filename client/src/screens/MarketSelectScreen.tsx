@@ -55,12 +55,7 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
         </div>
 
         {/* Continue */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.4 }}
-          style={{ marginTop: 12 }}
-        >
+        <motion.div style={{ marginTop: 12 }}>
           <button
             onClick={onContinue}
             disabled={!selected}
@@ -107,9 +102,9 @@ function MarketCard({ option, index, isSelected, onClick }: MarketCardProps) {
 
   return (
     <motion.button
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.2 + index * 0.08, duration: 0.45, ease: 'easeOut' }}
+      initial={{ y: 18 }}
+      animate={{ y: 0 }}
+      transition={{ delay: index * 0.04, duration: 0.3, ease: 'easeOut' }}
       onClick={onClick}
       disabled={disabled}
       style={{

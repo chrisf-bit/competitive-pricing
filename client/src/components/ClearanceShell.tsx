@@ -60,9 +60,9 @@ function ClearanceIntro({
   return (
     <motion.div
       key={activity.label}
-      initial={{ opacity: 0, y: 6 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.35, ease: 'easeOut' }}
+      initial={{ y: 6 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
       style={{
         flexShrink: 0,
         margin: '12px 16px 0',

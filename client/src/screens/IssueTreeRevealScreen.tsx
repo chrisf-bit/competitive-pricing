@@ -87,10 +87,10 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         <AnimatePresence mode="wait">
           <motion.div
             key={activePhase.id}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 14 }}
+            animate={{ y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{
               maxWidth: 680,
               width: '100%',

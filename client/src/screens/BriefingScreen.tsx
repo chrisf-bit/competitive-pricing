@@ -36,7 +36,6 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               alignItems: 'center',
               gap: 12,
               marginBottom: 32,
-              animation: 'fadeIn 0.5s ease',
             }}
           >
             <BarChart3 size={32} style={{ color: 'var(--brand-yellow)' }} />
@@ -64,7 +63,6 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               color: 'var(--white)',
               lineHeight: 1.2,
               marginBottom: 16,
-              animation: 'fadeIn 0.5s ease 0.1s backwards',
             }}
           >
             Competitive Pricing Simulation
@@ -80,7 +78,6 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               fontSize: 16,
               color: 'rgba(255,255,255,0.92)',
               lineHeight: 1.6,
-              animation: 'fadeIn 0.5s ease 0.2s backwards',
             }}
           >
             <p style={{ margin: 0 }}>
@@ -115,7 +112,6 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               gridTemplateColumns: 'repeat(3, 1fr)',
               gap: 16,
               marginBottom: 40,
-              animation: 'fadeIn 0.5s ease 0.3s backwards',
             }}
           >
             <InfoCard
@@ -141,7 +137,6 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               display: 'flex',
               alignItems: 'center',
               gap: 14,
-              animation: 'fadeIn 0.5s ease 0.4s backwards',
             }}
           >
             <button

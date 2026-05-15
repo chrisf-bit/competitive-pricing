@@ -138,10 +138,10 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           {!isDone && challenge && !result && (
             <motion.div
               key={`q-${challenge.id}`}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 6 }}
+              animate={{ y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
+              transition={{ duration: 0.2 }}
             >
               <div
                 style={{
@@ -195,10 +195,10 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           {!isDone && result && challenge && (
             <motion.div
               key={`fb-${challenge.id}`}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ y: 6 }}
+              animate={{ y: 0 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -252,9 +252,9 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           {isDone && (
             <motion.div
               key="done"
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ y: 6 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.2 }}
               style={{
                 display: 'flex',
                 alignItems: 'center',

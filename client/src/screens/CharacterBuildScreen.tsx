@@ -255,9 +255,9 @@ function AvatarTile({
 }) {
   return (
     <motion.button
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15 + index * 0.04, duration: 0.35, ease: 'easeOut' }}
+      initial={{ y: 8 }}
+      animate={{ y: 0 }}
+      transition={{ delay: index * 0.03, duration: 0.25, ease: 'easeOut' }}
       whileHover={{ scale: isSelected ? 1.02 : 1.04 }}
       whileTap={{ scale: 0.97 }}
       onClick={onClick}
@@ -342,9 +342,9 @@ function PersonaCard({
 
   return (
     <motion.button
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.45 + index * 0.06, duration: 0.4, ease: 'easeOut' }}
+      initial={{ y: 12 }}
+      animate={{ y: 0 }}
+      transition={{ delay: index * 0.04, duration: 0.3, ease: 'easeOut' }}
       onClick={onClick}
       style={{
         position: 'relative',

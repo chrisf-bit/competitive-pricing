@@ -281,9 +281,9 @@ function EmailCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
+      initial={{ y: 10 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.25, ease: 'easeOut' }}
       style={{
         background: 'var(--white)',
         color: 'var(--grey-700)',
