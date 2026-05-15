@@ -89,7 +89,6 @@ export default function App() {
                 ? state.conversationInProgress.choices.length >= 3
                 : false
             }
-            marketUpdateAcknowledged={state.marketUpdateAcknowledged}
           />
         )}
 

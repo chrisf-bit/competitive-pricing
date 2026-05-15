@@ -26,8 +26,6 @@ interface GuidePanelProps {
   selectedPartner: PartnerState | null;
   conversationPhase: number;
   conversationComplete: boolean;
-  /** True once the learner has clicked Acknowledge on the market banner. */
-  marketUpdateAcknowledged: boolean;
 }
 
 interface GuideStep {
@@ -69,7 +67,6 @@ export function GuidePanel({
   selectedPartner,
   conversationPhase,
   conversationComplete,
-  marketUpdateAcknowledged,
 }: GuidePanelProps) {
   const [tipsOpen, setTipsOpen] = useState(true);
 
@@ -80,7 +77,6 @@ export function GuidePanel({
     selectedPartner,
     conversationPhase,
     conversationComplete,
-    marketUpdateAcknowledged,
   );
 
   return (
@@ -422,7 +418,6 @@ function getGuideContent(
   selectedPartner: PartnerState | null,
   conversationPhase: number,
   conversationComplete: boolean,
-  marketUpdateAcknowledged: boolean,
 ): {
   screenLabel: string;
   objective: string;
@@ -431,30 +426,27 @@ function getGuideContent(
 } {
   switch (screen) {
     case 'portfolio':
+      // Portfolio steps render in the same neutral list style as
+      // Partner Detail. The engine can only observe market-update
+      // acknowledgement; pretending to track the other items would
+      // leave them looking permanently incomplete next to the one
+      // tick. The Advance Round step was removed alongside the
+      // action bar - the Conversation Report's Continue button is
+      // the only thing that advances now.
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:
           actionsRemaining > 0
             ? 'Identify which partners need attention most and engage them.'
-            : 'All actions used. Advance to the next round.',
+            : 'All actions used. The conversation report will advance you to the next round.',
         steps: [
           {
             icon: <Eye size={13} />,
             text: 'Check the market update',
-            done: marketUpdateAcknowledged,
-            active: !marketUpdateAcknowledged,
           },
           {
             icon: <Target size={13} />,
             text: 'Pick the partner who needs you most',
-            active:
-              marketUpdateAcknowledged && actionsRemaining > 0,
-            done: actionsRemaining === 0,
-          },
-          {
-            icon: <Clock size={13} />,
-            text: 'Advance round',
-            active: actionsRemaining === 0,
           },
         ],
         tips: [

@@ -16,9 +16,10 @@
  *   Storyteller            - unlocks one-line narrative; mutes raw-trend detail
  *   Data Detective         - unlocks biggest anomaly + read; mutes style cue
  *
- * Coverage today: R1 for the active No-Parity trio (Marina, Stavros,
- * Carlos). R2/R3 to follow once the R1 UI is reviewed; R4+ blocked on
- * SME content for those rounds.
+ * Coverage today: R1 for the active No-Parity roster (Marina, John,
+ * Carlos) plus the parked Stavros entry kept in sync for reuse.
+ * R2/R3 to follow once the R1 UI is reviewed; R4+ blocked on SME
+ * content for those rounds.
  */
 
 export interface PersonaHint {
@@ -100,6 +101,38 @@ export const personaHints: PersonaHintsByRound = {
         mutedTeaser: "You may not have a read on Stavros's style yet.",
         mutedFull:
           "Stavros is red/driver primary AND secondary - he wants speed, decisions, and ROI. He'll interrupt long preambles and respond to competitor benchmarks. Match his pace or he'll lose the thread.",
+      },
+    },
+  },
+  john: {
+    1: {
+      'conversation-architect': {
+        unlocked:
+          "Don't lead with numbers - John reads OTA reps as upsellers and will harden if you open with a pitch. Start by asking how he's driving direct traffic and let him talk. The opening you want is curiosity about his strategy, not a challenge to it.",
+        mutedTeaser: 'A counter-intuitive anomaly may be hiding in his data.',
+        mutedFull:
+          "His PACE shows roomnights -43% YoY but ADR up 10%. He's pushed Booking.com rates higher to defend his direct channel - the headline isn't a pricing miss, it's a deliberate brand-first stance. Walk in knowing the strategy before challenging the maths.",
+      },
+      'objection-navigator': {
+        unlocked:
+          "Expect two hard pushbacks: '18% commission is too much' and 'I never let any OTA above 30% of my business.' Don't fight the rule head-on. Reframe commission as one acquisition cost among several, and ask him to price his direct guest before agreeing on which is cheaper.",
+        mutedTeaser: 'His relational tone may be testier than the numbers suggest.',
+        mutedFull:
+          "Relationship is neutral but John has strong opinions and acts on emotion when OTAs come up. He'll hear cross-channel framing as adversarial unless he raises it first. Open with respect for his brand-first logic, not a critique of it.",
+      },
+      storyteller: {
+        unlocked:
+          "John is in a brand-first crisis he doesn't yet see. He's pushed Booking.com rates 10% higher to protect his direct channel, lost 43% of room-nights, and hasn't done the maths on what a direct guest actually costs him once campaigns and meta-search fees are added in.",
+        mutedTeaser: 'You may be smoothing over the supporting detail.',
+        mutedFull:
+          'eRPD 9.5 (up 0.4), Lose Price Public 81%, two active scenarios, top competitor Brand.com. PACE Jun-Dec: roomnights -43.34%, revenue -37.52%, ADR +10.27%. Three million Booking.com impressions in the last 90 days against a 60-room property.',
+      },
+      'data-detective': {
+        unlocked:
+          "The headline anomaly: ADR up 10% YoY while roomnights are down 43% and revenue down 37%. He's holding rates aggressively while volume collapses - that's strategy, not misconfiguration. Pair that with Lose Price Public at 81% and the call is about reframing the channel, not fixing a discount.",
+        mutedTeaser: "You may not have a read on John's style yet.",
+        mutedFull:
+          "John is red/driver primary with a green/amiable secondary. He wants control and quick decisions, but he also values trust and a relationship that respects his judgement. Aggressive benchmarking or hard data-only pitches will harden him; offering choices and reframing options will move him.",
       },
     },
   },

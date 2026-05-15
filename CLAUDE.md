@@ -481,12 +481,9 @@ SME authors know the slot they're filling):
 - Data Detective - unlocks biggest anomaly highlighted; mutes style
   cue
 
-**Coverage today:** R1 only, for the now-retired No-Parity trio
-(Marina, Stavros, Carlos) authored before John replaced Stavros as
-R1 target. **John has no personaHints content yet** - the persona
-insight + blind-spot cards won't render for him until R1 hints are
-authored. R2/R3 hints for Marina/Carlos and a full set for John
-land alongside the next SME drop.
+**Coverage today:** R1 hints authored for the active No-Parity
+roster (Marina, John, Carlos) plus Stavros (parked but kept in
+sync for reuse). R2/R3 hints land alongside the next SME drop.
 
 **State (`expandedBlindSpots: string[]` on `GameState`):** keys are
 `${partnerId}-${round}` strings. Resets on full restart
