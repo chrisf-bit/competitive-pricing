@@ -246,6 +246,7 @@ export function ClearanceSummaryScreen({
               <ActivityCard
                 key={score.activity.id}
                 score={score}
+                regime={regime}
                 expanded={expandedActivity === score.activity.id}
                 onToggleExpand={() =>
                   setExpandedActivity((cur) =>
@@ -386,11 +387,13 @@ function StatusBanner({
 
 function ActivityCard({
   score,
+  regime,
   expanded,
   onToggleExpand,
   onRetry,
 }: {
   score: ActivityScore;
+  regime: ParityRegime | null;
   expanded: boolean;
   onToggleExpand: () => void;
   onRetry: () => void;
