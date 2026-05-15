@@ -1,5 +1,5 @@
-import { TrendingUp, TrendingDown, Minus, Activity, Heart, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
-import type { TrendDirection, RPDLevel, RelationshipStatus, DiscountStatus } from '../types';
+import { TrendingUp, TrendingDown, Minus, Heart, CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
+import type { TrendDirection, RelationshipStatus, DiscountStatus } from '../types';
 
 export function TrendIcon({ direction, size = 14 }: { direction: TrendDirection; size?: number }) {
   const containerSize = size + 10;
@@ -34,36 +34,6 @@ export function TrendIcon({ direction, size = 14 }: { direction: TrendDirection;
   );
 }
 
-export function RPDBadge({ level }: { level: RPDLevel }) {
-  // Neutral palette so the badge informs without pre-judging the partner
-  // for the learner. The label text still names the level.
-  const labels: Record<RPDLevel, string> = {
-    competitive: 'Competitive',
-    'slightly-below': 'Slightly Below',
-    below: 'Below Market',
-    poor: 'Poor',
-  };
-  return (
-    <span
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        gap: 5,
-        padding: '4px 12px',
-        borderRadius: 'var(--radius-pill)',
-        fontSize: 12,
-        fontWeight: 700,
-        background: 'var(--grey-100)',
-        color: 'var(--grey-600)',
-        border: '1.5px solid var(--grey-300)',
-      }}
-    >
-      <Activity size={12} />
-      {labels[level]}
-    </span>
-  );
-}
-
 export function RelationshipBadge({ status }: { status: RelationshipStatus }) {
   const config: Record<RelationshipStatus, { bg: string; color: string; border: string }> = {
     warm: { bg: 'var(--success-bg)', color: 'var(--success)', border: 'var(--success)' },
@@ -77,19 +47,34 @@ export function RelationshipBadge({ status }: { status: RelationshipStatus }) {
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: 5,
-        padding: '4px 12px',
+        gap: 6,
+        padding: '4px 12px 4px 4px',
         borderRadius: 'var(--radius-pill)',
         fontSize: 12,
         fontWeight: 700,
         background: c.bg,
         color: c.color,
         border: `1.5px solid ${c.border}`,
-        textTransform: 'capitalize',
       }}
     >
-      <Heart size={12} />
-      {status}
+      <span
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 4,
+          padding: '2px 8px',
+          borderRadius: 'var(--radius-pill)',
+          background: 'rgba(255,255,255,0.55)',
+          fontSize: 10,
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+        }}
+      >
+        <Heart size={11} />
+        Relationship Status
+      </span>
+      <span style={{ textTransform: 'capitalize' }}>{status}</span>
     </span>
   );
 }

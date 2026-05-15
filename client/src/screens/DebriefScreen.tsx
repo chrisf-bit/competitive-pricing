@@ -10,8 +10,7 @@ import {
   Play,
 } from 'lucide-react';
 import type { ScoreBreakdown, PartnerState, ParityRegime } from '../types';
-import { getRPDLevel } from '../engine/gameEngine';
-import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
+import { RelationshipBadge } from '../components/MetricBadge';
 import { initialPartners } from '../data/partners';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 import { getPersonaById } from '../data/characters';
@@ -295,9 +294,6 @@ export function DebriefScreen({
                   </div>
 
                   <div style={{ display: 'flex', gap: 6 }}>
-                    <RPDBadge
-                      level={getRPDLevel(partner.metrics.experiencedRPD)}
-                    />
                     <RelationshipBadge status={partner.relationship} />
                   </div>
                 </div>

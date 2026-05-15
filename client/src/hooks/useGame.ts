@@ -122,6 +122,15 @@ export function useGame() {
     setState((s) => resetRoundForRetake(s));
   }, []);
 
+  /**
+   * Flip the one-time flag that records the learner has opened the
+   * Issue Tree Helper at least once. Used to lift the Round 1
+   * Begin Conversation gate. Idempotent.
+   */
+  const markIssueTreeHelperOpened = useCallback(() => {
+    setState((s) => (s.hasOpenedIssueTreeHelper ? s : { ...s, hasOpenedIssueTreeHelper: true }));
+  }, []);
+
   const onBackToPortfolio = useCallback(() => {
     setState((s) => ({
       ...s,
@@ -331,6 +340,7 @@ export function useGame() {
     acknowledgeMarketUpdate,
     markBlindSpotExpanded,
     setIssueTreeHelperState,
+    markIssueTreeHelperOpened,
     markLevel0Cleared,
   };
 }

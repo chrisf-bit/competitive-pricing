@@ -193,9 +193,18 @@ DO list and the regime's specific constraints.
   product issues (misconfigured) are also rendered neutrally.
 - **Severity colour-coding IS kept on the Data & Insights teaching
   screen** - that's a context where the colour IS the lesson.
-- **RPDBadge labels** (Competitive / Slightly Below / Below Market /
-  Poor) render in neutral grey across the app. The label still names
-  the level; the colour no longer pre-judges.
+- **RPDBadge has been removed** from Portfolio, Partner Detail, and
+  Debrief. The eRPD number is still shown prominently; the
+  Competitive / Slightly Below / Below Market / Poor pill was
+  redundant alongside the figure and risked steering the learner
+  before they'd read the data. `getRPDLevel` + the `RPDLevel` type
+  still exist in the engine in case the bucketing is needed
+  elsewhere later.
+- **RelationshipBadge is the only status pill** on partner cards
+  and the Partner Detail header. It now carries an explicit
+  "Relationship Status" label before the value (Warm / Neutral /
+  Cool / Strained) so the term lands clearly, given it's a new
+  concept for many learners.
 
 ### Round mechanic
 
@@ -392,6 +401,24 @@ Closing and reopening the drawer resumes the learner where they
 left off rather than starting over. Reset only happens on full
 restart (`onRestart`) and on practice-round entry
 (`startPracticeRound`).
+
+**Round 1 gate.** Opening the Helper at least once is mandatory in
+Round 1 - the Partner Detail Begin Conversation button is disabled
+until `GameState.hasOpenedIssueTreeHelper` flips to true. The
+Simulation Guide for Round 1 partner-detail surfaces an "Open the
+Issue Tree Helper" step that goes from active to done on first
+open. The flag is one-shot per playthrough (lifts permanently
+after the first open) and resets only on `onRestart`; practice
+rounds preserve it so returning learners aren't re-gated. Rounds
+2+ leave the Helper optional. Don't gate via Round 1's correct
+partner specifically - the gate is about getting the learner to
+discover the tool, not enforcing diagnostic use.
+
+**Progress bar uses brand-blue, not success-green.** Completed
+steps render `var(--brand-blue)` rather than `var(--success)` to
+avoid implying the learner has made the "correct" pick - the
+Helper is teach-mode and doesn't score picks. Active step stays
+brand-navy; pending stays grey.
 
 **Lives on Partner Detail only.** Not in the Conversation screen -
 keeps the call surface clean and positions the Helper as a
@@ -611,6 +638,17 @@ debate:
   Email Audit.** The Issue Tree reveal is completion-only. The
   Clearance Summary dedupes results by itemId before scoring so any
   re-record path can't inflate the percentage.
+- **Email Audit phrase content is keyed by parity regime.**
+  `data/emailAudit.ts` exports `emailAuditByRegime` plus a
+  `getEmailAudit(regime)` helper - Wide / Narrow / No Parity each
+  have their own 5-phrase set drawn from the regime-specific
+  legal compliance guidance. The learner only ever sees phrases
+  that apply to the regime they picked at Market Select
+  (e.g. "your rates should align with Brand.com" is approved in
+  Narrow, irrelevant in No Parity). The Clearance Summary's
+  missed-item lookup also uses the regime-specific scenario so
+  retry copy matches what the learner saw. Cross-Regional falls
+  back to Wide until its rules are authored.
 - **The summary does not reveal the correct answer for missed
   items.** Each missed-item card shows only the prompt plus a
   "marked incorrectly, hit Retry" hint. Revealing the answer pre-

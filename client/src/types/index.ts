@@ -586,6 +586,16 @@ export interface GameState {
    * round entry.
    */
   issueTreeHelperStates: Record<string, IssueTreeHelperState>;
+  /**
+   * True once the learner has opened the Issue Tree Helper at least
+   * once in the current playthrough. Used to gate the Begin
+   * Conversation button in Round 1 - the learner must open the
+   * Helper before they can engage their first partner. After the
+   * first open the gate lifts permanently for the session. Reset
+   * on full restart; preserved across practice rounds (a returning
+   * learner who has already cleared the sim doesn't need re-gating).
+   */
+  hasOpenedIssueTreeHelper: boolean;
   currentRound: number;         // 1, 2, 3
   actionsRemaining: number;     // starts at 2 per round
   actionsThisRound: string[];   // partner IDs engaged this round

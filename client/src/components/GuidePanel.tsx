@@ -14,6 +14,7 @@ import {
   Eye,
   Users,
   Check,
+  TreeDeciduous,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -27,6 +28,13 @@ interface GuidePanelProps {
   conversationComplete: boolean;
   /** True once the learner has clicked Acknowledge on the market banner. */
   marketUpdateAcknowledged: boolean;
+  /**
+   * True once the learner has opened the Issue Tree Helper at least
+   * once. The Partner Detail guide flags an "Open the Issue Tree
+   * Helper" step in Round 1 only; it switches from active to done
+   * once this flips true.
+   */
+  hasOpenedIssueTreeHelper: boolean;
 }
 
 interface GuideStep {
@@ -69,6 +77,7 @@ export function GuidePanel({
   conversationPhase,
   conversationComplete,
   marketUpdateAcknowledged,
+  hasOpenedIssueTreeHelper,
 }: GuidePanelProps) {
   const [tipsOpen, setTipsOpen] = useState(true);
 
@@ -80,6 +89,7 @@ export function GuidePanel({
     conversationPhase,
     conversationComplete,
     marketUpdateAcknowledged,
+    hasOpenedIssueTreeHelper,
   );
 
   return (
@@ -422,6 +432,7 @@ function getGuideContent(
   conversationPhase: number,
   conversationComplete: boolean,
   marketUpdateAcknowledged: boolean,
+  hasOpenedIssueTreeHelper: boolean,
 ): {
   screenLabel: string;
   objective: string;
@@ -501,6 +512,17 @@ function getGuideContent(
             text: 'Read profile notes',
             active: true,
           },
+          // Round 1 introduces the Issue Tree Helper as a mandatory
+          // pre-call step. The yellow tree tab to the right is the
+          // entry point. After Round 1 the step drops away.
+          ...(currentRound === 1
+            ? [{
+                icon: <TreeDeciduous size={13} />,
+                text: 'Open the Issue Tree Helper',
+                active: !hasOpenedIssueTreeHelper,
+                done: hasOpenedIssueTreeHelper,
+              }]
+            : []),
           {
             icon: <MessageSquare size={13} />,
             text: 'Begin conversation',

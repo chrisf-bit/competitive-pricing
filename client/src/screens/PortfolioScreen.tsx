@@ -6,8 +6,7 @@ import {
   Check,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
-import { getRPDLevel } from '../engine/gameEngine';
-import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
+import { RelationshipBadge } from '../components/MetricBadge';
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
@@ -154,7 +153,6 @@ export function PortfolioScreen({
       >
         {partners.map((partner, i) => {
           const engaged = actionsThisRound.includes(partner.persona.id);
-          const rpdLevel = getRPDLevel(partner.metrics.experiencedRPD);
           return (
             <div
               key={partner.persona.id}
@@ -283,7 +281,6 @@ export function PortfolioScreen({
                 </div>
 
                 <div data-tutorial={i === 0 ? 'status-badges' : undefined} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <RPDBadge level={rpdLevel} />
                   <RelationshipBadge status={partner.relationship} />
                 </div>
               </div>

@@ -90,6 +90,7 @@ export default function App() {
                 : false
             }
             marketUpdateAcknowledged={state.marketUpdateAcknowledged}
+            hasOpenedIssueTreeHelper={state.hasOpenedIssueTreeHelper}
           />
         )}
 
@@ -152,6 +153,7 @@ export default function App() {
           {state.screen === 'l0-email-audit' && (
             <ClearanceShell currentScreen={state.screen}>
               <EmailAuditScreen
+                regime={state.learnerProfile.market?.parityRegime ?? null}
                 retryItemIds={state.level0RetryItemIds}
                 onComplete={(results) =>
                   game.finishLevel0Activity('l0-issue-tree-reveal', results)
@@ -170,6 +172,7 @@ export default function App() {
             <ClearanceShell currentScreen={state.screen}>
               <ClearanceSummaryScreen
                 results={state.level0Progress.knowledgeCheckResults}
+                regime={state.learnerProfile.market?.parityRegime ?? null}
                 onContinue={(cleared) => {
                   game.markLevel0Cleared();
                   if (cleared) {
@@ -238,6 +241,8 @@ export default function App() {
               onMarkBlindSpotExpanded={game.markBlindSpotExpanded}
               issueTreeHelperStates={state.issueTreeHelperStates}
               onSetIssueTreeHelperState={game.setIssueTreeHelperState}
+              hasOpenedIssueTreeHelper={state.hasOpenedIssueTreeHelper}
+              onMarkIssueTreeHelperOpened={game.markIssueTreeHelperOpened}
               onStartConversation={game.onStartConversation}
               onBack={game.onBackToPortfolio}
             />

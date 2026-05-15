@@ -23,9 +23,7 @@ import type {
   IssueTreeHelperState,
   PacePerformance,
 } from '../types';
-import { getRPDLevel } from '../engine/gameEngine';
 import {
-  RPDBadge,
   RelationshipBadge,
   DiscountBadge,
 } from '../components/MetricBadge';
@@ -55,6 +53,14 @@ interface PartnerDetailScreenProps {
     round: number,
     state: IssueTreeHelperState,
   ) => void;
+  /**
+   * True once the learner has opened the Issue Tree Helper at least
+   * once. In Round 1 the Begin Conversation button is disabled until
+   * this is true - a one-time mandatory walk-through.
+   */
+  hasOpenedIssueTreeHelper: boolean;
+  /** Idempotent flag-setter called the first time the helper is opened. */
+  onMarkIssueTreeHelperOpened: () => void;
   onStartConversation: (id: string) => void;
   onBack: () => void;
 }
@@ -91,10 +97,16 @@ export function PartnerDetailScreen({
   onMarkBlindSpotExpanded,
   issueTreeHelperStates,
   onSetIssueTreeHelperState,
+  hasOpenedIssueTreeHelper,
+  onMarkIssueTreeHelperOpened,
   onStartConversation,
   onBack,
 }: PartnerDetailScreenProps) {
-  const canEngage = !alreadyEngaged && actionsRemaining > 0;
+  // Round 1 gates the Begin Conversation button until the learner
+  // has opened the Issue Tree Helper at least once - a one-shot
+  // mandatory walk-through. Rounds 2+ the helper stays optional.
+  const issueTreeGateBlocks = currentRound === 1 && !hasOpenedIssueTreeHelper;
+  const canEngage = !alreadyEngaged && actionsRemaining > 0 && !issueTreeGateBlocks;
 
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
@@ -208,7 +220,6 @@ export function PartnerDetailScreen({
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <RPDBadge level={getRPDLevel(partner.metrics.experiencedRPD)} />
           <RelationshipBadge status={partner.relationship} />
         </div>
       </div>
@@ -558,7 +569,11 @@ export function PartnerDetailScreen({
                   <FileText size={20} style={{ color: 'var(--grey-400)' }} />
                 </div>
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
-                  {alreadyEngaged ? 'Already engaged this round' : 'No actions remaining'}
+                  {alreadyEngaged
+                    ? 'Already engaged this round'
+                    : issueTreeGateBlocks
+                      ? 'Open the Issue Tree Helper before you engage'
+                      : 'No actions remaining'}
                 </div>
               </div>
             )}
@@ -575,7 +590,10 @@ export function PartnerDetailScreen({
           <HelperLauncherTab
             key="launcher"
             hasProgress={helperState.path.trigger !== undefined}
-            onOpen={() => setHelperOpen(true)}
+            onOpen={() => {
+              setHelperOpen(true);
+              onMarkIssueTreeHelperOpened();
+            }}
           />
         )}
         {helperOpen && (

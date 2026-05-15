@@ -9,13 +9,18 @@ import {
   Award,
   AlertCircle,
 } from 'lucide-react';
-import type { GameState, KnowledgeCheckResult } from '../types';
+import type { GameState, KnowledgeCheckResult, ParityRegime } from '../types';
 import { gmScript } from '../data/gameMasterScript';
-import { emailAudit } from '../data/emailAudit';
+import { getEmailAudit } from '../data/emailAudit';
 import { dataInsightsChallenges } from '../data/dashboardHotspot';
 
 interface ClearanceSummaryScreenProps {
   results: KnowledgeCheckResult[];
+  /**
+   * Learner's parity regime, used to resolve the regime-specific
+   * Email Audit phrase content when surfacing missed items.
+   */
+  regime: ParityRegime | null;
   /** Called when the learner clicks Continue. `cleared` reflects whether they actually passed the threshold (vs continuing anyway). */
   onContinue: (cleared: boolean) => void;
   onRetry: (
@@ -133,7 +138,10 @@ interface MissedItemDetail {
   source?: string;
 }
 
-function getMissedItemDetail(itemId: string): MissedItemDetail | null {
+function getMissedItemDetail(
+  itemId: string,
+  regime: ParityRegime | null,
+): MissedItemDetail | null {
   // GM Chat questions
   for (const beat of gmScript) {
     if (beat.type === 'question' && beat.question.itemId === itemId) {
@@ -146,10 +154,11 @@ function getMissedItemDetail(itemId: string): MissedItemDetail | null {
       };
     }
   }
-  // Email Audit phrases
+  // Email Audit phrases - look up in the regime-specific scenario so
+  // the rendered prompt/rationale matches what the learner saw.
   if (itemId.startsWith('email-audit-')) {
     const phraseId = itemId.replace('email-audit-', '');
-    const phrase = emailAudit.phrases.find((p) => p.id === phraseId);
+    const phrase = getEmailAudit(regime).phrases.find((p) => p.id === phraseId);
     if (phrase) {
       return {
         itemId,
@@ -181,6 +190,7 @@ function getMissedItemDetail(itemId: string): MissedItemDetail | null {
 
 export function ClearanceSummaryScreen({
   results,
+  regime,
   onContinue,
   onRetry,
 }: ClearanceSummaryScreenProps) {
@@ -544,7 +554,7 @@ function ActivityCard({
           >
             <div style={{ padding: '12px 18px 18px' }}>
               {missedResults.map((r, i) => {
-                const detail = getMissedItemDetail(r.itemId);
+                const detail = getMissedItemDetail(r.itemId, regime);
                 if (!detail) return null;
                 return (
                   <div

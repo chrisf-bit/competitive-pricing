@@ -100,6 +100,7 @@ export function createInitialState(overrides?: {
     marketUpdateAcknowledged: false,
     expandedBlindSpots: [],
     issueTreeHelperStates: {},
+    hasOpenedIssueTreeHelper: false,
     currentRound: 1,
     actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],

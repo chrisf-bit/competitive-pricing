@@ -1,12 +1,19 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, Check, X, Mail, ShieldCheck, ShieldAlert, FileText } from 'lucide-react';
-import { emailAudit, type EmailPhrase } from '../data/emailAudit';
-import type { KnowledgeCheckResult } from '../types';
+import { getEmailAudit, type EmailAuditScenario, type EmailPhrase } from '../data/emailAudit';
+import type { KnowledgeCheckResult, ParityRegime } from '../types';
 import { LaptopFrame } from '../components/DeviceFrame';
 
 interface EmailAuditScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
+  /**
+   * Learner's selected parity regime, captured in Market Select earlier
+   * in clearance. Drives which version of the email audit they see -
+   * regime-specific compliance rules mean Wide / Narrow / No Parity
+   * each get their own safe-vs-unsafe phrase set.
+   */
+  regime: ParityRegime | null;
   /**
    * When set, restricts the activity to only the listed itemIds. Used
    * by the Clearance Summary retry path so a learner only redoes the
@@ -21,9 +28,18 @@ type PhraseJudgement = {
   isCorrect: boolean;
 };
 
-export function EmailAuditScreen({ onComplete, retryItemIds }: EmailAuditScreenProps) {
+export function EmailAuditScreen({
+  onComplete,
+  regime,
+  retryItemIds,
+}: EmailAuditScreenProps) {
   const [activePhraseId, setActivePhraseId] = useState<string | null>(null);
   const [judgements, setJudgements] = useState<Record<string, PhraseJudgement>>({});
+
+  // Resolve the regime-specific scenario once per regime change.
+  // Memo also stabilises the phrase list reference so retry filtering
+  // below doesn't have to recompute on unrelated renders.
+  const emailAudit = useMemo(() => getEmailAudit(regime), [regime]);
 
   // On retry, narrow the phrase list to just the ones the learner got
   // wrong last time. retryItemIds use the 'email-audit-{phraseId}'
@@ -34,7 +50,7 @@ export function EmailAuditScreen({ onComplete, retryItemIds }: EmailAuditScreenP
       retryItemIds.map((id) => id.replace(/^email-audit-/, '')),
     );
     return emailAudit.phrases.filter((p) => failedPhraseIds.has(p.id));
-  }, [retryItemIds]);
+  }, [retryItemIds, emailAudit]);
 
   const totalPhrases = phrases.length;
   const reviewedCount = Object.keys(judgements).length;
@@ -169,6 +185,7 @@ export function EmailAuditScreen({ onComplete, retryItemIds }: EmailAuditScreenP
           }}
         >
           <EmailCard
+            scenario={emailAudit}
             activePhraseId={activePhraseId}
             judgements={judgements}
             onPickPhrase={setActivePhraseId}
@@ -250,11 +267,13 @@ export function EmailAuditScreen({ onComplete, retryItemIds }: EmailAuditScreenP
 // ───────────────────────── Email card ─────────────────────────
 
 function EmailCard({
+  scenario,
   activePhraseId,
   judgements,
   onPickPhrase,
   phrases,
 }: {
+  scenario: EmailAuditScenario;
   activePhraseId: string | null;
   judgements: Record<string, PhraseJudgement>;
   onPickPhrase: (id: string) => void;
@@ -312,20 +331,20 @@ function EmailCard({
             <tr>
               <td style={{ width: 56, paddingBottom: 2, color: 'var(--grey-400)' }}>From</td>
               <td style={{ paddingBottom: 2 }}>
-                {emailAudit.email.fromName}{' '}
+                {scenario.email.fromName}{' '}
                 <span style={{ color: 'var(--grey-400)' }}>
-                  ({emailAudit.email.fromRole})
+                  ({scenario.email.fromRole})
                 </span>
               </td>
             </tr>
             <tr>
               <td style={{ paddingBottom: 2, color: 'var(--grey-400)' }}>To</td>
-              <td style={{ paddingBottom: 2 }}>{emailAudit.email.toName}</td>
+              <td style={{ paddingBottom: 2 }}>{scenario.email.toName}</td>
             </tr>
             <tr>
               <td style={{ color: 'var(--grey-400)' }}>Subject</td>
               <td style={{ fontWeight: 600, color: 'var(--brand-navy)' }}>
-                {emailAudit.email.subject}
+                {scenario.email.subject}
               </td>
             </tr>
           </tbody>
@@ -342,7 +361,7 @@ function EmailCard({
           whiteSpace: 'pre-wrap',
         }}
       >
-        {emailAudit.email.body.map((token, i) => {
+        {scenario.email.body.map((token, i) => {
           if (typeof token === 'string') {
             return <span key={i}>{token}</span>;
           }
@@ -351,7 +370,7 @@ function EmailCard({
           // filtered it out), render the original text inline as
           // plain text so the email still reads naturally.
           if (!phrase) {
-            const orig = emailAudit.phrases.find((p) => p.id === token.phraseId);
+            const orig = scenario.phrases.find((p) => p.id === token.phraseId);
             return orig ? <span key={i}>{orig.text}</span> : null;
           }
           const j = judgements[phrase.id];

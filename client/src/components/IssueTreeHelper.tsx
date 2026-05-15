@@ -224,7 +224,7 @@ export function IssueTreeHelper({
                 background: isActive
                   ? 'var(--brand-navy)'
                   : isDone
-                    ? 'var(--success)'
+                    ? 'var(--brand-blue)'
                     : 'var(--grey-200)',
                 transition: 'background 0.2s ease',
               }}

@@ -158,18 +158,17 @@ const STEPS: TutorialStep[] = [
   },
   {
     target: 'status-badges',
-    title: 'Status Badges',
+    title: 'Relationship Status',
     description:
-      'Quick indicators showing RPD health and relationship status at a glance. These help you prioritise who needs attention.',
+      'The pill on each partner card shows where you stand with that partner: Warm, Neutral, Cool, or Strained. Strained or Cool partners need a softer opening before any hard conversation.',
     icon: <Activity size={18} style={{ color: 'var(--success)' }} />,
     position: 'bottom',
     detail: (
       <div style={{ display: 'flex', gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
         {[
-          { label: 'Competitive', color: 'var(--success)' },
-          { label: 'Below Market', color: '#e67e22' },
-          { label: 'Poor', color: 'var(--danger)' },
           { label: 'Warm', color: 'var(--success)' },
+          { label: 'Neutral', color: 'rgba(255,255,255,0.55)' },
+          { label: 'Cool', color: 'var(--warning)' },
           { label: 'Strained', color: 'var(--danger)' },
         ].map((badge) => (
           <span
