@@ -234,7 +234,7 @@ export function GuidePanel({
                       ? 'var(--brand-blue-light)'
                       : step.done
                         ? 'var(--success)'
-                        : 'rgba(255,255,255,0.35)',
+                        : 'rgba(255,255,255,0.65)',
                   }}>
                     {step.icon}
                   </div>
@@ -244,12 +244,12 @@ export function GuidePanel({
                     flex: 1,
                     fontSize: 12,
                     lineHeight: 1.4,
-                    fontWeight: step.active ? 600 : step.done ? 500 : 400,
+                    fontWeight: step.active ? 600 : step.done ? 500 : 500,
                     color: step.active
                       ? 'var(--white)'
                       : step.done
                         ? 'rgba(255,255,255,0.85)'
-                        : 'rgba(255,255,255,0.6)',
+                        : 'rgba(255,255,255,0.92)',
                   }}
                 >
                   {step.text}
@@ -339,7 +339,7 @@ export function GuidePanel({
                       style={{
                         fontSize: 11,
                         lineHeight: 1.5,
-                        color: 'rgba(255,255,255,0.5)',
+                        color: 'rgba(255,255,255,0.82)',
                         margin: '0 0 0 29px',
                       }}
                     >
