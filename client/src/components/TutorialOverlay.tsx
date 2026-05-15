@@ -259,14 +259,6 @@ const STEPS: TutorialStep[] = [
     ),
   },
   {
-    target: 'action-bar',
-    title: 'Action Bar',
-    description:
-      'Shows remaining actions and lets you advance to the next round once all actions are used. The advance button activates when you\'ve engaged 3 partners.',
-    icon: <Target size={18} style={{ color: 'var(--brand-yellow)' }} />,
-    position: 'top',
-  },
-  {
     target: 'issue-tree-helper',
     title: 'Issue Tree Helper',
     description:

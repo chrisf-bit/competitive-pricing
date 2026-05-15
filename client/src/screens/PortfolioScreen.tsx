@@ -3,8 +3,6 @@ import {
   Building2,
   ChevronRight,
   Globe,
-  ArrowRight,
-  Zap,
   Check,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
@@ -13,36 +11,21 @@ import { RPDBadge, RelationshipBadge } from '../components/MetricBadge';
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
-  currentRound: number;
-  actionsRemaining: number;
   actionsThisRound: string[];
   marketContext: MarketContext;
-  /** Stars earned per round so far; used to gate round advance. */
-  roundStars: Record<number, 0 | 1 | 2 | 3>;
   marketUpdateAcknowledged: boolean;
   onSelectPartner: (id: string) => void;
-  onAdvanceRound: () => void;
   onAcknowledgeMarketUpdate: () => void;
 }
 
 export function PortfolioScreen({
   partners,
-  currentRound,
-  actionsRemaining,
   actionsThisRound,
   marketContext,
-  roundStars,
   marketUpdateAcknowledged,
   onSelectPartner,
-  onAdvanceRound,
   onAcknowledgeMarketUpdate,
 }: PortfolioScreenProps) {
-  // Advance only unlocks once the learner has used their action AND
-  // earned at least 1 star this round. The 1-star floor lives in the
-  // engine's grading layer; this is the matching UI gate.
-  const earnedStarsThisRound = roundStars[currentRound] ?? 0;
-  const canAdvance = actionsRemaining === 0 && earnedStarsThisRound >= 1;
-
   return (
     <div
       style={{
@@ -424,72 +407,6 @@ export function PortfolioScreen({
         })}
       </div>
 
-      {/* Bottom action bar */}
-      <div
-        data-tutorial="action-bar"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '12px 18px',
-          background: 'var(--white)',
-          border: '1px solid var(--grey-100)',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: 'var(--shadow-sm)',
-          animation: 'fadeIn 0.3s ease 0.25s backwards',
-        }}
-      >
-        <div style={{ fontSize: 13, color: 'var(--grey-500)', display: 'flex', alignItems: 'center', gap: 8 }}>
-          {actionsRemaining > 0 ? (
-            <>
-              <Zap size={15} style={{ color: 'var(--brand-yellow)' }} />
-              <span>
-                Choose a partner to engage.{' '}
-                <strong style={{ color: 'var(--brand-navy)', fontSize: 15 }}>
-                  {actionsRemaining}
-                </strong>{' '}
-                action{actionsRemaining !== 1 ? 's' : ''} remaining this round.
-              </span>
-            </>
-          ) : earnedStarsThisRound >= 1 ? (
-            <span style={{ color: 'var(--success)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Zap size={15} />
-              Round cleared. Ready to advance.
-            </span>
-          ) : (
-            <span style={{ color: 'var(--error, #b3261e)', fontWeight: 700, display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Zap size={15} />
-              Round not cleared. Retake to advance.
-            </span>
-          )}
-        </div>
-
-        <button
-          onClick={onAdvanceRound}
-          disabled={!canAdvance}
-          style={{
-            background: canAdvance
-              ? 'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)'
-              : 'var(--grey-200)',
-            color: canAdvance ? 'var(--brand-navy-dark)' : 'var(--grey-400)',
-            padding: '11px 28px',
-            borderRadius: 'var(--radius-sm)',
-            fontSize: 14,
-            fontWeight: 800,
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            cursor: canAdvance ? 'pointer' : 'not-allowed',
-            opacity: canAdvance ? 1 : 0.5,
-            boxShadow: canAdvance ? '0 2px 10px rgba(254,186,2,0.3)' : 'none',
-            animation: canAdvance ? 'pulseGlow 2s ease infinite' : 'none',
-            letterSpacing: '0.01em',
-          }}
-        >
-          {currentRound >= 10 ? 'View Results' : 'Advance Round'}
-          <ArrowRight size={16} />
-        </button>
-      </div>
     </div>
   );
 }

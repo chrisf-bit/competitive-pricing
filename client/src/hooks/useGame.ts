@@ -74,10 +74,6 @@ export function useGame() {
     setState((s) => endConversation(s));
   }, []);
 
-  const onAdvanceRound = useCallback(() => {
-    setState((s) => advanceRound(s));
-  }, []);
-
   /**
    * Acknowledge the conversation report and continue. In normal play
    * this advances to the next round (or debrief at game end). In
@@ -318,7 +314,6 @@ export function useGame() {
     onStartConversation,
     onConversationChoice,
     onEndConversation,
-    onAdvanceRound,
     onContinueAfterReport,
     onRetakeAfterReport,
     onStartPracticeRound,
