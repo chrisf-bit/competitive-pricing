@@ -14,6 +14,7 @@ import {
   Clock,
   BookOpen,
   Globe,
+  TreeDeciduous,
 } from 'lucide-react';
 
 interface TutorialOverlayProps {
@@ -263,6 +264,14 @@ const STEPS: TutorialStep[] = [
     description:
       'Shows remaining actions and lets you advance to the next round once all actions are used. The advance button activates when you\'ve engaged 3 partners.',
     icon: <Target size={18} style={{ color: 'var(--brand-yellow)' }} />,
+    position: 'top',
+  },
+  {
+    target: 'issue-tree-helper',
+    title: 'Issue Tree Helper',
+    description:
+      "When you open a partner you'll see a yellow tree tab pinned to the right edge. Tap it to walk the Pricing Issue Tree - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close the drawer to peek at the metrics and pick up where you left off.",
+    icon: <TreeDeciduous size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },
 ];

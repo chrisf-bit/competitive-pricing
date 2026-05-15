@@ -15,7 +15,7 @@ import {
   UserCircle,
   ChevronRight,
   ChevronDown,
-  GitBranch,
+  TreeDeciduous,
   TrendingUp,
 } from 'lucide-react';
 import type {
@@ -963,62 +963,66 @@ function HelperLauncherTab({
     <motion.button
       onClick={onOpen}
       aria-label="Open Issue Tree Helper"
+      title="Issue Tree Helper"
       initial={{ opacity: 0, x: 12, y: '-50%' }}
-      animate={{ opacity: 1, x: 0, y: '-50%' }}
+      animate={{
+        opacity: 1,
+        x: 0,
+        y: '-50%',
+        boxShadow: [
+          '-4px 6px 14px rgba(254,186,2,0.30)',
+          '-4px 6px 26px rgba(254,186,2,0.60)',
+          '-4px 6px 14px rgba(254,186,2,0.30)',
+        ],
+      }}
       exit={{ opacity: 0, x: 12, y: '-50%' }}
-      transition={{ duration: 0.18, ease: 'easeOut' }}
+      transition={{
+        opacity: { duration: 0.18, ease: 'easeOut' },
+        x: { duration: 0.18, ease: 'easeOut' },
+        boxShadow: { duration: 2.6, repeat: Infinity, ease: 'easeInOut' },
+      }}
       style={{
         position: 'fixed',
         top: '50%',
         right: 0,
         background:
-          'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
-        color: 'var(--white)',
+          'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
+        color: 'var(--brand-navy-dark)',
         border: 'none',
         borderTopLeftRadius: 'var(--radius-md)',
         borderBottomLeftRadius: 'var(--radius-md)',
-        padding: '14px 8px 14px 10px',
+        padding: '18px 16px',
         display: 'flex',
-        flexDirection: 'column',
         alignItems: 'center',
-        gap: 6,
+        justifyContent: 'center',
         cursor: 'pointer',
-        boxShadow: '-4px 6px 16px rgba(0,15,40,0.22)',
         zIndex: 95,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.paddingRight = '12px';
+        e.currentTarget.style.paddingRight = '20px';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.paddingRight = '8px';
+        e.currentTarget.style.paddingRight = '16px';
       }}
     >
-      <GitBranch size={16} style={{ color: 'var(--brand-yellow)' }} />
-      <span
-        style={{
-          writingMode: 'vertical-rl',
-          transform: 'rotate(180deg)',
-          fontSize: 11,
-          fontWeight: 800,
-          letterSpacing: '0.10em',
-          textTransform: 'uppercase',
-          lineHeight: 1,
-        }}
-      >
-        Issue Tree Helper
+      <span style={{ position: 'relative', display: 'inline-flex' }}>
+        <TreeDeciduous size={28} strokeWidth={2.2} />
+        {hasProgress && (
+          <span
+            aria-label="In progress"
+            style={{
+              position: 'absolute',
+              top: -5,
+              right: -5,
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              background: 'var(--brand-navy-dark)',
+              border: '2px solid var(--brand-yellow)',
+            }}
+          />
+        )}
       </span>
-      {hasProgress && (
-        <span
-          style={{
-            width: 8,
-            height: 8,
-            borderRadius: '50%',
-            background: 'var(--brand-yellow)',
-            boxShadow: '0 0 0 2px rgba(254,186,2,0.25)',
-          }}
-          aria-label="In progress"
-        />
-      )}
     </motion.button>
   );
 }

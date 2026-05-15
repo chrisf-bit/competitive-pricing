@@ -340,13 +340,17 @@ based on the shape flag.
 ### Issue Tree Helper (guided diagnostic on Partner Detail)
 
 A pre-call wizard that walks the learner through the Pricing Issue
-Tree to land on a hook. Launched from a **vertical tab handle**
-pinned to the right edge of the Partner Detail screen (navy
-gradient, GitBranch icon, "Issue Tree Helper" label rotated 90deg).
-The tab carries a small yellow dot when the learner has any saved
-picks for the current partner-round, signalling unfinished progress.
-Tab hides while the drawer is open so the two affordances don't
-compete for attention.
+Tree to land on a hook. Launched from a **square launcher tab**
+pinned to the right edge of the Partner Detail screen: brand-yellow
+gradient, TreeDeciduous icon, no text label, with a subtle infinite
+yellow-glow pulse on `boxShadow` to draw the eye without moving the
+tab. The tab carries a small navy dot in the icon's top-right
+corner when the learner has any saved picks for the current
+partner-round, signalling unfinished progress. The tutorial calls
+out the helper as its final step so first-time learners know to
+look for the yellow tree tab when they open a partner. Tab hides
+while the drawer is open so the two affordances don't compete for
+attention.
 
 **Teach-mode in v1.** No scoring, no "you got it wrong." The wizard
 walks the learner one column at a time, narrows option sets by prior
