@@ -330,7 +330,6 @@ function KpiTable({
         <thead>
           <tr style={{ background: 'var(--brand-navy)', color: 'var(--white)' }}>
             <Th align="left">Hotel</Th>
-            <Th>Last contact</Th>
             <Th>eRPD</Th>
             <Th>eRPD Δ</Th>
             <Th>RPD Public</Th>
@@ -362,7 +361,6 @@ function KpiTable({
                 <Td align="left">
                   <strong style={{ color: 'var(--brand-navy)' }}>{row.hotelName}</strong>
                 </Td>
-                <Td muted>{row.lastContact}</Td>
                 <Td>
                   <span
                     style={{

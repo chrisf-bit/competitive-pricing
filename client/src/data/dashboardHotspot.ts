@@ -15,8 +15,6 @@ export type CompetitorTag = 'brand' | 'expedia';
 export interface SamplePartnerRow {
   id: string;
   hotelName: string;
-  /** Last pricing contact date string (display only). */
-  lastContact: string;
   hasActiveScenario: boolean;
   /** eRPD percentage (positive = uncompetitive, lower is better). */
   erpd: number;
@@ -49,7 +47,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'hotel-valle',
     hotelName: 'Hotel Valle',
-    lastContact: '30 Apr 2026',
     hasActiveScenario: true,
     erpd: 7.7,
     erpdChange: 11.65,
@@ -72,7 +69,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'city-hotel',
     hotelName: 'City Hotel',
-    lastContact: '26 Nov 2025',
     hasActiveScenario: true,
     erpd: 4.3,
     erpdChange: 3.97,
@@ -95,7 +91,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'park-one',
     hotelName: 'Park One Hotel',
-    lastContact: '27 Feb 2026',
     hasActiveScenario: true,
     erpd: 15.6,
     erpdChange: 8.07,
@@ -118,7 +113,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'attic-hotel',
     hotelName: 'Attic Hotel',
-    lastContact: '15 Apr 2026',
     hasActiveScenario: true,
     erpd: 18.1,
     erpdChange: 5.54,
@@ -141,7 +135,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'the-maze',
     hotelName: 'The Maze Hotel',
-    lastContact: '27 Mar 2026',
     hasActiveScenario: true,
     erpd: 6.3,
     erpdChange: 1.11,
@@ -164,7 +157,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'paradise-beach',
     hotelName: 'Paradise Beach Hotel',
-    lastContact: '21 Apr 2026',
     hasActiveScenario: true,
     erpd: 13.0,
     erpdChange: 7.41,
@@ -187,7 +179,6 @@ export const samplePartnerData: SamplePartnerRow[] = [
   {
     id: 'uphill-hotel',
     hotelName: 'UpHill Hotel',
-    lastContact: '03 Dec 2025',
     hasActiveScenario: true,
     erpd: 3.8,
     erpdChange: -8.15,
