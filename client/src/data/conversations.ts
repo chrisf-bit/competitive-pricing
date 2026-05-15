@@ -115,7 +115,7 @@ const marinaR1: ConversationTree = {
             description:
               'Walk her through where the visibility loss is concentrated and connect it to the missing Mobile Rate.',
             playerDialogue:
-              "Your visibility is slipping and you're losing the price comparison on about two-thirds of searches. The interesting bit is where the loss is concentrated: your Genius bookings are holding up, but on non-Genius traffic you're being undercut consistently. Your rate parity is clean and you don't have Mobile Rate active - that combination points to mobile users specifically, where most of Madrid's search volume sits.",
+              "Your visibility is slipping and you're losing the price comparison on about two-thirds of searches. The interesting bit is where the loss is concentrated: your Genius bookings are holding up, but on non-Genius traffic you're being undercut consistently. Your base rate sits in line with comparable boutique stays and you don't have Mobile Rate active - that combination points to mobile users specifically, where most of Madrid's search volume sits.",
             styleMatch: { blue: 2, green: 1, red: 0, yellow: -1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -577,7 +577,7 @@ const hannahR1: ConversationTree = {
             description:
               "Explain that her rate is fine - the issue is she's missing the filters and segments where travellers are choosing other properties.",
             playerDialogue:
-              "Here's the encouraging bit - your rate is fine. Your parity is clean and your ADR sits in line with comparable guesthouses. What's happening is more about visibility than price. Because you don't have a Last-Minute Deal or Genius active, you're disappearing from the filters that the travellers most likely to love Meadow Lane are using - last-minute weekend trips, mid-range romantic getaways. They never see you to choose between you and someone cheaper.",
+              "Here's the encouraging bit - your rate is fine. Your pricing looks healthy and your ADR sits in line with comparable guesthouses. What's happening is more about visibility than price. Because you don't have a Last-Minute Deal or Genius active, you're disappearing from the filters that the travellers most likely to love Meadow Lane are using - last-minute weekend trips, mid-range romantic getaways. They never see you to choose between you and someone cheaper.",
             styleMatch: { green: 2, yellow: 2, blue: 1, red: 0 },
             assertiveness: 2,
             compliance: 'safe',

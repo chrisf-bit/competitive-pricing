@@ -249,7 +249,6 @@ export interface PartnerState {
   trust: number;                // 0–100, hidden
   relationship: RelationshipStatus;
   discounts: DiscountProduct[];
-  lastContactedRound: number | null;
   conversationLog: ConversationRecord[];
   pendingActions: PendingAction[];
 }

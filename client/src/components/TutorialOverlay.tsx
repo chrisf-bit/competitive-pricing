@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useLayoutEffect, useCallback } from 'react';
 import {
   BarChart3,
   Eye,
@@ -287,24 +287,39 @@ export function TutorialOverlay({ onClose, onStartGame }: TutorialOverlayProps) 
     const el = document.querySelector(`[data-tutorial="${current.target}"]`);
     if (el) {
       const r = el.getBoundingClientRect();
-      setTargetRect({
-        top: r.top,
-        left: r.left,
-        width: r.width,
-        height: r.height,
-      });
-    } else {
-      setTargetRect(null);
+      if (r.width > 0 && r.height > 0) {
+        setTargetRect({
+          top: r.top,
+          left: r.left,
+          width: r.width,
+          height: r.height,
+        });
+        return true;
+      }
     }
+    return false;
   }, [current.target]);
 
-  useEffect(() => {
-    // Small delay to let portfolio render on first mount
-    const timer = setTimeout(measureTarget, 80);
-    window.addEventListener('resize', measureTarget);
+  useLayoutEffect(() => {
+    // Try measuring immediately after layout; if the target isn't laid
+    // out yet (mid-animation, just-mounted card, etc.) retry on rAF
+    // for up to ~30 frames before giving up. Without the retry the
+    // tooltip lands in screen-centre and never recovers.
+    let raf: number | null = null;
+    let frames = 0;
+    const tick = () => {
+      if (measureTarget()) return;
+      if (frames++ < 30) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        setTargetRect(null);
+      }
+    };
+    tick();
+    window.addEventListener('resize', tick);
     return () => {
-      clearTimeout(timer);
-      window.removeEventListener('resize', measureTarget);
+      if (raf !== null) cancelAnimationFrame(raf);
+      window.removeEventListener('resize', tick);
     };
   }, [measureTarget]);
 

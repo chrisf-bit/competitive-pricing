@@ -304,7 +304,6 @@ export function processConversationChoice(
     };
 
     updatedPartner.conversationLog.push(record);
-    updatedPartner.lastContactedRound = state.currentRound;
 
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
     const newActionsRemaining = state.actionsRemaining - 1;
@@ -441,7 +440,6 @@ function processBranchingChoice(
     };
 
     updatedPartner.conversationLog.push(record);
-    updatedPartner.lastContactedRound = state.currentRound;
 
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
     const newActionsRemaining = state.actionsRemaining - 1;

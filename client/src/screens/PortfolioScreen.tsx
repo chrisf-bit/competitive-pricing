@@ -376,7 +376,7 @@ export function PortfolioScreen({
                 </div>
               </div>
 
-              {/* Discounts + last contact */}
+              {/* Discounts */}
               <div
                 data-tutorial={i === 0 ? 'discount-row' : undefined}
                 style={{
@@ -384,7 +384,6 @@ export function PortfolioScreen({
                   borderTop: '1px solid var(--grey-100)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
                   fontSize: 11,
                   color: 'var(--grey-400)',
                 }}
@@ -393,11 +392,6 @@ export function PortfolioScreen({
                   {partner.discounts.filter((d) => d.status === 'active').length}/
                   {partner.discounts.length} discounts
                 </div>
-                <span>
-                  {partner.lastContactedRound
-                    ? `Contacted Round ${partner.lastContactedRound}`
-                    : 'No contact yet'}
-                </span>
               </div>
 
               {/* CTA footer */}
