@@ -1,5 +1,12 @@
-import { useState } from 'react';
-import { User, ChevronRight, CheckCircle2, ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  User,
+  ChevronRight,
+  CheckCircle2,
+  ArrowLeft,
+  PhoneCall,
+} from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getConversationTree } from '../data/conversations';
 
@@ -26,20 +33,37 @@ const styleColors: Record<string, string> = {
   blue: 'var(--style-blue)',
 };
 
-function getReactionLabel(emotion: string, styleMatch: number): { text: string; color: string; bg: string } | null {
+function getReactionLabel(
+  emotion: string,
+  styleMatch: number,
+): { text: string; color: string; bg: string } | null {
   if (styleMatch >= 2 && emotion === 'positive') {
-    return { text: 'Really connected with that approach', color: 'var(--success)', bg: 'var(--success-bg)' };
+    return {
+      text: 'Really connected with that approach',
+      color: 'var(--success)',
+      bg: 'var(--success-bg)',
+    };
   }
   if (styleMatch >= 1 && (emotion === 'positive' || emotion === 'neutral')) {
     return { text: 'Responded well', color: 'var(--success)', bg: 'var(--success-bg)' };
   }
   if (styleMatch <= -2 || emotion === 'negative') {
-    return { text: 'That didn\'t land well', color: 'var(--danger)', bg: 'var(--danger-bg)' };
+    return {
+      text: "That didn't land well",
+      color: 'var(--danger)',
+      bg: 'var(--danger-bg)',
+    };
   }
   if (styleMatch <= -1 || emotion === 'cautious') {
     return { text: 'Seemed hesitant', color: 'var(--warning)', bg: 'var(--warning-bg)' };
   }
   return null;
+}
+
+function formatDuration(seconds: number): string {
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
 export function ConversationScreen({
@@ -52,6 +76,14 @@ export function ConversationScreen({
 }: ConversationScreenProps) {
   const [hoveredOption, setHoveredOption] = useState<string | null>(null);
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  // Live call-duration ticker. See note in BranchingConversationScreen
+  // for rationale - cosmetic only, no engine dependency.
+  const [callSeconds, setCallSeconds] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setCallSeconds((s) => s + 1), 1000);
+    return () => window.clearInterval(id);
+  }, []);
 
   const tree = getConversationTree(partner.persona.id, currentRound);
   if (!tree) return null;
@@ -83,6 +115,9 @@ export function ConversationScreen({
     }, 400);
   };
 
+  const partnerColor = styleColors[partner.persona.style] ?? 'var(--brand-blue)';
+  const firstName = partner.persona.name.split(' ')[0];
+
   return (
     <div
       style={{
@@ -91,185 +126,266 @@ export function ConversationScreen({
         flexDirection: 'column',
         overflow: 'hidden',
         background: 'var(--off-white)',
+        padding: '12px',
       }}
     >
-      {/* Conversation header */}
-      <div
+      <motion.div
+        initial={{ y: 8 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.25, ease: 'easeOut' }}
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '10px 24px',
+          flex: 1,
+          maxWidth: 820,
+          width: '100%',
+          margin: '0 auto',
           background: 'var(--white)',
-          borderBottom: '2px solid var(--grey-100)',
-          boxShadow: 'var(--shadow-sm)',
+          borderRadius: 18,
+          boxShadow: '0 16px 50px rgba(0,15,40,0.18)',
+          border: '1px solid var(--grey-100)',
+          display: 'flex',
+          flexDirection: 'column',
+          overflow: 'hidden',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        {/* Call header */}
+        <div
+          style={{
+            padding: '16px 22px',
+            background:
+              'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-dark) 100%)',
+            color: 'var(--white)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 14,
+          }}
+        >
           {conversation.choices.length === 0 && (
             <button
               onClick={onBack}
               style={{
-                background: 'var(--white)',
-                border: '2px solid var(--grey-100)',
+                background: 'rgba(255,255,255,0.10)',
+                border: '1px solid rgba(255,255,255,0.18)',
                 borderRadius: 'var(--radius-sm)',
-                padding: '7px 12px',
+                padding: '6px 10px',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 5,
                 fontSize: 12,
                 fontWeight: 700,
-                color: 'var(--grey-500)',
+                color: 'var(--white)',
                 cursor: 'pointer',
-                boxShadow: 'var(--shadow-sm)',
+                transition: 'background 0.15s ease',
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.18)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.10)';
               }}
             >
               <ArrowLeft size={13} />
               Back
             </button>
           )}
+
           <div
             style={{
-              width: 40,
-              height: 40,
-              borderRadius: 10,
-              background: styleColors[partner.persona.style] ?? 'var(--brand-navy)',
+              width: 38,
+              height: 38,
+              borderRadius: '50%',
+              background: 'var(--success)',
               color: 'var(--white)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: 13,
+              boxShadow: '0 0 0 4px rgba(0, 138, 14, 0.20)',
+              flexShrink: 0,
+            }}
+          >
+            <PhoneCall size={16} />
+          </div>
+
+          <div
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: '50%',
+              background: partnerColor,
+              color: 'var(--white)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 14,
               fontWeight: 800,
-              boxShadow: '0 2px 8px rgba(0,53,128,0.25)',
+              flexShrink: 0,
             }}
           >
             {partner.persona.avatar}
           </div>
-          <div>
-            <div style={{ fontWeight: 700, color: 'var(--brand-navy)', fontSize: 15 }}>
+
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ fontSize: 15, fontWeight: 800 }}>
               {partner.persona.name}
             </div>
-            <div style={{ fontSize: 12, color: 'var(--grey-400)' }}>
-              {partner.persona.propertyName}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                fontSize: 11.5,
+                color: 'rgba(255,255,255,0.75)',
+                marginTop: 2,
+              }}
+            >
+              <span
+                style={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {partner.persona.propertyName}
+              </span>
+              <span style={{ color: 'rgba(255,255,255,0.3)' }}>·</span>
+              <motion.span
+                style={{
+                  width: 7,
+                  height: 7,
+                  borderRadius: '50%',
+                  background: '#3ee27a',
+                  flexShrink: 0,
+                }}
+                animate={{ opacity: [0.4, 1, 0.4] }}
+                transition={{ duration: 1.6, repeat: Infinity }}
+              />
+              <span style={{ color: '#3ee27a', fontWeight: 700 }}>Live</span>
+              <span style={{ color: 'rgba(255,255,255,0.3)' }}>·</span>
+              <span style={{ fontVariantNumeric: 'tabular-nums' }}>
+                {formatDuration(callSeconds)}
+              </span>
             </div>
           </div>
-        </div>
 
-        {/* Phase progress */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-          {phaseLabels.map((label, i) => {
-            const isActive = i === conversation.phaseIndex && !isComplete;
-            const isDone = i < conversation.choices.length;
-            return (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+          {/* Phase pills - the three-phase scenario gets named pills
+              rather than numbered dots because Hook / Diagnosis / Pitch
+              is a fixed and meaningful triad worth showing inline. */}
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              flexShrink: 0,
+            }}
+          >
+            {phaseLabels.map((label, i) => {
+              const isActive = i === conversation.phaseIndex && !isComplete;
+              const isDone = i < conversation.choices.length;
+              return (
                 <div
+                  key={i}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: 4,
-                    padding: '5px 14px',
+                    gap: 5,
+                    padding: '4px 10px',
                     borderRadius: 'var(--radius-pill)',
-                    fontSize: 12,
+                    fontSize: 11,
                     fontWeight: 700,
                     background: isActive
+                      ? 'var(--brand-yellow)'
+                      : isDone
+                        ? 'rgba(255,255,255,0.14)'
+                        : 'rgba(255,255,255,0.06)',
+                    color: isActive
                       ? 'var(--brand-navy)'
                       : isDone
-                        ? 'var(--success)'
-                        : 'var(--grey-100)',
-                    color: isActive || isDone ? 'var(--white)' : 'var(--grey-400)',
-                    boxShadow: isActive ? '0 2px 8px rgba(0,53,128,0.25)' : 'none',
+                        ? 'rgba(255,255,255,0.9)'
+                        : 'rgba(255,255,255,0.4)',
+                    border: isActive
+                      ? '1.5px solid var(--brand-yellow)'
+                      : '1.5px solid transparent',
                     transition: 'all 0.3s ease',
                   }}
                 >
-                  {isDone && <CheckCircle2 size={12} />}
+                  {isDone && <CheckCircle2 size={11} />}
                   {label}
                 </div>
-                {i < phaseLabels.length - 1 && (
-                  <div style={{
-                    width: 16,
-                    height: 2,
-                    background: isDone ? 'var(--success)' : 'var(--grey-200)',
-                    borderRadius: 1,
-                    transition: 'background 0.3s ease',
-                  }} />
-                )}
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Conversation body */}
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          padding: '20px 32px',
-          gap: 20,
-          maxWidth: 800,
-          margin: '0 auto',
-          width: '100%',
-        }}
-      >
-        {/* Partner says */}
-        <div style={{ animation: 'fadeIn 0.4s ease' }}>
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}>
+        {/* Transcript */}
+        <div
+          style={{
+            flex: 1,
+            overflowY: 'auto',
+            padding: '28px 36px',
+            background:
+              'linear-gradient(180deg, var(--white) 0%, var(--off-white) 100%)',
+          }}
+        >
+          <motion.div
+            key={`turn-${conversation.phaseIndex}-${conversation.choices.length}`}
+            initial={{ y: 6 }}
+            animate={{ y: 0 }}
+            transition={{ duration: 0.3, ease: 'easeOut' }}
+          >
             <div
               style={{
-                width: 44,
-                height: 44,
-                borderRadius: 12,
-                background: styleColors[partner.persona.style] ?? 'var(--brand-navy)',
-                color: 'var(--white)',
+                fontSize: 11,
+                fontWeight: 800,
+                color: 'var(--brand-navy)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.14em',
+                marginBottom: 10,
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 14,
-                fontWeight: 800,
-                flexShrink: 0,
-                boxShadow: '0 3px 12px rgba(0,0,0,0.15)',
+                gap: 8,
               }}
             >
-              {partner.persona.avatar}
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: '50%',
+                  background: partnerColor,
+                }}
+              />
+              {firstName} says
             </div>
-            <div>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 700,
-                  color: 'var(--brand-navy)',
-                  marginBottom: 6,
-                }}
-              >
-                {partner.persona.name.split(' ')[0]}
-              </div>
-              <div
-                style={{
-                  background: 'var(--white)',
-                  border: '2px solid var(--grey-100)',
-                  borderRadius: '4px 16px 16px 16px',
-                  padding: '16px 20px',
-                  fontSize: 15,
-                  lineHeight: 1.65,
-                  color: 'var(--grey-700)',
-                  boxShadow: 'var(--shadow-md)',
-                  maxWidth: 580,
-                  fontWeight: 500,
-                }}
-              >
-                {isComplete && conversation.currentResponse
-                  ? conversation.currentResponse
-                  : partnerPrompt}
-              </div>
-              {conversation.currentEmotion && conversation.styleMatchScore !== null && (() => {
-                const reaction = getReactionLabel(conversation.currentEmotion, conversation.styleMatchScore);
+            <div
+              style={{
+                fontSize: 17,
+                lineHeight: 1.6,
+                color: 'var(--grey-700)',
+                fontWeight: 500,
+                borderLeft: `3px solid ${partnerColor}`,
+                paddingLeft: 16,
+                fontStyle: 'italic',
+              }}
+            >
+              &ldquo;
+              {isComplete && conversation.currentResponse
+                ? conversation.currentResponse
+                : partnerPrompt}
+              &rdquo;
+            </div>
+
+            {conversation.currentEmotion &&
+              conversation.styleMatchScore !== null &&
+              (() => {
+                const reaction = getReactionLabel(
+                  conversation.currentEmotion,
+                  conversation.styleMatchScore,
+                );
                 if (!reaction) return null;
                 return (
                   <div
                     style={{
-                      marginTop: 8,
+                      marginTop: 14,
+                      marginLeft: 19,
                       display: 'inline-flex',
                       alignItems: 'center',
                       gap: 6,
@@ -279,7 +395,6 @@ export function ConversationScreen({
                       color: reaction.color,
                       fontSize: 11,
                       fontWeight: 700,
-                      animation: 'fadeIn 0.4s ease',
                     }}
                   >
                     <div
@@ -294,53 +409,71 @@ export function ConversationScreen({
                   </div>
                 );
               })()}
-            </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Player options or completion */}
+        {/* Response footer / completion CTA */}
         {isComplete ? (
           <div
             style={{
+              padding: '18px 28px',
+              background: 'var(--off-white)',
+              borderTop: '1px solid var(--grey-100)',
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
+              justifyContent: 'space-between',
               gap: 16,
-              marginTop: 12,
-              animation: 'slideUp 0.4s ease',
             }}
           >
-            <div
-              style={{
-                padding: '14px 24px',
-                background: 'var(--success)',
-                borderRadius: 'var(--radius-md)',
-                fontSize: 14,
-                color: 'var(--white)',
-                fontWeight: 700,
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                boxShadow: '0 3px 12px rgba(0,138,14,0.3)',
-              }}
-            >
-              <CheckCircle2 size={18} />
-              Conversation complete
+            <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+              <div
+                style={{
+                  width: 36,
+                  height: 36,
+                  borderRadius: '50%',
+                  background: 'var(--success)',
+                  color: 'var(--white)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '0 0 0 4px rgba(0, 138, 14, 0.18)',
+                  flexShrink: 0,
+                }}
+              >
+                <CheckCircle2 size={18} />
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontSize: 14,
+                    fontWeight: 800,
+                    color: 'var(--brand-navy)',
+                  }}
+                >
+                  Call complete
+                </div>
+                <div style={{ fontSize: 11.5, color: 'var(--grey-500)' }}>
+                  Duration {formatDuration(callSeconds)}
+                </div>
+              </div>
             </div>
             <button
               onClick={onEnd}
               style={{
-                background: 'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
+                background:
+                  'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
                 color: 'var(--brand-navy-dark)',
-                padding: '13px 36px',
+                padding: '12px 28px',
                 borderRadius: 'var(--radius-sm)',
-                fontSize: 15,
+                fontSize: 14,
                 fontWeight: 800,
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
                 cursor: 'pointer',
                 boxShadow: '0 3px 14px rgba(254,186,2,0.35)',
+                border: 'none',
+                flexShrink: 0,
               }}
             >
               See round report
@@ -348,47 +481,52 @@ export function ConversationScreen({
             </button>
           </div>
         ) : (
-          <div style={{ animation: 'slideUp 0.4s ease 0.15s backwards' }}>
+          <div
+            style={{
+              padding: '16px 28px 20px',
+              background: 'var(--off-white)',
+              borderTop: '1px solid var(--grey-100)',
+            }}
+          >
             <div
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: 6,
+                gap: 7,
                 marginBottom: 10,
               }}
             >
               <div
                 style={{
-                  width: 22,
-                  height: 22,
-                  borderRadius: 6,
-                  background: 'var(--brand-blue)',
+                  width: 20,
+                  height: 20,
+                  borderRadius: 5,
+                  background: 'var(--brand-navy)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <User size={13} style={{ color: 'var(--white)' }} />
+                <User size={12} style={{ color: 'var(--white)' }} />
               </div>
               <span
                 style={{
-                  fontSize: 13,
-                  fontWeight: 700,
+                  fontSize: 11,
+                  fontWeight: 800,
                   color: 'var(--brand-navy)',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.06em',
+                  letterSpacing: '0.14em',
                 }}
               >
-                Choose your approach
+                Your response
               </span>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {phase?.options.map((option, idx) => {
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {phase?.options.map((option) => {
                 const isHovered = hoveredOption === option.id;
                 const isSelected = selectedOption === option.id;
                 const isDisabled = selectedOption !== null && !isSelected;
-
                 return (
                   <button
                     key={option.id}
@@ -406,80 +544,50 @@ export function ConversationScreen({
                           ? '2px solid var(--brand-blue)'
                           : '2px solid var(--grey-100)',
                       borderRadius: 'var(--radius-md)',
-                      padding: '16px 20px',
+                      padding: '12px 16px',
                       textAlign: 'left',
                       cursor: selectedOption ? 'default' : 'pointer',
                       transition: 'all 0.2s ease',
                       boxShadow: isSelected
                         ? '0 4px 16px rgba(0,53,128,0.25)'
                         : isHovered
-                          ? 'var(--shadow-lg)'
+                          ? '0 3px 10px rgba(0,53,128,0.10)'
                           : 'var(--shadow-sm)',
-                      opacity: isDisabled ? 0.3 : 1,
-                      transform: isHovered && !isDisabled ? 'translateX(4px)' : 'none',
-                      animation: `fadeIn 0.3s ease ${idx * 0.06}s backwards`,
-                      position: 'relative',
-                      overflow: 'hidden',
+                      opacity: isDisabled ? 0.4 : 1,
                     }}
                   >
-                    {/* Left accent bar */}
                     <div
                       style={{
-                        position: 'absolute',
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        width: 4,
-                        background: isSelected
-                          ? 'var(--brand-yellow)'
-                          : isHovered
-                            ? 'var(--brand-blue)'
-                            : 'transparent',
-                        borderRadius: '0 2px 2px 0',
-                        transition: 'background 0.2s ease',
-                      }}
-                    />
-
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'space-between',
-                        marginBottom: 5,
+                        fontSize: 11,
+                        fontWeight: 800,
+                        color: isSelected
+                          ? 'rgba(255,255,255,0.75)'
+                          : 'var(--brand-blue)',
+                        marginBottom: 3,
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
                       }}
                     >
-                      <span
-                        style={{
-                          fontWeight: 700,
-                          fontSize: 14,
-                          color: isSelected ? 'var(--white)' : 'var(--brand-navy)',
-                        }}
-                      >
-                        {option.label}
-                      </span>
-                      {/* Compliance is part of what the report card
-                          grades on, so deliberately don't surface a
-                          Compliant / Risky / Borderline badge next to
-                          the option here - the learner has to judge it
-                          from the dialogue text alone. */}
+                      {option.label}
                     </div>
-                    <p
+                    <div
                       style={{
                         fontSize: 13,
-                        color: isSelected ? 'rgba(255,255,255,0.8)' : 'var(--grey-500)',
+                        color: isSelected
+                          ? 'rgba(255,255,255,0.95)'
+                          : 'var(--grey-700)',
                         lineHeight: 1.5,
-                        margin: 0,
                       }}
                     >
                       {option.description}
-                    </p>
+                    </div>
                   </button>
                 );
               })}
             </div>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 }
