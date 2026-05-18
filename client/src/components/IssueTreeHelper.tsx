@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, GitBranch, Lightbulb, RotateCcw } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, TreeDeciduous, Lightbulb, RotateCcw } from 'lucide-react';
 import type { IssueTreeHelperState } from '../types';
 import {
   triggers,
@@ -161,7 +161,7 @@ export function IssueTreeHelper({
               flexShrink: 0,
             }}
           >
-            <GitBranch size={16} />
+            <TreeDeciduous size={16} />
           </div>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 14, fontWeight: 800 }}>
