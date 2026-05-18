@@ -357,7 +357,6 @@ export function BranchingConversationScreen({
                 fontWeight: 500,
                 borderLeft: `3px solid ${partnerColor}`,
                 paddingLeft: 16,
-                fontStyle: 'italic',
               }}
             >
               &ldquo;
@@ -563,8 +562,7 @@ export function BranchingConversationScreen({
                           ? 'rgba(255,255,255,0.95)'
                           : 'var(--grey-700)',
                         lineHeight: 1.5,
-                        fontStyle: 'italic',
-                      }}
+                              }}
                     >
                       &ldquo;{option.playerDialogue}&rdquo;
                     </div>

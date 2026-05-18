@@ -363,7 +363,6 @@ export function ConversationScreen({
                 fontWeight: 500,
                 borderLeft: `3px solid ${partnerColor}`,
                 paddingLeft: 16,
-                fontStyle: 'italic',
               }}
             >
               &ldquo;
