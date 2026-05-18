@@ -7,10 +7,11 @@
  * matrix - the learner internalises the shape so the Diagnose step in
  * Level 1 feels familiar.
  *
- * Worked example: a partner ("Maria") whose eRPD has been sliding due
- * to a misconfigured Genius discount. Sourced from the conceptual
- * structure in the Issue Tree PDF; specific narrative is illustrative
- * pending SME refinement.
+ * Worked example: a partner ("Hotel Atlante") whose eRPD has been
+ * sliding due to a misconfigured Genius discount. Hotel-named so the
+ * learner can't mistake the partner for an LPS colleague. Sourced
+ * from the conceptual structure in the Issue Tree PDF; specific
+ * narrative is illustrative pending SME refinement.
  */
 
 import type { LucideIcon } from 'lucide-react';
@@ -39,11 +40,11 @@ export const issueTreePhases: IssueTreePhase[] = [
     label: 'Trigger',
     shortName: 'Trigger',
     icon: Search,
-    headline: "Maria's eRPD has been sliding for three weeks",
+    headline: "Hotel Atlante's eRPD has been sliding for three weeks",
     body:
-      'Something on this account has shifted. Before doing anything else, you notice the signal.',
+      "Something on this partner's pricing has shifted. Before doing anything else, you notice the signal.",
     narration:
-      "Every diagnostic conversation starts with a trigger - a signal in the data you've spotted on a partner account. Here, Maria's eRPD has slipped three weeks running.",
+      "Every diagnostic conversation starts with a trigger - a signal in the data you've spotted on a partner. Here, Hotel Atlante's eRPD has slipped three weeks running.",
   },
   {
     id: 'intent',
@@ -52,7 +53,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     icon: Compass,
     headline: 'Likely unintentional - this looks technical, not strategic',
     body:
-      "The slide is steady but not deliberate-looking. Nothing in Maria's recent calls suggests she's chosen to reposition. Worth treating as a config issue first, not a strategy shift.",
+      "The slide is steady but not deliberate-looking. Nothing in recent calls with Hotel Atlante suggests they've chosen to reposition. Worth treating as a config issue first, not a strategy shift.",
     narration:
       "Next: ask whether the change looks intentional or unintentional. That's your mandate axis - it tells you whether to fix it yourself, probe further, or escalate.",
   },
@@ -63,9 +64,9 @@ export const issueTreePhases: IssueTreePhase[] = [
     icon: ListChecks,
     headline: 'Genius discount looks misconfigured',
     body:
-      "Maria's Genius discount stack has fallen out of alignment with peers. Most likely: a recent Genius programme change wasn't carried through cleanly.",
+      "Hotel Atlante's Genius discount stack has fallen out of alignment with peers. Most likely: a recent Genius programme change wasn't carried through cleanly.",
     narration:
-      "Now narrow it. From the family of plausible causes, which one fits this signal best? Here, the data points at her Genius config.",
+      "Now narrow it. From the family of plausible causes, which one fits this signal best? Here, the data points at their Genius config.",
   },
   {
     id: 'metric',
@@ -85,9 +86,9 @@ export const issueTreePhases: IssueTreePhase[] = [
     icon: MessageSquare,
     headline: 'On-platform competitiveness narrative',
     body:
-      "Open with what you see on Booking.com - falling visibility, conversion softening - without claiming you know what's happening on her direct site or other OTAs.",
+      "Open with what you see on Booking.com - falling visibility, conversion softening - without claiming you know what's happening on the hotel's direct site or other OTAs.",
     narration:
-      "When you reach for the call, the Hook is your opening - how you frame the conversation safely. On-platform language only, no claims about her business beyond what you can see.",
+      "When you reach for the call, the Hook is your opening - how you frame the conversation safely. On-platform language only, no claims about the partner's business beyond what you can see.",
   },
   {
     id: 'pitch',
@@ -96,7 +97,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     icon: Lightbulb,
     headline: 'Genius audit + reset',
     body:
-      'Suggest a quick Genius audit so the two of you can verify the stack together. Frame it as a low-effort fix that gives Maria back the visibility she had a month ago.',
+      "Suggest a quick Genius audit so the two of you can verify the stack together. Frame it as a low-effort fix that gets Hotel Atlante back to the visibility it had a month ago.",
     narration:
       'The Pitch is the recommendation that follows from the diagnosis. Concrete, practical, paired to the cause you identified.',
   },
