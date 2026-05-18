@@ -129,13 +129,13 @@ const wideParityScenario: EmailAuditScenario = {
     },
     {
       id: 'p4',
-      text: 'partners are completely free to choose their own pricing and distribution strategy',
+      text: 'you as a partner are completely free to choose your own pricing and distribution strategy',
       isSafe: true,
       rationale: {
         correct:
-          'Correct. Verbatim approved phrasing - and worth using proactively when discussing pricing performance, to reinforce partner freedom.',
+          'Correct. Approved partner-freedom statement, addressed directly to the partner - worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
         incorrect:
-          'This one is safe - verbatim approved phrasing. Worth using proactively when discussing pricing performance, to reinforce partner freedom.',
+          'This one is safe - the approved partner-freedom statement addressed directly to the partner. Worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
       },
       source: 'Legal Compliance | General Communications | Do (verbatim)',
     },
@@ -227,13 +227,13 @@ const narrowParityScenario: EmailAuditScenario = {
     },
     {
       id: 'p4',
-      text: 'partners are completely free to choose their own pricing and distribution strategy',
+      text: 'you as a partner are completely free to choose your own pricing and distribution strategy',
       isSafe: true,
       rationale: {
         correct:
-          'Correct. Verbatim approved phrasing - and worth using proactively when discussing pricing performance, to reinforce partner freedom.',
+          'Correct. Approved partner-freedom statement, addressed directly to the partner - worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
         incorrect:
-          'This one is safe - verbatim approved phrasing. Worth using proactively when discussing pricing performance, to reinforce partner freedom.',
+          'This one is safe - the approved partner-freedom statement addressed directly to the partner. Worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
       },
       source: 'Legal Compliance | General Communications | Do (verbatim)',
     },
@@ -326,13 +326,13 @@ const noParityScenario: EmailAuditScenario = {
     },
     {
       id: 'p4',
-      text: 'partners are completely free to choose their own pricing and distribution strategy',
+      text: 'you as a partner are completely free to choose your own pricing and distribution strategy',
       isSafe: true,
       rationale: {
         correct:
-          'Correct. Verbatim approved phrasing - and particularly important to use proactively in a No Parity market to reinforce partner freedom over pricing and channels.',
+          'Correct. Approved partner-freedom statement, addressed directly to the partner - and particularly important to use proactively in a No Parity market to reinforce that pricing and channel choices are theirs.',
         incorrect:
-          "This one is safe - verbatim approved phrasing. Worth using proactively, especially in a No Parity market where it underscores the partner's right to set their own strategy.",
+          "This one is safe - the approved partner-freedom statement addressed directly to the partner. Worth using proactively, especially in a No Parity market where it underscores their right to set their own strategy.",
       },
       source: 'Legal Compliance | General Communications | Do (verbatim)',
     },
