@@ -303,6 +303,47 @@ based on the shape flag.
   tighten once 3+ branching scenarios exist and per-step `optimal`
   tagging is consistent).
 
+### Conversation screen visuals (softphone)
+
+Both `ConversationScreen` (3-phase) and `BranchingConversationScreen`
+(branching) render inside a **softphone-style call card** rather
+than a chat UI - the surrounding language already says "Begin
+Conversation" / "Call complete" / "See round report", and the
+visual now matches.
+
+- **Wrapper**: `--off-white` background with 12px padding so the
+  card floats as a sibling to the GuidePanel (matching the panel's
+  own 12px margins). Earlier the white banner was a full-width
+  child of an off-white column that butted directly against the
+  GuidePanel and read as "cut" at the edge - the floating card
+  fixes that.
+- **Header strip**: dark navy gradient, green `PhoneCall` badge,
+  partner avatar circle tinted with the partner's communication-
+  style colour, then `[Property] · Live · mm:ss` with a pulsing
+  green dot and a real call-duration timer ticking up from mount
+  via `useEffect` + `setInterval`. The timer is cosmetic only - no
+  engine state depends on it.
+- **Step indicator**: 3-phase scenarios keep named Hook /
+  Diagnosis / Pitch pills (the triad is part of the lesson);
+  branching scenarios use numbered dots since they can run up to
+  six steps.
+- **Transcript**: gradient `--white` to `--off-white`. Speaker
+  caption (`[FirstName] says`) + quoted speech rendered with the
+  partner's style colour as a 3px left accent bar. Plain (non-
+  italic) body type - italics felt too transcript-y.
+- **Response footer**: "Your response" caption + option cards.
+  Branching options lead with the move label uppercased and quote
+  the spoken line beneath; 3-phase options lead with the label
+  and show the move description beneath (the legacy data shape
+  doesn't carry a clean `playerDialogue` per option).
+- **Completion state**: "Call complete · Duration mm:ss" alongside
+  the See round report CTA. Lines up with the Conversation
+  Report's existing "Call" framing.
+- **Round advance**: the Conversation Report's Continue button is
+  the only thing that advances the round. The old Portfolio
+  action bar (with Advance Round) was removed in May 2026 since
+  it always read 1-action-remaining and added a redundant click.
+
 ### Star grading and round gating
 
 - Each round is graded **0-3 stars** by `engine/grading.ts` after the
@@ -794,3 +835,13 @@ from `main` branch).
   (`{ ...partner.metrics, ...baseline.metrics }`) so partner-level
   static fields like the PACE block survive baseline application
   without being duplicated in every round entry.
+- Don't reskin the partner conversation screens back to a chat-
+  bubble UI. The softphone treatment (call card with PhoneCall
+  badge, Live-with-duration status, quoted speaker turns, "Your
+  response" footer) lines up with the Begin Conversation / Call /
+  See round report language used elsewhere - reverting to chat
+  bubbles re-opens the "is this chat or call?" ambiguity.
+- Don't add an Advance Round button back to the Portfolio. The
+  Conversation Report's Continue button is the only round-advance
+  affordance; an action bar always read 1-action-remaining (one
+  action per round) and added a redundant click.
