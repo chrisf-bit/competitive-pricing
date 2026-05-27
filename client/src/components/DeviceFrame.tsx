@@ -137,13 +137,23 @@ export function PhoneFrame({
 
 // ───────────────────────── LaptopFrame ─────────────────────────
 
-export function LaptopFrame({ children }: { children: ReactNode }) {
+export function LaptopFrame({
+  children,
+  backdrop,
+}: {
+  children: ReactNode;
+  /** Optional override for the area around the laptop. Accepts any
+   *  CSS background value. Defaults to the standard navy radial. */
+  backdrop?: string;
+}) {
   return (
     <div
       style={{
         position: 'absolute',
         inset: 0,
-        background: FRAME_BACKDROP,
+        background: backdrop ?? FRAME_BACKDROP,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
