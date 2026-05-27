@@ -16,13 +16,24 @@ const FRAME_BACKDROP = 'radial-gradient(ellipse at center, rgba(0, 53, 128, 0.18
 
 // ───────────────────────── PhoneFrame ─────────────────────────
 
-export function PhoneFrame({ children }: { children: ReactNode }) {
+export function PhoneFrame({
+  children,
+  backdrop,
+}: {
+  children: ReactNode;
+  /** Optional override for the area around the phone body. Accepts any
+   *  CSS background value (gradient, url(), layered values). Defaults to
+   *  the standard navy radial gradient. */
+  backdrop?: string;
+}) {
   return (
     <div
       style={{
         position: 'absolute',
         inset: 0,
-        background: FRAME_BACKDROP,
+        background: backdrop ?? FRAME_BACKDROP,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

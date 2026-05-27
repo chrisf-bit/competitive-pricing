@@ -10,6 +10,7 @@ import {
 } from '../data/gameMasterScript';
 import type { KnowledgeCheckResult } from '../types';
 import { PhoneFrame } from '../components/DeviceFrame';
+import gmChatBackdrop from '../assets/gm-chat-backdrop.png';
 
 interface GameMasterChatScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
@@ -197,7 +198,7 @@ export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: G
   const correctCount = results.filter((r) => r.correct).length;
 
   return (
-    <PhoneFrame>
+    <PhoneFrame backdrop={`url(${gmChatBackdrop})`}>
     <div
       style={{
         height: '100%',
