@@ -25,6 +25,32 @@ export function ClearedCelebrationScreen({
     return () => clearTimeout(t);
   }, []);
 
+  // Preload + fully decode the backdrop before painting it. Otherwise
+  // the browser shows progressive PNG decode (visible bands from the
+  // top) while the motion.img is already at opacity 1.
+  const [bgReady, setBgReady] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    img.src = clearedImage;
+    const done = img.decode
+      ? img.decode().catch(() => undefined)
+      : new Promise<void>((resolve) => {
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        });
+    const fallback = setTimeout(() => {
+      if (!cancelled) setBgReady(true);
+    }, 2500);
+    done.then(() => {
+      if (!cancelled) setBgReady(true);
+    });
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
+
   const avatar = getAvatarById(avatarId);
 
   return (
@@ -40,23 +66,27 @@ export function ClearedCelebrationScreen({
         justifyContent: 'center',
       }}
     >
-      {/* Background image - darkened for legibility */}
-      <motion.img
-        src={clearedImage}
-        alt=""
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: 'easeOut' }}
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          objectPosition: 'center',
-          filter: 'brightness(0.55)',
-        }}
-      />
+      {/* Background image - darkened for legibility. Only mounted once
+          the image has fully decoded so it fades in as a complete frame
+          instead of revealing in bands while the PNG decodes. */}
+      {bgReady && (
+        <motion.img
+          src={clearedImage}
+          alt=""
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            filter: 'brightness(0.55)',
+          }}
+        />
+      )}
 
       {/* Additional vignette for extra contrast around the title */}
       <div
