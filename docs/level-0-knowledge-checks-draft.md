@@ -77,9 +77,9 @@ Flag any item you'd want SMEs Adriana / Irene / Daria to weigh in on with `[REVI
 - a) Public Pricing Adoption %
 - b) Genius Pricing Adoption %
 - c) Competitive Partner Share
-- d) **Average Daily Rate** ✓
+- d) **Review Score** ✓
 
-**Rationale:** The driver-metric pyramid for eRPD includes Public RPD, Loyal RPD, Public Pricing Adoption %, Competitive Partner Share, and Genius Pricing Adoption %. ADR is not a driver metric in this framework.
+**Rationale:** The driver-metric pyramid for eRPD includes Public RPD, Loyal RPD, Public Pricing Adoption %, Competitive Partner Share, and Genius Pricing Adoption %. Review Score shapes overall partner performance but it isn't a pricing driver. (Swapped in here in preference to ADR, which can indirectly influence eRPD and risked muddying the question.)
 **Source:** [STEERING] page 7
 
 ---

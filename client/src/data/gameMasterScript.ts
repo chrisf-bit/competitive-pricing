@@ -111,14 +111,14 @@ export const gmScript: GMBeat[] = [
       options: [
         { text: 'Public Pricing Adoption %', isCorrect: false },
         { text: 'Genius Pricing Adoption %', isCorrect: false },
-        { text: 'Average Daily Rate', isCorrect: true },
+        { text: 'Review Score', isCorrect: true },
         { text: 'Competitive Partner Share', isCorrect: false },
       ],
       followUp: {
         correct:
-          "Right. ADR isn't on the pyramid. The drivers are Public RPD, Loyal RPD, the two Adoption metrics, and Competitive Partner Share.",
+          "Right. Review Score isn't on the pricing pyramid - it shapes overall partner performance but it isn't a pricing driver. The drivers are Public RPD, Loyal RPD, the two Adoption metrics, and Competitive Partner Share.",
         incorrect:
-          "Average Daily Rate is the odd one out. The pyramid is Public RPD, Loyal RPD, Public Pricing Adoption, Genius Pricing Adoption, and Competitive Partner Share. ADR sits outside that.",
+          "Review Score is the odd one out - it shapes overall partner performance but it isn't a pricing driver. The pyramid is Public RPD, Loyal RPD, Public Pricing Adoption, Genius Pricing Adoption, and Competitive Partner Share.",
       },
     },
   },
