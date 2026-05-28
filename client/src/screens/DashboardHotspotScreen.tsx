@@ -143,7 +143,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            filter: 'brightness(0.55)',
+            filter: 'brightness(0.85)',
             zIndex: 0,
           }}
         />
