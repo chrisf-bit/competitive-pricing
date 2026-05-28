@@ -46,6 +46,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState<ChallengeResult[]>([]);
   const [pickedId, setPickedId] = useState<string | null>(null);
+  const [bgLoaded, setBgLoaded] = useState(false);
 
   // On retry, filter to just the challenges the learner got wrong.
   // itemIds are 'data-insights-{challengeId}' so we strip the prefix.
@@ -100,13 +101,16 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
         overflow: 'hidden',
       }}
     >
-      {/* Backdrop - darkened so the table and text stay legible on top. */}
+      {/* Backdrop - darkened so the table and text stay legible on top.
+          Fade is gated on the bitmap actually loading so the 0->1 opacity
+          transition happens after the image is paintable, not before. */}
       <motion.img
         src={dataInsightsBackdrop}
         alt=""
+        onLoad={() => setBgLoaded(true)}
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+        animate={{ opacity: bgLoaded ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
         style={{
           position: 'absolute',
           inset: 0,

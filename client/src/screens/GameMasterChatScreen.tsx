@@ -198,7 +198,7 @@ export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: G
   const correctCount = results.filter((r) => r.correct).length;
 
   return (
-    <PhoneFrame backdrop={`url(${gmChatBackdrop})`}>
+    <PhoneFrame backdropImage={gmChatBackdrop}>
     <div
       style={{
         height: '100%',

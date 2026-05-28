@@ -1,4 +1,5 @@
-import type { ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
+import { motion } from 'framer-motion';
 import { Signal, Wifi, BatteryFull } from 'lucide-react';
 
 /**
@@ -14,24 +15,56 @@ import { Signal, Wifi, BatteryFull } from 'lucide-react';
 
 const FRAME_BACKDROP = 'radial-gradient(ellipse at center, rgba(0, 53, 128, 0.18) 0%, var(--brand-navy-dark) 70%)';
 
+/**
+ * Renders an image backdrop that fades in once the bitmap has actually
+ * loaded. Without the onLoad gate, the opacity animation runs before
+ * the image is paintable and the user sees the bitmap pop in at full
+ * opacity rather than a smooth fade.
+ */
+function ImageBackdrop({ src }: { src: string }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <motion.img
+      src={src}
+      alt=""
+      onLoad={() => setLoaded(true)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: loaded ? 1 : 0 }}
+      transition={{ duration: 0.6, ease: 'easeOut' }}
+      style={{
+        position: 'absolute',
+        inset: 0,
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        objectPosition: 'center',
+        zIndex: 0,
+      }}
+    />
+  );
+}
+
 // ───────────────────────── PhoneFrame ─────────────────────────
 
 export function PhoneFrame({
   children,
   backdrop,
+  backdropImage,
 }: {
   children: ReactNode;
-  /** Optional override for the area around the phone body. Accepts any
-   *  CSS background value (gradient, url(), layered values). Defaults to
-   *  the standard navy radial gradient. */
+  /** Optional CSS-background override for the area around the phone body
+   *  (gradient, layered values). Defaults to the standard navy radial. */
   backdrop?: string;
+  /** Optional image URL rendered as a fading <img> beneath the phone.
+   *  Takes precedence over `backdrop` when set. */
+  backdropImage?: string;
 }) {
   return (
     <div
       style={{
         position: 'absolute',
         inset: 0,
-        background: backdrop ?? FRAME_BACKDROP,
+        background: backdropImage ? 'var(--brand-navy-dark)' : (backdrop ?? FRAME_BACKDROP),
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
@@ -40,9 +73,12 @@ export function PhoneFrame({
         padding: '20px',
       }}
     >
+      {backdropImage && <ImageBackdrop src={backdropImage} />}
       <div
         style={{
           // Phone body (the dark bezel)
+          position: 'relative',
+          zIndex: 1,
           width: 'min(420px, 100%)',
           aspectRatio: '9 / 19',
           maxHeight: '100%',
@@ -51,7 +87,6 @@ export function PhoneFrame({
           padding: 8,
           boxShadow:
             '0 30px 70px rgba(0,0,0,0.55), 0 0 0 1.5px rgba(255,255,255,0.06), inset 0 0 0 2px rgba(255,255,255,0.04)',
-          position: 'relative',
           display: 'flex',
           flexDirection: 'column',
         }}
@@ -140,18 +175,22 @@ export function PhoneFrame({
 export function LaptopFrame({
   children,
   backdrop,
+  backdropImage,
 }: {
   children: ReactNode;
-  /** Optional override for the area around the laptop. Accepts any
-   *  CSS background value. Defaults to the standard navy radial. */
+  /** Optional CSS-background override for the area around the laptop
+   *  (gradient, layered values). Defaults to the standard navy radial. */
   backdrop?: string;
+  /** Optional image URL rendered as a fading <img> beneath the laptop.
+   *  Takes precedence over `backdrop` when set. */
+  backdropImage?: string;
 }) {
   return (
     <div
       style={{
         position: 'absolute',
         inset: 0,
-        background: backdrop ?? FRAME_BACKDROP,
+        background: backdropImage ? 'var(--brand-navy-dark)' : (backdrop ?? FRAME_BACKDROP),
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
@@ -160,8 +199,11 @@ export function LaptopFrame({
         padding: '24px 32px',
       }}
     >
+      {backdropImage && <ImageBackdrop src={backdropImage} />}
       <div
         style={{
+          position: 'relative',
+          zIndex: 1,
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',

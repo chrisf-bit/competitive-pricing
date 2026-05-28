@@ -85,7 +85,7 @@ export function EmailAuditScreen({
   }
 
   return (
-    <LaptopFrame backdrop={`url(${emailAuditBackdrop})`}>
+    <LaptopFrame backdropImage={emailAuditBackdrop}>
     <div
       style={{
         height: '100%',
