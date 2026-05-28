@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Award } from 'lucide-react';
-import clearedImage from '../assets/cleared-dark.png';
+import clearedImage from '../assets/cleared-dark.webp';
 import type { CharacterArchetype } from '../types';
 import { getAvatarById } from '../data/characters';
 

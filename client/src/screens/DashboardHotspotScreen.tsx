@@ -14,7 +14,7 @@ import {
   type DataInsightsChallenge,
 } from '../data/dashboardHotspot';
 import type { KnowledgeCheckResult } from '../types';
-import dataInsightsBackdrop from '../assets/data-insights-backdrop.png';
+import dataInsightsBackdrop from '../assets/data-insights-backdrop.webp';
 
 /**
  * Data & Insights screen.

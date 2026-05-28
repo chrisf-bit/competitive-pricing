@@ -10,7 +10,7 @@ import {
 } from '../data/gameMasterScript';
 import type { KnowledgeCheckResult } from '../types';
 import { PhoneFrame } from '../components/DeviceFrame';
-import gmChatBackdrop from '../assets/gm-chat-backdrop.png';
+import gmChatBackdrop from '../assets/gm-chat-backdrop.webp';
 
 interface GameMasterChatScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;

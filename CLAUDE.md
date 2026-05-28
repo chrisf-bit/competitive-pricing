@@ -84,6 +84,28 @@ Key files:
   partner-property filter on conversation options.
 - **Role-agnostic copy.** Not all partner-facing roles are AMs - the
   briefing says "manage partner accounts" without naming the role.
+- **Partners get hotel-styled names where ambiguity is possible.**
+  The Issue Tree reveal's worked example is now **Hotel Atlante**,
+  not "Maria". A first-name-only partner read as a possible LPS
+  colleague, especially next to the Email Audit recipient who also
+  happens to be a Maria. When introducing a new partner in a
+  teaching context (worked examples, clearance copy), prefer the
+  property name so the learner-vs-partner relationship is
+  unambiguous. Pronouns shift to **they/their** when the referent
+  is the hotel as an entity. Avoid "this account" / "partner
+  account" - use partner-direct language ("this partner", "their
+  pricing").
+- **Partner-freedom statement is rendered in second person inside
+  partner-facing copy.** The approved phrase becomes "**you as a
+  partner are completely free to choose your own pricing and
+  distribution strategy**" when the surrounding text is addressed
+  directly to the partner (e.g. Sam's Email Audit drafts). The
+  third-person "partners are completely free..." reads awkwardly
+  in a direct-address email. Because we've adapted person/tense,
+  treat this as the **approved partner-freedom statement** rather
+  than a verbatim quote - the legal intent is preserved, the
+  surface form adapts to context. The third-person form is still
+  fine in LPS-side / training copy.
 
 ### Compliance guardrails (legal)
 
@@ -697,6 +719,16 @@ debate:
   just those items, and `finishLevel0Activity` clears the flag.
   Correct answers from previous attempts stay in the results -
   they're not re-asked.
+- **The GM pricing-pyramid distractor is Review Score, not ADR.**
+  The Day-one-with-Alex "which metric is NOT on the pyramid" knowledge
+  check (`gmScript` beat in `data/gameMasterScript.ts`) uses Review
+  Score as the correct (i.e. not-a-driver) answer. ADR was previously
+  here but was muddy because ADR can indirectly influence eRPD, so
+  the question could be argued either way. Review Score is cleanly
+  outside the pricing pyramid - it shapes overall partner performance
+  without being a pricing driver - and the follow-up copy spells that
+  out. If you re-author this beat, keep the distractor cleanly
+  non-pricing.
 
 ### Character build
 
@@ -742,6 +774,23 @@ debate:
 - Both frames use `position: absolute, inset: 0` (not `fixed`) so they
   fit inside the ClearanceShell's content area below the progress
   strip.
+- **Both frames accept an optional `backdrop` prop** that overrides
+  the default navy radial gradient. Used to place an illustrated
+  office scene behind the device chrome so the activity reads as
+  "the learner sitting at their desk" rather than a navy void. The
+  GM Chat phone uses `gm-chat-backdrop.webp` (city-window office
+  scene); the Email Audit laptop uses `email-audit-backdrop.webp`
+  (notebook and mug on a clean desk). Any CSS background value is
+  accepted (gradients, layered values, url()) so future activities
+  can swap in their own scene.
+- **Large PNG backdrops must be decoded before fading in.** The
+  Cleared Celebration screen runs `img.decode()` on its backdrop and
+  only mounts the `motion.img` once the promise resolves (with a
+  2.5s safety fallback for hung fetches), mirroring the avatar
+  preload pattern. Without this the motion fade plays while the
+  browser is still progressively decoding the PNG, producing a
+  visible top-to-bottom band reveal. Apply the same pattern to any
+  future full-bleed backdrop image larger than ~500KB.
 
 ### Portfolio market banner
 

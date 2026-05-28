@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plane, ChevronRight } from 'lucide-react';
-import splashImage from '../assets/splash-dark.png';
+import splashImage from '../assets/splash-dark.webp';
 
 interface SplashScreenProps {
   onBegin: () => void;

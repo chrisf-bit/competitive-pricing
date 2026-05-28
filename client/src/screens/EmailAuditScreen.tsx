@@ -4,7 +4,7 @@ import { ChevronRight, Check, X, Mail, ShieldCheck, ShieldAlert, FileText } from
 import { getEmailAudit, type EmailAuditScenario, type EmailPhrase } from '../data/emailAudit';
 import type { KnowledgeCheckResult, ParityRegime } from '../types';
 import { LaptopFrame } from '../components/DeviceFrame';
-import emailAuditBackdrop from '../assets/email-audit-backdrop.png';
+import emailAuditBackdrop from '../assets/email-audit-backdrop.webp';
 
 interface EmailAuditScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
