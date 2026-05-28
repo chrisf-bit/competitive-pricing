@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ChevronRight,
@@ -14,6 +14,7 @@ import {
   type DataInsightsChallenge,
 } from '../data/dashboardHotspot';
 import type { KnowledgeCheckResult } from '../types';
+import dataInsightsBackdrop from '../assets/data-insights-backdrop.png';
 
 /**
  * Data & Insights screen.
@@ -45,6 +46,32 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
   const [currentIndex, setCurrentIndex] = useState(0);
   const [results, setResults] = useState<ChallengeResult[]>([]);
   const [pickedId, setPickedId] = useState<string | null>(null);
+
+  // Preload + fully decode the backdrop before painting it so the fade
+  // shows a complete frame rather than the browser's progressive PNG
+  // decode banding from the top. Same pattern as ClearedCelebrationScreen.
+  const [bgReady, setBgReady] = useState(false);
+  useEffect(() => {
+    let cancelled = false;
+    const img = new Image();
+    img.src = dataInsightsBackdrop;
+    const done = img.decode
+      ? img.decode().catch(() => undefined)
+      : new Promise<void>((resolve) => {
+          img.onload = () => resolve();
+          img.onerror = () => resolve();
+        });
+    const fallback = setTimeout(() => {
+      if (!cancelled) setBgReady(true);
+    }, 2500);
+    done.then(() => {
+      if (!cancelled) setBgReady(true);
+    });
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
 
   // On retry, filter to just the challenges the learner got wrong.
   // itemIds are 'data-insights-{challengeId}' so we strip the prefix.
@@ -90,6 +117,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
   return (
     <div
       style={{
+        position: 'relative',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',
@@ -98,13 +126,39 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
         overflow: 'hidden',
       }}
     >
+      {/* Backdrop - mounted only once decoded so it fades in as a
+          complete frame rather than revealing in bands. Darkened so
+          the table and text stay legible on top. */}
+      {bgReady && (
+        <motion.img
+          src={dataInsightsBackdrop}
+          alt=""
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            filter: 'brightness(0.55)',
+            zIndex: 0,
+          }}
+        />
+      )}
+
       {/* Question + answers / feedback - sits ABOVE the table */}
       <div
         style={{
+          position: 'relative',
+          zIndex: 1,
           flexShrink: 0,
           padding: '16px 28px 14px',
-          borderBottom: '1px solid rgba(255,255,255,0.08)',
-          background: 'rgba(0,0,0,0.20)',
+          borderBottom: '1px solid rgba(255,255,255,0.12)',
+          background: 'rgba(0, 15, 40, 0.55)',
+          backdropFilter: 'blur(6px)',
         }}
       >
         <div style={{ maxWidth: 960, margin: '0 auto' }}>
@@ -284,6 +338,8 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
       {/* Table - below the question, fills remaining space */}
       <div
         style={{
+          position: 'relative',
+          zIndex: 1,
           flex: 1,
           padding: '14px 28px 18px',
           overflow: 'auto',
