@@ -107,6 +107,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           background: 'rgba(0,0,0,0.20)',
         }}
       >
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
         <div
           style={{
             display: 'flex',
@@ -277,6 +278,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
             </motion.div>
           )}
         </AnimatePresence>
+        </div>
       </div>
 
       {/* Table - below the question, fills remaining space */}
@@ -288,11 +290,13 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           minHeight: 0,
         }}
       >
-        <KpiTable
-          rows={samplePartnerData}
-          highlightedHotelId={result?.pickedId ?? null}
-          correctHotelId={result ? challenge?.correctHotelId ?? null : null}
-        />
+        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+          <KpiTable
+            rows={samplePartnerData}
+            highlightedHotelId={result?.pickedId ?? null}
+            correctHotelId={result ? challenge?.correctHotelId ?? null : null}
+          />
+        </div>
       </div>
     </div>
   );
