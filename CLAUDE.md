@@ -76,16 +76,26 @@ Key files:
 - **eRPD is partner-account level for LPS daily work.** Country-level
   is only the rollup objective. Don't say "your country's eRPD" in
   learner copy.
-- **Internal-only metric names never appear in partner dialogue.**
-  eRPD / Experienced RPD, Public RPD, Loyal RPD, and Lose Price Public
-  are LPS-side metric names - partners don't see them and the learner
-  must never say them aloud. Translate to partner-facing language in
-  conversation dialogue: "visibility", "price competitiveness",
-  "you're losing the price comparison on X% of searches", "what
-  Genius members see vs what non-Genius traffic sees". Internal names
-  are fine on the LPS dashboard / partner-detail screens (those are
-  the learner's pre-call data view) and in code/type fields. Only the
-  spoken-to-partner dialogue is gated.
+- **Internal-only metric names never appear in partner dialogue -
+  including in deliberately-wrong learner options.** eRPD /
+  Experienced RPD, Public RPD, Loyal RPD, Lose Price Public, and
+  Competitive Partner Share / Price Bucket are LPS-side metric
+  names. Partners don't see them and the learner must never say
+  them aloud. Translate to partner-facing language in conversation
+  dialogue: "visibility", "price competitiveness", "you're losing
+  the price comparison on X% of searches", "what Genius members see
+  vs what non-Genius traffic sees", "where your rates sit vs
+  Brand.com / your key OTAs". Internal names are fine on the LPS
+  dashboard / partner-detail screens (those are the learner's
+  pre-call data view) and in code / type fields. **Critically: this
+  ban also covers `risky` / `borderline` learner options where the
+  intent is to teach the lesson by violation.** Legal will block
+  the line even if it's flagged in-app as the wrong pick - the
+  phrase appearing in any partner-facing dialogue string is the
+  problem, not the grading around it. Compliance lessons must be
+  taught through the *other* violation modes (ranking threats,
+  parity-overreach in No-Parity markets, dictating external channel
+  strategy, etc.).
 - **No "parity" in conversations with No-Parity partners.** It's a
   partner-property filter on conversation options.
 - **Role-agnostic copy.** Not all partner-facing roles are AMs - the
