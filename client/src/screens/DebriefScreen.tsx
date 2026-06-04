@@ -9,13 +9,20 @@ import {
   RotateCcw,
   Lock,
   Play,
+  Download,
 } from 'lucide-react';
-import type { ScoreBreakdown, PartnerState, ParityRegime } from '../types';
+import type {
+  ScoreBreakdown,
+  PartnerState,
+  ParityRegime,
+  LearnerProfile,
+} from '../types';
 import { RelationshipBadge } from '../components/MetricBadge';
 import { initialPartners } from '../data/partners';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 import { getPersonaById } from '../data/characters';
 import { reportLessonStatus } from '../util/persistence';
+import { downloadDebriefPdf } from '../util/debriefPdf';
 
 const PRACTICE_AVAILABLE_ROUNDS = [1, 2, 3] as const;
 const TOTAL_ROUNDS_DISPLAYED = 10;
@@ -36,6 +43,12 @@ interface DebriefScreenProps {
    * carried...") shown at the end of the run.
    */
   personaId: string | null;
+  /**
+   * Full learner profile - used to generate the downloadable summary
+   * PDF (player name, persona resolution, regime). Optional for
+   * backwards compat; the download button hides if absent.
+   */
+  learnerProfile?: LearnerProfile;
   onRestart: () => void;
   onPracticeRound: (round: number) => void;
 }
@@ -56,6 +69,7 @@ export function DebriefScreen({
   roundStars,
   regime,
   personaId,
+  learnerProfile,
   onRestart,
   onPracticeRound,
 }: DebriefScreenProps) {
@@ -570,15 +584,47 @@ export function DebriefScreen({
           </div>
         </div>
 
-        {/* Replay button */}
+        {/* Footer actions: download summary + replay */}
         <div
           style={{
             display: 'flex',
             justifyContent: 'center',
+            gap: 12,
             paddingBottom: 32,
+            flexWrap: 'wrap',
             animation: 'fadeIn 0.4s ease 0.5s backwards',
           }}
         >
+          {learnerProfile && (
+            <button
+              onClick={() =>
+                downloadDebriefPdf({
+                  learnerProfile,
+                  score,
+                  partners,
+                  roundStars,
+                  regime,
+                  personaId,
+                })
+              }
+              style={{
+                background: 'var(--brand-yellow)',
+                color: 'var(--brand-navy-dark)',
+                padding: '12px 24px',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: 15,
+                fontWeight: 800,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                cursor: 'pointer',
+                boxShadow: '0 3px 12px rgba(254,186,2,0.3)',
+              }}
+            >
+              <Download size={16} />
+              Download your summary
+            </button>
+          )}
           <button
             onClick={onRestart}
             style={{

@@ -306,6 +306,7 @@ export default function App() {
               roundStars={state.roundStars}
               regime={state.learnerProfile.market?.parityRegime ?? null}
               personaId={state.learnerProfile.archetype?.id ?? null}
+              learnerProfile={state.learnerProfile}
               onRestart={game.onRestart}
               onPracticeRound={game.onStartPracticeRound}
             />

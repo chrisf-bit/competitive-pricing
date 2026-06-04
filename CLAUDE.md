@@ -961,6 +961,34 @@ goal copy.
   - Verified via `npm run build` (clean TS + 820KB JS / 227KB
     gzipped). Browser test on the deployed Render URL is the next
     gate.
+- **Phase 3 landed (commit on `release-2-partner-detail`):** Debrief
+  downloadable summary PDF.
+  - `package.json` adds `jspdf` ^3.0.1 as a runtime dep.
+  - `util/debriefPdf.ts` builds an A4 PDF from the run's data:
+    cover (name, persona, regime, completion date, overall grade,
+    portfolio RPD, relationship health), round-by-round results
+    (10 rows showing target partner, engaged partner if different,
+    stars), Well done section (persona `retroOnWin` + the rounds
+    that scored 2-3 stars), Coaching focus section (persona
+    `retroOnLoss` + the 0-star rounds with the partner the learner
+    picked vs the target), and a Where-to-grow-next aggregate
+    coaching line. Pure text - no images, no fonts beyond the
+    Helvetica that ships with jsPDF.
+  - jsPDF is loaded via **dynamic import** (`await import('jspdf')`)
+    so the ~770KB of jsPDF + html2canvas + dompurify chunks are
+    lazy-loaded only when the learner clicks Download. Main bundle
+    stays at 827KB - same as Phase 2 + 7KB for the wire-up.
+  - `DebriefScreen.tsx` gains a yellow "Download your summary" CTA
+    next to the existing "Play Again" button. The button hides
+    gracefully if `learnerProfile` isn't passed (backwards-compat
+    for non-App callers).
+  - `App.tsx` passes `state.learnerProfile` through to the Debrief
+    so the PDF can address the learner by name.
+  - Filename pattern: `rate-right-summary-{slug}-{YYYY-MM-DD}.pdf`.
+  - No backend, no network call - generated entirely client-side
+    inside the SCORM zip. SCORM zip output went 1.44MB -> 1.68MB
+    to accommodate the lazy-loaded jsPDF chunks (still fine for
+    LMS upload).
 
 ### Partner Detail restructure
 
