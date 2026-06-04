@@ -774,23 +774,41 @@ debate:
 - Both frames use `position: absolute, inset: 0` (not `fixed`) so they
   fit inside the ClearanceShell's content area below the progress
   strip.
-- **Both frames accept an optional `backdrop` prop** that overrides
-  the default navy radial gradient. Used to place an illustrated
-  office scene behind the device chrome so the activity reads as
-  "the learner sitting at their desk" rather than a navy void. The
+- **Both frames accept two backdrop props.** Use `backdrop` for any
+  CSS background value (gradients, layered values, url()) that
+  overrides the default navy radial gradient. Use `backdropImage`
+  (added May 2026) for an image URL that should fade in as a real
+  `<img>` element. The `backdropImage` path renders via an internal
+  `ImageBackdrop` helper that gates the framer-motion opacity
+  transition on the image's `onLoad`, so the fade starts only once
+  the bitmap is paintable rather than running against an empty img.
   GM Chat phone uses `gm-chat-backdrop.webp` (city-window office
   scene); the Email Audit laptop uses `email-audit-backdrop.webp`
-  (notebook and mug on a clean desk). Any CSS background value is
-  accepted (gradients, layered values, url()) so future activities
-  can swap in their own scene.
-- **Large PNG backdrops must be decoded before fading in.** The
-  Cleared Celebration screen runs `img.decode()` on its backdrop and
-  only mounts the `motion.img` once the promise resolves (with a
-  2.5s safety fallback for hung fetches), mirroring the avatar
-  preload pattern. Without this the motion fade plays while the
-  browser is still progressively decoding the PNG, producing a
-  visible top-to-bottom band reveal. Apply the same pattern to any
-  future full-bleed backdrop image larger than ~500KB.
+  (notebook and mug on a clean desk). Both go through `backdropImage`
+  - they used to render via CSS `background`, which doesn't transition
+  at all, so the fade never played.
+- **All full-bleed backdrops are compressed WebP.** Splash
+  (`splash-dark.webp`), Cleared Celebration (`cleared-dark.webp`),
+  Data & Insights (`data-insights-backdrop.webp`), GM Chat, and
+  Email Audit. The compressed batch dropped ~9.3MB of source PNG to
+  ~234KB of WebP across initial-paint assets (~97% reduction) with
+  no visible quality loss on these stylised illustrations.
+- **Backdrop fade pattern: `motion.img` with `onLoad`-gated opacity.**
+  At this WebP size (30-80KB each) the older `img.decode()` pre-mount
+  gate is no longer needed - WebP doesn't show the band-reveal that
+  motivated the decode pattern on the original 1.5-2.2MB PNGs.
+  Splash and Cleared Celebration now mount the `motion.img`
+  immediately and fade over 0.4-0.5s; Data & Insights uses the
+  `onLoad` gate (without it, framer-motion finishes its 0->1 opacity
+  transition before the bitmap arrives and the image pops in at full
+  opacity). Any future full-bleed backdrop should follow the
+  `onLoad`-gated motion.img pattern rather than reintroducing the
+  decode-and-wait approach.
+- **Data & Insights content is constrained to a 960px column.** The
+  question strip, KPI table, and feedback all sit inside a centred
+  max-width wrapper so the screen doesn't feel awkwardly stretched
+  on wide viewports. The backdrop and bottom border still span full
+  width; only the content column is constrained.
 
 ### Portfolio market banner
 
@@ -894,3 +912,14 @@ from `main` branch).
   Conversation Report's Continue button is the only round-advance
   affordance; an action bar always read 1-action-remaining (one
   action per round) and added a redundant click.
+- Don't paint a full-bleed backdrop as a CSS `background` value
+  when you want it to fade in. CSS-background changes don't run
+  through framer-motion's opacity transition, so the bitmap pops in
+  at full opacity. Use DeviceFrame's `backdropImage` prop (for the
+  phone/laptop frames) or a `motion.img` with `onLoad`-gated opacity
+  (for screen-level backdrops). This is exactly what the Email Audit
+  and GM Chat backdrops were doing wrong before the May 2026 fix.
+- Don't swap backdrops back to PNG. WebP at 30-80KB each is what
+  makes the immediate-mount fade pattern work; reintroducing 1.5MB+
+  PNGs brings back the band-reveal that originally forced the
+  decode-gate workaround.
