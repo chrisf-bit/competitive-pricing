@@ -241,11 +241,6 @@ export function useGame() {
     setState((s) => ({ ...s, tutorialShown: true }));
   }, []);
 
-  /** Acknowledge the round's market update banner on the portfolio. */
-  const acknowledgeMarketUpdate = useCallback(() => {
-    setState((s) => ({ ...s, marketUpdateAcknowledged: true }));
-  }, []);
-
   /**
    * Mark the persona blind-spot card as expanded for a partner-round.
    * After this fires the card is hidden on subsequent visits to that
@@ -354,7 +349,6 @@ export function useGame() {
     finishLevel0Activity,
     requestLevel0Retry,
     markTutorialShown,
-    acknowledgeMarketUpdate,
     markBlindSpotExpanded,
     setIssueTreeHelperState,
     markIssueTreeHelperOpened,

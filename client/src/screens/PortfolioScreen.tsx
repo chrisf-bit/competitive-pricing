@@ -3,7 +3,6 @@ import {
   Building2,
   ChevronRight,
   Globe,
-  Check,
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
 import { RelationshipBadge } from '../components/MetricBadge';
@@ -12,18 +11,14 @@ interface PortfolioScreenProps {
   partners: PartnerState[];
   actionsThisRound: string[];
   marketContext: MarketContext;
-  marketUpdateAcknowledged: boolean;
   onSelectPartner: (id: string) => void;
-  onAcknowledgeMarketUpdate: () => void;
 }
 
 export function PortfolioScreen({
   partners,
   actionsThisRound,
   marketContext,
-  marketUpdateAcknowledged,
   onSelectPartner,
-  onAcknowledgeMarketUpdate,
 }: PortfolioScreenProps) {
   return (
     <div
@@ -87,56 +82,6 @@ export function PortfolioScreen({
           </span>
           {marketContext.seasonalNote}
         </span>
-        {marketUpdateAcknowledged ? (
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 800,
-              color: 'var(--brand-navy)',
-              background: 'rgba(0, 53, 128, 0.10)',
-              padding: '5px 12px',
-              borderRadius: 'var(--radius-pill)',
-              whiteSpace: 'nowrap',
-              border: '1px solid rgba(0, 53, 128, 0.15)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 4,
-            }}
-          >
-            <Check size={11} strokeWidth={3} />
-            Acknowledged
-          </span>
-        ) : (
-          <button
-            onClick={onAcknowledgeMarketUpdate}
-            style={{
-              fontSize: 11,
-              fontWeight: 800,
-              color: 'var(--brand-navy)',
-              background: 'var(--white)',
-              padding: '6px 14px',
-              borderRadius: 'var(--radius-pill)',
-              whiteSpace: 'nowrap',
-              border: '1.5px solid var(--brand-navy)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.06em',
-              cursor: 'pointer',
-              transition: 'background 0.15s ease, color 0.15s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'var(--brand-navy)';
-              e.currentTarget.style.color = 'var(--white)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'var(--white)';
-              e.currentTarget.style.color = 'var(--brand-navy)';
-            }}
-          >
-            Acknowledge
-          </button>
-        )}
       </div>
 
       {/* Partner cards */}

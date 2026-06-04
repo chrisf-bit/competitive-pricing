@@ -422,13 +422,14 @@ function getGuideContent(
 } {
   switch (screen) {
     case 'portfolio':
-      // Portfolio steps render in the same neutral list style as
-      // Partner Detail. The engine can only observe market-update
-      // acknowledgement; pretending to track the other items would
-      // leave them looking permanently incomplete next to the one
-      // tick. The Advance Round step was removed alongside the
-      // action bar - the Conversation Report's Continue button is
-      // the only thing that advances now.
+      // Portfolio steps render as neutral, untracked reminders. The
+      // engine doesn't observe whether the learner actually read the
+      // market update or which partner they picked, so neither step
+      // carries a `done` flag - faking partial tracking would make
+      // the whole list look permanently incomplete. The Advance
+      // Round step was removed alongside the action bar - the
+      // Conversation Report's Continue button is the only thing
+      // that advances rounds now.
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:

@@ -655,13 +655,6 @@ export interface GameState {
   /** Whether the partner-sim tutorial has been auto-shown to the learner already. */
   tutorialShown: boolean;
   /**
-   * Whether the learner has clicked the Acknowledge button on the
-   * Portfolio's market update banner this round. Resets on round
-   * advance and on practice-round entry. Drives the strikethrough on
-   * the Simulation Guide's 'Check the market update' step.
-   */
-  marketUpdateAcknowledged: boolean;
-  /**
    * Set of `${partnerId}-${round}` keys for which the learner has
    * expanded the persona blind-spot card on Partner Detail. Once a key
    * lands here, the card stays hidden on subsequent visits to that

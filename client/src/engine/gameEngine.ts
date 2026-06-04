@@ -102,7 +102,6 @@ export function createInitialState(overrides?: {
     level0ReturnTo: null,
     level0RetryItemIds: null,
     tutorialShown: false,
-    marketUpdateAcknowledged: false,
     expandedBlindSpots: [],
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
@@ -147,7 +146,6 @@ export function startPracticeRound(state: GameState, round: number): GameState {
     selectedPartnerId: null,
     partners,
     marketContext: marketContextByRound[round] ?? marketContextByRound[1],
-    marketUpdateAcknowledged: false,
     expandedBlindSpots: [],
     issueTreeHelperStates: {},
     conversationInProgress: null,
@@ -678,7 +676,6 @@ export function advanceRound(state: GameState): GameState {
     selectedPartnerId: null,
     partners: updatedPartners,
     marketContext: marketContextByRound[nextRound] ?? state.marketContext,
-    marketUpdateAcknowledged: false,
     roundSummaries: [...state.roundSummaries, roundSummary],
     conversationInProgress: null,
   };

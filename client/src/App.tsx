@@ -220,9 +220,7 @@ export default function App() {
               }
               actionsThisRound={state.actionsThisRound}
               marketContext={state.marketContext}
-              marketUpdateAcknowledged={state.marketUpdateAcknowledged}
               onSelectPartner={game.onSelectPartner}
-              onAcknowledgeMarketUpdate={game.acknowledgeMarketUpdate}
             />
           )}
           {state.screen === 'partner-detail' && state.selectedPartnerId && (

@@ -820,18 +820,23 @@ debate:
 
 ### Portfolio market banner
 
-- The market update banner on the Portfolio has an **Acknowledge
-  button**, not a Demand pill. The button toggles a per-round
-  `marketUpdateAcknowledged` flag on GameState (resets on advance
-  and on practice-round entry). On click the button swaps to an
-  'Acknowledged' check pill; the banner text itself stays normal
-  (no strikethrough).
-- The Simulation Guide's 'Check the market update' step reads
-  `marketUpdateAcknowledged` for its `done` state. The next step
-  ('Pick the partner who needs you most') only becomes `active`
-  once acknowledged, encouraging read-then-decide. Completed Guide
-  steps don't strikethrough - text stays readable and a green check
-  icon appears on the right.
+- The market update banner on the Portfolio is **read-only** - the
+  yellow band with the seasonal note carries the information, and
+  the learner moves on. The earlier Acknowledge button and its
+  `marketUpdateAcknowledged` GameState flag were retired in
+  2026-06 alongside the Actions pill, on the same principle: the
+  click did nothing the learner could see (the Simulation Guide
+  step it gated had already dropped strikethrough feedback because
+  not all Guide steps could be tracked consistently). Don't add it
+  back unless we have a reason to *gate* something on it; a
+  "tap-to-acknowledge" with no downstream effect is friction
+  without payoff.
+- The Simulation Guide's portfolio steps ("Check the market
+  update", "Pick the partner who needs you most") are now both
+  untracked reminder items - neither carries a `done` flag. The
+  rendering style still supports `active` / `done` for screens
+  where tracking is consistent (e.g. the in-call Hook / Diagnosis
+  / Pitch progression).
 
 ### Fullscreen on launch
 
