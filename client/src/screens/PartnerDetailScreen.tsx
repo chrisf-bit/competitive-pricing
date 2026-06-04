@@ -754,8 +754,12 @@ function BigMetric({
   value: string;
   changeText?: string;
   highlight?: boolean;
-  /** Optional definition shown via the inline (i) tooltip. */
-  helpText?: string;
+  /**
+   * Optional tooltip body for the inline (i) icon. Plain strings get
+   * the default definition styling; pass a ReactNode for tooltips
+   * that surface live data (e.g. the active scenarios list).
+   */
+  helpText?: React.ReactNode;
 }) {
   return (
     <div
@@ -1077,16 +1081,18 @@ function TabPill({
 
 function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
   const m = partner.metrics;
-  // Fold the active scenario names into the Scenarios tile's help
-  // tooltip so the tile stays visually consistent with the others
-  // (no clickable card in an otherwise read-only row). Hovering the
-  // (i) icon reveals both the metric definition and the per-partner
-  // list - one affordance, like every other tile in the row.
+  // Scenarios tooltip surfaces live partner data, not a definition
+  // (the metric name is common knowledge for the audience). Style
+  // is intentionally different from the other tiles' tooltips - a
+  // small yellow header + bullet list reads as "this is the value"
+  // rather than "this is what the metric means".
   const scenarioNames = m.activeScenarioNames;
-  const scenariosHelpText =
-    scenarioNames && scenarioNames.length > 0
-      ? `${metricDefinitions.activeScenarios.helpText} Currently active: ${scenarioNames.join(', ')}.`
-      : metricDefinitions.activeScenarios.helpText;
+  const scenariosHelp =
+    scenarioNames && scenarioNames.length > 0 ? (
+      <ScenariosTooltipBody names={scenarioNames} />
+    ) : (
+      'No active scenarios on this partner.'
+    );
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -1125,7 +1131,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
         />
         <BigMetric
           label={metricDefinitions.activeScenarios.label}
-          helpText={scenariosHelpText}
+          helpText={scenariosHelp}
           value={`${m.activeScenarios}`}
         />
         <BigMetric
@@ -1186,6 +1192,67 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           format="number"
         />
       </div>
+    </div>
+  );
+}
+
+/**
+ * Tooltip body for the Scenarios tile. Styled deliberately differently
+ * from the prose-style tooltips used elsewhere (small brand-yellow
+ * header + bullet list) so a learner can tell at a glance this is
+ * live data, not a definition of what "Scenarios" means.
+ */
+function ScenariosTooltipBody({ names }: { names: string[] }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+      <div
+        style={{
+          fontSize: 9.5,
+          fontWeight: 800,
+          color: 'var(--brand-yellow)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.10em',
+        }}
+      >
+        Current scenarios
+      </div>
+      <ul
+        style={{
+          listStyle: 'none',
+          margin: 0,
+          padding: 0,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 4,
+        }}
+      >
+        {names.map((name) => (
+          <li
+            key={name}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              fontSize: 12.5,
+              fontWeight: 600,
+              color: 'var(--white)',
+              lineHeight: 1.2,
+            }}
+          >
+            <span
+              aria-hidden
+              style={{
+                width: 5,
+                height: 5,
+                borderRadius: 999,
+                background: 'var(--brand-yellow)',
+                flexShrink: 0,
+              }}
+            />
+            {name}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

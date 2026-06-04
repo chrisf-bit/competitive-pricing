@@ -28,8 +28,16 @@ import { Info } from 'lucide-react';
 interface MetricLabelProps {
   /** Display label shown to the learner. */
   label: string;
-  /** Plain-English definition shown on hover/tap. */
-  helpText: string;
+  /**
+   * Tooltip body. Plain strings carry a generic metric definition (the
+   * default styling - paragraph text, navy background). For tooltips
+   * that surface live partner data rather than a definition (e.g. the
+   * Scenarios tile listing the active scenarios), pass a ReactNode and
+   * apply the data styling inside it - that's the signal to the
+   * learner that the tooltip is showing the value, not explaining the
+   * metric.
+   */
+  helpText: React.ReactNode;
   /**
    * Optional override for the label typography. Defaults to the
    * 9px / 800 / uppercase / 0.08em-tracking pattern that matches the
