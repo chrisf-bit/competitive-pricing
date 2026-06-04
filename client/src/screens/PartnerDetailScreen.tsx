@@ -13,8 +13,8 @@ import {
   History,
   UserCircle,
   ChevronRight,
-  ChevronDown,
   TreeDeciduous,
+  Eye,
   TrendingUp,
   Lock,
   CalendarClock,
@@ -735,8 +735,8 @@ function PersonaBlindSpotCard({
             padding: 0,
           }}
         >
+          <Eye size={13} />
           Reveal blind spot
-          <ChevronDown size={13} />
         </button>
       )}
     </div>
