@@ -757,8 +757,10 @@ debate:
   `objectPosition`, `scale`, `translateY`, `objectFit` - are kept
   for future images that don't share the 1024x1536 ratio. All eight
   current avatars leave them unset.
-- `@dicebear/core` and `@dicebear/collection` are no longer imported
-  anywhere; they can be removed from `package.json` in a tidy-up pass.
+- `@dicebear/core` and `@dicebear/collection` were dropped from
+  `package.json` in Phase 1 (no current imports). Don't add them back
+  unless we reintroduce procedurally-generated avatars; the WebP
+  illustrations are the avatar source today.
 - 4 super-power personas (Conversation Architect, Objection Navigator,
   Storyteller, Data Detective).
 - Super-powers now have **a subtle gameplay impact** via the persona
