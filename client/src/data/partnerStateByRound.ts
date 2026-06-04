@@ -43,6 +43,51 @@ export interface PartnerStateBaseline {
   metrics: PartnerMetrics;
 }
 
+/**
+ * Round 1 baseline metrics for The Noble Falcon Inn. Shared verbatim
+ * across all three regime variants (Wide / Narrow / None) because the
+ * scenario data is identical - only the dialogue and compliance
+ * shape of the conversation differ by regime. Returns a fresh object
+ * per call so each partner-round entry owns its own data and the
+ * engine can mutate without cross-contaminating siblings.
+ *
+ * Numbers map verbatim to the SME PDF "Rate Right - Round 1" Data Set
+ * table for Hotel ID 101.
+ */
+function nobleFalconR1Metrics(): PartnerMetrics {
+  return {
+    erpd: 17.0,
+    erpdChange: 21.42,
+    rpdPublic: 20.0,
+    rpdLoyal: 5.9,
+    losePricePublic: 93,
+    activeScenarios: 4,
+    activeScenarioNames: [
+      'Brand Scenario',
+      'Family 2+1',
+      'Family 2+2',
+      'App',
+    ],
+    competitor: 'brand',
+    secondaryMetrics: {
+      last30dAbrn: { value: 1306, deltaPct: -18 },
+      last30dRoomNights: { value: 1113, deltaPct: 49 },
+      last30dAdr: { value: 70, deltaPct: -17 },
+      last90dPageViews: { value: 74948, deltaPct: 26 },
+      last90dConversion: { value: 1.4, deltaPct: -17 },
+      next3mRoomNights: { value: 1515, deltaPct: 81 },
+    },
+    lastPricingContact: '2026-05-13',
+    // Pricing Coverage (QTD) omitted - PDF says TBD.
+    experiencedRPD: 35,
+    visibility: 42,
+    conversion: 28,
+    revenue: 32,
+    discountQuality: 30,
+    rateParity: 'major',
+  };
+}
+
 export const partnerStateByRound: Record<
   string,
   Record<number, PartnerStateBaseline>
@@ -133,6 +178,11 @@ export const partnerStateByRound: Record<
       },
     },
   },
+  // John's baselines are retained even though John moved to
+  // pendingPartners in June 2026 - keeps the data on disk in case
+  // John is re-spliced back into the active roster. applyRoundBaseline
+  // is a no-op for partners that aren't in initialPartners, so this
+  // is harmless dead data.
   john: {
     1: {
       metrics: {
@@ -160,17 +210,10 @@ export const partnerStateByRound: Record<
             currency: 'EUR',
           },
         },
-        // Secondary metrics row - mirrors the Partner Metrics PDF
-        // page 1 example exactly. Three of six have known deltas;
-        // the other three are "data pending" (deltaPct undefined),
-        // which the card renders as the dimmed (xx) marker from the
-        // mockup. That's the SME-authored "comparator not yet
-        // available" state.
         secondaryMetrics: {
           last30dAbrn: { value: 1500 },
           last30dRoomNights: { value: 750 },
           last30dAdr: { value: 129, deltaPct: 5 },
-          last90dPageViews: { value: -6 },
           last90dConversion: { value: 2, deltaPct: -3 },
           next3mRoomNights: { value: 67, deltaPct: -8 },
         },
@@ -185,6 +228,15 @@ export const partnerStateByRound: Record<
       },
     },
   },
+  // The Noble Falcon Inn - same baseline metrics across all three
+  // regime variants (Wide / Narrow / None). The regime changes the
+  // dialogue and compliance shape of the conversation, not the
+  // partner data. nobleFalconR1 is defined below and re-used per
+  // partner id - if SME updates a number, it lands in all three
+  // variants automatically.
+  'noble-falcon-wide': { 1: { metrics: nobleFalconR1Metrics() } },
+  'noble-falcon-narrow': { 1: { metrics: nobleFalconR1Metrics() } },
+  'noble-falcon-none': { 1: { metrics: nobleFalconR1Metrics() } },
   carlos: {
     1: {
       metrics: {

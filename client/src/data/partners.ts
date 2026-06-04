@@ -1,4 +1,117 @@
-import type { PartnerState } from '../types';
+import type { PartnerState, ParityRegime } from '../types';
+
+/**
+ * Builds a Noble Falcon Inn partner record. The same hotel brand,
+ * contact (Anton Müller), profile, and metrics show up in all three
+ * regime variants - only location, parityRegime, the property image,
+ * and the partner id differ. Wrapping the shared content in a helper
+ * keeps the three variants in sync if SME edits the profile or the
+ * metrics later. Returns an array so the call site can spread the
+ * record into `initialPartners` inline.
+ *
+ * Anton's role title placeholder is "Brand Revenue Lead" pending
+ * SME confirmation. PACE block is omitted - the SME drop didn't
+ * carry YoY roomnights/revenue/ADR for this partner. Pricing
+ * Coverage QTD is omitted for the same reason (PDF says TBD).
+ */
+function nobleFalconBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: 'Anton Müller',
+        propertyName: 'The Noble Falcon Inn',
+        propertyType: 'Branded Mid-Scale Hotel',
+        roomCount: 140,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: 'AM',
+        propertyImage: args.propertyImage,
+        style: 'blue',
+        styleSecondary: 'green',
+        description:
+          'Brand Revenue Lead for a fully-managed-by-brand property. Operates within a centrally controlled pricing model with limited local autonomy. Process-led and measured in tone; values consistency, brand standards, and guest experience over local commercial flexibility.',
+        commercialGoal:
+          'Hit brand-set commercial KPIs without compromising brand consistency or guest experience',
+        profileNotes: [
+          'Centrally managed brand model - decisions need HQ sign-off',
+          'Values brand standards and consistency over local pricing latitude',
+          'Open to data-led arguments when framed around guest experience or policy fit',
+          'Anchors commitments to specific pilots with explicit review dates',
+        ],
+      },
+      // Metrics map verbatim to the SME PDF Data Set table for
+      // The Noble Falcon Inn (Hotel ID 101). Same baseline across
+      // all three regime variants - the regime only changes the
+      // regulatory framing of the conversation, not the data.
+      metrics: {
+        erpd: 17.0,
+        erpdChange: 21.42,
+        rpdPublic: 20.0,
+        rpdLoyal: 5.9,
+        losePricePublic: 93,
+        activeScenarios: 4,
+        activeScenarioNames: [
+          'Brand Scenario',
+          'Family 2+1',
+          'Family 2+2',
+          'App',
+        ],
+        competitor: 'brand',
+        // PACE block intentionally omitted - SME drop didn't include
+        // YoY roomnights/revenue/ADR for this partner. The PACE card
+        // hides itself when `pace` is undefined.
+        secondaryMetrics: {
+          last30dAbrn: { value: 1306, deltaPct: -18 },
+          last30dRoomNights: { value: 1113, deltaPct: 49 },
+          last30dAdr: { value: 70, deltaPct: -17 },
+          last90dPageViews: { value: 74948, deltaPct: 26 },
+          last90dConversion: { value: 1.4, deltaPct: -17 },
+          next3mRoomNights: { value: 1515, deltaPct: 81 },
+        },
+        lastPricingContact: '2026-05-13',
+        // Pricing Coverage (QTD) omitted - PDF says TBD.
+        // Legacy fields - kept for type compatibility and the old
+        // conversation system; not surfaced on the R2 Partner Detail.
+        experiencedRPD: 35,
+        visibility: 42,
+        conversion: 28,
+        revenue: 32,
+        discountQuality: 30,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Discount adoption mirrors the SME PDF Public/Genius/
+      // Foundations grids. Public Pricing fully active, Genius
+      // running only the base programme (no 15/20/Dynamic tiers),
+      // Family Rates and Payments active in Foundations but no
+      // Base Rate Plan (the partner's pricing is centrally
+      // controlled - they're not setting their own base plan).
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'active', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'active', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
 
 export const initialPartners: PartnerState[] = [
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──
@@ -85,88 +198,44 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-  // ── John - Brand-first Boutique Hotel (Red/Driver) ──
-  // No-Parity scenario, branching conversation shape. Replaces
-  // Stavros as the R1 target in the No-Parity rotation.
-  {
-    persona: {
-      id: 'john',
-      name: 'John Marston',
-      propertyName: 'Marston House',
-      propertyType: 'Boutique Hotel',
-      roomCount: 60,
-      location: 'York, England',
-      parityRegime: 'none',
-      avatar: 'JM',
-      propertyImage:
-        'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop',
-      style: 'red',
-      styleSecondary: 'green',
-      description:
-        "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
-      commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
-      profileNotes: [
-        'Believes OTAs erode his brand and direct channel',
-        'Runs sponsored campaigns on meta-search via an XML provider',
-        'PACE Jun-Dec: roomnights -43% YoY, revenue -37% YoY, ADR +10% YoY',
-        'Three million Booking.com impressions in the last 90 days',
-      ],
-    },
-    metrics: {
-      erpd: 9.5,
-      erpdChange: 0.4,
-      rpdPublic: 10.8,
-      rpdLoyal: 7.2,
-      losePricePublic: 81,
-      activeScenarios: 2,
-      competitor: 'brand',
-      pace: {
-        period: 'Jun-Dec 2026',
-        roomnights: { current: 876, lastYear: 1546, relativeChange: -43.34 },
-        revenue: {
-          current: 244679,
-          lastYear: 391585,
-          relativeChange: -37.52,
-          currency: 'EUR',
-        },
-        adr: {
-          current: 279,
-          lastYear: 253,
-          relativeChange: 10.27,
-          currency: 'EUR',
-        },
-      },
-      experiencedRPD: 42,
-      visibility: 48,
-      conversion: 36,
-      revenue: 38,
-      discountQuality: 30,
-      rateParity: 'clean',
-    },
-    metricHistory: [],
-    trust: 45,
-    relationship: 'neutral',
-    // John's adoption profile - per Partner Metrics PDF page 1. Three
-    // products active (Mobile Rates, Genius Programme, Base Rate Plan),
-    // everything else inactive. Reflects his brand-first stance: he's
-    // running the essentials on Booking.com but hasn't opened up the
-    // wider discount toolkit.
-    discounts: [
-      { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
-      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
-      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
-      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
-      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
-      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
-      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
-      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
-      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
-      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
-    ],
-    conversationLog: [],
-    pendingActions: [],
-  },
+  // ── The Noble Falcon Inn (Wide Parity / New York) ──
+  // Brand.com Competitiveness Gap scenario. Same hotel brand and
+  // contact (Anton Müller) shows up in all three regime variants -
+  // only location + parityRegime + the regime-specific dialogue
+  // change. Sourced from the SME "Rate Right - Round 1" doc.
+  //
+  // John replaced Stavros as the R1 target back in May 2026; in
+  // June 2026 the No-Parity slot moved again to Noble Falcon as
+  // the SME-confirmed "swap for Round 1" scenario, with Wide and
+  // Narrow variants standing up Wide R1 / Narrow R1 from scratch.
+  // John is parked in pendingPartners (same shape as Stavros).
+  ...nobleFalconBase({
+    id: 'noble-falcon-wide',
+    parityRegime: 'wide',
+    location: 'New York, USA',
+    propertyImage:
+      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=250&fit=crop',
+  }),
+
+  // ── The Noble Falcon Inn (Narrow Parity / London) ──
+  ...nobleFalconBase({
+    id: 'noble-falcon-narrow',
+    parityRegime: 'narrow',
+    location: 'London, UK',
+    propertyImage:
+      'https://images.unsplash.com/photo-1455587734955-081b22074882?w=400&h=250&fit=crop',
+  }),
+
+  // ── The Noble Falcon Inn (No Parity / Berlin) ──
+  // Replaces John as the No-Parity R1 priority partner from
+  // June 2026. Anton's surname fits the German market context.
+  ...nobleFalconBase({
+    id: 'noble-falcon-none',
+    parityRegime: 'none',
+    location: 'Berlin, Germany',
+    propertyImage:
+      'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
+  }),
 
   // ── Carlos - City Apartment Complex (Yellow/Socialiser) ──
   {
@@ -265,6 +334,87 @@ export const initialPartners: PartnerState[] = [
  * to bypass it.
  */
 export const pendingPartners: PartnerState[] = [
+  // ── John - Brand-first Boutique Hotel (Red/Driver) ──
+  // Was the No-Parity R1 target from May 2026 until June 2026,
+  // when The Noble Falcon Inn took the slot per the SME
+  // "Brand.com Competitiveness Gap" scenario drop. Branching
+  // scenario (john-r1) and persona hints kept on disk so John
+  // can be re-spliced into the active roster if needed.
+  {
+    persona: {
+      id: 'john',
+      name: 'John Marston',
+      propertyName: 'Marston House',
+      propertyType: 'Boutique Hotel',
+      roomCount: 60,
+      location: 'York, England',
+      parityRegime: 'none',
+      avatar: 'JM',
+      propertyImage:
+        'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop',
+      style: 'red',
+      styleSecondary: 'green',
+      description:
+        "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
+      commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
+      profileNotes: [
+        'Believes OTAs erode his brand and direct channel',
+        'Runs sponsored campaigns on meta-search via an XML provider',
+        'PACE Jun-Dec: roomnights -43% YoY, revenue -37% YoY, ADR +10% YoY',
+        'Three million Booking.com impressions in the last 90 days',
+      ],
+    },
+    metrics: {
+      erpd: 9.5,
+      erpdChange: 0.4,
+      rpdPublic: 10.8,
+      rpdLoyal: 7.2,
+      losePricePublic: 81,
+      activeScenarios: 2,
+      competitor: 'brand',
+      pace: {
+        period: 'Jun-Dec 2026',
+        roomnights: { current: 876, lastYear: 1546, relativeChange: -43.34 },
+        revenue: {
+          current: 244679,
+          lastYear: 391585,
+          relativeChange: -37.52,
+          currency: 'EUR',
+        },
+        adr: {
+          current: 279,
+          lastYear: 253,
+          relativeChange: 10.27,
+          currency: 'EUR',
+        },
+      },
+      experiencedRPD: 42,
+      visibility: 48,
+      conversion: 36,
+      revenue: 38,
+      discountQuality: 30,
+      rateParity: 'clean',
+    },
+    metricHistory: [],
+    trust: 45,
+    relationship: 'neutral',
+    discounts: [
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+    ],
+    conversationLog: [],
+    pendingActions: [],
+  },
+
   // ── Stavros - Large Resort Hotel (Red/Director) ──
   // Was the No-Parity R1 target before John replaced him in May 2026.
   // Persona + 3-phase conversation trees (rounds 1-3) are still on

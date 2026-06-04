@@ -1185,7 +1185,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           metricKey="last90dPageViews"
           value={m.secondaryMetrics?.last90dPageViews}
           comparator="vs peer"
-          format="percent"
+          format="number"
         />
         <SecondaryMetricCard
           metricKey="last90dConversion"

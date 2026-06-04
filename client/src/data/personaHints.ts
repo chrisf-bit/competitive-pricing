@@ -39,6 +39,45 @@ export type PersonaHintsByRound = Record<
   Record<number, Partial<Record<PersonaId, PersonaHint>>>
 >;
 
+/**
+ * Shared persona hint content for The Noble Falcon Inn R1, applied
+ * verbatim across all three regime variants (Wide / Narrow / None).
+ * Anton's character is constant across markets; the metrics + the
+ * four objections are the same; the only thing that changes by
+ * regime is the regulatory framing of the conversation - which
+ * doesn't move the persona's read of the partner.
+ */
+const nobleFalconR1Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    unlocked:
+      "Anton operates inside brand policy. If you open by attacking the price gap, he'll quote brand directives and the call stalls. Lead with curiosity about the constraints he's working within, then steer toward pilots that fit inside his frame - he'll meet you there.",
+    mutedTeaser: 'The metric pattern hides a counter-intuitive anomaly.',
+    mutedFull:
+      "Page Views vs peer are up 26% but Conversion is down 17%, with Lose Price at 93%. He's being seen, just not chosen - and the Brand scenario is the structural lock, not a behavioural miss. Approaches that respect the brand frame will move faster than direct challenges to the headline price gap.",
+  },
+  'objection-navigator': {
+    unlocked:
+      "Expect four overlapping pushbacks: (1) brand policy keeps Brand.com cheaper, (2) higher rates here filter 'risky' guests, (3) direct guests are the loyal base he protects, (4) brand control trumps platform volume. Don't argue the rule - reframe around incremental demand and isolate risk via prepayment policies, not via the rate.",
+    mutedTeaser: 'His relational tone is steadier than the numbers make it look.',
+    mutedFull:
+      "Anton is measured and defers to brand HQ - he won't commit in-call. Expect 'I'll have our revenue team review' as a yes-with-process, not a no. Anchor each ask to a specific pilot with a review date (30-day test, three-week review) and you'll close cleanly.",
+  },
+  storyteller: {
+    unlocked:
+      'Noble Falcon is in a structural Brand.com lockstep. Brand-managed pricing pushed Booking.com price competitiveness sharply down vs last year while visibility climbed and conversion collapsed against peer. Anton sees this as brand policy doing its job; the data says it costs volume at the moment family scenarios start flagging.',
+    mutedTeaser: 'You may be smoothing the supporting detail.',
+    mutedFull:
+      'eRPD 17.0% (+21.42 YoY), Public RPD 20.0%, Loyal RPD 5.9%, Lose Price Public 93%. Four active scenarios with Brand alongside Family 2+1 and Family 2+2. Last 30D Page Views 74,948 (+26% vs peer), Conversion 1.4% (-17%), ABRN 1,306 (-18% YoY). Last pricing contact 2026-05-13. Price bucket 7.',
+  },
+  'data-detective': {
+    unlocked:
+      "Headline anomaly: Page Views +26% vs peer while Conversion -17% and Lose Price at 93%. He's getting the impressions but losing the price comparison nearly every time. Pair that with Family 2+1 and 2+2 scenarios flagged - the family segment is your wedge into the brand-policy conversation.",
+    mutedTeaser: "You may not have a read on Anton's style yet.",
+    mutedFull:
+      'Anton is blue/thinker primary with green/amiable secondary. He responds to structured, low-pressure asks framed around guest experience or policy fit, not to aggressive benchmarking. Lead with the data interpretation, give him space to defer to his revenue team, and close on concrete pilot parameters.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -168,6 +207,15 @@ export const personaHints: PersonaHintsByRound = {
       },
     },
   },
+  // Noble Falcon Inn R1 - same persona hint content across all three
+  // regime variants (Wide / Narrow / None). Anton's character, the
+  // metrics, the four objection types, and the partner profile are
+  // identical; only the regulatory framing of the conversation
+  // differs by regime. Sharing the hints via nobleFalconR1Hints
+  // keeps SME edits in sync across all three variants.
+  'noble-falcon-wide': { 1: nobleFalconR1Hints },
+  'noble-falcon-narrow': { 1: nobleFalconR1Hints },
+  'noble-falcon-none': { 1: nobleFalconR1Hints },
 };
 
 export function getPersonaHint(
