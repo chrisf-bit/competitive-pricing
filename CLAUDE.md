@@ -945,7 +945,8 @@ goal copy.
   Detail rebuilt to match the Partner Metrics PDF.
   - `types/index.ts`: new `SecondaryMetricValue` /
     `PartnerSecondaryMetrics` shapes; `PartnerMetrics` carries
-    `secondaryMetrics`, `lastPricingContact`, `pricingCoverageQTD`,
+    `secondaryMetrics`, `lastPricingContactDaysAgo`,
+    `pricingCoverageQTD`,
     and `activeScenarioNames`; `DiscountProductId` expanded to the
     PDF's 11-product taxonomy (legacy `genius`, `last-minute`,
     `early-booker` IDs retained so parked-partner seed data still
@@ -958,7 +959,10 @@ goal copy.
     English `helpText` for the `<MetricLabel>` tooltip.
   - `data/partnerStateByRound.ts`: John R1 baseline now carries the
     full PDF page 1 data (six secondary metrics including the three
-    `(xx)` data-pending comparators, Last Pricing Contact 2026-01-29,
+    `(xx)` data-pending comparators, Last Pricing Contact stored
+    as a relative offset (the John baseline used 126 days back
+    against an authoring date of 2026-06-04 - rendered live as
+    `today - 126 days`),
     Pricing Coverage 24%, scenarios Brand.com + App). Marina and
     Carlos R1-R3 also gained secondary-metrics blocks consistent
     with their narrative arcs.
@@ -1150,8 +1154,18 @@ Source: PDF page 1.
 - Current right-panel structure stays: Profile (property manager
   personality description) -> Commercial Goal -> Notes.
 - **Two new fields added below Notes:**
-  - **Last Pricing Contact** - date string. Field on
-    `PartnerMetrics.lastPricingContact?: string` (ISO date).
+  - **Last Pricing Contact** - shown as a YYYY-MM-DD date in the
+    UI, but stored as a relative offset in days behind today:
+    `PartnerMetrics.lastPricingContactDaysAgo?: number`. The
+    Partner Detail screen resolves it to a date at render via
+    `formatDaysAgoAsDate(daysAgo)` so the gap between today and
+    the last contact stays constant across replays. A learner
+    returning to the sim six months later still sees the same
+    recency they did the first time. **Don't hard-code dates
+    here** - encode the partner's recency as days-ago against
+    the authoring date. The conversion math: pick the date the
+    SME doc had, subtract from the day you author, store the
+    delta.
   - **Pricing Coverage (QTD)** - percentage. Field on
     `PartnerMetrics.pricingCoverageQTD?: number`.
 - The Issue Tree gate tile stays at the bottom of the right column
@@ -1295,6 +1309,12 @@ from `main` branch).
   The strip is fine on Partner Detail (internal prioritisation); the
   bucket name must not surface in dialogue, hooks, pitches,
   briefings, or email-audit phrases.
+- Don't hardcode a fixed ISO date for Last Pricing Contact (or any
+  partner-data field that's meant to read as "recent"). Use the
+  `lastPricingContactDaysAgo` offset shape so the gap stays
+  constant across replays. A learner returning in six months
+  shouldn't see a six-month-old date - they should see the same
+  recency they saw on the first play.
 - Don't add `fetch()`, `XMLHttpRequest`, CDN-hosted fonts, or any
   other runtime network call to the sim. The production deliverable
   is a self-contained SCORM zip served from the LMS - any external

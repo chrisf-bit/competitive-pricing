@@ -480,7 +480,7 @@ export function PartnerDetailScreen({
                 single block. Both fields are optional - cards hide
                 gracefully when a partner doesn't carry them. */}
             <ProfileMetaFields
-              lastPricingContact={partner.metrics.lastPricingContact}
+              lastPricingContactDaysAgo={partner.metrics.lastPricingContactDaysAgo}
               pricingCoverageQTD={partner.metrics.pricingCoverageQTD}
             />
           </div>
@@ -1572,15 +1572,20 @@ function DiscountRow({ item }: { item: DiscountProduct }) {
  * Last Pricing Contact (date) and Pricing Coverage (QTD) %. Renders
  * nothing when neither field is populated, so partners without the
  * metadata don't get an empty block.
+ *
+ * lastPricingContactDaysAgo is stored as a relative offset and
+ * resolved here against the current date. That keeps the "time
+ * since last contact" gap constant across replays - a learner
+ * returning in six months sees the same recency, not a stale date.
  */
 function ProfileMetaFields({
-  lastPricingContact,
+  lastPricingContactDaysAgo,
   pricingCoverageQTD,
 }: {
-  lastPricingContact?: string;
+  lastPricingContactDaysAgo?: number;
   pricingCoverageQTD?: number;
 }) {
-  if (lastPricingContact === undefined && pricingCoverageQTD === undefined) {
+  if (lastPricingContactDaysAgo === undefined && pricingCoverageQTD === undefined) {
     return null;
   }
   return (
@@ -1594,11 +1599,11 @@ function ProfileMetaFields({
         gap: 10,
       }}
     >
-      {lastPricingContact !== undefined && (
+      {lastPricingContactDaysAgo !== undefined && (
         <ProfileMetaRow
           icon={<CalendarClock size={14} style={{ color: 'var(--brand-navy)' }} />}
           metricKey="lastPricingContact"
-          value={lastPricingContact}
+          value={formatDaysAgoAsDate(lastPricingContactDaysAgo)}
         />
       )}
       {pricingCoverageQTD !== undefined && (
@@ -1610,6 +1615,22 @@ function ProfileMetaFields({
       )}
     </div>
   );
+}
+
+/**
+ * Resolve a "days ago" offset to a YYYY-MM-DD date string using the
+ * current date. Anchored to local time at midnight so the value is
+ * deterministic within a calendar day and only shifts across day
+ * boundaries. Negative offsets clamp to today.
+ */
+function formatDaysAgoAsDate(daysAgo: number): string {
+  const days = Math.max(0, Math.floor(daysAgo));
+  const now = new Date();
+  const target = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days);
+  const yyyy = target.getFullYear();
+  const mm = String(target.getMonth() + 1).padStart(2, '0');
+  const dd = String(target.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 function ProfileMetaRow({

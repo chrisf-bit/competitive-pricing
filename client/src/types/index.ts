@@ -284,11 +284,16 @@ export interface PartnerMetrics {
    */
   secondaryMetrics?: PartnerSecondaryMetrics;
   /**
-   * Date of the learner's last pricing conversation with this partner.
-   * Surfaced in the right-hand profile panel under Notes (PDF page 1).
-   * ISO date string (YYYY-MM-DD).
+   * Days between today and the learner's last pricing conversation
+   * with this partner. Stored as a relative offset (not a fixed
+   * date) so the "time since last contact" stays constant across
+   * replays - a learner returning in six months still sees the
+   * same gap, not a 6-month-old date that gives away the calendar.
+   * Surfaced in the right-hand profile panel under Notes (PDF
+   * page 1); resolved to a YYYY-MM-DD string at render time via
+   * `today - daysAgo`.
    */
-  lastPricingContact?: string;
+  lastPricingContactDaysAgo?: number;
   /**
    * Pricing Coverage (Quarter to Date) as a percentage 0-100. Shown
    * in the right-hand profile panel under Last Pricing Contact (PDF

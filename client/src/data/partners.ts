@@ -74,7 +74,12 @@ function nobleFalconBase(args: {
           last90dConversion: { value: 1.4, deltaPct: -17 },
           next3mRoomNights: { value: 1515, deltaPct: 81 },
         },
-        lastPricingContact: '2026-05-13',
+        // Stored as a relative offset so the gap between today and
+        // the last contact stays constant across replays. The PDF
+        // showed 2026-05-13 against an authoring date of 2026-06-04
+        // - that's 22 days back, so we encode 22 here. Render time
+        // resolves it to "today - 22 days" in PartnerDetailScreen.
+        lastPricingContactDaysAgo: 22,
         // Pricing Coverage (QTD) omitted - PDF says TBD.
         // Legacy fields - kept for type compatibility and the old
         // conversation system; not surfaced on the R2 Partner Detail.
