@@ -20,9 +20,15 @@ commissioned by Adriana Nedea (PS Learning, Jan 2026 deck). It pairs a
   and the learner has to spot them, take the right action, and have
   the right conversation.
 
-MVP target: **2026-05-18**. Out of MVP: Level 2 branching, full
-Pricing Issue Tree as live mechanic, post-sim Diagnostic Tool, manager
-dashboard, SCORM/xAPI wrapper. All those are post-MVP.
+**Test target for Release 2: 2026-06-18** (Advanced View locked).
+The original MVP date of 2026-05-18 slipped; the project regrouped
+around a Release 2 scope (see "Release 2 scope" section below) with
+SCORM packaging brought forward as the production format.
+
+Out of Release 2 scope: Level 3 Advanced View content (OPC Metrics +
+Quality Adoption Metrics), full Pricing Issue Tree as live mechanic,
+post-sim Diagnostic Tool, manager dashboard. The Advanced View tab
+ships **locked / Coming Soon** in R2; content lands in R3.
 
 ## Source documents
 
@@ -852,6 +858,216 @@ debate:
   Hidden on production by default. Will be removed/further-gated
   before final delivery.
 
+## Release 2 scope (active, branch `release-2-partner-detail`)
+
+**Test target: 2026-06-18, Advanced View locked.** Source spec is
+the "Partner Metrics" PDF (`C:\Users\chris\Downloads\Partner
+Metrics.pdf`) - pages 1, 12-17 describe the Partner Detail rework,
+pages 4 + 21 + 23 carry metric definitions and the eRPD price-bucket
+thresholds, page 19 carries example partner profile + commercial
+goal copy.
+
+### Production format: fully self-contained SCORM 1.2 package
+
+- Final deliverable is a **single `rate-right.zip`** with HTML/JS/CSS
+  bundle, all WebP assets, fonts, the SCORM manifest, and the PDF
+  library for the debrief export. **No external hosting at runtime** -
+  the LMS unzips the package and serves it from its own infrastructure.
+- `vite.config.ts` ships with `base: './'` so the build works from any
+  nested LMS path.
+- Persistence adapter (`util/persistence.ts`) targets
+  `cmi.suspend_data` via a pipwerks-style SCORM 1.2 wrapper, with the
+  existing `localStorage` path retained as the dev fallback (auto-
+  selected when the SCORM API isn't present on `window`).
+- Learner name flows from `cmi.core.student_name` into
+  `learnerProfile.playerName` (overrides the `Name_Var` default).
+- `cmi.core.lesson_status` is set on Clearance pass and on
+  Debrief render; `cmi.core.score.raw` carries the clearance %.
+- `scripts/build-scorm.mjs` runs `vite build`, copies the manifest in,
+  and zips `dist/` into `rate-right.zip`.
+- **Render stays as the dev/SME preview channel until 2026-06-18**,
+  then is retired. The production deliverable does not depend on it.
+- The `@dicebear/*` deps (no longer imported anywhere) get dropped from
+  `package.json` in the same pass that wires up the SCORM build, to
+  keep the zip lean.
+
+### Partner Detail restructure
+
+Source: PDF page 1 (Release 1 / current scope), pages 2-3 (Releases
+2-3, locked).
+
+**Top of main column - unchanged from today:**
+- Property manager communication style chip (red/yellow/green/blue) +
+  Relationship Status pill.
+- Learner-persona insight card + blind-spot card. The persona effect
+  spec under "Persona power effects (subtle gameplay)" still applies -
+  these cards are not part of the R2 rework.
+
+**Below that - new tabbed block:**
+- **Tab bar:** `Driving Metrics` (active) | `Advanced View` (locked,
+  "Coming Soon" badge). Tab styling lifts from the existing pill/chip
+  vocabulary. Locked tab is not clickable in R2.
+- **Driving Metrics tab contents (top to bottom):**
+  1. **Existing KPI row** kept: eRPD, RPD Public, RPD Loyal, Lose
+     Price Public, Active Scenarios, Competitor.
+  2. **eRPD Price Bucket strip** (new) - see "eRPD Price Bucket"
+     section below.
+  3. **Six secondary metric cards** (new): Last 30D ABRN (vs last
+     year), Last 30D Room Nights (vs peer), Last 30D ADR (vs peer),
+     Last 90D Page Views (vs peer), Last 90D Conversion (vs peer),
+     Next 3M Room Nights (vs peer). Each carries primary value + a
+     parenthesised comparator delta. `(xx)` from the PDF means "data
+     pending / value to come" - render the pill with a "Data pending"
+     dimmed treatment, same pattern as the existing PACE
+     `dataPending` flag.
+  4. **Year-on-Year (PACE) card** stays where it is - not moved by R2.
+  5. **Discount Products** restructured into 3 columns (see "Discount
+     Products" section below).
+
+**Advanced View tab (locked in R2):**
+- Renders the page-1 "Coming Soon" treatment: dimmed tab with a lock
+  icon, click no-ops. PDF page 2 (Release 3) and page 3 (Release 2)
+  layouts are the design targets for later - **OPC Metrics** column
+  (Unsold Rooms, Sell Through Rate vs Peer, Distribution of Search,
+  Visibility Share vs Peer, Click Through Rate vs Peer, Conversion vs
+  Peer, Search Price vs Peer) and **Quality Adoption Metrics** column
+  (Weighted Adoption %, Utilization %, Discount Depth, Discount
+  Contribution, True discount fraction, True discount contribution).
+  Definitions per PDF page 21.
+
+### eRPD Price Bucket strip
+
+Source: PDF page 23 (thresholds), page 1 (visual placement).
+
+- **Seven buckets, 1 = most competitive, 7 = least competitive.**
+  Lower bucket = lower eRPD = partner's prices are closer to / below
+  Key OTA + Brand.com benchmark; higher bucket = partner is more
+  expensive, more likely to be the round's priority call.
+- **Thresholds (verbatim from PDF page 23):**
+  - Bucket 1: eRPD < -3%
+  - Bucket 2: eRPD -3% to 0% (above -3%, <= 0%)
+  - Bucket 3: eRPD 0% to 3% (above 0%, <= 3%)
+  - Bucket 4: eRPD 3% to 6% (above 3%, <= 6%)
+  - Bucket 5: eRPD 6% to 9% (above 6%, <= 9%)
+  - Bucket 6: eRPD 9% to 12% (above 9%, <= 12%)
+  - Bucket 7: eRPD > 12%
+- **Visual:** continuous CSS gradient from dark green (B1) through
+  light green (B2), yellow (B3), orange (B4), light red (B5), red
+  (B6), dark red (B7), with thin separators marking the seven
+  segments. Marker callout above the strip pins this partner's
+  bucket. Callout reads `Bucket {n} - eRPD {value}%` in small type.
+- **Tooltip-only thresholds.** Hovering / tapping any segment surfaces
+  its threshold via the shared `<MetricLabel>` tooltip pattern. The
+  strip itself stays clean (page-1 style), not the legend-heavy page-23
+  style.
+- **Engine:** new `getPriceBucket(erpd: number): 1 | 2 | 3 | 4 | 5 | 6
+  | 7` in `engine/gameEngine.ts` implements the thresholds verbatim.
+  The legacy `getRPDLevel` stays for now (no consumer cleanup in R2).
+- **Legal:** price bucket is **internal-only diagnostic data**. Per
+  the No-Parity compliance rule already in this file: "Competitive
+  Partner Share / Price Bucket distribution is for internal
+  prioritisation only, never a SMART objective." The strip is fine
+  on Partner Detail (the learner's pre-call view) but the bucket
+  number / "Bucket N" phrasing must **not** appear in partner
+  dialogue, hooks, pitches, briefings, or any partner-facing copy.
+  Same rule as the existing internal-metric-name ban.
+
+### Discount Products restructure
+
+Source: PDF page 1.
+
+- Block heading `Discount Products` is kept.
+- Three columns side-by-side, each headed with a small caption:
+  - **Public Pricing:** Mobile Rates, Country Rates, Portfolio Deals,
+    Campaigns.
+  - **Genius Pricing:** Genius Programme, Genius 15%, Genius 20%,
+    Genius dynamic pricing.
+  - **Foundations & Payments:** Base Rate Plan, Family Rates,
+    Payments.
+- Each row is `{label} {status pill}` where status is `Active` (green
+  pill) or `Inactive` (red pill). Same neutral-presentation rule as
+  the existing partner cards - the activity status is the data; we
+  don't add severity colouring beyond Active/Inactive.
+- Footer note (PDF page 1): "Note: This is a non-exhaustive list. The
+  metrics and products shown are commonly used to drive pricing
+  performance and are part of this learning solution." Render as a
+  single dimmed line under the block.
+- **Data shape:** new `PartnerDiscountProducts` type on
+  `PartnerMetrics` keyed by product slug, each carrying
+  `status: 'active' | 'inactive'`. `partnerStateByRound.ts` baselines
+  drive per-round changes (e.g. Carlos's misconfigured Country Rate
+  becomes a baseline-driven `active` flag with a separate
+  `misconfigured: true` annotation later).
+
+### Active Scenarios popover
+
+- The Active Scenarios KPI card on the Driving Metrics row becomes
+  clickable. On click, a small popover anchored to the card lists the
+  active scenario names (e.g. `Brand.com`, `App`).
+- Per-partner-round scenario list lives on
+  `PartnerMetrics.activeScenarios?: string[]`. R1 John baseline gets
+  `['Brand.com', 'App']`.
+
+### Right-hand panel additions
+
+Source: PDF page 1.
+
+- Current right-panel structure stays: Profile (property manager
+  personality description) -> Commercial Goal -> Notes.
+- **Two new fields added below Notes:**
+  - **Last Pricing Contact** - date string. Field on
+    `PartnerMetrics.lastPricingContact?: string` (ISO date).
+  - **Pricing Coverage (QTD)** - percentage. Field on
+    `PartnerMetrics.pricingCoverageQTD?: number`.
+- The Issue Tree gate tile stays at the bottom of the right column
+  as today, with copy: "Open the Issue Tree Helper before you
+  engage". It hides once `hasOpenedIssueTreeHelper` flips true
+  (same flag as the existing Round 1 gate), and the yellow tree-tab
+  affordance on the right edge stays as the quick-launcher
+  afterwards. Two affordances by design: the tile is the gate
+  message, the tab is reopening.
+
+### Inline metric helpers
+
+- New shared component `<MetricLabel label="..." helpText="...">`
+  used on every metric on the Driving Metrics tab and on the
+  eRPD Price Bucket strip segments. Renders the label with a small
+  info `(i)` icon; hover/tap surfaces the help text in a tooltip.
+- Definitions sourced from PDF page 4 (revenue/booking/visibility/
+  guest/pricing metric dictionary) and page 21 (Quality Adoption
+  definitions, for when the Advanced View tab unlocks in R3).
+- Definitions live in `data/metricDefinitions.ts` as a flat
+  `{ [metricKey]: { label, helpText } }` map. Tooltip itself uses
+  the existing tooltip pattern from the Issue Tree Helper / persona
+  blind-spot cards - no new library.
+- This is the surface that respects the existing rule about
+  internal metric names: the help text can use full internal names
+  (Experienced RPD, Lose Price Public) because the learner is
+  reading the dashboard, not speaking to the partner.
+
+### Debrief downloadable summary
+
+- New CTA on the Debrief: "Download your summary (PDF)".
+- Client-side PDF generation via **jsPDF** (~300KB, ES module, fully
+  client-side - works inside the SCORM zip with no network calls).
+  Added to `package.json` in Phase 1.
+- Content sections:
+  - Cover: learner name, character, persona, regime, completion date.
+  - Round-by-round result: 10 rows with `Round N - {target partner} -
+    {stars}` and the engaged partner if different (i.e. wrong-partner
+    rounds).
+  - **Well done** section: aggregated from rounds at 2-3 stars - lists
+    persona `retroOnWin` lines and key style-match wins. Pulls from
+    the existing `roundStars` + persona retro data.
+  - **Coaching focus** section: aggregated from 0-star rounds - lists
+    persona `retroOnLoss` lines, compliance breaches encountered, and
+    style-mismatch patterns. Sourced from grading metadata stored on
+    each completed round.
+- No backend, no email - the learner saves the PDF locally from the
+  browser's save dialog and forwards it to a manager if they choose.
+- The same data could power xAPI statements later if Booking wires up
+  an LRS; in R2 we just generate the PDF.
+
 ## How to run
 
 ```
@@ -923,3 +1139,19 @@ from `main` branch).
   makes the immediate-mount fade pattern work; reintroducing 1.5MB+
   PNGs brings back the band-reveal that originally forced the
   decode-gate workaround.
+- Don't reference eRPD price buckets in partner-facing copy.
+  Phrases like "you're in Bucket 6" or "let's get you out of the red
+  band" break the same internal-only rule that already governs
+  Experienced RPD, Lose Price Public, and Competitive Partner Share.
+  The strip is fine on Partner Detail (internal prioritisation); the
+  bucket name must not surface in dialogue, hooks, pitches,
+  briefings, or email-audit phrases.
+- Don't add `fetch()`, `XMLHttpRequest`, CDN-hosted fonts, or any
+  other runtime network call to the sim. The production deliverable
+  is a self-contained SCORM zip served from the LMS - any external
+  request will (a) fail or be blocked in many LMS sandboxes, (b)
+  break the "no hosting required" guarantee, and (c) potentially
+  trip Booking security review. All assets must ship in the bundle.
+  The pipwerks SCORM API calls (`LMSGetValue` / `LMSSetValue`) are
+  the only "outside the bundle" comms allowed, and those go to the
+  LMS-injected `window.API` object, not the network.
