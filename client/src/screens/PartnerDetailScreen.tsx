@@ -127,7 +127,15 @@ export function PartnerDetailScreen({
   // visible until the learner navigates away; on next visit
   // expandedBlindSpots already contains the key and the card is hidden.
   const [blindSpotOpen, setBlindSpotOpen] = useState(false);
-  const showBlindSpotCard = !!hint && !blindSpotAlreadySeen;
+  // The `|| blindSpotOpen` guard is load-bearing - without it, clicking
+  // Reveal triggers two state updates in the same render (local
+  // blindSpotOpen flips true AND the engine adds the key to
+  // expandedBlindSpots), which then makes blindSpotAlreadySeen true and
+  // unmounts the card before the user ever sees the full text. Keeping
+  // the card mounted while it's locally open means the "hide on
+  // subsequent visits" rule still works (blindSpotOpen resets to false
+  // when the learner navigates away).
+  const showBlindSpotCard = !!hint && (!blindSpotAlreadySeen || blindSpotOpen);
 
   function handleExpandBlindSpot() {
     setBlindSpotOpen(true);
