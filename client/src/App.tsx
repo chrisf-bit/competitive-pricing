@@ -70,7 +70,6 @@ export default function App() {
       {!isLevel0Chrome && (
         <Header
           currentRound={state.currentRound}
-          actionsRemaining={state.actionsRemaining}
           screen={state.screen}
           onTutorial={() => setShowTutorial(true)}
         />
@@ -82,7 +81,6 @@ export default function App() {
           <GuidePanel
             screen={state.screen}
             currentRound={state.currentRound}
-            actionsRemaining={state.actionsRemaining}
             selectedPartner={selectedPartner}
             conversationPhase={state.conversationInProgress?.phaseIndex ?? 0}
             conversationComplete={
@@ -233,7 +231,6 @@ export default function App() {
                 (p) => p.persona.id === state.selectedPartnerId,
               )!}
               currentRound={state.currentRound}
-              actionsRemaining={state.actionsRemaining}
               alreadyEngaged={state.actionsThisRound.includes(
                 state.selectedPartnerId,
               )}

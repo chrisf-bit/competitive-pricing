@@ -22,7 +22,6 @@ import type { GameScreen, PartnerState } from '../types';
 interface GuidePanelProps {
   screen: GameScreen;
   currentRound: number;
-  actionsRemaining: number;
   selectedPartner: PartnerState | null;
   conversationPhase: number;
   conversationComplete: boolean;
@@ -63,7 +62,6 @@ function IconBox({ children, bg = 'rgba(255,255,255,0.08)', size = 28 }: { child
 export function GuidePanel({
   screen,
   currentRound,
-  actionsRemaining,
   selectedPartner,
   conversationPhase,
   conversationComplete,
@@ -73,7 +71,6 @@ export function GuidePanel({
   const content = getGuideContent(
     screen,
     currentRound,
-    actionsRemaining,
     selectedPartner,
     conversationPhase,
     conversationComplete,
@@ -414,7 +411,6 @@ export function GuidePanel({
 function getGuideContent(
   screen: GameScreen,
   currentRound: number,
-  actionsRemaining: number,
   selectedPartner: PartnerState | null,
   conversationPhase: number,
   conversationComplete: boolean,
@@ -436,9 +432,7 @@ function getGuideContent(
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:
-          actionsRemaining > 0
-            ? 'Identify which partners need attention most and engage them.'
-            : 'All actions used. The conversation report will advance you to the next round.',
+          'Identify which partners need attention most and engage them.',
         steps: [
           {
             icon: <Eye size={13} />,

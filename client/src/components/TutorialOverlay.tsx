@@ -4,7 +4,6 @@ import {
   Eye,
   Tag,
   Users,
-  Zap,
   AlertTriangle,
   ChevronRight,
   ChevronLeft,
@@ -76,18 +75,10 @@ const STEPS: TutorialStep[] = [
   },
   {
     target: 'round-tracker',
-    title: 'Round Progress',
+    title: 'Rounds and actions',
     description:
-      'The simulation runs over 10 rounds. Completed rounds turn green, the current round is highlighted yellow.',
+      'The simulation runs over 10 rounds. Each round you pick one partner to engage - the rest wait. Neglected partners lose trust and their metrics drift, so pick the one who needs you most.',
     icon: <Clock size={18} style={{ color: 'var(--brand-yellow)' }} />,
-    position: 'bottom',
-  },
-  {
-    target: 'actions-counter',
-    title: 'Action Budget',
-    description:
-      'You get one action per round - one partner conversation. Pick the partner who needs you most; the rest will drift if you leave them too long.',
-    icon: <Zap size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (
       <div
@@ -104,7 +95,7 @@ const STEPS: TutorialStep[] = [
       >
         <AlertTriangle size={14} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
         <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-          Neglected partners lose trust and their metrics drift downward each round.
+          Completed rounds turn green; the current round is highlighted yellow.
         </span>
       </div>
     ),

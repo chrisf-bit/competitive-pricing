@@ -688,8 +688,7 @@ export interface GameState {
    * learner who has already cleared the sim doesn't need re-gating).
    */
   hasOpenedIssueTreeHelper: boolean;
-  currentRound: number;         // 1, 2, 3
-  actionsRemaining: number;     // starts at 2 per round
+  currentRound: number;         // 1..10
   actionsThisRound: string[];   // partner IDs engaged this round
   selectedPartnerId: string | null;
   partners: PartnerState[];

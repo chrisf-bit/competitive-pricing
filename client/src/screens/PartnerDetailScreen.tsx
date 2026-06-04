@@ -42,7 +42,6 @@ import { metricDefinitions } from '../data/metricDefinitions';
 interface PartnerDetailScreenProps {
   partner: PartnerState;
   currentRound: number;
-  actionsRemaining: number;
   alreadyEngaged: boolean;
   /** The learner's selected super-power persona id, or null if none picked. */
   personaId: string | null;
@@ -98,7 +97,6 @@ function SectionHeader({ icon, label, bg }: { icon: React.ReactNode; label: stri
 export function PartnerDetailScreen({
   partner,
   currentRound,
-  actionsRemaining,
   alreadyEngaged,
   personaId,
   expandedBlindSpots,
@@ -114,7 +112,11 @@ export function PartnerDetailScreen({
   // has opened the Issue Tree Helper at least once - a one-shot
   // mandatory walk-through. Rounds 2+ the helper stays optional.
   const issueTreeGateBlocks = currentRound === 1 && !hasOpenedIssueTreeHelper;
-  const canEngage = !alreadyEngaged && actionsRemaining > 0 && !issueTreeGateBlocks;
+  // One engagement per round: if a partner has already been engaged
+  // (this round) AND the Issue Tree gate is satisfied, the learner is
+  // free to start the call. The old explicit action budget was
+  // retired in 2026-06 - see engine/gameEngine.ts for the rationale.
+  const canEngage = !alreadyEngaged && !issueTreeGateBlocks;
 
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
@@ -497,7 +499,7 @@ export function PartnerDetailScreen({
                       Ready to engage
                     </h4>
                     <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)' }}>
-                      Uses 1 of {actionsRemaining} actions
+                      One engagement per round
                     </div>
                   </div>
                 </div>
@@ -550,9 +552,7 @@ export function PartnerDetailScreen({
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
                   {alreadyEngaged
                     ? 'Already engaged this round'
-                    : issueTreeGateBlocks
-                      ? 'Open the Issue Tree Helper before you engage'
-                      : 'No actions remaining'}
+                    : 'Open the Issue Tree Helper before you engage'}
                 </div>
               </div>
             )}

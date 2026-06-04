@@ -1229,6 +1229,20 @@ from `main` branch).
   Conversation Report's Continue button is the only round-advance
   affordance; an action bar always read 1-action-remaining (one
   action per round) and added a redundant click.
+- Don't add an Actions counter pill back to the Header, and don't
+  reintroduce `actionsRemaining` to `GameState`. The mechanic is
+  "one engagement per round" - the count value only ever showed 1
+  or briefly 0, and never told the learner anything beyond what
+  the round number already conveyed. The Conversation Report's
+  Continue is the only path forward after a call, so the brief
+  "actions=0" state was effectively unreachable to the eye.
+  "One engagement per round" is now communicated through:
+  (a) the small caption on the Begin Conversation card,
+  (b) the round-tracker tutorial step, and
+  (c) the implicit mechanic itself. The `actionsThisRound` array
+  on `GameState` is still there - it's how the engine knows which
+  partner was engaged this round, drives `alreadyEngaged`, and
+  feeds neglect calculations on round advance.
 - Don't paint a full-bleed backdrop as a CSS `background` value
   when you want it to fade in. CSS-background changes don't run
   through framer-motion's opacity transition, so the bitmap pops in

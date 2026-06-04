@@ -44,8 +44,13 @@ function applyRoundBaseline(
 }
 
 // ── Constants ──
-// One engagement per round - the learner must spot which partner needs them.
-const ACTIONS_PER_ROUND = 1;
+// One engagement per round - the learner must spot which partner needs
+// them. Tracked implicitly via `actionsThisRound` (the list of partner
+// IDs engaged this round): when the list is non-empty, the round is
+// effectively spent. The earlier explicit `actionsRemaining` counter
+// was removed in 2026-06 - it was always 1 or 0 with no intermediate
+// values, so a count rendered no real information and added a
+// redundant Actions pill to the Header.
 const TOTAL_ROUNDS = 10;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
@@ -102,7 +107,6 @@ export function createInitialState(overrides?: {
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
     currentRound: 1,
-    actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],
     selectedPartnerId: null,
     partners,
@@ -139,7 +143,6 @@ export function startPracticeRound(state: GameState, round: number): GameState {
     ...state,
     screen: 'portfolio',
     currentRound: round,
-    actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],
     selectedPartnerId: null,
     partners,
@@ -341,7 +344,6 @@ export function processConversationChoice(
     updatedPartner.conversationLog.push(record);
 
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
-    const newActionsRemaining = state.actionsRemaining - 1;
 
     // Grade the round - 0/1/2/3 stars - and route to the report screen
     // so the learner sees their result before the round transition.
@@ -378,7 +380,6 @@ export function processConversationChoice(
     return {
       ...state,
       partners: newPartners,
-      actionsRemaining: newActionsRemaining,
       actionsThisRound: newActionsThisRound,
       roundStars: newRoundStars,
       lastConversationGrade: grade,
@@ -477,7 +478,6 @@ function processBranchingChoice(
     updatedPartner.conversationLog.push(record);
 
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
-    const newActionsRemaining = state.actionsRemaining - 1;
 
     // Grade with the branching-aware grader. Minimal pass for v1:
     // floor = safe picks + no active style mismatch; 2 stars at
@@ -511,7 +511,6 @@ function processBranchingChoice(
     return {
       ...state,
       partners: newPartners,
-      actionsRemaining: newActionsRemaining,
       actionsThisRound: newActionsThisRound,
       roundStars: newRoundStars,
       lastConversationGrade: grade,
@@ -586,7 +585,6 @@ export function resetRoundForRetake(state: GameState): GameState {
     ...state,
     screen: 'portfolio',
     partners: newPartners,
-    actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: state.actionsThisRound.filter(
       (id) => id !== conv.partnerId,
     ),
@@ -676,7 +674,6 @@ export function advanceRound(state: GameState): GameState {
     ...state,
     screen: 'round-transition',
     currentRound: nextRound,
-    actionsRemaining: ACTIONS_PER_ROUND,
     actionsThisRound: [],
     selectedPartnerId: null,
     partners: updatedPartners,

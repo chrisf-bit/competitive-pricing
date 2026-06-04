@@ -1,9 +1,8 @@
-import { BarChart3, Zap, HelpCircle } from 'lucide-react';
+import { BarChart3, HelpCircle } from 'lucide-react';
 import type { GameScreen } from '../types';
 
 interface HeaderProps {
   currentRound: number;
-  actionsRemaining: number;
   screen: GameScreen;
   /** Optional callback to re-open the partner-sim tutorial. */
   onTutorial?: () => void;
@@ -11,9 +10,11 @@ interface HeaderProps {
 
 const TOTAL_ROUNDS = 10;
 
-export function Header({ currentRound, actionsRemaining, screen, onTutorial }: HeaderProps) {
-  const showActions = screen === 'portfolio' || screen === 'partner-detail';
-
+// `screen` kept on the prop interface even though Header no longer
+// branches on it - keeps the App.tsx callsite stable and gives us a
+// hook if we ever need to surface screen-specific affordances in the
+// header again (e.g. a back button on the partner-detail screen).
+export function Header({ currentRound, onTutorial }: HeaderProps) {
   return (
     <header
       style={{
@@ -88,35 +89,6 @@ export function Header({ currentRound, actionsRemaining, screen, onTutorial }: H
             Round {currentRound} of {TOTAL_ROUNDS}
           </span>
         </div>
-
-        {showActions && (
-          <div
-            data-tutorial="actions-counter"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 6,
-              background: actionsRemaining > 0 ? 'rgba(254,186,2,0.12)' : 'rgba(204,0,0,0.15)',
-              padding: '4px 14px',
-              borderRadius: 'var(--radius-pill)',
-              border: actionsRemaining > 0
-                ? '1px solid rgba(254,186,2,0.2)'
-                : '1px solid rgba(204,0,0,0.2)',
-            }}
-          >
-            <Zap size={13} style={{ color: actionsRemaining > 0 ? 'var(--brand-yellow)' : 'var(--danger)' }} />
-            <span style={{ color: 'rgba(255,255,255,0.6)', fontSize: 12 }}>Actions:</span>
-            <strong
-              style={{
-                color: actionsRemaining > 0 ? 'var(--brand-yellow)' : '#ff6666',
-                fontWeight: 800,
-                fontSize: 16,
-              }}
-            >
-              {actionsRemaining}
-            </strong>
-          </div>
-        )}
 
         {onTutorial && (
           <button
