@@ -47,7 +47,7 @@ export const metricDefinitions = {
   activeScenarios: {
     label: 'Scenarios',
     helpText:
-      'Number of active pricing scenarios applied to this partner (e.g. Brand.com matching, App-only rate). Click to see which ones.',
+      'Number of active pricing scenarios applied to this partner (e.g. Brand.com matching, App-only rate).',
   },
   competitor: {
     label: 'Competitor',

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -261,21 +261,32 @@ export function PartnerDetailScreen({
         >
           {/* Persona insight + blind-spot cards. Only render when the
               learner picked a persona AND a hint exists for this
-              partner-round. */}
+              partner-round. The two cards lay out side-by-side to
+              save vertical space - once the blind-spot has been seen
+              (and so doesn't render any more), the insight card
+              stretches to fill the row. */}
           {persona && hint && (
-            <PersonaInsightCard
-              persona={persona}
-              copy={hint.unlocked}
-            />
-          )}
-          {persona && hint && showBlindSpotCard && (
-            <PersonaBlindSpotCard
-              persona={persona}
-              teaser={hint.mutedTeaser}
-              full={hint.mutedFull}
-              isOpen={blindSpotOpen}
-              onExpand={handleExpandBlindSpot}
-            />
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: showBlindSpotCard ? '1fr 1fr' : '1fr',
+                gap: 10,
+              }}
+            >
+              <PersonaInsightCard
+                persona={persona}
+                copy={hint.unlocked}
+              />
+              {showBlindSpotCard && (
+                <PersonaBlindSpotCard
+                  persona={persona}
+                  teaser={hint.mutedTeaser}
+                  full={hint.mutedFull}
+                  isOpen={blindSpotOpen}
+                  onExpand={handleExpandBlindSpot}
+                />
+              )}
+            </div>
           )}
 
           {/* Tabbed metrics block (R2). Driving Metrics tab carries
@@ -738,8 +749,6 @@ function BigMetric({
   changeText,
   highlight,
   helpText,
-  onClick,
-  popover,
 }: {
   label: string;
   value: string;
@@ -747,19 +756,10 @@ function BigMetric({
   highlight?: boolean;
   /** Optional definition shown via the inline (i) tooltip. */
   helpText?: string;
-  /** Optional click handler - turns the whole card into a button. */
-  onClick?: () => void;
-  /** Optional popover element rendered relative to the card (e.g. the
-   *  Active Scenarios list). When set, the card itself becomes
-   *  position:relative so the popover can anchor to it. */
-  popover?: React.ReactNode;
 }) {
-  const interactive = !!onClick;
   return (
     <div
-      onClick={onClick}
       style={{
-        position: 'relative',
         textAlign: 'center',
         padding: '9px 6px',
         background: highlight
@@ -767,20 +767,6 @@ function BigMetric({
           : 'var(--off-white)',
         borderRadius: 'var(--radius-md)',
         border: highlight ? '1.5px solid rgba(0,53,128,0.15)' : '1.5px solid transparent',
-        cursor: interactive ? 'pointer' : 'default',
-        transition: interactive ? 'transform 0.12s ease, box-shadow 0.12s ease' : undefined,
-      }}
-      onMouseEnter={(e) => {
-        if (interactive) {
-          e.currentTarget.style.transform = 'translateY(-1px)';
-          e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,53,128,0.12)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (interactive) {
-          e.currentTarget.style.transform = '';
-          e.currentTarget.style.boxShadow = '';
-        }
       }}
     >
       <div style={{ marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
@@ -831,7 +817,6 @@ function BigMetric({
           </span>
         )}
       </div>
-      {popover}
     </div>
   );
 }
@@ -1092,14 +1077,23 @@ function TabPill({
 
 function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
   const m = partner.metrics;
-  const [scenariosOpen, setScenariosOpen] = useState(false);
+  // Fold the active scenario names into the Scenarios tile's help
+  // tooltip so the tile stays visually consistent with the others
+  // (no clickable card in an otherwise read-only row). Hovering the
+  // (i) icon reveals both the metric definition and the per-partner
+  // list - one affordance, like every other tile in the row.
   const scenarioNames = m.activeScenarioNames;
-  const scenariosClickable = !!scenarioNames && scenarioNames.length > 0;
+  const scenariosHelpText =
+    scenarioNames && scenarioNames.length > 0
+      ? `${metricDefinitions.activeScenarios.helpText} Currently active: ${scenarioNames.join(', ')}.`
+      : metricDefinitions.activeScenarios.helpText;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       {/* Existing six-KPI row, kept verbatim but with inline help via
-          MetricLabel and the Active Scenarios popover wired in. */}
+          MetricLabel on every tile. No tiles are clickable - hover
+          the (i) icon to reveal the metric definition (and, for
+          Scenarios, the list of currently-active ones). */}
       <div
         style={{
           display: 'grid',
@@ -1131,19 +1125,8 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
         />
         <BigMetric
           label={metricDefinitions.activeScenarios.label}
-          helpText={metricDefinitions.activeScenarios.helpText}
+          helpText={scenariosHelpText}
           value={`${m.activeScenarios}`}
-          onClick={
-            scenariosClickable ? () => setScenariosOpen((v) => !v) : undefined
-          }
-          popover={
-            scenariosOpen && scenarioNames ? (
-              <ScenariosPopover
-                names={scenarioNames}
-                onClose={() => setScenariosOpen(false)}
-              />
-            ) : undefined
-          }
         />
         <BigMetric
           label={metricDefinitions.competitor.label}
@@ -1375,105 +1358,6 @@ function SecondaryMetricLabel({
       >
         ({comparator})
       </span>
-    </div>
-  );
-}
-
-function ScenariosPopover({
-  names,
-  onClose,
-}: {
-  names: string[];
-  onClose: () => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    function onDocClick(e: MouseEvent) {
-      if (!ref.current?.contains(e.target as Node)) {
-        onClose();
-      }
-    }
-    // Run after the current click event finishes so the click that
-    // opened the popover doesn't immediately close it again.
-    const timer = window.setTimeout(() => {
-      document.addEventListener('mousedown', onDocClick);
-    }, 0);
-    return () => {
-      window.clearTimeout(timer);
-      document.removeEventListener('mousedown', onDocClick);
-    };
-  }, [onClose]);
-
-  return (
-    <div
-      ref={ref}
-      onClick={(e) => e.stopPropagation()}
-      style={{
-        position: 'absolute',
-        bottom: 'calc(100% + 6px)',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 30,
-        background: 'var(--white)',
-        border: '1.5px solid var(--grey-200)',
-        borderRadius: 'var(--radius-sm)',
-        padding: '8px 10px',
-        boxShadow: '0 6px 18px rgba(0,0,0,0.15)',
-        minWidth: 140,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 4,
-      }}
-    >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onClose();
-        }}
-        style={{
-          position: 'absolute',
-          top: 4,
-          right: 4,
-          width: 18,
-          height: 18,
-          borderRadius: 4,
-          background: 'var(--brand-navy)',
-          color: 'var(--white)',
-          border: 'none',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-        }}
-        aria-label="Close scenarios list"
-      >
-        <XCircle size={11} />
-      </button>
-      {names.map((name) => (
-        <div
-          key={name}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 6,
-            fontSize: 12,
-            fontWeight: 600,
-            color: 'var(--grey-700)',
-            textAlign: 'left',
-          }}
-        >
-          <span
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: 999,
-              background: 'var(--brand-navy)',
-              flexShrink: 0,
-            }}
-          />
-          {name}
-        </div>
-      ))}
     </div>
   );
 }
