@@ -127,19 +127,85 @@ export type RPDLevel = 'competitive' | 'slightly-below' | 'below' | 'poor';
 
 export type RateParityStatus = 'clean' | 'minor' | 'major';
 
+/**
+ * Discount product IDs. Reorganised in R2 into three categories
+ * (Public Pricing, Genius Pricing, Foundations & Payments) per the
+ * Partner Metrics PDF page 1. The legacy `genius`, `last-minute`,
+ * and `early-booker` IDs survive in the union so the parked partner
+ * seed data in data/partners.ts doesn't have to be rebuilt - those
+ * partners are not in the active No-Parity rotation today.
+ */
 export type DiscountProductId =
-  | 'genius'
+  // Public Pricing
   | 'mobile-rate'
   | 'country-rate'
+  | 'portfolio-deals'
+  | 'campaigns'
+  // Genius Pricing
+  | 'genius-programme'
+  | 'genius-15'
+  | 'genius-20'
+  | 'genius-dynamic'
+  // Foundations & Payments
+  | 'base-rate-plan'
+  | 'family-rates'
+  | 'payments'
+  // Legacy IDs retained for parked-partner seed data
+  | 'genius'
   | 'last-minute'
   | 'early-booker';
 
 export type DiscountStatus = 'active' | 'inactive' | 'misconfigured';
 
+/**
+ * Three-column grouping shown on Partner Detail. Drives which column
+ * the discount product renders into. Legacy / parked-partner records
+ * without a category fall back to a single-list rendering.
+ */
+export type DiscountCategory =
+  | 'public-pricing'
+  | 'genius-pricing'
+  | 'foundations-payments';
+
 export interface DiscountProduct {
   id: DiscountProductId;
   label: string;
   status: DiscountStatus;
+  /** R2 3-column grouping. Undefined for legacy/parked seed data. */
+  category?: DiscountCategory;
+}
+
+/**
+ * Secondary metric card on the Driving Metrics tab. One of six on
+ * the Partner Detail screen per PDF page 1. `deltaPct` undefined
+ * means the comparator is "data pending" (rendered as the dimmed
+ * `(xx)` placeholder from the mockup); the primary value still
+ * renders. Both value and deltaPct undefined => the card is hidden.
+ */
+export interface SecondaryMetricValue {
+  value: number;
+  deltaPct?: number;
+}
+
+/**
+ * The six secondary metrics on Partner Detail. Every field is
+ * optional so partners can be partially populated as SME data
+ * arrives. Missing fields render as "Data pending" cards rather
+ * than disappearing - the slot stays consistent across partners.
+ */
+export interface PartnerSecondaryMetrics {
+  /** Last 30D ABRN, comparator is vs last year. */
+  last30dAbrn?: SecondaryMetricValue;
+  /** Last 30D Room Nights, comparator is vs peer. */
+  last30dRoomNights?: SecondaryMetricValue;
+  /** Last 30D ADR, comparator is vs peer. */
+  last30dAdr?: SecondaryMetricValue;
+  /** Last 90D Page Views, value is itself a %, comparator is vs peer. */
+  last90dPageViews?: SecondaryMetricValue;
+  /** Last 90D Conversion, value is itself a %, comparator is vs peer. */
+  last90dConversion?: SecondaryMetricValue;
+  /** Next 3M Room Nights, comparator is vs peer. */
+  next3mRoomNights?: SecondaryMetricValue;
 }
 
 /**
@@ -194,6 +260,13 @@ export interface PartnerMetrics {
   losePricePublic: number;
   /** Number of active pricing scenarios on this partner. */
   activeScenarios: number;
+  /**
+   * Optional list of active scenario names for the click-to-reveal
+   * popover on the Active Scenarios KPI card (PDF page 1). When
+   * present, the card becomes interactive; when absent (legacy
+   * partners), the card stays as a static count.
+   */
+  activeScenarioNames?: string[];
   /** Top competitor for this partner. */
   competitor: 'brand' | 'expedia';
   /**
@@ -203,6 +276,25 @@ export interface PartnerMetrics {
    * Partner Detail when present.
    */
   pace?: PacePerformance;
+  /**
+   * Six secondary metric cards shown below the eRPD Price Bucket
+   * strip on the Driving Metrics tab (PDF page 1). Optional - cards
+   * render in a "Data pending" state for missing fields rather than
+   * disappearing, so the row stays consistent across partners.
+   */
+  secondaryMetrics?: PartnerSecondaryMetrics;
+  /**
+   * Date of the learner's last pricing conversation with this partner.
+   * Surfaced in the right-hand profile panel under Notes (PDF page 1).
+   * ISO date string (YYYY-MM-DD).
+   */
+  lastPricingContact?: string;
+  /**
+   * Pricing Coverage (Quarter to Date) as a percentage 0-100. Shown
+   * in the right-hand profile panel under Last Pricing Contact (PDF
+   * page 1).
+   */
+  pricingCoverageQTD?: number;
 
   // ── Legacy fields (drive conversation effects and scoring internally;
   // not surfaced on the new KPI cards). Will be retired post-MVP once

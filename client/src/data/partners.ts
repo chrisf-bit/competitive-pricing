@@ -66,11 +66,20 @@ export const initialPartners: PartnerState[] = [
     trust: 55,
     relationship: 'neutral',
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'active' },
-      { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
-      { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
-      { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
-      { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
+      // Public Pricing
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      // Genius Pricing
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      // Foundations & Payments
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
     ],
     conversationLog: [],
     pendingActions: [],
@@ -137,12 +146,23 @@ export const initialPartners: PartnerState[] = [
     metricHistory: [],
     trust: 45,
     relationship: 'neutral',
+    // John's adoption profile - per Partner Metrics PDF page 1. Three
+    // products active (Mobile Rates, Genius Programme, Base Rate Plan),
+    // everything else inactive. Reflects his brand-first stance: he's
+    // running the essentials on Booking.com but hasn't opened up the
+    // wider discount toolkit.
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'inactive' },
-      { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
-      { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
-      { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
-      { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
     ],
     conversationLog: [],
     pendingActions: [],
@@ -212,12 +232,22 @@ export const initialPartners: PartnerState[] = [
     metricHistory: [],
     trust: 60,
     relationship: 'neutral',
+    // Carlos's adoption profile - broad surface-healthy adoption with
+    // the Country Rate misconfigured. The misconfig is the trap that
+    // compounds silently and becomes the R3 conversation - it should
+    // be the only visibly off-pattern item in his list.
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'active' },
-      { id: 'mobile-rate', label: 'Mobile Rate', status: 'active' },
-      { id: 'country-rate', label: 'Country Rate', status: 'misconfigured' },
-      { id: 'last-minute', label: 'Last-Minute Deal', status: 'active' },
-      { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive' },
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'misconfigured', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
     ],
     conversationLog: [],
     pendingActions: [],

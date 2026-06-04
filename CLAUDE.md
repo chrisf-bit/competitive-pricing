@@ -906,6 +906,61 @@ goal copy.
   `npm run build:scorm` producing `rate-right.zip` at the repo
   root. Untested in a real SCORM LMS yet - SCORM Cloud smoke test
   is the next gate before the 2026-06-18 test pass.
+- **Phase 2 landed (commit on `release-2-partner-detail`):** Partner
+  Detail rebuilt to match the Partner Metrics PDF.
+  - `types/index.ts`: new `SecondaryMetricValue` /
+    `PartnerSecondaryMetrics` shapes; `PartnerMetrics` carries
+    `secondaryMetrics`, `lastPricingContact`, `pricingCoverageQTD`,
+    and `activeScenarioNames`; `DiscountProductId` expanded to the
+    PDF's 11-product taxonomy (legacy `genius`, `last-minute`,
+    `early-booker` IDs retained so parked-partner seed data still
+    compiles); `DiscountProduct.category` drives the 3-column
+    grouping; `DiscountCategory` type added.
+  - `engine/gameEngine.ts`: new `getPriceBucket(erpd)` mapping eRPD
+    to buckets 1-7 with thresholds verbatim from PDF page 23.
+  - `data/metricDefinitions.ts`: every Driving Metrics label and a
+    placeholder for the locked Advanced View labels carry plain-
+    English `helpText` for the `<MetricLabel>` tooltip.
+  - `data/partnerStateByRound.ts`: John R1 baseline now carries the
+    full PDF page 1 data (six secondary metrics including the three
+    `(xx)` data-pending comparators, Last Pricing Contact 2026-01-29,
+    Pricing Coverage 24%, scenarios Brand.com + App). Marina and
+    Carlos R1-R3 also gained secondary-metrics blocks consistent
+    with their narrative arcs.
+  - `data/partners.ts`: Marina, John, and Carlos rebuilt around the
+    11-product / 3-category discount taxonomy. John's adoption
+    profile matches the PDF (Mobile Rates, Genius Programme, Base
+    Rate Plan active; everything else inactive). Carlos's Country
+    Rate stays `misconfigured` - that's the R3 trap. Parked
+    partners (Stavros, Hannah, Priya, Yuki) keep their legacy
+    5-product lists; their records render via the
+    `DiscountProductsGrid` flat-list fallback.
+  - `components/MetricLabel.tsx`: shared label + info-icon tooltip
+    used everywhere on the Driving Metrics tab. Hover OR tap to
+    open, outside-click to dismiss, configurable alignment.
+  - `components/PriceBucketStrip.tsx`: 7-segment colour strip
+    (green -> red) with a "Bucket N · eRPD X%" callout pinned over
+    the partner's segment. Each segment carries its own hover
+    threshold tooltip; the strip's overall label has the long-form
+    definition tooltip via MetricLabel. Reads `getPriceBucket` from
+    the engine - no parallel implementation.
+  - `screens/PartnerDetailScreen.tsx`: tab bar above the metrics
+    block, Driving Metrics active + Advanced View locked with
+    "Coming Soon" pill. Driving Metrics tab renders the existing
+    KPI row (now with inline help on every card and an Active
+    Scenarios click-popover) followed by the eRPD Price Bucket
+    strip and the six secondary metric cards. PACE card stays
+    outside the tabs so it survives the R2 -> R3 transition
+    unchanged. Discount Products restructured into the 3-column
+    grid with the SME-authored footer note. Right-hand profile
+    card gains a `ProfileMetaFields` block below Notes for Last
+    Pricing Contact + Pricing Coverage (QTD). The existing
+    Action card (Begin Conversation / Issue Tree gate / etc.)
+    is unchanged - the "Open the Issue Tree Helper before you
+    engage" state on it already matches the PDF gate-tile spec.
+  - Verified via `npm run build` (clean TS + 820KB JS / 227KB
+    gzipped). Browser test on the deployed Render URL is the next
+    gate.
 
 ### Partner Detail restructure
 

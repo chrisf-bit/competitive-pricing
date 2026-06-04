@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   XCircle,
   AlertCircle,
-  BarChart3,
   Tag,
   FileText,
   History,
@@ -17,11 +16,17 @@ import {
   ChevronDown,
   TreeDeciduous,
   TrendingUp,
+  Lock,
+  CalendarClock,
+  Percent,
 } from 'lucide-react';
 import type {
   PartnerState,
   IssueTreeHelperState,
   PacePerformance,
+  DiscountProduct,
+  DiscountCategory,
+  SecondaryMetricValue,
 } from '../types';
 import {
   RelationshipBadge,
@@ -30,6 +35,9 @@ import {
 import { getPersonaById, type SuperPowerPersona } from '../data/characters';
 import { getPersonaHint } from '../data/personaHints';
 import { IssueTreeHelper } from '../components/IssueTreeHelper';
+import { MetricLabel } from '../components/MetricLabel';
+import { PriceBucketStrip } from '../components/PriceBucketStrip';
+import { metricDefinitions } from '../data/metricDefinitions';
 
 interface PartnerDetailScreenProps {
   partner: PartnerState;
@@ -134,6 +142,11 @@ export function PartnerDetailScreen({
     path: {},
     stepIndex: 0,
   };
+
+  // Tab state for the new R2 tabbed metrics block. Driving Metrics is
+  // active in R2; Advanced View ships locked (page 1 "Coming Soon"
+  // treatment) and unlocks in R3 with OPC / Quality Adoption content.
+  const [activeTab, setActiveTab] = useState<'driving' | 'advanced'>('driving');
 
   return (
     <div
@@ -263,7 +276,11 @@ export function PartnerDetailScreen({
             />
           )}
 
-          {/* Metrics card */}
+          {/* Tabbed metrics block (R2). Driving Metrics tab carries
+              the existing KPI row plus the new eRPD Price Bucket strip
+              and six secondary metric cards. Advanced View ships
+              locked in R2 - content lands in R3 (OPC + Quality
+              Adoption metrics). */}
           <div
             style={{
               background: 'var(--white)',
@@ -274,55 +291,31 @@ export function PartnerDetailScreen({
               animation: 'fadeIn 0.3s ease 0.1s backwards',
             }}
           >
-            <SectionHeader
-              icon={<BarChart3 size={16} style={{ color: 'var(--white)' }} />}
-              label="Performance Metrics"
+            <PartnerDetailTabBar
+              active={activeTab}
+              onSelect={setActiveTab}
             />
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(6, 1fr)',
-                gap: 8,
-              }}
-            >
-              <BigMetric
-                label="eRPD"
-                value={`${partner.metrics.erpd.toFixed(1)}%`}
-                changeText={`${partner.metrics.erpdChange < 0 ? '↓' : '↑'}${Math.abs(partner.metrics.erpdChange).toFixed(2)}`}
-                highlight
-              />
-              <BigMetric
-                label="RPD Public"
-                value={`${partner.metrics.rpdPublic.toFixed(1)}%`}
-              />
-              <BigMetric
-                label="RPD Loyal"
-                value={`${partner.metrics.rpdLoyal.toFixed(1)}%`}
-              />
-              <BigMetric
-                label="Lose Price"
-                value={`${partner.metrics.losePricePublic}%`}
-              />
-              <BigMetric
-                label="Scenarios"
-                value={`${partner.metrics.activeScenarios}`}
-              />
-              <BigMetric
-                label="Competitor"
-                value={partner.metrics.competitor === 'brand' ? 'Brand.com' : 'Expedia'}
-              />
-            </div>
+
+            {activeTab === 'driving' && (
+              <DrivingMetricsTab partner={partner} />
+            )}
+            {activeTab === 'advanced' && <AdvancedViewLocked />}
           </div>
 
           {/* Year-on-Year (PACE) performance - only rendered for
               partners with a `pace` block on their metrics (e.g. John,
               the brand-first scenario). Neutral tones; learner reads
-              the numbers and decides what they mean. */}
+              the numbers and decides what they mean. Stays outside
+              the tabbed block so it persists across tab switches and
+              survives the R2 -> R3 transition unchanged. */}
           {partner.metrics.pace && (
             <PacePerformanceCard pace={partner.metrics.pace} />
           )}
 
-          {/* Discount products */}
+          {/* Discount products - 3 column layout per Partner Metrics
+              PDF page 1: Public Pricing | Genius Pricing |
+              Foundations & Payments. Legacy/parked-partner records
+              without a category fall back to a single flat list. */}
           <div
             style={{
               background: 'var(--white)',
@@ -337,44 +330,20 @@ export function PartnerDetailScreen({
               icon={<Tag size={16} style={{ color: 'var(--white)' }} />}
               label="Discount Products"
             />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {partner.discounts.map((d) => (
-                <div
-                  key={d.id}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '6px 12px',
-                    background: 'var(--off-white)',
-                    borderRadius: 'var(--radius-sm)',
-                    fontSize: 12.5,
-                    border: '1.5px solid transparent',
-                  }}
-                >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <div
-                      style={{
-                        width: 22,
-                        height: 22,
-                        borderRadius: 6,
-                        background:
-                          d.status === 'active' ? 'var(--success-bg)' : 'var(--grey-100)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {d.status === 'active' && <CheckCircle2 size={12} style={{ color: 'var(--success)' }} />}
-                      {d.status === 'inactive' && <XCircle size={12} style={{ color: 'var(--grey-300)' }} />}
-                      {d.status === 'misconfigured' && <AlertCircle size={12} style={{ color: 'var(--grey-500)' }} />}
-                    </div>
-                    <span style={{ fontWeight: 600, color: 'var(--grey-700)' }}>{d.label}</span>
-                  </div>
-                  <DiscountBadge status={d.status} />
-                </div>
-              ))}
-            </div>
+            <DiscountProductsGrid discounts={partner.discounts} />
+            <p
+              style={{
+                marginTop: 10,
+                fontSize: 10.5,
+                color: 'var(--grey-400)',
+                fontStyle: 'italic',
+                lineHeight: 1.45,
+              }}
+            >
+              Note: this is a non-exhaustive list. The products shown
+              are commonly used to drive pricing performance and are
+              part of this learning solution.
+            </p>
           </div>
 
           {/* Conversation history */}
@@ -483,6 +452,16 @@ export function PartnerDetailScreen({
                 </div>
               ))}
             </div>
+
+            {/* Last Pricing Contact + Pricing Coverage (QTD) - new in
+                R2 per Partner Metrics PDF page 1. Rendered under Notes
+                in the same Profile card so the right column stays a
+                single block. Both fields are optional - cards hide
+                gracefully when a partner doesn't carry them. */}
+            <ProfileMetaFields
+              lastPricingContact={partner.metrics.lastPricingContact}
+              pricingCoverageQTD={partner.metrics.pricingCoverageQTD}
+            />
           </div>
 
           {/* Action card */}
@@ -758,15 +737,29 @@ function BigMetric({
   value,
   changeText,
   highlight,
+  helpText,
+  onClick,
+  popover,
 }: {
   label: string;
   value: string;
   changeText?: string;
   highlight?: boolean;
+  /** Optional definition shown via the inline (i) tooltip. */
+  helpText?: string;
+  /** Optional click handler - turns the whole card into a button. */
+  onClick?: () => void;
+  /** Optional popover element rendered relative to the card (e.g. the
+   *  Active Scenarios list). When set, the card itself becomes
+   *  position:relative so the popover can anchor to it. */
+  popover?: React.ReactNode;
 }) {
+  const interactive = !!onClick;
   return (
     <div
+      onClick={onClick}
       style={{
+        position: 'relative',
         textAlign: 'center',
         padding: '9px 6px',
         background: highlight
@@ -774,19 +767,38 @@ function BigMetric({
           : 'var(--off-white)',
         borderRadius: 'var(--radius-md)',
         border: highlight ? '1.5px solid rgba(0,53,128,0.15)' : '1.5px solid transparent',
+        cursor: interactive ? 'pointer' : 'default',
+        transition: interactive ? 'transform 0.12s ease, box-shadow 0.12s ease' : undefined,
+      }}
+      onMouseEnter={(e) => {
+        if (interactive) {
+          e.currentTarget.style.transform = 'translateY(-1px)';
+          e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,53,128,0.12)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (interactive) {
+          e.currentTarget.style.transform = '';
+          e.currentTarget.style.boxShadow = '';
+        }
       }}
     >
-      <div
-        style={{
-          fontSize: 9,
-          fontWeight: 800,
-          color: 'var(--grey-400)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.08em',
-          marginBottom: 4,
-        }}
-      >
-        {label}
+      <div style={{ marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
+        {helpText ? (
+          <MetricLabel label={label} helpText={helpText} align="top-center" />
+        ) : (
+          <span
+            style={{
+              fontSize: 9,
+              fontWeight: 800,
+              color: 'var(--grey-400)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+            }}
+          >
+            {label}
+          </span>
+        )}
       </div>
       <div
         style={{
@@ -819,6 +831,7 @@ function BigMetric({
           </span>
         )}
       </div>
+      {popover}
     </div>
   );
 }
@@ -968,6 +981,709 @@ function PaceRow({
 
 function formatNumber(n: number): string {
   return n.toLocaleString('en-GB');
+}
+
+// ─────────────────────────────────────────────────────────────────
+// R2 additions: tab bar, Driving Metrics tab content, locked
+// Advanced View placeholder, secondary-metric cards, 3-column
+// discount grid, Active Scenarios popover, and the right-column
+// Last Pricing Contact / Pricing Coverage fields.
+// ─────────────────────────────────────────────────────────────────
+
+function PartnerDetailTabBar({
+  active,
+  onSelect,
+}: {
+  active: 'driving' | 'advanced';
+  onSelect: (tab: 'driving' | 'advanced') => void;
+}) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        gap: 6,
+        borderBottom: '1.5px solid var(--grey-100)',
+        marginBottom: 12,
+        marginLeft: -4,
+        marginRight: -4,
+      }}
+    >
+      <TabPill
+        label="Driving Metrics"
+        isActive={active === 'driving'}
+        onClick={() => onSelect('driving')}
+      />
+      <TabPill
+        label="Advanced View"
+        isActive={active === 'advanced'}
+        // Locked in R2 - clicking is a no-op. The lock icon and "Coming
+        // soon" pill carry the affordance.
+        locked
+        onClick={() => {
+          /* no-op while locked - content lands in R3 */
+        }}
+      />
+    </div>
+  );
+}
+
+function TabPill({
+  label,
+  isActive,
+  locked,
+  onClick,
+}: {
+  label: string;
+  isActive: boolean;
+  locked?: boolean;
+  onClick: () => void;
+}) {
+  const color = locked
+    ? 'var(--grey-300)'
+    : isActive
+      ? 'var(--brand-navy)'
+      : 'var(--grey-500)';
+  return (
+    <button
+      onClick={onClick}
+      disabled={locked}
+      style={{
+        background: 'transparent',
+        border: 'none',
+        padding: '8px 14px',
+        marginBottom: -1.5,
+        borderBottom: isActive
+          ? '2.5px solid var(--brand-navy)'
+          : '2.5px solid transparent',
+        color,
+        fontSize: 12.5,
+        fontWeight: 800,
+        letterSpacing: '-0.01em',
+        cursor: locked ? 'not-allowed' : 'pointer',
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: 6,
+      }}
+    >
+      {label}
+      {locked && (
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+            padding: '1px 6px',
+            borderRadius: 999,
+            background: 'var(--grey-100)',
+            color: 'var(--grey-400)',
+            fontSize: 9,
+            fontWeight: 800,
+            letterSpacing: '0.04em',
+            textTransform: 'uppercase',
+          }}
+        >
+          <Lock size={9} />
+          Coming soon
+        </span>
+      )}
+    </button>
+  );
+}
+
+function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
+  const m = partner.metrics;
+  const [scenariosOpen, setScenariosOpen] = useState(false);
+  const scenarioNames = m.activeScenarioNames;
+  const scenariosClickable = !!scenarioNames && scenarioNames.length > 0;
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      {/* Existing six-KPI row, kept verbatim but with inline help via
+          MetricLabel and the Active Scenarios popover wired in. */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 8,
+        }}
+      >
+        <BigMetric
+          label={metricDefinitions.erpd.label}
+          helpText={metricDefinitions.erpd.helpText}
+          value={`${m.erpd.toFixed(1)}%`}
+          changeText={`${m.erpdChange < 0 ? '↓' : '↑'}${Math.abs(m.erpdChange).toFixed(2)}`}
+          highlight
+        />
+        <BigMetric
+          label={metricDefinitions.rpdPublic.label}
+          helpText={metricDefinitions.rpdPublic.helpText}
+          value={`${m.rpdPublic.toFixed(1)}%`}
+        />
+        <BigMetric
+          label={metricDefinitions.rpdLoyal.label}
+          helpText={metricDefinitions.rpdLoyal.helpText}
+          value={`${m.rpdLoyal.toFixed(1)}%`}
+        />
+        <BigMetric
+          label={metricDefinitions.losePricePublic.label}
+          helpText={metricDefinitions.losePricePublic.helpText}
+          value={`${m.losePricePublic}%`}
+        />
+        <BigMetric
+          label={metricDefinitions.activeScenarios.label}
+          helpText={metricDefinitions.activeScenarios.helpText}
+          value={`${m.activeScenarios}`}
+          onClick={
+            scenariosClickable ? () => setScenariosOpen((v) => !v) : undefined
+          }
+          popover={
+            scenariosOpen && scenarioNames ? (
+              <ScenariosPopover
+                names={scenarioNames}
+                onClose={() => setScenariosOpen(false)}
+              />
+            ) : undefined
+          }
+        />
+        <BigMetric
+          label={metricDefinitions.competitor.label}
+          helpText={metricDefinitions.competitor.helpText}
+          value={m.competitor === 'brand' ? 'Brand.com' : 'Expedia'}
+        />
+      </div>
+
+      <PriceBucketStrip erpd={m.erpd} />
+
+      {/* Six secondary metric cards per Partner Metrics PDF page 1.
+          Cards with no SME-authored value render in a "Data pending"
+          state rather than disappearing - keeps the row consistent
+          across partners and makes it obvious where the SME still
+          owes a number. */}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 8,
+        }}
+      >
+        <SecondaryMetricCard
+          metricKey="last30dAbrn"
+          value={m.secondaryMetrics?.last30dAbrn}
+          comparator="vs last year"
+          format="number"
+        />
+        <SecondaryMetricCard
+          metricKey="last30dRoomNights"
+          value={m.secondaryMetrics?.last30dRoomNights}
+          comparator="vs peer"
+          format="number"
+        />
+        <SecondaryMetricCard
+          metricKey="last30dAdr"
+          value={m.secondaryMetrics?.last30dAdr}
+          comparator="vs peer"
+          format="number"
+        />
+        <SecondaryMetricCard
+          metricKey="last90dPageViews"
+          value={m.secondaryMetrics?.last90dPageViews}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="last90dConversion"
+          value={m.secondaryMetrics?.last90dConversion}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="next3mRoomNights"
+          value={m.secondaryMetrics?.next3mRoomNights}
+          comparator="vs peer"
+          format="number"
+        />
+      </div>
+    </div>
+  );
+}
+
+function AdvancedViewLocked() {
+  return (
+    <div
+      style={{
+        padding: '36px 18px',
+        textAlign: 'center',
+        color: 'var(--grey-500)',
+        background: 'var(--off-white)',
+        borderRadius: 'var(--radius-md)',
+      }}
+    >
+      <div
+        style={{
+          width: 42,
+          height: 42,
+          margin: '0 auto 10px',
+          borderRadius: 12,
+          background: 'var(--grey-100)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Lock size={18} style={{ color: 'var(--grey-400)' }} />
+      </div>
+      <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--grey-600)', marginBottom: 4 }}>
+        Advanced View - coming soon
+      </div>
+      <div style={{ fontSize: 12, lineHeight: 1.5, maxWidth: 380, margin: '0 auto' }}>
+        OPC Metrics and Quality Adoption metrics unlock in the next
+        release. For now, stay on Driving Metrics for the data you
+        need to diagnose this partner.
+      </div>
+    </div>
+  );
+}
+
+/**
+ * Single secondary-metric card. Renders the value and the
+ * parenthesised comparator, with format-aware rendering: 'number'
+ * keeps the value as a plain integer ("1500"), 'percent' suffixes
+ * with % ("2%"). A missing comparator renders as the dimmed (xx)
+ * placeholder from the PDF mockup. A missing value entirely renders
+ * the card in a "Data pending" state.
+ */
+function SecondaryMetricCard({
+  metricKey,
+  value,
+  comparator,
+  format,
+}: {
+  metricKey: keyof typeof metricDefinitions;
+  value: SecondaryMetricValue | undefined;
+  comparator: 'vs last year' | 'vs peer';
+  format: 'number' | 'percent';
+}) {
+  const def = metricDefinitions[metricKey];
+
+  if (!value) {
+    return (
+      <div
+        style={{
+          textAlign: 'center',
+          padding: '8px 6px',
+          background: 'var(--off-white)',
+          borderRadius: 'var(--radius-md)',
+          border: '1.5px dashed var(--grey-200)',
+          opacity: 0.7,
+        }}
+      >
+        <SecondaryMetricLabel label={def.label} helpText={def.helpText} comparator={comparator} />
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 700,
+            color: 'var(--grey-400)',
+            marginTop: 6,
+            fontStyle: 'italic',
+          }}
+        >
+          Data pending
+        </div>
+      </div>
+    );
+  }
+
+  const primary =
+    format === 'percent'
+      ? `${value.value > 0 ? '+' : ''}${value.value}%`
+      : `${value.value.toLocaleString('en-GB')}`;
+  const delta =
+    value.deltaPct === undefined
+      ? '(xx)'
+      : `(${value.deltaPct > 0 ? '+' : ''}${value.deltaPct}%)`;
+  const deltaIsPending = value.deltaPct === undefined;
+
+  return (
+    <div
+      style={{
+        textAlign: 'center',
+        padding: '8px 6px',
+        background: 'var(--off-white)',
+        borderRadius: 'var(--radius-md)',
+        border: '1.5px solid transparent',
+      }}
+    >
+      <SecondaryMetricLabel label={def.label} helpText={def.helpText} comparator={comparator} />
+      <div
+        style={{
+          fontSize: 17,
+          fontWeight: 900,
+          color: 'var(--brand-navy)',
+          lineHeight: 1.1,
+          marginTop: 4,
+          letterSpacing: '-0.02em',
+        }}
+      >
+        {primary}
+      </div>
+      <div
+        style={{
+          fontSize: 10.5,
+          fontWeight: 700,
+          color: deltaIsPending ? 'var(--grey-300)' : 'var(--grey-500)',
+          marginTop: 2,
+        }}
+      >
+        {delta}
+      </div>
+    </div>
+  );
+}
+
+function SecondaryMetricLabel({
+  label,
+  helpText,
+  comparator,
+}: {
+  label: string;
+  helpText: string;
+  comparator: string;
+}) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: 1,
+      }}
+    >
+      <MetricLabel
+        label={label}
+        helpText={helpText}
+        align="top-center"
+        iconSize={10}
+      />
+      <span
+        style={{
+          fontSize: 8.5,
+          fontWeight: 700,
+          color: 'var(--grey-300)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+        }}
+      >
+        ({comparator})
+      </span>
+    </div>
+  );
+}
+
+function ScenariosPopover({
+  names,
+  onClose,
+}: {
+  names: string[];
+  onClose: () => void;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!ref.current?.contains(e.target as Node)) {
+        onClose();
+      }
+    }
+    // Run after the current click event finishes so the click that
+    // opened the popover doesn't immediately close it again.
+    const timer = window.setTimeout(() => {
+      document.addEventListener('mousedown', onDocClick);
+    }, 0);
+    return () => {
+      window.clearTimeout(timer);
+      document.removeEventListener('mousedown', onDocClick);
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      ref={ref}
+      onClick={(e) => e.stopPropagation()}
+      style={{
+        position: 'absolute',
+        bottom: 'calc(100% + 6px)',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 30,
+        background: 'var(--white)',
+        border: '1.5px solid var(--grey-200)',
+        borderRadius: 'var(--radius-sm)',
+        padding: '8px 10px',
+        boxShadow: '0 6px 18px rgba(0,0,0,0.15)',
+        minWidth: 140,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 4,
+      }}
+    >
+      <button
+        onClick={(e) => {
+          e.stopPropagation();
+          onClose();
+        }}
+        style={{
+          position: 'absolute',
+          top: 4,
+          right: 4,
+          width: 18,
+          height: 18,
+          borderRadius: 4,
+          background: 'var(--brand-navy)',
+          color: 'var(--white)',
+          border: 'none',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+        }}
+        aria-label="Close scenarios list"
+      >
+        <XCircle size={11} />
+      </button>
+      {names.map((name) => (
+        <div
+          key={name}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            fontSize: 12,
+            fontWeight: 600,
+            color: 'var(--grey-700)',
+            textAlign: 'left',
+          }}
+        >
+          <span
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: 999,
+              background: 'var(--brand-navy)',
+              flexShrink: 0,
+            }}
+          />
+          {name}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Discount Products grouped into the 3-column R2 layout
+ * (Public Pricing / Genius Pricing / Foundations & Payments).
+ * Records without a `category` field fall back into a flat list
+ * rendered below the categorised grid, so parked-partner seed data
+ * still displays cleanly.
+ */
+function DiscountProductsGrid({ discounts }: { discounts: DiscountProduct[] }) {
+  const categorised: Record<DiscountCategory, DiscountProduct[]> = {
+    'public-pricing': [],
+    'genius-pricing': [],
+    'foundations-payments': [],
+  };
+  const uncategorised: DiscountProduct[] = [];
+  for (const d of discounts) {
+    if (d.category) {
+      categorised[d.category].push(d);
+    } else {
+      uncategorised.push(d);
+    }
+  }
+
+  const hasCategorised = Object.values(categorised).some((arr) => arr.length > 0);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      {hasCategorised && (
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 12,
+          }}
+        >
+          <DiscountColumn title="Public Pricing" items={categorised['public-pricing']} />
+          <DiscountColumn title="Genius Pricing" items={categorised['genius-pricing']} />
+          <DiscountColumn title="Foundations & Payments" items={categorised['foundations-payments']} />
+        </div>
+      )}
+
+      {uncategorised.length > 0 && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          {uncategorised.map((d) => (
+            <DiscountRow key={d.id} item={d} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DiscountColumn({
+  title,
+  items,
+}: {
+  title: string;
+  items: DiscountProduct[];
+}) {
+  if (items.length === 0) return null;
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+      <div
+        style={{
+          fontSize: 10.5,
+          fontWeight: 800,
+          color: 'var(--grey-500)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.06em',
+          marginBottom: 4,
+          paddingLeft: 2,
+        }}
+      >
+        {title}
+      </div>
+      {items.map((item) => (
+        <DiscountRow key={item.id} item={item} />
+      ))}
+    </div>
+  );
+}
+
+function DiscountRow({ item }: { item: DiscountProduct }) {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '6px 10px',
+        background: 'var(--off-white)',
+        borderRadius: 'var(--radius-sm)',
+        fontSize: 12,
+        gap: 8,
+      }}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6, minWidth: 0 }}>
+        <div
+          style={{
+            width: 18,
+            height: 18,
+            borderRadius: 5,
+            background:
+              item.status === 'active' ? 'var(--success-bg)' : 'var(--grey-100)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            flexShrink: 0,
+          }}
+        >
+          {item.status === 'active' && <CheckCircle2 size={10} style={{ color: 'var(--success)' }} />}
+          {item.status === 'inactive' && <XCircle size={10} style={{ color: 'var(--grey-300)' }} />}
+          {item.status === 'misconfigured' && <AlertCircle size={10} style={{ color: 'var(--grey-500)' }} />}
+        </div>
+        <span
+          style={{
+            fontWeight: 600,
+            color: 'var(--grey-700)',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {item.label}
+        </span>
+      </div>
+      <DiscountBadge status={item.status} />
+    </div>
+  );
+}
+
+/**
+ * Right-hand panel additions per Partner Metrics PDF page 1: shows
+ * Last Pricing Contact (date) and Pricing Coverage (QTD) %. Renders
+ * nothing when neither field is populated, so partners without the
+ * metadata don't get an empty block.
+ */
+function ProfileMetaFields({
+  lastPricingContact,
+  pricingCoverageQTD,
+}: {
+  lastPricingContact?: string;
+  pricingCoverageQTD?: number;
+}) {
+  if (lastPricingContact === undefined && pricingCoverageQTD === undefined) {
+    return null;
+  }
+  return (
+    <div
+      style={{
+        marginTop: 14,
+        paddingTop: 12,
+        borderTop: '1.5px dashed var(--grey-100)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+      }}
+    >
+      {lastPricingContact !== undefined && (
+        <ProfileMetaRow
+          icon={<CalendarClock size={14} style={{ color: 'var(--brand-navy)' }} />}
+          metricKey="lastPricingContact"
+          value={lastPricingContact}
+        />
+      )}
+      {pricingCoverageQTD !== undefined && (
+        <ProfileMetaRow
+          icon={<Percent size={14} style={{ color: 'var(--brand-navy)' }} />}
+          metricKey="pricingCoverageQTD"
+          value={`${pricingCoverageQTD}%`}
+        />
+      )}
+    </div>
+  );
+}
+
+function ProfileMetaRow({
+  icon,
+  metricKey,
+  value,
+}: {
+  icon: React.ReactNode;
+  metricKey: 'lastPricingContact' | 'pricingCoverageQTD';
+  value: string;
+}) {
+  const def = metricDefinitions[metricKey];
+  return (
+    <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+      <div style={{ marginTop: 2, flexShrink: 0 }}>{icon}</div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 2, minWidth: 0 }}>
+        <MetricLabel
+          label={def.label}
+          helpText={def.helpText}
+          labelStyle={{
+            fontSize: 10,
+            fontWeight: 800,
+            color: 'var(--brand-navy)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        />
+        <div style={{ fontSize: 13.5, fontWeight: 700, color: 'var(--grey-700)' }}>
+          {value}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function HelperLauncherTab({

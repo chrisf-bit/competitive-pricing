@@ -162,6 +162,40 @@ export function getRPDLevel(rpd: number): RPDLevel {
   return 'poor';
 }
 
+/**
+ * Maps an eRPD percentage to one of the seven Booking.com price
+ * buckets used by LPS for internal portfolio prioritisation. Lower
+ * bucket = more competitive partner; higher bucket = partner is
+ * more expensive than Key OTA / Brand.com and worth a call.
+ *
+ * Thresholds verbatim from the Partner Metrics PDF page 23:
+ *   B1: eRPD < -3%       (most competitive)
+ *   B2: eRPD -3% to 0%
+ *   B3: eRPD 0% to 3%
+ *   B4: eRPD 3% to 6%
+ *   B5: eRPD 6% to 9%
+ *   B6: eRPD 9% to 12%
+ *   B7: eRPD > 12%       (least competitive)
+ *
+ * "X to Y" means above X and equal-to-or-lower-than Y, so a
+ * boundary value (e.g. exactly 3.0) lands in the lower bucket.
+ *
+ * Internal-only data. Per the compliance rules, the bucket must
+ * never appear in partner-facing copy - it's a prioritisation
+ * signal for the LPS, not a target to communicate to the partner.
+ */
+export type PriceBucket = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+
+export function getPriceBucket(erpd: number): PriceBucket {
+  if (erpd <= -3) return 1;
+  if (erpd <= 0) return 2;
+  if (erpd <= 3) return 3;
+  if (erpd <= 6) return 4;
+  if (erpd <= 9) return 5;
+  if (erpd <= 12) return 6;
+  return 7;
+}
+
 export function getTrend(current: number, previous: number): TrendDirection {
   const diff = current - previous;
   if (diff > 2) return 'up';
