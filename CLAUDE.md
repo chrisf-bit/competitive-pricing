@@ -883,13 +883,29 @@ goal copy.
   `learnerProfile.playerName` (overrides the `Name_Var` default).
 - `cmi.core.lesson_status` is set on Clearance pass and on
   Debrief render; `cmi.core.score.raw` carries the clearance %.
-- `scripts/build-scorm.mjs` runs `vite build`, copies the manifest in,
-  and zips `dist/` into `rate-right.zip`.
+- `client/scripts/build-scorm.mjs` runs `npm run build` (which puts
+  `imsmanifest.xml` from `client/public/` at the dist root) and then
+  zips the contents of `dist/` into `rate-right.zip` at the repo root.
+  Zip generation uses the OS-native tool (PowerShell `Compress-Archive`
+  on Windows, `zip -r` elsewhere) rather than a JS lib, because every
+  `node_modules`-resident archiver kept tripping OneDrive sync
+  interference on Windows; don't reintroduce a JS-based zip dep.
 - **Render stays as the dev/SME preview channel until 2026-06-18**,
   then is retired. The production deliverable does not depend on it.
-- The `@dicebear/*` deps (no longer imported anywhere) get dropped from
-  `package.json` in the same pass that wires up the SCORM build, to
-  keep the zip lean.
+- The `@dicebear/*` deps (no longer imported anywhere) have been
+  dropped from `package.json` in the same pass that wired up the SCORM
+  build, to keep the zip lean.
+- **Phase 1 landed (commit on `release-2-partner-detail`):** SCORM
+  wrapper (`util/scorm.ts`), persistence dispatch
+  (`util/persistence.ts` - SCORM `cmi.suspend_data` inside an LMS,
+  `localStorage` outside), session lifecycle on `pagehide`,
+  `reportLessonStatus('passed')` + `reportScore(clearancePct * 100)`
+  on Clearance Summary continue, `reportLessonStatus('completed')`
+  on Debrief mount, LMS `cmi.core.student_name` seeding the fresh-
+  boot `playerName`, manifest at `client/public/imsmanifest.xml`,
+  `npm run build:scorm` producing `rate-right.zip` at the repo
+  root. Untested in a real SCORM LMS yet - SCORM Cloud smoke test
+  is the next gate before the 2026-06-18 test pass.
 
 ### Partner Detail restructure
 

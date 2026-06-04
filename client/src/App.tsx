@@ -23,6 +23,7 @@ import { BranchingConversationScreen } from './screens/BranchingConversationScre
 import { ConversationReportScreen } from './screens/ConversationReportScreen';
 import { RoundTransitionScreen } from './screens/RoundTransitionScreen';
 import { DebriefScreen } from './screens/DebriefScreen';
+import { reportLessonStatus, reportScore } from './util/persistence';
 
 export default function App() {
   const game = useGame();
@@ -171,9 +172,11 @@ export default function App() {
               <ClearanceSummaryScreen
                 results={state.level0Progress.knowledgeCheckResults}
                 regime={state.learnerProfile.market?.parityRegime ?? null}
-                onContinue={(cleared) => {
+                onContinue={(cleared, scorePct) => {
                   game.markLevel0Cleared();
+                  reportScore(Math.round(scorePct * 100));
                   if (cleared) {
+                    reportLessonStatus('passed');
                     // Show the celebration before the tutorial fires.
                     game.goToScreen('l0-cleared-celebration');
                   } else {

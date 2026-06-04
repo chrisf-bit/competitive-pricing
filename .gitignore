@@ -3,6 +3,10 @@ dist
 dist-ssr
 *.local
 *.log
+# SCORM package output from npm run build:scorm
+rate-right.zip
+# Local test-extract folder from sanity-checking the SCORM zip
+rate-right-test/
 .DS_Store
 .vscode
 .idea

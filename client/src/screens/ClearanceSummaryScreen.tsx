@@ -21,8 +21,13 @@ interface ClearanceSummaryScreenProps {
    * Email Audit phrase content when surfacing missed items.
    */
   regime: ParityRegime | null;
-  /** Called when the learner clicks Continue. `cleared` reflects whether they actually passed the threshold (vs continuing anyway). */
-  onContinue: (cleared: boolean) => void;
+  /**
+   * Called when the learner clicks Continue. `cleared` reflects whether
+   * they actually passed the threshold (vs continuing anyway).
+   * `scorePct` is the overall correct fraction (0-1) at the moment of
+   * continue - used by the SCORM adapter to populate cmi.core.score.raw.
+   */
+  onContinue: (cleared: boolean, scorePct: number) => void;
   onRetry: (
     activityScreen: GameState['screen'],
     itemMatcher: (itemId: string) => boolean,
@@ -279,7 +284,7 @@ export function ClearanceSummaryScreen({
             : 'You need 80% or higher to clear. Use the Retry buttons above to revisit the items you missed.'}
         </div>
         <button
-          onClick={() => onContinue(cleared)}
+          onClick={() => onContinue(cleared, overallPct)}
           disabled={!cleared}
           style={{
             background: cleared ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.06)',

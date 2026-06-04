@@ -22,20 +22,37 @@ import {
   loadPersistedState,
   savePersistedState,
   clearPersistedState,
+  getLmsStudentName,
 } from '../util/persistence';
 
 export function useGame() {
   const [state, setState] = useState<GameState>(() => {
     const persisted = loadPersistedState();
-    return createInitialState(
-      persisted
-        ? {
-            learnerProfile: persisted.learnerProfile,
-            level0Cleared: persisted.level0Cleared,
-            roundStars: persisted.roundStars,
-          }
-        : undefined,
-    );
+    if (persisted) {
+      // Persisted learnerProfile.playerName takes precedence over the
+      // LMS student_name: the persisted value was set deliberately
+      // (either auto-populated from a prior LMS launch, or edited by
+      // the learner in Character Build) and we don't want to clobber
+      // it on every resume.
+      return createInitialState({
+        learnerProfile: persisted.learnerProfile,
+        level0Cleared: persisted.level0Cleared,
+        roundStars: persisted.roundStars,
+      });
+    }
+    // Fresh boot - if the LMS provided a student name, seed the
+    // default learnerProfile.playerName with it so the GM chat and
+    // celebration screens address the learner correctly from the
+    // start.
+    const lmsName = getLmsStudentName();
+    if (lmsName) {
+      const fresh = createInitialState();
+      return {
+        ...fresh,
+        learnerProfile: { ...fresh.learnerProfile, playerName: lmsName },
+      };
+    }
+    return createInitialState();
   });
 
   // Persist the durable slice of state whenever any of its inputs change.

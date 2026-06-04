@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  SCORM 1.2 manifest for the Rate Right pricing simulation.
+
+  Vite copies this file from client/public/ to client/dist/imsmanifest.xml
+  at build time. The build:scorm script then zips dist/ (including this
+  manifest at the root) into rate-right.zip for LMS upload.
+
+  Only index.html is declared explicitly as the SCO entry point. Vite's
+  hashed assets in dist/assets/ are served by the LMS automatically -
+  every major LMS (Cornerstone, SuccessFactors, Workday Learning,
+  SCORM Cloud) serves all files in the package regardless of whether
+  they appear in <file href="..."/> entries. If we ever need strict
+  per-file declarations, the build-scorm.mjs script can post-process
+  this manifest to enumerate every file in dist/.
+-->
+<manifest identifier="com.rapidlearn.rate-right" version="1.0"
+  xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2"
+  xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd
+                      http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+  </metadata>
+
+  <organizations default="rate-right-org">
+    <organization identifier="rate-right-org">
+      <title>Rate Right - Pricing Simulation</title>
+      <item identifier="rate-right-item" identifierref="rate-right-resource">
+        <title>Rate Right</title>
+        <adlcp:masteryscore>80</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+
+  <resources>
+    <resource identifier="rate-right-resource" type="webcontent"
+              adlcp:scormtype="sco" href="index.html">
+      <file href="index.html"/>
+    </resource>
+  </resources>
+</manifest>

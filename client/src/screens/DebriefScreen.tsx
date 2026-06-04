@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   TrendingUp,
   DollarSign,
@@ -14,6 +15,7 @@ import { RelationshipBadge } from '../components/MetricBadge';
 import { initialPartners } from '../data/partners';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 import { getPersonaById } from '../data/characters';
+import { reportLessonStatus } from '../util/persistence';
 
 const PRACTICE_AVAILABLE_ROUNDS = [1, 2, 3] as const;
 const TOTAL_ROUNDS_DISPLAYED = 10;
@@ -64,6 +66,13 @@ export function DebriefScreen({
     0,
   );
   const maxStars = TOTAL_ROUNDS_DISPLAYED * 3;
+
+  // Tell the LMS the sim is complete the moment the debrief mounts.
+  // Idempotent at the LMS level - repeat mounts (e.g. returning from
+  // practice mode) just re-write the same terminal status.
+  useEffect(() => {
+    reportLessonStatus('completed');
+  }, []);
 
   // Aggregate persona block: count strength-rounds (>= 2 stars) and
   // trade-off-rounds (0 stars) across all attempted rounds. 1-star
