@@ -10,8 +10,7 @@ import type { PartnerState, ParityRegime } from '../types';
  * record into `initialPartners` inline.
  *
  * Anton's role title is "Brand Revenue Lead" (SME-confirmed).
- * Pricing Coverage QTD is omitted - PDF says TBD; SME drop didn't
- * carry the value.
+ * Pricing Coverage QTD is 64% (SME-confirmed in 2026-06).
  */
 function nobleFalconBase(args: {
   id: string;
@@ -76,7 +75,7 @@ function nobleFalconBase(args: {
         // - that's 22 days back, so we encode 22 here. Render time
         // resolves it to "today - 22 days" in PartnerDetailScreen.
         lastPricingContactDaysAgo: 22,
-        // Pricing Coverage (QTD) omitted - PDF says TBD.
+        pricingCoverageQTD: 64,
         // Legacy fields - kept for type compatibility and the old
         // conversation system; not surfaced on the R2 Partner Detail.
         experiencedRPD: 35,

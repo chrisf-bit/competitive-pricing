@@ -81,7 +81,7 @@ function nobleFalconR1Metrics(): PartnerMetrics {
     // days behind. Renders as `today - 22 days` so the gap stays
     // constant across replays.
     lastPricingContactDaysAgo: 22,
-    // Pricing Coverage (QTD) omitted - PDF says TBD.
+    pricingCoverageQTD: 64,
     experiencedRPD: 35,
     visibility: 42,
     conversion: 28,
