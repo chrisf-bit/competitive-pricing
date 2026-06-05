@@ -127,7 +127,7 @@ const step2Options: BranchingOption[] = [
     id: 'nf-r1-search-acknowledge',
     label: 'Acknowledge the policy and ask about review cadence',
     description:
-      'Step back from the framing fight and ask how often the central pricing policy is reviewed.',
+      'Step back from the framing question and ask how often the central pricing policy is reviewed.',
     playerDialogue:
       "Brand policy is brand policy and I respect that. Can I ask how often the central pricing approach is reviewed - is there a window where this conversation might land better?",
     partnerResponse:

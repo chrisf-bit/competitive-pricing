@@ -50,7 +50,7 @@ export type PersonaHintsByRound = Record<
 const nobleFalconR1Hints: Partial<Record<PersonaId, PersonaHint>> = {
   'conversation-architect': {
     unlocked:
-      "Anton operates inside brand policy. If you open by attacking the price gap, he'll quote brand directives and the call stalls. Lead with curiosity about the constraints he's working within, then steer toward pilots that fit inside his frame - he'll meet you there.",
+      "Anton operates inside brand policy. If you open by leading with the price gap, he'll quote brand directives and the call stalls. Lead with curiosity about the constraints he's working within, then steer toward pilots that fit inside his frame - he'll meet you there.",
     mutedTeaser: 'The metric pattern hides a counter-intuitive anomaly.',
     mutedFull:
       "Page Views vs peer are up 26% but Conversion is down 17%, with Lose Price at 93%. He's being seen, just not chosen - and the Brand scenario is the structural lock, not a behavioural miss. Approaches that respect the brand frame will move faster than direct challenges to the headline price gap.",
@@ -154,7 +154,7 @@ export const personaHints: PersonaHintsByRound = {
       },
       'objection-navigator': {
         unlocked:
-          "Expect two hard pushbacks: '18% commission is too much' and 'I never let any OTA above 30% of my business.' Don't fight the rule head-on. Reframe commission as one acquisition cost among several, and ask him to price his direct guest before agreeing on which is cheaper.",
+          "Expect two hard pushbacks: '18% commission is too much' and 'I never let any OTA above 30% of my business.' Acknowledge the rule rather than taking it on directly. Reframe commission as one acquisition cost among several, and ask him to price his direct guest before agreeing on which is cheaper.",
         mutedTeaser: 'His relational tone may be testier than the numbers suggest.',
         mutedFull:
           "Relationship is neutral but John has strong opinions and acts on emotion when OTAs come up. He'll hear cross-channel framing as adversarial unless he raises it first. Open with respect for his brand-first logic, not a critique of it.",

@@ -98,6 +98,18 @@ Key files:
   strategy, etc.).
 - **No "parity" in conversations with No-Parity partners.** It's a
   partner-property filter on conversation options.
+- **Supportive, collaborative vocabulary - not combative.** Calls
+  with partners are framed as discussions, not arguments or
+  fights. When authoring conversation options, persona hints, or
+  any learner-facing copy that describes a partner approach,
+  prefer the softer register: "discussion" / "conversation" /
+  "case" / "rationale" over "argument"; "lead with X" / "raise X"
+  over "attack X"; "work alongside the rule" / "acknowledge it"
+  over "fight the rule head-on"; "framing question" over "framing
+  fight". Describing a *partner's* behaviour as challenging or
+  pushing back is fine (it's an accurate read); describing the
+  *learner's* approach as combative is not - that's the register
+  we're teaching them out of.
 - **Role-agnostic copy.** Not all partner-facing roles are AMs - the
   briefing says "manage partner accounts" without naming the role.
 - **Partners get hotel-styled names where ambiguity is possible.**

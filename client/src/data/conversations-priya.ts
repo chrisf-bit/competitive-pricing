@@ -343,7 +343,7 @@ export const priyaR2: ConversationTree = {
             id: 'priya-r2-diag-genius-and-country',
             label: 'Name Genius Level + Country Rate, with chain benchmark',
             description:
-              'Identify both gaps with quantified Pune/Bangalore comparison and clean segmentation argument.',
+              'Identify both gaps with quantified Pune/Bangalore comparison and clean segmentation case.',
             playerDialogue:
               "Two specific gaps versus your sister properties, both quantifiable. One: Genius programme - you're at Level 1, Pune and Bangalore are at Level 2, which unlocks priority placement and a badge that converts 22% better on repeat traveller traffic. Two: Country Rate - Pune runs 12% targeting UK, US, Middle East and Southeast Asia and sees a 20% international booking uplift; you have it switched off. Importantly, those two products target different traveller segments - Genius for repeat/loyalty, Country Rate for international new-search - so there's minimal overlap and minimal cannibalisation. They explain the bulk of the 15-point gap independently.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },

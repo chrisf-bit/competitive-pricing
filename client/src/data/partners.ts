@@ -41,7 +41,7 @@ function nobleFalconBase(args: {
         profileNotes: [
           'Centrally managed brand model - decisions need HQ sign-off',
           'Values brand standards and consistency over local pricing latitude',
-          'Open to data-led arguments when framed around guest experience or policy fit',
+          'Open to data-led discussions when framed around guest experience or policy fit',
           'Anchors commitments to specific pilots with explicit review dates',
         ],
       },
