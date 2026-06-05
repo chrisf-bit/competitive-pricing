@@ -1,8 +1,8 @@
 import type { BranchingConversationTree } from '../types';
 import { johnR1 } from './scenarios/john-r1';
-import { nobleFalconNoneR1 } from './scenarios/noble-falcon-none-r1';
-import { nobleFalconNarrowR1 } from './scenarios/noble-falcon-narrow-r1';
-import { nobleFalconWideR1 } from './scenarios/noble-falcon-wide-r1';
+import { nobleFalconNoneR10 } from './scenarios/noble-falcon-none-r10';
+import { nobleFalconNarrowR10 } from './scenarios/noble-falcon-narrow-r10';
+import { nobleFalconWideR10 } from './scenarios/noble-falcon-wide-r10';
 
 /**
  * Branching conversation scenarios.
@@ -14,14 +14,14 @@ import { nobleFalconWideR1 } from './scenarios/noble-falcon-wide-r1';
  * both.
  *
  * Coverage today:
- *   - The Noble Falcon Inn R1 across all three regime variants
+ *   - John R1 (Brand.com loyalist - No-Parity scenario). John is
+ *     back as the No-Parity R1 priority after SME clarified that
+ *     The Noble Falcon Inn scenario was intended for **Round 10**,
+ *     not Round 1 (the "Round 1" in the source doc title referred
+ *     to the doc itself, not the in-game round).
+ *   - The Noble Falcon Inn R10 across all three regime variants
  *     (No Parity / Narrow Parity / Wide Parity) - the SME-confirmed
- *     "Brand.com Competitiveness Gap" scenario. Replaced John as
- *     the No-Parity R1 target in June 2026 and stood up R1 for
- *     Narrow and Wide markets.
- *   - John R1 retained on disk (Marston House, parked - see
- *     `pendingPartners` in partners.ts). If John is re-spliced back
- *     into the active roster the scenario picks up unchanged.
+ *     "Brand.com Competitiveness Gap" scenario.
  *
  * As SME content lands per partner-round, add the scenario file under
  * `data/scenarios/` and register it below.
@@ -34,13 +34,13 @@ export const branchingScenarios: BranchingMap = {
     1: johnR1,
   },
   'noble-falcon-none': {
-    1: nobleFalconNoneR1,
+    10: nobleFalconNoneR10,
   },
   'noble-falcon-narrow': {
-    1: nobleFalconNarrowR1,
+    10: nobleFalconNarrowR10,
   },
   'noble-falcon-wide': {
-    1: nobleFalconWideR1,
+    10: nobleFalconWideR10,
   },
 };
 

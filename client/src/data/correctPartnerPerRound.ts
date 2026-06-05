@@ -23,43 +23,44 @@ export const correctPartnerPerRound: Partial<
     // data/partnerStateByRound.ts. Each round one partner is clearly
     // the worst on visible KPIs:
     //
-    //   R1 - The Noble Falcon Inn (No Parity / Berlin) - structural
-    //        Brand.com competitiveness gap, eRPD 17.0% with a 21.42
-    //        percentage-point YoY spike, Lose Price 93%, four active
-    //        scenarios including the Brand Scenario. Replaced John as
-    //        the R1 target in June 2026.
-    //   R2 - Marina (eRPD 9.4 trending sharply up, mobile gap
-    //                escalating, lose-price 82%)
-    //   R3 - Carlos (eRPD 10.8 trending sharply up, misconfigured
-    //                Country Rate now compounding)
+    //   R1  - John (brand-first crisis, pushing direct rates, losing
+    //               OTA volume, eRPD 9.5 / lose-price 81%)
+    //   R2  - Marina (eRPD 9.4 trending sharply up, mobile gap
+    //                 escalating, lose-price 82%)
+    //   R3  - Carlos (eRPD 10.8 trending sharply up, misconfigured
+    //                 Country Rate now compounding)
+    //   R10 - The Noble Falcon Inn (No Parity / Berlin) - structural
+    //         Brand.com competitiveness gap, eRPD 17.0% with a 21.42
+    //         percentage-point YoY spike, Lose Price 93%, four active
+    //         scenarios including the Brand Scenario.
     //
-    // Rounds 4-10 will need both new conversation content and new
+    // Rounds 4-9 will need both new conversation content and new
     // baselines once the partner-data drop lands. Until then they're
-    // placeheld with the Noble Falcon (No Parity) so the grading
-    // layer has an answer; the sim today isn't playable past R3
-    // because getConversationTree and getBranchingScenario both
-    // return undefined beyond R3.
-    1: 'noble-falcon-none',
+    // placeheld with John so the grading layer has an answer; the
+    // sim today isn't playable past R3 because getConversationTree
+    // and getBranchingScenario both return undefined beyond R3
+    // (apart from R10 Noble Falcon).
+    1: 'john',
     2: 'marina',
     3: 'carlos',
-    4: 'noble-falcon-none',
-    5: 'noble-falcon-none',
-    6: 'noble-falcon-none',
-    7: 'noble-falcon-none',
-    8: 'noble-falcon-none',
-    9: 'noble-falcon-none',
+    4: 'john',
+    5: 'john',
+    6: 'john',
+    7: 'john',
+    8: 'john',
+    9: 'john',
     10: 'noble-falcon-none',
   },
-  // Narrow + Wide regimes stand up R1 with the corresponding
+  // Narrow + Wide regimes stand up R10 with the corresponding
   // Noble Falcon variant. Each variant carries the same data and
   // partner story; only the regulatory framing of the conversation
-  // differs by regime (see data/scenarios/noble-falcon-*-r1.ts).
-  // R2-R10 pending the broader partner-data drop for these regimes.
+  // differs by regime (see data/scenarios/noble-falcon-*-r10.ts).
+  // R1-R9 pending the broader partner-data drop for these regimes.
   narrow: {
-    1: 'noble-falcon-narrow',
+    10: 'noble-falcon-narrow',
   },
   wide: {
-    1: 'noble-falcon-wide',
+    10: 'noble-falcon-wide',
   },
   // cross-regional: pending partner data.
 };

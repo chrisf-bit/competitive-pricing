@@ -17,25 +17,31 @@ import type { PartnerMetrics } from '../types';
  *
  * The narrative arc the baselines tell for No-Parity partners:
  *
- *   Round 1 - The Noble Falcon Inn is in a structural Brand.com
- *             competitiveness gap. eRPD 17.0% with a +21.42
- *             percentage-point YoY spike, Lose Price 93%, four
- *             active scenarios including the Brand Scenario.
- *             Marina is mid-pack with a slow mobile gap; Carlos
- *             is broadly OK with a misconfigured Country Rate
- *             quietly compounding (the R3 trap).
+ *   Round 1  - John in a brand-first crisis: pushing direct rates,
+ *              losing OTA volume. eRPD 9.5, lose-price 81%.
+ *              Marina mid-pack with a slow mobile gap; Carlos is
+ *              broadly OK with a misconfigured Country Rate
+ *              quietly compounding (the R3 trap).
  *
- *   Round 2 - Marina's slow mobile gap has escalated - Public RPD
- *             jumped, Lose Price Public over 80%. Marina is now
- *             clearest worst. Carlos still mild but starting to
- *             drift.
+ *   Round 2  - Marina's slow mobile gap has escalated - Public RPD
+ *              jumped, Lose Price Public over 80%. Marina is now
+ *              clearest worst. Carlos still mild but starting to
+ *              drift.
  *
- *   Round 3 - Marina improving (mobile addressed). Carlos's
- *             misconfigured Country Rate has been compounding
- *             silently - he's now the worst with a 10.8 eRPD
- *             trending sharply up.
+ *   Round 3  - Marina improving (mobile addressed). Carlos's
+ *              misconfigured Country Rate has been compounding
+ *              silently - he's now the worst with a 10.8 eRPD
+ *              trending sharply up.
  *
- * Rounds 4-10 are not yet baselined. They'll be filled in alongside
+ *   Round 10 - The Noble Falcon Inn (Anton Müller) in a
+ *              structural Brand.com competitiveness gap. eRPD
+ *              17.0% with a +21.42 percentage-point YoY spike,
+ *              Lose Price 93%, four active scenarios including
+ *              the Brand Scenario. Same partner story across all
+ *              three regime variants; the regulatory framing of
+ *              the conversation differs by parity regime.
+ *
+ * Rounds 4-9 are not yet baselined. They'll be filled in alongside
  * the conversation-tree drop for those rounds; until then the
  * partners simply retain their last baseline state.
  */
@@ -54,7 +60,7 @@ export interface PartnerStateBaseline {
  * Numbers map verbatim to the SME PDF "Rate Right - Round 1" Data Set
  * table for Hotel ID 101.
  */
-function nobleFalconR1Metrics(): PartnerMetrics {
+function nobleFalconR10Metrics(): PartnerMetrics {
   return {
     erpd: 17.0,
     erpdChange: 21.42,
@@ -221,9 +227,9 @@ export const partnerStateByRound: Record<
   // partner data. nobleFalconR1 is defined below and re-used per
   // partner id - if SME updates a number, it lands in all three
   // variants automatically.
-  'noble-falcon-wide': { 1: { metrics: nobleFalconR1Metrics() } },
-  'noble-falcon-narrow': { 1: { metrics: nobleFalconR1Metrics() } },
-  'noble-falcon-none': { 1: { metrics: nobleFalconR1Metrics() } },
+  'noble-falcon-wide': { 10: { metrics: nobleFalconR10Metrics() } },
+  'noble-falcon-narrow': { 10: { metrics: nobleFalconR10Metrics() } },
+  'noble-falcon-none': { 10: { metrics: nobleFalconR10Metrics() } },
   carlos: {
     1: {
       metrics: {

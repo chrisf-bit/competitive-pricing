@@ -4,7 +4,7 @@ import type {
   BranchingOption,
 } from '../../types';
 import {
-  nobleFalconR1IssueTreePath,
+  nobleFalconR10IssueTreePath,
   nobleFalconStep1Open,
   nobleFalconStep2ReframeSearch,
   nobleFalconStep5SegmentDiagnose,
@@ -12,7 +12,7 @@ import {
 } from './noble-falcon-base';
 
 /**
- * The Noble Falcon Inn - Round 1 - No Parity variant.
+ * The Noble Falcon Inn - Round 10 - No Parity variant.
  *
  * Source: SME doc "Rate Right - Round 1" (Brand.com Competitiveness
  * Gap). The OPTIMAL lines for Step 3 and Step 4 are taken verbatim
@@ -153,11 +153,11 @@ const step4RiskSolution: BranchingStep = {
 
 // ───────── Assembled tree ─────────
 
-export const nobleFalconNoneR1: BranchingConversationTree = {
+export const nobleFalconNoneR10: BranchingConversationTree = {
   conversationShape: 'branching',
   partnerId: 'noble-falcon-none',
-  round: 1,
-  issueTreePath: nobleFalconR1IssueTreePath,
+  round: 10,
+  issueTreePath: nobleFalconR10IssueTreePath,
   steps: [
     nobleFalconStep1Open,
     nobleFalconStep2ReframeSearch,

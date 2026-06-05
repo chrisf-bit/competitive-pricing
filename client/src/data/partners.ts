@@ -182,13 +182,12 @@ export const initialPartners: PartnerState[] = [
   // Brand.com Competitiveness Gap scenario. Same hotel brand and
   // contact (Anton Müller) shows up in all three regime variants -
   // only location + parityRegime + the regime-specific dialogue
-  // change. Sourced from the SME "Rate Right - Round 1" doc.
-  //
-  // John replaced Stavros as the R1 target back in May 2026; in
-  // June 2026 the No-Parity slot moved again to Noble Falcon as
-  // the SME-confirmed "swap for Round 1" scenario, with Wide and
-  // Narrow variants standing up Wide R1 / Narrow R1 from scratch.
-  // John is parked in pendingPartners (same shape as Stavros).
+  // change. Sourced from the SME "Rate Right - Round 1" doc, but
+  // SME later confirmed (2026-06) the scenario was always intended
+  // for **Round 10**, not Round 1 - "Round 1" was the doc title,
+  // not the in-game round. All three variants now register at
+  // round 10 (see branchingScenarios.ts and partnerStateByRound.ts).
+  // John was restored as the No-Parity R1 priority at the same time.
   ...nobleFalconBase({
     id: 'noble-falcon-wide',
     parityRegime: 'wide',
@@ -207,8 +206,8 @@ export const initialPartners: PartnerState[] = [
   }),
 
   // ── The Noble Falcon Inn (No Parity / Berlin) ──
-  // Replaces John as the No-Parity R1 priority partner from
-  // June 2026. Anton's surname fits the German market context.
+  // The No-Parity R10 priority partner. Anton's surname fits the
+  // German market context.
   ...nobleFalconBase({
     id: 'noble-falcon-none',
     parityRegime: 'none',
@@ -285,24 +284,13 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-];
-
-/**
- * Partners parked until their parity regimes go live in Market Select.
- * Kept here so the persona data and the conversation trees in
- * conversations-*.ts stay easy to re-merge - just splice these back
- * into initialPartners when Narrow / Wide / Cross Regional become
- * selectable. Not exported into the active roster today, so the
- * portfolio filter has nothing to surface even if a future bug were
- * to bypass it.
- */
-export const pendingPartners: PartnerState[] = [
   // ── John - Brand-first Boutique Hotel (Red/Driver) ──
-  // Was the No-Parity R1 target from May 2026 until June 2026,
-  // when The Noble Falcon Inn took the slot per the SME
-  // "Brand.com Competitiveness Gap" scenario drop. Branching
-  // scenario (john-r1) and persona hints kept on disk so John
-  // can be re-spliced into the active roster if needed.
+  // No-Parity scenario, branching conversation shape. John was the
+  // No-Parity R1 target from May to June 2026, briefly parked when
+  // The Noble Falcon Inn (now repurposed to R10) took the slot,
+  // and restored as R1 priority once SME confirmed Anton's
+  // scenario was R10 not R1. john-r1.ts and his persona hints are
+  // unchanged - he just slots straight back in.
   {
     persona: {
       id: 'john',
@@ -362,6 +350,18 @@ export const pendingPartners: PartnerState[] = [
     pendingActions: [],
   },
 
+];
+
+/**
+ * Partners parked until their parity regimes go live in Market Select.
+ * Kept here so the persona data and the conversation trees in
+ * conversations-*.ts stay easy to re-merge - just splice these back
+ * into initialPartners when Narrow / Wide / Cross Regional become
+ * selectable. Not exported into the active roster today, so the
+ * portfolio filter has nothing to surface even if a future bug were
+ * to bypass it.
+ */
+export const pendingPartners: PartnerState[] = [
   // ── Stavros - Large Resort Hotel (Red/Director) ──
   // Was the No-Parity R1 target before John replaced him in May 2026.
   // Persona + 3-phase conversation trees (rounds 1-3) are still on
