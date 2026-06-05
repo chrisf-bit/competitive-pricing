@@ -44,7 +44,7 @@ interface MetricLabelProps {
    * existing BigMetric label.
    */
   labelStyle?: React.CSSProperties;
-  /** Optional override for the icon size in px. Defaults to 11. */
+  /** Optional override for the icon size in px. Defaults to 13. */
   iconSize?: number;
   /**
    * Anchor preference for the tooltip's horizontal alignment relative
@@ -65,10 +65,21 @@ export function MetricLabel({
   label,
   helpText,
   labelStyle,
-  iconSize = 11,
+  iconSize = 13,
   align = 'top-right',
 }: MetricLabelProps) {
   const [open, setOpen] = useState(false);
+  // Auto-detect "info" (definition) vs "data" (live value) variant
+  // from the helpText prop shape. Plain strings are descriptions;
+  // ReactNodes carry structured data (e.g. the active scenarios
+  // list). The icon shape stays the same so the (i) affordance is
+  // consistent, but the colour differs so the learner can tell at
+  // a glance whether the tooltip will define the metric or show the
+  // current value.
+  const isDataVariant = typeof helpText !== 'string';
+  const iconColor = isDataVariant
+    ? 'var(--brand-yellow)'
+    : 'var(--grey-500)';
   const [coords, setCoords] = useState<{ left: number; top: number } | null>(null);
   const wrapRef = useRef<HTMLSpanElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -182,12 +193,12 @@ export function MetricLabel({
           margin: 0,
           display: 'inline-flex',
           alignItems: 'center',
-          color: 'var(--grey-300)',
+          color: iconColor,
           cursor: 'help',
           lineHeight: 0,
         }}
       >
-        <Info size={iconSize} />
+        <Info size={iconSize} strokeWidth={2.25} />
       </button>
 
       {open &&

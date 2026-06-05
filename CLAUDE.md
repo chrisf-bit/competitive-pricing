@@ -985,6 +985,15 @@ goal copy.
   - `components/MetricLabel.tsx`: shared label + info-icon tooltip
     used everywhere on the Driving Metrics tab. Hover OR tap to
     open, outside-click to dismiss, configurable alignment.
+    **Info vs data variants are auto-detected from the `helpText`
+    prop shape**: plain strings are descriptions (icon is grey, the
+    default), `ReactNode` values are live partner data (icon turns
+    brand-yellow). Same circled (i) shape either way so the
+    affordance reads as "click for tooltip"; the colour tells the
+    learner whether they'll see a definition or a value. Default
+    icon size is 13px with `strokeWidth: 2.25` for prominence -
+    smaller tiles (Secondary metrics, Profile-meta rows) pass
+    explicit `iconSize` overrides to keep proportions tight.
   - `components/PriceBucketStrip.tsx`: 7-segment colour strip
     (green -> red) with a "Bucket N · eRPD X%" callout pinned over
     the partner's segment. Each segment carries its own hover
