@@ -1086,13 +1086,15 @@ Source: PDF page 23 (thresholds), page 1 (visual placement).
   Lower bucket = lower eRPD = partner's prices are closer to / below
   Key OTA + Brand.com benchmark; higher bucket = partner is more
   expensive, more likely to be the round's priority call.
-- **Thresholds (verbatim from PDF page 23):**
-  - Bucket 1: eRPD < -3%
-  - Bucket 2: eRPD -3% to 0% (above -3%, <= 0%)
-  - Bucket 3: eRPD 0% to 3% (above 0%, <= 3%)
-  - Bucket 4: eRPD 3% to 6% (above 3%, <= 6%)
-  - Bucket 5: eRPD 6% to 9% (above 6%, <= 9%)
-  - Bucket 6: eRPD 9% to 12% (above 9%, <= 12%)
+- **Thresholds (verbatim from PDF page 23, "Details" column).**
+  Boundary values land in the lower bucket - so exactly 3.0 lands
+  in Bucket 3 (not 4), exactly 12.0 lands in Bucket 6 (not 7), etc.:
+  - Bucket 1: eRPD ≤ -3%
+  - Bucket 2: -3% < eRPD ≤ 0%
+  - Bucket 3: 0% < eRPD ≤ 3%
+  - Bucket 4: 3% < eRPD ≤ 6%
+  - Bucket 5: 6% < eRPD ≤ 9%
+  - Bucket 6: 9% < eRPD ≤ 12%
   - Bucket 7: eRPD > 12%
 - **Visual:** continuous CSS gradient from dark green (B1) through
   light green (B2), yellow (B3), orange (B4), light red (B5), red

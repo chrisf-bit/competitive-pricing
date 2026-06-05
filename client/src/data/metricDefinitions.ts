@@ -59,7 +59,7 @@ export const metricDefinitions = {
   priceBucket: {
     label: 'eRPD Price Bucket',
     helpText:
-      'Where this partner sits on the seven-bucket Booking.com price spectrum. Bucket 1 (eRPD < -3%) = most competitive; Bucket 7 (eRPD > 12%) = least competitive. Used for internal portfolio prioritisation only - never quoted to the partner.',
+      'Where this partner sits on the seven-bucket Booking.com price spectrum. Bucket 1 (eRPD ≤ -3%) = most competitive; Bucket 7 (eRPD > 12%) = least competitive. Used for internal portfolio prioritisation only - never quoted to the partner.',
   },
 
   // ── Secondary metrics row (PDF page 1) ──

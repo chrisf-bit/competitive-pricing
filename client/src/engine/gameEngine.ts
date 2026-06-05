@@ -169,17 +169,19 @@ export function getRPDLevel(rpd: number): RPDLevel {
  * bucket = more competitive partner; higher bucket = partner is
  * more expensive than Key OTA / Brand.com and worth a call.
  *
- * Thresholds verbatim from the Partner Metrics PDF page 23:
- *   B1: eRPD < -3%       (most competitive)
- *   B2: eRPD -3% to 0%
- *   B3: eRPD 0% to 3%
- *   B4: eRPD 3% to 6%
- *   B5: eRPD 6% to 9%
- *   B6: eRPD 9% to 12%
- *   B7: eRPD > 12%       (least competitive)
+ * Thresholds verbatim from the Partner Metrics PDF page 23
+ * "Details" column - boundary values land in the lower bucket:
+ *   B1: eRPD ≤ -3%             (most competitive)
+ *   B2: -3% < eRPD ≤ 0%
+ *   B3: 0%  < eRPD ≤ 3%
+ *   B4: 3%  < eRPD ≤ 6%
+ *   B5: 6%  < eRPD ≤ 9%
+ *   B6: 9%  < eRPD ≤ 12%
+ *   B7: eRPD > 12%             (least competitive)
  *
- * "X to Y" means above X and equal-to-or-lower-than Y, so a
- * boundary value (e.g. exactly 3.0) lands in the lower bucket.
+ * The boundary rule means exactly 3.0 lands in Bucket 3 (not 4),
+ * exactly 12.0 lands in Bucket 6 (not 7), exactly -3.0 lands in
+ * Bucket 1 (not 2), etc.
  *
  * Internal-only data. Per the compliance rules, the bucket must
  * never appear in partner-facing copy - it's a prioritisation

@@ -39,13 +39,18 @@ interface BucketSpec {
 // than a single CSS gradient so each segment can carry its own hover
 // tooltip with the threshold. The visual still reads as a smooth
 // green->red ramp because the colours are evenly stepped.
+// Threshold labels use ≤ / > exactly per the SME PDF page 23
+// "Details" column - boundary values land in the lower bucket
+// (e.g. exactly 3.0 lands in Bucket 3, not Bucket 4). The
+// engine's getPriceBucket() in gameEngine.ts implements the
+// matching maths.
 const BUCKETS: BucketSpec[] = [
-  { bucket: 1, thresholdLabel: 'eRPD < -3%', color: '#1f8a3a' },
-  { bucket: 2, thresholdLabel: 'eRPD -3% to 0%', color: '#56b66f' },
-  { bucket: 3, thresholdLabel: 'eRPD 0% to 3%', color: '#c7d04a' },
-  { bucket: 4, thresholdLabel: 'eRPD 3% to 6%', color: '#f0c64a' },
-  { bucket: 5, thresholdLabel: 'eRPD 6% to 9%', color: '#ec8a48' },
-  { bucket: 6, thresholdLabel: 'eRPD 9% to 12%', color: '#d8504a' },
+  { bucket: 1, thresholdLabel: 'eRPD ≤ -3%', color: '#1f8a3a' },
+  { bucket: 2, thresholdLabel: '-3% < eRPD ≤ 0%', color: '#56b66f' },
+  { bucket: 3, thresholdLabel: '0% < eRPD ≤ 3%', color: '#c7d04a' },
+  { bucket: 4, thresholdLabel: '3% < eRPD ≤ 6%', color: '#f0c64a' },
+  { bucket: 5, thresholdLabel: '6% < eRPD ≤ 9%', color: '#ec8a48' },
+  { bucket: 6, thresholdLabel: '9% < eRPD ≤ 12%', color: '#d8504a' },
   { bucket: 7, thresholdLabel: 'eRPD > 12%', color: '#a02828' },
 ];
 
