@@ -484,8 +484,8 @@ lands later.
 **Chatbot-style floating drawer.** ~400x640 panel anchored to the
 right edge, 16px gap from the screen edge, vertically centred.
 Rounded corners all around with a shadow. NOT full-height and NOT
-a modal - the learner can read the metrics, discount cards, PACE
-card, and profile on Partner Detail while picking their way
+a modal - the learner can read the metrics, discount cards, and
+profile on Partner Detail while picking their way
 through. No backdrop. Framer-motion handles enter/exit so the slide
 animation and the vertical centring don't fight each other
 (combining transforms in a plain CSS keyframe clobbered the y
@@ -657,31 +657,27 @@ debate:
   `PartnerMetrics` - they drive the conversation system and scoring
   internally. They're not displayed; they'll be retired post-MVP when
   the conversation system is rewired onto the new KPIs.
-- **Year-on-Year (PACE) performance** is an optional partner-scoped
-  block: `PartnerMetrics.pace?` with `period`, `roomnights`,
-  `revenue`, `adr` (each carrying current / lastYear / relativeChange,
-  plus currency for revenue and ADR), and an optional `dataPending`
-  flag. Rendered as a dedicated "Year-on-Year Performance" card on
-  Partner Detail when present, unless `dataPending: true` (in which
-  case the card hides itself so the learner doesn't see rows of
-  zeros). The card shows neutral tones - no severity colouring -
-  per the no-spoonfeeding rule.
-- **Three distinct PACE signatures** today, one per active No-Parity
-  partner:
-  - **John**: roomnights -43.34%, revenue -37.52%, ADR +10.27%.
-    Classic brand-first collapse (pushing rates up, losing OTA
-    volume). The R1 priority.
-  - **Marina**: roomnights -11.44%, revenue -12.39%, ADR -1.41%.
-    Moderate slow leak, consistent with the slow mobile gap.
-  - **Carlos**: roomnights +4.28%, revenue +4.75%, ADR +0.94%.
-    Surface-healthy growth - the Country Rate misconfig hasn't bitten
-    PACE yet, which is exactly the trap that surfaces by R3.
+- **The Year-on-Year (PACE) card was retired in 2026-06.** SME
+  confirmed the next 3M Room Nights tile (in the secondary metrics
+  row) carries the forward-looking signal the PACE card was
+  duplicating, and the YoY card itself wasn't part of the
+  finalised dashboard layout. The `PacePerformance` type and
+  `PartnerMetrics.pace` field were removed from the schema; the
+  `PacePerformanceCard` / `PaceRow` components and the
+  `formatNumber` helper were dropped from
+  `PartnerDetailScreen.tsx`. Don't bring it back without an SME
+  request - if YoY context is needed for a story (e.g. the
+  brand-first crisis John was telling), encode it in profile
+  notes or the persona-hint copy instead of as a separate card.
 - **`applyRoundBaseline` merges metrics** rather than replacing them
-  (`{ ...partner.metrics, ...baseline.metrics }`). This is so
-  partner-level "static" fields like the PACE block survive baseline
-  application without having to be duplicated into every per-round
-  baseline entry. Don't switch this back to a full replace - it
-  would silently drop PACE on baseline-driven rounds.
+  (`{ ...partner.metrics, ...baseline.metrics }`). This was
+  originally so partner-level "static" fields like the PACE block
+  survived baseline application without being duplicated in every
+  per-round baseline entry. The PACE block is gone but the merge
+  still matters - it keeps any other partner-scoped static fields
+  (e.g. `activeScenarioNames` when only set at the partner level)
+  intact when a per-round baseline overlays only the round-specific
+  numbers. Don't switch this back to a full replace.
 
 ### Parity regimes
 
@@ -1000,9 +996,8 @@ goal copy.
     "Coming Soon" pill. Driving Metrics tab renders the existing
     KPI row (now with inline help on every card and an Active
     Scenarios click-popover) followed by the eRPD Price Bucket
-    strip and the six secondary metric cards. PACE card stays
-    outside the tabs so it survives the R2 -> R3 transition
-    unchanged. Discount Products restructured into the 3-column
+    strip and the six secondary metric cards. Discount Products
+    restructured into the 3-column
     grid with the SME-authored footer note. Right-hand profile
     card gains a `ProfileMetaFields` block below Notes for Last
     Pricing Contact + Pricing Coverage (QTD). The existing
@@ -1068,10 +1063,8 @@ Source: PDF page 1 (Release 1 / current scope), pages 2-3 (Releases
      Next 3M Room Nights (vs peer). Each carries primary value + a
      parenthesised comparator delta. `(xx)` from the PDF means "data
      pending / value to come" - render the pill with a "Data pending"
-     dimmed treatment, same pattern as the existing PACE
-     `dataPending` flag.
-  4. **Year-on-Year (PACE) card** stays where it is - not moved by R2.
-  5. **Discount Products** restructured into 3 columns (see "Discount
+     dimmed treatment.
+  4. **Discount Products** restructured into 3 columns (see "Discount
      Products" section below).
 
 **Advanced View tab (locked in R2):**
@@ -1270,15 +1263,21 @@ from `main` branch).
   to the learner.
 - Don't restore the Issue Tree Helper to a centred full-height
   modal. The chatbot-style right-side drawer (~400x640) is
-  intentional - it lets the learner peek at the metrics and PACE
-  card while running the diagnosis. If it grows enough to need
-  more space, scroll inside the drawer rather than expanding the
-  drawer footprint.
+  intentional - it lets the learner peek at the metrics and
+  discount cards while running the diagnosis. If it grows enough
+  to need more space, scroll inside the drawer rather than
+  expanding the drawer footprint.
 - Don't switch `applyRoundBaseline` back to a full replace
   (`metrics: { ...baseline.metrics }`). It merges
-  (`{ ...partner.metrics, ...baseline.metrics }`) so partner-level
-  static fields like the PACE block survive baseline application
+  (`{ ...partner.metrics, ...baseline.metrics }`) so any
+  partner-level static fields survive baseline application
   without being duplicated in every round entry.
+- Don't reintroduce a Year-on-Year (PACE) card on Partner Detail.
+  Retired in 2026-06 - SME confirmed the next-3M Room Nights
+  secondary metric covers the forward-looking signal it was
+  duplicating. If a story needs YoY context (e.g. a brand-first
+  collapse), encode it in profile notes or persona-hint copy
+  rather than as a standalone card.
 - Don't reskin the partner conversation screens back to a chat-
   bubble UI. The softphone treatment (call card with PhoneCall
   badge, Live-with-duration status, quoted speaker turns, "Your

@@ -17,18 +17,18 @@ import type { PartnerMetrics } from '../types';
  *
  * The narrative arc the baselines tell for No-Parity partners:
  *
- *   Round 1 - John is in a structural brand-first crisis. Booking.com
- *             roomnights -43% YoY, revenue -37%, ADR +10% (the
- *             classic signature of a partner who's pushed rates up
- *             and lost OTA volume on purpose). eRPD 9.5, lose-price
- *             81%. Marina is mid-pack with a slow mobile gap.
- *             Carlos is broadly OK and even improving.
+ *   Round 1 - The Noble Falcon Inn is in a structural Brand.com
+ *             competitiveness gap. eRPD 17.0% with a +21.42
+ *             percentage-point YoY spike, Lose Price 93%, four
+ *             active scenarios including the Brand Scenario.
+ *             Marina is mid-pack with a slow mobile gap; Carlos
+ *             is broadly OK with a misconfigured Country Rate
+ *             quietly compounding (the R3 trap).
  *
- *   Round 2 - John not yet baselined (R2 conversation content TBD;
- *             see correctPartnerPerRound.ts). Marina's slow mobile
- *             gap has now escalated - Public RPD jumped, Lose Price
- *             Public is over 80%. Marina is now clearest worst.
- *             Carlos still mild but starting to drift.
+ *   Round 2 - Marina's slow mobile gap has escalated - Public RPD
+ *             jumped, Lose Price Public over 80%. Marina is now
+ *             clearest worst. Carlos still mild but starting to
+ *             drift.
  *
  *   Round 3 - Marina improving (mobile addressed). Carlos's
  *             misconfigured Country Rate has been compounding
@@ -197,22 +197,6 @@ export const partnerStateByRound: Record<
         activeScenarios: 2,
         activeScenarioNames: ['Brand.com', 'App'],
         competitor: 'brand',
-        pace: {
-          period: 'Jun-Dec 2026',
-          roomnights: { current: 876, lastYear: 1546, relativeChange: -43.34 },
-          revenue: {
-            current: 244679,
-            lastYear: 391585,
-            relativeChange: -37.52,
-            currency: 'EUR',
-          },
-          adr: {
-            current: 279,
-            lastYear: 253,
-            relativeChange: 10.27,
-            currency: 'EUR',
-          },
-        },
         secondaryMetrics: {
           last30dAbrn: { value: 1500 },
           last30dRoomNights: { value: 750 },

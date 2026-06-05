@@ -9,10 +9,9 @@ import type { PartnerState, ParityRegime } from '../types';
  * metrics later. Returns an array so the call site can spread the
  * record into `initialPartners` inline.
  *
- * Anton's role title placeholder is "Brand Revenue Lead" pending
- * SME confirmation. PACE block is omitted - the SME drop didn't
- * carry YoY roomnights/revenue/ADR for this partner. Pricing
- * Coverage QTD is omitted for the same reason (PDF says TBD).
+ * Anton's role title is "Brand Revenue Lead" (SME-confirmed).
+ * Pricing Coverage QTD is omitted - PDF says TBD; SME drop didn't
+ * carry the value.
  */
 function nobleFalconBase(args: {
   id: string;
@@ -63,9 +62,6 @@ function nobleFalconBase(args: {
           'App',
         ],
         competitor: 'brand',
-        // PACE block intentionally omitted - SME drop didn't include
-        // YoY roomnights/revenue/ADR for this partner. The PACE card
-        // hides itself when `pace` is undefined.
         secondaryMetrics: {
           last30dAbrn: { value: 1306, deltaPct: -18 },
           last30dRoomNights: { value: 1113, deltaPct: 49 },
@@ -152,26 +148,6 @@ export const initialPartners: PartnerState[] = [
       losePricePublic: 68,
       activeScenarios: 1,
       competitor: 'brand',
-      // Story: moderate YoY decline across volume + revenue, ADR
-      // essentially flat. Consistent with a small mobile-traffic
-      // gap that's been bleeding bookings without changing rate
-      // strategy. Not a crisis (compare with John); slow leak.
-      pace: {
-        period: 'Jun-Dec 2026',
-        roomnights: { current: 4180, lastYear: 4720, relativeChange: -11.44 },
-        revenue: {
-          current: 587000,
-          lastYear: 670000,
-          relativeChange: -12.39,
-          currency: 'EUR',
-        },
-        adr: {
-          current: 140,
-          lastYear: 142,
-          relativeChange: -1.41,
-          currency: 'EUR',
-        },
-      },
       // Legacy
       experiencedRPD: 58,
       visibility: 62,
@@ -274,28 +250,11 @@ export const initialPartners: PartnerState[] = [
       losePricePublic: 48,
       activeScenarios: 1,
       competitor: 'brand',
-      // Story: slight YoY growth on roomnights + revenue, ADR
-      // basically flat. Surface picture looks healthy and matches
-      // his "aggressive growth" goal. The Country Rate misconfig
-      // hasn't bitten PACE yet - that's the trap: nothing in this
-      // card flags him as the priority, even though the misconfig
+      // Carlos's surface KPIs look healthy and match his "aggressive
+      // growth" goal. The Country Rate misconfig (visible in the
+      // discount product list below) is the trap: nothing in this
+      // KPI row flags him as the priority, even though the misconfig
       // is compounding silently and surfaces by R3.
-      pace: {
-        period: 'Jun-Dec 2026',
-        roomnights: { current: 6820, lastYear: 6540, relativeChange: 4.28 },
-        revenue: {
-          current: 728000,
-          lastYear: 695000,
-          relativeChange: 4.75,
-          currency: 'EUR',
-        },
-        adr: {
-          current: 107,
-          lastYear: 106,
-          relativeChange: 0.94,
-          currency: 'EUR',
-        },
-      },
       experiencedRPD: 65,
       visibility: 70,
       conversion: 55,
@@ -365,7 +324,7 @@ export const pendingPartners: PartnerState[] = [
       profileNotes: [
         'Believes OTAs erode his brand and direct channel',
         'Runs sponsored campaigns on meta-search via an XML provider',
-        'PACE Jun-Dec: roomnights -43% YoY, revenue -37% YoY, ADR +10% YoY',
+        'Brand-first pricing strategy with a hard 30% OTA cap rule',
         'Three million Booking.com impressions in the last 90 days',
       ],
     },
@@ -377,22 +336,6 @@ export const pendingPartners: PartnerState[] = [
       losePricePublic: 81,
       activeScenarios: 2,
       competitor: 'brand',
-      pace: {
-        period: 'Jun-Dec 2026',
-        roomnights: { current: 876, lastYear: 1546, relativeChange: -43.34 },
-        revenue: {
-          current: 244679,
-          lastYear: 391585,
-          relativeChange: -37.52,
-          currency: 'EUR',
-        },
-        adr: {
-          current: 279,
-          lastYear: 253,
-          relativeChange: 10.27,
-          currency: 'EUR',
-        },
-      },
       experiencedRPD: 42,
       visibility: 48,
       conversion: 36,

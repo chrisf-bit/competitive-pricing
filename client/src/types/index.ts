@@ -208,43 +208,6 @@ export interface PartnerSecondaryMetrics {
   next3mRoomNights?: SecondaryMetricValue;
 }
 
-/**
- * PACE-period year-on-year performance for a partner.
- *
- * Rendered as a dedicated card on Partner Detail when present. Net
- * Average Daily Rate (ADR) and revenue carry their own currency so
- * the PACE card can render the right symbol.
- *
- * `dataPending: true` signals the schema is reserved for this
- * partner but the SME hasn't supplied real values yet. The PACE
- * card hides itself in that case so the learner doesn't see a row
- * of zeros - once the SME fills in real numbers, flip dataPending
- * to false (or drop the field) and the card renders.
- */
-export interface PacePerformance {
-  /** Period label shown above the card, e.g. "Jun-Dec 2026". */
-  period: string;
-  roomnights: { current: number; lastYear: number; relativeChange: number };
-  revenue: {
-    current: number;
-    lastYear: number;
-    relativeChange: number;
-    currency: string;
-  };
-  adr: {
-    current: number;
-    lastYear: number;
-    relativeChange: number;
-    currency: string;
-  };
-  /**
-   * True while the schema is reserved but SME hasn't provided real
-   * values. The PACE card returns null in this state so we don't
-   * show a row of zeros. Default false / undefined = render normally.
-   */
-  dataPending?: boolean;
-}
-
 export interface PartnerMetrics {
   // ── New KPI structure (what the learner sees - sourced from the
   // KPI spec PFRs work with day-to-day) ──
@@ -269,13 +232,6 @@ export interface PartnerMetrics {
   activeScenarioNames?: string[];
   /** Top competitor for this partner. */
   competitor: 'brand' | 'expedia';
-  /**
-   * Optional PACE-period YoY performance. Authored per partner-round
-   * for scenarios where the YoY decline / shift is part of the story
-   * (e.g. brand-first partners). Rendered as a dedicated card on
-   * Partner Detail when present.
-   */
-  pace?: PacePerformance;
   /**
    * Six secondary metric cards shown below the eRPD Price Bucket
    * strip on the Driving Metrics tab (PDF page 1). Optional - cards
