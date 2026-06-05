@@ -685,7 +685,7 @@ debate:
   shared via the `nobleFalconBase()` helper in `data/partners.ts`,
   only location + `parityRegime` + the property image differ. The
   contact `Anton Müller` is consistent across all three (blue/thinker
-  primary + green/amiable secondary). Conversation files are
+  primary + red/driver secondary). Conversation files are
   `data/scenarios/noble-falcon-{none,narrow,wide}-r1.ts` - the four
   regime-agnostic steps live in `noble-falcon-base.ts` and only
   Steps 3 + 4 (the parity ask and the risk solution) carry the

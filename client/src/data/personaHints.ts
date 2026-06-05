@@ -74,7 +74,7 @@ const nobleFalconR1Hints: Partial<Record<PersonaId, PersonaHint>> = {
       "Headline anomaly: Page Views +26% vs peer while Conversion -17% and Lose Price at 93%. He's getting the impressions but losing the price comparison nearly every time. Pair that with Family 2+1 and 2+2 scenarios flagged - the family segment is your wedge into the brand-policy conversation.",
     mutedTeaser: "You may not have a read on Anton's style yet.",
     mutedFull:
-      'Anton is blue/thinker primary with green/amiable secondary. He responds to structured, low-pressure asks framed around guest experience or policy fit, not to aggressive benchmarking. Lead with the data interpretation, give him space to defer to his revenue team, and close on concrete pilot parameters.',
+      'Anton is blue/thinker primary with red/driver secondary. He responds to structured, substantive asks that respect his time - lead with the data interpretation, get to the point, and close on concrete pilot parameters with a review date. Fluffy small talk or open-ended exploration will lose him; so will theatrics or hard-sell energy.',
   },
 };
 

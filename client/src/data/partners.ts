@@ -27,13 +27,13 @@ function nobleFalconBase(args: {
         name: 'Anton Müller',
         propertyName: 'The Noble Falcon Inn',
         propertyType: 'Branded Mid-Scale Hotel',
-        roomCount: 140,
+        roomCount: 288,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: 'AM',
         propertyImage: args.propertyImage,
         style: 'blue',
-        styleSecondary: 'green',
+        styleSecondary: 'red',
         description:
           'Brand Revenue Lead for a fully-managed-by-brand property. Operates within a centrally controlled pricing model with limited local autonomy. Process-led and measured in tone; values consistency, brand standards, and guest experience over local commercial flexibility.',
         commercialGoal:
