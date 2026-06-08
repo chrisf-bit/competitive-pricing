@@ -453,7 +453,7 @@ function getGuideContent(
           {
             icon: <Zap size={12} />,
             title: 'Dig deeper',
-            text: 'Low RPD can stem from discounts, config issues, or price competitiveness.',
+            text: 'High RPD can stem from missing or misconfigured discounts, config issues, or weak price competitiveness.',
           },
           ...(currentRound > 1
             ? [{

@@ -625,8 +625,11 @@ debate:
   in No-Parity markets. Where the Simulation Guide or the on-screen
   tips used to say "Check rate parity and discounts", they now read
   "Check pricing competitiveness and discounts"; the Dig deeper tip
-  on RPD now lists "discounts, config issues, or price
-  competitiveness" rather than "rate parity". The internal field
+  on RPD now reads "**High** RPD can stem from missing or
+  misconfigured discounts, config issues, or weak price
+  competitiveness" (lower RPD is the healthy state - the previous
+  "Low RPD can stem from..." phrasing had the direction reversed).
+  The internal field
   `rateParity` on `PartnerMetrics` is unchanged - it's not surfaced
   to the learner, just used by the engine.
 - **Data & Insights challenge 3-of-3 take-away** (in

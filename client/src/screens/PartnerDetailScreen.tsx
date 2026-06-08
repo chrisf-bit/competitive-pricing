@@ -18,6 +18,7 @@ import {
   Lock,
   CalendarClock,
   Percent,
+  Info,
 } from 'lucide-react';
 import type {
   PartnerState,
@@ -945,6 +946,25 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      {/* Discoverability hint for the MetricLabel info-icon affordance.
+          Surfaces the (i) icon as an interactive element rather than
+          decoration - testers won't necessarily hover on instinct. */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          fontSize: 11,
+          color: 'var(--grey-400)',
+          fontStyle: 'italic',
+          lineHeight: 1.45,
+          marginTop: -4,
+        }}
+      >
+        <Info size={12} style={{ color: 'var(--grey-400)', flexShrink: 0 }} />
+        <span>Hover any (i) icon for the metric definition.</span>
+      </div>
+
       {/* Existing six-KPI row, kept verbatim but with inline help via
           MetricLabel on every tile. No tiles are clickable - hover
           the (i) icon to reveal the metric definition (and, for
