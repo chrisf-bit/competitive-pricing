@@ -197,7 +197,7 @@ export function PartnerDetailScreen({
             Back
           </button>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <div data-tutorial="partner-detail-header" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
             <div
               style={{
                 width: 56,
@@ -301,6 +301,7 @@ export function PartnerDetailScreen({
               locked in R2 - content lands in R3 (OPC + Quality
               Adoption metrics). */}
           <div
+            data-tutorial="partner-detail-tabs"
             style={{
               background: 'var(--white)',
               border: '2px solid var(--grey-100)',
@@ -326,6 +327,7 @@ export function PartnerDetailScreen({
               Foundations & Payments. Legacy/parked-partner records
               without a category fall back to a single flat list. */}
           <div
+            data-tutorial="partner-detail-discounts"
             style={{
               background: 'var(--white)',
               border: '2px solid var(--grey-100)',
@@ -406,6 +408,7 @@ export function PartnerDetailScreen({
         >
           {/* Partner profile */}
           <div
+            data-tutorial="partner-detail-profile"
             style={{
               background: 'var(--white)',
               border: '2px solid var(--grey-100)',
@@ -475,6 +478,7 @@ export function PartnerDetailScreen({
 
           {/* Action card */}
           <div
+            data-tutorial="partner-detail-action"
             style={{
               background: canEngage
                 ? 'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)'
@@ -1009,7 +1013,9 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
         />
       </div>
 
-      <PriceBucketStrip erpd={m.erpd} />
+      <div data-tutorial="partner-detail-bucket-strip">
+        <PriceBucketStrip erpd={m.erpd} />
+      </div>
 
       {/* Six secondary metric cards per Partner Metrics PDF page 1.
           Cards with no SME-authored value render in a "Data pending"
@@ -1017,6 +1023,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           across partners and makes it obvious where the SME still
           owes a number. */}
       <div
+        data-tutorial="partner-detail-secondary"
         style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(6, 1fr)',
@@ -1535,6 +1542,7 @@ function HelperLauncherTab({
 }) {
   return (
     <motion.button
+      data-tutorial="partner-detail-tree-tab"
       onClick={onOpen}
       aria-label="Open Issue Tree Helper"
       title="Issue Tree Helper"

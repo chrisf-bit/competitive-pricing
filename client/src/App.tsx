@@ -332,6 +332,10 @@ export default function App() {
 
       {showTutorial && (
         <TutorialOverlay
+          // Route the Help icon to the step set matching the current
+          // screen. Anywhere outside Partner Detail falls back to the
+          // Portfolio tour - the only two tour shapes today.
+          mode={state.screen === 'partner-detail' ? 'partner-detail' : 'portfolio'}
           onClose={() => setShowTutorial(false)}
           onStartGame={() => setShowTutorial(false)}
         />

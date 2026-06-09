@@ -14,11 +14,19 @@ import {
   BookOpen,
   Globe,
   TreeDeciduous,
+  UserCircle,
+  Layers,
+  Gauge,
+  PlayCircle,
 } from 'lucide-react';
 
 interface TutorialOverlayProps {
   onClose: () => void;
   onStartGame: () => void;
+  /** Which step set to render. 'portfolio' walks the Portfolio
+   *  screen; 'partner-detail' walks the Partner Detail screen.
+   *  Defaults to 'portfolio'. */
+  mode?: 'portfolio' | 'partner-detail';
 }
 
 interface TutorialStep {
@@ -64,7 +72,7 @@ function IconBox({
   );
 }
 
-const STEPS: TutorialStep[] = [
+const PORTFOLIO_STEPS: TutorialStep[] = [
   {
     target: 'guide-panel',
     title: 'Simulation Guide',
@@ -231,10 +239,103 @@ const STEPS: TutorialStep[] = [
   },
 ];
 
-export function TutorialOverlay({ onClose, onStartGame }: TutorialOverlayProps) {
+// ─── Partner Detail walkthrough ───
+// Targets the data-tutorial markers added to PartnerDetailScreen.tsx
+// in R2. Surfaced via the Header Help icon when the learner is on
+// the Partner Detail screen (App.tsx picks the right step set based
+// on state.screen).
+
+const PARTNER_DETAIL_STEPS: TutorialStep[] = [
+  {
+    target: 'partner-detail-header',
+    title: 'Partner header',
+    description:
+      "The property name is the headline; the contact, location, and room count sit on the subline. The communication-style chip and the Relationship Status pill on the right tell you the partner's style and how warm the relationship is.",
+    icon: <UserCircle size={18} style={{ color: 'var(--brand-blue-light)' }} />,
+    position: 'bottom',
+  },
+  {
+    target: 'partner-detail-tabs',
+    title: 'Metrics tabs',
+    description:
+      "Driving Metrics is active and shows the headline KPIs, the eRPD Price Bucket strip, and the secondary metric tiles. Advanced View is locked - OPC and Quality Adoption metrics will unlock in a later release.",
+    icon: <Layers size={18} style={{ color: 'var(--brand-yellow)' }} />,
+    position: 'bottom',
+  },
+  {
+    target: 'partner-detail-bucket-strip',
+    title: 'eRPD Price Bucket',
+    description:
+      "Seven segments from B1 (most competitive, eRPD ≤ -3%) to B7 (least competitive, eRPD > 12%). The bucket the partner sits in pins their eRPD visually next to the threshold band.",
+    icon: <Gauge size={18} style={{ color: 'var(--brand-yellow)' }} />,
+    position: 'bottom',
+    detail: (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          padding: '8px 12px',
+          background: 'rgba(254,186,2,0.08)',
+          border: '1px solid rgba(254,186,2,0.2)',
+          borderRadius: 8,
+          marginTop: 8,
+        }}
+      >
+        <AlertTriangle size={14} style={{ color: 'var(--brand-yellow)', flexShrink: 0 }} />
+        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
+          Hover any segment for its threshold definition.
+        </span>
+      </div>
+    ),
+  },
+  {
+    target: 'partner-detail-secondary',
+    title: 'Secondary metrics',
+    description:
+      "Six tiles showing recency and pace context: Last 30D ABRN vs last year; Room Nights, ADR, Page Views, Conversion vs peer; Next 3M Room Nights forward pace. Hover any (i) icon for the metric definition.",
+    icon: <BarChart3 size={18} style={{ color: 'var(--brand-blue-light)' }} />,
+    position: 'top',
+  },
+  {
+    target: 'partner-detail-discounts',
+    title: 'Discount Products',
+    description:
+      "Eleven products in three columns: Public Pricing, Genius Pricing, Foundations & Payments. Each row reads active or inactive. Watch for misconfigured products - they're often the silent culprit behind an eRPD gap.",
+    icon: <Tag size={18} style={{ color: 'var(--brand-yellow)' }} />,
+    position: 'top',
+  },
+  {
+    target: 'partner-detail-profile',
+    title: 'Profile + commercial context',
+    description:
+      "Partner description, commercial goal, free-text notes, and below them Last Pricing Contact and Pricing Coverage (QTD). The Pricing Coverage % tells you how much of the partner's pricing toolkit is in play - low values mean lots of headroom.",
+    icon: <BookOpen size={18} style={{ color: 'var(--brand-blue-light)' }} />,
+    position: 'left',
+  },
+  {
+    target: 'partner-detail-tree-tab',
+    title: 'Issue Tree Helper',
+    description:
+      "Yellow tree tab pinned to the right edge - tap to open the Issue Tree drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
+    icon: <TreeDeciduous size={18} style={{ color: 'var(--brand-yellow)' }} />,
+    position: 'left',
+  },
+  {
+    target: 'partner-detail-action',
+    title: 'Begin Conversation',
+    description:
+      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open the Issue Tree Helper at least once first - that gate teaches the diagnostic workflow.",
+    icon: <PlayCircle size={18} style={{ color: 'var(--success)' }} />,
+    position: 'left',
+  },
+];
+
+export function TutorialOverlay({ onClose, onStartGame, mode = 'portfolio' }: TutorialOverlayProps) {
   const [step, setStep] = useState(0);
   const [targetRect, setTargetRect] = useState<Rect | null>(null);
 
+  const STEPS = mode === 'partner-detail' ? PARTNER_DETAIL_STEPS : PORTFOLIO_STEPS;
   const current = STEPS[step];
   const isLast = step === STEPS.length - 1;
 
