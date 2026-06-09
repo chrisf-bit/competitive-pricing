@@ -205,5 +205,9 @@ export const crystalWaterNarrowR1: BranchingConversationTree = {
   partnerId: 'crystal-water-narrow',
   round: 1,
   issueTreePath: crystalWaterR1IssueTreePath,
+  // SME-prescribed AM opener (Narrow Parity column). Set in stone -
+  // Sarah's Step 1 partnerPrompt is her response to this.
+  openingAm:
+    "Hi Sarah! I wanted to follow up on your current distribution strategy. Crystal Water Resort is getting a huge amount of traffic on our platform right now - your page views are outperforming your peers by over 200%.",
   steps: [step1Open, step2Reframe, step3Close],
 };

@@ -209,5 +209,9 @@ export const velvetSkyNoneR2: BranchingConversationTree = {
   partnerId: 'velvet-sky-none',
   round: 2,
   issueTreePath: velvetSkyR2IssueTreePath,
+  // SME-prescribed AM opener (No Parity column). Set in stone -
+  // John's Step 1 partnerPrompt is his response to this.
+  openingAm:
+    "Hi John! I was looking over your traffic data. Your page views are in good shape, but your conversion is hitting a wall because your offer is not considered competitive by our customers, in particular if we compare it to your website.",
   steps: [step1Open, step2Targeted, step3Close],
 };

@@ -204,5 +204,9 @@ export const velvetSkyWideR2: BranchingConversationTree = {
   partnerId: 'velvet-sky-wide',
   round: 2,
   issueTreePath: velvetSkyR2IssueTreePath,
+  // SME-prescribed AM opener (Wide Parity column). Set in stone -
+  // John's Step 1 partnerPrompt is his response to this.
+  openingAm:
+    "Hi John! I noticed your direct website rates are consistently lower than what you have listed with us, and it's stalling your visibility. How are you currently calculating the true cost of driving those direct bookings?",
   steps: [step1Open, step2Fenced, step3Close],
 };

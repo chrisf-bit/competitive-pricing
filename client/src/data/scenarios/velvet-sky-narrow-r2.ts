@@ -204,5 +204,9 @@ export const velvetSkyNarrowR2: BranchingConversationTree = {
   partnerId: 'velvet-sky-narrow',
   round: 2,
   issueTreePath: velvetSkyR2IssueTreePath,
+  // SME-prescribed AM opener (Narrow Parity column). Set in stone -
+  // John's Step 1 partnerPrompt is his response to this.
+  openingAm:
+    "Hi John! Why don't we go through the performance? I've noticed the property has great organic appeal, but your conversion here is decreasing because your public website pricing is cheaper than your Booking.com rate.",
   steps: [step1Open, step2Member, step3Close],
 };

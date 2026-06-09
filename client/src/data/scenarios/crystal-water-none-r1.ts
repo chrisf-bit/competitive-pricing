@@ -213,5 +213,9 @@ export const crystalWaterNoneR1: BranchingConversationTree = {
   partnerId: 'crystal-water-none',
   round: 1,
   issueTreePath: crystalWaterR1IssueTreePath,
+  // SME-prescribed AM opener (No Parity column). Set in stone -
+  // Sarah's Step 1 partnerPrompt is her response to this.
+  openingAm:
+    "Hi Sarah! I was analysing the peak-season data for Crystal Water Resort. Your property is attracting an immense amount of interest - your page views are tracking at 202% above your peer group, which is phenomenal.",
   steps: [step1Open, step2Reframe, step3Close],
 };

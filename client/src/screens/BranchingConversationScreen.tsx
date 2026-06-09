@@ -326,6 +326,50 @@ export function BranchingConversationScreen({
             animate={{ y: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
           >
+            {/* AM opener (set in stone) - rendered only at step 0 when
+                the scenario carries a tree.openingAm. Scenarios like
+                Noble Falcon that let the learner CHOOSE their opener
+                leave openingAm undefined and skip this block. */}
+            {tree.openingAm && conversation.phaseIndex === 0 && (
+              <div style={{ marginBottom: 20 }}>
+                <div
+                  style={{
+                    fontSize: 11,
+                    fontWeight: 800,
+                    color: 'var(--brand-navy)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.14em',
+                    marginBottom: 10,
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 8,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: 6,
+                      height: 6,
+                      borderRadius: '50%',
+                      background: 'var(--brand-yellow)',
+                    }}
+                  />
+                  You said
+                </div>
+                <div
+                  style={{
+                    fontSize: 17,
+                    lineHeight: 1.6,
+                    color: 'var(--grey-700)',
+                    fontWeight: 500,
+                    borderLeft: '3px solid var(--brand-yellow)',
+                    paddingLeft: 16,
+                  }}
+                >
+                  &ldquo;{tree.openingAm}&rdquo;
+                </div>
+              </div>
+            )}
+
             <div
               style={{
                 fontSize: 11,

@@ -207,5 +207,9 @@ export const crystalWaterWideR1: BranchingConversationTree = {
   partnerId: 'crystal-water-wide',
   round: 1,
   issueTreePath: crystalWaterR1IssueTreePath,
+  // SME-prescribed AM opener (Wide Parity column). Set in stone -
+  // Sarah's Step 1 partnerPrompt is her response to this.
+  openingAm:
+    "Hi Sarah! I was looking over your recent performance for Crystal Water Resort. You've generated significant visibility - your page views are up 202% compared to your local peer group.",
   steps: [step1Open, step2MetaLeak, step3Close],
 };

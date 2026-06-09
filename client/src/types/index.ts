@@ -453,6 +453,16 @@ export interface BranchingConversationTree {
   conversationShape: 'branching';
   partnerId: string;
   round: number;
+  /**
+   * Optional AM line that opens the call before the first partner
+   * prompt. Used when the SME script has a set AM opener (and the
+   * partner's first turn is a response to it, not a free greeting).
+   * Rendered once at the top of the conversation, set in stone -
+   * the learner doesn't pick it. Scenarios that let the learner
+   * choose their opener (e.g. Noble Falcon) leave this undefined
+   * and surface the AM's opener as Step 1's optimal option.
+   */
+  openingAm?: string;
   /** Ordered list of exchanges in this scenario. Typically 4-6 steps. */
   steps: BranchingStep[];
   /**
