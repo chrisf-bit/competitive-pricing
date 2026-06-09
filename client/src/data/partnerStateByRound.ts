@@ -102,11 +102,17 @@ export const partnerStateByRound: Record<
   marina: {
     1: {
       metrics: {
-        erpd: 6.3,
-        erpdChange: 1.2,
-        rpdPublic: 7.5,
-        rpdLoyal: 4.8,
-        losePricePublic: 68,
+        // R1 distractor profile: clearly milder than Crystal Water
+        // (eRPD 5.2% / Bucket 4 / Lose Price 99%). Marina reads
+        // as a healthy boutique - Bucket 3, Lose Price 42% - so
+        // the priority signal points unambiguously at Crystal
+        // Water. The mobile-gap story stays in R2 where she
+        // becomes the placeholder priority at sharper numbers.
+        erpd: 2.4,
+        erpdChange: 0.5,
+        rpdPublic: 2.8,
+        rpdLoyal: 1.6,
+        losePricePublic: 42,
         activeScenarios: 1,
         activeScenarioNames: ['Brand.com'],
         competitor: 'brand',
@@ -120,11 +126,11 @@ export const partnerStateByRound: Record<
         },
         lastPricingContactDaysAgo: 110,
         pricingCoverageQTD: 32,
-        experiencedRPD: 58,
-        visibility: 62,
-        conversion: 45,
-        revenue: 55,
-        discountQuality: 40,
+        experiencedRPD: 68,
+        visibility: 70,
+        conversion: 55,
+        revenue: 60,
+        discountQuality: 50,
         rateParity: 'clean',
       },
     },
@@ -231,11 +237,17 @@ export const partnerStateByRound: Record<
   carlos: {
     1: {
       metrics: {
-        erpd: 3.4,
-        erpdChange: -1.2,
-        rpdPublic: 4.1,
-        rpdLoyal: 2.5,
-        losePricePublic: 48,
+        // R1 distractor profile: drop to Bucket 3 so Crystal Water
+        // (Bucket 4) sits visibly higher on the eRPD strip. The
+        // misconfigured Country Rate is still the discoverable
+        // trap that compounds across rounds - it's the only red
+        // flag in his otherwise healthy R1 picture and pays off
+        // at R3 (where the legacy Carlos R3 baseline ramps eRPD).
+        erpd: 1.8,
+        erpdChange: -0.4,
+        rpdPublic: 2.3,
+        rpdLoyal: 1.1,
+        losePricePublic: 36,
         activeScenarios: 1,
         activeScenarioNames: ['Brand.com'],
         competitor: 'brand',
@@ -249,10 +261,10 @@ export const partnerStateByRound: Record<
         },
         lastPricingContactDaysAgo: 102,
         pricingCoverageQTD: 41,
-        experiencedRPD: 65,
-        visibility: 70,
-        conversion: 55,
-        revenue: 62,
+        experiencedRPD: 72,
+        visibility: 76,
+        conversion: 62,
+        revenue: 68,
         discountQuality: 60,
         rateParity: 'minor',
       },
