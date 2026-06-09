@@ -200,9 +200,13 @@ export interface PartnerSecondaryMetrics {
   last30dRoomNights?: SecondaryMetricValue;
   /** Last 30D ADR, comparator is vs peer. */
   last30dAdr?: SecondaryMetricValue;
-  /** Last 90D Page Views, value is itself a %, comparator is vs peer. */
+  /** Last 30D Page Views, value is itself a %, comparator is vs peer.
+   *  Field name kept as last90dPageViews for backwards compatibility
+   *  with persisted state and existing partner data. */
   last90dPageViews?: SecondaryMetricValue;
-  /** Last 90D Conversion, value is itself a %, comparator is vs peer. */
+  /** Last 30D Conversion, value is itself a %, comparator is vs peer.
+   *  Field name kept as last90dConversion for backwards compatibility
+   *  with persisted state and existing partner data. */
   last90dConversion?: SecondaryMetricValue;
   /** Next 3M Room Nights, comparator is vs peer. */
   next3mRoomNights?: SecondaryMetricValue;
