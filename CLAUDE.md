@@ -304,23 +304,31 @@ DO list and the regime's specific constraints.
   round 3, and `getBranchingScenario` resolves at R1 (Crystal
   Water), R2 (Velvet Sky), and R3 (Noble Falcon); Practice Mode
   handles missing rounds by locking those cards.
-- **Only No-Parity is selectable today.** The active No-Parity
-  roster is Marina, Carlos (R1 and R3 distractors), the three
+- **No Parity, Narrow Parity, and Wide Parity are all selectable
+  today** in Market Select. Cross Regional is still gated. The
+  active roster is Marina, Carlos (R1 and R3 distractors), Raven
+  Inn and Driftwood Bay Resort (R2 distractors), plus the three
   Crystal Water variants (R1 priority across regimes), the three
-  Velvet Sky variants (R2 priority across regimes), the three
-  Noble Falcon variants (R3 priority across regimes), plus Raven
-  Inn and Driftwood Bay Resort (R2 distractors, No-Parity only).
-  John Marston moved back to `pendingPartners` in June 2026
-  alongside Stavros, Hannah, Priya, Yuki.
+  Velvet Sky variants (R2 priority across regimes), and the three
+  Noble Falcon variants (R3 priority across regimes). Distractor
+  partner records are tagged `parityRegime: 'none'` but appear on
+  all three regimes' portfolios via the explicit
+  `portfolioByRound` mapping. John Marston moved back to
+  `pendingPartners` in June 2026 alongside Stavros, Hannah, Priya,
+  Yuki.
 - **Per-round portfolio composition is explicit** in
   `data/portfolioByRound.ts`. Three cards per round in the early
   rounds (one priority + two distractors) is the design target -
   Noble Falcon Inn doesn't appear on R1 or R2 because its static
   metrics (eRPD 17% / Bucket 7) would dominate the puzzle visually
-  long before R3 is the right call. Sibling of
-  `correctPartnerPerRound.ts`: keep them in sync - the priority
-  partner per round MUST be present in the corresponding portfolio
-  list, otherwise the round is unwinnable.
+  long before R3 is the right call. The mapping is the source of
+  truth on Portfolio renders - it ignores each partner's own
+  `parityRegime` field when an entry exists, which lets the same
+  distractor record (e.g. Marina with parityRegime 'none') appear
+  on Wide / Narrow / No-Parity portfolios without per-regime
+  clones. Sibling of `correctPartnerPerRound.ts`: keep them in sync
+  - the priority partner per round MUST be present in the
+  corresponding portfolio list, otherwise the round is unwinnable.
 
 ### Conversation structure
 

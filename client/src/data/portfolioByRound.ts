@@ -6,24 +6,25 @@ import type { ParityRegime } from '../types';
  *
  * Three partners per round in the early rounds (one priority + two
  * distractors). The cap may grow for R8-R10 later, but is intentional
- * today so the puzzle stays focused. Without this filter, every
- * partner whose `parityRegime` matches the learner's market would
- * show up at every round, which (a) makes the priority pick obvious
- * by elimination once the catalogue is small and (b) lets very
- * severe partners (e.g. The Noble Falcon Inn at R3) bleed into
- * earlier rounds where their static metrics dominate the puzzle.
+ * today so the puzzle stays focused.
+ *
+ * The mapping is the source of truth - the Portfolio filter uses
+ * these explicit lists and ignores each partner's own `parityRegime`
+ * field when an entry exists. That lets us reuse a single distractor
+ * partner record (e.g. Marina, parityRegime 'none') as a distractor
+ * across multiple regimes' portfolios without authoring per-regime
+ * clones of it.
  *
  * If a regime+round combination isn't mapped here, the Portfolio
  * screen falls back to "show all partners whose parityRegime matches"
- * - the legacy behaviour. Used today for Wide / Narrow / Cross-
- * Regional, where the only mapped partner per round is the priority,
- * so the fallback renders a single-card portfolio.
+ * - the legacy behaviour for round / regime combinations not yet
+ * wired in.
  *
  * Sibling of `correctPartnerPerRound.ts`: that file says "which one
  * was the right call"; this file says "which three cards were on the
  * portfolio when that call happened". Keep them in sync - the
  * priority partner from `correctPartnerPerRound` MUST be present in
- * the corresponding `portfolioByRound` entry, otherwise R1 is
+ * the corresponding `portfolioByRound` entry, otherwise the round is
  * unwinnable because the right pick isn't on the screen.
  */
 export const portfolioByRound: Partial<
@@ -52,10 +53,22 @@ export const portfolioByRound: Partial<
     // than Noble Falcon's structural Bucket-7 crisis).
     3: ['noble-falcon-none', 'marina', 'carlos'],
   },
-  // Narrow + Wide regimes: not mapped here. Market Select shows
-  // these as "Coming soon" today, so the Portfolio code path is
-  // unreachable. When they go live, populate explicit per-round
-  // lists for each.
+  // Narrow Parity: reuses the No-Parity distractor records (Marina,
+  // Carlos, Raven Inn, Driftwood Bay) since the distractor
+  // conversations are regime-neutral 3-phase filler. The priority
+  // swaps to the Narrow regime variant for each round.
+  narrow: {
+    1: ['marina', 'crystal-water-narrow', 'carlos'],
+    2: ['velvet-sky-narrow', 'raven-inn', 'driftwood-bay'],
+    3: ['noble-falcon-narrow', 'marina', 'carlos'],
+  },
+  // Wide Parity: same shape as Narrow - reuses the same distractors,
+  // priority swaps to the Wide regime variant.
+  wide: {
+    1: ['marina', 'crystal-water-wide', 'carlos'],
+    2: ['velvet-sky-wide', 'raven-inn', 'driftwood-bay'],
+    3: ['noble-falcon-wide', 'marina', 'carlos'],
+  },
 };
 
 /**

@@ -210,27 +210,34 @@ export default function App() {
           {state.screen === 'portfolio' && (
             <PortfolioScreen
               partners={(() => {
-                // Step 1: filter to partners whose parityRegime matches
-                // the learner's chosen regime. If no regime is chosen
-                // yet (e.g. dev nav jumped straight here), show all.
-                const regimeFiltered = state.learnerProfile.market
-                  ? state.partners.filter(
-                      (p) => p.persona.parityRegime === state.learnerProfile.market!.parityRegime,
-                    )
-                  : state.partners;
-                // Step 2: if an explicit per-round portfolio is defined
-                // for this regime+round, narrow to those partner ids
-                // (one priority + one or two distractors). Falls back
-                // to the regime-filtered list when no mapping exists,
-                // which keeps Wide / Narrow / Cross-Regional working
-                // until they go live.
-                if (!state.learnerProfile.market) return regimeFiltered;
+                // No regime chosen yet (e.g. dev nav jumped straight
+                // here) - show every partner so the screen renders.
+                if (!state.learnerProfile.market) return state.partners;
+                // Prefer the explicit per-round portfolio mapping when
+                // defined. The mapping is the source of truth - it
+                // lists priority + distractors by partner id, and
+                // ignores parityRegime, so the same distractor partner
+                // record can appear on multiple regimes' portfolios
+                // without authoring per-regime clones of it.
                 const ids = getPortfolioForRound(
                   state.learnerProfile.market.parityRegime,
                   state.currentRound,
                 );
-                if (!ids) return regimeFiltered;
-                return regimeFiltered.filter((p) => ids.includes(p.persona.id));
+                if (ids) {
+                  return state.partners.filter((p) =>
+                    ids.includes(p.persona.id),
+                  );
+                }
+                // Fallback: no explicit mapping for this regime+round,
+                // so show every partner whose parityRegime matches
+                // the learner's chosen regime. Used for round / regime
+                // combinations that haven't been wired into
+                // portfolioByRound yet.
+                return state.partners.filter(
+                  (p) =>
+                    p.persona.parityRegime ===
+                    state.learnerProfile.market!.parityRegime,
+                );
               })()}
               actionsThisRound={state.actionsThisRound}
               marketContext={state.marketContext}

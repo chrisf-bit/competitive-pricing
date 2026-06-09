@@ -30,12 +30,12 @@ export const marketOptions: MarketOption[] = [
   {
     market: { parityRegime: 'narrow' as ParityRegime },
     label: 'Narrow Parity',
-    available: false,
+    available: true,
   },
   {
     market: { parityRegime: 'wide' as ParityRegime },
     label: 'Wide Parity',
-    available: false,
+    available: true,
   },
   {
     market: { parityRegime: 'cross-regional' as ParityRegime },
