@@ -265,15 +265,11 @@ DO list and the regime's specific constraints.
   silently between rounds.
 - The "right" partner each round is held in
   `data/correctPartnerPerRound.ts` per regime per round. For
-  No-Parity the rotation is **Crystal Water Resort R1, Marina R2
-  (placeholder), The Noble Falcon Inn R3** - matched to the per-
-  round state baselines (below). Crystal Water at R1 and Noble
-  Falcon at R3 are SME-approved branching scenarios; Marina at R2
-  holds the slot until the Velvet Sky Boutique drop lands. For
-  Narrow and Wide regimes, R1 is the corresponding Crystal Water
-  variant and R3 is the corresponding Noble Falcon variant - same
-  data, same partner story, different regulatory framing of the
-  conversation.
+  No-Parity the rotation is **Crystal Water Resort R1, Velvet Sky
+  Boutique Hotel R2, The Noble Falcon Inn R3** - all three are
+  SME-approved branching scenarios. For Narrow and Wide regimes,
+  each round uses the corresponding regime variant - same data,
+  same partner story, different regulatory framing.
 - **Per-round partner state is scripted** in
   `data/partnerStateByRound.ts` and applied as an overlay by
   `applyRoundBaseline` in three places: `createInitialState` (R1
@@ -286,31 +282,35 @@ DO list and the regime's specific constraints.
   scripted arc for No-Parity today: R1 Crystal Water Resort in a
   Brand.com Competitiveness Gap (Sarah Bennett running cheaper
   promotional rates on her direct brand site, 202% page-view spike
-  vs peer but Conversion -52%, Lose Price 99%, only Genius
-  Programme active); R2 Marina's mobile gap escalates (placeholder
-  pending the SME-approved Velvet Sky Boutique R2 drop); R3 The
-  Noble Falcon Inn in a structural Brand.com competitiveness gap
-  (eRPD 17.0% with +21.42 percentage points YoY, Lose Price 93%,
-  four active scenarios including the Brand Scenario). Crystal
-  Water and Noble Falcon also stand up R1 and R3 respectively for
-  Narrow and Wide regimes - same data, regime-specific dialogue
-  (see `data/scenarios/crystal-water-{none,narrow,wide}-r1.ts` and
+  vs peer but Conversion -52%, Lose Price 99%, only Genius Programme
+  active); R2 Velvet Sky Boutique Hotel in a milder but chronic
+  Brand.com gap (John Whitford aggressively discounting on his
+  direct site, zero active Booking.com pricing tools, Lose Price
+  99% with mild +0.53 YoY eRPD change); R3 The Noble Falcon Inn in
+  a structural Brand.com competitiveness gap (eRPD 17.0% with
+  +21.42 percentage points YoY, Lose Price 93%, four active
+  scenarios including the Brand Scenario). All three priorities
+  also stand up for Narrow and Wide regimes - same data, regime-
+  specific dialogue (see
+  `data/scenarios/crystal-water-{none,narrow,wide}-r1.ts`,
+  `data/scenarios/velvet-sky-{none,narrow,wide}-r2.ts`, and
   `data/scenarios/noble-falcon-{none,narrow,wide}-r3.ts`).
-- **Conversation data covers Crystal Water Resort R1 and The Noble
-  Falcon Inn R3 as SME-approved branching scenarios across all
-  three regimes, plus Marina R2 + Carlos R3 as 3-phase
-  placeholders.** Rounds 4-10 are non-playable today (TOTAL_ROUNDS
-  is capped at 3 in `gameEngine.ts`). `getConversationTree` returns
-  undefined past round 3, and `getBranchingScenario` only resolves
-  at R1 (Crystal Water) and R3 (Noble Falcon); Practice Mode handles
-  missing rounds by locking those cards.
+- **Conversation data covers Crystal Water Resort R1, Velvet Sky
+  Boutique Hotel R2, and The Noble Falcon Inn R3 as SME-approved
+  branching scenarios across all three regimes, plus Marina R1-R3
+  and Carlos R1-R3 as 3-phase distractors.** Rounds 4-10 are
+  non-playable today (TOTAL_ROUNDS is capped at 3 in
+  `gameEngine.ts`). `getConversationTree` returns undefined past
+  round 3, and `getBranchingScenario` resolves at R1 (Crystal
+  Water), R2 (Velvet Sky), and R3 (Noble Falcon); Practice Mode
+  handles missing rounds by locking those cards.
 - **Only No-Parity is selectable today.** Marina, Carlos, the three
-  Crystal Water variants (none / narrow / wide), and the three
-  Noble Falcon variants (none / narrow / wide) sit in
-  `initialPartners`. John moved back to `pendingPartners` in
-  June 2026 alongside Stavros, Hannah, Priya, Yuki - John's
-  branching scenario and persona hints stay on disk in case a
-  future round repurposes his brand-first crisis profile.
+  Crystal Water variants, the three Velvet Sky variants, and the
+  three Noble Falcon variants sit in `initialPartners`. John
+  Marston moved back to `pendingPartners` in June 2026 alongside
+  Stavros, Hannah, Priya, Yuki - John Marston's branching scenario
+  and persona hints stay on disk in case a future round repurposes
+  his brand-first crisis profile.
 - **Per-round portfolio composition is explicit** in
   `data/portfolioByRound.ts`. Three cards per round in the early
   rounds (one priority + two distractors) is the design target -

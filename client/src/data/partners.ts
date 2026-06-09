@@ -124,6 +124,113 @@ function crystalWaterBase(args: {
   ];
 }
 
+/**
+ * Builds a Velvet Sky Boutique Hotel partner record. Same hotel
+ * brand, contact (John Whitford, Hotel Manager), profile, and metrics
+ * across all three regime variants - only location, parityRegime,
+ * the property image, and the partner id differ. Wrapping the shared
+ * content in a helper keeps the three variants in sync.
+ *
+ * Data: SME spreadsheet row 34 (Hotel ID 34, "List examples only
+ * Brand.com" sheet). Mild eRPD change (+0.53 YoY) but a chronic 99%
+ * Lose Price - the gap is structural, not freshly escalating. Zero
+ * Booking.com pricing products active on this partner: he's leaning
+ * entirely on his direct brand site's discount strategy.
+ */
+function velvetSkyBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: 'John Whitford',
+        propertyName: 'Velvet Sky Boutique Hotel',
+        propertyType: 'Boutique Hotel',
+        roomCount: 38,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: 'JW',
+        propertyImage: args.propertyImage,
+        style: 'red',
+        styleSecondary: 'blue',
+        description:
+          "Owner-manager at an independent boutique who treats his direct brand site as his lowest-priced channel by design. Talks in commercial terms - margins, commission, ROI - and weighs every trade-off before agreeing. Direct and pragmatic; not warm, but rewards a tight commercial case.",
+        commercialGoal:
+          'Grow direct bookings via aggressive on-site discounting while keeping ADR protected',
+        profileNotes: [
+          'Runs deep public discounts on his direct brand site to shift share away from OTAs',
+          'Views Booking.com as discovery / billboard, not as a primary conversion channel',
+          'No active Booking.com pricing tools today - Genius programme is off',
+          'Calculates commission cost vs direct acquisition cost before any move',
+        ],
+      },
+      // Metrics map verbatim to the SME spreadsheet row 34 (Hotel
+      // ID 34 - Velvet Sky Boutique Hotel). Same baseline across all
+      // three regime variants; the regime only changes the regulatory
+      // framing. The flat Public-vs-Loyal RPD (both 5.0%) reflects
+      // that Genius isn't active for this partner.
+      metrics: {
+        erpd: 5.0,
+        erpdChange: 0.53,
+        rpdPublic: 5.0,
+        rpdLoyal: 5.0,
+        losePricePublic: 99,
+        activeScenarios: 1,
+        activeScenarioNames: ['Brand Scenario'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 351, deltaPct: -8 },
+          last30dRoomNights: { value: 220, deltaPct: -18 },
+          last30dAdr: { value: 162, deltaPct: 2 },
+          last90dPageViews: { value: 18500, deltaPct: 45 },
+          last90dConversion: { value: 1.3, deltaPct: -38 },
+          next3mRoomNights: { value: 165, deltaPct: -12 },
+        },
+        // SME spreadsheet showed 2026-05-12 against an authoring
+        // date of 2026-06-09 - 28 days back.
+        lastPricingContactDaysAgo: 28,
+        // Zero Booking.com pricing products active on this partner;
+        // the SME spreadsheet showed all 11 inactive. Rendered as
+        // 0% to flag the empty toolkit explicitly.
+        pricingCoverageQTD: 0,
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 52,
+        visibility: 60,
+        conversion: 30,
+        revenue: 38,
+        discountQuality: 20,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Sparse adoption: nothing active. Reinforces the story that
+      // John relies entirely on his direct brand site's discount
+      // strategy and hasn't engaged any Booking.com pricing tool -
+      // even Genius is off.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 function nobleFalconBase(args: {
   id: string;
   parityRegime: ParityRegime;
@@ -258,6 +365,40 @@ export const initialPartners: PartnerState[] = [
     location: 'Bali, Indonesia',
     propertyImage:
       'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
+  }),
+
+  // ── Velvet Sky Boutique Hotel (Wide Parity / Amsterdam) ──
+  // SME-approved R2 priority - Brand.com Competitiveness Gap caused
+  // by John's aggressive public discounting on his direct brand
+  // site. Same hotel brand + contact (John Whitford) across all
+  // three regime variants - only location, parityRegime, the
+  // property image, and the partner id differ. Data sourced from
+  // SME spreadsheet row 34.
+  ...velvetSkyBase({
+    id: 'velvet-sky-wide',
+    parityRegime: 'wide',
+    location: 'Amsterdam, Netherlands',
+    propertyImage:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+  }),
+
+  // ── Velvet Sky Boutique Hotel (Narrow Parity / Edinburgh) ──
+  ...velvetSkyBase({
+    id: 'velvet-sky-narrow',
+    parityRegime: 'narrow',
+    location: 'Edinburgh, Scotland',
+    propertyImage:
+      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=400&h=250&fit=crop',
+  }),
+
+  // ── Velvet Sky Boutique Hotel (No Parity / Lisbon) ──
+  // The No-Parity R2 priority partner today.
+  ...velvetSkyBase({
+    id: 'velvet-sky-none',
+    parityRegime: 'none',
+    location: 'Lisbon, Portugal',
+    propertyImage:
+      'https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=400&h=250&fit=crop',
   }),
 
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──

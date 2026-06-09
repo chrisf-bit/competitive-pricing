@@ -80,6 +80,43 @@ const crystalWaterR1Hints: Partial<Record<PersonaId, PersonaHint>> = {
 };
 
 /**
+ * Shared persona hint content for Velvet Sky Boutique Hotel R2,
+ * applied verbatim across all three regime variants. John's
+ * character + the metrics + the objection types are constant; only
+ * the regulatory framing of the conversation differs by regime.
+ */
+const velvetSkyR2Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    unlocked:
+      "John is red / blue. Open with the commercial logic - the 90% discovery dynamic - and let him do the maths in his head. Skip the rapport build, skip the emotional appeal. He responds to trade-offs he can quantify and trades you concrete next steps in return. Don't suggest a public rate drop; he'll shut down immediately.",
+    mutedTeaser: 'The discount toolkit on this partner tells a sharper story than the eRPD.',
+    mutedFull:
+      "Velvet Sky has zero Booking.com pricing products active - not even Genius. Pricing Coverage QTD is 0%. He's leaning entirely on his direct site discount strategy and treating Booking.com as a billboard. The wedge isn't the eRPD level (5.0%, Bucket 4 - mild) - it's the chronic 99% Lose Price + the empty toolkit. Lots of room to add on-platform tools without touching his base.",
+  },
+  'objection-navigator': {
+    unlocked:
+      "Expect three pushbacks: (1) 'cheaper direct rate is intentional - it shifts share away from OTAs', (2) 'matching loses my direct edge', and (3) 'a base-rate drop hurts my margins'. The wedge is to keep his public base intact, pitch fenced direct incentives (member rates, value-adds) for his website, and a targeted Country Rate / Mobile Rate on Booking.com - he stays in control on both sides.",
+    mutedTeaser: 'His tone is steadier than his commercial language suggests.',
+    mutedFull:
+      "John is pragmatic but not adversarial. He weighs trade-offs and won't commit in-call unless the maths is clean. If you land a coherent commercial logic he'll close on a concrete next step - 'let's clean up the public rates and test the mobile segment'. Aggressive openers or moralising lectures collapse the call instantly.",
+  },
+  storyteller: {
+    unlocked:
+      "Velvet Sky's story is the boutique-with-no-Booking.com-strategy. John is running aggressive direct-site discounts to dodge commission, has zero Booking.com pricing tools on, and views the platform as discovery only. The Lose Price is 99% but the eRPD is only 5% - the gap is chronic, not freshly escalating. The narrative is 'fenced direct edge + targeted platform tools', not 'fix a crisis'.",
+    mutedTeaser: 'The supporting detail on adoption matters here.',
+    mutedFull:
+      "eRPD 5.0% (Bucket 4), eRPD change +0.53 YoY - mild and stable. RPD Public 5.0% / RPD Loyal 5.0% (Genius is off, so no gap). Lose Price Public 99%. Zero active Booking.com pricing products - mobile, country, genius, family, payments, base rate plan all inactive. Last 30D ABRN 351 (-8%), Conversion -38% vs peer, Page Views +45% vs peer. Last pricing contact 28 days back.",
+  },
+  'data-detective': {
+    unlocked:
+      "Headline anomaly: zero active Booking.com pricing tools across an 11-product taxonomy - Pricing Coverage QTD is literally 0%. Even Genius is off, which is why RPD Public and RPD Loyal are both 5.0% (no Genius gap). The lever isn't dropping the base rate; it's switching on a Mobile Rate (Wide / Narrow) or a Country Rate (No Parity) to capture the conversion without touching ADR.",
+    mutedTeaser: "You may not have a read on John's style yet.",
+    mutedFull:
+      "John is red / driver primary with blue / thinker secondary. He talks in margins, commission, ROI. He wants to weigh trade-offs and retain control. Match his pace - state the observation, name the commercial logic, propose a tight pilot with a clear measurement plan. Warm openers or relational framing will lose him; threats or moralising will lose him faster.",
+  },
+};
+
+/**
  * Shared persona hint content for The Noble Falcon Inn R3, applied
  * verbatim across all three regime variants (Wide / Narrow / None).
  * Anton's character is constant across markets; the metrics + the
@@ -256,6 +293,13 @@ export const personaHints: PersonaHintsByRound = {
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },
   'crystal-water-none': { 1: crystalWaterR1Hints },
+  // Velvet Sky Boutique Hotel R2 - same persona hint content across
+  // all three regime variants. John's character + metrics +
+  // objections are identical; only the regulatory framing of the
+  // conversation differs by regime.
+  'velvet-sky-wide': { 2: velvetSkyR2Hints },
+  'velvet-sky-narrow': { 2: velvetSkyR2Hints },
+  'velvet-sky-none': { 2: velvetSkyR2Hints },
   // Noble Falcon Inn R3 - same persona hint content across all three
   // regime variants (Wide / Narrow / None). Anton's character, the
   // metrics, the four objection types, and the partner profile are

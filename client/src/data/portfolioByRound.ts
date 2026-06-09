@@ -37,13 +37,11 @@ export const portfolioByRound: Partial<
     // 202% page-view spike vs peer is the unmissable signal.
     1: ['marina', 'crystal-water-none', 'carlos'],
 
-    // R2 - Marina holds the priority slot as a placeholder pending
-    // the SME-approved Velvet Sky Boutique drop; Carlos is a
-    // distractor. Two-card portfolio until the Velvet Sky + Raven
-    // Inn + Oasis-like-partner work lands in the next couple of
-    // commits, at which point this becomes a three-card portfolio
-    // with Velvet Sky as the priority.
-    2: ['marina', 'carlos'],
+    // R2 - Velvet Sky Boutique Hotel is the SME-approved priority;
+    // Marina and Carlos hold the distractor slots temporarily until
+    // the Raven Inn + Oasis-like-partner distractors are authored.
+    // At that point Marina and Carlos drop off the R2 portfolio.
+    2: ['velvet-sky-none', 'marina', 'carlos'],
 
     // R3 - The Noble Falcon Inn alone for now. R3 distractor
     // partners will be added later (likely Marina + Carlos at their

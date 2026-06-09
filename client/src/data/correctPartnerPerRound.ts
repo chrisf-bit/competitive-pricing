@@ -26,8 +26,10 @@ export const correctPartnerPerRound: Partial<
     //              Competitiveness Gap; Sarah Bennett running cheaper
     //              brand-site promotional rates, 202% page-view spike
     //              vs peer but Conversion -52%, Lose Price 99%).
-    //   R2 - Marina (placeholder priority pending SME-approved
-    //              Velvet Sky Boutique R2 drop).
+    //   R2 - Velvet Sky Boutique Hotel (SME-approved Brand.com
+    //              Competitiveness Gap; John Whitford aggressively
+    //              discounting on his direct site, no active Booking.com
+    //              pricing tools, Lose Price 99%).
     //   R3 - The Noble Falcon Inn (SME-approved structural Brand.com
     //              competitiveness gap; eRPD 17.0% with +21.42 YoY,
     //              Lose Price 93%, four active scenarios incl. Brand).
@@ -37,7 +39,7 @@ export const correctPartnerPerRound: Partial<
     // grading layer always has an answer if a stray code path
     // bypasses the cap.
     1: 'crystal-water-none',
-    2: 'marina',
+    2: 'velvet-sky-none',
     3: 'noble-falcon-none',
     4: 'noble-falcon-none',
     5: 'noble-falcon-none',
@@ -47,18 +49,20 @@ export const correctPartnerPerRound: Partial<
     9: 'noble-falcon-none',
     10: 'noble-falcon-none',
   },
-  // Narrow + Wide regimes stand up R1 (Crystal Water Resort) and R3
-  // (Noble Falcon Inn) with the corresponding regime variants. Each
-  // variant carries the same data and partner story; only the
-  // regulatory framing of the conversation differs by regime. R2
-  // pending the Velvet Sky Boutique drop; R4-R10 pending the
-  // broader partner-data drop.
+  // Narrow + Wide regimes stand up R1 (Crystal Water Resort), R2
+  // (Velvet Sky Boutique Hotel) and R3 (Noble Falcon Inn) with the
+  // corresponding regime variants. Each variant carries the same
+  // data and partner story; only the regulatory framing of the
+  // conversation differs by regime. R4-R10 pending the broader
+  // partner-data drop.
   narrow: {
     1: 'crystal-water-narrow',
+    2: 'velvet-sky-narrow',
     3: 'noble-falcon-narrow',
   },
   wide: {
     1: 'crystal-water-wide',
+    2: 'velvet-sky-wide',
     3: 'noble-falcon-wide',
   },
   // cross-regional: pending partner data.
