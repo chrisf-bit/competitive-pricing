@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowLeft,
   MapPin,
-  Building2,
   MessageSquare,
   CheckCircle2,
   XCircle,
@@ -217,7 +216,7 @@ export function PartnerDetailScreen({
             </div>
             <div>
               <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>
-                {partner.persona.name}
+                {partner.persona.propertyName}
               </h2>
               <div
                 style={{
@@ -229,8 +228,8 @@ export function PartnerDetailScreen({
                   fontWeight: 500,
                 }}
               >
-                <Building2 size={12} />
-                {partner.persona.propertyName}
+                <UserCircle size={12} />
+                {partner.persona.name}
                 <span style={{ color: 'var(--grey-200)' }}>|</span>
                 <MapPin size={12} />
                 {partner.persona.location}

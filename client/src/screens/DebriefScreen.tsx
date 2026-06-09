@@ -25,7 +25,9 @@ import { reportLessonStatus } from '../util/persistence';
 import { downloadDebriefPdf } from '../util/debriefPdf';
 
 const PRACTICE_AVAILABLE_ROUNDS = [1, 2, 3] as const;
-const TOTAL_ROUNDS_DISPLAYED = 10;
+// Matches TOTAL_ROUNDS in gameEngine.ts - the contiguous playable max
+// (capped at SME-approved priority content). Bump as new drops land.
+const TOTAL_ROUNDS_DISPLAYED = 3;
 
 interface DebriefScreenProps {
   score: ScoreBreakdown;

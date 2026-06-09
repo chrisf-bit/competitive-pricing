@@ -51,7 +51,10 @@ function applyRoundBaseline(
 // was removed in 2026-06 - it was always 1 or 0 with no intermediate
 // values, so a count rendered no real information and added a
 // redundant Actions pill to the Header.
-const TOTAL_ROUNDS = 10;
+// Capped at the contiguous max of SME-approved priority content.
+// Today: R1 John (placeholder), R2 Marina (placeholder), R3 Noble
+// Falcon (SME-approved). Bump as each new priority drop lands.
+const TOTAL_ROUNDS = 3;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 

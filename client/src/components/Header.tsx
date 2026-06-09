@@ -8,7 +8,10 @@ interface HeaderProps {
   onTutorial?: () => void;
 }
 
-const TOTAL_ROUNDS = 10;
+// Capped at the contiguous max of SME-approved priority content.
+// Today: R1 John (placeholder), R2 Marina (placeholder), R3 Noble
+// Falcon (SME-approved). Bump as each new priority drop lands.
+const TOTAL_ROUNDS = 3;
 
 // `screen` kept on the prop interface even though Header no longer
 // branches on it - keeps the App.tsx callsite stable and gives us a
