@@ -77,7 +77,7 @@ const STEPS: TutorialStep[] = [
     target: 'round-tracker',
     title: 'Rounds and actions',
     description:
-      'The simulation runs over 10 rounds. Each round you pick one partner to engage - the rest wait. Neglected partners lose trust and their metrics drift, so pick the one who needs you most.',
+      "Each round you pick one partner to engage - the rest wait. Neglected partners lose trust and their metrics drift, so pick the one who needs you most.",
     icon: <Clock size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (
@@ -112,40 +112,9 @@ const STEPS: TutorialStep[] = [
     target: 'partner-card',
     title: 'Partner Cards',
     description:
-      'Each card represents an accommodation partner in your portfolio. Click a card to view their full profile and start a conversation.',
+      "Each card shows the property name, headline KPIs, and the relationship status. Read the numbers - there's no severity colour-coding on the metrics, so you have to spot the priority yourself. Click a card to open the partner.",
     icon: <Users size={18} style={{ color: 'var(--brand-blue-light)' }} />,
     position: 'right',
-    detail: (
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8 }}>
-        <div style={{ display: 'flex', gap: 6 }}>
-          {[
-            { color: 'var(--danger)', label: 'Poor RPD' },
-            { color: '#e67e22', label: 'Below market' },
-            { color: 'var(--success)', label: 'Engaged' },
-          ].map((item) => (
-            <div
-              key={item.label}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 5,
-                fontSize: 10,
-                color: 'rgba(255,255,255,0.55)',
-                padding: '3px 8px',
-                background: 'rgba(255,255,255,0.05)',
-                borderRadius: 4,
-              }}
-            >
-              <div style={{ width: 8, height: 8, borderRadius: 2, background: item.color }} />
-              {item.label}
-            </div>
-          ))}
-        </div>
-        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>
-          Border colours indicate urgency level.
-        </span>
-      </div>
-    ),
   },
   {
     target: 'status-badges',
@@ -184,32 +153,36 @@ const STEPS: TutorialStep[] = [
     target: 'rpd-number',
     title: 'Experienced RPD',
     description:
-      'The headline metric. RPD (Relative Price Difference) measures how competitively priced this partner is versus comparable properties. Lower RPD means more competitive.',
+      "The headline metric. eRPD measures how competitively priced a partner is on Booking.com vs Brand.com or a Key OTA - lower is better. The seven price-bucket strip on Partner Detail anchors the number visually.",
     icon: <BarChart3 size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (
-      <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-        {[
-          { range: '70+', label: 'Competitive', color: 'var(--success)' },
-          { range: '55-69', label: 'Slightly below', color: 'var(--warning)' },
-          { range: '40-54', label: 'Below market', color: '#e67e22' },
-          { range: '<40', label: 'Poor', color: 'var(--danger)' },
-        ].map((tier) => (
-          <div
-            key={tier.range}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 5,
-              fontSize: 10,
-              color: 'rgba(255,255,255,0.55)',
-            }}
-          >
-            <div style={{ width: 8, height: 8, borderRadius: 2, background: tier.color }} />
-            <span style={{ fontWeight: 700, color: tier.color }}>{tier.range}</span>
-            <span>{tier.label}</span>
-          </div>
-        ))}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8 }}>
+        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+          {[
+            { range: 'B1', label: '≤ -3% · most competitive', color: 'var(--success)' },
+            { range: 'B4', label: '3% to 6% · drifting', color: 'var(--warning)' },
+            { range: 'B7', label: '> 12% · least competitive', color: 'var(--danger)' },
+          ].map((tier) => (
+            <div
+              key={tier.range}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 5,
+                fontSize: 10,
+                color: 'rgba(255,255,255,0.55)',
+              }}
+            >
+              <div style={{ width: 8, height: 8, borderRadius: 2, background: tier.color }} />
+              <span style={{ fontWeight: 700, color: tier.color }}>{tier.range}</span>
+              <span>{tier.label}</span>
+            </div>
+          ))}
+        </div>
+        <span style={{ fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>
+          Seven buckets in total - lower eRPD = more competitive.
+        </span>
       </div>
     ),
   },
@@ -225,7 +198,7 @@ const STEPS: TutorialStep[] = [
     target: 'discount-row',
     title: 'Discount Products',
     description:
-      'Shows how many of the 5 available discount products are active. Misconfigured discounts need fixing. Activating the right discounts improves RPD.',
+      "Eleven pricing products grouped into three columns: Public Pricing, Genius Pricing, and Foundations & Payments. Each row shows active or inactive. Watch for misconfigured products - they're the silent culprit behind many eRPD gaps.",
     icon: <Tag size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
     detail: (
