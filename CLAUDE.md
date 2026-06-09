@@ -300,12 +300,12 @@ DO list and the regime's specific constraints.
   round 3, and `getBranchingScenario` only resolves at R1 (John,
   pending replacement) and R3 (Noble Falcon); Practice Mode
   handles missing rounds by locking those cards.
-- **Only No-Parity is selectable today.** Marina, John, Carlos,
-  and the three Noble Falcon variants (none / narrow / wide) sit
-  in `initialPartners`. Stavros, Hannah, Priya, Yuki are parked
-  in a separate `pendingPartners` export in the same file - their
-  persona data and conversation trees are intact and ready to be
-  spliced back into the active roster if needed.
+- **Only No-Parity is selectable today.** Marina, Carlos, and the
+  three Noble Falcon variants (none / narrow / wide) sit in
+  `initialPartners`. John moved back to `pendingPartners` in
+  June 2026 alongside Stavros, Hannah, Priya, Yuki - John's
+  branching scenario and persona hints stay on disk in case a
+  future round repurposes his brand-first crisis profile.
 
 ### Conversation structure
 
@@ -584,9 +584,11 @@ SME authors know the slot they're filling):
 - Data Detective - unlocks biggest anomaly highlighted; mutes style
   cue
 
-**Coverage today:** R1 hints authored for the active No-Parity
-roster (Marina, John, Carlos) plus Stavros (parked but kept in
-sync for reuse). R2/R3 hints land alongside the next SME drop.
+**Coverage today:** R1 hints authored for Marina and Carlos plus
+the parked John and Stavros (kept in sync for reuse). R3 hints
+authored for The Noble Falcon Inn across all three regimes. R1
+priority (Crystal Water Resort) and R2 priority (Velvet Sky
+Boutique) hints land alongside the partner record drops.
 
 **State (`expandedBlindSpots: string[]` on `GameState`):** keys are
 `${partnerId}-${round}` strings. Resets on full restart

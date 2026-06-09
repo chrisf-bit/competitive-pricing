@@ -283,11 +283,24 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
+];
+
+/**
+ * Partners parked until their parity regimes go live in Market Select.
+ * Kept here so the persona data and the conversation trees in
+ * conversations-*.ts stay easy to re-merge - just splice these back
+ * into initialPartners when Narrow / Wide / Cross Regional become
+ * selectable. Not exported into the active roster today, so the
+ * portfolio filter has nothing to surface even if a future bug were
+ * to bypass it.
+ */
+export const pendingPartners: PartnerState[] = [
   // ── John - Brand-first Boutique Hotel (Red/Driver) ──
-  // No-Parity scenario, branching conversation shape. John holds
-  // the No-Parity R1 priority slot as a placeholder until the
-  // SME-approved Crystal Water Resort R1 content lands. The Noble
-  // Falcon Inn now lives at R3 across all three regime variants.
+  // Was the No-Parity R1 placeholder priority until June 2026, when
+  // SME-approved R1 content (Crystal Water Resort) landed and John
+  // moved here. His branching scenario (data/scenarios/john-r1.ts)
+  // and persona hints are intact - splice back into initialPartners
+  // if a future round repurposes the brand-first crisis profile.
   {
     persona: {
       id: 'john',
@@ -347,18 +360,6 @@ export const initialPartners: PartnerState[] = [
     pendingActions: [],
   },
 
-];
-
-/**
- * Partners parked until their parity regimes go live in Market Select.
- * Kept here so the persona data and the conversation trees in
- * conversations-*.ts stay easy to re-merge - just splice these back
- * into initialPartners when Narrow / Wide / Cross Regional become
- * selectable. Not exported into the active roster today, so the
- * portfolio filter has nothing to surface even if a future bug were
- * to bypass it.
- */
-export const pendingPartners: PartnerState[] = [
   // ── Stavros - Large Resort Hotel (Red/Director) ──
   // Was the No-Parity R1 target before John replaced him in May 2026.
   // Persona + 3-phase conversation trees (rounds 1-3) are still on
