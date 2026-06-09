@@ -24,6 +24,7 @@ import { ConversationReportScreen } from './screens/ConversationReportScreen';
 import { RoundTransitionScreen } from './screens/RoundTransitionScreen';
 import { DebriefScreen } from './screens/DebriefScreen';
 import { reportLessonStatus, reportScore } from './util/persistence';
+import { getPortfolioForRound } from './data/portfolioByRound';
 
 export default function App() {
   const game = useGame();
@@ -208,16 +209,29 @@ export default function App() {
           )}
           {state.screen === 'portfolio' && (
             <PortfolioScreen
-              partners={
-                // Filter to partners whose parityRegime matches the learner's
-                // chosen regime. If no regime is chosen yet (e.g. dev nav
-                // jumped straight here), show all partners.
-                state.learnerProfile.market
+              partners={(() => {
+                // Step 1: filter to partners whose parityRegime matches
+                // the learner's chosen regime. If no regime is chosen
+                // yet (e.g. dev nav jumped straight here), show all.
+                const regimeFiltered = state.learnerProfile.market
                   ? state.partners.filter(
                       (p) => p.persona.parityRegime === state.learnerProfile.market!.parityRegime,
                     )
-                  : state.partners
-              }
+                  : state.partners;
+                // Step 2: if an explicit per-round portfolio is defined
+                // for this regime+round, narrow to those partner ids
+                // (one priority + one or two distractors). Falls back
+                // to the regime-filtered list when no mapping exists,
+                // which keeps Wide / Narrow / Cross-Regional working
+                // until they go live.
+                if (!state.learnerProfile.market) return regimeFiltered;
+                const ids = getPortfolioForRound(
+                  state.learnerProfile.market.parityRegime,
+                  state.currentRound,
+                );
+                if (!ids) return regimeFiltered;
+                return regimeFiltered.filter((p) => ids.includes(p.persona.id));
+              })()}
               actionsThisRound={state.actionsThisRound}
               marketContext={state.marketContext}
               onSelectPartner={game.onSelectPartner}

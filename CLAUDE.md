@@ -311,6 +311,15 @@ DO list and the regime's specific constraints.
   June 2026 alongside Stavros, Hannah, Priya, Yuki - John's
   branching scenario and persona hints stay on disk in case a
   future round repurposes his brand-first crisis profile.
+- **Per-round portfolio composition is explicit** in
+  `data/portfolioByRound.ts`. Three cards per round in the early
+  rounds (one priority + two distractors) is the design target -
+  Noble Falcon Inn doesn't appear on R1 or R2 because its static
+  metrics (eRPD 17% / Bucket 7) would dominate the puzzle visually
+  long before R3 is the right call. Sibling of
+  `correctPartnerPerRound.ts`: keep them in sync - the priority
+  partner per round MUST be present in the corresponding portfolio
+  list, otherwise the round is unwinnable.
 
 ### Conversation structure
 
