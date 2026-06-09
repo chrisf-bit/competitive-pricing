@@ -265,16 +265,15 @@ DO list and the regime's specific constraints.
   silently between rounds.
 - The "right" partner each round is held in
   `data/correctPartnerPerRound.ts` per regime per round. For
-  No-Parity the rotation is **John R1 (placeholder), Marina R2
-  (placeholder), The Noble Falcon Inn R3** - matched to the
-  per-round state baselines (below). John and Marina hold R1/R2
-  as placeholders pending the SME-approved Crystal Water Resort
-  (R1) and Velvet Sky Boutique (R2) drops; Noble Falcon at R3 is
-  the SME-confirmed "Brand.com Competitiveness Gap" scenario. For
-  Narrow and Wide regimes, R3 is the corresponding Noble Falcon
-  regime variant (`noble-falcon-narrow` / `noble-falcon-wide`) -
-  same data, same partner story, different regulatory framing of
-  the conversation.
+  No-Parity the rotation is **Crystal Water Resort R1, Marina R2
+  (placeholder), The Noble Falcon Inn R3** - matched to the per-
+  round state baselines (below). Crystal Water at R1 and Noble
+  Falcon at R3 are SME-approved branching scenarios; Marina at R2
+  holds the slot until the Velvet Sky Boutique drop lands. For
+  Narrow and Wide regimes, R1 is the corresponding Crystal Water
+  variant and R3 is the corresponding Noble Falcon variant - same
+  data, same partner story, different regulatory framing of the
+  conversation.
 - **Per-round partner state is scripted** in
   `data/partnerStateByRound.ts` and applied as an overlay by
   `applyRoundBaseline` in three places: `createInitialState` (R1
@@ -284,24 +283,30 @@ DO list and the regime's specific constraints.
   being practised). The engine's conversation outcomes only nudge a
   couple of legacy metric fields; without this overlay the headline
   KPIs never move and the same partner stays worst forever. The
-  scripted arc for No-Parity today: R1 John in a brand-first crisis
-  (placeholder, pushing direct rates, losing OTA volume, eRPD 9.5 /
-  lose-price 81%); R2 Marina's mobile gap escalates (placeholder);
-  R3 The Noble Falcon Inn in a structural Brand.com competitiveness
-  gap (eRPD 17.0% with +21.42 percentage points YoY, Lose Price 93%,
-  four active scenarios including the Brand Scenario). Noble Falcon
-  also stands up R3 for Narrow and Wide regimes - same data,
-  regime-specific dialogue (see
+  scripted arc for No-Parity today: R1 Crystal Water Resort in a
+  Brand.com Competitiveness Gap (Sarah Bennett running cheaper
+  promotional rates on her direct brand site, 202% page-view spike
+  vs peer but Conversion -52%, Lose Price 99%, only Genius
+  Programme active); R2 Marina's mobile gap escalates (placeholder
+  pending the SME-approved Velvet Sky Boutique R2 drop); R3 The
+  Noble Falcon Inn in a structural Brand.com competitiveness gap
+  (eRPD 17.0% with +21.42 percentage points YoY, Lose Price 93%,
+  four active scenarios including the Brand Scenario). Crystal
+  Water and Noble Falcon also stand up R1 and R3 respectively for
+  Narrow and Wide regimes - same data, regime-specific dialogue
+  (see `data/scenarios/crystal-water-{none,narrow,wide}-r1.ts` and
   `data/scenarios/noble-falcon-{none,narrow,wide}-r3.ts`).
-- **Conversation data covers John R1 + Marina R2 + Carlos R3 as
-  3-phase placeholders, plus the SME-approved Noble Falcon Inn R3
-  branching scenario across all three regimes.** Rounds 4-10 are
-  not yet playable. `getConversationTree` returns undefined past
-  round 3, and `getBranchingScenario` only resolves at R1 (John,
-  pending replacement) and R3 (Noble Falcon); Practice Mode
-  handles missing rounds by locking those cards.
-- **Only No-Parity is selectable today.** Marina, Carlos, and the
-  three Noble Falcon variants (none / narrow / wide) sit in
+- **Conversation data covers Crystal Water Resort R1 and The Noble
+  Falcon Inn R3 as SME-approved branching scenarios across all
+  three regimes, plus Marina R2 + Carlos R3 as 3-phase
+  placeholders.** Rounds 4-10 are non-playable today (TOTAL_ROUNDS
+  is capped at 3 in `gameEngine.ts`). `getConversationTree` returns
+  undefined past round 3, and `getBranchingScenario` only resolves
+  at R1 (Crystal Water) and R3 (Noble Falcon); Practice Mode handles
+  missing rounds by locking those cards.
+- **Only No-Parity is selectable today.** Marina, Carlos, the three
+  Crystal Water variants (none / narrow / wide), and the three
+  Noble Falcon variants (none / narrow / wide) sit in
   `initialPartners`. John moved back to `pendingPartners` in
   June 2026 alongside Stavros, Hannah, Priya, Yuki - John's
   branching scenario and persona hints stay on disk in case a

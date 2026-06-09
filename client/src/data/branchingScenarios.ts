@@ -1,5 +1,8 @@
 import type { BranchingConversationTree } from '../types';
 import { johnR1 } from './scenarios/john-r1';
+import { crystalWaterNoneR1 } from './scenarios/crystal-water-none-r1';
+import { crystalWaterNarrowR1 } from './scenarios/crystal-water-narrow-r1';
+import { crystalWaterWideR1 } from './scenarios/crystal-water-wide-r1';
 import { nobleFalconNoneR3 } from './scenarios/noble-falcon-none-r3';
 import { nobleFalconNarrowR3 } from './scenarios/noble-falcon-narrow-r3';
 import { nobleFalconWideR3 } from './scenarios/noble-falcon-wide-r3';
@@ -14,12 +17,17 @@ import { nobleFalconWideR3 } from './scenarios/noble-falcon-wide-r3';
  * both.
  *
  * Coverage today:
- *   - John R1 (Brand.com loyalist - No-Parity scenario). Placeholder
- *     priority until SME-approved R1 content (Crystal Water Resort)
- *     lands.
- *   - The Noble Falcon Inn R3 across all three regime variants
- *     (No Parity / Narrow Parity / Wide Parity) - the SME-confirmed
- *     "Brand.com Competitiveness Gap" scenario.
+ *   - Crystal Water Resort R1 across all three regime variants - the
+ *     SME-approved "Brand.com Competitiveness Gap" scenario (Sarah
+ *     Bennett running cheaper promotional rates on her direct brand
+ *     site, capping conversion on Booking.com despite a 202% page
+ *     view spike vs peer).
+ *   - The Noble Falcon Inn R3 across all three regime variants - the
+ *     SME-confirmed structural Brand.com Competitiveness Gap (Anton
+ *     Müller, fully managed by brand, eRPD 17% / Lose Price 93%).
+ *   - John R1 retained on disk (Marston House, parked - see
+ *     `pendingPartners` in partners.ts). If John is re-spliced back
+ *     into the active roster the scenario picks up unchanged.
  *
  * As SME content lands per partner-round, add the scenario file under
  * `data/scenarios/` and register it below.
@@ -30,6 +38,15 @@ type BranchingMap = Record<string, Record<number, BranchingConversationTree>>;
 export const branchingScenarios: BranchingMap = {
   john: {
     1: johnR1,
+  },
+  'crystal-water-none': {
+    1: crystalWaterNoneR1,
+  },
+  'crystal-water-narrow': {
+    1: crystalWaterNarrowR1,
+  },
+  'crystal-water-wide': {
+    1: crystalWaterWideR1,
   },
   'noble-falcon-none': {
     3: nobleFalconNoneR3,

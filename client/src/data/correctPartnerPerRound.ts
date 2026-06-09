@@ -22,22 +22,21 @@ export const correctPartnerPerRound: Partial<
     // Right call per round follows the scripted state arc in
     // data/partnerStateByRound.ts:
     //
-    //   R1 - John (placeholder priority pending SME-approved R1
-    //              content - Crystal Water Resort will replace him)
-    //   R2 - Marina (placeholder priority pending SME-approved R2
-    //              content - Velvet Sky Boutique will replace her)
-    //   R3 - The Noble Falcon Inn (No Parity / Berlin) - structural
-    //              Brand.com competitiveness gap, eRPD 17.0% with a
-    //              21.42 percentage-point YoY spike, Lose Price 93%,
-    //              four active scenarios including the Brand Scenario.
-    //              SME-approved branching content lives in
-    //              data/scenarios/noble-falcon-none-r3.ts.
+    //   R1 - Crystal Water Resort (SME-approved Brand.com
+    //              Competitiveness Gap; Sarah Bennett running cheaper
+    //              brand-site promotional rates, 202% page-view spike
+    //              vs peer but Conversion -52%, Lose Price 99%).
+    //   R2 - Marina (placeholder priority pending SME-approved
+    //              Velvet Sky Boutique R2 drop).
+    //   R3 - The Noble Falcon Inn (SME-approved structural Brand.com
+    //              competitiveness gap; eRPD 17.0% with +21.42 YoY,
+    //              Lose Price 93%, four active scenarios incl. Brand).
     //
-    // Rounds 4-10 will need both new conversation content and new
-    // baselines once the partner-data drop lands. Until then they're
-    // placeheld with the Noble Falcon (No Parity) so the grading
-    // layer has an answer.
-    1: 'john',
+    // Rounds 4-10 are non-playable today (TOTAL_ROUNDS is capped at
+    // 3 in gameEngine.ts). The entries past R3 are kept so the
+    // grading layer always has an answer if a stray code path
+    // bypasses the cap.
+    1: 'crystal-water-none',
     2: 'marina',
     3: 'noble-falcon-none',
     4: 'noble-falcon-none',
@@ -48,15 +47,18 @@ export const correctPartnerPerRound: Partial<
     9: 'noble-falcon-none',
     10: 'noble-falcon-none',
   },
-  // Narrow + Wide regimes stand up R3 with the corresponding Noble
-  // Falcon variant. Each variant carries the same data and partner
-  // story; only the regulatory framing of the conversation differs
-  // by regime (see data/scenarios/noble-falcon-*-r3.ts). R1, R2 and
-  // R4-R10 pending the broader partner-data drop for these regimes.
+  // Narrow + Wide regimes stand up R1 (Crystal Water Resort) and R3
+  // (Noble Falcon Inn) with the corresponding regime variants. Each
+  // variant carries the same data and partner story; only the
+  // regulatory framing of the conversation differs by regime. R2
+  // pending the Velvet Sky Boutique drop; R4-R10 pending the
+  // broader partner-data drop.
   narrow: {
+    1: 'crystal-water-narrow',
     3: 'noble-falcon-narrow',
   },
   wide: {
+    1: 'crystal-water-wide',
     3: 'noble-falcon-wide',
   },
   // cross-regional: pending partner data.

@@ -12,6 +12,118 @@ import type { PartnerState, ParityRegime } from '../types';
  * Anton's role title is "Brand Revenue Lead" (SME-confirmed).
  * Pricing Coverage QTD is 64% (SME-confirmed in 2026-06).
  */
+/**
+ * Builds a Crystal Water Resort partner record. Same hotel brand,
+ * contact (Sarah Bennett, Hotel Manager), profile, and metrics in
+ * all three regime variants - only location, parityRegime, the
+ * property image, and the partner id differ. Wrapping the shared
+ * content in a helper keeps the three variants in sync if SME edits
+ * the profile or the metrics later. Returns an array so the call
+ * site can spread the record into `initialPartners` inline.
+ *
+ * Data: SME spreadsheet row 9 (Hotel ID 9, "List examples only
+ * Brand.com" sheet). Property type sits under the SME's "Marketing
+ * Contract Only" profile - independent operation with brand
+ * affiliation only.
+ */
+function crystalWaterBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: 'Sarah Bennett',
+        propertyName: 'Crystal Water Resort',
+        propertyType: 'Resort',
+        roomCount: 142,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: 'SB',
+        propertyImage: args.propertyImage,
+        style: 'red',
+        styleSecondary: 'yellow',
+        description:
+          "Hotel Manager at a brand-affiliated resort that operates under a marketing contract only - no central pricing control. Direct, results-focused, and watches the daily ABRN and ADR numbers herself. Energetic and no-fluff; expects clear commercial logic and a concrete next step before she agrees to anything.",
+        commercialGoal:
+          'Maximise resort revenue while protecting margin and reducing OTA commission cost',
+        profileNotes: [
+          'Tracks daily ABRN and ADR; reacts quickly to weekly shifts',
+          'Running cheaper promotional rates on her direct brand site to drive direct bookings',
+          'Treats Booking.com as top-funnel discovery, not a conversion channel',
+          'Uses Genius programme but no other Booking.com pricing tools today',
+        ],
+      },
+      // Metrics map verbatim to the SME spreadsheet row 9 (Hotel ID 9
+      // - Crystal Water Resort). Same baseline across all three
+      // regime variants; the regime only changes the regulatory
+      // framing of the conversation, not the data. The 202% page
+      // view spike vs peer is the headline the SME dialogue
+      // references directly.
+      metrics: {
+        erpd: 5.2,
+        erpdChange: 3.27,
+        rpdPublic: 6.6,
+        rpdLoyal: 0.6,
+        losePricePublic: 99,
+        activeScenarios: 1,
+        activeScenarioNames: ['Brand Scenario'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 514, deltaPct: -15 },
+          last30dRoomNights: { value: 320, deltaPct: -28 },
+          last30dAdr: { value: 145, deltaPct: 4 },
+          last90dPageViews: { value: 32100, deltaPct: 202 },
+          last90dConversion: { value: 1.1, deltaPct: -52 },
+          next3mRoomNights: { value: 240, deltaPct: -18 },
+        },
+        // SME spreadsheet showed 2026-05-12 against an authoring
+        // date of 2026-06-09 - that's 28 days back. Stored as an
+        // offset so the gap stays constant across replays.
+        lastPricingContactDaysAgo: 28,
+        // Only Genius Programme is active out of 11 products in the
+        // R2 taxonomy - sparse adoption that matches Sarah's
+        // direct-first stance. Rendered as a low % to flag headroom.
+        pricingCoverageQTD: 12,
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 55,
+        visibility: 88,
+        conversion: 28,
+        revenue: 42,
+        discountQuality: 30,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Adoption mirrors the SME spreadsheet row 9: Genius
+      // Programme is the only active product. Everything else
+      // (public-pricing levers, Genius tiers, base rate plan,
+      // family rates, payments) is inactive. The sparse pattern
+      // is the visual cue that Sarah's not using Booking.com's
+      // tools - she's pricing through her direct brand site.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 function nobleFalconBase(args: {
   id: string;
   parityRegime: ParityRegime;
@@ -114,6 +226,40 @@ function nobleFalconBase(args: {
 }
 
 export const initialPartners: PartnerState[] = [
+  // ── Crystal Water Resort (Wide Parity / Sydney) ──
+  // SME-approved R1 priority - Brand.com Competitiveness Gap caused
+  // by Sarah's promotional rate on her direct brand site undercutting
+  // Booking.com. Same hotel brand + contact (Sarah Bennett) shows up
+  // in all three regime variants - only location, parityRegime, the
+  // property image, and the partner id differ. Data sourced from SME
+  // spreadsheet row 9.
+  ...crystalWaterBase({
+    id: 'crystal-water-wide',
+    parityRegime: 'wide',
+    location: 'Sydney, Australia',
+    propertyImage:
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+  }),
+
+  // ── Crystal Water Resort (Narrow Parity / Athens) ──
+  ...crystalWaterBase({
+    id: 'crystal-water-narrow',
+    parityRegime: 'narrow',
+    location: 'Athens, Greece',
+    propertyImage:
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+  }),
+
+  // ── Crystal Water Resort (No Parity / Bali) ──
+  // The No-Parity R1 priority partner today.
+  ...crystalWaterBase({
+    id: 'crystal-water-none',
+    parityRegime: 'none',
+    location: 'Bali, Indonesia',
+    propertyImage:
+      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
+  }),
+
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──
   {
     persona: {

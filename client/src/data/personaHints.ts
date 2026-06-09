@@ -41,6 +41,45 @@ export type PersonaHintsByRound = Record<
 >;
 
 /**
+ * Shared persona hint content for Crystal Water Resort R1, applied
+ * verbatim across all three regime variants (Wide / Narrow / None).
+ * Sarah's character is constant across markets; the metrics + the
+ * four objections are the same; the only thing that changes by
+ * regime is the regulatory framing of the conversation - which
+ * doesn't move the persona's read of the partner.
+ */
+const crystalWaterR1Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    unlocked:
+      "Sarah is red / yellow. Lead with the data observation, get to the point fast, and connect each step to a concrete commercial number. Skip the warmth - she reads 'understanding' without a next step as filler. Open by mirroring her direct-first strategy, then surface the meta-search leak so she sees the cost in her own terms.",
+    mutedTeaser: 'A counter-intuitive anomaly is sitting in the traffic data.',
+    mutedFull:
+      "Page Views are up 202% vs peer but Conversion is down 52% and Lose Price is at 99%. She's being seen massively - she's just not being chosen, because her direct site is cheaper. The headline number to hold in your head is the meta-search leak: travellers see her here, compare, and book the lower price elsewhere (often a third-party OTA, not her direct site).",
+  },
+  'objection-navigator': {
+    unlocked:
+      "Expect three flavours of pushback: (1) 'we're shifting share to direct intentionally', (2) 'commission costs are the reason', and (3) 'a public rate drop is non-negotiable'. The wedge is to keep her public base intact and pitch targeted tools - Country Rate, Family rate, or matching the brand promo specifically - so she stays in control while you capture the 202% traffic surplus.",
+    mutedTeaser: 'Her relational tempo is faster than the numbers suggest.',
+    mutedFull:
+      "Sarah moves quickly and dislikes long preambles. She'll cut you off if you spend more than 20 seconds on context before getting to the ask. Open with the observation, pivot fast, and close on a concrete next step with a review date she can take to her revenue team this afternoon.",
+  },
+  storyteller: {
+    unlocked:
+      "Crystal Water is a billboard-without-the-checkout story. Sarah's promotional rate on her direct brand site is undercutting Booking.com, so the 202% page-view spike vs peer turns into traffic that converts elsewhere. The leak is to meta-search third parties as much as to her own site - she doesn't yet see that part of the picture, which is the wedge.",
+    mutedTeaser: 'The supporting detail behind the 202% headline matters here.',
+    mutedFull:
+      "eRPD 5.2% (Bucket 4) with a +3.27 YoY change, Public RPD 6.6% vs Loyal RPD 0.6% (her Genius members see a competitive rate, the general public doesn't). Lose Price Public 99%. Only Genius Programme active out of 11 pricing products - pricing coverage QTD 12%. Last 30D ABRN 514 (-15%), Room Nights -28% vs peer, Conversion 1.1% (-52%). Last pricing contact 28 days back.",
+  },
+  'data-detective': {
+    unlocked:
+      "Headline anomaly: Page Views +202% vs peer while Conversion is -52% and Lose Price sits at 99%. She's being seen but losing the price comparison almost every time. Pair that with Public RPD 6.6% and Loyal RPD 0.6% - the gap is on the public-traveller side specifically, not on Genius. That's the leverage point: a targeted tool or a brand-rate alignment without disturbing her Genius pricing.",
+    mutedTeaser: "You may not have read on Sarah's communication style yet.",
+    mutedFull:
+      "Sarah is red / driver primary with yellow / expressive secondary. She wants speed, energy, and a clear commercial logic. Mirror her pace - state the observation, get to the ask, close on a concrete pilot with a review date. Methodical exposition or warm-and-amiable openers will lose her in the first 30 seconds.",
+  },
+};
+
+/**
  * Shared persona hint content for The Noble Falcon Inn R3, applied
  * verbatim across all three regime variants (Wide / Narrow / None).
  * Anton's character is constant across markets; the metrics + the
@@ -208,6 +247,15 @@ export const personaHints: PersonaHintsByRound = {
       },
     },
   },
+  // Crystal Water Resort R1 - same persona hint content across all
+  // three regime variants (Wide / Narrow / None). Sarah's character,
+  // the metrics, and the objection types are identical; only the
+  // regulatory framing of the conversation differs by regime.
+  // Sharing the hints via crystalWaterR1Hints keeps SME edits in
+  // sync across all three variants.
+  'crystal-water-wide': { 1: crystalWaterR1Hints },
+  'crystal-water-narrow': { 1: crystalWaterR1Hints },
+  'crystal-water-none': { 1: crystalWaterR1Hints },
   // Noble Falcon Inn R3 - same persona hint content across all three
   // regime variants (Wide / Narrow / None). Anton's character, the
   // metrics, the four objection types, and the partner profile are
