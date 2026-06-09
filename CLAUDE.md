@@ -265,18 +265,16 @@ DO list and the regime's specific constraints.
   silently between rounds.
 - The "right" partner each round is held in
   `data/correctPartnerPerRound.ts` per regime per round. For
-  No-Parity the rotation is **John R1, Marina R2, Carlos R3, The
-  Noble Falcon Inn R10** - matched to the per-round state baselines
-  (below) so each round one partner is genuinely the worst on
-  visible KPIs. John was briefly parked in May-June 2026 when an
-  SME doc title misled us into slotting The Noble Falcon Inn at R1;
-  SME confirmed in June 2026 that the Noble Falcon scenario was
-  always intended for **Round 10** (the "Round 1" in the doc title
-  referred to the doc, not the in-game round) and John was
-  restored to R1. For Narrow and Wide regimes, R10 is the
-  corresponding Noble Falcon regime variant
-  (`noble-falcon-narrow` / `noble-falcon-wide`) - same data, same
-  partner story, different regulatory framing of the conversation.
+  No-Parity the rotation is **John R1 (placeholder), Marina R2
+  (placeholder), The Noble Falcon Inn R3** - matched to the
+  per-round state baselines (below). John and Marina hold R1/R2
+  as placeholders pending the SME-approved Crystal Water Resort
+  (R1) and Velvet Sky Boutique (R2) drops; Noble Falcon at R3 is
+  the SME-confirmed "Brand.com Competitiveness Gap" scenario. For
+  Narrow and Wide regimes, R3 is the corresponding Noble Falcon
+  regime variant (`noble-falcon-narrow` / `noble-falcon-wide`) -
+  same data, same partner story, different regulatory framing of
+  the conversation.
 - **Per-round partner state is scripted** in
   `data/partnerStateByRound.ts` and applied as an overlay by
   `applyRoundBaseline` in three places: `createInitialState` (R1
@@ -287,21 +285,21 @@ DO list and the regime's specific constraints.
   couple of legacy metric fields; without this overlay the headline
   KPIs never move and the same partner stays worst forever. The
   scripted arc for No-Parity today: R1 John in a brand-first crisis
-  (pushing direct rates, losing OTA volume, eRPD 9.5 / lose-price
-  81%); R2 Marina's mobile gap escalates; R3 Marina recovering,
-  Carlos's misconfigured Country Rate compounds; R10 The Noble
-  Falcon Inn in a structural Brand.com competitiveness gap (eRPD
-  17.0% with +21.42 percentage points YoY, Lose Price 93%, four
-  active scenarios including the Brand Scenario). Noble Falcon
-  also stands up R10 for Narrow and Wide regimes - same data,
+  (placeholder, pushing direct rates, losing OTA volume, eRPD 9.5 /
+  lose-price 81%); R2 Marina's mobile gap escalates (placeholder);
+  R3 The Noble Falcon Inn in a structural Brand.com competitiveness
+  gap (eRPD 17.0% with +21.42 percentage points YoY, Lose Price 93%,
+  four active scenarios including the Brand Scenario). Noble Falcon
+  also stands up R3 for Narrow and Wide regimes - same data,
   regime-specific dialogue (see
-  `data/scenarios/noble-falcon-{none,narrow,wide}-r10.ts`).
-- **Conversation data covers rounds 1-3 per partner today, plus
-  R10 for The Noble Falcon Inn across all three regimes.** Rounds
-  4-9 are not yet playable. `getConversationTree` returns undefined
-  past round 3, and `getBranchingScenario` only resolves at R1
-  (John) and R10 (Noble Falcon); Practice Mode handles missing
-  rounds by locking those cards.
+  `data/scenarios/noble-falcon-{none,narrow,wide}-r3.ts`).
+- **Conversation data covers John R1 + Marina R2 + Carlos R3 as
+  3-phase placeholders, plus the SME-approved Noble Falcon Inn R3
+  branching scenario across all three regimes.** Rounds 4-10 are
+  not yet playable. `getConversationTree` returns undefined past
+  round 3, and `getBranchingScenario` only resolves at R1 (John,
+  pending replacement) and R3 (Noble Falcon); Practice Mode
+  handles missing rounds by locking those cards.
 - **Only No-Parity is selectable today.** Marina, John, Carlos,
   and the three Noble Falcon variants (none / narrow / wide) sit
   in `initialPartners`. Stavros, Hannah, Priya, Yuki are parked
@@ -697,26 +695,25 @@ debate:
   screen. Narrow / Wide / Cross Regional are visually disabled
   ("Coming soon" pill, dashed border, not-allowed cursor) until the
   matching partner data lands (expected next week).
-- **The Noble Falcon Inn is the R10 target across all three regime
-  variants** per the SME "Brand.com Competitiveness Gap" drop. SME
-  confirmed in June 2026 that the scenario was intended for Round
-  10 (the source doc was titled "Rate Right - Round 1" but the "1"
-  referred to the doc, not the in-game round). Three regime
-  variants of the same hotel (Wide / Narrow / None) sit in
-  `initialPartners` alongside Marina, John, and Carlos; their data
-  is shared via the `nobleFalconBase()` helper in
-  `data/partners.ts`, only location + `parityRegime` + the property
-  image differ. The contact `Anton Müller` is consistent across all
-  three (blue/thinker primary + red/driver secondary). Conversation
-  files are `data/scenarios/noble-falcon-{none,narrow,wide}-r10.ts`
-  - the four regime-agnostic steps live in `noble-falcon-base.ts`
-  and only Steps 3 + 4 (the parity ask and the risk solution)
-  carry the regime-specific dialogue from the SME doc.
-- John R1 is the No-Parity Round 1 priority - he was briefly
-  parked in May-June 2026 while we mis-slotted Noble Falcon at R1,
-  then restored once the R10 destination was confirmed. Scenario
-  file `data/scenarios/john-r1.ts` is in the new branching shape;
-  the dialogue is No-Parity compliant - the AM never proactively
+- **The Noble Falcon Inn is the R3 target across all three regime
+  variants** per the SME "Brand.com Competitiveness Gap" drop.
+  Originally mis-slotted at R1 (the source doc was titled "Rate
+  Right - Round 1") and then briefly at R10 before landing at R3
+  in 2026-06. Three regime variants of the same hotel (Wide /
+  Narrow / None) sit in `initialPartners` alongside Marina, John,
+  and Carlos; their data is shared via the `nobleFalconBase()`
+  helper in `data/partners.ts`, only location + `parityRegime` +
+  the property image differ. The contact `Anton Müller` is
+  consistent across all three (blue/thinker primary + red/driver
+  secondary). Conversation files are
+  `data/scenarios/noble-falcon-{none,narrow,wide}-r3.ts` - the
+  four regime-agnostic steps live in `noble-falcon-base.ts` and
+  only Steps 3 + 4 (the parity ask and the risk solution) carry
+  the regime-specific dialogue from the SME doc.
+- John R1 is a **placeholder** No-Parity Round 1 priority pending
+  the SME-approved Crystal Water Resort drop. Scenario file
+  `data/scenarios/john-r1.ts` is in the new branching shape; the
+  dialogue is No-Parity compliant - the AM never proactively
   raises cross-channel pricing, cross-channel framing only kicks
   in after John self-discloses his lower direct rate, and the
   close asks for "the best price you're willing to make available
@@ -1173,7 +1170,7 @@ Source: PDF page 1.
   clickable. On click, a small popover anchored to the card lists the
   active scenario names (e.g. `Brand.com`, `App`).
 - Per-partner-round scenario list lives on
-  `PartnerMetrics.activeScenarioNames?: string[]`. Noble Falcon R10
+  `PartnerMetrics.activeScenarioNames?: string[]`. Noble Falcon R3
   carries `['Brand Scenario', 'Family 2+1', 'Family 2+2', 'App']`
   (verbatim from the SME data set).
 

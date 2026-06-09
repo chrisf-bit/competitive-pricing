@@ -28,20 +28,18 @@ import type { PartnerMetrics } from '../types';
  *              clearest worst. Carlos still mild but starting to
  *              drift.
  *
- *   Round 3  - Marina improving (mobile addressed). Carlos's
- *              misconfigured Country Rate has been compounding
- *              silently - he's now the worst with a 10.8 eRPD
- *              trending sharply up.
+ *   Round 3  - The Noble Falcon Inn (Anton Müller) in a structural
+ *              Brand.com competitiveness gap. eRPD 17.0% with a
+ *              +21.42 percentage-point YoY spike, Lose Price 93%,
+ *              four active scenarios including the Brand Scenario.
+ *              Same partner story across all three regime variants;
+ *              the regulatory framing of the conversation differs
+ *              by parity regime. The pre-R3 No-Parity Carlos arc
+ *              (his misconfigured Country Rate compounding) will be
+ *              re-housed in a different round when SME content for
+ *              R4+ lands.
  *
- *   Round 10 - The Noble Falcon Inn (Anton Müller) in a
- *              structural Brand.com competitiveness gap. eRPD
- *              17.0% with a +21.42 percentage-point YoY spike,
- *              Lose Price 93%, four active scenarios including
- *              the Brand Scenario. Same partner story across all
- *              three regime variants; the regulatory framing of
- *              the conversation differs by parity regime.
- *
- * Rounds 4-9 are not yet baselined. They'll be filled in alongside
+ * Rounds 4-10 are not yet baselined. They'll be filled in alongside
  * the conversation-tree drop for those rounds; until then the
  * partners simply retain their last baseline state.
  */
@@ -50,17 +48,17 @@ export interface PartnerStateBaseline {
 }
 
 /**
- * Round 1 baseline metrics for The Noble Falcon Inn. Shared verbatim
+ * Round 3 baseline metrics for The Noble Falcon Inn. Shared verbatim
  * across all three regime variants (Wide / Narrow / None) because the
  * scenario data is identical - only the dialogue and compliance
  * shape of the conversation differ by regime. Returns a fresh object
  * per call so each partner-round entry owns its own data and the
  * engine can mutate without cross-contaminating siblings.
  *
- * Numbers map verbatim to the SME PDF "Rate Right - Round 1" Data Set
- * table for Hotel ID 101.
+ * Numbers map verbatim to the SME "Brand.com Competitiveness Gap"
+ * Data Set table for Hotel ID 101.
  */
-function nobleFalconR10Metrics(): PartnerMetrics {
+function nobleFalconR3Metrics(): PartnerMetrics {
   return {
     erpd: 17.0,
     erpdChange: 21.42,
@@ -227,9 +225,9 @@ export const partnerStateByRound: Record<
   // partner data. nobleFalconR1 is defined below and re-used per
   // partner id - if SME updates a number, it lands in all three
   // variants automatically.
-  'noble-falcon-wide': { 10: { metrics: nobleFalconR10Metrics() } },
-  'noble-falcon-narrow': { 10: { metrics: nobleFalconR10Metrics() } },
-  'noble-falcon-none': { 10: { metrics: nobleFalconR10Metrics() } },
+  'noble-falcon-wide': { 3: { metrics: nobleFalconR3Metrics() } },
+  'noble-falcon-narrow': { 3: { metrics: nobleFalconR3Metrics() } },
+  'noble-falcon-none': { 3: { metrics: nobleFalconR3Metrics() } },
   carlos: {
     1: {
       metrics: {

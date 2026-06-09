@@ -17,10 +17,10 @@
  *   Data Detective         - unlocks biggest anomaly + read; mutes style cue
  *
  * Coverage today: R1 for the active No-Parity roster (Marina, John,
- * Carlos) plus the parked Stavros entry kept in sync for reuse. R10
+ * Carlos) plus the parked Stavros entry kept in sync for reuse. R3
  * for The Noble Falcon Inn across all three regime variants (Wide /
- * Narrow / None). R2/R3 to follow once the R1 UI is reviewed; R4+
- * blocked on SME content for those rounds.
+ * Narrow / None). R2 to follow once SME content lands; R4+ blocked
+ * on SME content for those rounds.
  */
 
 export interface PersonaHint {
@@ -41,14 +41,14 @@ export type PersonaHintsByRound = Record<
 >;
 
 /**
- * Shared persona hint content for The Noble Falcon Inn R10, applied
+ * Shared persona hint content for The Noble Falcon Inn R3, applied
  * verbatim across all three regime variants (Wide / Narrow / None).
  * Anton's character is constant across markets; the metrics + the
  * four objections are the same; the only thing that changes by
  * regime is the regulatory framing of the conversation - which
  * doesn't move the persona's read of the partner.
  */
-const nobleFalconR10Hints: Partial<Record<PersonaId, PersonaHint>> = {
+const nobleFalconR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
   'conversation-architect': {
     unlocked:
       "Anton operates inside brand policy. If you open by leading with the price gap, he'll quote brand directives and the call stalls. Lead with curiosity about the constraints he's working within, then steer toward pilots that fit inside his frame - he'll meet you there.",
@@ -208,15 +208,15 @@ export const personaHints: PersonaHintsByRound = {
       },
     },
   },
-  // Noble Falcon Inn R10 - same persona hint content across all three
+  // Noble Falcon Inn R3 - same persona hint content across all three
   // regime variants (Wide / Narrow / None). Anton's character, the
   // metrics, the four objection types, and the partner profile are
   // identical; only the regulatory framing of the conversation
-  // differs by regime. Sharing the hints via nobleFalconR10Hints
+  // differs by regime. Sharing the hints via nobleFalconR3Hints
   // keeps SME edits in sync across all three variants.
-  'noble-falcon-wide': { 10: nobleFalconR10Hints },
-  'noble-falcon-narrow': { 10: nobleFalconR10Hints },
-  'noble-falcon-none': { 10: nobleFalconR10Hints },
+  'noble-falcon-wide': { 3: nobleFalconR3Hints },
+  'noble-falcon-narrow': { 3: nobleFalconR3Hints },
+  'noble-falcon-none': { 3: nobleFalconR3Hints },
 };
 
 export function getPersonaHint(

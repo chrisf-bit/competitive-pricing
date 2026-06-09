@@ -1,8 +1,8 @@
 import type { BranchingConversationTree } from '../types';
 import { johnR1 } from './scenarios/john-r1';
-import { nobleFalconNoneR10 } from './scenarios/noble-falcon-none-r10';
-import { nobleFalconNarrowR10 } from './scenarios/noble-falcon-narrow-r10';
-import { nobleFalconWideR10 } from './scenarios/noble-falcon-wide-r10';
+import { nobleFalconNoneR3 } from './scenarios/noble-falcon-none-r3';
+import { nobleFalconNarrowR3 } from './scenarios/noble-falcon-narrow-r3';
+import { nobleFalconWideR3 } from './scenarios/noble-falcon-wide-r3';
 
 /**
  * Branching conversation scenarios.
@@ -14,12 +14,10 @@ import { nobleFalconWideR10 } from './scenarios/noble-falcon-wide-r10';
  * both.
  *
  * Coverage today:
- *   - John R1 (Brand.com loyalist - No-Parity scenario). John is
- *     back as the No-Parity R1 priority after SME clarified that
- *     The Noble Falcon Inn scenario was intended for **Round 10**,
- *     not Round 1 (the "Round 1" in the source doc title referred
- *     to the doc itself, not the in-game round).
- *   - The Noble Falcon Inn R10 across all three regime variants
+ *   - John R1 (Brand.com loyalist - No-Parity scenario). Placeholder
+ *     priority until SME-approved R1 content (Crystal Water Resort)
+ *     lands.
+ *   - The Noble Falcon Inn R3 across all three regime variants
  *     (No Parity / Narrow Parity / Wide Parity) - the SME-confirmed
  *     "Brand.com Competitiveness Gap" scenario.
  *
@@ -34,13 +32,13 @@ export const branchingScenarios: BranchingMap = {
     1: johnR1,
   },
   'noble-falcon-none': {
-    10: nobleFalconNoneR10,
+    3: nobleFalconNoneR3,
   },
   'noble-falcon-narrow': {
-    10: nobleFalconNarrowR10,
+    3: nobleFalconNarrowR3,
   },
   'noble-falcon-wide': {
-    10: nobleFalconWideR10,
+    3: nobleFalconWideR3,
   },
 };
 

@@ -5,7 +5,7 @@ import type {
 } from '../../types';
 
 /**
- * Shared Noble Falcon R10 step definitions and the Issue Tree path.
+ * Shared Noble Falcon R3 step definitions and the Issue Tree path.
  *
  * Four of the six conversation steps are identical across all three
  * regime variants (Wide / Narrow / None) - only Step 3 ("Frame the
@@ -33,7 +33,7 @@ import type {
  * including the risky picks - per the absolute legal ban.
  */
 
-export const nobleFalconR10IssueTreePath: IssueTreePath = {
+export const nobleFalconR3IssueTreePath: IssueTreePath = {
   trigger: 'pricing-signal',
   issueId: 'brand-com-erpd-not-competitive',
   intent: 'intentional',

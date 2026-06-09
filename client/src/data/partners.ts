@@ -182,12 +182,11 @@ export const initialPartners: PartnerState[] = [
   // Brand.com Competitiveness Gap scenario. Same hotel brand and
   // contact (Anton Müller) shows up in all three regime variants -
   // only location + parityRegime + the regime-specific dialogue
-  // change. Sourced from the SME "Rate Right - Round 1" doc, but
-  // SME later confirmed (2026-06) the scenario was always intended
-  // for **Round 10**, not Round 1 - "Round 1" was the doc title,
-  // not the in-game round. All three variants now register at
-  // round 10 (see branchingScenarios.ts and partnerStateByRound.ts).
-  // John was restored as the No-Parity R1 priority at the same time.
+  // change. Sourced from the SME "Brand.com Competitiveness Gap"
+  // doc and slotted at Round 3 across all three variants (see
+  // branchingScenarios.ts and partnerStateByRound.ts). John holds
+  // R1 as a placeholder priority pending the SME-approved Crystal
+  // Water Resort drop.
   ...nobleFalconBase({
     id: 'noble-falcon-wide',
     parityRegime: 'wide',
@@ -206,7 +205,7 @@ export const initialPartners: PartnerState[] = [
   }),
 
   // ── The Noble Falcon Inn (No Parity / Berlin) ──
-  // The No-Parity R10 priority partner. Anton's surname fits the
+  // The No-Parity R3 priority partner. Anton's surname fits the
   // German market context.
   ...nobleFalconBase({
     id: 'noble-falcon-none',
@@ -285,12 +284,10 @@ export const initialPartners: PartnerState[] = [
   },
 
   // ── John - Brand-first Boutique Hotel (Red/Driver) ──
-  // No-Parity scenario, branching conversation shape. John was the
-  // No-Parity R1 target from May to June 2026, briefly parked when
-  // The Noble Falcon Inn (now repurposed to R10) took the slot,
-  // and restored as R1 priority once SME confirmed Anton's
-  // scenario was R10 not R1. john-r1.ts and his persona hints are
-  // unchanged - he just slots straight back in.
+  // No-Parity scenario, branching conversation shape. John holds
+  // the No-Parity R1 priority slot as a placeholder until the
+  // SME-approved Crystal Water Resort R1 content lands. The Noble
+  // Falcon Inn now lives at R3 across all three regime variants.
   {
     persona: {
       id: 'john',
