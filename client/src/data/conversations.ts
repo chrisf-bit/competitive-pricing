@@ -2,6 +2,8 @@ import type { ConversationTree } from '../types';
 import { carlosR1, carlosR2, carlosR3 } from './conversations-carlos';
 import { priyaR1, priyaR2, priyaR3 } from './conversations-priya';
 import { yukiR1, yukiR2, yukiR3 } from './conversations-yuki';
+import { ravenInnR2 } from './conversations-raven-inn';
+import { driftwoodBayR2 } from './conversations-driftwood-bay';
 
 // ════════════════════════════════════════════════════════════
 //  MARINA - Round 1
@@ -2056,6 +2058,8 @@ export const conversationTrees: ConversationTree[] = [
   carlosR1, carlosR2, carlosR3,
   priyaR1, priyaR2, priyaR3,
   yukiR1, yukiR2, yukiR3,
+  ravenInnR2,
+  driftwoodBayR2,
 ];
 
 export function getConversationTree(

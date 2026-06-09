@@ -401,6 +401,159 @@ export const initialPartners: PartnerState[] = [
       'https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=400&h=250&fit=crop',
   }),
 
+  // ── Raven Inn (No Parity / Reykjavik) - R2 distractor ──
+  // Healthy Key OTA gap profile (Bucket 3, Lose Price 35%). Data
+  // mapped from the SME spreadsheet Key OTA sheet row 14 (White
+  // Cliffs Hotel) with a made-up partner name. Reads as not the
+  // priority vs Velvet Sky Boutique Hotel at R2.
+  {
+    persona: {
+      id: 'raven-inn',
+      name: 'Emily Carter',
+      propertyName: 'Raven Inn',
+      propertyType: 'Boutique Hotel',
+      roomCount: 52,
+      location: 'Reykjavik, Iceland',
+      parityRegime: 'none',
+      avatar: 'EC',
+      propertyImage:
+        'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
+      style: 'green',
+      styleSecondary: 'blue',
+      description:
+        'Hotel Manager at a steady boutique with a strong Key OTA position. Collaborative, analytical, and likes to weigh changes carefully against her own dashboards before committing. Treats Booking.com as a partner she actively co-plans with.',
+      commercialGoal: 'Maintain steady occupancy and continue refining margin',
+      profileNotes: [
+        'Genuinely strong Key OTA pricing on Loyal members - sits below comp',
+        'Three active RPD scenarios (International, Family 2+1, Family 2+2)',
+        'Runs Genius Programme; otherwise sparse on Booking.com pricing tools',
+        'Prefers data-led calls and written follow-ups before any change',
+      ],
+    },
+    metrics: {
+      // Data from SME spreadsheet Key OTA sheet row 14 (White Cliffs).
+      erpd: 1.3,
+      erpdChange: 2.66,
+      rpdPublic: 5.2,
+      rpdLoyal: -2.3,
+      losePricePublic: 35,
+      activeScenarios: 3,
+      activeScenarioNames: ['International', 'Family 2+1', 'Family 2+2'],
+      competitor: 'expedia',
+      secondaryMetrics: {
+        last30dAbrn: { value: 785, deltaPct: 6 },
+        last30dRoomNights: { value: 540, deltaPct: 4 },
+        last30dAdr: { value: 168, deltaPct: 1 },
+        last90dPageViews: { value: 21200, deltaPct: 12 },
+        last90dConversion: { value: 2.4, deltaPct: 8 },
+        next3mRoomNights: { value: 410, deltaPct: 7 },
+      },
+      lastPricingContactDaysAgo: 28,
+      pricingCoverageQTD: 38,
+      experiencedRPD: 72,
+      visibility: 78,
+      conversion: 65,
+      revenue: 70,
+      discountQuality: 60,
+      rateParity: 'clean',
+    },
+    metricHistory: [],
+    trust: 60,
+    relationship: 'warm',
+    discounts: [
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+    ],
+    conversationLog: [],
+    pendingActions: [],
+  },
+
+  // ── Driftwood Bay Resort (No Parity / Cartagena) - R2 distractor ──
+  // Moderate Brand gap profile (Bucket 4, eRPD 3.4%). Data mapped
+  // from the SME spreadsheet mix sheet row 43 (The Oasis Palms
+  // Resort) with a made-up partner name. Reads as not the priority
+  // vs Velvet Sky Boutique Hotel at R2 - milder eRPD and improving
+  // Loyal pricing.
+  {
+    persona: {
+      id: 'driftwood-bay',
+      name: 'Daniel Cruz',
+      propertyName: 'Driftwood Bay Resort',
+      propertyType: 'Resort',
+      roomCount: 86,
+      location: 'Cartagena, Colombia',
+      parityRegime: 'none',
+      avatar: 'DC',
+      propertyImage:
+        'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+      style: 'yellow',
+      styleSecondary: 'green',
+      description:
+        "Energetic resort manager who loves talking about the property and runs multiple pricing scenarios in parallel. Quick to engage, decisive once excited, and prefers conversational calls with concrete next steps over methodical exposition.",
+      commercialGoal: 'Grow incremental volume while keeping the brand premium',
+      profileNotes: [
+        'Four active RPD scenarios in flight (Brand, App, Family 2+1, Family 2+2)',
+        'Genius Programme active; loyal pricing genuinely competitive vs comp',
+        'Small Brand.com public gap is the one open lever',
+        'Responds well to celebration of what is working and a concrete next move',
+      ],
+    },
+    metrics: {
+      // Data from SME spreadsheet mix sheet row 43 (Oasis Palms).
+      erpd: 3.4,
+      erpdChange: 1.37,
+      rpdPublic: 5.3,
+      rpdLoyal: -1.5,
+      losePricePublic: 99,
+      activeScenarios: 4,
+      activeScenarioNames: ['Brand Scenario', 'App', 'Family 2+1', 'Family 2+2'],
+      competitor: 'brand',
+      secondaryMetrics: {
+        last30dAbrn: { value: 343, deltaPct: 2 },
+        last30dRoomNights: { value: 260, deltaPct: -2 },
+        last30dAdr: { value: 155, deltaPct: 3 },
+        last90dPageViews: { value: 14800, deltaPct: 18 },
+        last90dConversion: { value: 1.9, deltaPct: -8 },
+        next3mRoomNights: { value: 200, deltaPct: -4 },
+      },
+      lastPricingContactDaysAgo: 28,
+      pricingCoverageQTD: 15,
+      experiencedRPD: 60,
+      visibility: 68,
+      conversion: 48,
+      revenue: 55,
+      discountQuality: 45,
+      rateParity: 'minor',
+    },
+    metricHistory: [],
+    trust: 55,
+    relationship: 'neutral',
+    discounts: [
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+    ],
+    conversationLog: [],
+    pendingActions: [],
+  },
+
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──
   {
     persona: {

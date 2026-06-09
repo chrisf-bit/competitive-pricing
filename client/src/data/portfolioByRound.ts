@@ -38,15 +38,19 @@ export const portfolioByRound: Partial<
     1: ['marina', 'crystal-water-none', 'carlos'],
 
     // R2 - Velvet Sky Boutique Hotel is the SME-approved priority;
-    // Marina and Carlos hold the distractor slots temporarily until
-    // the Raven Inn + Oasis-like-partner distractors are authored.
-    // At that point Marina and Carlos drop off the R2 portfolio.
-    2: ['velvet-sky-none', 'marina', 'carlos'],
+    // Raven Inn and Driftwood Bay Resort are the distractors. Raven
+    // Inn is a healthy Key OTA profile (Bucket 3 / Lose Price 35%);
+    // Driftwood Bay is a moderate Brand profile (Bucket 4 / eRPD
+    // 3.4%). Both clearly read as less-severe than Velvet Sky's
+    // 99% Lose Price + Bucket 4 + eRPD 5.0%.
+    2: ['velvet-sky-none', 'raven-inn', 'driftwood-bay'],
 
-    // R3 - The Noble Falcon Inn alone for now. R3 distractor
-    // partners will be added later (likely Marina + Carlos at their
-    // R3 baselines if SME doesn't deliver new distractor data).
-    3: ['noble-falcon-none'],
+    // R3 - The Noble Falcon Inn is the SME-approved priority; Marina
+    // and Carlos hold the distractor slots, surfaced at their R3
+    // baselines from partnerStateByRound.ts (Marina improving,
+    // Carlos's misconfigured Country Rate compounding but milder
+    // than Noble Falcon's structural Bucket-7 crisis).
+    3: ['noble-falcon-none', 'marina', 'carlos'],
   },
   // Narrow + Wide regimes: not mapped here. Market Select shows
   // these as "Coming soon" today, so the Portfolio code path is

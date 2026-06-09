@@ -304,13 +304,14 @@ DO list and the regime's specific constraints.
   round 3, and `getBranchingScenario` resolves at R1 (Crystal
   Water), R2 (Velvet Sky), and R3 (Noble Falcon); Practice Mode
   handles missing rounds by locking those cards.
-- **Only No-Parity is selectable today.** Marina, Carlos, the three
-  Crystal Water variants, the three Velvet Sky variants, and the
-  three Noble Falcon variants sit in `initialPartners`. John
-  Marston moved back to `pendingPartners` in June 2026 alongside
-  Stavros, Hannah, Priya, Yuki - John Marston's branching scenario
-  and persona hints stay on disk in case a future round repurposes
-  his brand-first crisis profile.
+- **Only No-Parity is selectable today.** The active No-Parity
+  roster is Marina, Carlos (R1 and R3 distractors), the three
+  Crystal Water variants (R1 priority across regimes), the three
+  Velvet Sky variants (R2 priority across regimes), the three
+  Noble Falcon variants (R3 priority across regimes), plus Raven
+  Inn and Driftwood Bay Resort (R2 distractors, No-Parity only).
+  John Marston moved back to `pendingPartners` in June 2026
+  alongside Stavros, Hannah, Priya, Yuki.
 - **Per-round portfolio composition is explicit** in
   `data/portfolioByRound.ts`. Three cards per round in the early
   rounds (one priority + two distractors) is the design target -
