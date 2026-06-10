@@ -1,6 +1,18 @@
 import type { PartnerState, ParityRegime } from '../types';
 
 /**
+ * Build the avatar initials from a contact's full name. Takes the
+ * first letter of the first name + first letter of the surname.
+ * Used by the partner-record helpers so each regime variant's
+ * avatar matches the regime-specific contact surname.
+ */
+function initialsFromName(name: string): string {
+  const [first, ...rest] = name.split(' ');
+  const last = rest[rest.length - 1] ?? '';
+  return `${first[0] ?? ''}${last[0] ?? ''}`.toUpperCase();
+}
+
+/**
  * Builds a Noble Falcon Inn partner record. The same hotel brand,
  * contact (Anton Müller), profile, and metrics show up in all three
  * regime variants - only location, parityRegime, the property image,
@@ -31,18 +43,23 @@ function crystalWaterBase(args: {
   parityRegime: ParityRegime;
   location: string;
   propertyImage: string;
+  /** Regime-specific full contact name. First name 'Sarah' stays
+   *  constant across variants so the SME dialogue (which addresses
+   *  her by first name) still reads correctly; only the surname
+   *  shifts to match the country. */
+  contactName: string;
 }): PartnerState[] {
   return [
     {
       persona: {
         id: args.id,
-        name: 'Sarah Bennett',
+        name: args.contactName,
         propertyName: 'Crystal Water Resort',
         propertyType: 'Resort',
         roomCount: 142,
         location: args.location,
         parityRegime: args.parityRegime,
-        avatar: 'SB',
+        avatar: initialsFromName(args.contactName),
         propertyImage: args.propertyImage,
         style: 'red',
         styleSecondary: 'yellow',
@@ -142,18 +159,22 @@ function velvetSkyBase(args: {
   parityRegime: ParityRegime;
   location: string;
   propertyImage: string;
+  /** Regime-specific contact name. First name 'John' stays constant
+   *  so SME dialogue still reads correctly; surname shifts to match
+   *  the country. */
+  contactName: string;
 }): PartnerState[] {
   return [
     {
       persona: {
         id: args.id,
-        name: 'John Whitford',
+        name: args.contactName,
         propertyName: 'Velvet Sky Boutique Hotel',
         propertyType: 'Boutique Hotel',
         roomCount: 38,
         location: args.location,
         parityRegime: args.parityRegime,
-        avatar: 'JW',
+        avatar: initialsFromName(args.contactName),
         propertyImage: args.propertyImage,
         style: 'red',
         styleSecondary: 'blue',
@@ -236,18 +257,22 @@ function nobleFalconBase(args: {
   parityRegime: ParityRegime;
   location: string;
   propertyImage: string;
+  /** Regime-specific contact name. First name 'Anton' stays constant
+   *  so SME dialogue still reads correctly; surname shifts to match
+   *  the country. */
+  contactName: string;
 }): PartnerState[] {
   return [
     {
       persona: {
         id: args.id,
-        name: 'Anton Müller',
+        name: args.contactName,
         propertyName: 'The Noble Falcon Inn',
         propertyType: 'Branded Mid-Scale Hotel',
         roomCount: 288,
         location: args.location,
         parityRegime: args.parityRegime,
-        avatar: 'AM',
+        avatar: initialsFromName(args.contactName),
         propertyImage: args.propertyImage,
         style: 'blue',
         styleSecondary: 'red',
@@ -345,17 +370,21 @@ function marinaBase(args: {
   id: string;
   parityRegime: ParityRegime;
   location: string;
+  /** Regime-specific contact name. First name 'Marina' stays
+   *  constant so existing 3-phase dialogue still reads correctly;
+   *  surname shifts per regime. */
+  contactName: string;
 }): PartnerState[] {
   return [{
     persona: {
       id: args.id,
-      name: 'Marina Alvarez',
+      name: args.contactName,
       propertyName: 'Hotel & Suites Castellana',
       propertyType: 'Boutique City Hotel',
       roomCount: 35,
       location: args.location,
       parityRegime: args.parityRegime,
-      avatar: 'MA',
+      avatar: initialsFromName(args.contactName),
       propertyImage: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
       style: 'blue',
       styleSecondary: 'green',
@@ -409,17 +438,20 @@ function carlosBase(args: {
   id: string;
   parityRegime: ParityRegime;
   location: string;
+  /** Regime-specific contact name. First name 'Carlos' stays
+   *  constant; surname shifts per regime. */
+  contactName: string;
 }): PartnerState[] {
   return [{
     persona: {
       id: args.id,
-      name: 'Carlos Rivera',
+      name: args.contactName,
       propertyName: 'Barceloneta Living',
       propertyType: 'City Apartments',
       roomCount: 45,
       location: args.location,
       parityRegime: args.parityRegime,
-      avatar: 'CR',
+      avatar: initialsFromName(args.contactName),
       propertyImage: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=250&fit=crop',
       style: 'yellow',
       styleSecondary: 'red',
@@ -473,17 +505,20 @@ function ravenInnBase(args: {
   id: string;
   parityRegime: ParityRegime;
   location: string;
+  /** Regime-specific contact name. First name 'Emily' stays
+   *  constant; surname shifts per regime. */
+  contactName: string;
 }): PartnerState[] {
   return [{
     persona: {
       id: args.id,
-      name: 'Emily Carter',
+      name: args.contactName,
       propertyName: 'Raven Inn',
       propertyType: 'Boutique Hotel',
       roomCount: 52,
       location: args.location,
       parityRegime: args.parityRegime,
-      avatar: 'EC',
+      avatar: initialsFromName(args.contactName),
       propertyImage:
         'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
       style: 'green',
@@ -549,17 +584,20 @@ function driftwoodBayBase(args: {
   id: string;
   parityRegime: ParityRegime;
   location: string;
+  /** Regime-specific contact name. First name 'Daniel' stays
+   *  constant; surname shifts per regime. */
+  contactName: string;
 }): PartnerState[] {
   return [{
     persona: {
       id: args.id,
-      name: 'Daniel Cruz',
+      name: args.contactName,
       propertyName: 'Driftwood Bay Resort',
       propertyType: 'Resort',
       roomCount: 86,
       location: args.location,
       parityRegime: args.parityRegime,
-      avatar: 'DC',
+      avatar: initialsFromName(args.contactName),
       propertyImage:
         'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
       style: 'yellow',
@@ -635,6 +673,7 @@ export const initialPartners: PartnerState[] = [
     id: 'crystal-water-wide',
     parityRegime: 'wide',
     location: 'Miami Beach, USA',
+    contactName: 'Sarah Mitchell',
     propertyImage:
       'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
   }),
@@ -644,6 +683,7 @@ export const initialPartners: PartnerState[] = [
     id: 'crystal-water-narrow',
     parityRegime: 'narrow',
     location: 'Cornwall, UK',
+    contactName: 'Sarah Bennett',
     propertyImage:
       'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
   }),
@@ -654,6 +694,7 @@ export const initialPartners: PartnerState[] = [
     id: 'crystal-water-none',
     parityRegime: 'none',
     location: 'Marbella, Spain',
+    contactName: 'Sarah Beltrán',
     propertyImage:
       'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
   }),
@@ -670,6 +711,7 @@ export const initialPartners: PartnerState[] = [
     id: 'velvet-sky-wide',
     parityRegime: 'wide',
     location: 'New York, USA',
+    contactName: 'John Whitfield',
     propertyImage:
       'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
   }),
@@ -679,6 +721,7 @@ export const initialPartners: PartnerState[] = [
     id: 'velvet-sky-narrow',
     parityRegime: 'narrow',
     location: 'Edinburgh, UK',
+    contactName: 'John Whitford',
     propertyImage:
       'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=400&h=250&fit=crop',
   }),
@@ -689,6 +732,7 @@ export const initialPartners: PartnerState[] = [
     id: 'velvet-sky-none',
     parityRegime: 'none',
     location: 'Madrid, Spain',
+    contactName: 'John Vela',
     propertyImage:
       'https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=400&h=250&fit=crop',
   }),
@@ -701,18 +745,18 @@ export const initialPartners: PartnerState[] = [
   // Spain (No) / UK (Narrow) / US (Wide). Narrow + Wide variants
   // alias back to the base `raven-inn` for conversation + baseline
   // lookups via the regime-suffix fallback.
-  ...ravenInnBase({ id: 'raven-inn', parityRegime: 'none', location: 'Valencia, Spain' }),
-  ...ravenInnBase({ id: 'raven-inn-narrow', parityRegime: 'narrow', location: 'Bath, UK' }),
-  ...ravenInnBase({ id: 'raven-inn-wide', parityRegime: 'wide', location: 'Boston, USA' }),
+  ...ravenInnBase({ id: 'raven-inn', parityRegime: 'none', location: 'Valencia, Spain', contactName: 'Emily Castro' }),
+  ...ravenInnBase({ id: 'raven-inn-narrow', parityRegime: 'narrow', location: 'Bath, UK', contactName: 'Emily Carter' }),
+  ...ravenInnBase({ id: 'raven-inn-wide', parityRegime: 'wide', location: 'Boston, USA', contactName: 'Emily Carter' }),
 
   // ── Driftwood Bay Resort - R2 distractor across all three regimes ──
   // Moderate Brand gap profile (Bucket 4, eRPD 3.4%). Data mapped
   // from SME spreadsheet mix sheet row 43 (The Oasis Palms Resort)
   // with a made-up partner name. Reads as not the priority vs
   // Velvet Sky Boutique Hotel at R2. Country grouped per regime.
-  ...driftwoodBayBase({ id: 'driftwood-bay', parityRegime: 'none', location: 'Mallorca, Spain' }),
-  ...driftwoodBayBase({ id: 'driftwood-bay-narrow', parityRegime: 'narrow', location: 'Brighton, UK' }),
-  ...driftwoodBayBase({ id: 'driftwood-bay-wide', parityRegime: 'wide', location: 'Newport Beach, USA' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay', parityRegime: 'none', location: 'Mallorca, Spain', contactName: 'Daniel Cruz' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay-narrow', parityRegime: 'narrow', location: 'Brighton, UK', contactName: 'Daniel Crawford' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay-wide', parityRegime: 'wide', location: 'Newport Beach, USA', contactName: 'Daniel Cruz' }),
 
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──
   // Three regime variants. The conversations / persona hints / per-
@@ -721,9 +765,9 @@ export const initialPartners: PartnerState[] = [
   // suffix alias fallback in getConversationTree / getPartnerBaseline
   // / getPersonaHint. Contact + property name stay constant; only
   // location, parityRegime, and id differ across variants.
-  ...marinaBase({ id: 'marina', parityRegime: 'none', location: 'Madrid, Spain' }),
-  ...marinaBase({ id: 'marina-narrow', parityRegime: 'narrow', location: 'London, UK' }),
-  ...marinaBase({ id: 'marina-wide', parityRegime: 'wide', location: 'New York, USA' }),
+  ...marinaBase({ id: 'marina', parityRegime: 'none', location: 'Madrid, Spain', contactName: 'Marina Alvarez' }),
+  ...marinaBase({ id: 'marina-narrow', parityRegime: 'narrow', location: 'London, UK', contactName: 'Marina Ashworth' }),
+  ...marinaBase({ id: 'marina-wide', parityRegime: 'wide', location: 'New York, USA', contactName: 'Marina Brown' }),
 
   // ── The Noble Falcon Inn (Wide Parity / New York) ──
   // Brand.com Competitiveness Gap scenario. Same hotel brand and
@@ -738,6 +782,7 @@ export const initialPartners: PartnerState[] = [
     id: 'noble-falcon-wide',
     parityRegime: 'wide',
     location: 'New York, USA',
+    contactName: 'Anton Müller',
     propertyImage:
       'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=250&fit=crop',
   }),
@@ -747,6 +792,7 @@ export const initialPartners: PartnerState[] = [
     id: 'noble-falcon-narrow',
     parityRegime: 'narrow',
     location: 'London, UK',
+    contactName: 'Anton Walters',
     propertyImage:
       'https://images.unsplash.com/photo-1455587734955-081b22074882?w=400&h=250&fit=crop',
   }),
@@ -757,6 +803,7 @@ export const initialPartners: PartnerState[] = [
     id: 'noble-falcon-none',
     parityRegime: 'none',
     location: 'Seville, Spain',
+    contactName: 'Anton Vega',
     propertyImage:
       'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
   }),
@@ -765,9 +812,9 @@ export const initialPartners: PartnerState[] = [
   // Surface-healthy KPIs at R1 with a misconfigured Country Rate
   // hiding in the discount list (the R3 trap). Country grouped per
   // regime; Narrow + Wide alias back to `carlos` for trees/baselines.
-  ...carlosBase({ id: 'carlos', parityRegime: 'none', location: 'Barcelona, Spain' }),
-  ...carlosBase({ id: 'carlos-narrow', parityRegime: 'narrow', location: 'Manchester, UK' }),
-  ...carlosBase({ id: 'carlos-wide', parityRegime: 'wide', location: 'Los Angeles, USA' }),
+  ...carlosBase({ id: 'carlos', parityRegime: 'none', location: 'Barcelona, Spain', contactName: 'Carlos Rivera' }),
+  ...carlosBase({ id: 'carlos-narrow', parityRegime: 'narrow', location: 'Manchester, UK', contactName: 'Carlos Reeves' }),
+  ...carlosBase({ id: 'carlos-wide', parityRegime: 'wide', location: 'Los Angeles, USA', contactName: 'Carlos Rivera' }),
 
 ];
 
