@@ -757,12 +757,24 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   const avgRevenue = totalRevenueChange / state.partners.length;
   const avgTrust = totalTrust / state.partners.length;
 
-  const overallScore = avgRPD * 0.4 + avgRevenue * 0.3 + avgTrust * 0.3;
+  // Grade reads from per-round stars rather than the legacy metric
+  // deltas above. The new branching conversations only nudge a few
+  // legacy fields by a couple of points, so even a perfect 3-stars-
+  // per-round playthrough wouldn't clear the legacy thresholds and a
+  // perfect run would inexplicably land at C / Developing. Stars are
+  // the authoritative per-round score and roll up cleanly here:
+  // 3 rounds * 3 stars = 9 max; the percentage maps to A/B/C/D.
+  let totalStars = 0;
+  for (const round of Object.keys(state.roundStars)) {
+    totalStars += state.roundStars[Number(round)] ?? 0;
+  }
+  const maxStars = TOTAL_ROUNDS * 3;
+  const starsPct = maxStars > 0 ? totalStars / maxStars : 0;
 
   let grade: 'A' | 'B' | 'C' | 'D';
-  if (overallScore >= 25) grade = 'A';
-  else if (overallScore >= 15) grade = 'B';
-  else if (overallScore >= 5) grade = 'C';
+  if (starsPct >= 0.89) grade = 'A';
+  else if (starsPct >= 0.67) grade = 'B';
+  else if (starsPct >= 0.33) grade = 'C';
   else grade = 'D';
 
   if (highlights.length === 0) {

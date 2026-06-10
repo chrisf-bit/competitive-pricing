@@ -159,13 +159,13 @@ export function DebriefScreen({
             <ScoreMetric
               icon={<TrendingUp size={18} />}
               label="Avg RPD Change"
-              value={`${score.portfolioRPD >= 0 ? '+' : ''}${score.portfolioRPD}`}
+              value={`${score.portfolioRPD >= 0 ? '+' : ''}${score.portfolioRPD}%`}
               positive={score.portfolioRPD > 0}
             />
             <ScoreMetric
               icon={<DollarSign size={18} />}
               label="Revenue Impact"
-              value={`${score.revenueImpact >= 0 ? '+' : ''}${score.revenueImpact}`}
+              value={`${score.revenueImpact >= 0 ? '+' : ''}${score.revenueImpact}%`}
               positive={score.revenueImpact > 0}
             />
             <ScoreMetric
