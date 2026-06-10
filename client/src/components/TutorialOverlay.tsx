@@ -206,28 +206,9 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
     target: 'discount-row',
     title: 'Discount Products',
     description:
-      "Eleven pricing products grouped into three columns: Public Pricing, Genius Pricing, and Foundations & Payments. Each row shows active or inactive. Watch for misconfigured products - they're the silent culprit behind many eRPD gaps.",
+      'Eleven pricing products grouped into three columns: Public Pricing, Genius Pricing, and Foundations & Payments. Each row shows active or inactive. The mix of what is on vs off tells you what tools the partner is leaning on.',
     icon: <Tag size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
-    detail: (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          padding: '8px 12px',
-          background: 'rgba(204,0,0,0.08)',
-          border: '1px solid rgba(204,0,0,0.2)',
-          borderRadius: 8,
-          marginTop: 8,
-        }}
-      >
-        <AlertTriangle size={14} style={{ color: 'var(--danger)', flexShrink: 0 }} />
-        <span style={{ fontSize: 11, color: 'rgba(255,255,255,0.6)' }}>
-          Watch for the red alert icon. It means a discount is misconfigured and needs attention.
-        </span>
-      </div>
-    ),
   },
   {
     target: 'issue-tree-helper',
@@ -301,7 +282,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-discounts',
     title: 'Discount Products',
     description:
-      "Eleven products in three columns: Public Pricing, Genius Pricing, Foundations & Payments. Each row reads active or inactive. Watch for misconfigured products - they're often the silent culprit behind an eRPD gap.",
+      'Eleven products in three columns: Public Pricing, Genius Pricing, Foundations & Payments. Each row reads active or inactive. The shape of what is on vs off tells you which levers the partner is using.',
     icon: <Tag size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },
