@@ -1346,6 +1346,21 @@ to resolve before final delivery.
 - **Practice Mode locked R4-R10 cards** auto-scale with
   TOTAL_ROUNDS - no manual action needed.
 
+### Functional gaps to close before final ship
+
+- **Randomise conversation option positions at render time.** Every
+  branching `BranchingStep.options` array and every 3-phase
+  `phase.options` array currently lists the OPTIMAL pick first by
+  authoring convention - a pattern testers will spot in a few clicks
+  ("the right answer is always the top one"). Before live launch,
+  shuffle the option order at render time in
+  `BranchingConversationScreen` and `ConversationScreen`, ideally
+  with a seeded random so a replay of the same round shows the same
+  layout (so the learner isn't disoriented by reshuffled positions
+  mid-attempt). The data files do not need to change - the
+  `optimal: true` flag and the grading layer key off ids, not array
+  position.
+
 ### Decisions to confirm before final ship
 
 - **Returning-learner routing**: cleared learners currently always
