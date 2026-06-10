@@ -195,10 +195,13 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
         </AnimatePresence>
       </div>
 
-      {/* Reset Progress - bottom-right, low-key. Wipes the persisted
-          learner profile + clearance status + round stars so the next
-          Begin starts a brand-new run. Requires a confirm because a
-          stray click would wipe a real tester's progress. */}
+      {/* Reset Progress - sits just below the Begin button so it's
+          discoverable without competing with the main CTA, and out
+          of the way of the DevNav lightning-bolt button in the
+          bottom-right. Wipes the persisted learner profile +
+          clearance status + round stars so the next Begin starts a
+          brand-new run. Requires a confirm because a stray click
+          would wipe a real tester's progress. */}
       {showBegin && (
         <motion.button
           initial={{ opacity: 0 }}
@@ -212,8 +215,9 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
           }}
           style={{
             position: 'absolute',
-            bottom: 24,
-            right: 24,
+            top: 'calc(50% + 290px)',
+            left: '50%',
+            transform: 'translateX(-50%)',
             zIndex: 4,
             background: 'rgba(255,255,255,0.08)',
             color: 'rgba(255,255,255,0.7)',
