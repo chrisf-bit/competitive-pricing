@@ -675,7 +675,10 @@ export function advanceRound(state: GameState): GameState {
 
   return {
     ...state,
-    screen: 'round-transition',
+    // Routes straight to the next round's portfolio - the previous
+    // between-round summary screen was retired in 2026-06 because it
+    // didn't add value (the data is on the portfolio already).
+    screen: 'portfolio',
     currentRound: nextRound,
     actionsThisRound: [],
     selectedPartnerId: null,

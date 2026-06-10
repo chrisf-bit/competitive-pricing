@@ -556,7 +556,6 @@ export type GameScreen =
   | 'conversation'
   | 'conversation-report'
   | 'l1-outcome'
-  | 'round-transition'
   // ── Wrap-up ──
   | 'debrief';
 

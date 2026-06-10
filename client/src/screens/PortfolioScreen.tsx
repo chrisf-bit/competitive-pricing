@@ -81,6 +81,18 @@ export function PortfolioScreen({
             Market Update
           </span>
           {marketContext.seasonalNote}
+          {marketContext.competitorPricing && (
+            <span
+              style={{
+                display: 'block',
+                marginTop: 4,
+                fontWeight: 500,
+                color: 'var(--grey-600)',
+              }}
+            >
+              {marketContext.competitorPricing}
+            </span>
+          )}
         </span>
       </div>
 

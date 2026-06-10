@@ -21,7 +21,6 @@ import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
 import { BranchingConversationScreen } from './screens/BranchingConversationScreen';
 import { ConversationReportScreen } from './screens/ConversationReportScreen';
-import { RoundTransitionScreen } from './screens/RoundTransitionScreen';
 import { DebriefScreen } from './screens/DebriefScreen';
 import { reportLessonStatus, reportScore } from './util/persistence';
 import { getPortfolioForRound } from './data/portfolioByRound';
@@ -301,18 +300,6 @@ export default function App() {
               personaId={state.learnerProfile.archetype?.id ?? null}
               onContinue={game.onContinueAfterReport}
               onRetake={game.onRetakeAfterReport}
-            />
-          )}
-          {state.screen === 'round-transition' && (
-            <RoundTransitionScreen
-              currentRound={state.currentRound}
-              previousRound={state.currentRound - 1}
-              summaries={
-                state.roundSummaries[state.roundSummaries.length - 1] ?? []
-              }
-              partners={state.partners}
-              marketContext={state.marketContext}
-              onContinue={() => game.goToScreen('portfolio')}
             />
           )}
           {state.screen === 'debrief' && game.score && (

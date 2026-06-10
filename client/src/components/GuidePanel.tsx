@@ -4,7 +4,6 @@ import {
   MousePointerClick,
   MessageSquare,
   BarChart3,
-  Clock,
   Award,
   Lightbulb,
   AlertTriangle,
@@ -560,36 +559,6 @@ function getGuideContent(
                   }]
                 : []),
             ],
-      };
-
-    case 'round-transition':
-      return {
-        screenLabel: 'Round Summary',
-        objective: 'See how your decisions played out.',
-        steps: [
-          {
-            icon: <Eye size={13} />,
-            text: 'Review partner outcomes',
-            active: true,
-          },
-          {
-            icon: <BarChart3 size={13} />,
-            text: 'Note improvements and declines',
-            active: true,
-          },
-          {
-            icon: <Target size={13} />,
-            text: 'Continue to next round',
-            active: false,
-          },
-        ],
-        tips: [
-          {
-            icon: <Clock size={12} />,
-            title: 'Delayed effects',
-            text: 'Changes from prior rounds show up over time.',
-          },
-        ],
       };
 
     case 'debrief':
