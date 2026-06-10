@@ -93,10 +93,9 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             <p style={{ margin: 0 }}>
               You'll take ownership of a portfolio of partner accounts that need your
               judgement. In each round, one partner will need your attention most. Read the
-              signals. Decide what matters. Adjust your Action Plans. Choose your partner
-              actions. Have the conversation. Pay attention to how each partner responds,
-              not every situation is the same, and not every partner sees the issue in the
-              same way.
+              signals. Decide what matters. Choose your partner actions. Have the
+              conversation. Pay attention to how each partner responds, not every situation
+              is the same, and not every partner sees the issue in the same way.
             </p>
             <p style={{ margin: 0, color: 'var(--white)', fontWeight: 600 }}>
               First, you need to earn your clearance. Show that you understand why price
