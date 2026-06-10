@@ -34,7 +34,16 @@ export default function App() {
   if (showSplash) {
     return (
       <>
-        <SplashScreen onBegin={() => setShowSplash(false)} />
+        <SplashScreen
+          onBegin={() => setShowSplash(false)}
+          onResetProgress={() => {
+            // game.onRestart already calls clearPersistedState and
+            // hands us a fresh in-memory GameState. Stay on the
+            // splash screen so the next Begin click runs the
+            // full clearance / regime / persona flow from scratch.
+            game.onRestart();
+          }}
+        />
         <DevNav
           currentScreen={state.screen}
           onJump={(screen) => {

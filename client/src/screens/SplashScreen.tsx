@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Plane, ChevronRight } from 'lucide-react';
+import { Plane, ChevronRight, RotateCcw } from 'lucide-react';
 import splashImage from '../assets/splash-dark.webp';
 
 interface SplashScreenProps {
   onBegin: () => void;
+  /** Wipes the persisted learner profile, clearance status, and
+   *  round stars from local storage so the next click of Begin
+   *  starts a brand-new run. */
+  onResetProgress: () => void;
 }
 
-export function SplashScreen({ onBegin }: SplashScreenProps) {
+export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
   const [showBegin, setShowBegin] = useState(false);
 
   useEffect(() => {
@@ -190,6 +194,54 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Reset Progress - bottom-right, low-key. Wipes the persisted
+          learner profile + clearance status + round stars so the next
+          Begin starts a brand-new run. Requires a confirm because a
+          stray click would wipe a real tester's progress. */}
+      {showBegin && (
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.4, ease: 'easeOut' }}
+          onClick={() => {
+            const ok = window.confirm(
+              'Reset progress? This will wipe your saved regime, persona, clearance status, and round stars. The next Begin will start a fresh run.',
+            );
+            if (ok) onResetProgress();
+          }}
+          style={{
+            position: 'absolute',
+            bottom: 24,
+            right: 24,
+            zIndex: 4,
+            background: 'rgba(255,255,255,0.08)',
+            color: 'rgba(255,255,255,0.7)',
+            padding: '8px 14px',
+            borderRadius: 'var(--radius-sm)',
+            fontSize: 12,
+            fontWeight: 600,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 6,
+            border: '1px solid rgba(255,255,255,0.14)',
+            cursor: 'pointer',
+            backdropFilter: 'blur(6px)',
+            transition: 'background 0.15s ease, color 0.15s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.14)';
+            e.currentTarget.style.color = 'var(--white)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
+            e.currentTarget.style.color = 'rgba(255,255,255,0.7)';
+          }}
+        >
+          <RotateCcw size={13} />
+          Reset progress
+        </motion.button>
+      )}
     </div>
   );
 }
