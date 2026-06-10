@@ -58,8 +58,13 @@ export interface EmailAuditScenario {
 }
 
 // ── Wide Parity scenario ────────────────────────────────────────────
-// Asks the partner to align rates and availability with Brand.com AND
-// other key OTAs; cross-channel data is fair game proactively.
+// SME-approved Wide Parity email audit (Sam writing to Maria at
+// Velvet Sky Boutique). Wide Parity permits proactively asking for
+// the same rates, conditions, and availability across Brand.com AND
+// other third-party OTAs. The two unsafe picks are the textbook
+// Wide-Parity DON'Ts: instructing the partner to stop working with
+// other OTAs / wholesalers, and promising fixed ranking rewards in
+// exchange for pricing parity.
 const wideParityScenario: EmailAuditScenario = {
   setupHeadline: 'Sam asked you to review a draft email before he hits send',
   setupBody:
@@ -67,25 +72,25 @@ const wideParityScenario: EmailAuditScenario = {
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
-    toName: 'Maria (Hotel Marina, Lisbon)',
+    toName: 'Maria (Velvet Sky Boutique, New York)',
     subject: 'Booking.com pricing review - opportunities for Q3',
     body: [
       'Hi Maria,\n\n',
-      'Following our call last week, I wanted to share a few thoughts on your Q3 numbers and where we see opportunities to recover the conversion drop.\n\nFirst, the headline: ',
+      "Following up on our recent account analysis, I wanted to highlight some strategic pricing trends we've noted for Velvet Sky Boutique.\n\n",
       { phraseId: 'p1' },
       '.\n\n',
-      "We've seen your conversion trending down across the last six weeks. As you know, ",
+      'Because you are currently undercutting us on these other platforms, ',
       { phraseId: 'p2' },
-      ", so the goal here is really to find the right balance for your business.\n\n",
-      'Looking at the wider channel mix, ',
+      '.\n\n',
+      'Under our wide parity framework, ',
       { phraseId: 'p3' },
-      ". That should give you a cleaner read on what is and isn't working.\n\n",
-      'Of course, ',
+      '.\n\n',
+      'If you clean up these public rate leaks and match our pricing today, ',
       { phraseId: 'p4' },
-      '; this is just to share what we see in the data on our side.\n\n',
-      'One thing to flag: ',
+      '.\n\n',
+      'Our platform is investing heavily in global marketing for your destination, and ',
       { phraseId: 'p5' },
-      ', but we can usually avoid that with a few small adjustments to your Genius participation.\n\n',
+      '.\n\n',
       'Looking forward to hearing your thoughts. Happy to jump on another call if useful.\n\n',
       'Best,\nSam',
     ],
@@ -93,71 +98,74 @@ const wideParityScenario: EmailAuditScenario = {
   phrases: [
     {
       id: 'p1',
-      text: 'Booking.com requires you to match the prices on your Brand.com site or your visibility may be reduced',
-      isSafe: false,
-      rationale: {
-        correct:
-          'Right call. Two violations in one sentence - frames pricing as a requirement (we never require) and threatens visibility in exchange for compliance. Both prohibited by the General Communications guidance.',
-        incorrect:
-          'This one is unsafe. It frames pricing as a requirement (we never require partners to lower prices) AND threatens visibility - both prohibited by the General Communications guidance.',
-      },
-      source: "Legal Compliance | General Communications | Don't (x2)",
-    },
-    {
-      id: 'p2',
-      text: 'less competitive prices can reduce your conversion and visibility on Booking.com',
+      text: 'Our cross-channel data shows that your public rates on Booking.com are currently higher than the pricing you provide on your direct Brand.com site as well as on other third-party OTA platforms',
       isSafe: true,
       rationale: {
         correct:
-          'Correct. This is the verbatim approved phrasing from the Wide Parity guidance - factual, on-platform-only, no threat or requirement.',
+          "Correct. Proactively using cross-channel and third-party OTA data to ask for rate alignment is exactly what Wide Parity permits - it's the AM's right to surface the gap factually.",
         incorrect:
-          "Actually this one is safe. It's the verbatim approved phrasing - factual, on-platform-only, no threat or requirement. Use this one freely.",
+          "Actually this one is safe in Wide Parity. The regime specifically allows proactive use of cross-channel and third-party OTA data to surface a rate gap.",
       },
       source: 'Legal Compliance | Wide Parity Markets | Do (verbatim)',
     },
     {
-      id: 'p3',
-      text: "we'd recommend you switch off other OTAs and route inventory through Booking.com",
+      id: 'p2',
+      text: 'I strongly recommend that you completely stop working with those lower-volume wholesalers to simplify your channel distribution',
       isSafe: false,
       rationale: {
         correct:
-          'Spot on. Recommending a partner switch off other OTAs is explicitly prohibited - it dictates external distribution strategy, which sits outside our mandate.',
+          "Right call. Recommending the partner stop working with other OTAs or wholesalers is a Wide-Parity DON'T - we can ask for rate alignment but we never dictate which channels they distribute through.",
         incorrect:
-          'This one is unsafe. Recommending a partner switch off other OTAs is explicitly prohibited - it dictates external distribution strategy, which is outside our mandate.',
+          "This one is unsafe. Wide Parity lets us ask for rate alignment, but recommending the partner stop working with other OTAs or wholesalers is explicitly prohibited - we don't dictate channel strategy.",
       },
-      source: "Legal Compliance | Wide Parity Markets | Don't (verbatim)",
+      source: "Legal Compliance | Wide Parity Markets | Don't",
     },
     {
-      id: 'p4',
-      text: 'you as a partner are completely free to choose your own pricing and distribution strategy',
+      id: 'p3',
+      text: 'we ask that you provide our platform with the same public rates, conditions, and room inventory availability that you distribute across these other third-party channels',
       isSafe: true,
       rationale: {
         correct:
-          'Correct. Approved partner-freedom statement, addressed directly to the partner - worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
+          "Correct. This is the Wide-Parity verbatim ask - same rates, conditions, and availability across third parties and Brand.com. The full mandate.",
         incorrect:
-          'This one is safe - the approved partner-freedom statement addressed directly to the partner. Worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
+          "Actually this one is safe in Wide Parity. Requesting equal rates, conditions, and availability across third parties and Brand.com is the regime's full approved ask.",
       },
-      source: 'Legal Compliance | General Communications | Do (verbatim)',
+      source: 'Legal Compliance | Wide Parity Markets | Do (verbatim)',
     },
     {
-      id: 'p5',
-      text: 'partners with non-competitive prices receive ranking penalties',
+      id: 'p4',
+      text: 'I will personally guarantee that our algorithm elevates your property into a top-3 search ranking reward for the next 30 days',
       isSafe: false,
       rationale: {
         correct:
-          'Right. "Penalties" plus "ranking" is a direct threat. Even if the underlying performance signal is real, this framing is prohibited.',
+          "Right. Promising fixed ranking rewards, visibility upgrades, or search placement in exchange for pricing parity is prohibited in every regime - the algorithm isn't a bargaining chip and we don't make promises about it.",
         incorrect:
-          'This one is unsafe. "Penalties" plus "ranking" together is a direct threat - prohibited even if the underlying performance signal is real. Reframe as on-platform consequences (visibility, conversion) without the penalty/threat language.',
+          'This one is unsafe. Promising a top-3 ranking reward (or any fixed ranking promise) in exchange for pricing alignment is explicitly prohibited.',
       },
       source: "Legal Compliance | General Communications | Don't",
+    },
+    {
+      id: 'p5',
+      text: 'aligning your base rates ensures you successfully turn our traffic engine into higher net revenue',
+      isSafe: true,
+      rationale: {
+        correct:
+          "Correct. Re-focuses the value proposition on business metrics and on-platform discovery, without threats or ranking promises. Exactly the framing the regime invites.",
+        incorrect:
+          "This one is safe. It frames the value proposition around on-platform discovery and net revenue - no threats, no ranking promises, just the business case.",
+      },
+      source: 'Legal Compliance | Wide Parity Markets | Do',
     },
   ],
 };
 
 // ── Narrow Parity scenario ──────────────────────────────────────────
-// Strict alignment with Brand.com only. Asking about other OTAs is
-// out of bounds - the AM only references Brand.com rates and never
-// asks the partner to change pricing on third-party channels.
+// SME-approved Narrow Parity email audit (Sam writing to Maria).
+// Narrow Parity permits asking for rate alignment with Brand.com but
+// NOT for equal availability and NOT for alignment with other OTAs.
+// The two unsafe picks are the textbook Narrow-Parity DON'Ts:
+// asking for equal availability with the direct channel and asking
+// the partner to adjust rates on third-party OTAs.
 const narrowParityScenario: EmailAuditScenario = {
   setupHeadline: 'Sam asked you to review a draft email before he hits send',
   setupBody:
@@ -165,25 +173,26 @@ const narrowParityScenario: EmailAuditScenario = {
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
-    toName: 'Maria (Hotel Marina, Lisbon)',
+    toName: 'Maria (Crystal Water Resort, Cornwall)',
     subject: 'Booking.com pricing review - opportunities for Q3',
     body: [
       'Hi Maria,\n\n',
-      'Following our call last week, I wanted to share a few thoughts on your Q3 numbers.\n\nFirst, the headline: ',
+      'Following our call last week, I wanted to share a few thoughts on your Q3 performance metrics.\n\n',
+      'Based on our market data, ',
       { phraseId: 'p1' },
-      '.\n\n',
-      "We've seen your conversion trending down. Looking at the data, ",
+      ' (Brand.com).\n\n',
+      'To resolve this friction, ',
       { phraseId: 'p2' },
-      " - that's where we'd want to focus first.\n\n",
-      'On the broader channel mix, ',
+      '.\n\n',
+      'Of course, pricing is just one lever among many affecting your performance, and ',
       { phraseId: 'p3' },
-      '. That would help us close the gap faster.\n\n',
-      'Of course, ',
+      '.\n\n',
+      'Therefore, ',
       { phraseId: 'p4' },
-      '; this is just to share what we see in the data on our side.\n\n',
-      'One thing to flag: ',
+      ', and we look forward to reviewing how targeted tools can help capture your traffic surplus.\n\n',
+      'Nevertheless, we also noticed that third-party OTAs are undercutting your price on meta-search, so ',
       { phraseId: 'p5' },
-      ', but we can usually avoid that with a few small adjustments.\n\n',
+      '.\n\n',
       'Looking forward to hearing your thoughts. Happy to jump on another call if useful.\n\n',
       'Best,\nSam',
     ],
@@ -191,63 +200,63 @@ const narrowParityScenario: EmailAuditScenario = {
   phrases: [
     {
       id: 'p1',
-      text: 'Booking.com requires you to match the prices on your Brand.com site or your visibility may be reduced',
-      isSafe: false,
+      text: 'your pricing on Booking.com is currently 6.60% more expensive than what you publicly offer on your direct website',
+      isSafe: true,
       rationale: {
         correct:
-          'Right call. Two violations in one sentence - frames pricing as a requirement (we never require) and threatens visibility in exchange for compliance. Both prohibited by the General Communications guidance, regardless of regime.',
+          'Correct. Using direct Brand.com comparison data to highlight where Booking.com is more expensive is the regime-approved framing - factual cross-channel observation against the direct site only.',
         incorrect:
-          'This one is unsafe. Even in Narrow Parity, where Brand.com alignment is the approved ask, framing it as a requirement and threatening visibility are both prohibited.',
+          "Actually this one is safe in a Narrow Parity market. Comparing the partner's Booking.com price to their direct Brand.com price is permitted - it's the cross-OTA comparison that isn't.",
       },
-      source: "Legal Compliance | General Communications | Don't (x2)",
+      source: 'Legal Compliance | Narrow Parity Markets | Do',
     },
     {
       id: 'p2',
-      text: 'your rates and conditions should align with your Brand.com site',
-      isSafe: true,
-      rationale: {
-        correct:
-          'Correct. In a Narrow Parity market this is the verbatim approved ask - alignment with Brand.com only, no other channels mentioned.',
-        incorrect:
-          'Actually this one is safe in a Narrow Parity market. Asking for alignment with Brand.com - and Brand.com only - is the verbatim approved phrasing for this regime.',
-      },
-      source: 'Legal Compliance | Narrow Parity Markets | Do (verbatim)',
-    },
-    {
-      id: 'p3',
-      text: "we'd also ask that you align your Booking.com rates with the OTAs where you're currently cheaper",
+      text: 'Booking.com requires you to match the exact room availability that you have opened up on your direct brand website',
       isSafe: false,
       rationale: {
         correct:
-          'Spot on. In Narrow Parity we only ask for alignment with Brand.com. Asking for alignment with other OTAs is explicitly prohibited.',
+          "Right call. Asking for equal room availability with the direct channel is strictly forbidden in Narrow Parity - the regime allows rate alignment with Brand.com but not availability alignment.",
         incorrect:
-          "This one is unsafe. In Narrow Parity the alignment ask stops at Brand.com - we don't ask partners to match other OTAs.",
+          "This one is unsafe. Narrow Parity covers rate alignment with Brand.com but does NOT extend to availability - asking for equal room availability with the direct channel is explicitly prohibited.",
       },
-      source: "Legal Compliance | Narrow Parity Markets | Don't (verbatim)",
+      source: "Legal Compliance | Narrow Parity Markets | Don't",
     },
     {
-      id: 'p4',
-      text: 'you as a partner are completely free to choose your own pricing and distribution strategy',
+      id: 'p3',
+      text: 'conversion can also be optimized through higher review scores or adding property photos',
       isSafe: true,
       rationale: {
         correct:
-          'Correct. Approved partner-freedom statement, addressed directly to the partner - worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
+          "Correct. Reaffirms that pricing is a partner choice and points to other operational levers (review score, content) the partner controls. Right tone for the regime.",
         incorrect:
-          'This one is safe - the approved partner-freedom statement addressed directly to the partner. Worth using proactively when discussing pricing performance, to reinforce that the choice is theirs.',
+          "This one is safe. Framing conversion as multi-lever - pricing alongside review scores and content - reaffirms the partner's autonomy and avoids pressuring pricing as the only fix.",
+      },
+      source: 'Legal Compliance | General Communications | Do',
+    },
+    {
+      id: 'p4',
+      text: 'you remain completely free to choose your own unique distribution strategy across the market',
+      isSafe: true,
+      rationale: {
+        correct:
+          "Correct. Explicitly states the partner's absolute freedom over their distribution mix - the approved partner-freedom framing, addressed directly to them.",
+        incorrect:
+          "This one is safe. It's the approved partner-freedom statement - explicitly stating the partner's absolute freedom over distribution. Worth using proactively to reinforce that the choice is theirs.",
       },
       source: 'Legal Compliance | General Communications | Do (verbatim)',
     },
     {
       id: 'p5',
-      text: 'partners with non-competitive prices receive ranking penalties',
+      text: 'we request that you adjust your rates on those external channels to re-establish market balance',
       isSafe: false,
       rationale: {
         correct:
-          'Right. "Penalties" plus "ranking" is a direct threat. Even if the underlying performance signal is real, this framing is prohibited.',
+          "Right. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - sits well outside Narrow Parity's mandate. The regime only covers Brand.com alignment.",
         incorrect:
-          'This one is unsafe. "Penalties" plus "ranking" together is a direct threat - prohibited even if the underlying performance signal is real. Reframe as on-platform consequences (visibility, conversion) without the penalty/threat language.',
+          "This one is unsafe. In Narrow Parity we may ask for Brand.com alignment, but asking the partner to adjust rates on third-party OTAs is explicitly prohibited.",
       },
-      source: "Legal Compliance | General Communications | Don't",
+      source: "Legal Compliance | Narrow Parity Markets | Don't",
     },
   ],
 };
