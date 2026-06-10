@@ -238,7 +238,13 @@ export default function App() {
                     state.learnerProfile.market!.parityRegime,
                 );
               })()}
-              actionsThisRound={state.actionsThisRound}
+              // Merge actionsThisRound + previouslyEngagedThisRound so
+              // a wrong-pick partner from before a retake still reads
+              // as "Engaged this round" on their portfolio card.
+              actionsThisRound={[
+                ...state.actionsThisRound,
+                ...state.previouslyEngagedThisRound,
+              ]}
               marketContext={state.marketContext}
               onSelectPartner={game.onSelectPartner}
             />
@@ -249,9 +255,10 @@ export default function App() {
                 (p) => p.persona.id === state.selectedPartnerId,
               )!}
               currentRound={state.currentRound}
-              alreadyEngaged={state.actionsThisRound.includes(
-                state.selectedPartnerId,
-              )}
+              alreadyEngaged={
+                state.actionsThisRound.includes(state.selectedPartnerId) ||
+                state.previouslyEngagedThisRound.includes(state.selectedPartnerId)
+              }
               personaId={state.learnerProfile.archetype?.id ?? null}
               expandedBlindSpots={state.expandedBlindSpots}
               onMarkBlindSpotExpanded={game.markBlindSpotExpanded}

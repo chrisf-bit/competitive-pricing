@@ -657,6 +657,16 @@ export interface GameState {
   hasOpenedIssueTreeHelper: boolean;
   currentRound: number;         // 1..10
   actionsThisRound: string[];   // partner IDs engaged this round
+  /**
+   * Partner IDs the learner picked this round, had a 0-star outcome
+   * on, and then retook. The action budget is restored (entry removed
+   * from actionsThisRound) but the partner remains here so the
+   * Portfolio + Partner Detail still mark them as 'Engaged this
+   * round' - the learner sees they already tried that partner and
+   * doesn't waste the retake re-picking the same wrong call. Cleared
+   * on advanceRound and startPracticeRound.
+   */
+  previouslyEngagedThisRound: string[];
   selectedPartnerId: string | null;
   partners: PartnerState[];
   marketContext: MarketContext;

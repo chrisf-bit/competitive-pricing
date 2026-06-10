@@ -110,6 +110,7 @@ export function createInitialState(overrides?: {
     hasOpenedIssueTreeHelper: false,
     currentRound: 1,
     actionsThisRound: [],
+    previouslyEngagedThisRound: [],
     selectedPartnerId: null,
     partners,
     marketContext: marketContextByRound[1],
@@ -146,6 +147,7 @@ export function startPracticeRound(state: GameState, round: number): GameState {
     screen: 'portfolio',
     currentRound: round,
     actionsThisRound: [],
+    previouslyEngagedThisRound: [],
     selectedPartnerId: null,
     partners,
     marketContext: marketContextByRound[round] ?? marketContextByRound[1],
@@ -591,6 +593,16 @@ export function resetRoundForRetake(state: GameState): GameState {
     actionsThisRound: state.actionsThisRound.filter(
       (id) => id !== conv.partnerId,
     ),
+    // Keep the wrong-pick partner flagged as "engaged this round" on
+    // the Portfolio + Partner Detail so the learner sees they've
+    // already tried that partner and doesn't waste the retake
+    // re-picking the same wrong call. Action budget is restored
+    // (above) so they can still pick someone else.
+    previouslyEngagedThisRound: state.previouslyEngagedThisRound.includes(
+      conv.partnerId,
+    )
+      ? state.previouslyEngagedThisRound
+      : [...state.previouslyEngagedThisRound, conv.partnerId],
     selectedPartnerId: null,
     conversationInProgress: null,
     lastConversationGrade: null,
@@ -681,6 +693,7 @@ export function advanceRound(state: GameState): GameState {
     screen: 'portfolio',
     currentRound: nextRound,
     actionsThisRound: [],
+    previouslyEngagedThisRound: [],
     selectedPartnerId: null,
     partners: updatedPartners,
     marketContext: marketContextByRound[nextRound] ?? state.marketContext,
