@@ -53,21 +53,22 @@ export const portfolioByRound: Partial<
     // than Noble Falcon's structural Bucket-7 crisis).
     3: ['noble-falcon-none', 'marina', 'carlos'],
   },
-  // Narrow Parity: reuses the No-Parity distractor records (Marina,
-  // Carlos, Raven Inn, Driftwood Bay) since the distractor
-  // conversations are regime-neutral 3-phase filler. The priority
-  // swaps to the Narrow regime variant for each round.
+  // Narrow Parity: uses regime-specific distractor variants
+  // (-narrow suffix) so all three cards per round are in the UK
+  // market. The Narrow distractor records share conversation trees,
+  // baselines, and persona hints with their base counterparts via
+  // the regime-suffix alias fallback in the engine.
   narrow: {
-    1: ['marina', 'crystal-water-narrow', 'carlos'],
-    2: ['velvet-sky-narrow', 'raven-inn', 'driftwood-bay'],
-    3: ['noble-falcon-narrow', 'marina', 'carlos'],
+    1: ['marina-narrow', 'crystal-water-narrow', 'carlos-narrow'],
+    2: ['velvet-sky-narrow', 'raven-inn-narrow', 'driftwood-bay-narrow'],
+    3: ['noble-falcon-narrow', 'marina-narrow', 'carlos-narrow'],
   },
-  // Wide Parity: same shape as Narrow - reuses the same distractors,
-  // priority swaps to the Wide regime variant.
+  // Wide Parity: same shape as Narrow with -wide suffixed distractor
+  // variants so all three cards per round are in the US market.
   wide: {
-    1: ['marina', 'crystal-water-wide', 'carlos'],
-    2: ['velvet-sky-wide', 'raven-inn', 'driftwood-bay'],
-    3: ['noble-falcon-wide', 'marina', 'carlos'],
+    1: ['marina-wide', 'crystal-water-wide', 'carlos-wide'],
+    2: ['velvet-sky-wide', 'raven-inn-wide', 'driftwood-bay-wide'],
+    3: ['noble-falcon-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 

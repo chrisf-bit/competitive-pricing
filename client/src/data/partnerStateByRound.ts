@@ -337,5 +337,12 @@ export function getPartnerBaseline(
   partnerId: string,
   round: number,
 ): PartnerStateBaseline | null {
-  return partnerStateByRound[partnerId]?.[round] ?? null;
+  const direct = partnerStateByRound[partnerId]?.[round];
+  if (direct) return direct;
+  // Per-regime distractor variants (marina-narrow, carlos-wide, etc.)
+  // alias back to their base partner's baselines so we don't need to
+  // duplicate per-round metric scripts for each country variant.
+  const baseId = partnerId.replace(/-(none|narrow|wide)$/, '');
+  if (baseId === partnerId) return null;
+  return partnerStateByRound[baseId]?.[round] ?? null;
 }

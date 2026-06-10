@@ -2062,11 +2062,29 @@ export const conversationTrees: ConversationTree[] = [
   driftwoodBayR2,
 ];
 
+/**
+ * Strip a `-none` / `-narrow` / `-wide` regime suffix from a partner
+ * id. Used so per-regime distractor variants (marina-narrow,
+ * carlos-wide, etc.) can reuse the same conversation tree, baseline,
+ * and persona hint as their base partner without authoring per-regime
+ * duplicates. Priority partner ids that are intentionally regime-
+ * keyed (crystal-water-narrow, noble-falcon-wide, etc.) get a direct
+ * lookup first, so the alias path only kicks in when no exact tree
+ * exists for the variant id.
+ */
+const REGIME_SUFFIX = /-(none|narrow|wide)$/;
+
 export function getConversationTree(
   partnerId: string,
   round: number,
 ): ConversationTree | undefined {
-  return conversationTrees.find(
+  const direct = conversationTrees.find(
     (t) => t.partnerId === partnerId && t.round === round,
+  );
+  if (direct) return direct;
+  const baseId = partnerId.replace(REGIME_SUFFIX, '');
+  if (baseId === partnerId) return undefined;
+  return conversationTrees.find(
+    (t) => t.partnerId === baseId && t.round === round,
   );
 }

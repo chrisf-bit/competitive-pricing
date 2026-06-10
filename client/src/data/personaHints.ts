@@ -317,5 +317,12 @@ export function getPersonaHint(
   personaId: string | null,
 ): PersonaHint | null {
   if (!personaId) return null;
-  return personaHints[partnerId]?.[round]?.[personaId as PersonaId] ?? null;
+  const direct = personaHints[partnerId]?.[round]?.[personaId as PersonaId];
+  if (direct) return direct;
+  // Per-regime distractor variants (marina-narrow, carlos-wide, etc.)
+  // alias back to their base partner's hints so we don't duplicate
+  // per-regime hint content for each country variant.
+  const baseId = partnerId.replace(/-(none|narrow|wide)$/, '');
+  if (baseId === partnerId) return null;
+  return personaHints[baseId]?.[round]?.[personaId as PersonaId] ?? null;
 }

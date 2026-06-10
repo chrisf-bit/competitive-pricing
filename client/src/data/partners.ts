@@ -332,89 +332,157 @@ function nobleFalconBase(args: {
   ];
 }
 
-export const initialPartners: PartnerState[] = [
-  // ── Crystal Water Resort (Wide Parity / Sydney) ──
-  // SME-approved R1 priority - Brand.com Competitiveness Gap caused
-  // by Sarah's promotional rate on her direct brand site undercutting
-  // Booking.com. Same hotel brand + contact (Sarah Bennett) shows up
-  // in all three regime variants - only location, parityRegime, the
-  // property image, and the partner id differ. Data sourced from SME
-  // spreadsheet row 9.
-  ...crystalWaterBase({
-    id: 'crystal-water-wide',
-    parityRegime: 'wide',
-    location: 'Sydney, Australia',
-    propertyImage:
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
-  }),
+// ─── Distractor partner helpers ─────────────────────────────────
+// Each base helper builds one distractor record per regime variant
+// (No Parity / Narrow / Wide). The Narrow + Wide variants alias back
+// to the base id ('marina', 'carlos', etc.) for conversation tree,
+// per-round baseline, and persona-hint lookups via the suffix-strip
+// fallback in conversations.ts / partnerStateByRound.ts /
+// personaHints.ts. Country groupings: Spain for No Parity, UK for
+// Narrow, US for Wide - matches the priority partner per regime.
 
-  // ── Crystal Water Resort (Narrow Parity / Athens) ──
-  ...crystalWaterBase({
-    id: 'crystal-water-narrow',
-    parityRegime: 'narrow',
-    location: 'Athens, Greece',
-    propertyImage:
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
-  }),
-
-  // ── Crystal Water Resort (No Parity / Bali) ──
-  // The No-Parity R1 priority partner today.
-  ...crystalWaterBase({
-    id: 'crystal-water-none',
-    parityRegime: 'none',
-    location: 'Bali, Indonesia',
-    propertyImage:
-      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
-  }),
-
-  // ── Velvet Sky Boutique Hotel (Wide Parity / Amsterdam) ──
-  // SME-approved R2 priority - Brand.com Competitiveness Gap caused
-  // by John's aggressive public discounting on his direct brand
-  // site. Same hotel brand + contact (John Whitford) across all
-  // three regime variants - only location, parityRegime, the
-  // property image, and the partner id differ. Data sourced from
-  // SME spreadsheet row 34.
-  ...velvetSkyBase({
-    id: 'velvet-sky-wide',
-    parityRegime: 'wide',
-    location: 'Amsterdam, Netherlands',
-    propertyImage:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
-  }),
-
-  // ── Velvet Sky Boutique Hotel (Narrow Parity / Edinburgh) ──
-  ...velvetSkyBase({
-    id: 'velvet-sky-narrow',
-    parityRegime: 'narrow',
-    location: 'Edinburgh, Scotland',
-    propertyImage:
-      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=400&h=250&fit=crop',
-  }),
-
-  // ── Velvet Sky Boutique Hotel (No Parity / Lisbon) ──
-  // The No-Parity R2 priority partner today.
-  ...velvetSkyBase({
-    id: 'velvet-sky-none',
-    parityRegime: 'none',
-    location: 'Lisbon, Portugal',
-    propertyImage:
-      'https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=400&h=250&fit=crop',
-  }),
-
-  // ── Raven Inn (No Parity / Reykjavik) - R2 distractor ──
-  // Healthy Key OTA gap profile (Bucket 3, Lose Price 35%). Data
-  // mapped from the SME spreadsheet Key OTA sheet row 14 (White
-  // Cliffs Hotel) with a made-up partner name. Reads as not the
-  // priority vs Velvet Sky Boutique Hotel at R2.
-  {
+function marinaBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+}): PartnerState[] {
+  return [{
     persona: {
-      id: 'raven-inn',
+      id: args.id,
+      name: 'Marina Alvarez',
+      propertyName: 'Hotel & Suites Castellana',
+      propertyType: 'Boutique City Hotel',
+      roomCount: 35,
+      location: args.location,
+      parityRegime: args.parityRegime,
+      avatar: 'MA',
+      propertyImage: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
+      style: 'blue',
+      styleSecondary: 'green',
+      description:
+        'Meticulous owner-operator who tracks every metric. Respects data-driven conversations and detailed reasoning. Will test your logic before committing.',
+      commercialGoal: 'Grow bookings without eroding ADR',
+      profileNotes: [
+        'Prefers scheduled calls over spontaneous check-ins',
+        'Has asked for written proposals in the past',
+        'References competitor data when making decisions',
+        'Takes 24–48 hours to respond to recommendations',
+      ],
+    },
+    metrics: {
+      erpd: 6.3,
+      erpdChange: 1.2,
+      rpdPublic: 7.5,
+      rpdLoyal: 4.8,
+      losePricePublic: 68,
+      activeScenarios: 1,
+      competitor: 'brand',
+      experiencedRPD: 58,
+      visibility: 62,
+      conversion: 45,
+      revenue: 55,
+      discountQuality: 40,
+      rateParity: 'clean',
+    },
+    metricHistory: [],
+    trust: 55,
+    relationship: 'neutral',
+    discounts: [
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+    ],
+    conversationLog: [],
+    pendingActions: [],
+  }];
+}
+
+function carlosBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+}): PartnerState[] {
+  return [{
+    persona: {
+      id: args.id,
+      name: 'Carlos Rivera',
+      propertyName: 'Barceloneta Living',
+      propertyType: 'City Apartments',
+      roomCount: 45,
+      location: args.location,
+      parityRegime: args.parityRegime,
+      avatar: 'CR',
+      propertyImage: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=250&fit=crop',
+      style: 'yellow',
+      styleSecondary: 'red',
+      description:
+        'Energetic apartment operator who loves innovation and new trends. Makes quick decisions but sometimes acts before thinking. Relationship-first communicator who thrives on enthusiasm.',
+      commercialGoal: 'Aggressive growth - maximise bookings across all channels',
+      profileNotes: [
+        'Loves talking about trends and innovation',
+        'Makes quick decisions but sometimes regrets them',
+        'Responds to success stories from similar properties',
+        'Prefers casual, high-energy communication',
+      ],
+    },
+    metrics: {
+      erpd: 3.4,
+      erpdChange: -1.2,
+      rpdPublic: 4.1,
+      rpdLoyal: 2.5,
+      losePricePublic: 48,
+      activeScenarios: 1,
+      competitor: 'brand',
+      experiencedRPD: 65,
+      visibility: 70,
+      conversion: 55,
+      revenue: 62,
+      discountQuality: 60,
+      rateParity: 'minor',
+    },
+    metricHistory: [],
+    trust: 60,
+    relationship: 'neutral',
+    discounts: [
+      { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+      { id: 'country-rate', label: 'Country Rates', status: 'misconfigured', category: 'public-pricing' },
+      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
+      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-15', label: 'Genius 15%', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+      { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+    ],
+    conversationLog: [],
+    pendingActions: [],
+  }];
+}
+
+function ravenInnBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+}): PartnerState[] {
+  return [{
+    persona: {
+      id: args.id,
       name: 'Emily Carter',
       propertyName: 'Raven Inn',
       propertyType: 'Boutique Hotel',
       roomCount: 52,
-      location: 'Reykjavik, Iceland',
-      parityRegime: 'none',
+      location: args.location,
+      parityRegime: args.parityRegime,
       avatar: 'EC',
       propertyImage:
         'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
@@ -431,7 +499,6 @@ export const initialPartners: PartnerState[] = [
       ],
     },
     metrics: {
-      // Data from SME spreadsheet Key OTA sheet row 14 (White Cliffs).
       erpd: 1.3,
       erpdChange: 2.66,
       rpdPublic: 5.2,
@@ -475,23 +542,23 @@ export const initialPartners: PartnerState[] = [
     ],
     conversationLog: [],
     pendingActions: [],
-  },
+  }];
+}
 
-  // ── Driftwood Bay Resort (No Parity / Cartagena) - R2 distractor ──
-  // Moderate Brand gap profile (Bucket 4, eRPD 3.4%). Data mapped
-  // from the SME spreadsheet mix sheet row 43 (The Oasis Palms
-  // Resort) with a made-up partner name. Reads as not the priority
-  // vs Velvet Sky Boutique Hotel at R2 - milder eRPD and improving
-  // Loyal pricing.
-  {
+function driftwoodBayBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+}): PartnerState[] {
+  return [{
     persona: {
-      id: 'driftwood-bay',
+      id: args.id,
       name: 'Daniel Cruz',
       propertyName: 'Driftwood Bay Resort',
       propertyType: 'Resort',
       roomCount: 86,
-      location: 'Cartagena, Colombia',
-      parityRegime: 'none',
+      location: args.location,
+      parityRegime: args.parityRegime,
       avatar: 'DC',
       propertyImage:
         'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
@@ -508,7 +575,6 @@ export const initialPartners: PartnerState[] = [
       ],
     },
     metrics: {
-      // Data from SME spreadsheet mix sheet row 43 (Oasis Palms).
       erpd: 3.4,
       erpdChange: 1.37,
       rpdPublic: 5.3,
@@ -552,71 +618,112 @@ export const initialPartners: PartnerState[] = [
     ],
     conversationLog: [],
     pendingActions: [],
-  },
+  }];
+}
+
+export const initialPartners: PartnerState[] = [
+  // ── Crystal Water Resort (Wide Parity / Miami) ──
+  // SME-approved R1 priority - Brand.com Competitiveness Gap caused
+  // by Sarah's promotional rate on her direct brand site undercutting
+  // Booking.com. Same hotel brand + contact (Sarah Bennett) shows up
+  // in all three regime variants - only location, parityRegime, the
+  // property image, and the partner id differ. Data sourced from SME
+  // spreadsheet row 9. Country groupings (Spain / UK / US for No /
+  // Narrow / Wide) match the rest of the regime's portfolio so the
+  // tester reads a single market per regime.
+  ...crystalWaterBase({
+    id: 'crystal-water-wide',
+    parityRegime: 'wide',
+    location: 'Miami Beach, USA',
+    propertyImage:
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+  }),
+
+  // ── Crystal Water Resort (Narrow Parity / Cornwall) ──
+  ...crystalWaterBase({
+    id: 'crystal-water-narrow',
+    parityRegime: 'narrow',
+    location: 'Cornwall, UK',
+    propertyImage:
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+  }),
+
+  // ── Crystal Water Resort (No Parity / Marbella) ──
+  // The No-Parity R1 priority partner today.
+  ...crystalWaterBase({
+    id: 'crystal-water-none',
+    parityRegime: 'none',
+    location: 'Marbella, Spain',
+    propertyImage:
+      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
+  }),
+
+  // ── Velvet Sky Boutique Hotel (Wide Parity / New York) ──
+  // SME-approved R2 priority - Brand.com Competitiveness Gap caused
+  // by John's aggressive public discounting on his direct brand
+  // site. Same hotel brand + contact (John Whitford) across all
+  // three regime variants - only location, parityRegime, the
+  // property image, and the partner id differ. Data sourced from
+  // SME spreadsheet row 34. Country groupings match the rest of
+  // the regime's portfolio (Spain / UK / US for No / Narrow / Wide).
+  ...velvetSkyBase({
+    id: 'velvet-sky-wide',
+    parityRegime: 'wide',
+    location: 'New York, USA',
+    propertyImage:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+  }),
+
+  // ── Velvet Sky Boutique Hotel (Narrow Parity / Edinburgh) ──
+  ...velvetSkyBase({
+    id: 'velvet-sky-narrow',
+    parityRegime: 'narrow',
+    location: 'Edinburgh, UK',
+    propertyImage:
+      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=400&h=250&fit=crop',
+  }),
+
+  // ── Velvet Sky Boutique Hotel (No Parity / Madrid) ──
+  // The No-Parity R2 priority partner today.
+  ...velvetSkyBase({
+    id: 'velvet-sky-none',
+    parityRegime: 'none',
+    location: 'Madrid, Spain',
+    propertyImage:
+      'https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=400&h=250&fit=crop',
+  }),
+
+  // ── Raven Inn - R2 distractor across all three regimes ──
+  // Healthy Key OTA gap profile (Bucket 3, Lose Price 35%). Data
+  // mapped from SME spreadsheet Key OTA sheet row 14 (White Cliffs
+  // Hotel) with a made-up partner name. Reads as not the priority
+  // vs Velvet Sky Boutique Hotel at R2. Country grouped per regime:
+  // Spain (No) / UK (Narrow) / US (Wide). Narrow + Wide variants
+  // alias back to the base `raven-inn` for conversation + baseline
+  // lookups via the regime-suffix fallback.
+  ...ravenInnBase({ id: 'raven-inn', parityRegime: 'none', location: 'Valencia, Spain' }),
+  ...ravenInnBase({ id: 'raven-inn-narrow', parityRegime: 'narrow', location: 'Bath, UK' }),
+  ...ravenInnBase({ id: 'raven-inn-wide', parityRegime: 'wide', location: 'Boston, USA' }),
+
+  // ── Driftwood Bay Resort - R2 distractor across all three regimes ──
+  // Moderate Brand gap profile (Bucket 4, eRPD 3.4%). Data mapped
+  // from SME spreadsheet mix sheet row 43 (The Oasis Palms Resort)
+  // with a made-up partner name. Reads as not the priority vs
+  // Velvet Sky Boutique Hotel at R2. Country grouped per regime.
+  ...driftwoodBayBase({ id: 'driftwood-bay', parityRegime: 'none', location: 'Mallorca, Spain' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay-narrow', parityRegime: 'narrow', location: 'Brighton, UK' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay-wide', parityRegime: 'wide', location: 'Newport Beach, USA' }),
 
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──
-  {
-    persona: {
-      id: 'marina',
-      name: 'Marina Alvarez',
-      propertyName: 'Hotel & Suites Castellana',
-      propertyType: 'Boutique City Hotel',
-      roomCount: 35,
-      location: 'Madrid, Spain',
-      parityRegime: 'none',
-      avatar: 'MA',
-      propertyImage: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
-      style: 'blue',
-      styleSecondary: 'green',
-      description:
-        'Meticulous owner-operator who tracks every metric. Respects data-driven conversations and detailed reasoning. Will test your logic before committing.',
-      commercialGoal: 'Grow bookings without eroding ADR',
-      profileNotes: [
-        'Prefers scheduled calls over spontaneous check-ins',
-        'Has asked for written proposals in the past',
-        'References competitor data when making decisions',
-        'Takes 24–48 hours to respond to recommendations',
-      ],
-    },
-    metrics: {
-      // New KPI structure
-      erpd: 6.3,
-      erpdChange: 1.2,
-      rpdPublic: 7.5,
-      rpdLoyal: 4.8,
-      losePricePublic: 68,
-      activeScenarios: 1,
-      competitor: 'brand',
-      // Legacy
-      experiencedRPD: 58,
-      visibility: 62,
-      conversion: 45,
-      revenue: 55,
-      discountQuality: 40,
-      rateParity: 'clean',
-    },
-    metricHistory: [],
-    trust: 55,
-    relationship: 'neutral',
-    discounts: [
-      // Public Pricing
-      { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
-      { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
-      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
-      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      // Genius Pricing
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
-      { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
-      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
-      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
-      // Foundations & Payments
-      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
-      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
-      { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
-    ],
-    conversationLog: [],
-    pendingActions: [],
-  },
+  // Three regime variants. The conversations / persona hints / per-
+  // round baselines registered against the base id `marina` are
+  // reused by the `-narrow` and `-wide` variants via the regime-
+  // suffix alias fallback in getConversationTree / getPartnerBaseline
+  // / getPersonaHint. Contact + property name stay constant; only
+  // location, parityRegime, and id differ across variants.
+  ...marinaBase({ id: 'marina', parityRegime: 'none', location: 'Madrid, Spain' }),
+  ...marinaBase({ id: 'marina-narrow', parityRegime: 'narrow', location: 'London, UK' }),
+  ...marinaBase({ id: 'marina-wide', parityRegime: 'wide', location: 'New York, USA' }),
 
   // ── The Noble Falcon Inn (Wide Parity / New York) ──
   // Brand.com Competitiveness Gap scenario. Same hotel brand and
@@ -644,84 +751,23 @@ export const initialPartners: PartnerState[] = [
       'https://images.unsplash.com/photo-1455587734955-081b22074882?w=400&h=250&fit=crop',
   }),
 
-  // ── The Noble Falcon Inn (No Parity / Berlin) ──
-  // The No-Parity R3 priority partner. Anton's surname fits the
-  // German market context.
+  // ── The Noble Falcon Inn (No Parity / Seville) ──
+  // The No-Parity R3 priority partner.
   ...nobleFalconBase({
     id: 'noble-falcon-none',
     parityRegime: 'none',
-    location: 'Berlin, Germany',
+    location: 'Seville, Spain',
     propertyImage:
       'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
   }),
 
-  // ── Carlos - City Apartment Complex (Yellow/Socialiser) ──
-  {
-    persona: {
-      id: 'carlos',
-      name: 'Carlos Rivera',
-      propertyName: 'Barceloneta Living',
-      propertyType: 'City Apartments',
-      roomCount: 45,
-      location: 'Barcelona, Spain',
-      parityRegime: 'none',
-      avatar: 'CR',
-      propertyImage: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=250&fit=crop',
-      style: 'yellow',
-      styleSecondary: 'red',
-      description:
-        'Energetic apartment operator who loves innovation and new trends. Makes quick decisions but sometimes acts before thinking. Relationship-first communicator who thrives on enthusiasm.',
-      commercialGoal: 'Aggressive growth - maximise bookings across all channels',
-      profileNotes: [
-        'Loves talking about trends and innovation',
-        'Makes quick decisions but sometimes regrets them',
-        'Responds to success stories from similar properties',
-        'Prefers casual, high-energy communication',
-      ],
-    },
-    metrics: {
-      erpd: 3.4,
-      erpdChange: -1.2,
-      rpdPublic: 4.1,
-      rpdLoyal: 2.5,
-      losePricePublic: 48,
-      activeScenarios: 1,
-      competitor: 'brand',
-      // Carlos's surface KPIs look healthy and match his "aggressive
-      // growth" goal. The Country Rate misconfig (visible in the
-      // discount product list below) is the trap: nothing in this
-      // KPI row flags him as the priority, even though the misconfig
-      // is compounding silently and surfaces by R3.
-      experiencedRPD: 65,
-      visibility: 70,
-      conversion: 55,
-      revenue: 62,
-      discountQuality: 60,
-      rateParity: 'minor',
-    },
-    metricHistory: [],
-    trust: 60,
-    relationship: 'neutral',
-    // Carlos's adoption profile - broad surface-healthy adoption with
-    // the Country Rate misconfigured. The misconfig is the trap that
-    // compounds silently and becomes the R3 conversation - it should
-    // be the only visibly off-pattern item in his list.
-    discounts: [
-      { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
-      { id: 'country-rate', label: 'Country Rates', status: 'misconfigured', category: 'public-pricing' },
-      { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
-      { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
-      { id: 'genius-15', label: 'Genius 15%', status: 'active', category: 'genius-pricing' },
-      { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
-      { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
-      { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
-      { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
-      { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
-    ],
-    conversationLog: [],
-    pendingActions: [],
-  },
+  // ── Carlos - City Apartment Complex - distractor across all regimes ──
+  // Surface-healthy KPIs at R1 with a misconfigured Country Rate
+  // hiding in the discount list (the R3 trap). Country grouped per
+  // regime; Narrow + Wide alias back to `carlos` for trees/baselines.
+  ...carlosBase({ id: 'carlos', parityRegime: 'none', location: 'Barcelona, Spain' }),
+  ...carlosBase({ id: 'carlos-narrow', parityRegime: 'narrow', location: 'Manchester, UK' }),
+  ...carlosBase({ id: 'carlos-wide', parityRegime: 'wide', location: 'Los Angeles, USA' }),
 
 ];
 
