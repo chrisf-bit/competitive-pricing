@@ -1280,6 +1280,95 @@ npm run dev
 Hosted at the URL on Render configured via `render.yaml` (auto-deploy
 from `main` branch).
 
+## Pre-production checklist (remove / change before final SCORM deploy)
+
+A running list of features that exist for tester / reviewer
+convenience and shouldn't ship in the final SCORM package, plus
+placeholder content awaiting SME sign-off and open design questions
+to resolve before final delivery.
+
+### Dev-only affordances to remove or further gate
+
+- **DevNav** (`src/components/DevNav.tsx`) - floating bottom-right
+  lightning-bolt button that opens a panel with jump-to buttons for
+  every screen + Show Splash + Reset utilities. Gated to `npm run
+  dev` or `?dev=1` in the URL today. Remove the component import +
+  the URL-param check entirely before SCORM ship.
+- **Reset Progress button on Splash screen**
+  (`src/screens/SplashScreen.tsx`) - bottom-right `Reset progress`
+  button that wipes the persisted profile + clearance status + round
+  stars. Useful for testers hitting the deeplink with a stale
+  profile, but in SCORM the LMS owns attempt semantics, so this
+  button conflicts with the standard "new attempt" flow. Either
+  remove the `onResetProgress` wiring entirely (which deletes the
+  button) or gate it behind `?dev=1` alongside DevNav.
+- **`?dev=1` URL flag** - the query-param check that opens the dev
+  affordances above. Remove from production source.
+
+### Placeholder content awaiting SME review
+
+- **Distractor 3-phase conversation trees** - Claude-authored
+  filler that plays when the learner picks the wrong partner.
+  Files: `data/conversations-raven-inn.ts`,
+  `data/conversations-driftwood-bay.ts`, Marina + Carlos R1-R3 in
+  `data/conversations.ts` + `data/conversations-carlos.ts`. SME
+  should confirm the dialogue is compliant across all regimes (the
+  regime-suffix alias fallback means a single tree serves Wide /
+  Narrow / None variants of the same partner).
+- **Distractor persona hints** - Claude-authored
+  `data/personaHints.ts` content for Marina, Carlos, Raven Inn,
+  Driftwood Bay. Unlocked + blind-spot copy hasn't been SME-validated.
+- **R1 + R3 distractor baselines** - Marina + Carlos at R1 and R3 in
+  `data/partnerStateByRound.ts` carry Claude-tuned metric values
+  (e.g. Marina R1 at eRPD 2.4% / Bucket 3) so the priority puzzle
+  reads cleanly. Numbers haven't been SME-validated for narrative
+  coherence.
+- **Avg RPD Change + Revenue Impact tiles on Debrief** - still pulled
+  from the legacy `experiencedRPD` and `revenue` fields that the
+  new branching engine only nudges by a couple of points per
+  round. Numbers are largely cosmetic. Decide whether to compute
+  them from the new eRPD baselines, leave them as soft indicators,
+  or drop the tiles entirely.
+
+### Round / regime gates that scale with content
+
+- **TOTAL_ROUNDS capped at 3** in `engine/gameEngine.ts` and
+  `components/Header.tsx`. Bump as each additional round's SME
+  priority content lands. Header dots, Practice Mode grid, and
+  Debrief grading all derive from this constant so the bump is
+  one-line.
+- **Advanced View tab locked** on Partner Detail. Unlocks in R3
+  with the OPC + Quality Adoption Metrics content drop.
+- **Cross-Regional regime** still flagged `available: false` in
+  `data/learnerMarkets.ts`. Either remove the card from Market
+  Select entirely if it won't ship, or unlock when content lands.
+  Today it falls back to Wide Parity if accessed.
+- **Practice Mode locked R4-R10 cards** auto-scale with
+  TOTAL_ROUNDS - no manual action needed.
+
+### Decisions to confirm before final ship
+
+- **Returning-learner routing**: cleared learners currently always
+  route through Market Select + Character Build (pre-filled) on
+  every Briefing -> Open your portfolio click. Decide if that
+  stays for real learners or reverts to "skip if cleared" for
+  production. SCORM's `cmi.suspend_data` + `cmi.core.lesson_status
+  = 'passed'` may make the question moot at the LMS layer.
+- **Distractor contact name pattern**: first name stays constant
+  across regime variants (Marina/Marina/Marina) and only surname
+  changes per regime (Alvarez/Ashworth/Brown). Decision was driven
+  by keeping the SME dialogue ("Hi Marina, ...") readable across
+  variants without per-regime tree authoring. Confirm with legal
+  that surname-only localisation passes review; if first names
+  must also differ, per-regime distractor trees (with substituted
+  names) become necessary.
+- **Parked partner records** - `pendingPartners` in
+  `data/partners.ts` still contains John Marston, Stavros,
+  Hannah, Priya, Yuki with their persona data and 3-phase trees.
+  These are dead data on disk today. Decide whether to leave them
+  for future-round reuse or strip them out of the SCORM bundle
+  for size / clarity.
+
 ## Things to avoid
 
 - Don't reintroduce em dashes (saved as a feedback memory).
