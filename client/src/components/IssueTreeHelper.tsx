@@ -108,20 +108,23 @@ export function IssueTreeHelper({
       // Right-side floating drawer. Sized like a chatbot window
       // (not full-height) so it leaves most of the Partner Detail
       // content visible while the learner walks through the
-      // diagnosis. Anchored vertically centred on the right edge.
-      // Framer-motion handles entrance + exit; combining x slide
-      // with the y centring requires both transforms to live in the
-      // same animation (a plain CSS keyframe would clobber the y).
-      initial={{ opacity: 0, x: 28, y: '-50%' }}
-      animate={{ opacity: 1, x: 0, y: '-50%' }}
-      exit={{ opacity: 0, x: 28, y: '-50%' }}
+      // diagnosis. Top-anchored below the Header so the right
+      // column's Action card (Begin Conversation) is never occluded
+      // - it sits in the viewport space below the drawer's bottom
+      // edge. Framer-motion handles the x slide entrance / exit.
+      initial={{ opacity: 0, x: 28 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 28 }}
       transition={{ duration: 0.24, ease: [0.32, 0.72, 0.32, 1] }}
       style={{
         position: 'fixed',
-        top: '50%',
+        top: 80,
         right: 16,
         width: 'min(400px, 92vw)',
-        height: 'min(640px, calc(100vh - 64px))',
+        // Cap the height so ~160px of viewport remains visible at
+        // the bottom for the Partner Detail Action card. 80 (top
+        // offset) + 160 (bottom buffer) = 240 reserved.
+        height: 'min(640px, calc(100vh - 240px))',
         background: 'var(--white)',
         boxShadow: '-12px 16px 40px rgba(0,15,40,0.22)',
         border: '1px solid var(--grey-100)',
