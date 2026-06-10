@@ -96,13 +96,15 @@ export default function App() {
           {state.screen === 'briefing' && (
             <BriefingScreen
               hasCleared={state.level0Progress.cleared}
-              onStart={() => {
-                if (state.level0Progress.cleared) {
-                  game.goToScreen('portfolio');
-                } else {
-                  game.goToScreen('l0-market-select');
-                }
-              }}
+              // Always route through Market Select + Character Build,
+              // even for cleared returning learners. Both screens
+              // pre-fill from the persisted learnerProfile so the
+              // returner can just click Continue twice if they want
+              // to keep their previous choices, or change them on
+              // the way through. The clearance activities themselves
+              // are still skipped for cleared learners - that's
+              // gated downstream of Character Build.
+              onStart={() => game.goToScreen('l0-market-select')}
             />
           )}
           {state.screen === 'l0-market-select' && (
@@ -122,7 +124,14 @@ export default function App() {
                 playerName={state.learnerProfile.playerName}
                 onSelectAvatar={game.setLearnerAvatar}
                 onSelectArchetype={game.setLearnerArchetype}
-                onContinue={() => game.goToScreen('l0-gm-chat')}
+                // Cleared learners jump straight to their portfolio
+                // after confirming / changing their regime + persona.
+                // Fresh learners go through the clearance activities.
+                onContinue={() =>
+                  state.level0Progress.cleared
+                    ? game.goToScreen('portfolio')
+                    : game.goToScreen('l0-gm-chat')
+                }
               />
             </ClearanceShell>
           )}
