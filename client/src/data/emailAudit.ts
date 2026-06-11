@@ -110,9 +110,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          'Right call. Compliant: Proactively using cross-channel and third-party OTA data to ask for rate alignment.',
+          "Right call. Proactively using cross-channel and third-party OTA data to ask for rate alignment is exactly what Wide Parity permits - it's the AM's right to surface the gap factually.",
         incorrect:
-          'Actually this one is safe. Compliant: Proactively using cross-channel and third-party OTA data to ask for rate alignment.',
+          "Actually this one is safe. Proactively using cross-channel and third-party OTA data to ask for rate alignment is exactly what Wide Parity permits - it's the AM's right to surface the gap factually.",
       },
       source: 'Legal Compliance | Wide Parity Markets | Do (verbatim)',
     },
@@ -122,9 +122,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: Wide Parity Compliance] - recommending that a partner stops working with other OTAs or wholesalers.',
+          "Right call. Recommending that a partner stop working with other OTAs or wholesalers is a hard Wide Parity DON'T. We can ask for rate alignment but never dictate the channels they distribute through.",
         incorrect:
-          'This one is unsafe. [Rule Broken: Wide Parity Compliance] - recommending that a partner stops working with other OTAs or wholesalers.',
+          "This one is unsafe. Recommending that a partner stop working with other OTAs or wholesalers is a hard Wide Parity DON'T. We can ask for rate alignment but never dictate the channels they distribute through.",
       },
       source: "Legal Compliance | Wide Parity Markets | Don't",
     },
@@ -134,9 +134,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          'Right call. Compliant: Requesting equal rates, conditions, and availability across third parties and Brand.com.',
+          'Right call. Requesting equal rates, conditions, and availability across third parties and Brand.com is the full Wide-Parity ask - the regime mandate in one sentence.',
         incorrect:
-          'Actually this one is safe. Compliant: Requesting equal rates, conditions, and availability across third parties and Brand.com.',
+          'Actually this one is safe. Requesting equal rates, conditions, and availability across third parties and Brand.com is the full Wide-Parity ask - the regime mandate in one sentence.',
       },
       source: 'Legal Compliance | Wide Parity Markets | Do (verbatim)',
     },
@@ -146,9 +146,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: Wide Parity Compliance] - promising fixed ranking rewards, visibility upgrades, or search placement in exchange for pricing parity.',
+          "Right call. Promising fixed ranking rewards, visibility upgrades, or search placement in exchange for pricing parity is prohibited across every regime. The algorithm isn't a bargaining chip and we don't make promises about it.",
         incorrect:
-          'This one is unsafe. [Rule Broken: Wide Parity Compliance] - promising fixed ranking rewards, visibility upgrades, or search placement in exchange for pricing parity.',
+          "This one is unsafe. Promising fixed ranking rewards, visibility upgrades, or search placement in exchange for pricing parity is prohibited across every regime. The algorithm isn't a bargaining chip and we don't make promises about it.",
       },
       source: "Legal Compliance | Wide Parity Markets | Don't",
     },
@@ -158,9 +158,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          'Right call. Compliant: Re-focuses the value proposition on business metrics and high on-platform discovery without threats or promises.',
+          'Right call. Re-focuses the value proposition on business metrics and on-platform discovery without threats or promises - the right closing tone for the regime.',
         incorrect:
-          'Actually this one is safe. Compliant: Re-focuses the value proposition on business metrics and high on-platform discovery without threats or promises.',
+          'Actually this one is safe. Re-focuses the value proposition on business metrics and on-platform discovery without threats or promises - the right closing tone for the regime.',
       },
       source: 'Legal Compliance | Wide Parity Markets | Do',
     },
@@ -212,9 +212,9 @@ const narrowParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          'Right call. Compliant: Using direct Brand.com comparison data to highlight where Booking.com is more expensive.',
+          "Right call. Using direct Brand.com comparison data to highlight where Booking.com is more expensive is the approved framing in Narrow Parity - factual cross-channel observation against the direct site only.",
         incorrect:
-          'Actually this one is safe. Compliant: Using direct Brand.com comparison data to highlight where Booking.com is more expensive.',
+          "Actually this one is safe. Using direct Brand.com comparison data to highlight where Booking.com is more expensive is the approved framing in Narrow Parity - factual cross-channel observation against the direct site only.",
       },
       source: 'Legal Compliance | Narrow Parity Markets | Do',
     },
@@ -224,9 +224,9 @@ const narrowParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: Narrow Parity Compliance] - asking for equal availability with direct channels is strictly forbidden.',
+          "Right call. In Narrow Parity, asking for equal availability with the direct channel is strictly forbidden - the regime covers rate alignment with Brand.com but not availability alignment.",
         incorrect:
-          'This one is unsafe. [Rule Broken: Narrow Parity Compliance] - asking for equal availability with direct channels is strictly forbidden.',
+          "This one is unsafe. In Narrow Parity, asking for equal availability with the direct channel is strictly forbidden - the regime covers rate alignment with Brand.com but not availability alignment.",
       },
       source: "Legal Compliance | Narrow Parity Markets | Don't",
     },
@@ -236,9 +236,9 @@ const narrowParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          'Right call. Compliant: Reaffirms that pricing is a partner choice and points to other operational elements.',
+          'Right call. Reaffirms that pricing is a partner choice and points to other operational levers the partner controls - review score, content. Right tone for the regime.',
         incorrect:
-          'Actually this one is safe. Compliant: Reaffirms that pricing is a partner choice and points to other operational elements.',
+          'Actually this one is safe. Reaffirms that pricing is a partner choice and points to other operational levers the partner controls - review score, content. Right tone for the regime.',
       },
       source: 'Legal Compliance | General Communications | Do',
     },
@@ -248,9 +248,9 @@ const narrowParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          "Right call. Compliant: explicitly states the partner's absolute freedom over their distribution mix.",
+          "Right call. Explicitly states the partner's absolute freedom over their distribution mix - the approved partner-freedom framing, addressed directly to them.",
         incorrect:
-          "Actually this one is safe. Compliant: explicitly states the partner's absolute freedom over their distribution mix.",
+          "Actually this one is safe. Explicitly states the partner's absolute freedom over their distribution mix - the approved partner-freedom framing, addressed directly to them.",
       },
       source: 'Legal Compliance | General Communications | Do (verbatim)',
     },
@@ -260,9 +260,9 @@ const narrowParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: Narrow Parity Compliance] - asking to adjust pricing on other third-party channels or demanding parity with other OTAs.',
+          "Right call. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - sits well outside Narrow Parity's mandate. The regime only covers Brand.com alignment.",
         incorrect:
-          'This one is unsafe. [Rule Broken: Narrow Parity Compliance] - asking to adjust pricing on other third-party channels or demanding parity with other OTAs.',
+          "This one is unsafe. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - sits well outside Narrow Parity's mandate. The regime only covers Brand.com alignment.",
       },
       source: "Legal Compliance | Narrow Parity Markets | Don't",
     },
@@ -315,9 +315,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          "Right call. Compliant — You can only discuss it reactively. You can bring it up in a neutral, fact-finding way to ask if the discrepancy is intentional or unintentional.",
+          "Right call. In a No Parity market you can only raise external prices reactively, and this phrasing does exactly that - a neutral, fact-finding question about whether the discrepancy is intentional or unintentional.",
         incorrect:
-          "Actually this one is safe. Compliant — You can only discuss it reactively. You can bring it up in a neutral, fact-finding way to ask if the discrepancy is intentional or unintentional.",
+          "Actually this one is safe. In a No Parity market you can only raise external prices reactively, and this phrasing does exactly that - a neutral, fact-finding question about whether the discrepancy is intentional or unintentional.",
       },
       source: 'Legal Compliance | No Parity Markets | Do (verbatim)',
     },
@@ -327,9 +327,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: General Compliance] — Across all parity regimes, you must never recommend that a partner stop working with other OTAs or wholesalers to simplify distribution or fix distorted pricing.',
+          "Right call. Across every parity regime, we never recommend that a partner stop working with other OTAs or wholesalers - even to simplify distribution or fix distorted pricing. That sits well outside our mandate.",
         incorrect:
-          'This one is unsafe. [Rule Broken: General Compliance] — Across all parity regimes, you must never recommend that a partner stop working with other OTAs or wholesalers to simplify distribution or fix distorted pricing.',
+          "This one is unsafe. Across every parity regime, we never recommend that a partner stop working with other OTAs or wholesalers - even to simplify distribution or fix distorted pricing. That sits well outside our mandate.",
       },
       source: "Legal Compliance | General Communications | Don't",
     },
@@ -339,9 +339,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: No Parity Compliance] — In a No Parity market, you must not talk about "parity" at all or require a partner to match prices from other channels. Furthermore, you cannot threaten penalties like reduced visibility based on external prices. You can only ask for the "best price" they can offer Booking.com to stay competitive on the platform.',
+          "Right call. In a No Parity market we don't use the word 'parity' at all, and we never require a partner to match prices from other channels or threaten penalties like reduced visibility based on external prices. The most we can ask for is the 'best price' they're willing to make available on Booking.com to stay competitive on-platform.",
         incorrect:
-          'This one is unsafe. [Rule Broken: No Parity Compliance] — In a No Parity market, you must not talk about "parity" at all or require a partner to match prices from other channels. Furthermore, you cannot threaten penalties like reduced visibility based on external prices. You can only ask for the "best price" they can offer Booking.com to stay competitive on the platform.',
+          "This one is unsafe. In a No Parity market we don't use the word 'parity' at all, and we never require a partner to match prices from other channels or threaten penalties like reduced visibility based on external prices. The most we can ask for is the 'best price' they're willing to make available on Booking.com to stay competitive on-platform.",
       },
       source: "Legal Compliance | No Parity Markets | Don't",
     },
@@ -351,9 +351,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          'Right call. [Rule Broken: No Parity Compliance] — You must never suggest that external prices not being competitive will directly lead to punishment, de-ranking, or loss of visibility.',
+          "Right call. We must never suggest that uncompetitive external prices will directly lead to punishment, de-ranking, or loss of visibility - that's a hard No Parity break.",
         incorrect:
-          'This one is unsafe. [Rule Broken: No Parity Compliance] — You must never suggest that external prices not being competitive will directly lead to punishment, de-ranking, or loss of visibility.',
+          "This one is unsafe. We must never suggest that uncompetitive external prices will directly lead to punishment, de-ranking, or loss of visibility - that's a hard No Parity break.",
       },
       source: "Legal Compliance | No Parity Markets | Don't (verbatim)",
     },
@@ -363,9 +363,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          "Right call. Compliant — It is mandatory across all conversations and parity markets to explicitly state that partners remain entirely free to determine their own distribution and pricing strategy.",
+          "Right call. It's mandatory across every conversation and every parity market to explicitly state that partners remain entirely free to determine their own distribution and pricing strategy.",
         incorrect:
-          "Actually this one is safe. Compliant — It is mandatory across all conversations and parity markets to explicitly state that partners remain entirely free to determine their own distribution and pricing strategy.",
+          "Actually this one is safe. It's mandatory across every conversation and every parity market to explicitly state that partners remain entirely free to determine their own distribution and pricing strategy.",
       },
       source: 'Legal Compliance | General Communications | Do (verbatim)',
     },
