@@ -387,6 +387,29 @@ function EmailCard({
           );
         })}
       </div>
+
+      {/* Optional learner-facing closing disclaimer, used in No Parity
+          to flag that an outbound email itself can violate the
+          reactive-only rule. Not part of the email body the learner
+          judges - it's a yellow framing note. */}
+      {scenario.closingNote && (
+        <div
+          style={{
+            margin: '0 20px 18px',
+            padding: '12px 14px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'rgba(254, 186, 2, 0.16)',
+            border: '1px solid rgba(254, 186, 2, 0.42)',
+            fontSize: 12,
+            lineHeight: 1.5,
+            color: 'var(--grey-700)',
+            fontStyle: 'italic',
+          }}
+        >
+          <strong style={{ fontStyle: 'normal' }}>Disclaimer:</strong>{' '}
+          {scenario.closingNote}
+        </div>
+      )}
     </motion.div>
   );
 }
