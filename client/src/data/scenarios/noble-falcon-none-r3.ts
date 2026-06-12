@@ -104,7 +104,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Use the doc-prescribed No-Parity solution: frame price and risk as two independent levers, and offer prepayment policies on specific dates as the risk control.",
     playerDialogue:
-      "We can separate price from risk. Improving competitiveness by 10% yields 30% more bookings, and we can layer strict prepayment policies on specific dates to protect your revenue.",
+      "We can separate price from risk. On average, partners who improve their price competitiveness by 10% on Booking.com see ~30% more bookings, ~25% more revenue, and appear in ~10% more searches.",
     partnerResponse:
       "Isolating risk via policy rules while keeping rates competitive is practical. Let's look at the metrics; how does this visibility issue affect our specific guest segments?",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
