@@ -267,6 +267,8 @@ const narrowParityScenario: EmailAuditScenario = {
       source: "Legal Compliance | Narrow Parity Markets | Don't",
     },
   ],
+  closingNote:
+    "In no-parity and narrow-parity markets, if you notice a cross-channel pricing discrepancy, you can reactively confirm whether that discrepancy across platforms is intentional or unintentional. Explain that if partners' prices are more attractive on other platforms, this might be an indication that there is scope to improve price competitiveness on Booking.com. This must remain a neutral, informative question: not a push for alignment.",
 };
 
 // ── No Parity scenario ──────────────────────────────────────────────
@@ -371,7 +373,7 @@ const noParityScenario: EmailAuditScenario = {
     },
   ],
   closingNote:
-    'Remember that in No Parity markets, we may only refer to external prices reactively (i.e., if the partner brings it up first) to understand if a price difference is intentional and an outbound email could represent a violation of this rule.',
+    "In no-parity and narrow-parity markets, if you notice a cross-channel pricing discrepancy, you can reactively confirm whether that discrepancy across platforms is intentional or unintentional. Explain that if partners' prices are more attractive on other platforms, this might be an indication that there is scope to improve price competitiveness on Booking.com. This must remain a neutral, informative question: not a push for alignment.",
 };
 
 // ── Cross-Regional ──────────────────────────────────────────────────

@@ -406,7 +406,7 @@ function EmailCard({
             fontStyle: 'italic',
           }}
         >
-          <strong style={{ fontStyle: 'normal' }}>Disclaimer:</strong>{' '}
+          <strong style={{ fontStyle: 'normal' }}>Reminder:</strong>{' '}
           {scenario.closingNote}
         </div>
       )}
