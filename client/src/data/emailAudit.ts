@@ -1,11 +1,18 @@
 /**
- * Email Audit content for Clearance, keyed by parity regime.
+ * Call Audit content for Clearance, keyed by parity regime.
  *
- * The learner reviews a draft email written by a colleague ("Sam") and
- * judges each highlighted phrase as Safe or Unsafe. Phrases are
- * sourced from the legal compliance guidance PDF (Stay legally
- * compliant | Content writing guidance) so SMEs can audit content
- * against the source.
+ * The learner reviews a Zoom AI recap of a recent call between a
+ * colleague ("Sam") and a partner, and judges each highlighted phrase
+ * Sam said as Safe or Unsafe. Phrases are sourced from the legal
+ * compliance guidance PDF (Stay legally compliant | Content writing
+ * guidance) so SMEs can audit content against the source.
+ *
+ * Originally framed as a draft email; reframed to a Zoom AI recap of
+ * a recorded call in June 2026 after legal flagged that LPS teams
+ * aren't permitted to send outbound emails like this to partners.
+ * The phrases themselves are unchanged - they're the same things an
+ * AM might say in any partner-facing channel, and the regime-specific
+ * rules apply identically to spoken vs written communication.
  *
  * Regime-specific because what counts as safe/unsafe depends on the
  * market's parity regime - e.g. asking a partner to align rates with
@@ -21,7 +28,7 @@ import type { ParityRegime } from '../types';
 export interface EmailPhrase {
   id: string;
   text: string;
-  /** True if the phrase is safe to send as-is. */
+  /** True if the phrase was safe for Sam to say on the call. */
   isSafe: boolean;
   /**
    * Feedback shown to the learner after they answer.
@@ -43,10 +50,15 @@ export interface EmailPhrase {
 export type EmailBodyToken = string | { phraseId: string };
 
 export interface EmailAuditScenario {
-  /** Framing shown above the email. */
+  /** Framing shown above the recap. */
   setupHeadline: string;
   setupBody: string;
-  /** Email metadata. */
+  /**
+   * Recap metadata. Field names retain `fromName`/`toName`/`subject`
+   * for historical reasons (the activity was originally framed as an
+   * email audit before legal asked us to switch to a recorded-call
+   * recap). On-screen these render as Recorded by / Partner / Topic.
+   */
   email: {
     fromName: string;
     fromRole: string;
@@ -56,17 +68,17 @@ export interface EmailAuditScenario {
   };
   phrases: EmailPhrase[];
   /**
-   * Optional learner-facing note rendered after the email signature.
-   * Used in the No Parity scenario to flag the reactive-only rule
-   * that an outbound email itself could violate - it isn't part of
-   * the email body and the learner doesn't judge it; it's a closing
-   * reminder that frames the whole activity.
+   * Optional learner-facing note rendered after the recap body.
+   * Shared between No Parity and Narrow Parity to flag the reactive-
+   * only rule on cross-channel discrepancies. It isn't part of the
+   * recap and the learner doesn't judge it; it's a closing reminder
+   * that frames the whole activity.
    */
   closingNote?: string;
 }
 
 // ── Wide Parity scenario ────────────────────────────────────────────
-// SME-approved Wide Parity email audit (Sam writing to Maria at
+// SME-approved Wide Parity call audit (Sam speaking with Maria at
 // Velvet Sky Boutique). Wide Parity permits proactively asking for
 // the same rates, conditions, and availability across Brand.com AND
 // other third-party OTAs. The two unsafe picks are the textbook
@@ -74,16 +86,15 @@ export interface EmailAuditScenario {
 // other OTAs / wholesalers, and promising fixed ranking rewards in
 // exchange for pricing parity.
 const wideParityScenario: EmailAuditScenario = {
-  setupHeadline: 'Sam asked you to review a draft email before he hits send',
+  setupHeadline: "Sam shared the Zoom AI recap of a recent partner call",
   setupBody:
-    "Sam, an LPS colleague, has drafted an email to one of his Wide Parity partners about a recent conversion drop. He's not totally sure about all of it. Click on each highlighted phrase and judge whether it's Safe to send or Unsafe.",
+    "Sam, an LPS colleague, has shared the Zoom AI recap of a recent call with one of his Wide Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
     toName: 'Maria (Velvet Sky Boutique, New York)',
     subject: 'Booking.com pricing review - opportunities for Q3',
     body: [
-      'Hi Maria,\n\n',
       "Following up on our recent account analysis, I wanted to highlight some strategic pricing trends we've noted for Velvet Sky Boutique.\n\n",
       { phraseId: 'p1' },
       '.\n\n',
@@ -98,9 +109,7 @@ const wideParityScenario: EmailAuditScenario = {
       '.\n\n',
       'Our platform is investing heavily in global marketing for your destination, but, of course, it is your call to ',
       { phraseId: 'p5' },
-      '.\n\n',
-      'Looking forward to hearing your thoughts. Happy to jump on another call if useful.\n\n',
-      'Best,\nSam',
+      '.',
     ],
   },
   phrases: [
@@ -168,25 +177,24 @@ const wideParityScenario: EmailAuditScenario = {
 };
 
 // ── Narrow Parity scenario ──────────────────────────────────────────
-// SME-approved Narrow Parity email audit (Sam writing to Maria).
+// SME-approved Narrow Parity call audit (Sam speaking with Maria).
 // Narrow Parity permits asking for rate alignment with Brand.com but
 // NOT for equal availability and NOT for alignment with other OTAs.
 // The two unsafe picks are the textbook Narrow-Parity DON'Ts:
 // asking for equal availability with the direct channel and asking
 // the partner to adjust rates on third-party OTAs.
 const narrowParityScenario: EmailAuditScenario = {
-  setupHeadline: 'Sam asked you to review a draft email before he hits send',
+  setupHeadline: "Sam shared the Zoom AI recap of a recent partner call",
   setupBody:
-    "Sam, an LPS colleague, has drafted an email to one of his Narrow Parity partners about a recent conversion drop. He's not totally sure about all of it. Click on each highlighted phrase and judge whether it's Safe to send or Unsafe.",
+    "Sam, an LPS colleague, has shared the Zoom AI recap of a recent call with one of his Narrow Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
     toName: 'Maria (Crystal Water Resort, Cornwall)',
     subject: 'Booking.com pricing review - opportunities for Q3',
     body: [
-      'Hi Maria,\n\n',
-      'Following our call last week, I wanted to share a few thoughts on your Q3 performance.\n\n',
-      'Based on data, ',
+      'Picking up from our conversation earlier this week, I wanted to share a few thoughts on your Q3 performance.\n\n',
+      'Based on the data, ',
       { phraseId: 'p1' },
       ' (Brand.com).\n\n',
       'To resolve this friction, ',
@@ -200,9 +208,7 @@ const narrowParityScenario: EmailAuditScenario = {
       ', and we look forward to reviewing how targeted tools can help capture your traffic surplus.\n\n',
       'Nevertheless, we also noticed that OTAs are undercutting your price on meta-search, so ',
       { phraseId: 'p5' },
-      '.\n\n',
-      'Looking forward to hearing your thoughts. Happy to jump on another call if useful.\n\n',
-      'Best,\nSam',
+      '.',
     ],
   },
   phrases: [
@@ -272,25 +278,24 @@ const narrowParityScenario: EmailAuditScenario = {
 };
 
 // ── No Parity scenario ──────────────────────────────────────────────
-// SME-approved No Parity email audit (Sam writing to Maria).
+// SME-approved No Parity call audit (Sam speaking with Maria).
 // In No Parity the word "parity" is banned in partner-facing copy
 // and cross-channel pricing is only ever raised REACTIVELY (if the
 // partner brings it up first) - never as a requirement, never tied
 // to ranking or visibility consequences. The closingNote flags the
-// reactive-only rule explicitly so the learner sees that an
-// outbound email could itself be a violation.
+// reactive-only rule explicitly so the learner sees the cross-channel
+// raise should only ever happen if the partner brings it up first.
 const noParityScenario: EmailAuditScenario = {
-  setupHeadline: 'Sam asked you to review a draft email before he hits send',
+  setupHeadline: "Sam shared the Zoom AI recap of a recent partner call",
   setupBody:
-    "Sam, an LPS colleague, has drafted an email to one of his No Parity partners about a recent conversion drop. He's not totally sure about all of it. Click on each highlighted phrase and judge whether it's Safe to send or Unsafe.",
+    "Sam, an LPS colleague, has shared the Zoom AI recap of a recent call with one of his No Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
     toName: 'Maria (Crystal Water Resort, Marbella)',
     subject: 'Booking.com pricing review - opportunities for Q3',
     body: [
-      'Hi Maria,\n\n',
-      'Following up on our call the other day, you wanted to understand your pricing position across platforms. In order to do that, we noticed something worth checking.\n\n',
+      'Picking up from our call the other day, you wanted to understand your pricing position across platforms. While looking into that, we noticed something worth checking.\n\n',
       'First of all, ',
       { phraseId: 'p1' },
       " - it'd be useful to understand if that's a deliberate choice on your end.\n\n",
@@ -305,9 +310,7 @@ const noParityScenario: EmailAuditScenario = {
       ", so we'd want to find a way to keep things competitive on Booking.com.\n\n",
       'Of course, ',
       { phraseId: 'p5' },
-      '; this is just to share what we see in the data on our side.\n\n',
-      'Looking forward to hearing your thoughts. Happy to jump on another call if useful.\n\n',
-      'Best,\nSam',
+      '; this is just to share what we see in the data on our side.',
     ],
   },
   phrases: [

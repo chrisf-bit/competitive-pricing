@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Check, X, Mail, ShieldCheck, ShieldAlert, FileText } from 'lucide-react';
+import { ChevronRight, Check, X, Video, ShieldCheck, ShieldAlert, FileText } from 'lucide-react';
 import { getEmailAudit, type EmailAuditScenario, type EmailPhrase } from '../data/emailAudit';
 import type { KnowledgeCheckResult, ParityRegime } from '../types';
 import { LaptopFrame } from '../components/DeviceFrame';
@@ -135,7 +135,7 @@ export function EmailAuditScreen({
               marginTop: 2,
             }}
           >
-            Click each highlighted phrase to judge whether it's safe to send.
+            Click each highlighted phrase to judge whether Sam was safe to say it.
           </div>
         </div>
         <div
@@ -148,7 +148,7 @@ export function EmailAuditScreen({
             flexShrink: 0,
           }}
         >
-          Email Audit
+          Call Audit
         </div>
         <div
           style={{
@@ -297,7 +297,7 @@ function EmailCard({
         flexShrink: 0,
       }}
     >
-      {/* Email header */}
+      {/* Recap header */}
       <div
         style={{
           padding: '12px 20px 10px',
@@ -317,8 +317,8 @@ function EmailCard({
             marginBottom: 8,
           }}
         >
-          <Mail size={12} />
-          Draft - not yet sent
+          <Video size={12} />
+          Zoom AI Recap - recorded call
         </div>
         <table
           style={{
@@ -330,7 +330,9 @@ function EmailCard({
         >
           <tbody>
             <tr>
-              <td style={{ width: 56, paddingBottom: 2, color: 'var(--grey-400)' }}>From</td>
+              <td style={{ width: 84, paddingBottom: 2, color: 'var(--grey-400)' }}>
+                Recorded by
+              </td>
               <td style={{ paddingBottom: 2 }}>
                 {scenario.email.fromName}{' '}
                 <span style={{ color: 'var(--grey-400)' }}>
@@ -339,11 +341,11 @@ function EmailCard({
               </td>
             </tr>
             <tr>
-              <td style={{ paddingBottom: 2, color: 'var(--grey-400)' }}>To</td>
+              <td style={{ paddingBottom: 2, color: 'var(--grey-400)' }}>Partner</td>
               <td style={{ paddingBottom: 2 }}>{scenario.email.toName}</td>
             </tr>
             <tr>
-              <td style={{ color: 'var(--grey-400)' }}>Subject</td>
+              <td style={{ color: 'var(--grey-400)' }}>Topic</td>
               <td style={{ fontWeight: 600, color: 'var(--brand-navy)' }}>
                 {scenario.email.subject}
               </td>
@@ -388,10 +390,10 @@ function EmailCard({
         })}
       </div>
 
-      {/* Optional learner-facing closing disclaimer, used in No Parity
-          to flag that an outbound email itself can violate the
-          reactive-only rule. Not part of the email body the learner
-          judges - it's a yellow framing note. */}
+      {/* Optional learner-facing closing reminder, used in No and
+          Narrow Parity to flag the reactive-only rule on cross-channel
+          discrepancies. Not part of the recap body the learner judges
+          - it's a yellow framing note. */}
       {scenario.closingNote && (
         <div
           style={{
@@ -530,13 +532,13 @@ function ReviewPanel({
             marginBottom: 16,
           }}
         >
-          <Mail size={24} />
+          <Video size={24} />
         </div>
         <div style={{ fontSize: 15, fontWeight: 600, color: 'rgba(255,255,255,0.85)' }}>
           Pick a phrase to review
         </div>
         <div style={{ fontSize: 13, lineHeight: 1.5, marginTop: 8, maxWidth: 280 }}>
-          Click any of the highlighted phrases in the email to judge whether it's safe to send.
+          Click any of the highlighted phrases in the recap to judge whether Sam was safe to say it.
         </div>
       </div>
     );
@@ -614,17 +616,17 @@ function ReviewPanel({
                   marginBottom: 14,
                 }}
               >
-                Is this safe to send?
+                Was this safe to say?
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <JudgementButton
                   variant="safe"
-                  label="Safe to send"
+                  label="Safe to say"
                   onClick={() => onPick(phrase.id, true)}
                 />
                 <JudgementButton
                   variant="unsafe"
-                  label="Unsafe - rewrite"
+                  label="Unsafe - shouldn't have said it"
                   onClick={() => onPick(phrase.id, false)}
                 />
               </div>
