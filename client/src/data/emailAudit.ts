@@ -1,14 +1,14 @@
 /**
  * Call Audit content for Clearance, keyed by parity regime.
  *
- * The learner reviews a Zoom AI recap of a recent call between a
- * colleague ("Sam") and a partner, and judges each highlighted phrase
- * Sam said as Safe or Unsafe. Phrases are sourced from the legal
- * compliance guidance PDF (Stay legally compliant | Content writing
- * guidance) so SMEs can audit content against the source.
+ * The learner reviews a Zoom AI transcript of a recent call between
+ * a colleague ("Sam") and a partner, and judges each highlighted
+ * phrase Sam said as Safe or Unsafe. Phrases are sourced from the
+ * legal compliance guidance PDF (Stay legally compliant | Content
+ * writing guidance) so SMEs can audit content against the source.
  *
- * Originally framed as a draft email; reframed to a Zoom AI recap of
- * a recorded call in June 2026 after legal flagged that LPS teams
+ * Originally framed as a draft email; reframed to a Zoom AI transcript
+ * of a recorded call in June 2026 after legal flagged that LPS teams
  * aren't permitted to send outbound emails like this to partners.
  * The phrases themselves are unchanged - they're the same things an
  * AM might say in any partner-facing channel, and the regime-specific
@@ -50,14 +50,14 @@ export interface EmailPhrase {
 export type EmailBodyToken = string | { phraseId: string };
 
 export interface EmailAuditScenario {
-  /** Framing shown above the recap. */
+  /** Framing shown above the transcript. */
   setupHeadline: string;
   setupBody: string;
   /**
-   * Recap metadata. Field names retain `fromName`/`toName`/`subject`
+   * Transcript metadata. Field names retain `fromName`/`toName`/`subject`
    * for historical reasons (the activity was originally framed as an
    * email audit before legal asked us to switch to a recorded-call
-   * recap). On-screen these render as Recorded by / Partner / Topic.
+   * transcript). On-screen these render as Recorded by / Partner / Topic.
    */
   email: {
     fromName: string;
@@ -68,11 +68,11 @@ export interface EmailAuditScenario {
   };
   phrases: EmailPhrase[];
   /**
-   * Optional learner-facing note rendered after the recap body.
+   * Optional learner-facing note rendered after the transcript body.
    * Shared between No Parity and Narrow Parity to flag the reactive-
    * only rule on cross-channel discrepancies. It isn't part of the
-   * recap and the learner doesn't judge it; it's a closing reminder
-   * that frames the whole activity.
+   * transcript and the learner doesn't judge it; it's a closing
+   * reminder that frames the whole activity.
    */
   closingNote?: string;
 }
@@ -86,9 +86,9 @@ export interface EmailAuditScenario {
 // other OTAs / wholesalers, and promising fixed ranking rewards in
 // exchange for pricing parity.
 const wideParityScenario: EmailAuditScenario = {
-  setupHeadline: "Sam shared the Zoom AI recap of a recent partner call",
+  setupHeadline: "Sam shared the Zoom AI transcript of a recent partner call",
   setupBody:
-    "Sam, an LPS colleague, has shared the Zoom AI recap of a recent call with one of his Wide Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
+    "Sam, an LPS colleague, has shared the Zoom AI transcript of a recent call with one of his Wide Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
@@ -184,9 +184,9 @@ const wideParityScenario: EmailAuditScenario = {
 // asking for equal availability with the direct channel and asking
 // the partner to adjust rates on third-party OTAs.
 const narrowParityScenario: EmailAuditScenario = {
-  setupHeadline: "Sam shared the Zoom AI recap of a recent partner call",
+  setupHeadline: "Sam shared the Zoom AI transcript of a recent partner call",
   setupBody:
-    "Sam, an LPS colleague, has shared the Zoom AI recap of a recent call with one of his Narrow Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
+    "Sam, an LPS colleague, has shared the Zoom AI transcript of a recent call with one of his Narrow Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',
@@ -286,9 +286,9 @@ const narrowParityScenario: EmailAuditScenario = {
 // reactive-only rule explicitly so the learner sees the cross-channel
 // raise should only ever happen if the partner brings it up first.
 const noParityScenario: EmailAuditScenario = {
-  setupHeadline: "Sam shared the Zoom AI recap of a recent partner call",
+  setupHeadline: "Sam shared the Zoom AI transcript of a recent partner call",
   setupBody:
-    "Sam, an LPS colleague, has shared the Zoom AI recap of a recent call with one of his No Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
+    "Sam, an LPS colleague, has shared the Zoom AI transcript of a recent call with one of his No Parity partners about a conversion drop. He's not sure all of his comments were on-side. Click each highlighted phrase and judge whether it was Safe to say or Unsafe.",
   email: {
     fromName: 'Sam',
     fromRole: 'LPS',

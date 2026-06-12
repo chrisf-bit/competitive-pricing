@@ -58,9 +58,9 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     id: 'email-audit',
     label: 'Call Audit',
     screen: 'l0-email-audit',
-    title: "Audit Sam's call recap",
+    title: "Audit Sam's call transcript",
     subtitle:
-      'A colleague has shared the Zoom AI recap of a recent call with a partner. Click each highlighted phrase and judge whether it was safe to say.',
+      'A colleague has shared the Zoom AI transcript of a recent call with a partner. Click each highlighted phrase and judge whether it was safe to say.',
   },
   {
     id: 'issue-tree',

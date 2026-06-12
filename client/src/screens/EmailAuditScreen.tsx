@@ -297,7 +297,7 @@ function EmailCard({
         flexShrink: 0,
       }}
     >
-      {/* Recap header */}
+      {/* Transcript header */}
       <div
         style={{
           padding: '12px 20px 10px',
@@ -318,7 +318,7 @@ function EmailCard({
           }}
         >
           <Video size={12} />
-          Zoom AI Recap - recorded call
+          Zoom AI Transcript - recorded call
         </div>
         <table
           style={{
@@ -392,8 +392,8 @@ function EmailCard({
 
       {/* Optional learner-facing closing reminder, used in No and
           Narrow Parity to flag the reactive-only rule on cross-channel
-          discrepancies. Not part of the recap body the learner judges
-          - it's a yellow framing note. */}
+          discrepancies. Not part of the transcript body the learner
+          judges - it's a yellow framing note. */}
       {scenario.closingNote && (
         <div
           style={{
@@ -538,7 +538,7 @@ function ReviewPanel({
           Pick a phrase to review
         </div>
         <div style={{ fontSize: 13, lineHeight: 1.5, marginTop: 8, maxWidth: 280 }}>
-          Click any of the highlighted phrases in the recap to judge whether Sam was safe to say it.
+          Click any of the highlighted phrases in the transcript to judge whether Sam was safe to say it.
         </div>
       </div>
     );
