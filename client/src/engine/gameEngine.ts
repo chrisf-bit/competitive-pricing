@@ -712,10 +712,12 @@ export function advanceRound(state: GameState): GameState {
 
   return {
     ...state,
-    // Routes straight to the next round's portfolio - the previous
-    // between-round summary screen was retired in 2026-06 because it
-    // didn't add value (the data is on the portfolio already).
-    screen: 'portfolio',
+    // Routes to the round-select hub. Learner picks the next round's
+    // tile to enter its portfolio. The between-round screen retired in
+    // 2026-06 was a passive summary - this one has a job (show star
+    // progress, unlock the next tile, offer retries) so the extra
+    // click earns its keep.
+    screen: 'round-select',
     currentRound: nextRound,
     actionsThisRound: [],
     previouslyEngagedThisRound: [],
@@ -724,6 +726,21 @@ export function advanceRound(state: GameState): GameState {
     marketContext: marketContextByRound[nextRound] ?? state.marketContext,
     roundSummaries: [...state.roundSummaries, roundSummary],
     conversationInProgress: null,
+  };
+}
+
+// ── Enter a round from the round-select hub ──
+// Routes into the portfolio for the tapped round. `currentRound`
+// is set (in case it's out-of-sync from a retry tap on an earlier
+// completed round) but no neglect drift or baseline shifting fires
+// - advanceRound owns those state updates. This is a plain screen
+// jump into an existing round's play state.
+export function enterRound(state: GameState, round: number): GameState {
+  return {
+    ...state,
+    screen: 'portfolio',
+    currentRound: round,
+    selectedPartnerId: null,
   };
 }
 

@@ -14,6 +14,7 @@ import {
   processConversationChoice,
   endConversation,
   advanceRound,
+  enterRound,
   resetRoundForRetake,
   startPracticeRound,
   calculateScore,
@@ -127,6 +128,22 @@ export function useGame() {
    */
   const onStartPracticeRound = useCallback((round: number) => {
     setState((s) => startPracticeRound(s, round));
+  }, []);
+
+  /**
+   * Enter the tapped round from the Round Select hub. If the round is
+   * the current one, drop straight into its portfolio. If it's an
+   * earlier round the learner wants to retry (fewer than 3 stars),
+   * fall back to Practice Mode so their state resets to that round's
+   * baseline and their stars can only go up.
+   */
+  const onEnterRound = useCallback((round: number) => {
+    setState((s) => {
+      if (round === s.currentRound) {
+        return enterRound(s, round);
+      }
+      return startPracticeRound(s, round);
+    });
   }, []);
 
   /**
@@ -343,6 +360,7 @@ export function useGame() {
     onContinueAfterReport,
     onRetakeAfterReport,
     onStartPracticeRound,
+    onEnterRound,
     onBackToPortfolio,
     onRestart,
     setLearnerMarket,

@@ -546,6 +546,12 @@ export type GameScreen =
   | 'l0-issue-tree-reveal'
   | 'l0-clearance-summary'
   | 'l0-cleared-celebration'
+  // ── Round hub ──
+  // Progress hub shown after clearance and between rounds. Two levels
+  // of 10 tiles each: Level 1 = existing partner-portfolio content
+  // (rounds 1-10, mostly locked pending SME content); Level 2 =
+  // OPC / Advanced View content (rounds 11-20, all locked until R3).
+  | 'round-select'
   // ── Level 1 (existing partner-portfolio sim, plus new outcome stage) ──
   | 'portfolio'
   | 'partner-detail'

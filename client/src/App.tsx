@@ -17,6 +17,7 @@ import { IssueTreeRevealScreen } from './screens/IssueTreeRevealScreen';
 import { ClearanceSummaryScreen } from './screens/ClearanceSummaryScreen';
 import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
+import { RoundSelectScreen } from './screens/RoundSelectScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
 import { ConversationScreen } from './screens/ConversationScreen';
 import { BranchingConversationScreen } from './screens/BranchingConversationScreen';
@@ -217,7 +218,7 @@ export default function App() {
                     game.goToScreen('l0-cleared-celebration');
                   } else {
                     // "Continue anyway" path - skip the celebration.
-                    game.goToScreen('portfolio');
+                    game.goToScreen('round-select');
                     if (!state.tutorialShown) {
                       setShowTutorial(true);
                       game.markTutorialShown();
@@ -236,12 +237,19 @@ export default function App() {
               archetype={state.learnerProfile.archetype}
               avatarId={state.learnerProfile.avatarId}
               onContinue={() => {
-                game.goToScreen('portfolio');
+                game.goToScreen('round-select');
                 if (!state.tutorialShown) {
                   setShowTutorial(true);
                   game.markTutorialShown();
                 }
               }}
+            />
+          )}
+          {state.screen === 'round-select' && (
+            <RoundSelectScreen
+              currentRound={state.currentRound}
+              roundStars={state.roundStars}
+              onEnterRound={game.onEnterRound}
             />
           )}
           {state.screen === 'portfolio' && (
