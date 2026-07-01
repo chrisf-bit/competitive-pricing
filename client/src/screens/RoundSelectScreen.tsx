@@ -148,9 +148,9 @@ export function RoundSelectScreen({
               lineHeight: 1.5,
             }}
           >
-            Each round teaches a different pricing situation. Clear a
-            round to unlock the next. Complete all ten to unlock the
-            Level 2 series featuring OPC metrics.
+            Each round you'll face a different pricing situation.
+            Clear a round to unlock the next. Complete all ten to
+            unlock the Level 2 series featuring OPC metrics.
           </p>
         </motion.div>
 
