@@ -26,7 +26,6 @@ const LEVEL_1_ROUNDS = Array.from({ length: 10 }, (_, i) => i + 1);
 const LEVEL_2_ROUNDS = Array.from({ length: 10 }, (_, i) => i + 11);
 
 interface RoundSelectScreenProps {
-  currentRound: number;
   roundStars: Record<number, 0 | 1 | 2 | 3>;
   onEnterRound: (round: number) => void;
 }
@@ -39,10 +38,22 @@ interface RoundSelectScreenProps {
  * of Level 2) is locked.
  */
 export function RoundSelectScreen({
-  currentRound,
   roundStars,
   onEnterRound,
 }: RoundSelectScreenProps) {
+  // "Current" is the first playable round the learner hasn't cleared
+  // yet. Derived from roundStars rather than the engine's currentRound
+  // because persistence restores roundStars but resets currentRound
+  // to 1. Without this, a returning learner with every round cleared
+  // would see Round 1 marked "Current" alongside Round 2/3 tagged
+  // "Cleared" - impossible progression order. If every playable round
+  // is already cleared, no tile is current; the retry pills on
+  // completed tiles are the way forward.
+  const activeRound =
+    (AVAILABLE_ROUNDS as readonly number[]).find(
+      (r) => (roundStars[r] ?? 0) < 1,
+    ) ?? null;
+
   return (
     <div
       style={{
@@ -68,27 +79,17 @@ export function RoundSelectScreen({
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center',
-          filter: 'brightness(0.35)',
+          filter: 'brightness(0.65)',
         }}
       />
-      {/* Overlay stack: radial vignette + a flat navy scrim over the
-          middle band where the tiles sit. Locked tiles were washing
-          into the cityscape without the flat scrim - the lights on
-          the buildings competed with the tile borders. */}
+      {/* Soft radial vignette only - tiles carry their own weight now
+          so no need for a middle-band scrim washing the backdrop out. */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse at center, rgba(0,15,40,0.45) 0%, rgba(0,15,40,0.30) 45%, rgba(0,15,40,0.85) 100%)',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'linear-gradient(180deg, rgba(0,15,40,0) 0%, rgba(0,15,40,0.55) 30%, rgba(0,15,40,0.55) 70%, rgba(0,15,40,0) 100%)',
+            'radial-gradient(ellipse at center, rgba(0,15,40,0.15) 0%, rgba(0,15,40,0.05) 50%, rgba(0,15,40,0.55) 100%)',
         }}
       />
 
@@ -157,7 +158,7 @@ export function RoundSelectScreen({
           label="Level 1"
           subLabel="Partner-portfolio fundamentals"
           rounds={LEVEL_1_ROUNDS}
-          currentRound={currentRound}
+          activeRound={activeRound}
           roundStars={roundStars}
           isLevel2Locked={false}
           onEnterRound={onEnterRound}
@@ -167,7 +168,7 @@ export function RoundSelectScreen({
           label="Level 2"
           subLabel="On-Platform Competitiveness (OPC) metrics"
           rounds={LEVEL_2_ROUNDS}
-          currentRound={currentRound}
+          activeRound={activeRound}
           roundStars={roundStars}
           isLevel2Locked
           onEnterRound={onEnterRound}
@@ -181,7 +182,7 @@ function LevelBlock({
   label,
   subLabel,
   rounds,
-  currentRound,
+  activeRound,
   roundStars,
   isLevel2Locked,
   onEnterRound,
@@ -189,7 +190,7 @@ function LevelBlock({
   label: string;
   subLabel: string;
   rounds: number[];
-  currentRound: number;
+  activeRound: number | null;
   roundStars: Record<number, 0 | 1 | 2 | 3>;
   isLevel2Locked: boolean;
   onEnterRound: (round: number) => void;
@@ -250,7 +251,7 @@ function LevelBlock({
         {rounds.map((round) => {
           const stars = roundStars[round] ?? 0;
           const isCompleted = stars >= 1;
-          const isCurrent = round === currentRound && !isLevel2Locked;
+          const isCurrent = round === activeRound && !isLevel2Locked;
           const isPlayable =
             !isLevel2Locked &&
             (AVAILABLE_ROUNDS as readonly number[]).includes(round) &&
@@ -305,28 +306,36 @@ function RoundTile({
     overflow: 'hidden' as const,
   };
 
+  // Solid, opaque backgrounds on every tile - no translucency, so they
+  // read cleanly on any part of the cityscape backdrop. Each state gets
+  // a distinct hue that's obvious at a glance: bright brand-yellow for
+  // the current round, deep green for cleared, mid navy for locked.
   const style: React.CSSProperties = isCurrent
     ? {
         ...base,
         background:
-          'linear-gradient(160deg, rgba(20, 45, 90, 0.95) 0%, rgba(10, 25, 55, 0.95) 100%)',
-        border: '1.5px solid var(--brand-yellow)',
+          'linear-gradient(160deg, #FEC526 0%, #F5A800 100%)',
+        border: '2px solid #FFDB6E',
         boxShadow:
-          '0 0 0 3px rgba(254,186,2,0.15), 0 8px 24px rgba(254,186,2,0.35)',
+          '0 0 0 3px rgba(254,186,2,0.35), 0 10px 28px rgba(254,186,2,0.5)',
+        color: 'var(--brand-navy-dark)',
       }
     : isCompleted
       ? {
           ...base,
           background:
-            'linear-gradient(160deg, rgba(0,60,20,0.85) 0%, rgba(0,30,15,0.90) 100%)',
-          border: '1.5px solid rgba(0,180,50,0.65)',
-          boxShadow: '0 6px 18px rgba(0,25,10,0.4)',
+            'linear-gradient(160deg, #0EAD3B 0%, #067A24 100%)',
+          border: '2px solid #4BD671',
+          boxShadow: '0 8px 22px rgba(0,90,25,0.55)',
+          color: 'var(--white)',
         }
       : {
           ...base,
-          background: 'rgba(6, 22, 50, 0.92)',
-          border: '1.5px solid rgba(255,255,255,0.14)',
-          boxShadow: '0 4px 14px rgba(0,10,30,0.45)',
+          background:
+            'linear-gradient(160deg, #1F3A6E 0%, #14284D 100%)',
+          border: '2px solid rgba(255,255,255,0.22)',
+          boxShadow: '0 6px 18px rgba(0,10,30,0.55)',
+          color: 'var(--white)',
         };
 
   return (
@@ -359,7 +368,11 @@ function RoundTile({
             fontWeight: 800,
             textTransform: 'uppercase',
             letterSpacing: '0.14em',
-            color: 'rgba(255,255,255,0.5)',
+            color: isCurrent
+              ? 'rgba(0, 20, 55, 0.75)'
+              : isCompleted
+                ? 'rgba(255,255,255,0.85)'
+                : 'rgba(255,255,255,0.60)',
           }}
         >
           Round {round}
@@ -369,7 +382,14 @@ function RoundTile({
         ) : isCompleted ? (
           <StatusPill tone="complete" label="Cleared" />
         ) : (
-          <Lock size={12} color="rgba(255,255,255,0.4)" />
+          <Lock
+            size={12}
+            color={
+              isLevel2
+                ? 'rgba(255,255,255,0.35)'
+                : 'rgba(255,255,255,0.55)'
+            }
+          />
         )}
       </div>
 
@@ -377,13 +397,22 @@ function RoundTile({
       <div style={{ display: 'flex', gap: 3 }}>
         {[1, 2, 3].map((i) => {
           const earned = i <= stars;
+          const emptyStroke = isCurrent
+            ? 'rgba(0,20,55,0.5)'
+            : isCompleted
+              ? 'rgba(255,255,255,0.55)'
+              : 'rgba(255,255,255,0.32)';
+          const filledFill = isCurrent
+            ? 'var(--brand-navy-dark)'
+            : 'var(--brand-yellow)';
+          const filledStroke = filledFill;
           return (
             <Star
               key={i}
               size={18}
               strokeWidth={1.6}
-              fill={earned ? 'var(--brand-yellow)' : 'transparent'}
-              color={earned ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.32)'}
+              fill={earned ? filledFill : 'transparent'}
+              color={earned ? filledStroke : emptyStroke}
             />
           );
         })}
@@ -396,12 +425,12 @@ function RoundTile({
           alignItems: 'center',
           gap: 4,
           fontSize: 11,
-          fontWeight: 700,
+          fontWeight: 800,
           color: isCurrent
-            ? 'var(--brand-yellow)'
+            ? 'var(--brand-navy-dark)'
             : isCompleted
-              ? 'rgba(62, 226, 122, 0.95)'
-              : 'rgba(255,255,255,0.4)',
+              ? 'rgba(255,255,255,0.95)'
+              : 'rgba(255,255,255,0.65)',
         }}
       >
         {isLevel2 ? (
@@ -443,24 +472,24 @@ function StatusPill({
   tone: 'current' | 'complete';
   label: string;
 }) {
+  // Current pill sits on the bright brand-yellow tile, so dark navy
+  // fill for contrast; Cleared pill sits on the bright green tile,
+  // so white fill with a deep-green text colour.
   const bg =
-    tone === 'current' ? 'rgba(254,186,2,0.22)' : 'rgba(0,138,14,0.22)';
-  const color =
-    tone === 'current' ? 'var(--brand-yellow)' : 'rgb(62, 226, 122)';
-  const border =
     tone === 'current'
-      ? '1px solid rgba(254,186,2,0.45)'
-      : '1px solid rgba(0,138,14,0.55)';
+      ? 'var(--brand-navy-dark)'
+      : 'rgba(255,255,255,0.95)';
+  const color =
+    tone === 'current' ? 'var(--brand-yellow)' : '#046B1B';
   return (
     <span
       style={{
         fontSize: 9,
         fontWeight: 800,
-        padding: '2px 7px',
+        padding: '2px 8px',
         borderRadius: 100,
         background: bg,
         color,
-        border,
         textTransform: 'uppercase',
         letterSpacing: '0.1em',
       }}

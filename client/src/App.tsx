@@ -247,7 +247,6 @@ export default function App() {
           )}
           {state.screen === 'round-select' && (
             <RoundSelectScreen
-              currentRound={state.currentRound}
               roundStars={state.roundStars}
               onEnterRound={game.onEnterRound}
             />
