@@ -110,15 +110,6 @@ export function PartnerDetailScreen({
   // retired in 2026-06 - see engine/gameEngine.ts for the rationale.
   const canEngage = !alreadyEngaged && !issueTreeGateBlocks;
 
-  // Idle-nudge target picks the primary next action for the learner's
-  // current gate state: Round 1 with an unopened Helper needs the
-  // yellow tree tab; everything else (Helper opened, or R2+) is
-  // waiting on Begin Conversation.
-  useIdleNudge(
-    issueTreeGateBlocks ? 'partner-detail-tree-tab' : 'partner-detail-action',
-    true,
-  );
-
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
   const hint = getPersonaHint(partner.persona.id, currentRound, personaId);
@@ -128,6 +119,19 @@ export function PartnerDetailScreen({
   // open/closed state is local; the learner's picks are persisted in
   // GameState so closing and reopening resumes them.
   const [helperOpen, setHelperOpen] = useState(false);
+
+  // Idle-nudge target picks the primary next action for the learner's
+  // current gate state: Round 1 with an unopened Helper needs the
+  // yellow tree tab; everything else (Helper opened, or R2+) is
+  // waiting on Begin Conversation. Disabled while the Helper drawer is
+  // open - the drawer covers the entire right column including Begin
+  // Conversation, so a pulse behind it would be invisible, and the
+  // learner isn't stuck on the CTA anyway (they're mid-diagnostic).
+  // The nudge resumes when they close the drawer.
+  useIdleNudge(
+    issueTreeGateBlocks ? 'partner-detail-tree-tab' : 'partner-detail-action',
+    !helperOpen,
+  );
   const helperKey = `${partner.persona.id}-${currentRound}`;
   const helperState = issueTreeHelperStates[helperKey] ?? {
     path: {},
