@@ -135,7 +135,7 @@ export function RoundSelectScreen({
               lineHeight: 1.1,
             }}
           >
-            Pick your round
+            Round Select
           </h1>
           <p
             style={{
