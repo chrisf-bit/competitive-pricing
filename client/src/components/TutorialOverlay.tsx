@@ -212,9 +212,9 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
   },
   {
     target: 'issue-tree-helper',
-    title: 'Issue Tree Helper',
+    title: 'Diagnosis Coach',
     description:
-      "When you open a partner you'll see a yellow tree tab pinned to the right edge. Tap it to walk the Pricing Issue Tree - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close the drawer to peek at the metrics and pick up where you left off.",
+      "When you open a partner you'll see a yellow tree tab pinned to the right edge. Tap it and the Coach walks you through the diagnosis with you - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close the drawer to peek at the metrics and pick up where you left off.",
     icon: <TreeDeciduous size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },
@@ -296,9 +296,9 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
   },
   {
     target: 'partner-detail-tree-tab',
-    title: 'Issue Tree Helper',
+    title: 'Diagnosis Coach',
     description:
-      "Yellow tree tab pinned to the right edge - tap to open the Issue Tree drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
+      "Yellow tree tab pinned to the right edge - tap to open the Coach drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
     icon: <TreeDeciduous size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'left',
   },
@@ -306,7 +306,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-action',
     title: 'Begin Conversation',
     description:
-      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open the Issue Tree Helper at least once first - that gate teaches the diagnostic workflow.",
+      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open the Diagnosis Coach at least once first - that gate teaches the diagnostic workflow.",
     icon: <PlayCircle size={18} style={{ color: 'var(--success)' }} />,
     position: 'left',
   },

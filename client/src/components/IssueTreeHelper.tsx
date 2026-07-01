@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, TreeDeciduous, Lightbulb, RotateCcw } from 'lucide-react';
-import type { IssueTreeHelperState } from '../types';
+import { X, ChevronLeft, ChevronRight, TreeDeciduous, Lightbulb, RotateCcw, Sparkles } from 'lucide-react';
+import type { IssueTreeHelperState, IssueTreePath } from '../types';
 import {
   triggers,
   issues,
@@ -42,6 +42,26 @@ import {
 interface IssueTreeHelperProps {
   /** Partner being diagnosed. Shown in the header for context. */
   partnerName: string;
+  /**
+   * First name derived from partnerName. Used in the coach's
+   * intro copy so the drawer reads as a colleague talking to
+   * the learner about a specific person, not a generic form.
+   */
+  partnerFirstName: string;
+  /**
+   * Optional one-line data lens on the partner (e.g. the persona
+   * hint). Rendered above the options as "Reading the data" so
+   * the learner is picking against visible context, not abstract
+   * categories. Hidden if not supplied.
+   */
+  dataContext?: string;
+  /**
+   * Optional SME-prescribed path through the tree for this partner-
+   * round. When present, the option at each step that matches the
+   * prescribed path picks up a soft "Data suggests this" tag. The
+   * learner still has to pick; this is a nudge, not autopilot.
+   */
+  suggestedPath?: IssueTreePath;
   /** Current helper progress (path + step) - controlled by the parent. */
   helperState: IssueTreeHelperState;
   /** Called on every pick / step navigation so the parent can persist. */
@@ -53,6 +73,9 @@ const STEP_COUNT = 6;
 
 export function IssueTreeHelper({
   partnerName,
+  partnerFirstName,
+  dataContext,
+  suggestedPath,
   helperState,
   onUpdate,
   onClose,
@@ -168,7 +191,7 @@ export function IssueTreeHelper({
           </div>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 14, fontWeight: 800 }}>
-              Issue Tree Helper
+              Diagnosis Coach
             </div>
             <div
               style={{
@@ -179,7 +202,7 @@ export function IssueTreeHelper({
                 textOverflow: 'ellipsis',
               }}
             >
-              Diagnosis for {partnerName}
+              Working out the angle for {partnerName}
             </div>
           </div>
         </div>
@@ -264,17 +287,40 @@ export function IssueTreeHelper({
                 fontWeight: 800,
                 color: 'var(--brand-navy)',
                 margin: 0,
-                marginBottom: 14,
+                marginBottom: 10,
                 lineHeight: 1.3,
               }}
             >
-              {stepIndex === 0 && 'What kind of trigger surfaced this issue?'}
+              {stepIndex === 0 && `Looking at ${partnerFirstName}'s data, which trigger is loudest?`}
               {stepIndex === 1 && 'What pricing issue does the data point to?'}
-              {stepIndex === 2 && 'Does this look intentional or unintentional?'}
+              {stepIndex === 2 && `From what you're seeing, does this look intentional or unintentional?`}
               {stepIndex === 3 && 'Which root cause best fits the pattern?'}
               {stepIndex === 4 && 'What does the metric pattern look like?'}
               {stepIndex === 5 && 'Which hook angle fits this diagnosis?'}
             </h3>
+
+            {/* Coach intro on Step 0 - frames the whole drawer as a
+                walk-through rather than a quiz. Shown once, dropped on
+                subsequent steps so it doesn't get repetitive. */}
+            {stepIndex === 0 && (
+              <p
+                style={{
+                  fontSize: 12.5,
+                  color: 'var(--grey-600)',
+                  lineHeight: 1.55,
+                  margin: '0 0 12px',
+                  fontStyle: 'italic',
+                }}
+              >
+                We'll walk {partnerFirstName}'s data together and land
+                on the right way to open the call. There might be more
+                than one trigger - pick the one that stands out most.
+              </p>
+            )}
+
+            {/* Data context callout - grounds each pick in the visible
+                partner data so options aren't abstract categories. */}
+            {dataContext && <DataContextCallout text={dataContext} />}
 
             {stepIndex === 0 &&
               triggers.map((t) => (
@@ -283,6 +329,7 @@ export function IssueTreeHelper({
                   label={t.label}
                   description={t.description}
                   selected={path.trigger === t.id}
+                  suggested={suggestedPath?.trigger === t.id}
                   onClick={() => setPathField('trigger', t.id)}
                 />
               ))}
@@ -294,6 +341,7 @@ export function IssueTreeHelper({
                   label={i.label}
                   description={i.description}
                   selected={path.issueId === i.id}
+                  suggested={suggestedPath?.issueId === i.id}
                   onClick={() => setPathField('issueId', i.id)}
                 />
               ))}
@@ -305,6 +353,7 @@ export function IssueTreeHelper({
                   label={i.label}
                   description={i.description}
                   selected={path.intent === i.id}
+                  suggested={suggestedPath?.intent === i.id}
                   onClick={() => setPathField('intent', i.id)}
                 />
               ))}
@@ -316,6 +365,7 @@ export function IssueTreeHelper({
                   label={rc.label}
                   description={rc.description}
                   selected={path.rootCauseId === rc.id}
+                  suggested={suggestedPath?.rootCauseId === rc.id}
                   onClick={() => setPathField('rootCauseId', rc.id)}
                 />
               ))}
@@ -327,6 +377,7 @@ export function IssueTreeHelper({
                   label={m.label}
                   description={m.description}
                   selected={path.metricInsightId === m.id}
+                  suggested={suggestedPath?.metricInsightId === m.id}
                   onClick={() => setPathField('metricInsightId', m.id)}
                 />
               ))}
@@ -338,6 +389,7 @@ export function IssueTreeHelper({
                   label={h.label}
                   description={h.description}
                   selected={path.hookId === h.id}
+                  suggested={suggestedPath?.hookId === h.id}
                   onClick={() => setPathField('hookId', h.id)}
                 />
               ))}
@@ -450,13 +502,30 @@ function OptionCard({
   label,
   description,
   selected,
+  suggested = false,
   onClick,
 }: {
   label: string;
   description: string;
   selected: boolean;
+  /**
+   * Soft nudge - this option matches the SME-prescribed path for
+   * the current partner-round. Adds a small "Data suggests this"
+   * chip so the learner knows which option the coach's read of
+   * the data would land on, without auto-selecting it. Selection
+   * still requires their pick.
+   */
+  suggested?: boolean;
   onClick: () => void;
 }) {
+  // Idle default border for suggested-but-unpicked: subtle blue tint
+  // that reads as "worth a look" rather than "you got it right".
+  const idleBorder = suggested
+    ? '2px solid rgba(0, 159, 227, 0.35)'
+    : '2px solid var(--grey-100)';
+  const idleBackground = suggested
+    ? 'rgba(0, 159, 227, 0.04)'
+    : 'var(--white)';
   return (
     <button
       onClick={onClick}
@@ -465,10 +534,8 @@ function OptionCard({
         width: '100%',
         textAlign: 'left',
         padding: '11px 13px',
-        background: selected ? 'rgba(254,186,2,0.10)' : 'var(--white)',
-        border: selected
-          ? '2px solid var(--brand-yellow)'
-          : '2px solid var(--grey-100)',
+        background: selected ? 'rgba(254,186,2,0.10)' : idleBackground,
+        border: selected ? '2px solid var(--brand-yellow)' : idleBorder,
         borderRadius: 'var(--radius-md)',
         cursor: 'pointer',
         marginBottom: 8,
@@ -478,23 +545,99 @@ function OptionCard({
         if (!selected) e.currentTarget.style.borderColor = 'var(--brand-blue)';
       }}
       onMouseLeave={(e) => {
-        if (!selected) e.currentTarget.style.borderColor = 'var(--grey-100)';
+        if (!selected) {
+          e.currentTarget.style.borderColor = suggested
+            ? 'rgba(0, 159, 227, 0.35)'
+            : 'var(--grey-100)';
+        }
       }}
     >
       <div
         style={{
-          fontSize: 13,
-          fontWeight: 700,
-          color: 'var(--brand-navy)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 8,
           marginBottom: 3,
         }}
       >
-        {label}
+        <div
+          style={{
+            fontSize: 13,
+            fontWeight: 700,
+            color: 'var(--brand-navy)',
+          }}
+        >
+          {label}
+        </div>
+        {suggested && !selected && (
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 4,
+              fontSize: 9.5,
+              fontWeight: 800,
+              padding: '2px 7px',
+              borderRadius: 100,
+              background: 'rgba(0, 159, 227, 0.12)',
+              color: 'var(--brand-blue)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              flexShrink: 0,
+            }}
+          >
+            <Sparkles size={9} />
+            Data suggests this
+          </span>
+        )}
       </div>
       <div style={{ fontSize: 12, color: 'var(--grey-500)', lineHeight: 1.4 }}>
         {description}
       </div>
     </button>
+  );
+}
+
+/**
+ * Small "Reading the data" callout rendered above the options on
+ * each step. Grounds the pick in visible partner data so the
+ * learner's choice reads as a response to what they can see, not
+ * an abstract category question.
+ */
+function DataContextCallout({ text }: { text: string }) {
+  return (
+    <div
+      style={{
+        padding: '9px 11px',
+        background: 'var(--off-white)',
+        border: '1px solid var(--grey-100)',
+        borderRadius: 'var(--radius-sm)',
+        marginBottom: 12,
+      }}
+    >
+      <div
+        style={{
+          fontSize: 10,
+          fontWeight: 800,
+          color: 'var(--grey-400)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.10em',
+          marginBottom: 4,
+        }}
+      >
+        Reading the data
+      </div>
+      <div
+        style={{
+          fontSize: 12,
+          color: 'var(--grey-700)',
+          lineHeight: 1.5,
+        }}
+      >
+        {text}
+      </div>
+    </div>
   );
 }
 

@@ -32,6 +32,7 @@ import {
 import { getPersonaById, type SuperPowerPersona } from '../data/characters';
 import { getPersonaHint } from '../data/personaHints';
 import { IssueTreeHelper } from '../components/IssueTreeHelper';
+import { getBranchingScenario } from '../data/branchingScenarios';
 import { MetricLabel } from '../components/MetricLabel';
 import { PriceBucketStrip } from '../components/PriceBucketStrip';
 import { metricDefinitions } from '../data/metricDefinitions';
@@ -510,7 +511,7 @@ export function PartnerDetailScreen({
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
                   {alreadyEngaged
                     ? 'Already engaged this round'
-                    : 'Open the Issue Tree Helper before you engage'}
+                    : 'Open the Diagnosis Coach before you engage'}
                 </div>
               </div>
             )}
@@ -537,6 +538,12 @@ export function PartnerDetailScreen({
           <IssueTreeHelper
             key="helper-drawer"
             partnerName={partner.persona.name}
+            partnerFirstName={partner.persona.name.split(' ')[0]}
+            dataContext={hint?.oneLiner}
+            suggestedPath={
+              getBranchingScenario(partner.persona.id, currentRound)
+                ?.issueTreePath
+            }
             helperState={helperState}
             onUpdate={(next) =>
               onSetIssueTreeHelperState(
@@ -1416,8 +1423,8 @@ function HelperLauncherTab({
     <motion.button
       data-tutorial="partner-detail-tree-tab"
       onClick={onOpen}
-      aria-label="Open Issue Tree Helper"
-      title="Issue Tree Helper"
+      aria-label="Open Diagnosis Coach"
+      title="Diagnosis Coach"
       initial={{ opacity: 0, x: 12, y: '-50%' }}
       animate={{
         opacity: 1,

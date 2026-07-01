@@ -520,7 +520,7 @@ function getGuideContent(
           ...(currentRound === 1
             ? [{
                 icon: <TreeDeciduous size={13} />,
-                text: 'Open the Issue Tree Helper (yellow tab, right edge)',
+                text: 'Open the Diagnosis Coach (yellow tab, right edge)',
                 target: 'partner-detail-tree-tab',
               }]
             : []),
