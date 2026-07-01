@@ -49,13 +49,6 @@ interface IssueTreeHelperProps {
    */
   partnerFirstName: string;
   /**
-   * Optional one-line data lens on the partner (e.g. the persona
-   * hint). Rendered above the options as "Reading the data" so
-   * the learner is picking against visible context, not abstract
-   * categories. Hidden if not supplied.
-   */
-  dataContext?: string;
-  /**
    * Optional SME-prescribed path through the tree for this partner-
    * round. When present, the option at each step that matches the
    * prescribed path picks up a soft "Data suggests this" tag. The
@@ -74,7 +67,6 @@ const STEP_COUNT = 6;
 export function IssueTreeHelper({
   partnerName,
   partnerFirstName,
-  dataContext,
   suggestedPath,
   helperState,
   onUpdate,
@@ -317,10 +309,6 @@ export function IssueTreeHelper({
                 than one trigger - pick the one that stands out most.
               </p>
             )}
-
-            {/* Data context callout - grounds each pick in the visible
-                partner data so options aren't abstract categories. */}
-            {dataContext && <DataContextCallout text={dataContext} />}
 
             {stepIndex === 0 &&
               triggers.map((t) => (
@@ -599,47 +587,6 @@ function OptionCard({
   );
 }
 
-/**
- * Small "Reading the data" callout rendered above the options on
- * each step. Grounds the pick in visible partner data so the
- * learner's choice reads as a response to what they can see, not
- * an abstract category question.
- */
-function DataContextCallout({ text }: { text: string }) {
-  return (
-    <div
-      style={{
-        padding: '9px 11px',
-        background: 'var(--off-white)',
-        border: '1px solid var(--grey-100)',
-        borderRadius: 'var(--radius-sm)',
-        marginBottom: 12,
-      }}
-    >
-      <div
-        style={{
-          fontSize: 10,
-          fontWeight: 800,
-          color: 'var(--grey-400)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.10em',
-          marginBottom: 4,
-        }}
-      >
-        Reading the data
-      </div>
-      <div
-        style={{
-          fontSize: 12,
-          color: 'var(--grey-700)',
-          lineHeight: 1.5,
-        }}
-      >
-        {text}
-      </div>
-    </div>
-  );
-}
 
 function PathSummary({ path }: { path: IssueTreeHelperState['path'] }) {
   const trigger = path.trigger ? getTrigger(path.trigger) : undefined;

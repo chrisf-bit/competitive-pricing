@@ -539,7 +539,6 @@ export function PartnerDetailScreen({
             key="helper-drawer"
             partnerName={partner.persona.name}
             partnerFirstName={partner.persona.name.split(' ')[0]}
-            dataContext={hint?.oneLiner}
             suggestedPath={
               getBranchingScenario(partner.persona.id, currentRound)
                 ?.issueTreePath
@@ -1431,16 +1430,16 @@ function HelperLauncherTab({
         x: 0,
         y: '-50%',
         boxShadow: [
-          '-4px 6px 14px rgba(254,186,2,0.30)',
-          '-4px 6px 26px rgba(254,186,2,0.60)',
-          '-4px 6px 14px rgba(254,186,2,0.30)',
+          '-6px 8px 18px rgba(254,186,2,0.40)',
+          '-6px 8px 34px rgba(254,186,2,0.75)',
+          '-6px 8px 18px rgba(254,186,2,0.40)',
         ],
       }}
       exit={{ opacity: 0, x: 12, y: '-50%' }}
       transition={{
         opacity: { duration: 0.18, ease: 'easeOut' },
         x: { duration: 0.18, ease: 'easeOut' },
-        boxShadow: { duration: 2.6, repeat: Infinity, ease: 'easeInOut' },
+        boxShadow: { duration: 2.4, repeat: Infinity, ease: 'easeInOut' },
       }}
       style={{
         position: 'fixed',
@@ -1450,24 +1449,26 @@ function HelperLauncherTab({
           'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
         color: 'var(--brand-navy-dark)',
         border: 'none',
-        borderTopLeftRadius: 'var(--radius-md)',
-        borderBottomLeftRadius: 'var(--radius-md)',
-        padding: '18px 16px',
+        borderTopLeftRadius: 'var(--radius-lg)',
+        borderBottomLeftRadius: 'var(--radius-lg)',
+        padding: '24px 20px 22px',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        gap: 6,
         cursor: 'pointer',
         zIndex: 95,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.paddingRight = '20px';
+        e.currentTarget.style.paddingRight = '26px';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.paddingRight = '16px';
+        e.currentTarget.style.paddingRight = '20px';
       }}
     >
       <span style={{ position: 'relative', display: 'inline-flex' }}>
-        <TreeDeciduous size={28} strokeWidth={2.2} />
+        <TreeDeciduous size={36} strokeWidth={2.5} />
         {hasProgress && (
           <span
             aria-label="In progress"
@@ -1483,6 +1484,19 @@ function HelperLauncherTab({
             }}
           />
         )}
+      </span>
+      {/* Small label under the icon so the tab reads as an
+          affordance, not just a decorative pulse. */}
+      <span
+        style={{
+          fontSize: 9.5,
+          fontWeight: 900,
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          lineHeight: 1,
+        }}
+      >
+        Coach
       </span>
     </motion.button>
   );
