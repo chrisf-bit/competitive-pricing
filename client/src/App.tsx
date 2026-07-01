@@ -331,6 +331,7 @@ export default function App() {
             <DebriefScreen
               score={game.score}
               partners={state.partners}
+              engagedPartnerIds={state.engagedPartnerIds}
               roundStars={state.roundStars}
               regime={state.learnerProfile.market?.parityRegime ?? null}
               personaId={state.learnerProfile.archetype?.id ?? null}

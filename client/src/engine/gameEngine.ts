@@ -111,6 +111,7 @@ export function createInitialState(overrides?: {
     currentRound: 1,
     actionsThisRound: [],
     previouslyEngagedThisRound: [],
+    engagedPartnerIds: [],
     selectedPartnerId: null,
     partners,
     marketContext: marketContextByRound[1],
@@ -349,6 +350,13 @@ export function processConversationChoice(
     updatedPartner.conversationLog.push(record);
 
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
+    // Only persist the engagement to the durable list during the main
+    // run. Practice Mode replays are separate attempts and shouldn't
+    // rewrite the main-run engagement history the Debrief reads.
+    const newEngagedPartnerIds =
+      !state.isPracticeMode && !state.engagedPartnerIds.includes(conv.partnerId)
+        ? [...state.engagedPartnerIds, conv.partnerId]
+        : state.engagedPartnerIds;
 
     // Grade the round - 0/1/2/3 stars - and route to the report screen
     // so the learner sees their result before the round transition.
@@ -386,6 +394,7 @@ export function processConversationChoice(
       ...state,
       partners: newPartners,
       actionsThisRound: newActionsThisRound,
+      engagedPartnerIds: newEngagedPartnerIds,
       roundStars: newRoundStars,
       lastConversationGrade: grade,
       conversationInProgress: {
@@ -483,6 +492,12 @@ function processBranchingChoice(
     updatedPartner.conversationLog.push(record);
 
     const newActionsThisRound = [...state.actionsThisRound, conv.partnerId];
+    // See processConversationChoice above for the reasoning - main-run
+    // only, skip Practice Mode, dedupe.
+    const newEngagedPartnerIds =
+      !state.isPracticeMode && !state.engagedPartnerIds.includes(conv.partnerId)
+        ? [...state.engagedPartnerIds, conv.partnerId]
+        : state.engagedPartnerIds;
 
     // Grade with the branching-aware grader. Minimal pass for v1:
     // floor = safe picks + no active style mismatch; 2 stars at
@@ -517,6 +532,7 @@ function processBranchingChoice(
       ...state,
       partners: newPartners,
       actionsThisRound: newActionsThisRound,
+      engagedPartnerIds: newEngagedPartnerIds,
       roundStars: newRoundStars,
       lastConversationGrade: grade,
       conversationInProgress: {
@@ -591,6 +607,14 @@ export function resetRoundForRetake(state: GameState): GameState {
     screen: 'portfolio',
     partners: newPartners,
     actionsThisRound: state.actionsThisRound.filter(
+      (id) => id !== conv.partnerId,
+    ),
+    // Retake undoes the engagement from the durable list too: the
+    // partner's state is snapshot-reverted (above), so from the
+    // debrief's perspective the wrong pick "didn't happen". Without
+    // this filter, a 0-star wrong-pick would still surface in the
+    // Debrief's Partner Outcomes + insights as an engaged partner.
+    engagedPartnerIds: state.engagedPartnerIds.filter(
       (id) => id !== conv.partnerId,
     ),
     // Keep the wrong-pick partner flagged as "engaged this round" on
@@ -712,7 +736,18 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   const improvements: string[] = [];
   const styleInsights: string[] = [];
 
-  for (const partner of state.partners) {
+  // Restrict insights + portfolio-level averages to the partners the
+  // learner actually engaged with. Judging them across the whole
+  // regime portfolio (21 partners today) produced nonsense on a
+  // perfect run: 18 correctly-ignored partners showed up as "RPD
+  // declined, consider prioritising them earlier" and every one of
+  // them added a style-preference paragraph. Now the debrief only
+  // speaks to the calls the learner made.
+  const engagedPartners = state.partners.filter((p) =>
+    state.engagedPartnerIds.includes(p.persona.id),
+  );
+
+  for (const partner of engagedPartners) {
     const initial = initialPartnerData.find(
       (p) => p.persona.id === partner.persona.id,
     );
@@ -766,9 +801,10 @@ export function calculateScore(state: GameState): ScoreBreakdown {
     }
   }
 
-  const avgRPD = totalRPDImprovement / state.partners.length;
-  const avgRevenue = totalRevenueChange / state.partners.length;
-  const avgTrust = totalTrust / state.partners.length;
+  const engagedCount = engagedPartners.length;
+  const avgRPD = engagedCount > 0 ? totalRPDImprovement / engagedCount : 0;
+  const avgRevenue = engagedCount > 0 ? totalRevenueChange / engagedCount : 0;
+  const avgTrust = engagedCount > 0 ? totalTrust / engagedCount : 0;
 
   // Grade reads from per-round stars rather than the legacy metric
   // deltas above. The new branching conversations only nudge a few

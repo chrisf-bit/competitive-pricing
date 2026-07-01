@@ -32,6 +32,12 @@ const TOTAL_ROUNDS_DISPLAYED = 3;
 interface DebriefScreenProps {
   score: ScoreBreakdown;
   partners: PartnerState[];
+  /**
+   * Partner IDs the learner actually engaged with during the main
+   * run. Filters the Partner Outcomes grid (so only the ~3 calls
+   * they made render, not the whole 21-partner regime portfolio).
+   */
+  engagedPartnerIds: string[];
   /** Best stars earned per round across all attempts. */
   roundStars: Record<number, 0 | 1 | 2 | 3>;
   /**
@@ -68,6 +74,7 @@ const gradeConfig: Record<
 export function DebriefScreen({
   score,
   partners,
+  engagedPartnerIds,
   roundStars,
   regime,
   personaId,
@@ -82,6 +89,19 @@ export function DebriefScreen({
     0,
   );
   const maxStars = TOTAL_ROUNDS_DISPLAYED * 3;
+  const allRoundsMaxed = totalStars === maxStars && totalStars > 0;
+
+  // Only the partners the learner actually engaged with belong in the
+  // Partner Outcomes grid. Everything else in the 21-partner regime
+  // portfolio was correctly ignored per the one-action-per-round
+  // mechanic, so rendering them as outcome cards misrepresents the
+  // run. Fallback to the full list is guarded against an empty
+  // engagement history (shouldn't happen once conversations wire
+  // this up, but the debrief still needs something to render).
+  const outcomePartners =
+    engagedPartnerIds.length > 0
+      ? partners.filter((p) => engagedPartnerIds.includes(p.persona.id))
+      : partners;
 
   // Tell the LMS the sim is complete the moment the debrief mounts.
   // Idempotent at the LMS level - repeat mounts (e.g. returning from
@@ -201,7 +221,7 @@ export function DebriefScreen({
         >
           <h4 style={{ marginBottom: 16, fontSize: 14 }}>Partner Outcomes</h4>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
-            {partners.map((partner) => {
+            {outcomePartners.map((partner) => {
               const initial = initialPartners.find(
                 (p) => p.persona.id === partner.persona.id,
               );
@@ -493,7 +513,11 @@ export function DebriefScreen({
           </div>
         </div>
 
-        {/* Practice Mode - round-select grid */}
+        {/* Practice Mode - round-select grid. Hidden entirely on a
+            perfect run (all attempted rounds already at 3 stars) -
+            there's nothing to chase and the "replay to try different
+            approaches" framing reads as busywork. */}
+        {!allRoundsMaxed && (
         <div
           style={{
             background: 'var(--white)',
@@ -585,6 +609,7 @@ export function DebriefScreen({
             })}
           </div>
         </div>
+        )}
 
         {/* Footer actions: download summary + replay */}
         <div

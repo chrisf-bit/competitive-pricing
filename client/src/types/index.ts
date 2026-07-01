@@ -667,6 +667,21 @@ export interface GameState {
    * on advanceRound and startPracticeRound.
    */
   previouslyEngagedThisRound: string[];
+  /**
+   * Durable, cross-round list of partner IDs the learner engaged with
+   * during their main run. Appended when a conversation completes
+   * (skipped for Practice Mode replays - those are separate attempts,
+   * they shouldn't retroactively rewrite the main-run engagement
+   * history). Filtered on retake so a 0-star wrong-pick that was
+   * reverted doesn't count as an engagement. Consumed by the Debrief:
+   * `calculateScore` restricts its highlights / improvements / style
+   * insights to just these partners, and the Partner Outcomes grid
+   * only renders them. Without this scope, the debrief judged the
+   * learner across the whole 21-partner regime portfolio (18 of
+   * which they correctly ignored) and read as "you neglected
+   * everyone" even on a perfect 9/9 run.
+   */
+  engagedPartnerIds: string[];
   selectedPartnerId: string | null;
   partners: PartnerState[];
   marketContext: MarketContext;
