@@ -305,8 +305,6 @@ export default function App() {
                 state.previouslyEngagedThisRound.includes(state.selectedPartnerId)
               }
               personaId={state.learnerProfile.archetype?.id ?? null}
-              expandedBlindSpots={state.expandedBlindSpots}
-              onMarkBlindSpotExpanded={game.markBlindSpotExpanded}
               issueTreeHelperStates={state.issueTreeHelperStates}
               onSetIssueTreeHelperState={game.setIssueTreeHelperState}
               hasOpenedIssueTreeHelper={state.hasOpenedIssueTreeHelper}

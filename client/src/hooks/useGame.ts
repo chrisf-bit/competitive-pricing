@@ -264,23 +264,6 @@ export function useGame() {
   }, []);
 
   /**
-   * Mark the persona blind-spot card as expanded for a partner-round.
-   * After this fires the card is hidden on subsequent visits to that
-   * partner-round (until restart or practice-round entry).
-   */
-  const markBlindSpotExpanded = useCallback(
-    (partnerId: string, round: number) => {
-      const key = `${partnerId}-${round}`;
-      setState((s) =>
-        s.expandedBlindSpots.includes(key)
-          ? s
-          : { ...s, expandedBlindSpots: [...s.expandedBlindSpots, key] },
-      );
-    },
-    [],
-  );
-
-  /**
    * Persist Issue Tree Helper picks for a partner-round so the
    * learner can close the drawer to peek at data and resume their
    * picks on reopen. Resets only on full restart / practice-round
@@ -373,7 +356,6 @@ export function useGame() {
     requestLevel0Retry,
     markTutorialShown,
     markPartnerDetailTutorialShown,
-    markBlindSpotExpanded,
     setIssueTreeHelperState,
     markIssueTreeHelperOpened,
     markLevel0Cleared,

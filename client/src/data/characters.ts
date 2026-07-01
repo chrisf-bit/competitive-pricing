@@ -138,6 +138,15 @@ export interface SuperPowerPersona {
     /** Coaching tail on the Debrief aggregate block. */
     aggregateCoaching: string;
   };
+  /**
+   * Concrete, learner-facing description of what the persona does
+   * during play. Rendered on the Character Build card so the pick
+   * doesn't feel like pure flavour. One line, present tense, names
+   * the actual UI effect (which chip, which highlight) so the
+   * learner knows what to expect. Kept honest to what ships - if
+   * you build a new persona effect, update this string first.
+   */
+  inGameImpact: string;
 }
 
 export const superPowerPersonas: SuperPowerPersona[] = [
@@ -182,6 +191,8 @@ export const superPowerPersonas: SuperPowerPersona[] = [
       aggregateCoaching:
         'Next playthrough, push past the rapport when the numbers ask for it.',
     },
+    inGameImpact:
+      'On each partner, a one-line coaching chip tells you how to approach the conversation.',
   },
   {
     id: 'objection-navigator',
@@ -226,6 +237,8 @@ export const superPowerPersonas: SuperPowerPersona[] = [
       aggregateCoaching:
         'Next playthrough, slow down for one more diagnostic question before pitching.',
     },
+    inGameImpact:
+      'On each partner, a one-line chip flags the pushback most likely to derail the call.',
   },
   {
     id: 'storyteller',
@@ -268,6 +281,8 @@ export const superPowerPersonas: SuperPowerPersona[] = [
       aggregateCoaching:
         'Next playthrough, leave the supporting detail in when it changes the story.',
     },
+    inGameImpact:
+      'On each partner, a one-line chip retells the numbers as the story they add up to.',
   },
   {
     id: 'data-detective',
@@ -310,6 +325,8 @@ export const superPowerPersonas: SuperPowerPersona[] = [
       aggregateCoaching:
         'Next playthrough, look up from the dashboard for the partner\'s style signals.',
     },
+    inGameImpact:
+      'On each partner, a one-line chip calls out the biggest metric anomaly hiding in the data.',
   },
 ];
 

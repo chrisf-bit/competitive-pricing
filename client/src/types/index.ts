@@ -643,15 +643,6 @@ export interface GameState {
    */
   partnerDetailTutorialShown: boolean;
   /**
-   * Set of `${partnerId}-${round}` keys for which the learner has
-   * expanded the persona blind-spot card on Partner Detail. Once a key
-   * lands here, the card stays hidden on subsequent visits to that
-   * partner-round (per the "hide when seen once" rule). Reset on full
-   * restart and on practice-round entry so a clean attempt gets the
-   * hint surfaced again.
-   */
-  expandedBlindSpots: string[];
-  /**
    * Issue Tree Helper progress per partner-round. The Helper drawer
    * is intentionally close-and-reopenable (learner pops out to check
    * data, comes back without losing picks). Keys are

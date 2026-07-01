@@ -13,7 +13,6 @@ import {
   UserCircle,
   ChevronRight,
   TreeDeciduous,
-  Eye,
   Lock,
   CalendarClock,
   Percent,
@@ -44,10 +43,6 @@ interface PartnerDetailScreenProps {
   alreadyEngaged: boolean;
   /** The learner's selected super-power persona id, or null if none picked. */
   personaId: string | null;
-  /** Set of `${partnerId}-${round}` keys whose blind-spot card has been opened. */
-  expandedBlindSpots: string[];
-  /** Called when the learner expands the blind-spot card. */
-  onMarkBlindSpotExpanded: (partnerId: string, round: number) => void;
   /**
    * Saved Issue Tree Helper state per partner-round. Lets the learner
    * close the drawer to peek at metrics and reopen without losing
@@ -98,8 +93,6 @@ export function PartnerDetailScreen({
   currentRound,
   alreadyEngaged,
   personaId,
-  expandedBlindSpots,
-  onMarkBlindSpotExpanded,
   issueTreeHelperStates,
   onSetIssueTreeHelperState,
   hasOpenedIssueTreeHelper,
@@ -129,26 +122,6 @@ export function PartnerDetailScreen({
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
   const hint = getPersonaHint(partner.persona.id, currentRound, personaId);
-  const blindSpotKey = `${partner.persona.id}-${currentRound}`;
-  const blindSpotAlreadySeen = expandedBlindSpots.includes(blindSpotKey);
-  // Local expand state for the current view. Once expanded, content stays
-  // visible until the learner navigates away; on next visit
-  // expandedBlindSpots already contains the key and the card is hidden.
-  const [blindSpotOpen, setBlindSpotOpen] = useState(false);
-  // The `|| blindSpotOpen` guard is load-bearing - without it, clicking
-  // Reveal triggers two state updates in the same render (local
-  // blindSpotOpen flips true AND the engine adds the key to
-  // expandedBlindSpots), which then makes blindSpotAlreadySeen true and
-  // unmounts the card before the user ever sees the full text. Keeping
-  // the card mounted while it's locally open means the "hide on
-  // subsequent visits" rule still works (blindSpotOpen resets to false
-  // when the learner navigates away).
-  const showBlindSpotCard = !!hint && (!blindSpotAlreadySeen || blindSpotOpen);
-
-  function handleExpandBlindSpot() {
-    setBlindSpotOpen(true);
-    onMarkBlindSpotExpanded(partner.persona.id, currentRound);
-  }
 
   // Issue Tree Helper - opens the guided diagnostic wizard for this
   // partner. Teach-mode only; no scoring or impact on grading. Drawer
@@ -282,27 +255,7 @@ export function PartnerDetailScreen({
               (and so doesn't render any more), the insight card
               stretches to fill the row. */}
           {persona && hint && (
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: showBlindSpotCard ? '1fr 1fr' : '1fr',
-                gap: 10,
-              }}
-            >
-              <PersonaInsightCard
-                persona={persona}
-                copy={hint.unlocked}
-              />
-              {showBlindSpotCard && (
-                <PersonaBlindSpotCard
-                  persona={persona}
-                  teaser={hint.mutedTeaser}
-                  full={hint.mutedFull}
-                  isOpen={blindSpotOpen}
-                  onExpand={handleExpandBlindSpot}
-                />
-              )}
-            </div>
+            <PersonaLensChip persona={persona} oneLiner={hint.oneLiner} />
           )}
 
           {/* Tabbed metrics block (R2). Driving Metrics tab carries
@@ -596,12 +549,19 @@ export function PartnerDetailScreen({
   );
 }
 
-function PersonaInsightCard({
+/**
+ * A single compact chip that acts as the learner's persona lens on
+ * the partner. Replaced the insight + blind-spot cards in 2026-07 -
+ * user testing said the two-card block was too much copy for what
+ * amounted to one pre-call cue. The chip stays visible on every
+ * visit; the one-line copy is the entire hint.
+ */
+function PersonaLensChip({
   persona,
-  copy,
+  oneLiner,
 }: {
   persona: SuperPowerPersona;
-  copy: string;
+  oneLiner: string;
 }) {
   const Icon = persona.icon;
   const accent = `var(--style-${persona.accent})`;
@@ -609,126 +569,44 @@ function PersonaInsightCard({
     <div
       style={{
         background: 'var(--white)',
-        border: '2px solid var(--grey-100)',
+        border: '1.5px solid var(--grey-100)',
         borderLeft: `4px solid ${accent}`,
-        borderRadius: 'var(--radius-lg)',
-        padding: '10px 14px',
-        boxShadow: 'var(--shadow-md)',
+        borderRadius: 'var(--radius-md)',
+        padding: '9px 12px',
+        boxShadow: 'var(--shadow-sm)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: 10,
         animation: 'fadeIn 0.3s ease 0.05s backwards',
       }}
     >
       <div
         style={{
-          display: 'inline-flex',
+          width: 26,
+          height: 26,
+          borderRadius: 7,
+          background: `${accent}1a`,
+          color: accent,
+          display: 'flex',
           alignItems: 'center',
-          gap: 5,
-          padding: '3px 9px',
-          borderRadius: 999,
-          background: accent,
-          color: 'var(--white)',
-          fontSize: 10.5,
-          fontWeight: 800,
-          letterSpacing: '0.02em',
-          marginBottom: 6,
+          justifyContent: 'center',
+          flexShrink: 0,
         }}
       >
-        <Icon size={11} />
-        {persona.powerEffect.unlockedChip}
+        <Icon size={14} strokeWidth={2.2} />
       </div>
-      <p
+      <div
         style={{
           fontSize: 12.5,
           color: 'var(--grey-700)',
-          lineHeight: 1.5,
-          margin: 0,
+          lineHeight: 1.45,
         }}
       >
-        {copy}
-      </p>
-    </div>
-  );
-}
-
-function PersonaBlindSpotCard({
-  persona,
-  teaser,
-  full,
-  isOpen,
-  onExpand,
-}: {
-  persona: SuperPowerPersona;
-  teaser: string;
-  full: string;
-  isOpen: boolean;
-  onExpand: () => void;
-}) {
-  const Icon = persona.icon;
-  const accent = `var(--style-${persona.accent})`;
-  return (
-    <div
-      style={{
-        background: isOpen ? 'var(--white)' : 'var(--off-white)',
-        border: `1.5px dashed ${isOpen ? 'var(--grey-200)' : 'var(--grey-300)'}`,
-        borderRadius: 'var(--radius-lg)',
-        padding: '10px 14px',
-        boxShadow: isOpen ? 'var(--shadow-sm)' : 'none',
-        animation: 'fadeIn 0.3s ease 0.08s backwards',
-        opacity: isOpen ? 1 : 0.78,
-        transition: 'opacity 0.2s ease, background 0.2s ease',
-      }}
-    >
-      {!isOpen && (
-        <div
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 5,
-            padding: '3px 9px',
-            borderRadius: 999,
-            background: 'rgba(0,0,0,0.05)',
-            color: accent,
-            fontSize: 10.5,
-            fontWeight: 800,
-            letterSpacing: '0.02em',
-            marginBottom: 6,
-          }}
-        >
-          <Icon size={11} />
-          {persona.powerEffect.mutedChip}
-        </div>
-      )}
-      <p
-        style={{
-          fontSize: 12.5,
-          color: isOpen ? 'var(--grey-700)' : 'var(--grey-500)',
-          lineHeight: 1.5,
-          margin: 0,
-          fontStyle: isOpen ? 'normal' : 'italic',
-        }}
-      >
-        {isOpen ? full : teaser}
-      </p>
-      {!isOpen && (
-        <button
-          onClick={onExpand}
-          style={{
-            marginTop: 6,
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 4,
-            background: 'transparent',
-            border: 'none',
-            color: 'var(--brand-navy)',
-            fontSize: 11.5,
-            fontWeight: 700,
-            cursor: 'pointer',
-            padding: 0,
-          }}
-        >
-          <Eye size={13} />
-          Reveal blind spot
-        </button>
-      )}
+        <span style={{ fontWeight: 800, color: accent }}>
+          {persona.powerEffect.unlockedChip}:
+        </span>{' '}
+        {oneLiner}
+      </div>
     </div>
   );
 }

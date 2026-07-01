@@ -553,6 +553,45 @@ function PersonaCard({
           </ul>
         </div>
       </div>
+
+      {/* In-game impact strip. Tells the learner what the persona
+          actually does during play - so the pick doesn't read as
+          pure flavour. Kept short and honest to the chip that
+          renders on Partner Detail during play. */}
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: 8,
+          padding: '10px 12px',
+          borderRadius: 8,
+          background: `${accentColor}12`,
+          border: `1px solid ${accentColor}35`,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 800,
+            color: accentColor,
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            flexShrink: 0,
+            paddingTop: 1,
+          }}
+        >
+          In game
+        </div>
+        <div
+          style={{
+            fontSize: 12,
+            lineHeight: 1.45,
+            color: 'rgba(255,255,255,0.85)',
+          }}
+        >
+          {persona.inGameImpact}
+        </div>
+      </div>
     </motion.button>
   );
 }
