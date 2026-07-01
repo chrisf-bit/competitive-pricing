@@ -14,6 +14,8 @@ import {
   Users,
   Check,
   TreeDeciduous,
+  Gauge,
+  Tag,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -432,15 +434,19 @@ function getGuideContent(
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:
-          'Identify which partners need attention most and engage them.',
+          'One partner needs your attention more than the others. Find them, open their profile, and start the call.',
         steps: [
           {
             icon: <Eye size={13} />,
-            text: 'Check the market update',
+            text: 'Read the market update at the top',
+          },
+          {
+            icon: <BarChart3 size={13} />,
+            text: 'Compare eRPD and Lose Price across the cards',
           },
           {
             icon: <Target size={13} />,
-            text: 'Pick the partner who needs you most',
+            text: 'Click the card of the partner who needs you most',
           },
         ],
         tips: [
@@ -478,20 +484,20 @@ function getGuideContent(
           ? `${selectedPartner.persona.name.split(' ')[0]}'s Profile`
           : 'Partner Detail',
         objective: selectedPartner
-          ? `Study ${selectedPartner.persona.name.split(' ')[0]}'s data before engaging.`
+          ? `Look at ${selectedPartner.persona.name.split(' ')[0]}'s numbers, form a hypothesis, then start the call.`
           : 'Review the partner data.',
         steps: [
           {
+            icon: <Gauge size={13} />,
+            text: 'Check the eRPD Price Bucket - where do they sit?',
+          },
+          {
             icon: <BarChart3 size={13} />,
-            text: 'Review metrics and trends',
+            text: 'Scan the Secondary Metrics for context and pace',
           },
           {
-            icon: <AlertTriangle size={13} />,
-            text: 'Check pricing competitiveness and discounts',
-          },
-          {
-            icon: <Eye size={13} />,
-            text: 'Read profile notes',
+            icon: <Tag size={13} />,
+            text: 'Read the Discount Products - active vs inactive',
           },
           // Round 1 introduces the Issue Tree Helper as a mandatory
           // pre-call step. The yellow tree tab to the right is the
@@ -499,12 +505,12 @@ function getGuideContent(
           ...(currentRound === 1
             ? [{
                 icon: <TreeDeciduous size={13} />,
-                text: 'Open the Issue Tree Helper',
+                text: 'Open the Issue Tree Helper (yellow tab, right edge)',
               }]
             : []),
           {
             icon: <MessageSquare size={13} />,
-            text: 'Begin conversation',
+            text: 'Hit Begin Conversation when you have a plan',
           },
         ],
         tips: selectedPartner ? getPartnerSpecificTips(selectedPartner) : [],

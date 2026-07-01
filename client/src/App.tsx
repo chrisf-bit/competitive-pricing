@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './index.css';
 import { useGame } from './hooks/useGame';
 import { Header } from './components/Header';
@@ -30,6 +30,26 @@ export default function App() {
   const { state } = game;
   const [showTutorial, setShowTutorial] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
+
+  // Auto-fire the Partner Detail tutorial the first time the learner
+  // lands on that screen. Portfolio's auto-fire is triggered inline
+  // by the clearance/celebration onContinue callbacks; Partner Detail
+  // is reached via a card click deeper in the reducer, so a screen
+  // watcher is the cleaner hook. Gated by both flags: showSplash
+  // suppresses it while the splash is still up (DevNav jump path);
+  // showTutorial suppresses re-firing if the learner just closed
+  // the Portfolio tour.
+  useEffect(() => {
+    if (
+      state.screen === 'partner-detail' &&
+      !state.partnerDetailTutorialShown &&
+      !showTutorial &&
+      !showSplash
+    ) {
+      setShowTutorial(true);
+      game.markPartnerDetailTutorialShown();
+    }
+  }, [state.screen, state.partnerDetailTutorialShown, showTutorial, showSplash, game]);
 
   if (showSplash) {
     return (

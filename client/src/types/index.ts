@@ -625,8 +625,17 @@ export interface GameState {
    * activity from scratch. Cleared when the activity completes.
    */
   level0RetryItemIds: string[] | null;
-  /** Whether the partner-sim tutorial has been auto-shown to the learner already. */
+  /** Whether the Portfolio tutorial has been auto-shown to the learner already. */
   tutorialShown: boolean;
+  /**
+   * Whether the Partner Detail tutorial has been auto-shown on
+   * first-visit. Separate flag from `tutorialShown` because the two
+   * tours cover different screens with different step sets, and a
+   * learner who saw the Portfolio walkthrough still hasn't seen
+   * Partner Detail until they've clicked into a partner. Both flags
+   * clear on full restart via `onRestart`.
+   */
+  partnerDetailTutorialShown: boolean;
   /**
    * Set of `${partnerId}-${round}` keys for which the learner has
    * expanded the persona blind-spot card on Partner Detail. Once a key

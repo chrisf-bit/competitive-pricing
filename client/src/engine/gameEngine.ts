@@ -105,6 +105,7 @@ export function createInitialState(overrides?: {
     level0ReturnTo: null,
     level0RetryItemIds: null,
     tutorialShown: false,
+    partnerDetailTutorialShown: false,
     expandedBlindSpots: [],
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,

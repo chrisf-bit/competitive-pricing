@@ -236,9 +236,14 @@ export function useGame() {
     [],
   );
 
-  /** Mark the partner-sim tutorial as having been auto-shown. */
+  /** Mark the Portfolio tutorial as having been auto-shown. */
   const markTutorialShown = useCallback(() => {
     setState((s) => ({ ...s, tutorialShown: true }));
+  }, []);
+
+  /** Mark the Partner Detail tutorial as having been auto-shown. */
+  const markPartnerDetailTutorialShown = useCallback(() => {
+    setState((s) => ({ ...s, partnerDetailTutorialShown: true }));
   }, []);
 
   /**
@@ -349,6 +354,7 @@ export function useGame() {
     finishLevel0Activity,
     requestLevel0Retry,
     markTutorialShown,
+    markPartnerDetailTutorialShown,
     markBlindSpotExpanded,
     setIssueTreeHelperState,
     markIssueTreeHelperOpened,
