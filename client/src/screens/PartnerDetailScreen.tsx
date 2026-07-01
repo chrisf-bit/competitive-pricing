@@ -36,6 +36,7 @@ import { IssueTreeHelper } from '../components/IssueTreeHelper';
 import { MetricLabel } from '../components/MetricLabel';
 import { PriceBucketStrip } from '../components/PriceBucketStrip';
 import { metricDefinitions } from '../data/metricDefinitions';
+import { useIdleNudge } from '../hooks/useIdleNudge';
 
 interface PartnerDetailScreenProps {
   partner: PartnerState;
@@ -115,6 +116,15 @@ export function PartnerDetailScreen({
   // free to start the call. The old explicit action budget was
   // retired in 2026-06 - see engine/gameEngine.ts for the rationale.
   const canEngage = !alreadyEngaged && !issueTreeGateBlocks;
+
+  // Idle-nudge target picks the primary next action for the learner's
+  // current gate state: Round 1 with an unopened Helper needs the
+  // yellow tree tab; everything else (Helper opened, or R2+) is
+  // waiting on Begin Conversation.
+  useIdleNudge(
+    issueTreeGateBlocks ? 'partner-detail-tree-tab' : 'partner-detail-action',
+    true,
+  );
 
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);

@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import type { PartnerState, MarketContext } from '../types';
 import { RelationshipBadge } from '../components/MetricBadge';
+import { useIdleNudge } from '../hooks/useIdleNudge';
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
@@ -20,6 +21,11 @@ export function PortfolioScreen({
   marketContext,
   onSelectPartner,
 }: PortfolioScreenProps) {
+  // If the learner idles on Portfolio, pulse the first partner card
+  // to draw the eye back to the primary decision. Enabled unconditionally
+  // here - anywhere the screen renders the nudge is desirable.
+  useIdleNudge('partner-card', true);
+
   return (
     <div
       style={{

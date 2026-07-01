@@ -111,3 +111,29 @@ button:active {
   50% { box-shadow: 0 0 0 6px rgba(254, 186, 2, 0.15); }
 }
 
+/*
+ * Idle-nudge pulse. Applied by useIdleNudge to both the target tile
+ * on the main screen (via its data-tutorial attribute) and the Guide
+ * step that describes it (via data-guide-step-for). Runs three
+ * iterations of a ~0.8s cycle so it registers without lingering.
+ */
+@keyframes idleNudgePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(254, 186, 2, 0);
+    outline-color: rgba(254, 186, 2, 0);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px rgba(254, 186, 2, 0.55),
+      0 0 22px rgba(254, 186, 2, 0.35);
+    outline-color: rgba(254, 186, 2, 0.75);
+  }
+}
+
+.idle-nudge-pulse {
+  animation: idleNudgePulse 0.8s ease-in-out 3;
+  outline: 2px solid rgba(254, 186, 2, 0);
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+

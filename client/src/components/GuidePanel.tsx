@@ -33,6 +33,14 @@ interface GuideStep {
   text: string;
   active?: boolean;
   done?: boolean;
+  /**
+   * Optional `data-tutorial` selector for the tile/block on the main
+   * screen this step refers to. Kept at block granularity (a partner
+   * card, a metric tile, an action button) rather than per-number so
+   * the target is always visually obvious. Consumed by the idle-nudge
+   * pulse in useIdleNudge / IdleNudgeProvider.
+   */
+  target?: string;
 }
 
 interface GuideTip {
@@ -196,6 +204,7 @@ export function GuidePanel({
             {content.steps.map((step, i) => (
               <div
                 key={i}
+                data-guide-step-for={step.target}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -439,14 +448,17 @@ function getGuideContent(
           {
             icon: <Eye size={13} />,
             text: 'Read the market update at the top',
+            target: 'market-bar',
           },
           {
             icon: <BarChart3 size={13} />,
             text: 'Compare eRPD and Lose Price across the cards',
+            target: 'partner-card',
           },
           {
             icon: <Target size={13} />,
             text: 'Click the card of the partner who needs you most',
+            target: 'partner-card',
           },
         ],
         tips: [
@@ -490,14 +502,17 @@ function getGuideContent(
           {
             icon: <Gauge size={13} />,
             text: 'Check the eRPD Price Bucket - where do they sit?',
+            target: 'partner-detail-bucket-strip',
           },
           {
             icon: <BarChart3 size={13} />,
             text: 'Scan the Secondary Metrics for context and pace',
+            target: 'partner-detail-secondary',
           },
           {
             icon: <Tag size={13} />,
             text: 'Read the Discount Products - active vs inactive',
+            target: 'partner-detail-discounts',
           },
           // Round 1 introduces the Issue Tree Helper as a mandatory
           // pre-call step. The yellow tree tab to the right is the
@@ -506,11 +521,13 @@ function getGuideContent(
             ? [{
                 icon: <TreeDeciduous size={13} />,
                 text: 'Open the Issue Tree Helper (yellow tab, right edge)',
+                target: 'partner-detail-tree-tab',
               }]
             : []),
           {
             icon: <MessageSquare size={13} />,
             text: 'Hit Begin Conversation when you have a plan',
+            target: 'partner-detail-action',
           },
         ],
         tips: selectedPartner ? getPartnerSpecificTips(selectedPartner) : [],
