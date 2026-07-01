@@ -206,9 +206,9 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
     target: 'discount-row',
     title: 'Discount Products',
     description:
-      'Eleven pricing products grouped into three columns: Public Pricing, Genius Pricing, and Foundations & Payments. Each row shows active or inactive. The mix of what is on vs off tells you what tools the partner is leaning on.',
+      'Each card sums up how many of the partner\'s pricing products are currently active. A low count against a high denominator means unused levers. Open the partner to see the full three-column view - Public Pricing, Genius Pricing, and Foundations & Payments - and judge which specific tools are on or off.',
     icon: <Tag size={18} style={{ color: 'var(--brand-yellow)' }} />,
-    position: 'top',
+    position: 'bottom',
   },
   {
     target: 'issue-tree-helper',
