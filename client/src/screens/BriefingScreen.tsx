@@ -97,6 +97,11 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               conversation. Pay attention to how each partner responds, not every situation
               is the same, and not every partner sees the issue in the same way.
             </p>
+            <p style={{ margin: 0 }}>
+              You'll work through 10 rounds of increasing complexity. Complete all 10 and
+              you'll unlock a further 10 rounds featuring on-platform competitiveness (OPC)
+              metrics for a deeper diagnostic view.
+            </p>
             <p style={{ margin: 0, color: 'var(--white)', fontWeight: 600 }}>
               First, you need to earn your clearance. Show that you understand why price
               competitiveness matters, know how to work within the guardrails, and make

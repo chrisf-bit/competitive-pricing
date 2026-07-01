@@ -290,7 +290,6 @@ export interface PartnerPersona {
   styleSecondary: CommunicationStyle;
   description: string;          // brief flavour text
   commercialGoal: string;
-  profileNotes: string[];       // behavioural cues (no style labels)
   /**
    * Parity regime this partner operates under. Drives which conversation
    * options are legal (see ConversationOption.parityFilter). Optional for

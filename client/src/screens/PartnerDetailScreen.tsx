@@ -444,32 +444,11 @@ export function PartnerDetailScreen({
               </p>
             </div>
 
-            <div style={{ fontSize: 10, fontWeight: 800, color: 'var(--grey-400)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
-              Notes
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              {partner.persona.profileNotes.map((note, i) => (
-                <div
-                  key={i}
-                  style={{
-                    fontSize: 12,
-                    color: 'var(--grey-600)',
-                    lineHeight: 1.4,
-                    padding: '5px 10px',
-                    background: 'var(--off-white)',
-                    borderRadius: 4,
-                  }}
-                >
-                  {note}
-                </div>
-              ))}
-            </div>
-
             {/* Last Pricing Contact + Pricing Coverage (QTD) - new in
-                R2 per Partner Metrics PDF page 1. Rendered under Notes
-                in the same Profile card so the right column stays a
-                single block. Both fields are optional - cards hide
-                gracefully when a partner doesn't carry them. */}
+                R2 per Partner Metrics PDF page 1. Rendered inside the
+                Profile card so the right column stays a single block.
+                Both fields are optional - cards hide gracefully when a
+                partner doesn't carry them. */}
             <ProfileMetaFields
               lastPricingContactDaysAgo={partner.metrics.lastPricingContactDaysAgo}
               pricingCoverageQTD={partner.metrics.pricingCoverageQTD}
@@ -519,23 +498,24 @@ export function PartnerDetailScreen({
                   style={{
                     background: 'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
                     color: 'var(--brand-navy-dark)',
-                    padding: '12px 24px',
-                    borderRadius: 'var(--radius-sm)',
-                    fontSize: 14,
+                    padding: '18px 28px',
+                    borderRadius: 'var(--radius-md)',
+                    fontSize: 17,
                     fontWeight: 800,
+                    letterSpacing: '0.01em',
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: 8,
+                    gap: 10,
                     cursor: 'pointer',
-                    boxShadow: '0 3px 14px rgba(254,186,2,0.35)',
+                    boxShadow: '0 6px 22px rgba(254,186,2,0.42)',
                     animation: 'pulseGlow 2s ease infinite',
                   }}
                 >
-                  <MessageSquare size={15} />
+                  <MessageSquare size={20} />
                   Begin Conversation
-                  <ChevronRight size={15} />
+                  <ChevronRight size={20} />
                 </button>
               </>
             ) : (

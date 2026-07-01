@@ -67,12 +67,6 @@ function crystalWaterBase(args: {
           "Hotel Manager at a brand-affiliated resort that operates under a marketing contract only - no central pricing control. Direct, results-focused, and watches the daily ABRN and ADR numbers herself. Energetic and no-fluff; expects clear commercial logic and a concrete next step before she agrees to anything.",
         commercialGoal:
           'Maximise resort revenue while protecting margin and reducing OTA commission cost',
-        profileNotes: [
-          'Tracks daily ABRN and ADR; reacts quickly to weekly shifts',
-          'Running cheaper promotional rates on her direct brand site to drive direct bookings',
-          'Treats Booking.com as top-funnel discovery, not a conversion channel',
-          'Uses Genius programme but no other Booking.com pricing tools today',
-        ],
       },
       // Metrics map verbatim to the SME spreadsheet row 9 (Hotel ID 9
       // - Crystal Water Resort). Same baseline across all three
@@ -182,12 +176,6 @@ function velvetSkyBase(args: {
           "Owner-manager at an independent boutique who treats his direct brand site as his lowest-priced channel by design. Talks in commercial terms - margins, commission, ROI - and weighs every trade-off before agreeing. Direct and pragmatic; not warm, but rewards a tight commercial case.",
         commercialGoal:
           'Grow direct bookings via aggressive on-site discounting while keeping ADR protected',
-        profileNotes: [
-          'Runs deep public discounts on his direct brand site to shift share away from OTAs',
-          'Views Booking.com as discovery / billboard, not as a primary conversion channel',
-          'No active Booking.com pricing tools today - Genius programme is off',
-          'Calculates commission cost vs direct acquisition cost before any move',
-        ],
       },
       // Metrics map verbatim to the SME spreadsheet row 34 (Hotel
       // ID 34 - Velvet Sky Boutique Hotel). Same baseline across all
@@ -280,12 +268,6 @@ function nobleFalconBase(args: {
           'Brand Revenue Lead for a fully-managed-by-brand property. Operates within a centrally controlled pricing model with limited local autonomy. Process-led and measured in tone; values consistency, brand standards, and guest experience over local commercial flexibility.',
         commercialGoal:
           'Hit brand-set commercial KPIs without compromising brand consistency or guest experience',
-        profileNotes: [
-          'Centrally managed brand model - decisions need HQ sign-off',
-          'Values brand standards and consistency over local pricing latitude',
-          'Open to data-led discussions when framed around guest experience or policy fit',
-          'Anchors commitments to specific pilots with explicit review dates',
-        ],
       },
       // Metrics map verbatim to the SME PDF Data Set table for
       // The Noble Falcon Inn (Hotel ID 101). Same baseline across
@@ -391,12 +373,6 @@ function marinaBase(args: {
       description:
         'Meticulous owner-operator who tracks every metric. Respects data-driven conversations and detailed reasoning. Will test your logic before committing.',
       commercialGoal: 'Grow bookings without eroding ADR',
-      profileNotes: [
-        'Prefers scheduled calls over spontaneous check-ins',
-        'Has asked for written proposals in the past',
-        'References competitor data when making decisions',
-        'Takes 24–48 hours to respond to recommendations',
-      ],
     },
     metrics: {
       erpd: 6.3,
@@ -458,12 +434,6 @@ function carlosBase(args: {
       description:
         'Energetic apartment operator who loves innovation and new trends. Makes quick decisions but sometimes acts before thinking. Relationship-first communicator who thrives on enthusiasm.',
       commercialGoal: 'Aggressive growth - maximise bookings across all channels',
-      profileNotes: [
-        'Loves talking about trends and innovation',
-        'Makes quick decisions but sometimes regrets them',
-        'Responds to success stories from similar properties',
-        'Prefers casual, high-energy communication',
-      ],
     },
     metrics: {
       erpd: 3.4,
@@ -526,12 +496,6 @@ function ravenInnBase(args: {
       description:
         'Hotel Manager at a steady boutique with a strong Key OTA position. Collaborative, analytical, and likes to weigh changes carefully against her own dashboards before committing. Treats Booking.com as a partner she actively co-plans with.',
       commercialGoal: 'Maintain steady occupancy and continue refining margin',
-      profileNotes: [
-        'Genuinely strong Key OTA pricing on Loyal members - sits below comp',
-        'Three active RPD scenarios (International, Family 2+1, Family 2+2)',
-        'Runs Genius Programme; otherwise sparse on Booking.com pricing tools',
-        'Prefers data-led calls and written follow-ups before any change',
-      ],
     },
     metrics: {
       erpd: 1.3,
@@ -605,12 +569,6 @@ function driftwoodBayBase(args: {
       description:
         "Energetic resort manager who loves talking about the property and runs multiple pricing scenarios in parallel. Quick to engage, decisive once excited, and prefers conversational calls with concrete next steps over methodical exposition.",
       commercialGoal: 'Grow incremental volume while keeping the brand premium',
-      profileNotes: [
-        'Four active RPD scenarios in flight (Brand, App, Family 2+1, Family 2+2)',
-        'Genius Programme active; loyal pricing genuinely competitive vs comp',
-        'Small Brand.com public gap is the one open lever',
-        'Responds well to celebration of what is working and a concrete next move',
-      ],
     },
     metrics: {
       erpd: 3.4,
@@ -851,12 +809,6 @@ export const pendingPartners: PartnerState[] = [
       description:
         "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
       commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
-      profileNotes: [
-        'Believes OTAs erode his brand and direct channel',
-        'Runs sponsored campaigns on meta-search via an XML provider',
-        'Brand-first pricing strategy with a hard 30% OTA cap rule',
-        'Three million Booking.com impressions in the last 90 days',
-      ],
     },
     metrics: {
       erpd: 9.5,
@@ -915,12 +867,6 @@ export const pendingPartners: PartnerState[] = [
       description:
         'High-volume operator under revenue pressure. Wants fast answers and clear ROI. Will challenge you if your reasoning is weak - but acts decisively once convinced.',
       commercialGoal: 'Recover declining occupancy and revenue fast',
-      profileNotes: [
-        'Impatient with preamble - gets straight to business',
-        'Compares Booking.com performance against Expedia weekly',
-        'Has blamed the platform for poor results in previous calls',
-        'Responds well to competitive benchmarks and revenue projections',
-      ],
     },
     metrics: {
       erpd: 17.2,
@@ -968,12 +914,6 @@ export const pendingPartners: PartnerState[] = [
       description:
         'Passionate host who values guest experience above volume. Sees discounting as potentially cheapening her brand. Needs reassurance and a gentle approach.',
       commercialGoal: 'Maintain reputation while improving off-peak bookings',
-      profileNotes: [
-        'Mentions guest reviews and personal touches frequently',
-        'Uncomfortable with aggressive sales language',
-        'Has turned down discount recommendations before',
-        'Responds to stories about similar properties that succeeded',
-      ],
     },
     metrics: {
       erpd: 14.8,
@@ -1021,12 +961,6 @@ export const pendingPartners: PartnerState[] = [
       description:
         'Sharp, results-focused GM who manages by numbers. Expects structured conversations with clear action items. Benchmarks obsessively against her chain\'s other properties.',
       commercialGoal: 'Rapid revenue recovery - RPD is critically low',
-      profileNotes: [
-        'Expects structured agendas and clear action items',
-        'Challenges weak reasoning with sharp questions',
-        'Benchmarks everything against her hotel chain\'s other properties',
-        'Values efficiency and hates wasting time',
-      ],
     },
     metrics: {
       erpd: 12.5,
@@ -1074,12 +1008,6 @@ export const pendingPartners: PartnerState[] = [
       description:
         'Thoughtful owner of a traditional luxury inn. Deeply protective of her brand and guest experience. Moves at a measured pace and consults her team before any changes.',
       commercialGoal: 'Improve visibility without compromising premium positioning',
-      profileNotes: [
-        'Values harmony and consensus in business relationships',
-        'Worried that discounting will attract the wrong type of guest',
-        'Makes decisions slowly after consulting with her team',
-        'Responds well to case studies of other luxury properties',
-      ],
     },
     metrics: {
       erpd: 5.6,
