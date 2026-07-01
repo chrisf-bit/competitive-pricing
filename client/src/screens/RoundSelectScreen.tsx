@@ -68,7 +68,19 @@ export function RoundSelectScreen({
           height: '100%',
           objectFit: 'cover',
           objectPosition: 'center',
-          filter: 'brightness(0.55)',
+          filter: 'brightness(0.35)',
+        }}
+      />
+      {/* Overlay stack: radial vignette + a flat navy scrim over the
+          middle band where the tiles sit. Locked tiles were washing
+          into the cityscape without the flat scrim - the lights on
+          the buildings competed with the tile borders. */}
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background:
+            'radial-gradient(ellipse at center, rgba(0,15,40,0.45) 0%, rgba(0,15,40,0.30) 45%, rgba(0,15,40,0.85) 100%)',
         }}
       />
       <div
@@ -76,7 +88,7 @@ export function RoundSelectScreen({
           position: 'absolute',
           inset: 0,
           background:
-            'radial-gradient(ellipse at center, rgba(0,15,40,0.28) 0%, rgba(0,15,40,0.15) 45%, rgba(0,15,40,0.70) 100%)',
+            'linear-gradient(180deg, rgba(0,15,40,0) 0%, rgba(0,15,40,0.55) 30%, rgba(0,15,40,0.55) 70%, rgba(0,15,40,0) 100%)',
         }}
       />
 
@@ -297,22 +309,24 @@ function RoundTile({
     ? {
         ...base,
         background:
-          'linear-gradient(160deg, rgba(254,186,2,0.18) 0%, rgba(254,186,2,0.06) 100%)',
+          'linear-gradient(160deg, rgba(20, 45, 90, 0.95) 0%, rgba(10, 25, 55, 0.95) 100%)',
         border: '1.5px solid var(--brand-yellow)',
-        boxShadow: '0 8px 24px rgba(254,186,2,0.25)',
+        boxShadow:
+          '0 0 0 3px rgba(254,186,2,0.15), 0 8px 24px rgba(254,186,2,0.35)',
       }
     : isCompleted
       ? {
           ...base,
           background:
-            'linear-gradient(160deg, rgba(0,138,14,0.18) 0%, rgba(0,138,14,0.05) 100%)',
-          border: '1.5px solid rgba(0,138,14,0.55)',
+            'linear-gradient(160deg, rgba(0,60,20,0.85) 0%, rgba(0,30,15,0.90) 100%)',
+          border: '1.5px solid rgba(0,180,50,0.65)',
+          boxShadow: '0 6px 18px rgba(0,25,10,0.4)',
         }
       : {
           ...base,
-          background: 'rgba(0, 15, 40, 0.55)',
-          border: '1.5px solid rgba(255,255,255,0.08)',
-          opacity: 0.72,
+          background: 'rgba(6, 22, 50, 0.92)',
+          border: '1.5px solid rgba(255,255,255,0.14)',
+          boxShadow: '0 4px 14px rgba(0,10,30,0.45)',
         };
 
   return (
