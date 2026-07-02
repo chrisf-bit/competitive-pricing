@@ -36,7 +36,7 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     screen: 'l0-character-build',
     title: 'Build your character',
     subtitle:
-      'Pick an avatar (visual identity only) and the super power you\'ll naturally lean into. Everyone has equal potential to succeed.',
+      "This is your starting point in the sim, who you are on day one. Pick the avatar you identify with and the super power you naturally lean into today. Everyone has equal potential to succeed.",
   },
   {
     id: 'gm-chat',
