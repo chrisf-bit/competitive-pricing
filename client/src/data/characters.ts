@@ -108,12 +108,8 @@ export interface SuperPowerPersona {
   id: string;
   name: string;
   superPower: string;
-  identity: string;
   succeedsBy: string;
-  strengths: string[];
-  gameplayStyle: string;
   winsBy: string[];
-  weaknesses: { headline: string; detail: string }[];
   /** CSS color name token used for accent (matches existing --style-* vars). */
   accent: 'green' | 'red' | 'yellow' | 'blue';
   icon: LucideIcon;
@@ -154,30 +150,11 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     id: 'conversation-architect',
     name: 'The Conversation Architect',
     superPower: 'Questioning & Listening',
-    identity:
-      'Excels at guiding commercial conversations through thoughtful questioning and active listening. Uncovers hidden concerns, understands partner motivations deeply, and builds trust by making partners feel heard.',
     succeedsBy: 'Succeeds by uncovering what others miss.',
-    strengths: [
-      'Reveals hidden partner needs and motivations',
-      'Builds trust quickly through active listening',
-      'Adapts questioning style to different personalities',
-      'Creates stronger alignment during pricing conversations',
-    ],
-    gameplayStyle: 'Curious, collaborative, relationship-driven.',
     winsBy: [
       'uncovering the real commercial challenge',
       'building trust',
       'asking the right questions at the right time',
-    ],
-    weaknesses: [
-      {
-        headline: 'Avoids conflict',
-        detail: 'Can burn time harmonising instead of deciding.',
-      },
-      {
-        headline: 'Less data-oriented',
-        detail: 'May rely too heavily on conversation and instinct over analytical evidence.',
-      },
     ],
     accent: 'green',
     icon: MessageCircle,
@@ -198,32 +175,11 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     id: 'objection-navigator',
     name: 'The Objection Navigator',
     superPower: 'Handling Objections',
-    identity:
-      'Thrives when conversations become difficult. Handles pricing resistance, commercial tension, and stakeholder pushback calmly without damaging relationships or losing momentum.',
     succeedsBy: 'Succeeds by turning resistance into progress.',
-    strengths: [
-      'Handles pushback calmly and constructively',
-      'Reframes difficult conversations positively',
-      'Maintains confidence under pressure',
-      'Keeps commercial discussions moving forward',
-    ],
-    gameplayStyle: 'Composed, resilient, confident.',
     winsBy: [
       'staying calm under pressure',
       'navigating resistance effectively',
       'maintaining momentum during difficult discussions',
-    ],
-    weaknesses: [
-      {
-        headline: 'Can become defensive',
-        detail:
-          'Can focus too much on beating resistance than finding root causes.',
-      },
-      {
-        headline: 'Can push conversations too quickly',
-        detail:
-          'Can jump to solution before understanding the issue.',
-      },
     ],
     accent: 'red',
     icon: Shield,
@@ -244,30 +200,11 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     id: 'storyteller',
     name: 'The Storyteller',
     superPower: 'Storytelling Using Data',
-    identity:
-      'Transforms complex pricing insights into clear, compelling commercial stories. Knows how to make data meaningful, relevant, and actionable for different audiences.',
     succeedsBy: 'Succeeds by making insight easy to understand and impossible to ignore.',
-    strengths: [
-      'Simplifies complex commercial information clearly',
-      'Connects data directly to partner priorities',
-      'Communicates insights in a compelling way',
-      'Creates alignment through clarity and storytelling',
-    ],
-    gameplayStyle: 'Clear, persuasive, communication-focused.',
     winsBy: [
       'translating complexity into clarity',
       'helping stakeholders understand value',
       'turning insight into action through storytelling',
-    ],
-    weaknesses: [
-      {
-        headline: 'Can oversimplify things',
-        detail: 'Can remove important details.',
-      },
-      {
-        headline: 'Relies on strong inputs',
-        detail: 'Can struggle when data or signals are weak.',
-      },
     ],
     accent: 'yellow',
     icon: Sparkles,
@@ -288,30 +225,11 @@ export const superPowerPersonas: SuperPowerPersona[] = [
     id: 'data-detective',
     name: 'The Data Detective',
     superPower: 'Data Analysis',
-    identity:
-      'Thrives in complexity. Navigates dashboards, pricing metrics, and commercial data with speed and precision. Uncovers patterns hidden inside large volumes of information and transforms raw numbers into actionable insight.',
     succeedsBy: 'Succeeds by finding the evidence others overlook.',
-    strengths: [
-      'Identifies trends and anomalies rapidly',
-      'Connects multiple datasets into meaningful insight',
-      'Detects pricing gaps and margin risks',
-      'Supports decisions with strong commercial evidence',
-    ],
-    gameplayStyle: 'Analytical, methodical, evidence-driven.',
     winsBy: [
       'uncovering insight faster',
       'validating recommendations with data',
       'reducing commercial risk through precision',
-    ],
-    weaknesses: [
-      {
-        headline: 'Can overcomplicate conversations',
-        detail: 'Can overwhelm people with details.',
-      },
-      {
-        headline: 'Can miss emotional signals',
-        detail: 'Can focus on metrics over relationships.',
-      },
     ],
     accent: 'blue',
     icon: Search,

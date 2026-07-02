@@ -453,105 +453,52 @@ function PersonaCard({
         {persona.succeedsBy}
       </div>
 
-      {/* Wins by + Blind spots side-by-side - keeps the card short
-          enough that all four personas fit on a standard laptop
-          viewport without scroll. */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          gap: 16,
-        }}
-      >
-        <div>
-          <div
-            style={{
-              fontSize: 10,
-              fontWeight: 800,
-              color: 'rgba(255,255,255,0.5)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.10em',
-              marginBottom: 6,
-            }}
-          >
-            Wins by
-          </div>
-          <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
-            {persona.winsBy.map((item, i) => (
-              <li
-                key={i}
-                style={{
-                  fontSize: 12,
-                  lineHeight: 1.4,
-                  color: 'rgba(255,255,255,0.78)',
-                  marginBottom: 3,
-                  paddingLeft: 12,
-                  position: 'relative',
-                }}
-              >
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 6,
-                    width: 5,
-                    height: 5,
-                    borderRadius: '50%',
-                    background: accentColor,
-                  }}
-                />
-                {item}
-              </li>
-            ))}
-          </ul>
+      {/* Wins by - character-trait strengths for the persona. Blind
+          spots were removed once the mechanical Blind Spot card on
+          Partner Detail was retired; without a game hook the list
+          read as decorative. The In game strip below carries the
+          concrete mechanical framing instead. */}
+      <div>
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 800,
+            color: 'rgba(255,255,255,0.5)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.10em',
+            marginBottom: 6,
+          }}
+        >
+          Wins by
         </div>
-
-        <div>
-          <div
-            style={{
-              fontSize: 10,
-              fontWeight: 800,
-              color: 'rgba(255,255,255,0.5)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.10em',
-              marginBottom: 6,
-            }}
-          >
-            Blind spots
-          </div>
-          <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
-            {persona.weaknesses.map((w, i) => (
-              <li
-                key={i}
+        <ul style={{ paddingLeft: 0, listStyle: 'none', margin: 0 }}>
+          {persona.winsBy.map((item, i) => (
+            <li
+              key={i}
+              style={{
+                fontSize: 12,
+                lineHeight: 1.4,
+                color: 'rgba(255,255,255,0.78)',
+                marginBottom: 3,
+                paddingLeft: 12,
+                position: 'relative',
+              }}
+            >
+              <span
                 style={{
-                  fontSize: 12,
-                  lineHeight: 1.4,
-                  color: 'rgba(255,255,255,0.78)',
-                  marginBottom: 5,
-                  paddingLeft: 12,
-                  position: 'relative',
+                  position: 'absolute',
+                  left: 0,
+                  top: 6,
+                  width: 5,
+                  height: 5,
+                  borderRadius: '50%',
+                  background: accentColor,
                 }}
-              >
-                <span
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    top: 5,
-                    width: 6,
-                    height: 6,
-                    borderRadius: '50%',
-                    border: `1.5px solid ${accentColor}`,
-                    background: 'transparent',
-                  }}
-                />
-                <span style={{ fontWeight: 700, color: 'rgba(255,255,255,0.88)' }}>
-                  {w.headline}.
-                </span>{' '}
-                <span style={{ color: 'rgba(255,255,255,0.62)' }}>{w.detail}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+              />
+              {item}
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* In-game impact strip. Tells the learner what the persona
