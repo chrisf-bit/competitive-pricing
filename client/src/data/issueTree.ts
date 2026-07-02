@@ -145,7 +145,7 @@ export const rootCauses: RootCauseOption[] = [
   },
   {
     id: 'exclusive-supply-brand',
-    label: 'Exclusive room / rate supply on Brand.com',
+    label: 'Missing room / rate on Brand.com',
     description:
       'Specific room types or rate plans are only available on the direct site.',
     validIssues: ['brand-com-erpd-not-competitive'],
