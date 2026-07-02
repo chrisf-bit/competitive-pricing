@@ -128,6 +128,71 @@ export function createInitialState(overrides?: {
 }
 
 /**
+ * Reset the sim for a fresh playthrough while preserving the durable
+ * bits the learner has earned. Called from the Debrief 'Play Again'
+ * button. Distinct from `onRestart` (full nuke, used by Splash 'Reset
+ * progress' and DevNav 'Reset') because a learner who's completed
+ * clearance should not have to redo it just to replay the rounds -
+ * that was the "retook clearance despite completing it earlier" bug.
+ *
+ * Preserves:
+ *   - learnerProfile (regime, avatar, persona, name)
+ *   - level0Progress.cleared (so Briefing still shows 'Open your
+ *     portfolio' and Character Build routes past the activities)
+ *   - tutorialShown / partnerDetailTutorialShown (they've seen them)
+ *
+ * Resets everything else: partners revert to R1 baseline, round back
+ * to 1, roundStars wiped, all conversation / helper / engagement
+ * bookkeeping cleared. The learner lands on the Round Select hub
+ * with a fresh sheet.
+ */
+export function resetForPlayAgain(state: GameState): GameState {
+  const partners = initialPartners.map((p) => {
+    const withBaseline = applyRoundBaseline(p, 1);
+    return {
+      ...withBaseline,
+      metrics: { ...withBaseline.metrics },
+      metricHistory: [{ round: 0, metrics: { ...withBaseline.metrics } }],
+      discounts: p.discounts.map((d) => ({ ...d })),
+      conversationLog: [],
+      pendingActions: [],
+    };
+  });
+
+  return {
+    ...state,
+    screen: 'round-select',
+    currentRound: 1,
+    actionsThisRound: [],
+    previouslyEngagedThisRound: [],
+    engagedPartnerIds: [],
+    selectedPartnerId: null,
+    partners,
+    marketContext: getMarketContext(
+      state.learnerProfile.market?.parityRegime ?? null,
+      1,
+    ),
+    roundSummaries: [],
+    roundStars: {},
+    issueTreeHelperStates: {},
+    hasOpenedIssueTreeHelper: false,
+    conversationInProgress: null,
+    lastConversationGrade: null,
+    isPracticeMode: false,
+    gameComplete: false,
+    // Clear any in-flight Level 0 retry bookkeeping too - a Play
+    // Again should land the learner on a fully clean slate outside
+    // of their identity + clearance.
+    level0ReturnTo: null,
+    level0RetryItemIds: null,
+    level0Progress: {
+      ...state.level0Progress,
+      knowledgeCheckResults: [],
+    },
+  };
+}
+
+/**
  * Drop into Practice Mode on a specific round. Used by the Debrief
  * screen's round-grid replay. Partners are reset to their baseline
  * state for the round so the practice attempt is a clean run, not a

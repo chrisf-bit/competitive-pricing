@@ -16,6 +16,7 @@ import {
   advanceRound,
   enterRound,
   resetRoundForRetake,
+  resetForPlayAgain,
   startPracticeRound,
   calculateScore,
 } from '../engine/gameEngine';
@@ -177,6 +178,17 @@ export function useGame() {
   const onRestart = useCallback(() => {
     clearPersistedState();
     setState(createInitialState());
+  }, []);
+
+  /**
+   * Replay the sim without wiping clearance or the learner profile.
+   * Called from the Debrief 'Play Again' button. See
+   * engine.resetForPlayAgain for what survives and what doesn't.
+   * The useEffect above will persist the freshened state on the
+   * next render so a mid-run reload lands on the same fresh slate.
+   */
+  const onPlayAgain = useCallback(() => {
+    setState((s) => resetForPlayAgain(s));
   }, []);
 
   // ── Level 0 learner-profile setters ──
@@ -346,6 +358,7 @@ export function useGame() {
     onEnterRound,
     onBackToPortfolio,
     onRestart,
+    onPlayAgain,
     setLearnerMarket,
     setLearnerStrengths,
     setLearnerArchetype,

@@ -169,12 +169,14 @@ export default function App() {
                 playerName={state.learnerProfile.playerName}
                 onSelectAvatar={game.setLearnerAvatar}
                 onSelectArchetype={game.setLearnerArchetype}
-                // Cleared learners jump straight to their portfolio
-                // after confirming / changing their regime + persona.
-                // Fresh learners go through the clearance activities.
+                // Cleared learners jump to the Round Select hub after
+                // confirming / changing their regime + persona (the
+                // hub is the entry point for a run, not Portfolio
+                // directly). Fresh learners go through the clearance
+                // activities from GM Chat onwards.
                 onContinue={() =>
                   state.level0Progress.cleared
-                    ? game.goToScreen('portfolio')
+                    ? game.goToScreen('round-select')
                     : game.goToScreen('l0-gm-chat')
                 }
               />
@@ -374,7 +376,7 @@ export default function App() {
               regime={state.learnerProfile.market?.parityRegime ?? null}
               personaId={state.learnerProfile.archetype?.id ?? null}
               learnerProfile={state.learnerProfile}
-              onRestart={game.onRestart}
+              onPlayAgain={game.onPlayAgain}
               onPracticeRound={game.onStartPracticeRound}
             />
           )}

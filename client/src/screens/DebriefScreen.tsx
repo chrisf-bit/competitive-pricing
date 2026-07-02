@@ -57,7 +57,13 @@ interface DebriefScreenProps {
    * backwards compat; the download button hides if absent.
    */
   learnerProfile?: LearnerProfile;
-  onRestart: () => void;
+  /**
+   * Replay the sim without wiping clearance or the learner profile.
+   * Bound to the 'Play Again' button. Distinct from a full onRestart
+   * (Splash 'Reset progress', DevNav 'Reset') so a completed learner
+   * who wants another go doesn't have to redo clearance.
+   */
+  onPlayAgain: () => void;
   onPracticeRound: (round: number) => void;
 }
 
@@ -79,7 +85,7 @@ export function DebriefScreen({
   regime,
   personaId,
   learnerProfile,
-  onRestart,
+  onPlayAgain,
   onPracticeRound,
 }: DebriefScreenProps) {
   const gc = gradeConfig[score.overallGrade];
@@ -653,7 +659,7 @@ export function DebriefScreen({
             </button>
           )}
           <button
-            onClick={onRestart}
+            onClick={onPlayAgain}
             style={{
               background: 'var(--brand-navy)',
               color: 'var(--white)',
