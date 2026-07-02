@@ -345,6 +345,8 @@ function PhaseVisual({ phaseId }: { phaseId: string }) {
       return <MetricVisual />;
     case 'hook':
       return <HookVisual />;
+    case 'pitch':
+      return <PitchVisual />;
     default:
       return null;
   }
@@ -584,26 +586,64 @@ function HookVisual() {
   );
 }
 
-function IntroVisual() {
-  const steps = ['Trigger', 'Issue', 'Intent', 'Root Cause', 'Metric', 'Hook'];
+function PitchVisual() {
   return (
-    <VisualCard label="The six-step tree">
+    <VisualCard label="Recommended action">
+      <div
+        style={{
+          padding: '10px 13px',
+          background: 'rgba(254, 186, 2, 0.10)',
+          border: '1px solid rgba(254, 186, 2, 0.30)',
+          borderRadius: 8,
+          fontSize: 13,
+          fontWeight: 700,
+          color: 'var(--brand-yellow)',
+        }}
+      >
+        Genius audit + reset
+      </div>
+      <div
+        style={{
+          fontSize: 11,
+          color: 'rgba(255,255,255,0.55)',
+          marginTop: 8,
+          lineHeight: 1.45,
+        }}
+      >
+        Low-effort fix. Restores public visibility without changing the base rate.
+      </div>
+    </VisualCard>
+  );
+}
+
+function IntroVisual() {
+  const steps = [
+    'Trigger',
+    'Issue',
+    'Intent',
+    'Root Cause',
+    'Diagnosis',
+    'Hook',
+    'Pitch',
+  ];
+  return (
+    <VisualCard label="The seven-step tree">
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 6,
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: 5,
         }}
       >
         {steps.map((step, i) => (
           <div
             key={step}
             style={{
-              padding: '6px 8px',
+              padding: '5px 6px',
               background: 'rgba(0, 159, 227, 0.08)',
               border: '1px solid rgba(0, 159, 227, 0.30)',
               borderRadius: 6,
-              fontSize: 11,
+              fontSize: 10.5,
               fontWeight: 700,
               color: 'rgba(255,255,255,0.85)',
               textAlign: 'center',
@@ -612,12 +652,12 @@ function IntroVisual() {
             <span
               style={{
                 color: 'var(--brand-blue-light)',
-                fontSize: 9,
+                fontSize: 8.5,
                 display: 'block',
-                marginBottom: 2,
+                marginBottom: 1,
               }}
             >
-              Step {i + 1}
+              {i + 1}
             </span>
             {step}
           </div>

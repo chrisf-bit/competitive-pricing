@@ -1,19 +1,25 @@
 /**
  * Issue Tree reveal content for Level 0.
  *
- * A worked example walking the learner through the framework LPS use
- * to diagnose pricing issues on the platform. Six diagnostic phases
- * that exactly mirror the Diagnosis Coach drawer in the sim
- * (Trigger > Issue > Intent > Root Cause > Metric Insight > Hook),
- * preceded by an intro card that names the framework and connects it
- * to the Coach. Alignment matters: learners see this in clearance,
- * then walk the same six steps in every partner conversation.
+ * A worked example walking the learner through the Pricing Issue Tree,
+ * the diagnostic flow LPS use before every partner call. Framing and
+ * step titles map to the SME's material verbatim: each step is the
+ * question the LPS asks themselves, and Alex's narration carries the
+ * coaching commentary. Not a checklist - a mind map.
+ *
+ * Seven diagnostic steps, preceded by an Overview intro. The seven
+ * mirror the SME framework: Trigger, Issue, Intent, Root Cause,
+ * Diagnosis, Hook, Pitch. The Diagnosis Coach drawer in the sim
+ * currently walks steps 1-6 (ending at Hook); the Pitch (step 7)
+ * happens live via the conversation option picks. The Reveal
+ * teaches all seven so the learner has the full mental model.
  *
  * Worked example: a partner ("Hotel Atlante") whose eRPD has been
  * sliding due to a misconfigured Genius discount. Hotel-named so the
- * learner can't mistake the partner for an LPS colleague. Sourced
- * from the conceptual structure in the Issue Tree PDF; specific
- * narrative is illustrative pending SME refinement.
+ * learner can't mistake the partner for an LPS colleague. The
+ * example is intentionally simple; the SME material is clear that
+ * the Tree is a starting point, not the final word, and case-by-case
+ * judgment always beats strict adherence.
  */
 
 import type { LucideIcon } from 'lucide-react';
@@ -25,6 +31,7 @@ import {
   ListChecks,
   Activity,
   MessageSquare,
+  Lightbulb,
 } from 'lucide-react';
 
 export interface IssueTreePhase {
@@ -50,77 +57,88 @@ export const issueTreePhases: IssueTreePhase[] = [
     label: 'Overview',
     shortName: 'Overview',
     icon: BookOpen,
-    headline: 'The six-step diagnostic used on every partner call',
+    headline: 'Meet the Pricing Issue Tree',
     body:
-      "This is the Pricing Issue Tree. LPS walk these six steps in order before any partner call, so the conversation stays structured, honest, and safe. The Diagnosis Coach in the sim guides you through the same six steps for each partner.",
+      "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist. More a mind map that LPS walk before any partner call so the conversation stays structured, evidence-based, and legally safe. Seven questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
     narration:
-      "Quick primer before you meet a partner. Every diagnostic starts with a trigger and ends with a hook. Six steps in between shape the whole call. Click through and I'll show you what each looks like on a real-ish example.",
+      "Quick primer. This is the framework LPS use to move from noticing a pricing issue to closing on a commercial pitch. Seven questions in order. Click through and I'll show you how it plays on a real-ish example.",
   },
   {
     id: 'trigger',
     label: 'Trigger',
     shortName: 'Trigger',
     icon: Search,
-    headline: "Hotel Atlante's eRPD has been sliding for three weeks",
+    headline: 'What am I seeing?',
     body:
-      "Something on this partner's pricing has shifted. Before doing anything else, you notice the signal.",
+      "The starting point. Something on Hotel Atlante has shifted - the eRPD has slipped for three weeks. Before doing anything else, you notice the signal.",
     narration:
-      "Every diagnostic conversation starts with a trigger - a signal in the data you've spotted on a partner. Here, Hotel Atlante's eRPD has slipped three weeks running.",
+      "Triggers come in four flavours: performance outcomes (room nights or conversion drops), data signals (competitiveness turning red), partner interactions (they raise a concern), or programme changes (Genius eligibility shifts). Any of them can start the diagnostic.",
   },
   {
     id: 'issue',
     label: 'Issue',
     shortName: 'Issue',
     icon: Target,
-    headline: 'Which pricing issue does the data point at?',
+    headline: 'Where are the primary pricing gaps?',
     body:
-      "The trigger is the signal. The Issue is the specific pricing pattern the signal maps to - a Brand.com competitiveness gap, a Key OTA gap, a discount depth mismatch, and so on. Naming the Issue precisely narrows what you look at next.",
+      "The trigger tells you something is off. This step names where the gap sits: on the partner's own website (Brand.com), on a Key OTA, or somewhere else the RPD data flags. For Hotel Atlante the pattern points at an on-platform competitiveness gap.",
     narration:
-      "From the trigger you pick a specific pricing issue. This is the second column of the tree, a fixed list of pricing issues LPS have seen play out. For Hotel Atlante, the pattern points at an on-platform competitiveness gap.",
+      "You review the Pricing RPD dashboard and RPD Scenarios dashboard to name the Issue precisely. That's what narrows the search for the root cause.",
   },
   {
     id: 'intent',
     label: 'Intent',
     shortName: 'Intent',
     icon: Compass,
-    headline: 'Likely unintentional. This looks technical, not strategic',
+    headline: "What is the partner's pricing strategy?",
     body:
-      "The slide is steady but not deliberate-looking. Nothing in recent calls with Hotel Atlante suggests they've chosen to reposition. Worth treating as a config issue first, not a strategy shift.",
+      "Ask whether the gap is intentional (a deliberate commercial strategy - exclusive prices on the direct site, preferred-OTA plays) or unintentional (technical oversight, setup miss). For Hotel Atlante the slide looks technical, not strategic - treat it as unintentional first.",
     narration:
-      "Next: ask whether the change looks intentional or unintentional. That's your mandate axis. It tells you whether to fix it yourself, probe further, or reframe the conversation around a strategy the partner has actively chosen.",
+      "In No Parity and Narrow Parity markets you can only raise cross-channel pricing reactively, and the conversation stays neutral and informational. Never demand parity, never threaten visibility.",
   },
   {
     id: 'root-cause',
     label: 'Root Cause',
     shortName: 'Root Cause',
     icon: ListChecks,
-    headline: 'Genius discount looks misconfigured',
+    headline: "What's likely behind the pricing gaps?",
     body:
-      "Hotel Atlante's Genius discount stack has fallen out of alignment with peers. Most likely: a recent Genius programme change wasn't carried through cleanly.",
+      "The specific underlying reason. Intentional root causes tend to be brand-first strategies, exclusive promotions, or preferred-OTA plays. Unintentional root causes tend to be setup or inventory oversights, external actions, or technical errors. For Hotel Atlante the Genius discount stack looks misconfigured.",
     narration:
-      "Now narrow it. From the family of plausible causes, which one fits this signal best? Here, the data points at their Genius config.",
+      "You're building a hypothesis. The next step tests it against the data before you take it to the partner.",
   },
   {
     id: 'metric',
-    label: 'Metric',
-    shortName: 'Metric',
+    label: 'Diagnosis',
+    shortName: 'Diagnosis',
     icon: Activity,
-    headline: 'Public RPD slipping. Loyal RPD steady',
+    headline: 'What proof do I have?',
     body:
-      "If it were a base-rate issue, you'd expect Loyal RPD to move too. The fact that it's only Public confirms the Genius story.",
+      "The evidence phase. Different causes show up as different data patterns: structural constant non-competitive eRPD points to foundational choices; structural Genius/Public RPD gaps point to programme issues; non-structural changing eRPD points to promotions or external interventions. For Hotel Atlante, Public RPD is slipping while Loyal RPD is steady - confirms the Genius story.",
     narration:
-      'You confirm with the metric. Different causes show up in different driver metrics. Matching the cause to the metric is how you separate plausible from probable.',
+      "Match the cause to the pattern. If Loyal RPD had moved too, you'd be looking at a base-rate issue instead of a Genius one.",
   },
   {
     id: 'hook',
     label: 'Hook',
     shortName: 'Hook',
     icon: MessageSquare,
-    headline: 'On-platform competitiveness narrative',
+    headline: 'What conversation should I lead with?',
     body:
-      "Open with what you see on Booking.com - falling visibility, softening conversion - without claiming you know what's happening on the hotel's direct site or other OTAs. This is the angle you take into the call.",
+      "The angle you take into the call. Pick between existing RPD scenarios (mobile, app, domestic, international, family, wholesale leakage), self-identified scenarios (base-rate misalignment, non-genuine discounts, coupons), or OPC commercial scenarios (a segment-specific diagnosis). For Hotel Atlante, an on-platform competitiveness narrative fits.",
     narration:
-      "The Hook is your opening. It frames the conversation safely. On-platform language only, no claims about the partner's business beyond what you can see. Once you've landed on a Hook, the rest of the call is a conversation - not a diagnosis.",
+      "Frame safely. On-platform language only, no claims about the partner's business beyond what you can see. The Hook is your bridge from data to conversation.",
+  },
+  {
+    id: 'pitch',
+    label: 'Pitch',
+    shortName: 'Pitch',
+    icon: Lightbulb,
+    headline: "What's the commercial pitch?",
+    body:
+      "The tailored solution that follows from the diagnosis. Cross-platform pitches include The Value Proposition Wall, the Reverse Billboard effect, and the Same Net for Everyone mindset. On-platform pitches include the Fake Value trap and Direct-Booking Loyalty Pushback. For Hotel Atlante: propose a Genius audit and reset - restores visibility without changing the base rate.",
+    narration:
+      "In the sim, the Diagnosis Coach walks you to the Hook. The Pitch happens live on the call, through the conversation option picks you make in the moment. Same framework, just delivered rather than prepared.",
   },
 ];
 
