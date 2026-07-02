@@ -59,7 +59,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     icon: TreeDeciduous,
     headline: 'Meet the Pricing Issue Tree',
     body:
-      "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist, more a mind map that LPS walk before any partner call. Seven guiding questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
+      "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist, more a mind map LPS can use to guide their thinking before any partner call. Seven guiding questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
     narration:
       "You'll see this same tree icon on a yellow tab on Partner Detail in the sim - that's the Diagnosis Coach, which walks you through the tree on a real partner. Click through and I'll show you how it plays on a worked example.",
   },
