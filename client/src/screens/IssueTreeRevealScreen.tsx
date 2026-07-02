@@ -331,8 +331,12 @@ function PhaseChip({
  */
 function PhaseVisual({ phaseId }: { phaseId: string }) {
   switch (phaseId) {
+    case 'intro':
+      return <IntroVisual />;
     case 'trigger':
       return <TriggerVisual />;
+    case 'issue':
+      return <IssueVisual />;
     case 'intent':
       return <IntentVisual />;
     case 'root-cause':
@@ -341,10 +345,6 @@ function PhaseVisual({ phaseId }: { phaseId: string }) {
       return <MetricVisual />;
     case 'hook':
       return <HookVisual />;
-    case 'pitch':
-      return <PitchVisual />;
-    case 'objection':
-      return <ObjectionVisual />;
     default:
       return null;
   }
@@ -584,63 +584,93 @@ function HookVisual() {
   );
 }
 
-function PitchVisual() {
+function IntroVisual() {
+  const steps = ['Trigger', 'Issue', 'Intent', 'Root Cause', 'Metric', 'Hook'];
   return (
-    <VisualCard label="Recommended action">
+    <VisualCard label="The six-step tree">
       <div
         style={{
-          padding: '10px 13px',
-          background: 'rgba(254, 186, 2, 0.10)',
-          border: '1px solid rgba(254, 186, 2, 0.30)',
-          borderRadius: 8,
-          fontSize: 13,
-          fontWeight: 700,
-          color: 'var(--brand-yellow)',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: 6,
         }}
       >
-        Genius audit + reset
-      </div>
-      <div
-        style={{
-          fontSize: 11,
-          color: 'rgba(255,255,255,0.55)',
-          marginTop: 8,
-          lineHeight: 1.45,
-        }}
-      >
-        Low-effort fix. Restores public visibility without changing the base rate.
+        {steps.map((step, i) => (
+          <div
+            key={step}
+            style={{
+              padding: '6px 8px',
+              background: 'rgba(0, 159, 227, 0.08)',
+              border: '1px solid rgba(0, 159, 227, 0.30)',
+              borderRadius: 6,
+              fontSize: 11,
+              fontWeight: 700,
+              color: 'rgba(255,255,255,0.85)',
+              textAlign: 'center',
+            }}
+          >
+            <span
+              style={{
+                color: 'var(--brand-blue-light)',
+                fontSize: 9,
+                display: 'block',
+                marginBottom: 2,
+              }}
+            >
+              Step {i + 1}
+            </span>
+            {step}
+          </div>
+        ))}
       </div>
     </VisualCard>
   );
 }
 
-function ObjectionVisual() {
+function IssueVisual() {
+  const issues = [
+    { label: 'Brand.com competitiveness gap', active: true },
+    { label: 'Key OTA competitiveness gap', active: false },
+    { label: 'Discount depth mismatch', active: false },
+  ];
   return (
-    <VisualCard label="Likely pushback">
-      <div
-        style={{
-          padding: '10px 13px',
-          background: 'rgba(255,255,255,0.07)',
-          border: '1px solid rgba(255,255,255,0.10)',
-          borderRadius: 12,
-          borderTopRightRadius: 4,
-          fontSize: 12.5,
-          color: 'rgba(255,255,255,0.85)',
-          lineHeight: 1.45,
-          fontStyle: 'italic',
-        }}
-      >
-        "We already discount enough."
-      </div>
-      <div
-        style={{
-          fontSize: 11,
-          color: 'rgba(255,255,255,0.45)',
-          marginTop: 6,
-          textAlign: 'right',
-        }}
-      >
-        - Maria
+    <VisualCard label="Pricing issue shortlist">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+        {issues.map((issue) => (
+          <div
+            key={issue.label}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              padding: '7px 10px',
+              borderRadius: 6,
+              background: issue.active
+                ? 'rgba(254, 186, 2, 0.10)'
+                : 'rgba(255,255,255,0.04)',
+              border: issue.active
+                ? '1px solid rgba(254, 186, 2, 0.45)'
+                : '1px solid transparent',
+              fontSize: 12,
+              color: 'rgba(255,255,255,0.85)',
+            }}
+          >
+            <span>{issue.label}</span>
+            {issue.active && (
+              <span
+                style={{
+                  fontSize: 10,
+                  fontWeight: 700,
+                  color: 'var(--brand-yellow)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.08em',
+                }}
+              >
+                Best fit
+              </span>
+            )}
+          </div>
+        ))}
       </div>
     </VisualCard>
   );

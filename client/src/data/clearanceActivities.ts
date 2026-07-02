@@ -66,9 +66,9 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     id: 'issue-tree',
     label: 'Diagnose',
     screen: 'l0-issue-tree-reveal',
-    title: 'Diagnosing pricing issues',
+    title: 'How LPS diagnose pricing issues',
     subtitle:
-      'Every partner conversation follows the same arc. Click each step to walk through how Alex would diagnose a pricing problem.',
+      "This is the Pricing Issue Tree, the six-step framework LPS walk through before any partner call. The Diagnosis Coach in the sim guides you through these same steps. Click through the worked example on Hotel Atlante to see how it fits together.",
   },
   {
     id: 'summary',
