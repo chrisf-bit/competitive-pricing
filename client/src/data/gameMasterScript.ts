@@ -124,6 +124,48 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
+    text: "Right. One more on the fundamentals, then we'll shift gears.",
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A5',
+      prompt:
+        'Roughly how much ABRN growth do we get for every 1% improvement in RPD?',
+      options: [
+        { text: 'About 0.5%', isCorrect: false },
+        { text: 'About 2 to 3%', isCorrect: true },
+        { text: 'About 10%', isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          "Right. Roughly 2 to 3 percent ABRN uplift for every 1 percent improvement in RPD. Sounds small, but it compounds fast across a portfolio - that's why price competitiveness is the lever we lean on.",
+        incorrect:
+          "It's about 2 to 3 percent ABRN uplift per 1 percent improvement in RPD. Doesn't sound huge on paper, but it compounds fast across a portfolio - that's why we treat price competitiveness as the primary lever.",
+      },
+    },
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A6',
+      prompt:
+        "Competitive Partner Share tells us the proportion of a portfolio's partner value sitting in which eRPD range?",
+      options: [
+        { text: 'eRPD greater than 12% (the least competitive band)', isCorrect: false },
+        { text: 'eRPD 3% to 6% (the middle band)', isCorrect: false },
+        { text: 'eRPD less than or equal to 0% (the competitive band)', isCorrect: true },
+      ],
+      followUp: {
+        correct:
+          "Yep. eRPD less than or equal to zero is the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value is sitting inside it. Purely internal prioritisation - it never goes into a partner conversation.",
+        incorrect:
+          "It's eRPD less than or equal to zero - the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value sits inside that band, so we know where the healthy price competitiveness lives. Internal only, don't put it into a partner conversation.",
+      },
+    },
+  },
+  {
+    type: 'message',
     text: "Good. Now an important one - this trips people up.",
   },
   {
@@ -142,6 +184,32 @@ export const gmScript: GMBeat[] = [
           'Spot on. Cross-channel is comparing us to other places they sell - their site, other OTAs. On-platform is only about how they perform within Booking.com against similar properties.',
         incorrect:
           "It's cross-channel. On-platform is only about performance WITHIN Booking.com - against similar properties on the platform. The moment another channel enters the picture, you're in cross-channel territory. Worth keeping that boundary clear in conversations.",
+      },
+    },
+  },
+  {
+    type: 'message',
+    text: "One last one - about what happens if we let things drift.",
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'B2',
+      prompt:
+        'A partner is consistently priced higher than similar properties on the platform. What compounds if they leave it alone?',
+      options: [
+        { text: 'Not much - they lose a few bookings this week, that\'s it', isCorrect: false },
+        {
+          text: "They accrue 'visibility debt': fewer clicks, weaker ranking over time, and recovery gets expensive",
+          isCorrect: true,
+        },
+        { text: 'They get automatically moved to a lower price bucket', isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          "That's it. 'Visibility debt' is the term. Uncompetitive pricing over time means they get shown less, ranking weakens, and pulling it back later usually needs heavy last-minute discounts or serious investment. Cheaper to keep price competitive in the first place.",
+        incorrect:
+          "It's called 'visibility debt'. Consistent uncompetitive pricing means the platform shows them less, ranking weakens, and recovery later takes heavy last-minute discounts or significant investment. Much cheaper to prevent than repair.",
       },
     },
   },
