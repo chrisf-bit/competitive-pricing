@@ -24,7 +24,7 @@
 
 import type { LucideIcon } from 'lucide-react';
 import {
-  BookOpen,
+  TreeDeciduous,
   Search,
   Target,
   Compass,
@@ -56,12 +56,12 @@ export const issueTreePhases: IssueTreePhase[] = [
     id: 'intro',
     label: 'Overview',
     shortName: 'Overview',
-    icon: BookOpen,
+    icon: TreeDeciduous,
     headline: 'Meet the Pricing Issue Tree',
     body:
       "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist. More a mind map that LPS walk before any partner call so the conversation stays structured, evidence-based, and legally safe. Seven questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
     narration:
-      "Quick primer. This is the framework LPS use to move from noticing a pricing issue to closing on a commercial pitch. Seven questions in order. Click through and I'll show you how it plays on a real-ish example.",
+      "Quick primer. This is the framework LPS use to move from noticing a pricing issue to closing on a commercial pitch. Seven questions in order. In the sim you'll see this same tree icon on a yellow tab on Partner Detail - that's the Diagnosis Coach, which walks you through this tree on a real partner. Click through and I'll show you how it plays on a worked example.",
   },
   {
     id: 'trigger',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Check } from 'lucide-react';
+import { ChevronRight, Check, TreeDeciduous } from 'lucide-react';
 import {
   issueTreePhases,
   type IssueTreePhase,
@@ -627,7 +627,34 @@ function IntroVisual() {
     'Pitch',
   ];
   return (
-    <VisualCard label="The seven-step tree">
+    <VisualCard label="The seven-step tree · look for this in the sim">
+      {/* Prominent tree badge that mirrors the yellow launcher tab on
+          Partner Detail. Deliberately styled to look like the Coach tab
+          so learners recognise it at first glance in play. */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: 12,
+        }}
+      >
+        <div
+          style={{
+            width: 52,
+            height: 52,
+            borderRadius: 12,
+            background:
+              'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
+            color: 'var(--brand-navy-dark)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            boxShadow: '0 4px 14px rgba(254,186,2,0.35)',
+          }}
+        >
+          <TreeDeciduous size={28} strokeWidth={2.5} />
+        </div>
+      </div>
       <div
         style={{
           display: 'grid',
