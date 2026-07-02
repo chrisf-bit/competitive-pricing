@@ -32,14 +32,29 @@ export default function App() {
   const [showTutorial, setShowTutorial] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
 
+  // Auto-fire the Portfolio tutorial the first time the learner
+  // actually lands on the Portfolio screen. Previously fired inline
+  // from the clearance / celebration onContinue callbacks, but the
+  // Round Select hub sits between clearance and Portfolio now, so
+  // that path fired the tour on Round Select where its target
+  // (guide-panel) isn't rendered. Watching state.screen defers the
+  // fire until Portfolio actually mounts.
+  useEffect(() => {
+    if (
+      state.screen === 'portfolio' &&
+      !state.tutorialShown &&
+      !showTutorial &&
+      !showSplash
+    ) {
+      setShowTutorial(true);
+      game.markTutorialShown();
+    }
+  }, [state.screen, state.tutorialShown, showTutorial, showSplash, game]);
+
   // Auto-fire the Partner Detail tutorial the first time the learner
-  // lands on that screen. Portfolio's auto-fire is triggered inline
-  // by the clearance/celebration onContinue callbacks; Partner Detail
-  // is reached via a card click deeper in the reducer, so a screen
-  // watcher is the cleaner hook. Gated by both flags: showSplash
-  // suppresses it while the splash is still up (DevNav jump path);
-  // showTutorial suppresses re-firing if the learner just closed
-  // the Portfolio tour.
+  // lands on that screen. Same pattern as above: gated on the
+  // partner-detail-specific flag so the Portfolio tour doesn't
+  // trigger this one and vice versa.
   useEffect(() => {
     if (
       state.screen === 'partner-detail' &&
@@ -218,11 +233,10 @@ export default function App() {
                     game.goToScreen('l0-cleared-celebration');
                   } else {
                     // "Continue anyway" path - skip the celebration.
+                    // Tutorial fires from the state.screen === 'portfolio'
+                    // watcher above, once the learner actually lands on
+                    // Portfolio via Round Select.
                     game.goToScreen('round-select');
-                    if (!state.tutorialShown) {
-                      setShowTutorial(true);
-                      game.markTutorialShown();
-                    }
                   }
                 }}
                 onRetry={(activityScreen, itemMatcher) =>
@@ -237,11 +251,10 @@ export default function App() {
               archetype={state.learnerProfile.archetype}
               avatarId={state.learnerProfile.avatarId}
               onContinue={() => {
+                // Tutorial fires from the state.screen === 'portfolio'
+                // watcher above, once the learner actually lands on
+                // Portfolio via Round Select.
                 game.goToScreen('round-select');
-                if (!state.tutorialShown) {
-                  setShowTutorial(true);
-                  game.markTutorialShown();
-                }
               }}
             />
           )}
