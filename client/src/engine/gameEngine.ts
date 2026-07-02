@@ -10,7 +10,7 @@ import type {
   LastConversationGrade,
 } from '../types';
 import { initialPartners } from '../data/partners';
-import { marketContextByRound, generateRoundSummary } from '../data/market';
+import { getMarketContext, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
 import { getBranchingScenario } from '../data/branchingScenarios';
 import { getPartnerBaseline } from '../data/partnerStateByRound';
@@ -114,7 +114,10 @@ export function createInitialState(overrides?: {
     engagedPartnerIds: [],
     selectedPartnerId: null,
     partners,
-    marketContext: marketContextByRound[1],
+    marketContext: getMarketContext(
+      overrides?.learnerProfile?.market?.parityRegime ?? null,
+      1,
+    ),
     roundSummaries: [],
     roundStars: overrides?.roundStars ?? {},
     lastConversationGrade: null,
@@ -151,7 +154,10 @@ export function startPracticeRound(state: GameState, round: number): GameState {
     previouslyEngagedThisRound: [],
     selectedPartnerId: null,
     partners,
-    marketContext: marketContextByRound[round] ?? marketContextByRound[1],
+    marketContext: getMarketContext(
+      state.learnerProfile.market?.parityRegime ?? null,
+      round,
+    ),
     issueTreeHelperStates: {},
     conversationInProgress: null,
     lastConversationGrade: null,
@@ -721,7 +727,10 @@ export function advanceRound(state: GameState): GameState {
     previouslyEngagedThisRound: [],
     selectedPartnerId: null,
     partners: updatedPartners,
-    marketContext: marketContextByRound[nextRound] ?? state.marketContext,
+    marketContext: getMarketContext(
+      state.learnerProfile.market?.parityRegime ?? null,
+      nextRound,
+    ),
     roundSummaries: [...state.roundSummaries, roundSummary],
     conversationInProgress: null,
   };
