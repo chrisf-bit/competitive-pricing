@@ -274,7 +274,7 @@ const narrowParityScenario: EmailAuditScenario = {
     },
   ],
   closingNote:
-    "In no-parity and narrow-parity markets, if you notice a cross-channel pricing discrepancy, you can reactively confirm whether that discrepancy across platforms is intentional or unintentional. Explain that if partners' prices are more attractive on other platforms, this might be an indication that there is scope to improve price competitiveness on Booking.com. This must remain a neutral, informative question: not a push for alignment.",
+    "In no-parity and narrow-parity markets, if a pricing discrepancy is observed, you can reactively discuss the existence of that discrepancy and seek to better understand the partner's pricing strategy across channels. Any such discussion should remain neutral and informational, with a focus on explaining how pricing decisions may affect performance on Booking.com. The goal is to better understand the partner's pricing strategy and the context of any observed differences in pricing across channels.",
 };
 
 // ── No Parity scenario ──────────────────────────────────────────────
@@ -317,14 +317,14 @@ const noParityScenario: EmailAuditScenario = {
     {
       id: 'p1',
       text: 'your prices look more attractive on a couple of other platforms - is that intentional and part of your strategy?',
-      isSafe: true,
+      isSafe: false,
       rationale: {
         correct:
-          "Right call. In a No Parity market you can only raise external prices reactively, and this phrasing does exactly that - a neutral, fact-finding question about whether the discrepancy is intentional or unintentional.",
+          "Right call. Even in a reactive raise, this phrasing presumes a strategy and pressures the partner to justify their intent. The neutral way to raise it is: 'We note that your prices differ across channels. Could you help us understand your current pricing approach? As always, you remain free to determine your pricing strategy, and the point of this conversation is just to better explain how pricing decisions may affect performance on Booking.com.'",
         incorrect:
-          "Actually this one is safe. In a No Parity market you can only raise external prices reactively, and this phrasing does exactly that - a neutral, fact-finding question about whether the discrepancy is intentional or unintentional.",
+          "Actually this one is unsafe. It presumes a strategy and pressures the partner to justify their intent, which is off-side even in a reactive raise. The neutral phrasing is: 'We note that your prices differ across channels. Could you help us understand your current pricing approach? As always, you remain free to determine your pricing strategy, and the point of this conversation is just to better explain how pricing decisions may affect performance on Booking.com.'",
       },
-      source: 'Legal Compliance | No Parity Markets | Do (verbatim)',
+      source: "Legal Compliance | No Parity Markets | Don't (SME refinement)",
     },
     {
       id: 'p2',
@@ -376,7 +376,7 @@ const noParityScenario: EmailAuditScenario = {
     },
   ],
   closingNote:
-    "In no-parity and narrow-parity markets, if you notice a cross-channel pricing discrepancy, you can reactively confirm whether that discrepancy across platforms is intentional or unintentional. Explain that if partners' prices are more attractive on other platforms, this might be an indication that there is scope to improve price competitiveness on Booking.com. This must remain a neutral, informative question: not a push for alignment.",
+    "In no-parity and narrow-parity markets, if a pricing discrepancy is observed, you can reactively discuss the existence of that discrepancy and seek to better understand the partner's pricing strategy across channels. Any such discussion should remain neutral and informational, with a focus on explaining how pricing decisions may affect performance on Booking.com. The goal is to better understand the partner's pricing strategy and the context of any observed differences in pricing across channels.",
 };
 
 // ── Cross-Regional ──────────────────────────────────────────────────
