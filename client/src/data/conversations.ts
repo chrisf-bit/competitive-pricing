@@ -117,7 +117,7 @@ const marinaR1: ConversationTree = {
             description:
               'Walk her through where the visibility loss is concentrated and connect it to the missing Mobile Rate.',
             playerDialogue:
-              "Your visibility is slipping and you're losing the price comparison on about two-thirds of searches. The interesting bit is where the loss is concentrated: your Genius bookings are holding up, but on non-Genius traffic you're being undercut consistently. Your base rate sits in line with comparable boutique stays and you don't have Mobile Rate active - that combination points to mobile users specifically, where most of Madrid's search volume sits.",
+              "Your Loyal RPD sits close to your Public RPD - about a one-point gap, when the Genius discount should be creating closer to ten. Combined with Mobile Rate being off, that points at where the leverage is: you're leaving mobile-specific conversion on the table rather than fixing a base-rate issue.",
             styleMatch: { blue: 2, green: 1, red: 0, yellow: -1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -148,8 +148,8 @@ const marinaR1: ConversationTree = {
         {
           optionId: 'marina-r1-diag-mobile-gap',
           responses: [
-            { trustThreshold: 'low', text: "Okay, that's a much clearer read. The Public-vs-Loyal split is interesting - I hadn't broken it out that way. Go on.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That's exactly the kind of analysis I needed. The Public-vs-Loyal gap is a strong signal - so you're pointing at a mobile-specific issue, not a base rate one. Makes sense.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "Okay, that's a much clearer read. I hadn't looked at the Genius gap that way. Go on.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's exactly the kind of analysis I needed. Genius pricing pattern being the signal, not a base-rate issue. Makes sense.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes - I was looking at the same numbers last week and reaching the same conclusion. Glad we're aligned. What's the fix?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, visibility: 1 },
@@ -421,7 +421,7 @@ const stavrosR1: ConversationTree = {
             label: 'Suggest lowering the base rate',
             description: 'Recommend a direct rate reduction to become more competitive.',
             playerDialogue:
-              "To be straightforward - your base rate is significantly above the market for comparable resorts on Kos right now. If you brought it down by 8–10%, combined with your existing discounts, you'd likely see a meaningful jump in visibility and bookings.",
+              "To be straightforward - your base rate is significantly above the market for comparable resorts on Kos right now. If you brought it down by 8-10%, combined with your existing discounts, you'd likely see a meaningful jump in visibility and bookings.",
             styleMatch: { red: 1, blue: 0, yellow: 0, green: -2 },
             assertiveness: 3,
             compliance: 'risky',
@@ -632,7 +632,7 @@ const hannahR1: ConversationTree = {
             label: 'Suggest Last-Minute Deal only',
             description: 'A targeted, small discount for unfilled rooms close to check-in.',
             playerDialogue:
-              "I completely understand that, and I wouldn't suggest anything that feels wrong for your brand. What about a Last-Minute Deal that only applies to rooms that would otherwise go empty? It's a small, targeted discount for bookings made 1–2 days before arrival. Your regular guests and advance bookers see no change at all - it just fills those last empty rooms.",
+              "I completely understand that, and I wouldn't suggest anything that feels wrong for your brand. What about a Last-Minute Deal that only applies to rooms that would otherwise go empty? It's a small, targeted discount for bookings made 1-2 days before arrival. Your regular guests and advance bookers see no change at all - it just fills those last empty rooms.",
             styleMatch: { green: 2, yellow: 1, blue: 1, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1763,7 +1763,7 @@ const stavrosR3: ConversationTree = {
             label: 'Build a seasonal strategy',
             description: 'Create a pricing plan that varies by season and demand.',
             playerDialogue:
-              "Here's my recommendation for high season: maintain your current discount setup, but create an Early Booker Deal specifically for June–August to capture advance bookings. Then in shoulder season, we layer in more aggressive Country Rates. This way you maximise revenue in peak and drive volume in quiet periods.",
+              "Here's my recommendation for high season: maintain your current discount setup, but create an Early Booker Deal specifically for June-August to capture advance bookings. Then in shoulder season, we layer in more aggressive Country Rates. This way you maximise revenue in peak and drive volume in quiet periods.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',

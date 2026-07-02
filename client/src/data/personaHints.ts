@@ -126,11 +126,11 @@ export const personaHints: PersonaHintsByRound = {
       },
       storyteller: {
         oneLiner:
-          'Genius bookings mask a quiet visibility slip: her base rate sits just above market and she loses two-thirds of public price checks.',
+          'Marina reads healthy for R1 (Bucket 3, Lose Price 42%). The quieter story is that the Genius discount barely creates any gap between her Public and Loyal RPD.',
       },
       'data-detective': {
         oneLiner:
-          'Anomaly: 2.7-point gap between RPD Public (7.5%) and RPD Loyal (4.8%) with Mobile Rate off - non-Genius mobile is the leak.',
+          'Anomaly: RPD Loyal (1.6%) sits close to RPD Public (2.8%). The Genius discount should be creating a ~10-point gap, not 1 point. Otherwise she reads healthy at R1.',
       },
     },
   },

@@ -302,7 +302,7 @@ export interface PartnerState {
   persona: PartnerPersona;
   metrics: PartnerMetrics;
   metricHistory: MetricSnapshot[];
-  trust: number;                // 0–100, hidden
+  trust: number;                // 0-100, hidden
   relationship: RelationshipStatus;
   discounts: DiscountProduct[];
   conversationLog: ConversationRecord[];
@@ -355,7 +355,7 @@ export interface ConversationOption {
   description: string;          // fuller text shown on hover/selection
   playerDialogue: string;       // what the player "says"
   styleMatch: Record<CommunicationStyle, number>; // -2 to +2 match score per style
-  assertiveness: number;        // 1–3 (low, medium, high)
+  assertiveness: number;        // 1-3 (low, medium, high)
   compliance: 'safe' | 'borderline' | 'risky';
   /**
    * Which parity regimes this option is legal in. Undefined means available in
