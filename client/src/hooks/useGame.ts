@@ -39,6 +39,7 @@ export function useGame() {
       return createInitialState({
         learnerProfile: persisted.learnerProfile,
         level0Cleared: persisted.level0Cleared,
+        level0ClearedForRegime: persisted.level0ClearedForRegime,
         roundStars: persisted.roundStars,
       });
     }
@@ -65,13 +66,20 @@ export function useGame() {
     const snapshot = JSON.stringify({
       profile: state.learnerProfile,
       cleared: state.level0Progress.cleared,
+      clearedForRegime: state.level0Progress.clearedForRegime,
       stars: state.roundStars,
     });
     if (snapshot !== lastPersistedRef.current) {
       lastPersistedRef.current = snapshot;
       savePersistedState(state);
     }
-  }, [state.learnerProfile, state.level0Progress.cleared, state.roundStars, state]);
+  }, [
+    state.learnerProfile,
+    state.level0Progress.cleared,
+    state.level0Progress.clearedForRegime,
+    state.roundStars,
+    state,
+  ]);
 
   const goToScreen = useCallback((screen: GameState['screen']) => {
     setState((s) => ({ ...s, screen }));
@@ -239,6 +247,21 @@ export function useGame() {
   }, []);
 
   /**
+   * Set the return-to screen for the next Level 0 activity completion.
+   * Consumed by finishLevel0Activity below - the activity that completes
+   * next routes there instead of its default next screen. Used by the
+   * cleared-learner-changing-regime path in App.tsx to route through
+   * the Call Audit and back to Round Select without redoing the rest
+   * of clearance.
+   */
+  const requestReturnToAfterActivity = useCallback(
+    (target: GameState['screen']) => {
+      setState((s) => ({ ...s, level0ReturnTo: target }));
+    },
+    [],
+  );
+
+  /**
    * Record results from a Level 0 activity AND navigate. If a return-to
    * screen is set (via requestLevel0Retry), navigates there instead of
    * the activity's default next screen, then clears the return-to.
@@ -296,12 +319,45 @@ export function useGame() {
   );
 
 
-  /** Mark Level 0 as cleared so the Briefing button adapts on a return visit. */
+  /**
+   * Mark Level 0 as cleared so the Briefing button adapts on a return
+   * visit. Also snapshots the current regime as `clearedForRegime` so
+   * the returning-learner routing can detect a regime change and
+   * route through the Call Audit for the new regime.
+   */
   const markLevel0Cleared = useCallback(() => {
     setState((s) => ({
       ...s,
-      level0Progress: { ...s.level0Progress, cleared: true },
+      level0Progress: {
+        ...s.level0Progress,
+        cleared: true,
+        clearedForRegime:
+          s.learnerProfile.market?.parityRegime ??
+          s.level0Progress.clearedForRegime,
+      },
     }));
+  }, []);
+
+  /**
+   * Update `clearedForRegime` to the learner's current regime without
+   * changing the cleared flag. Called after a returning cleared
+   * learner completes the Call Audit for a new regime - the routing
+   * gate that sent them there should not fire again next time until
+   * they switch regime once more.
+   */
+  const markClearedForCurrentRegime = useCallback(() => {
+    setState((s) => {
+      const regime = s.learnerProfile.market?.parityRegime;
+      if (!regime) return s;
+      if (s.level0Progress.clearedForRegime === regime) return s;
+      return {
+        ...s,
+        level0Progress: {
+          ...s.level0Progress,
+          clearedForRegime: regime,
+        },
+      };
+    });
   }, []);
 
   /**
@@ -366,11 +422,13 @@ export function useGame() {
     setLearnerName,
     recordKnowledgeCheckResults,
     finishLevel0Activity,
+    requestReturnToAfterActivity,
     requestLevel0Retry,
     markTutorialShown,
     markPartnerDetailTutorialShown,
     setIssueTreeHelperState,
     markIssueTreeHelperOpened,
     markLevel0Cleared,
+    markClearedForCurrentRegime,
   };
 }

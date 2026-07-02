@@ -1,4 +1,4 @@
-import type { GameState } from '../types';
+import type { GameState, ParityRegime } from '../types';
 import { getScormAdapter } from './scorm';
 
 /**
@@ -29,6 +29,13 @@ const SCORM_SCORE_MAX_KEY = 'cmi.core.score.max';
 export interface PersistedState {
   learnerProfile: GameState['learnerProfile'];
   level0Cleared: boolean;
+  /**
+   * The regime the learner was cleared under. Optional for backwards
+   * compatibility with pre-2026-07 payloads that predated the field -
+   * those parse as null and the app treats a null value the same way
+   * as "not yet cleared for the current regime" on regime change.
+   */
+  level0ClearedForRegime?: ParityRegime | null;
   /** Best stars earned for each completed round (1-indexed by round). */
   roundStars: Record<number, 0 | 1 | 2 | 3>;
 }
@@ -42,6 +49,7 @@ function parsePayload(raw: string | null): PersistedState | null {
     return {
       learnerProfile: parsed.learnerProfile,
       level0Cleared: parsed.level0Cleared,
+      level0ClearedForRegime: parsed.level0ClearedForRegime ?? null,
       roundStars: parsed.roundStars ?? {},
     };
   } catch {
@@ -67,6 +75,7 @@ export function savePersistedState(state: GameState): void {
   const payload: PersistedState = {
     learnerProfile: state.learnerProfile,
     level0Cleared: state.level0Progress.cleared,
+    level0ClearedForRegime: state.level0Progress.clearedForRegime,
     roundStars: state.roundStars,
   };
   const serialised = JSON.stringify(payload);

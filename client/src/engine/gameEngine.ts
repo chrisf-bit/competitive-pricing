@@ -2,6 +2,7 @@ import type {
   GameState,
   PartnerState,
   PartnerMetrics,
+  ParityRegime,
   RelationshipStatus,
   ConversationRecord,
   ScoreBreakdown,
@@ -68,6 +69,12 @@ const NEGLECT_METRIC_DECAY = -3;
 export function createInitialState(overrides?: {
   learnerProfile?: GameState['learnerProfile'];
   level0Cleared?: boolean;
+  /**
+   * Which regime the learner cleared under, if any. Persisted so a
+   * regime change on return can route them through the Call Audit
+   * for the new regime without redoing the whole clearance.
+   */
+  level0ClearedForRegime?: ParityRegime | null;
   roundStars?: GameState['roundStars'];
 }): GameState {
   const partners = initialPartners.map((p) => {
@@ -100,6 +107,7 @@ export function createInitialState(overrides?: {
       emailAuditCompleted: false,
       inboxTriageCompleted: false,
       cleared: overrides?.level0Cleared ?? false,
+      clearedForRegime: overrides?.level0ClearedForRegime ?? null,
     },
     currentDiagnosis: null,
     level0ReturnTo: null,

@@ -89,6 +89,16 @@ export interface Level0Progress {
   inboxTriageCompleted: boolean;
   /** True once the learner has met the pass threshold and proceeded to Level 1. */
   cleared: boolean;
+  /**
+   * The parity regime the learner cleared under. Null before clearance
+   * and set on the Clearance Summary continue when they pass. On a
+   * return visit, if they switch to a different regime at Market
+   * Select the app routes them through the Call Audit again (each
+   * regime has its own phrase set and compliance rules) before
+   * dropping them into the Round Select hub. Full clearance is not
+   * re-required - only the regime-specific audit.
+   */
+  clearedForRegime: ParityRegime | null;
 }
 
 // ── Level 1 outcome-stage types ──

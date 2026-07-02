@@ -170,15 +170,30 @@ export default function App() {
                 onSelectAvatar={game.setLearnerAvatar}
                 onSelectArchetype={game.setLearnerArchetype}
                 // Cleared learners jump to the Round Select hub after
-                // confirming / changing their regime + persona (the
-                // hub is the entry point for a run, not Portfolio
-                // directly). Fresh learners go through the clearance
-                // activities from GM Chat onwards.
-                onContinue={() =>
-                  state.level0Progress.cleared
-                    ? game.goToScreen('round-select')
-                    : game.goToScreen('l0-gm-chat')
-                }
+                // confirming / changing their regime + persona.
+                // Exception: if they switched to a regime they haven't
+                // cleared under, route through the Call Audit for the
+                // new regime first (the phrase set and compliance rules
+                // differ per regime). Fresh learners still go through
+                // the full clearance from GM Chat onwards.
+                onContinue={() => {
+                  if (!state.level0Progress.cleared) {
+                    game.goToScreen('l0-gm-chat');
+                    return;
+                  }
+                  const currentRegime =
+                    state.learnerProfile.market?.parityRegime ?? null;
+                  const clearedFor = state.level0Progress.clearedForRegime;
+                  if (currentRegime && currentRegime !== clearedFor) {
+                    // Route back to Round Select once the audit finishes -
+                    // consumed by finishLevel0Activity in the useGame
+                    // reducer.
+                    game.requestReturnToAfterActivity('round-select');
+                    game.goToScreen('l0-email-audit');
+                    return;
+                  }
+                  game.goToScreen('round-select');
+                }}
               />
             </ClearanceShell>
           )}
@@ -208,9 +223,19 @@ export default function App() {
               <EmailAuditScreen
                 regime={state.learnerProfile.market?.parityRegime ?? null}
                 retryItemIds={state.level0RetryItemIds}
-                onComplete={(results) =>
-                  game.finishLevel0Activity('l0-issue-tree-reveal', results)
-                }
+                onComplete={(results) => {
+                  // Cleared learners who came here via the regime-change
+                  // path (Character Build set level0ReturnTo to
+                  // 'round-select') should have their clearedForRegime
+                  // snapshot refreshed so the routing doesn't re-fire on
+                  // the next visit under the same regime. Fresh clearance
+                  // path also refreshes it - harmless duplicate work,
+                  // simpler than branching.
+                  if (state.level0Progress.cleared) {
+                    game.markClearedForCurrentRegime();
+                  }
+                  game.finishLevel0Activity('l0-issue-tree-reveal', results);
+                }}
               />
             </ClearanceShell>
           )}
