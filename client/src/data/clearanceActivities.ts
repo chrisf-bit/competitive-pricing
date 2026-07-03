@@ -66,9 +66,9 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     id: 'issue-tree',
     label: 'Diagnose',
     screen: 'l0-issue-tree-reveal',
-    title: 'How LPS diagnose pricing issues',
+    title: 'Using the Pricing Issue Tree',
     subtitle:
-      "A quick walk through the Pricing Issue Tree, the framework LPS can use before every partner call.",
+      "A change of pace: this one's a walkthrough, not a check. Your manager will have introduced you to the Pricing Issue Tree in your briefing. Here's a quick recap of the seven steps on a worked example, so you're set to use it in the sim.",
   },
   {
     id: 'summary',
