@@ -68,8 +68,15 @@ Key files:
 
 ### Voice and copy
 
-- **No em dashes (—) anywhere.** Plain hyphens (-). Chris has corrected
-  this twice; memory file enforces.
+- **No em dashes (—) or en dashes (–) anywhere.** Plain hyphens (-),
+  in code AND in the assistant's chat responses back to Chris (he
+  reads the chat text too and em dashes there count as violations).
+  Chris has corrected this three times now; memory file enforces.
+  En dashes strip too as of Jul 2026 - even in numeric ranges
+  ("5-10" not "5–10").
+- **No "real-ish" (or similar hedges).** Use "worked example" or an
+  unhedged descriptor. "Real-ish" reads as apologetic when the sim
+  is deliberately teaching from a constructed scenario.
 - **No "Level 0/1/2" labels in learner-facing copy.** Levels are
   internal SME terms. UI uses activity names ("Email Audit", "Day
   one", "Diagnose"). Internal code/types/route-ids can use level prefixes.
@@ -474,6 +481,13 @@ visual now matches.
 
 ### Issue Tree Helper (guided diagnostic on Partner Detail)
 
+**Renamed to "Diagnosis Coach" in Jul 2026 user-facing copy - internal
+identifiers kept.** See the "Jul 2026 session update" section below
+for the rename, coach-mode intro, auto-suggest, enlarged launcher
+tab with "COACH" label, and pause-during-drawer-open idle-nudge
+interaction. Section below still describes the drawer's mechanics
+which are unchanged.
+
 A pre-call wizard that walks the learner through the Pricing Issue
 Tree to land on a hook. Launched from a **square launcher tab**
 pinned to the right edge of the Partner Detail screen: brand-yellow
@@ -551,6 +565,12 @@ keeps the call surface clean and positions the Helper as a
 pre-call think-time tool.
 
 ### Persona power effects (subtle gameplay)
+
+**Refactored in Jul 2026 into a single Persona Lens chip on Partner
+Detail** (replaced the Insight + Blind Spot cards). See "Jul 2026
+session update" below for details. Section here still holds for
+the retro line on Conversation Report and aggregate block on
+Debrief; those surfaces are unchanged.
 
 Super-power personas (Conversation Architect, Objection Navigator,
 Storyteller, Data Detective) used to be flavour-only. They now have
@@ -1268,6 +1288,470 @@ Source: PDF page 1.
   browser's save dialog and forwards it to a manager if they choose.
 - The same data could power xAPI statements later if Booking wires up
   an LRS; in R2 we just generate the PDF.
+
+## Jul 2026 session update
+
+Biggest single update since the R2 scope drop. Multiple system-shaped
+changes landed between 2026-07-01 and 2026-07-03. Where a section
+above is superseded or extended, its header points here.
+
+### Naming shifts (user-facing only, internal identifiers kept)
+
+- **"Issue Tree Helper" -> "Diagnosis Coach"** in every user-facing
+  string. Internal identifiers (`IssueTreeHelper` component,
+  `issueTreeHelperStates` state field, `hasOpenedIssueTreeHelper`
+  flag, `data/issueTree.ts`) kept for continuity. Rename covers
+  drawer title, launcher tab tooltip, tutorial, GuidePanel step
+  copy, and the Partner Detail gate. The name is TBC per client -
+  future rename should treat "Diagnosis Coach" as the canonical
+  touchpoint and swap it in one pass. Icon is still TreeDeciduous;
+  recommendation for a future rename is Stethoscope for a clean
+  "diagnostic coach" read, but held until the name settles.
+- **"Email Audit" -> "Call Audit"** everywhere user-facing. The
+  activity is reframed as reviewing a Zoom AI transcript of a
+  recorded partner call, not a draft email (legal flagged that
+  LPS teams aren't permitted to send outbound emails like the
+  original draft). Internal file/type names (`emailAudit.ts`,
+  `EmailAuditScreen`, `getEmailAudit`) kept. Header labels
+  swapped: From/To/Subject -> Recorded by/Partner/Topic. Judgement
+  buttons: "Safe to send" -> "Safe to say", "Unsafe - rewrite" ->
+  "Unsafe - shouldn't have said it". Body text stripped of the
+  "Best, Sam" signoff.
+
+### Round Select hub (new screen `'round-select'`)
+
+- Inserted **after the cleared celebration** (which now routes here
+  instead of `portfolio`) AND **between rounds** - `advanceRound`
+  routes here instead of the next round's portfolio.
+- **Two levels of ten tiles each**. Level 1 = existing partner-
+  portfolio content (rounds 1-10; today only R1-R3 are playable per
+  TOTAL_ROUNDS, the rest render locked with "Coming Soon"). Level 2
+  = future OPC / Advanced View content (rounds 11-20, all locked
+  with a sparkles badge + OPC label).
+- **Current tile derived from `roundStars`**, not the engine's
+  `currentRound`. Persistence restores roundStars but resets
+  currentRound to 1, so a returning learner with rounds already
+  cleared would otherwise see Round 1 tagged "Current" alongside
+  Round 2/3 tagged "Cleared". `activeRound = first playable round
+  with < 1 star`. If every playable round is cleared, no tile is
+  current and the retry pills on completed tiles carry the flow.
+- **Tile styling**: solid, high-alpha fills (~92%) so tiles read
+  cleanly on the backdrop. Current = brand-yellow gradient, navy
+  content, glow ring. Cleared = bright green gradient, white
+  content, white "CLEARED" pill with deep-green text. Locked =
+  mid-navy gradient with visible border and white icons/text.
+- **Retry pill** on completed tiles with < 3 stars ("Retry for 3
+  stars"). Clicking a cleared tile calls `startPracticeRound` -
+  partner state resets to that round's baseline; stars only go up.
+- **`enterRound(state, round)` engine reducer** for the current-
+  round click; keeps existing state, just routes to portfolio.
+- **`onEnterRound` hook handler** branches: if the clicked round
+  === currentRound -> `enterRound`; if it's an earlier completed
+  round -> `startPracticeRound`.
+- Cleared learners who complete Character Build on a return visit
+  now route to `round-select` instead of `portfolio` (was jumping
+  straight past the hub previously).
+- Backdrop: night cityscape WebP at 36KB. Fade-in pattern matches
+  splash/cleared/data-insights. Backdrop brightness at 0.65, radial
+  vignette only (no middle-band scrim). Tiles carry their own
+  weight now that they're solid, so the backdrop can breathe.
+
+### Idle nudge (new)
+
+- **`useIdleNudge(target, enabled)` hook** in `hooks/useIdleNudge.ts`.
+  Watches window for mousedown/keydown/wheel/touchstart. After 15s
+  of no interaction, fires a yellow pulse animation on the element
+  matching `[data-tutorial="{target}"]` AND on any Guide-panel
+  step marked `[data-guide-step-for="{target}"]`. Repeats every 20s
+  if still idle. Off-screen targets scroll into view before pulsing.
+  **No mousemove listener** - reading the screen with a still cursor
+  is exactly the state we want to interrupt.
+- **CSS**: `.idle-nudge-pulse` class + `idleNudgePulse` keyframe in
+  `index.css`. Three-iteration yellow ring (box-shadow + outline)
+  totalling ~2.4s.
+- **Portfolio** wires the hook with target `partner-card` (pulses
+  the first card - primary decision).
+- **Partner Detail** wires with target derived from state:
+  - R1 pre-Helper (`issueTreeGateBlocks`) -> `partner-detail-tree-tab`
+  - Otherwise -> `partner-detail-action` (Begin Conversation)
+  - **Disabled while the Diagnosis Coach drawer is open**
+    (`!helperOpen`) - drawer covers the right column so Begin
+    Conversation would pulse behind it, and the learner isn't
+    stuck on the CTA anyway (they're mid-diagnostic).
+- **GuideStep gained an optional `target` field**;
+  `data-guide-step-for={step.target}` emitted on each step div.
+  Metric-referring steps target the whole block, not per-number.
+
+### Persona system: single Persona Lens chip
+
+- **Insight + Blind Spot cards on Partner Detail replaced** with a
+  single `PersonaLensChip` component. Icon + persona chip label +
+  one-line lens on the partner. Same footprint as a metric row;
+  no expand button, no paragraphs.
+- **`PersonaHint` schema reduced from three fields to one**:
+  dropped `unlocked` / `mutedTeaser` / `mutedFull`, kept only
+  `oneLiner`. All 24 authored hint entries across
+  Marina/Carlos/Stavros/John + Crystal Water / Velvet Sky /
+  Noble Falcon regime variants rewritten as tight single sentences
+  distilling each persona's angle (Architect on approach, Navigator
+  on pushback, Storyteller on story, Detective on anomaly).
+- **`inGameImpact: string` field added to `SuperPowerPersona`**.
+  Rendered as an accent-tinted strip at the bottom of each Character
+  Build persona card. Names the concrete UI effect the pick has
+  ("On each partner, a one-line chip flags the pushback most likely
+  to derail the call"). Authoring rule: update this string first
+  when a new persona effect ships, so it stays honest to what the
+  card actually delivers.
+- **Character Build cards trimmed**: removed the Blind Spots list
+  block and the underlying `weaknesses[]` field from the persona
+  type. Also stripped dead fields `identity`, `strengths`,
+  `gameplayStyle` that were declared and authored but never
+  rendered.
+- **`expandedBlindSpots` GameState field removed** along with
+  `markBlindSpotExpanded` reducer, hook handler, and prop wiring.
+  Practice mode + full restart no longer need to clear it.
+- The **retro line on Conversation Report** and **aggregate block
+  on Debrief** are unchanged (still driven by
+  `powerEffect.retroOnWin/retroOnLoss/aggregateCoaching`).
+
+### Engagement-scoped Debrief
+
+Fixes the reported "perfect run reads as if I neglected 18 partners"
+bug. Insights, outcomes, and averages now only look at partners the
+learner actually engaged with.
+
+- **New `engagedPartnerIds: string[]` on GameState**. Appended when a
+  conversation completes (main run only; Practice Mode replays don't
+  rewrite the main-run engagement history). Filtered on retake so a
+  reverted 0-star wrong-pick doesn't count as an engagement.
+- **`calculateScore` restricts insights + averages to engaged
+  partners.** Highlights, improvements, style insights, Avg RPD
+  Change, Revenue Impact, Relationship Health now compute over
+  engaged partners only. A perfect 9/9 run no longer surfaces
+  "Sarah's RPD declined, consider prioritising them earlier" for
+  the 18 partners the learner correctly ignored.
+- **Debrief Partner Outcomes grid** only renders engaged partners
+  (typically 3 cards, not 21). Fallback to the full list if the
+  engagement history is somehow empty.
+- **Practice Mode block on Debrief hidden entirely** when all
+  attempted rounds are already at 3 stars. Nothing to chase on a
+  perfect run.
+- **Grade derived from per-round stars** (not the legacy metric
+  deltas). 3 rounds x 3 stars = 9 max; 89%/67%/33% maps to A/B/C/D.
+
+### Play Again vs Restart
+
+Fixes the reported "I had to retake clearance despite completing it
+earlier" bug.
+
+- **`resetForPlayAgain(state)` engine reducer** (new). Preserves
+  `learnerProfile`, `level0Progress.cleared`, `clearedForRegime`,
+  and both `tutorialShown` / `partnerDetailTutorialShown` flags.
+  Wipes everything else (partners back to R1 baseline, currentRound
+  1, roundStars {}, engagements, helper picks, conversation state,
+  market context, retry bookkeeping). Learner lands on Round Select.
+- **Debrief "Play Again" button** now calls `game.onPlayAgain`
+  (backed by `resetForPlayAgain`) instead of the destructive
+  `game.onRestart`. Rename on `DebriefScreen` prop from
+  `onRestart` to `onPlayAgain` reflects the change.
+- **`game.onRestart` stays destructive** - Splash "Reset progress"
+  and DevNav "Reset" still use it. Full nuke including clearance
+  status.
+
+### Regime change routes cleared learners through Call Audit
+
+For learners changing regime on a return visit (experimentation or
+role change into a new parity regime), the Call Audit is
+regime-specific so they need to walk it again for the new regime.
+Rest of clearance stays skipped.
+
+- **New `Level0Progress.clearedForRegime: ParityRegime | null` field**.
+  Snapshots the regime the learner cleared under. Set by
+  `markLevel0Cleared` on Clearance Summary success (reads
+  `learnerProfile.market.parityRegime` at that moment). Persisted
+  to localStorage / SCORM `cmi.suspend_data`.
+- **Character Build onContinue** now checks:
+  - Not cleared -> `l0-gm-chat` (fresh full clearance)
+  - Cleared, regime matches `clearedForRegime` -> `round-select`
+  - Cleared, regime changed -> set `level0ReturnTo: 'round-select'`,
+    route to `l0-email-audit` (Call Audit for the new regime)
+- **New `markClearedForCurrentRegime` reducer** refreshes the snapshot
+  after a Call Audit completion. Called from the Email Audit
+  onComplete handler in App.tsx (any completion is safe to call it -
+  the reducer no-ops if the regime already matches).
+- **New `requestReturnToAfterActivity(screen)` reducer** sets
+  `level0ReturnTo` from App.tsx; consumed by the existing
+  `finishLevel0Activity`.
+- **Older persisted payloads without `level0ClearedForRegime`** parse
+  as null. Trigger the audit once on the returning learner's next
+  regime switch, then settle.
+
+### Regime-indexed market context
+
+Fixes the reported "banner references cities I've never seen" bug.
+
+- **`marketContextByRound` reshaped to `marketContextByRegime`** in
+  `data/market.ts`. Each of the three active regimes now carries its
+  own R1/R2/R3 content:
+  - **No Parity (Spain)**: Costa del Sol, Madrid, Barcelona,
+    Valencia, Mallorca
+  - **Narrow (UK)**: Cotswolds, Cornwall, London, Edinburgh, Bath,
+    Brighton
+  - **Wide (USA)**: Miami Beach, Newport Beach, New York, Boston,
+    West Coast
+- **`getMarketContext(regime, round)` helper** with fallbacks: null
+  regime -> Wide; Cross-Regional -> Wide; missing round for a
+  regime -> Round 1 for that regime.
+- Three engine sites (`createInitialState`, `startPracticeRound`,
+  `advanceRound`) now resolve via the helper against the learner's
+  regime.
+- Previous banners referenced parked-partner cities (Kos, Mumbai,
+  Kyoto) that no longer appear on any active portfolio. Gone.
+
+### Diagnose activity (formerly "Issue Tree Reveal")
+
+- **Eight cards total**: Overview (position 0) + seven diagnostic
+  phases aligned to the SME's Pricing Issue Tree material verbatim:
+  Trigger, Issue, Intent, Root Cause, Diagnosis, Hook, Pitch.
+- **Headlines are the SME's guiding questions**, not declarative
+  worked-example lines: "What am I seeing?" / "Where are the
+  primary pricing gaps?" / "What is the partner's pricing
+  strategy?" / "What's likely behind the pricing gaps?" / "What
+  proof do I have?" / "What conversation should I lead with?" /
+  "What's the commercial pitch?". Alex's narration adds the coaching
+  context. Hotel Atlante is the running worked example.
+- **Overview icon is TreeDeciduous** to match the Diagnosis Coach
+  launcher tab; `IntroVisual` renders a large yellow tree badge
+  styled identically to the launcher (same gradient, navy tree,
+  shadow). Learners see the same shape in clearance and on Partner
+  Detail so the correlation is unmissable.
+- **Overview narration explicitly points at the sim**: "You'll see
+  this same tree icon on a yellow tab on Partner Detail in the sim
+  - that's the Diagnosis Coach, which walks you through the tree
+  on a real partner."
+- **Pitch step carries a caveat**: "In the sim the Diagnosis Coach
+  walks you to the Hook. The Pitch happens live on the call,
+  through the conversation option picks you make in the moment."
+  Handles the divergence between the Reveal (7 steps) and the
+  drawer (6 steps).
+- **Subtitle** in `clearanceActivities.ts`: "A change of pace: this
+  one's a walkthrough, not a check. Your manager will have introduced
+  you to the Pricing Issue Tree in your briefing. Here's a quick
+  recap of the seven steps on a worked example, so you're set to
+  use it in the sim." Bridges from the Call Audit (assessment) into
+  this teaching activity and references the TLX manager briefing
+  as prior context.
+- **Objection phase dropped** from the old Reveal (was stale -
+  Objection was retired from the sim in May 2026).
+
+### Diagnosis Coach reframe (drawer copy + launcher)
+
+- **Drawer header** shifted from "Issue Tree Helper" / "Diagnosis
+  for X" to "Diagnosis Coach" / "Working out the angle for X".
+- **Step 0 coach intro**: "We'll walk {name}'s data together and
+  land on the right way to open the call. There might be more than
+  one trigger - pick the one that stands out most."
+- **Step 1 question reframed** from "What kind of trigger surfaced
+  this issue?" to "Looking at {name}'s data, which trigger is
+  loudest?" - acknowledges multi-trigger reality without adding
+  multi-select complexity.
+- **Auto-suggest** added: soft blue tint + "Data suggests this"
+  chip on the option at each step matching the branching
+  scenario's `issueTreePath`. Uses existing SME data; nudge only,
+  learner still clicks.
+- **Launcher tab enlarged**: icon 28 -> 36, heavier stroke, padding
+  bumped, radius bumped, glow wider. Added a small "COACH" label
+  under the tree icon so the tab reads as a labelled affordance
+  instead of just a decorative pulse.
+
+### Alex chat (Day one with Alex) - three new items
+
+Added from the SME's "content to add" list. Scoring, retry, and
+Clearance Summary display pick these up automatically because the
+summary enumerates `gmScript` at runtime.
+
+- **A5**: "Roughly how much ABRN growth do we get for every 1%
+  improvement in RPD?" -> **about 2 to 3%**. Frames why price
+  competitiveness is the primary lever.
+- **A6**: "Competitive Partner Share tells us the proportion of a
+  portfolio's partner value sitting in which eRPD range?" ->
+  **eRPD less than or equal to 0%** (the competitive band).
+  Follow-up flags CPS is internal-only prioritisation and never
+  goes into a partner conversation.
+- **B2**: "A partner is consistently priced higher than similar
+  properties on the platform. What compounds if they leave it
+  alone?" -> they accrue **"visibility debt"** (fewer clicks,
+  weaker ranking over time, expensive to recover).
+
+### Call Audit content refinements (SME)
+
+- **Reminder rewritten** (No Parity + Narrow Parity share the same
+  copy): "In no-parity and narrow-parity markets, if a pricing
+  discrepancy is observed, you can reactively discuss the existence
+  of that discrepancy and seek to better understand the partner's
+  pricing strategy across channels. Any such discussion should
+  remain neutral and informational, with a focus on explaining how
+  pricing decisions may affect performance on Booking.com. The goal
+  is to better understand the partner's pricing strategy and the
+  context of any observed differences in pricing across channels."
+- **No Parity phrase p1 flipped from safe to unsafe** ("your prices
+  look more attractive on a couple of other platforms - is that
+  intentional and part of your strategy?"). Was previously cited as
+  verbatim-approved; SME's refinement is that even in a reactive
+  raise this presumes a strategy and pressures the partner to
+  justify their intent. Off-side. Rationale now teaches the neutral
+  phrasing: "We note that your prices differ across channels. Could
+  you help us understand your current pricing approach? As always,
+  you remain free to determine your pricing strategy, and the point
+  of this conversation is just to better explain how pricing
+  decisions may affect performance on Booking.com." Transcript body
+  around p1 kept as-is (Sam's whole approach was off, not just the
+  flagged phrase).
+
+### Loyal RPD framing corrected (SME)
+
+SME flagged that Loyal RPD near zero is NOT "fine" - it means the
+partner has raised Public rates to compensate for the Genius
+discount, so the ~10-point gap that should exist between Public and
+Loyal isn't there.
+
+- **Marina R1 Data Detective hint**: rewrote from stale 7.5% / 4.8%
+  (old baseline) to current 2.8% / 1.6% and reframed as "the Genius
+  discount should be creating a ~10-point gap, not 1 point".
+- **Marina R1 Storyteller hint**: rewrote to reflect current Lose
+  Price 42% (was still on old 68%), and flagged the missing Genius
+  gap as the quieter story.
+- **Marina R1 conversation dialogue** (`marina-r1-diag-mobile-gap`
+  option and Marina's responses): rewrote "Genius bookings holding
+  up, non-Genius traffic undercut" as "Loyal RPD sits close to
+  Public RPD - Genius discount should be creating closer to ten
+  points".
+- **Priority partner scenarios** (Crystal Water, Velvet Sky, Noble
+  Falcon) already avoided the pattern - unchanged.
+- **Driftwood Bay** (Loyal -1.5) and **Raven Inn** (Loyal -2.3)
+  genuinely have negative Loyal RPD so their "Loyal is strong"
+  framing is factually accurate. Left in place.
+
+### Diagnosis Coach: option relabel
+
+- Root-cause option in the Brand.com / Intentional branch of
+  `data/issueTree.ts` relabelled from "Exclusive room / rate supply
+  on Brand.com" to "Missing room / rate on Brand.com" per client
+  copy note. Description ("Specific room types or rate plans are
+  only available on the direct site") left in place. Flag if it
+  needs updating to match the new phrasing on next pass.
+
+### Character Build subtitle + card cleanup
+
+- **Subtitle** now reads: "This is your starting point in the sim,
+  who you are on day one. Pick the avatar you identify with and
+  the super power you naturally lean into today. Everyone has
+  equal potential to succeed." Client testing feedback was
+  "it's not clear if that's the current version of myself or what
+  I would like to become" - the day-one framing is explicit.
+- Persona cards structure now: name + super power label + succeeds-
+  by tagline + "Wins by" list + "In game" impact strip. Blind
+  spots and dead fields removed (see persona system section above).
+
+### Partner Detail: Notes removed, CTA enlarged
+
+- **Notes block removed** from the right-column Profile card
+  entirely (105 lines net removal after stripping the now-unused
+  `profileNotes[]` field from the type and all 12 partner records
+  in `data/partners.ts`).
+- **Begin Conversation button enlarged**: padding 12/24 -> 18/28,
+  font 14 -> 17, icons 15 -> 20, radius sm -> md, softer/wider
+  glow. Same yellow gradient + pulseGlow animation.
+- **Briefing narrative** gained a paragraph explaining the 10-round
+  arc plus the future unlock of a second 10-round series with OPC
+  (on-platform competitiveness) metrics. Sets expectation and
+  previews the R3 Advanced View drop.
+
+### Simulation Guide + tutorials
+
+- **Portfolio + Partner Detail Guide "What to do" steps sharpened**
+  to name the exact next action ("Compare eRPD and Lose Price
+  across the cards" instead of "Pick the partner who needs you
+  most"). The generic reminders that used to sit here read as
+  filler; specific next-action copy actually helps stuck learners.
+- **Partner Detail tutorial auto-fires on first-visit** via a
+  `state.screen === 'partner-detail'` useEffect watcher in
+  App.tsx. Same pattern as Portfolio. Gated by a new
+  `partnerDetailTutorialShown: boolean` on GameState so it only
+  fires once per playthrough.
+- **Portfolio tutorial deferred to actual Portfolio mount**.
+  Previously fired inline on the ClearanceSummary and
+  ClearedCelebration onContinue callbacks; with Round Select now
+  sitting between clearance and Portfolio, the tutorial was firing
+  on Round Select where its target (`guide-panel`) isn't
+  rendered. Now fires from a `state.screen === 'portfolio'`
+  useEffect watcher.
+- **Tutorial step 8 (Portfolio, Discount Products) fixed**:
+  description no longer mentions the 3-column detail view (that
+  lives on Partner Detail, not the Portfolio card summary);
+  tooltip position switched from `top` to `bottom` so it doesn't
+  cover the row it's describing.
+
+### xAPI data pipeline (planned, not built)
+
+- Client hosting in **Docebo** (unlikely LMS-hosted LRS). Data
+  pipeline discussion landed on **batch ETL** (Docebo
+  `/tcapi/statements` endpoint, OAuth2 poll, flatten to SQL,
+  Tableau reads) as the recommended path over event-driven /
+  webhook streaming. Batch is simpler to build and manage,
+  backfillable, comfortably handles 1000 concurrent worst case.
+- Sim will need to **emit xAPI statements alongside its existing
+  SCORM calls** (SCORM 1.2 only carries `lesson_status` /
+  `score.raw` natively; behavioural data is a separate stream).
+  Small `sendStatement()` helper posting to Docebo's xAPI endpoint
+  at key events.
+- **Client-side decisions pending**: Docebo xAPI endpoint URL +
+  OAuth2 credentials, Booking-owned IRI namespace for
+  activity/verb URIs, event taxonomy sign-off, learner identifier
+  method (mbox / account / hashed).
+- Email draft to client covering all four asks was prepared during
+  this session (see chat history).
+
+### GameState field additions (this session)
+
+For quick reference when reading `types/index.ts`:
+
+- `engagedPartnerIds: string[]` - durable engagement history for
+  Debrief scoping
+- `partnerDetailTutorialShown: boolean` - auto-fire gate
+- `level0Progress.clearedForRegime: ParityRegime | null` - regime
+  the learner cleared under
+
+Persisted set now includes `level0ClearedForRegime` alongside
+learnerProfile, level0Cleared, and roundStars. Older payloads
+without the field parse safely; regime-change routing settles
+on the next Call Audit completion.
+
+### Things to avoid (session-specific)
+
+- Don't put an em dash or en dash in ANYTHING (including chat
+  responses to Chris). Plain hyphens even in numeric ranges.
+- Don't use "real-ish" or similar hedges - use "worked example".
+- Don't restore the persona Insight + Blind Spot cards. Single
+  chip is the model. `weaknesses[]` on the persona type has
+  been removed.
+- Don't restore `profileNotes[]` on `PartnerPersona`. Field is
+  gone; every partner record has been cleaned.
+- Don't make Play Again destructive. `game.onPlayAgain` preserves
+  clearance; only Splash "Reset progress" and DevNav "Reset"
+  should nuke.
+- Don't skip the Call Audit re-run on regime change for cleared
+  learners. Regime-specific content; walking it once is the
+  minimum bar.
+- Don't fire tutorials inline in `onContinue` callbacks now that
+  Round Select sits between clearance and Portfolio. Use the
+  `state.screen ===` useEffect watchers.
+- Don't rewrite the Debrief to score across all partners again.
+  Scoping to `engagedPartnerIds` is the design; a perfect run
+  should read as a perfect run.
+- Don't reintroduce Objection as a phase in either the Reveal or
+  the Coach drawer. It was retired in May 2026 and doesn't come
+  back until SME content exists for it.
 
 ## How to run
 
