@@ -1039,9 +1039,9 @@ function AdvancedViewLocked() {
         Advanced View - coming soon
       </div>
       <div style={{ fontSize: 12, lineHeight: 1.5, maxWidth: 380, margin: '0 auto' }}>
-        OPC Metrics and Quality Adoption metrics unlock in the next
-        release. For now, stay on Driving Metrics for the data you
-        need to diagnose this partner.
+        More metrics unlock in the next release. For now, stay on
+        Driving Metrics for the data you need to diagnose this
+        partner.
       </div>
     </div>
   );
