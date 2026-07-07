@@ -103,7 +103,7 @@ export const metricDefinitions = {
   pricingCoverageQTD: {
     label: 'Pricing Coverage (QTD)',
     helpText:
-      "Quarter-to-date share of the partner's eligible pricing products that are currently configured (active). Higher = more pricing levers in play; lower = headroom to introduce more scenarios.",
+      'Quarter-to-date share of the pricing competitiveness steering actions you have tracked for this partner, across topics, products, and scenarios. Higher = more steering activity logged; lower = headroom for more engagement.',
   },
 
   // ── Advanced View (locked R2, content lands R3) - PDF page 21 ──

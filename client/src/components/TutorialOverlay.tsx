@@ -290,7 +290,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-profile',
     title: 'Profile + commercial context',
     description:
-      "Partner description, commercial goal, free-text notes, and below them Last Pricing Contact and Pricing Coverage (QTD). The Pricing Coverage % tells you how much of the partner's pricing toolkit is in play - low values mean lots of headroom.",
+      "Partner description, commercial goal, free-text notes, and below them Last Pricing Contact and Pricing Coverage (QTD). The Pricing Coverage % tells you how much you have tracked pricing competitiveness steering actions holistically, including topics, products, and scenarios for that partner so far.",
     icon: <BookOpen size={18} style={{ color: 'var(--brand-blue-light)' }} />,
     position: 'left',
   },
