@@ -16,6 +16,8 @@ export interface SamplePartnerRow {
   id: string;
   hotelName: string;
   hasActiveScenario: boolean;
+  /** Partner Value (ABRN last year) - scale indicator, not a severity axis. */
+  partnerValueAbrn: number;
   /** eRPD percentage (positive = uncompetitive, lower is better). */
   erpd: number;
   /** Change in eRPD vs prior period; positive = worsening, negative = improving. */
@@ -48,6 +50,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'hotel-valle',
     hotelName: 'Hotel Valle',
     hasActiveScenario: true,
+    partnerValueAbrn: 2906,
     erpd: 7.7,
     erpdChange: 11.65,
     rpdPublic: 10.3,
@@ -70,6 +73,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'city-hotel',
     hotelName: 'City Hotel',
     hasActiveScenario: true,
+    partnerValueAbrn: 10879,
     erpd: 4.3,
     erpdChange: 3.97,
     rpdPublic: 10.1,
@@ -92,6 +96,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'park-one',
     hotelName: 'Park One Hotel',
     hasActiveScenario: true,
+    partnerValueAbrn: 3470,
     erpd: 15.6,
     erpdChange: 8.07,
     rpdPublic: 15.6,
@@ -114,6 +119,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'attic-hotel',
     hotelName: 'Attic Hotel',
     hasActiveScenario: true,
+    partnerValueAbrn: 15480,
     erpd: 18.1,
     erpdChange: 5.54,
     rpdPublic: 19.4,
@@ -136,6 +142,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'the-maze',
     hotelName: 'The Maze Hotel',
     hasActiveScenario: true,
+    partnerValueAbrn: 765,
     erpd: 6.3,
     erpdChange: 1.11,
     rpdPublic: 6.3,
@@ -158,6 +165,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'paradise-beach',
     hotelName: 'Paradise Beach Hotel',
     hasActiveScenario: true,
+    partnerValueAbrn: 1200,
     erpd: 13.0,
     erpdChange: 7.41,
     rpdPublic: 13.0,
@@ -180,6 +188,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     id: 'uphill-hotel',
     hotelName: 'UpHill Hotel',
     hasActiveScenario: true,
+    partnerValueAbrn: 16900,
     erpd: 3.8,
     erpdChange: -8.15,
     rpdPublic: 6.5,
@@ -228,9 +237,9 @@ export const dataInsightsChallenges: DataInsightsChallenge[] = [
     ],
     feedback: {
       correct:
-        "Right. Attic Hotel has the worst eRPD in the portfolio (18.1%), it's still trending up, and 100% of public traffic is losing price. That combination - high eRPD + losing every public bid + still worsening - is the textbook priority signal.",
+        "Right. Attic Hotel has the worst eRPD in the portfolio (18.1%), it's still trending up, 100% of public traffic is losing price, and at 15,480 ABRN last year there's real value on the line. Size plus poor pricing plus still worsening is the textbook priority signal.",
       incorrect:
-        "Attic Hotel is the strongest signal here: worst eRPD (18.1%), still trending up, and 100% Lose Price Public. When eRPD is high AND Lose Price Public is high AND the trend is still rising, that's the partner who needs the call first.",
+        "Attic is the strongest signal: worst eRPD (18.1%), still trending up, 100% Lose Price Public, and 15,480 ABRN last year means real revenue is at stake. UpHill is technically larger (16,900) but its eRPD is actually improving. Where high value meets high eRPD meets high Lose Price, that's the partner who needs the call first.",
     },
   },
   {
