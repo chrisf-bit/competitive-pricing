@@ -44,7 +44,7 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     screen: 'l0-gm-chat',
     title: 'Day one with Alex',
     subtitle:
-      'Alex will check you\'ve got the basics down before you meet a real partner. Five quick questions on the data side of pricing.',
+      "Alex will check you've got the basics down before you meet a real partner.",
   },
   {
     id: 'data-insights',
