@@ -395,6 +395,45 @@ based on the shape flag.
   tighten once 3+ branching scenarios exist and per-step `optimal`
   tagging is consistent).
 
+### Distractor design
+
+The three-option pattern (Hook / Diagnosis / Pitch phases in the
+3-phase model, per-step options in the branching model) leans on
+distractor quality for its teaching power. A round where the
+correct answer is obvious - because both distractors are visibly
+wrong - lets the learner pattern-match without engaging with the
+reasoning.
+
+**Rule: at least one distractor per option triad must be "close
+but not quite".** A plausible option that stays inside the safe
+register on first read but carries a specific nuance that makes
+it less correct than the optimal pick. The other distractor can
+be more clearly wrong (visible compliance breach, obvious style
+mismatch, wrong diagnostic angle), but at least one has to force
+the learner to compare fine-grained differences.
+
+Nuance shifts that count as "close but not quite":
+
+- Right diagnostic angle, wrong framing for the partner's regime
+  (e.g. proactive cross-channel talk in a Narrow market vs the
+  Brand.com-only version needed there)
+- Right pitch, wrong tone for the partner's communication style
+  (e.g. a data-heavy delivery to a green/relationship-led
+  partner)
+- Right metric, delivered without the setup context that makes
+  it land
+- Right question, but phrased in a way that presumes intent
+  (which the neutral compliant version deliberately avoids)
+- Right destination, wrong route (arrives at a compliant hook
+  but via a step that oversteps - e.g. asking for parity in a
+  No-Parity market before landing on the neutral ask)
+
+Applies to both 3-phase legacy trees and the branching
+scenarios' per-step options. When reviewing new SME-drafted
+content, if the two distractors both read as "obviously wrong,"
+push back and ask for one of them to be rewritten as a
+plausible near-miss.
+
 ### Conversation screen visuals (softphone)
 
 Both `ConversationScreen` (3-phase) and `BranchingConversationScreen`
@@ -1727,6 +1766,46 @@ learnerProfile, level0Cleared, and roundStars. Older payloads
 without the field parse safely; regime-change routing settles
 on the next Call Audit completion.
 
+### Post-session tweaks (2026-07-08 onward)
+
+Small copy and content changes since the main Jul 2026 push.
+
+- **Data & Insights table gains a Partner Value (ABRN ly)
+  column.** New `SamplePartnerRow.partnerValueAbrn` field on
+  `data/dashboardHotspot.ts`; new column on the sample partner
+  table in the D&I clearance activity, sitting after Hotel name.
+  Rendered as neutral bold with thousands separators, no colour
+  coding because it's a scale indicator, not a severity axis.
+  Priority-challenge feedback rewritten to name the value angle:
+  Attic Hotel is the priority even though UpHill has more ABRN,
+  because UpHill's eRPD is actually improving. Ties the sample
+  table to the CPS/ABRN concept the Alex chat A6 beat teaches.
+- **"Five quick questions" dropped from Day one with Alex
+  subtitle.** New SME-added beats (A5, A6, B2) took the chat
+  past five, so the count in the subtitle was stale. Subtitle
+  in `data/clearanceActivities.ts` now just names the purpose
+  without pinning a count.
+- **Pricing Coverage reframed as LPS activity, not partner
+  adoption.** SME clarification: Pricing Coverage % measures
+  how much steering work the LPS has tracked for a partner
+  (across topics, products, and scenarios), not how many of
+  the partner's pricing products are configured. Same numbers,
+  different meaning: a low % now says "you haven't done many
+  steering conversations with this partner yet" rather than
+  "the partner has lots of untapped pricing levers." Updated
+  in two learner-facing places: the Partner Detail tutorial
+  step 6/8 in `components/TutorialOverlay.tsx` and the metric
+  tooltip in `data/metricDefinitions.ts`. No gameplay change.
+- **Advanced View copy no longer names specific future
+  metrics.** Both learner-facing surfaces (tutorial tab-bar
+  step in `TutorialOverlay.tsx` and the Advanced View
+  placeholder body copy on `PartnerDetailScreen.tsx`) now read
+  "more metrics will unlock in a later release." SME flagged
+  Quality Adoption as premature to preview; going generic on
+  both is safer if either shifts before R3 ships. Internal
+  code comments and this file's R2 scope section still name
+  both, since those aren't learner-facing.
+
 ### Things to avoid (session-specific)
 
 - Don't put an em dash or en dash in ANYTHING (including chat
@@ -1874,6 +1953,22 @@ to resolve before final delivery.
 - Don't add severity colour-coding to Portfolio / Partner Detail
   metrics - it makes "spot the bad partner" trivial.
 - Don't add Level 0/1/2 prefix labels to learner-facing UI.
+- Don't ship a round with two obviously-wrong distractors. At
+  least one distractor per option triad (Hook / Diagnosis / Pitch
+  in the 3-phase model, per-step options in branching) must be a
+  "close but not quite" near-miss - the same register as the
+  optimal pick but with a specific nuance (wrong regime framing,
+  wrong tone for the partner style, missing setup context,
+  presumes intent, right destination via a wrong route). See
+  "Distractor design" for the full rule. Trivially-easy triads
+  let the learner pattern-match without reasoning.
+- Don't preview locked features by name in learner-facing copy.
+  "Advanced View unlocks OPC and Quality Adoption metrics"
+  reads as a promise; if either shifts before R3 ships we've
+  mispromised. Default to generic phrasing ("more metrics will
+  unlock in a later release") unless the feature is locked in
+  for the next release. Internal code comments and R2 scope
+  notes in this file are exempt - they aren't learner-facing.
 - Don't put questions/instructions BELOW the data they refer to.
 - Don't invent dashboard layouts that mimic specific real tools - LPS
   use multiple existing tools, and we don't want to teach a fake one.
