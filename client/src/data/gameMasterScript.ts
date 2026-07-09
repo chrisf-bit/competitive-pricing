@@ -216,6 +216,108 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
+    text: "One more thing about OPC before we shift gears. When Level 2 unlocks and you get access to the OPC dashboard, you'll see a family of six new metrics. I'm not going to walk you through how to use each one in a diagnostic (that's the TLX training that lands with the dashboard). But it's worth knowing how each one links to eRPD, because that's the anchor you've already got. Some of them feed into eRPD, some are downstream of it, and knowing which is which is how you'll read the dashboard when it arrives.",
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A9',
+      prompt:
+        'Which of the new OPC metrics is a direct INPUT to how eRPD is calculated?',
+      options: [
+        { text: 'Search Price', isCorrect: true },
+        { text: 'Visibility Share', isCorrect: false },
+        { text: 'Sell Through Rate', isCorrect: false },
+        { text: 'Net Booked Share', isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          "Right. Search Price is the average public price shown on the front-end, weighted by visitors. eRPD compares your Search Price against the peer set's Search Prices to produce a competitiveness position. So Search Price is upstream of eRPD; change one and you change the other. The other OPC metrics either sit downstream of eRPD or are independent context.",
+        incorrect:
+          "It's Search Price. eRPD compares your Search Price (the average public price shown on the front-end) against the peer set's Search Prices. Search Price is the upstream input; the rest sit downstream of eRPD or are independent context.",
+      },
+    },
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A10',
+      prompt:
+        "A partner's eRPD has been uncompetitive for two quarters. Which OPC metric is most likely to have suffered as a direct consequence?",
+      options: [
+        { text: 'Visibility Share', isCorrect: true },
+        { text: 'Search Price', isCorrect: false },
+        { text: 'Search Month Distribution', isCorrect: false },
+        { text: 'Sell Through Rate', isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          'Right. Uncompetitive eRPD pushes the property down in ranking, so it appears in fewer destination searches. Visibility Share is the direct downstream signal. Sell Through Rate would also slip as a consequence, but that\'s second-order (visibility hurts conversion hurts throughput); the direct hit is Visibility Share. Search Month Distribution is seasonality and moves independently of pricing.',
+        incorrect:
+          "It's Visibility Share. Uncompetitive eRPD pushes the property down in ranking, so it appears in fewer destination searches. Sell Through Rate would fall too as a knock-on (via visibility hurting conversion), but that's second-order; the direct hit is Visibility Share.",
+      },
+    },
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A11',
+      prompt:
+        "A partner's Sell Through Rate has fallen and Unsold Rooms have climbed. Their eRPD is trending up (worsening). What's the most likely connection?",
+      options: [
+        {
+          text: 'Uncompetitive pricing has reduced visibility and conversion, so less inventory clears',
+          isCorrect: true,
+        },
+        {
+          text: 'The metrics are unrelated; supply and pricing move independently',
+          isCorrect: false,
+        },
+        { text: 'Sell Through Rate directly determines eRPD', isCorrect: false },
+        {
+          text: 'Higher eRPD forces the partner to hold back inventory',
+          isCorrect: false,
+        },
+      ],
+      followUp: {
+        correct:
+          'Yep. Rising eRPD (worsening competitiveness) reduces the property\'s ranking and conversion. Fewer travellers see it, fewer of those who see it convert, so more inventory sits unsold at the end of the period. Sell Through Rate falls, Unsold Rooms rises. Both are supply-side symptoms of an upstream pricing problem.',
+        incorrect:
+          "The connection runs from eRPD to Visibility Share to conversion to inventory. Rising eRPD hurts ranking, so fewer travellers see the property; fewer of those convert; so more rooms sit unsold. Sell Through Rate and Unsold Rooms are downstream symptoms of the pricing problem, not independent of it.",
+      },
+    },
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A12',
+      prompt:
+        "Net Booked Share is Booking.com's share of a partner's total capacity, either historically or forward-looking. How does it relate to eRPD?",
+      options: [
+        {
+          text: "It's a compound outcome; competitive eRPD tends to grow Net Booked Share over time, alongside visibility and inventory decisions",
+          isCorrect: true,
+        },
+        {
+          text: "They're independent; NBS is about capacity, eRPD is about pricing",
+          isCorrect: false,
+        },
+        {
+          text: 'It replaces eRPD as the on-platform performance measure',
+          isCorrect: false,
+        },
+        { text: 'eRPD is calculated FROM Net Booked Share', isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          'Right. Net Booked Share is the aggregate outcome, blending eRPD (are we competitive), Visibility Share (are we seen), and inventory decisions. When eRPD trends competitive over time, Net Booked Share tends to grow because the platform is winning more of the partner\'s capacity. When eRPD drifts uncompetitive, NBS slows. Other factors can move NBS too, like inventory allocation and capacity constraints, but eRPD is a major driver.',
+        incorrect:
+          "Net Booked Share is a compound outcome. Competitive eRPD tends to grow it over time because winning the pricing competition means Booking.com captures more of the partner's capacity. Visibility Share and inventory decisions also feed in, but eRPD is a major driver. It doesn't replace eRPD or derive from it, they're linked but distinct.",
+      },
+    },
+  },
+  {
+    type: 'message',
     text: "Good. Now an important one - this trips people up.",
   },
   {

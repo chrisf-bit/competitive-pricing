@@ -1814,6 +1814,24 @@ Small copy and content changes since the main Jul 2026 push.
   both is safer if either shifts before R3 ships. Internal
   code comments and this file's R2 scope section still name
   both, since those aren't learner-facing.
+- **Alex chat: OPC metrics family beats (A9-A12).** Follow-up
+  ask on the OPC narrative: four new questions after A8
+  covering the six new OPC metrics (Search Price, Visibility
+  Share, Sell Through Rate, Unsold Rooms, Net Booked Share,
+  Search Month Distribution). Each question is framed around
+  the metric's link to eRPD, not a definitional match. A9
+  tests Search Price as the upstream input to eRPD; A10 tests
+  Visibility Share as the direct downstream signal when eRPD
+  is uncompetitive; A11 tests Sell Through Rate + Unsold Rooms
+  as paired supply-side symptoms of upstream pricing; A12
+  tests Net Booked Share as a compound outcome. Search Month
+  Distribution rides as a distractor with a follow-up
+  explanation (independent of pricing). Scope note: still not
+  operational teaching (that stays with the future TLX
+  training that ships with the OPC dashboard). These beats
+  establish vocabulary and the causal chain so the Level 2
+  dashboard is legible when it arrives. Alex chat now
+  contains A1-A12 + B1-B2 (14 items pre-B-track transition).
 - **Alex chat: three new beats introducing OPC.** SME
   feedback: the sim taught eRPD, RPD flavours, and CPS, but
   never told the learner *why On-Platform Competitiveness is
