@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Lightbulb, RotateCcw, Sparkles } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Lightbulb, RotateCcw, Sparkles, Target } from 'lucide-react';
 import type { IssueTreeHelperState, IssueTreePath } from '../types';
 import {
   triggers,
@@ -648,7 +648,7 @@ function PathSummary({ path }: { path: IssueTreeHelperState['path'] }) {
               marginBottom: 6,
             }}
           >
-            <Lightbulb size={14} style={{ color: 'var(--brand-yellow)' }} />
+            <Target size={14} style={{ color: 'var(--brand-yellow)' }} />
             <span
               style={{
                 fontSize: 11,
