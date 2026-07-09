@@ -13,7 +13,7 @@ import {
   Clock,
   BookOpen,
   Globe,
-  TreeDeciduous,
+  Lightbulb,
   UserCircle,
   Layers,
   Gauge,
@@ -214,8 +214,8 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
     target: 'issue-tree-helper',
     title: 'Diagnosis Coach',
     description:
-      "When you open a partner you'll see a yellow tree tab pinned to the right edge. Tap it and the Coach walks you through the diagnosis with you - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close the drawer to peek at the metrics and pick up where you left off.",
-    icon: <TreeDeciduous size={18} style={{ color: 'var(--brand-yellow)' }} />,
+      "When you open a partner you'll see a yellow lightbulb tab pinned to the right edge. Tap it and the Coach walks you through the diagnosis with you - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close the drawer to peek at the metrics and pick up where you left off.",
+    icon: <Lightbulb size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },
 ];
@@ -298,8 +298,8 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-tree-tab',
     title: 'Diagnosis Coach',
     description:
-      "Yellow tree tab pinned to the right edge - tap to open the Coach drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
-    icon: <TreeDeciduous size={18} style={{ color: 'var(--brand-yellow)' }} />,
+      "Yellow lightbulb tab pinned to the right edge - tap to open the Coach drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
+    icon: <Lightbulb size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'left',
   },
   {

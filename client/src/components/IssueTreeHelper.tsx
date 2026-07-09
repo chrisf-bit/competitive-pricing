@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, TreeDeciduous, Lightbulb, RotateCcw, Sparkles } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Lightbulb, RotateCcw, Sparkles } from 'lucide-react';
 import type { IssueTreeHelperState, IssueTreePath } from '../types';
 import {
   triggers,
@@ -179,7 +179,7 @@ export function IssueTreeHelper({
               flexShrink: 0,
             }}
           >
-            <TreeDeciduous size={16} />
+            <Lightbulb size={16} />
           </div>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 14, fontWeight: 800 }}>

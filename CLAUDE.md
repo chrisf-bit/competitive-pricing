@@ -26,8 +26,8 @@ around a Release 2 scope (see "Release 2 scope" section below) with
 SCORM packaging brought forward as the production format.
 
 Out of Release 2 scope: Level 3 Advanced View content (OPC Metrics +
-Quality Adoption Metrics), full Pricing Issue Tree as live mechanic,
-post-sim Diagnostic Tool, manager dashboard. The Advanced View tab
+Quality Adoption Metrics), full Pricing Diagnostic to Pitch Flow as
+live mechanic, post-sim Diagnostic Tool, manager dashboard. The Advanced View tab
 ships **locked / Coming Soon** in R2; content lands in R3.
 
 ## Source documents
@@ -356,7 +356,7 @@ based on the shape flag.
 
 **3-phase (legacy):**
 - Every conversation is **3 phases: Hook -> Diagnosis -> Pitch.**
-  Mirrors the back half of Alex's Issue Tree flow taught in
+  Mirrors the back half of Alex's Diagnostic Flow taught in
   clearance.
 - **Objection phase was removed in May 2026.** No SME-validated
   content for objection responses, so we pulled it rather than
@@ -382,10 +382,11 @@ based on the shape flag.
   diagnosis/pitch-correct readout on the Conversation Report; doesn't
   affect the floor.
 - Each tree carries `issueTreePath` mapping the scenario to the
-  Pricing Issue Tree leaf (trigger, issue, intent, root cause,
-  metric insight, hook). Consumed by the Issue Tree Helper and -
-  eventually - by a stricter grader that scores the learner's
-  Helper pick against the prescribed path.
+  Diagnostic Flow leaf (trigger, issue, intent, root cause,
+  metric insight, hook). Consumed by the Diagnosis Coach drawer
+  and - eventually - by a stricter grader that scores the
+  learner's Coach pick against the prescribed path. (Internal
+  field name `issueTreePath` kept per the rename precedent.)
 - Branching scenarios live in `data/scenarios/{partner}-r{n}.ts`,
   registered via `data/branchingScenarios.ts`. Coverage today: John
   R1 (Wide Parity, Brand.com loyalist).
@@ -547,7 +548,7 @@ hook with a one-line description. Scoring/validation against
 `BranchingConversationTree.issueTreePath` can layer on later once
 more scenarios land.
 
-**Six steps**, mirroring the Issue Tree columns:
+**Six steps**, mirroring the Diagnostic Flow columns:
 1. Trigger (Performance Outcome / Pricing Signal / Interaction / Programme)
 2. Primary pricing issue (e.g. Brand.com eRPD not competitive)
 3. Intent (Intentional / Unintentional)
@@ -1550,8 +1551,9 @@ Fixes the reported "banner references cities I've never seen" bug.
 ### Diagnose activity (formerly "Issue Tree Reveal")
 
 - **Eight cards total**: Overview (position 0) + seven diagnostic
-  phases aligned to the SME's Pricing Issue Tree material verbatim:
-  Trigger, Issue, Intent, Root Cause, Diagnosis, Hook, Pitch.
+  phases aligned to the SME's Pricing Diagnostic to Pitch Flow
+  material verbatim: Trigger, Issue, Intent, Root Cause,
+  Diagnosis, Hook, Pitch.
 - **Headlines are the SME's guiding questions**, not declarative
   worked-example lines: "What am I seeing?" / "Where are the
   primary pricing gaps?" / "What is the partner's pricing
@@ -1559,25 +1561,32 @@ Fixes the reported "banner references cities I've never seen" bug.
   proof do I have?" / "What conversation should I lead with?" /
   "What's the commercial pitch?". Alex's narration adds the coaching
   context. Hotel Atlante is the running worked example.
-- **Overview icon is TreeDeciduous** to match the Diagnosis Coach
-  launcher tab; `IntroVisual` renders a large yellow tree badge
-  styled identically to the launcher (same gradient, navy tree,
-  shadow). Learners see the same shape in clearance and on Partner
-  Detail so the correlation is unmissable.
+- **Overview icon is Lightbulb** to match the Diagnosis Coach
+  launcher tab; `IntroVisual` renders a large yellow lightbulb
+  badge styled identically to the launcher (same gradient, navy
+  lightbulb, shadow). Learners see the same shape in clearance
+  and on Partner Detail so the correlation is unmissable.
+  (Framework rename: was `TreeDeciduous` until the Pricing
+  Diagnostic to Pitch Flow rename; see the Post-session tweaks
+  rename bullet.)
 - **Overview narration explicitly points at the sim**: "You'll see
-  this same tree icon on a yellow tab on Partner Detail in the sim
-  - that's the Diagnosis Coach, which walks you through the tree
-  on a real partner."
+  this same lightbulb icon on a yellow tab on Partner Detail in
+  the sim - that's the Diagnosis Coach, which walks you through
+  the Diagnostic Flow on a real partner."
+- **Pitch step icon is Handshake** (was `Lightbulb` until the
+  rename swap; framework icon collides with Pitch icon if both
+  are Lightbulb, so Pitch moved to Handshake).
 - **Pitch step carries a caveat**: "In the sim the Diagnosis Coach
-  walks you to the Hook. The Pitch happens live on the call,
-  through the conversation option picks you make in the moment."
-  Handles the divergence between the Reveal (7 steps) and the
-  drawer (6 steps).
+  walks you through the Diagnostic Flow up to the Hook. The Pitch
+  happens live on the call, through the conversation option picks
+  you make in the moment." Handles the divergence between the
+  Reveal (7 steps) and the drawer (6 steps).
 - **Subtitle** in `clearanceActivities.ts`: "A change of pace: this
   one's a walkthrough, not a check. Your manager will have introduced
-  you to the Pricing Issue Tree in your briefing. Here's a quick
-  recap of the seven steps on a worked example, so you're set to
-  use it in the sim." Bridges from the Call Audit (assessment) into
+  you to the Pricing Diagnostic to Pitch Flow in your briefing.
+  Here's a quick recap of the seven steps on a worked example, so
+  you're set to use it in the sim." Bridges from the Call Audit
+  (assessment) into
   this teaching activity and references the TLX manager briefing
   as prior context.
 - **Objection phase dropped** from the old Reveal (was stale -
@@ -1805,6 +1814,27 @@ Small copy and content changes since the main Jul 2026 push.
   both is safer if either shifts before R3 ships. Internal
   code comments and this file's R2 scope section still name
   both, since those aren't learner-facing.
+- **"Pricing Issue Tree" renamed to "Pricing Diagnostic to
+  Pitch Flow"** in every user-facing string. Follows the same
+  pattern as the earlier Coach rename: internal identifiers
+  (`IssueTreeHelper` component, `data/issueTree.ts`,
+  `data/issueTreeReveal.ts`, `IssueTreePath` type,
+  `issueTreeHelperStates` state field,
+  `hasOpenedIssueTreeHelper` flag, screen id
+  `l0-issue-tree-reveal`) all kept for continuity. Short-form
+  in narrative copy is **the Diagnostic Flow** (or just "the
+  Flow" where context is unambiguous); "the Tree" retires.
+  Icon changed from `TreeDeciduous` to **`Lightbulb`** across
+  the Diagnose reveal Overview card, the Diagnosis Coach
+  launcher tab on Partner Detail, the tutorial steps, and the
+  Guide panel item. Pitch step (step 7) icon inside the
+  Diagnose reveal was `Lightbulb`; swapped to **`Handshake`**
+  so the framework icon and the Pitch icon don't collide
+  visually. Learner-facing tutorial + narration copy now says
+  "yellow lightbulb tab" instead of "yellow tree tab."
+  Documented rename in the source SME material (framework
+  concept) drove this - matches whatever the SME will call it
+  in the manager briefing / TLX materials.
 
 ### Things to avoid (session-specific)
 
@@ -1953,6 +1983,15 @@ to resolve before final delivery.
 - Don't add severity colour-coding to Portfolio / Partner Detail
   metrics - it makes "spot the bad partner" trivial.
 - Don't add Level 0/1/2 prefix labels to learner-facing UI.
+- Don't use "Pricing Issue Tree" or "the Tree" in any new
+  learner-facing copy. The framework is now the **Pricing
+  Diagnostic to Pitch Flow** ("the Diagnostic Flow" as short
+  form). Internal code identifiers - `IssueTreeHelper`,
+  `data/issueTree.ts`, `data/issueTreeReveal.ts`,
+  `IssueTreePath`, `issueTreePath`, screen id
+  `l0-issue-tree-reveal`, etc. - are kept for continuity, per
+  the same precedent as the earlier Diagnosis Coach rename.
+  Icon is `Lightbulb`, not `TreeDeciduous`.
 - Don't ship a round with two obviously-wrong distractors. At
   least one distractor per option triad (Hook / Diagnosis / Pitch
   in the 3-phase model, per-step options in branching) must be a

@@ -66,9 +66,9 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     id: 'issue-tree',
     label: 'Diagnose',
     screen: 'l0-issue-tree-reveal',
-    title: 'Using the Pricing Issue Tree',
+    title: 'Using the Pricing Diagnostic to Pitch Flow',
     subtitle:
-      "A change of pace: this one's a walkthrough, not a check. Your manager will have introduced you to the Pricing Issue Tree in your briefing. Here's a quick recap of the seven steps on a worked example, so you're set to use it in the sim.",
+      "A change of pace: this one's a walkthrough, not a check. Your manager will have introduced you to the Pricing Diagnostic to Pitch Flow in your briefing. Here's a quick recap of the seven steps on a worked example, so you're set to use it in the sim.",
   },
   {
     id: 'summary',

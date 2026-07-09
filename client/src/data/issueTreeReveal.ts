@@ -1,8 +1,9 @@
 /**
- * Issue Tree reveal content for Level 0.
+ * Diagnose reveal content for Level 0 (formerly "Issue Tree reveal";
+ * framework is now the Pricing Diagnostic to Pitch Flow).
  *
- * A worked example walking the learner through the Pricing Issue Tree,
- * the diagnostic flow LPS use before every partner call. Framing and
+ * A worked example walking the learner through the Flow, the
+ * diagnostic sequence LPS use before every partner call. Framing and
  * step titles map to the SME's material verbatim: each step is the
  * question the LPS asks themselves, and Alex's narration carries the
  * coaching commentary. Not a checklist - a mind map.
@@ -18,20 +19,20 @@
  * sliding due to a misconfigured Genius discount. Hotel-named so the
  * learner can't mistake the partner for an LPS colleague. The
  * example is intentionally simple; the SME material is clear that
- * the Tree is a starting point, not the final word, and case-by-case
+ * the Flow is a starting point, not the final word, and case-by-case
  * judgment always beats strict adherence.
  */
 
 import type { LucideIcon } from 'lucide-react';
 import {
-  TreeDeciduous,
+  Lightbulb,
   Search,
   Target,
   Compass,
   ListChecks,
   Activity,
   MessageSquare,
-  Lightbulb,
+  Handshake,
 } from 'lucide-react';
 
 export interface IssueTreePhase {
@@ -56,12 +57,12 @@ export const issueTreePhases: IssueTreePhase[] = [
     id: 'intro',
     label: 'Overview',
     shortName: 'Overview',
-    icon: TreeDeciduous,
-    headline: 'Meet the Pricing Issue Tree',
+    icon: Lightbulb,
+    headline: 'Meet the Pricing Diagnostic to Pitch Flow',
     body:
       "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist, more a mind map LPS can use to guide their thinking. Seven guiding questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
     narration:
-      "You'll see this same tree icon on a yellow tab on Partner Detail in the sim - that's the Diagnosis Coach, which walks you through the tree on a real partner. Click through and I'll show you how it plays on a worked example.",
+      "You'll see this same lightbulb icon on a yellow tab on Partner Detail in the sim - that's the Diagnosis Coach, which walks you through the Diagnostic Flow on a real partner. Click through and I'll show you how it plays on a worked example.",
   },
   {
     id: 'trigger',
@@ -133,12 +134,12 @@ export const issueTreePhases: IssueTreePhase[] = [
     id: 'pitch',
     label: 'Pitch',
     shortName: 'Pitch',
-    icon: Lightbulb,
+    icon: Handshake,
     headline: "What's the commercial pitch?",
     body:
       "The tailored solution that follows from the diagnosis. Cross-platform pitches include The Value Proposition Wall, the Reverse Billboard effect, and the Same Net for Everyone mindset. On-platform pitches include the Fake Value trap and Direct-Booking Loyalty Pushback. For Hotel Atlante: propose a Genius audit and reset - restores visibility without changing the base rate.",
     narration:
-      "In the sim, the Diagnosis Coach walks you to the Hook. The Pitch happens live on the call, through the conversation option picks you make in the moment. Same framework, just delivered rather than prepared.",
+      "In the sim, the Diagnosis Coach walks you through the Diagnostic Flow up to the Hook. The Pitch happens live on the call, through the conversation option picks you make in the moment. Same framework, just delivered rather than prepared.",
   },
 ];
 

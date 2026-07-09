@@ -13,7 +13,6 @@ import {
   Eye,
   Users,
   Check,
-  TreeDeciduous,
   Gauge,
   Tag,
 } from 'lucide-react';
@@ -519,7 +518,7 @@ function getGuideContent(
           // entry point. After Round 1 the step drops away.
           ...(currentRound === 1
             ? [{
-                icon: <TreeDeciduous size={13} />,
+                icon: <Lightbulb size={13} />,
                 text: 'Open the Diagnosis Coach (yellow tab, right edge)',
                 target: 'partner-detail-tree-tab',
               }]
