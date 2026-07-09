@@ -1814,6 +1814,24 @@ Small copy and content changes since the main Jul 2026 push.
   both is safer if either shifts before R3 ships. Internal
   code comments and this file's R2 scope section still name
   both, since those aren't learner-facing.
+- **Alex chat: three new beats introducing OPC.** SME
+  feedback: the sim taught eRPD, RPD flavours, and CPS, but
+  never told the learner *why On-Platform Competitiveness is
+  where you start*. Without that anchor the R2 Advanced View
+  lock and the Level 2 round tiles (rounds 11-20, sparkles +
+  OPC badge) will feel like a new tool rather than the payoff
+  of a discipline the learner has been building. Three beats
+  added after A6 in `data/gameMasterScript.ts`: a message
+  setting up OPC vs Cross-Platform, question A7 on ~90% of
+  Booking.com bookings originating on-platform (the "why OPC
+  first" anchor), and question A8 on OPC being regime-neutral
+  (safe to raise in Wide, Narrow, and No Parity alike). A8's
+  follow-up doubles up: it explains the compliance angle AND
+  seeds the OPC-improves-cross-platform correlation (same
+  base rate + discount stack shows up across channels).
+  Advanced View placeholder tab copy stays generic per the
+  earlier feedback - the SME confirmed OPC won't be visible
+  by name until Level 2 unlocks in a later release.
 - **"Pricing Issue Tree" renamed to "Pricing Diagnostic to
   Pitch Flow"** in every user-facing string. Follows the same
   pattern as the earlier Coach rename: internal identifiers

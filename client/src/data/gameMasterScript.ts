@@ -166,6 +166,56 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
+    text: "One more piece of context before we shift gears. When you look at a partner's pricing there are two flavours of competitiveness. On-Platform Competitiveness - OPC - is how they stack up against their peer set inside Booking.com. Cross-Platform Competitiveness is how they compare with their own Brand.com rates and other OTAs. Both matter, but there's a reason we start on-platform.",
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A7',
+      prompt:
+        'Roughly what share of bookings on Booking.com come from customers who discover the property directly on the platform?',
+      options: [
+        { text: '50%', isCorrect: false },
+        { text: '70%', isCorrect: false },
+        { text: 'Around 90%', isCorrect: true },
+        { text: '30%', isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          "Yep. Around nine in ten. That's why On-Platform Competitiveness is the primary lever - win how you stack up against your peer set inside Booking.com and you win where the vast majority of your traffic lives.",
+        incorrect:
+          "Around 90%. Nine in ten travellers who book on Booking.com discovered the property here, not somewhere else. That's why OPC - how you sit against your peer set inside the platform - is the lever we spend most of our time on.",
+      },
+    },
+  },
+  {
+    type: 'question',
+    question: {
+      itemId: 'A8',
+      prompt:
+        "You're working a No Parity market. Which framing is neutral and safe to raise in every call?",
+      options: [
+        {
+          text: "How the partner's pricing compares against similar properties on Booking.com",
+          isCorrect: true,
+        },
+        {
+          text: "How the partner's pricing compares against their Brand.com rates",
+          isCorrect: false,
+        },
+        { text: 'Both, if you frame them carefully', isCorrect: false },
+        { text: "Neither - pricing framing isn't allowed in No Parity", isCorrect: false },
+      ],
+      followUp: {
+        correct:
+          "Right. On-Platform Competitiveness is regime-neutral because it's about how travellers experience Booking.com, not the partner's external strategy. You can lead with it in Wide, Narrow, and No Parity alike. Cross-platform framing carries regime-specific rules - in No Parity you can only raise it reactively if the partner brings it up first. And here's the bonus: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
+        incorrect:
+          "It's the on-platform comparison. OPC is regime-neutral because it's about how travellers experience Booking.com, not the partner's external strategy - so it's safe in Wide, Narrow, and No Parity alike. Cross-platform framing needs the regime rules applied. And the payoff: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
+      },
+    },
+  },
+  {
+    type: 'message',
     text: "Good. Now an important one - this trips people up.",
   },
   {
