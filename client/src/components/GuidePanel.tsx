@@ -15,6 +15,7 @@ import {
   Check,
   Gauge,
   Tag,
+  Sparkles,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -572,6 +573,11 @@ function getGuideContent(
                 icon: <AlertTriangle size={12} />,
                 title: 'Compliance flags',
                 text: 'Risky options may damage trust.',
+              },
+              {
+                icon: <Sparkles size={12} />,
+                title: 'Translate with PPAI',
+                text: 'Once the root cause is identified, use the Partner Performance AI (PPAI) tool to translate the complex data into a simple, actionable story tailored to the partner.',
               },
               ...(conversationPhase === 2
                 ? [{
