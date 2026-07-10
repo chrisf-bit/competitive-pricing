@@ -780,11 +780,18 @@ debate:
   screen. Narrow / Wide / Cross Regional are visually disabled
   ("Coming soon" pill, dashed border, not-allowed cursor) until the
   matching partner data lands (expected next week).
-- **The Noble Falcon Inn is the R3 target across all three regime
-  variants** per the SME "Brand.com Competitiveness Gap" drop.
-  Originally mis-slotted at R1 (the source doc was titled "Rate
-  Right - Round 1") and then briefly at R10 before landing at R3
-  in 2026-06. Three regime variants of the same hotel (Wide /
+- **The Noble Falcon Inn sits at R3 as a pedagogical stretch;
+  Sheet 7 places it at Round 10 as its target home.** SME's
+  Partner Data Set 46 (Sheet 7 of the "2026 Pricing Learning -
+  Data examples" workbook) tags Noble Falcon as Round 10 content.
+  It's been pulled forward to R3 in the current sim so testers
+  can experience a genuinely complex partner (eRPD 17%, +21pp
+  YoY, four active scenarios, Brand Scenario active) inside the
+  playable window, before R4-R9 SME priority content lands.
+  Noble Falcon moves back to Round 10 as the remaining rounds
+  get authored. Originally mis-slotted at R1 (the source doc was
+  titled "Rate Right - Round 1") and then briefly at R10 before
+  landing at R3 in 2026-06. Three regime variants of the same hotel (Wide /
   Narrow / None) sit in `initialPartners` alongside Marina, John,
   and Carlos; their data is shared via the `nobleFalconBase()`
   helper in `data/partners.ts`, only location + `parityRegime` +

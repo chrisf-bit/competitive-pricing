@@ -309,9 +309,14 @@ function nobleFalconBase(args: {
         lastPricingContactDaysAgo: 22,
         pricingCoverageQTD: 64,
         // Partner Data Set 46, Sheet 7 row 39 (The Noble Falcon Inn).
-        // Sheet 7 tags this as Round 10 (Level 2 content); in the
-        // current sim it's the R3 priority. Full-year 2025 ABRN,
-        // same regardless of which round the hotel appears in.
+        // Sheet 7 places this at Round 10 (its target home). It's
+        // pulled forward to R3 in the current sim as a deliberate
+        // pedagogical stretch - lets testers see a genuinely complex
+        // partner (eRPD 17%, +21pp YoY, four active scenarios) inside
+        // the playable window while R4-R9 SME content is still
+        // pending. Noble Falcon moves back to Round 10 as the
+        // remaining rounds get authored. Full-year 2025 ABRN,
+        // unchanged by round placement.
         partnerValueAbrn: 13957,
         // Legacy fields - kept for type compatibility and the old
         // conversation system; not surfaced on the R2 Partner Detail.
