@@ -105,6 +105,11 @@ export const metricDefinitions = {
     helpText:
       'Quarter-to-date share of the pricing competitiveness steering actions you have tracked for this partner, across topics, products, and scenarios. Higher = more steering activity logged; lower = headroom for more engagement.',
   },
+  partnerValueAbrn: {
+    label: 'Partner Value (ABRN ly)',
+    helpText:
+      "Total ABRN (Actual Booked Room Nights) the partner delivered last year. Scale indicator: how much value they represent to Booking.com, independent of how well they're currently priced. Big + poorly-priced = high-priority call; big + well-priced = healthy; small + poorly-priced = still worth a look but less urgent.",
+  },
 
   // ── Advanced View (locked R2, content lands R3) - PDF page 21 ──
   weightedAdoption: {

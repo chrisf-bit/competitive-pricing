@@ -99,6 +99,9 @@ function crystalWaterBase(args: {
         // R2 taxonomy - sparse adoption that matches Sarah's
         // direct-first stance. Rendered as a low % to flag headroom.
         pricingCoverageQTD: 12,
+        // Partner Data Set 46, Sheet 7 row 5 (Crystal Water Resort,
+        // Round 1). Full-year 2025 ABRN.
+        partnerValueAbrn: 6061,
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 55,
         visibility: 88,
@@ -206,6 +209,9 @@ function velvetSkyBase(args: {
         // the SME spreadsheet showed all 11 inactive. Rendered as
         // 0% to flag the empty toolkit explicitly.
         pricingCoverageQTD: 0,
+        // Partner Data Set 46, Sheet 7 row 8 (Velvet Sky Boutique
+        // Hotel, Round 2). Full-year 2025 ABRN.
+        partnerValueAbrn: 4137,
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 52,
         visibility: 60,
@@ -302,6 +308,11 @@ function nobleFalconBase(args: {
         // resolves it to "today - 22 days" in PartnerDetailScreen.
         lastPricingContactDaysAgo: 22,
         pricingCoverageQTD: 64,
+        // Partner Data Set 46, Sheet 7 row 39 (The Noble Falcon Inn).
+        // Sheet 7 tags this as Round 10 (Level 2 content); in the
+        // current sim it's the R3 priority. Full-year 2025 ABRN,
+        // same regardless of which round the hotel appears in.
+        partnerValueAbrn: 13957,
         // Legacy fields - kept for type compatibility and the old
         // conversation system; not surfaced on the R2 Partner Detail.
         experiencedRPD: 35,
@@ -382,6 +393,14 @@ function marinaBase(args: {
       losePricePublic: 68,
       activeScenarios: 1,
       competitor: 'brand',
+      // Claude-authored Partner Value (2025 ABRN). Sized so Marina
+      // reads as a plausibly-larger distractor than the R1 priority
+      // (Crystal Water at 6,061) - teaches "size alone isn't enough,
+      // read the pricing signals". Same partner value applies on
+      // R3 too (Marina reappears as R3 distractor against Noble
+      // Falcon at 13,957, where she's noticeably smaller). Not in
+      // Sheet 7's Partner Data Set 46.
+      partnerValueAbrn: 8200,
       experiencedRPD: 58,
       visibility: 62,
       conversion: 45,
@@ -443,6 +462,11 @@ function carlosBase(args: {
       losePricePublic: 48,
       activeScenarios: 1,
       competitor: 'brand',
+      // Claude-authored Partner Value (2025 ABRN). Sized as a
+      // smaller distractor across R1 and R3 - reads as "worth
+      // engaging but not the top call this week". Not in Sheet 7's
+      // Partner Data Set 46.
+      partnerValueAbrn: 3400,
       experiencedRPD: 65,
       visibility: 70,
       conversion: 55,
@@ -516,6 +540,11 @@ function ravenInnBase(args: {
       },
       lastPricingContactDaysAgo: 28,
       pricingCoverageQTD: 38,
+      // Claude-authored Partner Value (2025 ABRN). Raven Inn is a
+      // R2 distractor; sized bigger than Velvet Sky (4,137) so the
+      // round teaches "biggest isn't automatically the call - read
+      // the pricing". Not in Sheet 7's Partner Data Set 46.
+      partnerValueAbrn: 5800,
       experiencedRPD: 72,
       visibility: 78,
       conversion: 65,
@@ -589,6 +618,12 @@ function driftwoodBayBase(args: {
       },
       lastPricingContactDaysAgo: 28,
       pricingCoverageQTD: 15,
+      // Claude-authored Partner Value (2025 ABRN). Driftwood Bay
+      // is a R2 distractor; sized smaller than Velvet Sky (4,137)
+      // so the round triad has one big-good, one similar-mediocre,
+      // one small-average distractor mix. Not in Sheet 7's Partner
+      // Data Set 46.
+      partnerValueAbrn: 2900,
       experiencedRPD: 60,
       visibility: 68,
       conversion: 48,

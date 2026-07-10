@@ -135,7 +135,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           backdropFilter: 'blur(6px)',
         }}
       >
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <div
           style={{
             display: 'flex',
@@ -320,7 +320,7 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
           minHeight: 0,
         }}
       >
-        <div style={{ maxWidth: 960, margin: '0 auto' }}>
+        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
           <KpiTable
             rows={samplePartnerData}
             highlightedHotelId={result?.pickedId ?? null}

@@ -468,6 +468,11 @@ function getGuideContent(
             text: 'One partner per round. Pick the one whose numbers need you most - neglected partners drift.',
           },
           {
+            icon: <Gauge size={12} />,
+            title: 'Check Partner Value',
+            text: "Open a partner and look at Partner Value (ABRN ly) in their profile - it tells you how much value is at stake. Big + poorly-priced is your priority signal.",
+          },
+          {
             icon: <Zap size={12} />,
             title: 'Dig deeper',
             text: 'High RPD can stem from missing or misconfigured discounts, config issues, or weak price competitiveness.',

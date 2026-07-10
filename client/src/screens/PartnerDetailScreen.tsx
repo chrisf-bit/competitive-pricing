@@ -16,6 +16,7 @@ import {
   Lock,
   CalendarClock,
   Percent,
+  Coins,
   Info,
 } from 'lucide-react';
 import type {
@@ -420,6 +421,7 @@ export function PartnerDetailScreen({
             <ProfileMetaFields
               lastPricingContactDaysAgo={partner.metrics.lastPricingContactDaysAgo}
               pricingCoverageQTD={partner.metrics.pricingCoverageQTD}
+              partnerValueAbrn={partner.metrics.partnerValueAbrn}
             />
           </div>
 
@@ -1326,11 +1328,17 @@ function DiscountRow({ item }: { item: DiscountProduct }) {
 function ProfileMetaFields({
   lastPricingContactDaysAgo,
   pricingCoverageQTD,
+  partnerValueAbrn,
 }: {
   lastPricingContactDaysAgo?: number;
   pricingCoverageQTD?: number;
+  partnerValueAbrn?: number;
 }) {
-  if (lastPricingContactDaysAgo === undefined && pricingCoverageQTD === undefined) {
+  if (
+    lastPricingContactDaysAgo === undefined &&
+    pricingCoverageQTD === undefined &&
+    partnerValueAbrn === undefined
+  ) {
     return null;
   }
   return (
@@ -1344,6 +1352,13 @@ function ProfileMetaFields({
         gap: 10,
       }}
     >
+      {partnerValueAbrn !== undefined && (
+        <ProfileMetaRow
+          icon={<Coins size={14} style={{ color: 'var(--brand-navy)' }} />}
+          metricKey="partnerValueAbrn"
+          value={partnerValueAbrn.toLocaleString('en-US')}
+        />
+      )}
       {lastPricingContactDaysAgo !== undefined && (
         <ProfileMetaRow
           icon={<CalendarClock size={14} style={{ color: 'var(--brand-navy)' }} />}
@@ -1384,7 +1399,7 @@ function ProfileMetaRow({
   value,
 }: {
   icon: React.ReactNode;
-  metricKey: 'lastPricingContact' | 'pricingCoverageQTD';
+  metricKey: 'lastPricingContact' | 'pricingCoverageQTD' | 'partnerValueAbrn';
   value: string;
 }) {
   const def = metricDefinitions[metricKey];

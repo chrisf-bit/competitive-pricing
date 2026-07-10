@@ -270,6 +270,16 @@ export interface PartnerMetrics {
    * page 1).
    */
   pricingCoverageQTD?: number;
+  /**
+   * Partner Value (ABRN last year) - total actual booked room nights
+   * for 2025. Scale/size indicator: how much value the partner
+   * represents, independent of how well they're currently priced.
+   * Rendered as a profile-meta field alongside Last Pricing Contact
+   * and Pricing Coverage. Static partner-level attribute, not
+   * per-round; the value is the partner's 2025 total regardless of
+   * which round they appear in.
+   */
+  partnerValueAbrn?: number;
 
   // ── Legacy fields (drive conversation effects and scoring internally;
   // not surfaced on the new KPI cards). Will be retired post-MVP once
