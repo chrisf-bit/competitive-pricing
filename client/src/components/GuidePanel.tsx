@@ -581,8 +581,8 @@ function getGuideContent(
               },
               {
                 icon: <Sparkles size={12} />,
-                title: 'Translate with PPAI',
-                text: 'Once the root cause is identified, use the Partner Performance AI (PPAI) tool to translate the complex data into a simple, actionable story tailored to the partner.',
+                title: 'PPAI in real calls',
+                text: "The Partner Performance AI (PPAI) tool isn't inside the sim, but in a real partner call you'd use it to translate this diagnostic work into a simple, actionable story tailored to them.",
               },
               ...(conversationPhase === 2
                 ? [{
