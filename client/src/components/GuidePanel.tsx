@@ -583,8 +583,8 @@ function getGuideContent(
               },
               {
                 icon: <Sparkles size={12} />,
-                title: 'PPAI in real calls',
-                text: "The Partner Performance AI (PPAI) tool isn't inside the sim, but in a real partner call you'd use it to translate this diagnostic work into a simple, actionable story tailored to them.",
+                title: 'PPAI before the call',
+                text: "The Partner Performance AI (PPAI) tool isn't inside the sim. In real work you'd reach for it between the Pricing Diagnostic to Pitch Flow and picking up the phone, to turn your diagnosis into a partner-facing narrative.",
               },
               ...(conversationPhase === 2
                 ? [{
