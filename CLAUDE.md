@@ -1879,6 +1879,196 @@ Small copy and content changes since the main Jul 2026 push.
   concept) drove this - matches whatever the SME will call it
   in the manager briefing / TLX materials.
 
+### Post-2026-07-13 tweaks
+
+Larger scope shifts and multiple related changes since the
+2026-07-08 batch. September 2026 confirmed as full launch (not
+partial-scope test), which reshapes the trajectory materially.
+All levels ship, Objection returns as a round scenario type,
+Level 3 (OPC Application) unlocks alongside Level 2.
+
+**Naming and icon (Diagnosis Coach retired):**
+
+- **"Diagnosis Coach" retired as the tool name.** Drawer is now
+  called **"Pricing Diagnostic to Pitch Flow"** everywhere in
+  user-facing copy, matching the framework it walks. Previously
+  we distinguished them (framework name vs tool name); collapsing
+  them simplifies the mental model at the cost of a slightly
+  longer label. Full name used everywhere in prose; **no short
+  form nickname** (earlier "the Diagnostic Flow" short form is
+  retired). Drawer header, launcher tab, tutorial steps, guide
+  panel step, reveal narration, aria-label, action card copy all
+  updated. Internal identifiers (`IssueTreeHelper` component,
+  `data/issueTree.ts`, `IssueTreePath`, `issueTreePath`,
+  `l0-issue-tree-reveal`, `hasOpenedIssueTreeHelper`, etc.)
+  unchanged per rename precedent.
+- **Icon changed from `Lightbulb` to `Workflow`** across all
+  framework touchpoints: Diagnose reveal Overview card, launcher
+  tab on Partner Detail, tutorial steps, guide panel item.
+  `Workflow` reads as a literal process flow (connected boxes
+  with an arrow), matches the name, and preserves the
+  unmissable visual correlation between clearance teaching and
+  the sim tool.
+- **Launcher tab label restacked as four lines** to fit the full
+  name: `Pricing / Diagnostic / to Pitch / Flow` at fontSize
+  8.5, letterSpacing 0.04em, lineHeight 1.15. Tab grows a touch
+  taller; horizontal padding unchanged.
+- **Residual `TreeDeciduous` fix** on the launcher tab. The
+  earlier tree-to-lightbulb rename missed the `HelperLauncherTab`
+  component in `PartnerDetailScreen.tsx` (only the drawer's
+  header icon inside `IssueTreeHelper.tsx` was updated). Fixed
+  in the same pass as the Lightbulb-to-Workflow swap.
+- **Pitch step icon stays as `Handshake`** (moved from
+  `Lightbulb` in the earlier rename to avoid collision with the
+  framework icon; still valid now that the framework icon is
+  `Workflow`).
+
+**Portfolio Guide reshape (3 steps -> 4 steps):**
+
+- Steps now teach the actual workflow given that Partner Value
+  ABRN ly is a key priority signal that lives on Partner Detail,
+  not on the Portfolio card. New sequence: (1) read market
+  update, (2) scan cards for eRPD/Lose Price to shortlist,
+  (3) open each candidate to check Partner Value (ABRN ly),
+  (4) pick where value and pricing risk both stack up.
+- Objective at the top rewritten: "One partner needs your
+  attention more than the others. Card metrics narrow the field;
+  check Partner Value inside each profile before you commit."
+- Standalone "Check Partner Value" tip dropped from the tips
+  block; new step 3 covers it directly.
+
+**Partner Value (ABRN ly) added to Partner Detail:**
+
+- New `partnerValueAbrn?: number` field on `PartnerMetrics`.
+  Partner-level static attribute (Actual Booked Room Nights last
+  year), not per-round. Populated once per partner record and
+  survives `applyRoundBaseline` merges unchanged.
+- Priority partners use SME values from Sheet 7 "Partner Data
+  Set 46" of the `2026 Pricing Learning - Data examples`
+  workbook: Crystal Water Resort 6061, Velvet Sky Boutique
+  Hotel 4137, The Noble Falcon Inn 13957. Same value across
+  all three regime variants of each.
+- Distractors (not in Sheet 7's roster) use Claude-authored
+  values sized to keep round puzzles honest: Marina 8200,
+  Carlos 3400, Raven Inn 5800, Driftwood Bay 2900. Marina at
+  8200 is bigger than Crystal Water at 6061 (R1) so
+  "biggest wins" pattern-matching fails; Raven Inn at 5800 is
+  bigger than Velvet Sky at 4137 (R2), same purpose.
+- Renders as a new profile-meta row on Partner Detail alongside
+  Last Pricing Contact and Pricing Coverage. `Coins` icon,
+  neutral bold with thousands separators (en-US locale), no
+  colour coding because it's a scale not a severity axis.
+  Tooltip via `metricDefinitions.ts`.
+- **Not added to the Portfolio card summary** deliberately.
+  Teaches learners to open partners rather than deciding from
+  the card alone.
+- **Data & Insights table width bumped from 960px to 1120px**
+  to accommodate the same Partner Value column added there in
+  the earlier `dashboardHotspot.ts` pass. Competitor column was
+  clipping at 960px after Partner Value was added.
+
+**PPAI tip in the conversation Simulation Guide (evolved three
+times across this session):**
+
+- Added originally as a tip inside the conversation-screen tips
+  block: "Once the root cause is identified, use the Partner
+  Performance AI (PPAI) tool to translate the complex data into
+  a simple, actionable story tailored to the partner."
+- Reframed to make the sim vs real-world boundary explicit
+  (PPAI is not reachable from the sim; the old wording implied
+  otherwise).
+- Refined further to name the timing: PPAI sits between the
+  Pricing Diagnostic to Pitch Flow completing and the learner
+  picking up the phone (not mid-call). Current title: **"PPAI
+  before the call"**. Current text: "The Partner Performance AI
+  (PPAI) tool isn't inside the sim. In real work you'd reach
+  for it between the Pricing Diagnostic to Pitch Flow and
+  picking up the phone, to turn your diagnosis into a
+  partner-facing narrative."
+- **Decision landed with Adriana:** PPAI is referenced in the
+  sim but not simulated. No game data emitted for PPAI. If
+  Booking wants PPAI adoption reporting, it comes from a
+  separate source (survey), not the sim. Recorded as section
+  7.8 of the reporting spec doc.
+
+**Objection reinterpretation (major, and it's back for launch):**
+
+- **Objection is not a separate conversation phase.** Each round
+  IS an objection scenario. The learner's job in every round:
+  diagnose using the Pricing Diagnostic to Pitch Flow, identify
+  which objection type applies, and deliver the pitch that
+  addresses it. Step 7 of the Flow ("What's the commercial
+  pitch?") is literally the objection-handling response, per
+  the SME's Content Hub PDF.
+- **21 named objection types** cataloged from the Content Hub:
+  Section 26 (Common XPC Objections, 10 primaries + 2 supports)
+  and Section 40 (OPC Common Objections, 9 primaries).
+- **Level 1 rounds** carry one primary objection per round plus
+  optional supports (secondary objections the learner might
+  brush against; the SME's exact use of "Support" tag is
+  awaiting clarification).
+- **Level 2 rounds** carry multiple objections per round,
+  encountered in sequence during the conversation. Different
+  emission shape from Level 1 (multiple per-objection statements
+  per round vs one).
+- Full round-to-objection mapping shared by Chris on 2026-07-14
+  (see chat history for the sheet).
+
+**September 2026 = full launch confirmed:**
+
+- Not a partial-scope test. Complete sim with all levels
+  (Levels 0 through 3), all rounds (1 through 20), Objection
+  restored as a round scenario type, OPC Application unlocked
+  as Level 3.
+- Timeline to launch: roughly 7 to 10 weeks from 2026-07-13.
+  Significant build ahead: R4-R10 SME priority content, Level 2
+  rounds 11-20, Level 3 (OPC Application) mechanic and content,
+  Objection reintroduction, xAPI emission wiring, reporting
+  integration.
+- Content-first prioritisation suggested: Objection first
+  (touches every round), R4-R10 second (already stubbed as
+  locked "Coming soon"), Level 2/3 last (structurally biggest).
+
+**Reporting workstream (xAPI + Snowflake), v0.1 spec drafted:**
+
+- Target Snowflake schema per client's data pipeline doc:
+  FACT_GAME_EVENTS, FACT_DECISION_SCORES,
+  FACT_OBJECTION_PERFORMANCE, FACT_CLEARANCE,
+  DIM_CAPABILITY_SCORES, DIM_COACHING_FOCUS.
+- **10 capability dimensions** per the client's Page 5 data map,
+  each mapped to specific L-item codes (L0.1 through L3.5):
+  Recognising discrepancies & prioritising partners (L0.1,
+  L1.4), OPC/CPC context & eRPD understanding (L0.2), Pricing
+  Diagnostic to Pitch Flow & discrepancy classification (L0.4,
+  L1.1, L1.3), Signal vs Proof (L1.2), Commercial recommendation
+  & scenario selection (L2.1, L2.2), Objection handling (L2.3),
+  Landing next steps & escalation (L2.4), Compliance & parity
+  (L0.3), Advanced data scenarios & portfolio prioritisation
+  (L3.1-4), PPAI integration (L3.5, TBD).
+- **Level structure has two frames:** the sim UI uses "Level 1"
+  (rounds 1-10) and "Level 2" (rounds 11-20). The client's
+  reporting model uses L0/L1/L2/L3 as capability groupings.
+  Every scoring statement carries `context.extensions.level` and
+  `context.extensions.item-code` so ETL can aggregate items into
+  capabilities cleanly regardless of the sim's UI level
+  structure. Use the client's L0/L1/L2/L3 numbering when
+  describing anything to Booking's data team.
+- **Discrete xAPI shape confirmed** (one statement per measured
+  event, maps one to one to fact-table rows). Estimated 100 to
+  150 statements per full playthrough.
+- **Star + normalized-percentage scoring emitted together** on
+  every scoring statement. `result.score.raw` for stars (min 0,
+  max 3), `context.extensions.normalized-score` for 0-100
+  percentage.
+- **Scope boundary: rapid-learn's remit ends when xAPI
+  statements land in Docebo.** Booking's data team owns the
+  ETL from Docebo to Snowflake, plus all downstream tables,
+  retention, refresh, permissions, and reporting. Confirmed
+  route via the client-friendly email draft (see chat 2026-07-14).
+- v0.1 spec doc drafted (taxonomy + 6 sample statements + full
+  Snowflake DDL + field-to-column mapping + open questions).
+  Client questions covered in section 7 of that doc.
+
 ### Things to avoid (session-specific)
 
 - Don't put an em dash or en dash in ANYTHING (including chat
@@ -1901,9 +2091,14 @@ Small copy and content changes since the main Jul 2026 push.
 - Don't rewrite the Debrief to score across all partners again.
   Scoping to `engagedPartnerIds` is the design; a perfect run
   should read as a perfect run.
-- Don't reintroduce Objection as a phase in either the Reveal or
-  the Coach drawer. It was retired in May 2026 and doesn't come
-  back until SME content exists for it.
+- Don't reintroduce Objection as a fourth conversation phase.
+  The 3-phase Hook / Diagnosis / Pitch model stays. Objection
+  returns for the September 2026 launch as a **round scenario
+  type** (each round IS an objection to overcome via the Pricing
+  Diagnostic to Pitch Flow, not a separate step in the call).
+  SME content is dropping across the summer; catalog of 21 named
+  objection types documented in the Post-2026-07-13 tweaks
+  section above.
 
 ## How to run
 
