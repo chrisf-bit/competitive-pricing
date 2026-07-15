@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Check, Lightbulb } from 'lucide-react';
+import { ChevronRight, Check, Workflow } from 'lucide-react';
 import {
   issueTreePhases,
   type IssueTreePhase,
@@ -652,7 +652,7 @@ function IntroVisual() {
             boxShadow: '0 4px 14px rgba(254,186,2,0.35)',
           }}
         >
-          <Lightbulb size={28} strokeWidth={2.5} />
+          <Workflow size={28} strokeWidth={2.5} />
         </div>
       </div>
       <div

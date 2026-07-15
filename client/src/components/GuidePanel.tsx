@@ -16,6 +16,7 @@ import {
   Gauge,
   Tag,
   Sparkles,
+  Workflow,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -519,13 +520,14 @@ function getGuideContent(
             text: 'Read the Discount Products - active vs inactive',
             target: 'partner-detail-discounts',
           },
-          // Round 1 introduces the Issue Tree Helper as a mandatory
-          // pre-call step. The yellow tree tab to the right is the
-          // entry point. After Round 1 the step drops away.
+          // Round 1 introduces the Pricing Diagnostic to Pitch Flow
+          // drawer as a mandatory pre-call step. The yellow flow tab
+          // to the right is the entry point. After Round 1 the step
+          // drops away.
           ...(currentRound === 1
             ? [{
-                icon: <Lightbulb size={13} />,
-                text: 'Open the Diagnosis Coach (yellow tab, right edge)',
+                icon: <Workflow size={13} />,
+                text: 'Open the Pricing Diagnostic to Pitch Flow (yellow tab, right edge)',
                 target: 'partner-detail-tree-tab',
               }]
             : []),

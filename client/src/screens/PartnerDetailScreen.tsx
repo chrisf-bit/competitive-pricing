@@ -12,7 +12,7 @@ import {
   History,
   UserCircle,
   ChevronRight,
-  TreeDeciduous,
+  Workflow,
   Lock,
   CalendarClock,
   Percent,
@@ -513,7 +513,7 @@ export function PartnerDetailScreen({
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
                   {alreadyEngaged
                     ? 'Already engaged this round'
-                    : 'Open the Diagnosis Coach before you engage'}
+                    : 'Open the Pricing Diagnostic to Pitch Flow before you engage'}
                 </div>
               </div>
             )}
@@ -1437,8 +1437,8 @@ function HelperLauncherTab({
     <motion.button
       data-tutorial="partner-detail-tree-tab"
       onClick={onOpen}
-      aria-label="Open Diagnosis Coach"
-      title="Diagnosis Coach"
+      aria-label="Open Pricing Diagnostic to Pitch Flow"
+      title="Pricing Diagnostic to Pitch Flow"
       initial={{ opacity: 0, x: 12, y: '-50%' }}
       animate={{
         opacity: 1,
@@ -1483,7 +1483,7 @@ function HelperLauncherTab({
       }}
     >
       <span style={{ position: 'relative', display: 'inline-flex' }}>
-        <TreeDeciduous size={36} strokeWidth={2.5} />
+        <Workflow size={36} strokeWidth={2.5} />
         {hasProgress && (
           <span
             aria-label="In progress"
@@ -1500,18 +1500,22 @@ function HelperLauncherTab({
           />
         )}
       </span>
-      {/* Small label under the icon so the tab reads as an
-          affordance, not just a decorative pulse. */}
+      {/* Full framework name stacked as four lines. Tight font so the
+          label reads as an affordance without dominating the tab. */}
       <span
         style={{
-          fontSize: 9.5,
+          fontSize: 8.5,
           fontWeight: 900,
-          letterSpacing: '0.12em',
+          letterSpacing: '0.04em',
           textTransform: 'uppercase',
-          lineHeight: 1,
+          lineHeight: 1.15,
+          textAlign: 'center',
         }}
       >
-        Coach
+        Pricing<br />
+        Diagnostic<br />
+        to Pitch<br />
+        Flow
       </span>
     </motion.button>
   );

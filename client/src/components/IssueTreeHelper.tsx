@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Lightbulb, RotateCcw, Sparkles, Target } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Workflow, RotateCcw, Sparkles, Target } from 'lucide-react';
 import type { IssueTreeHelperState, IssueTreePath } from '../types';
 import {
   triggers,
@@ -179,11 +179,11 @@ export function IssueTreeHelper({
               flexShrink: 0,
             }}
           >
-            <Lightbulb size={16} />
+            <Workflow size={16} />
           </div>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 14, fontWeight: 800 }}>
-              Diagnosis Coach
+              Pricing Diagnostic to Pitch Flow
             </div>
             <div
               style={{

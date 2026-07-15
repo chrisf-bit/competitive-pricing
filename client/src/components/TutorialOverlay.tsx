@@ -13,7 +13,7 @@ import {
   Clock,
   BookOpen,
   Globe,
-  Lightbulb,
+  Workflow,
   UserCircle,
   Layers,
   Gauge,
@@ -212,10 +212,10 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
   },
   {
     target: 'issue-tree-helper',
-    title: 'Diagnosis Coach',
+    title: 'Pricing Diagnostic to Pitch Flow',
     description:
-      "When you open a partner you'll see a yellow lightbulb tab pinned to the right edge. Tap it and the Coach walks you through the diagnosis with you - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close the drawer to peek at the metrics and pick up where you left off.",
-    icon: <Lightbulb size={18} style={{ color: 'var(--brand-yellow)' }} />,
+      "When you open a partner you'll see a yellow tab pinned to the right edge. Tap it to open the Pricing Diagnostic to Pitch Flow, which walks you through the diagnosis with you - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close it to peek at the metrics and pick up where you left off.",
+    icon: <Workflow size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },
 ];
@@ -296,17 +296,17 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
   },
   {
     target: 'partner-detail-tree-tab',
-    title: 'Diagnosis Coach',
+    title: 'Pricing Diagnostic to Pitch Flow',
     description:
-      "Yellow lightbulb tab pinned to the right edge - tap to open the Coach drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
-    icon: <Lightbulb size={18} style={{ color: 'var(--brand-yellow)' }} />,
+      "Yellow tab pinned to the right edge - tap to open the Pricing Diagnostic to Pitch Flow drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
+    icon: <Workflow size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'left',
   },
   {
     target: 'partner-detail-action',
     title: 'Begin Conversation',
     description:
-      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open the Diagnosis Coach at least once first - that gate teaches the diagnostic workflow.",
+      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open the Pricing Diagnostic to Pitch Flow at least once first - that gate teaches the diagnostic habit.",
     icon: <PlayCircle size={18} style={{ color: 'var(--success)' }} />,
     position: 'left',
   },
