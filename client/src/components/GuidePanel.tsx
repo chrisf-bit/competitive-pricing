@@ -443,7 +443,7 @@ function getGuideContent(
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:
-          'One partner needs your attention more than the others. Find them, open their profile, and start the call.',
+          'One partner needs your attention more than the others. Card metrics narrow the field; check Partner Value inside each profile before you commit.',
         steps: [
           {
             icon: <Eye size={13} />,
@@ -452,12 +452,17 @@ function getGuideContent(
           },
           {
             icon: <BarChart3 size={13} />,
-            text: 'Compare eRPD and Lose Price across the cards',
+            text: 'Scan the cards for eRPD and Lose Price to shortlist candidates',
+            target: 'partner-card',
+          },
+          {
+            icon: <BookOpen size={13} />,
+            text: 'Open each candidate to check Partner Value (ABRN ly)',
             target: 'partner-card',
           },
           {
             icon: <Target size={13} />,
-            text: 'Click the card of the partner who needs you most',
+            text: 'Pick the partner where value and pricing risk both stack up',
             target: 'partner-card',
           },
         ],
@@ -466,11 +471,6 @@ function getGuideContent(
             icon: <AlertTriangle size={12} />,
             title: 'Prioritise wisely',
             text: 'One partner per round. Pick the one whose numbers need you most - neglected partners drift.',
-          },
-          {
-            icon: <Gauge size={12} />,
-            title: 'Check Partner Value',
-            text: "Open a partner and look at Partner Value (ABRN ly) in their profile - it tells you how much value is at stake. Big + poorly-priced is your priority signal.",
           },
           {
             icon: <Zap size={12} />,
