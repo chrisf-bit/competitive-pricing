@@ -858,6 +858,10 @@ export const pendingPartners: PartnerState[] = [
       losePricePublic: 81,
       activeScenarios: 2,
       competitor: 'brand',
+      // Claude-authored Partner Value (2025 ABRN). Small-to-medium
+      // boutique in York; sized to sit below Crystal Water's 6061
+      // if John ever comes back to the R1 slot.
+      partnerValueAbrn: 3800,
       experiencedRPD: 42,
       visibility: 48,
       conversion: 36,
@@ -916,6 +920,10 @@ export const pendingPartners: PartnerState[] = [
       losePricePublic: 96,
       activeScenarios: 3,
       competitor: 'expedia',
+      // Claude-authored Partner Value (2025 ABRN). Large 180-room
+      // Greek resort with high volume; sized above Noble Falcon's
+      // 13957 to reflect the higher room count.
+      partnerValueAbrn: 15200,
       experiencedRPD: 38,
       visibility: 40,
       conversion: 32,
@@ -963,6 +971,10 @@ export const pendingPartners: PartnerState[] = [
       losePricePublic: 91,
       activeScenarios: 2,
       competitor: 'brand',
+      // Claude-authored Partner Value (2025 ABRN). Small country
+      // guesthouse; sized to reflect low room count and quiet
+      // regional demand.
+      partnerValueAbrn: 1200,
       experiencedRPD: 42,
       visibility: 35,
       conversion: 28,
@@ -1010,6 +1022,10 @@ export const pendingPartners: PartnerState[] = [
       losePricePublic: 88,
       activeScenarios: 2,
       competitor: 'expedia',
+      // Claude-authored Partner Value (2025 ABRN). Budget chain
+      // property with strong volume; sized around the larger end
+      // of the distractor pool.
+      partnerValueAbrn: 9600,
       experiencedRPD: 30,
       visibility: 28,
       conversion: 22,
@@ -1057,6 +1073,10 @@ export const pendingPartners: PartnerState[] = [
       losePricePublic: 64,
       activeScenarios: 1,
       competitor: 'expedia',
+      // Claude-authored Partner Value (2025 ABRN). Small luxury
+      // ryokan with low room count and premium positioning; sized
+      // low to reflect boutique scale rather than mass volume.
+      partnerValueAbrn: 1800,
       experiencedRPD: 48,
       visibility: 38,
       conversion: 35,
