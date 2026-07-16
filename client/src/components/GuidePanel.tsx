@@ -520,14 +520,14 @@ function getGuideContent(
             text: 'Read the Discount Products - active vs inactive',
             target: 'partner-detail-discounts',
           },
-          // Round 1 introduces the Pricing Diagnostic to Pitch Flow
+          // Round 1 introduces the Pricing Diagnostic Flow
           // drawer as a mandatory pre-call step. The yellow flow tab
           // to the right is the entry point. After Round 1 the step
           // drops away.
           ...(currentRound === 1
             ? [{
                 icon: <Workflow size={13} />,
-                text: 'Open the Pricing Diagnostic to Pitch Flow (yellow tab, right edge)',
+                text: 'Open the Pricing Diagnostic Flow (yellow tab, right edge)',
                 target: 'partner-detail-tree-tab',
               }]
             : []),
@@ -584,7 +584,7 @@ function getGuideContent(
               {
                 icon: <Sparkles size={12} />,
                 title: 'PPAI before the call',
-                text: "The Partner Performance AI (PPAI) tool isn't inside the sim. In real work you'd reach for it between the Pricing Diagnostic to Pitch Flow and picking up the phone, to turn your diagnosis into a partner-facing narrative.",
+                text: "The Partner Performance AI (PPAI) tool isn't inside the sim. In real work you'd reach for it between the Pricing Diagnostic Flow and picking up the phone, to turn your diagnosis into a partner-facing narrative.",
               },
               ...(conversationPhase === 2
                 ? [{

@@ -1,6 +1,6 @@
 /**
  * Diagnose reveal content for Level 0 (formerly "Issue Tree reveal";
- * framework is now the Pricing Diagnostic to Pitch Flow).
+ * framework is now the Pricing Diagnostic Flow).
  *
  * A worked example walking the learner through the Flow, the
  * diagnostic sequence LPS use before every partner call. Framing and
@@ -58,11 +58,11 @@ export const issueTreePhases: IssueTreePhase[] = [
     label: 'Overview',
     shortName: 'Overview',
     icon: Workflow,
-    headline: 'Meet the Pricing Diagnostic to Pitch Flow',
+    headline: 'Meet the Pricing Diagnostic Flow',
     body:
       "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist, more a mind map LPS can use to guide their thinking. Seven guiding questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
     narration:
-      "You'll see this same flow icon on a yellow tab on Partner Detail in the sim - tap it to open the Pricing Diagnostic to Pitch Flow and walk it through on a real partner. Click through and I'll show you how it plays on a worked example.",
+      "You'll see this same flow icon on a yellow tab on Partner Detail in the sim - tap it to open the Pricing Diagnostic Flow and walk it through on a real partner. Click through and I'll show you how it plays on a worked example.",
   },
   {
     id: 'trigger',
@@ -139,7 +139,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     body:
       "The tailored solution that follows from the diagnosis. Cross-platform pitches include The Value Proposition Wall, the Reverse Billboard effect, and the Same Net for Everyone mindset. On-platform pitches include the Fake Value trap and Direct-Booking Loyalty Pushback. For Hotel Atlante: propose a Genius audit and reset - restores visibility without changing the base rate.",
     narration:
-      "In the sim, the Pricing Diagnostic to Pitch Flow walks you up to the Hook. The Pitch happens live on the call, through the conversation option picks you make in the moment. Same framework, just delivered rather than prepared.",
+      "In the sim, the Pricing Diagnostic Flow walks you up to the Hook. The Pitch happens live on the call, through the conversation option picks you make in the moment. Same framework, just delivered rather than prepared.",
   },
 ];
 

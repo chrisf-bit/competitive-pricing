@@ -183,7 +183,7 @@ export function IssueTreeHelper({
           </div>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 14, fontWeight: 800 }}>
-              Pricing Diagnostic to Pitch Flow
+              Pricing Diagnostic Flow
             </div>
             <div
               style={{

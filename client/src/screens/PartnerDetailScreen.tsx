@@ -513,7 +513,7 @@ export function PartnerDetailScreen({
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
                   {alreadyEngaged
                     ? 'Already engaged this round'
-                    : 'Open the Pricing Diagnostic to Pitch Flow before you engage'}
+                    : 'Open the Pricing Diagnostic Flow before you engage'}
                 </div>
               </div>
             )}
@@ -1437,8 +1437,8 @@ function HelperLauncherTab({
     <motion.button
       data-tutorial="partner-detail-tree-tab"
       onClick={onOpen}
-      aria-label="Open Pricing Diagnostic to Pitch Flow"
-      title="Pricing Diagnostic to Pitch Flow"
+      aria-label="Open Pricing Diagnostic Flow"
+      title="Pricing Diagnostic Flow"
       initial={{ opacity: 0, x: 12, y: '-50%' }}
       animate={{
         opacity: 1,
@@ -1500,13 +1500,12 @@ function HelperLauncherTab({
           />
         )}
       </span>
-      {/* Full framework name stacked as four lines. Tight font so the
-          label reads as an affordance without dominating the tab. */}
+      {/* Framework name stacked as three lines. */}
       <span
         style={{
-          fontSize: 8.5,
+          fontSize: 9.5,
           fontWeight: 900,
-          letterSpacing: '0.04em',
+          letterSpacing: '0.06em',
           textTransform: 'uppercase',
           lineHeight: 1.15,
           textAlign: 'center',
@@ -1514,7 +1513,6 @@ function HelperLauncherTab({
       >
         Pricing<br />
         Diagnostic<br />
-        to Pitch<br />
         Flow
       </span>
     </motion.button>

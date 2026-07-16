@@ -26,7 +26,7 @@ around a Release 2 scope (see "Release 2 scope" section below) with
 SCORM packaging brought forward as the production format.
 
 Out of Release 2 scope: Level 3 Advanced View content (OPC Metrics +
-Quality Adoption Metrics), full Pricing Diagnostic to Pitch Flow as
+Quality Adoption Metrics), full Pricing Diagnostic Flow as
 live mechanic, post-sim Diagnostic Tool, manager dashboard. The Advanced View tab
 ships **locked / Coming Soon** in R2; content lands in R3.
 
@@ -1558,7 +1558,7 @@ Fixes the reported "banner references cities I've never seen" bug.
 ### Diagnose activity (formerly "Issue Tree Reveal")
 
 - **Eight cards total**: Overview (position 0) + seven diagnostic
-  phases aligned to the SME's Pricing Diagnostic to Pitch Flow
+  phases aligned to the SME's Pricing Diagnostic Flow
   material verbatim: Trigger, Issue, Intent, Root Cause,
   Diagnosis, Hook, Pitch.
 - **Headlines are the SME's guiding questions**, not declarative
@@ -1590,7 +1590,7 @@ Fixes the reported "banner references cities I've never seen" bug.
   Reveal (7 steps) and the drawer (6 steps).
 - **Subtitle** in `clearanceActivities.ts`: "A change of pace: this
   one's a walkthrough, not a check. Your manager will have introduced
-  you to the Pricing Diagnostic to Pitch Flow in your briefing.
+  you to the Pricing Diagnostic Flow in your briefing.
   Here's a quick recap of the seven steps on a worked example, so
   you're set to use it in the sim." Bridges from the Call Audit
   (assessment) into
@@ -1890,7 +1890,7 @@ Level 3 (OPC Application) unlocks alongside Level 2.
 **Naming and icon (Diagnosis Coach retired):**
 
 - **"Diagnosis Coach" retired as the tool name.** Drawer is now
-  called **"Pricing Diagnostic to Pitch Flow"** everywhere in
+  called **"Pricing Diagnostic Flow"** everywhere in
   user-facing copy, matching the framework it walks. Previously
   we distinguished them (framework name vs tool name); collapsing
   them simplifies the mental model at the cost of a slightly
@@ -1978,11 +1978,11 @@ times across this session):**
   (PPAI is not reachable from the sim; the old wording implied
   otherwise).
 - Refined further to name the timing: PPAI sits between the
-  Pricing Diagnostic to Pitch Flow completing and the learner
+  Pricing Diagnostic Flow completing and the learner
   picking up the phone (not mid-call). Current title: **"PPAI
   before the call"**. Current text: "The Partner Performance AI
   (PPAI) tool isn't inside the sim. In real work you'd reach
-  for it between the Pricing Diagnostic to Pitch Flow and
+  for it between the Pricing Diagnostic Flow and
   picking up the phone, to turn your diagnosis into a
   partner-facing narrative."
 - **Decision landed with Adriana:** PPAI is referenced in the
@@ -1995,7 +1995,7 @@ times across this session):**
 
 - **Objection is not a separate conversation phase.** Each round
   IS an objection scenario. The learner's job in every round:
-  diagnose using the Pricing Diagnostic to Pitch Flow, identify
+  diagnose using the Pricing Diagnostic Flow, identify
   which objection type applies, and deliver the pitch that
   addresses it. Step 7 of the Flow ("What's the commercial
   pitch?") is literally the objection-handling response, per
