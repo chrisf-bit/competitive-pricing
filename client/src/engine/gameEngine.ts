@@ -15,6 +15,7 @@ import { getMarketContext, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
 import { getBranchingScenario } from '../data/branchingScenarios';
 import { getPartnerBaseline } from '../data/partnerStateByRound';
+import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 import { gradeRound, gradeBranchingRound } from './grading';
 
 /**
@@ -680,6 +681,20 @@ export function resetRoundForRetake(state: GameState): GameState {
     p.persona.id === conv.partnerId ? snapshot : p,
   );
 
+  // Only flag the retake partner as "already tried this round" when
+  // they were the WRONG pick for the round. If the learner picked
+  // the CORRECT partner but bombed the responses, they should be
+  // able to retake with the same (correct) partner - marking the
+  // partner as previously engaged disables their Begin Conversation
+  // button (via alreadyEngaged in App.tsx), which would leave the
+  // learner stuck on retake with no valid partner to call.
+  const regime = state.learnerProfile.market?.parityRegime ?? null;
+  const correctPartnerId = regime
+    ? getCorrectPartnerForRound(regime, state.currentRound)
+    : null;
+  const wasWrongPartner =
+    correctPartnerId !== null && conv.partnerId !== correctPartnerId;
+
   return {
     ...state,
     screen: 'portfolio',
@@ -695,16 +710,17 @@ export function resetRoundForRetake(state: GameState): GameState {
     engagedPartnerIds: state.engagedPartnerIds.filter(
       (id) => id !== conv.partnerId,
     ),
-    // Keep the wrong-pick partner flagged as "engaged this round" on
+    // Keep the WRONG-pick partner flagged as "engaged this round" on
     // the Portfolio + Partner Detail so the learner sees they've
     // already tried that partner and doesn't waste the retake
-    // re-picking the same wrong call. Action budget is restored
-    // (above) so they can still pick someone else.
-    previouslyEngagedThisRound: state.previouslyEngagedThisRound.includes(
-      conv.partnerId,
-    )
-      ? state.previouslyEngagedThisRound
-      : [...state.previouslyEngagedThisRound, conv.partnerId],
+    // re-picking the same wrong call. Right partner + bad responses
+    // = the flag is skipped so the learner can retake with the same
+    // correct partner without Begin Conversation being disabled.
+    previouslyEngagedThisRound: wasWrongPartner
+      ? state.previouslyEngagedThisRound.includes(conv.partnerId)
+        ? state.previouslyEngagedThisRound
+        : [...state.previouslyEngagedThisRound, conv.partnerId]
+      : state.previouslyEngagedThisRound,
     selectedPartnerId: null,
     conversationInProgress: null,
     lastConversationGrade: null,
