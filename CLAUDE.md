@@ -20,15 +20,22 @@ commissioned by Adriana Nedea (PS Learning, Jan 2026 deck). It pairs a
   and the learner has to spot them, take the right action, and have
   the right conversation.
 
-**Test target for Release 2: 2026-06-18** (Advanced View locked).
-The original MVP date of 2026-05-18 slipped; the project regrouped
-around a Release 2 scope (see "Release 2 scope" section below) with
-SCORM packaging brought forward as the production format.
+**Current trajectory: September 2026 = full launch.** Confirmed
+by Chris on 2026-07-14: complete sim across Levels 0 through 3,
+rounds 1 through 20, Objection restored as a round scenario type,
+OPC Application unlocked as Level 3. See the Post-2026-07-13
+tweaks section under "Jul 2026 session update" for the launch
+scope details and the significant build ahead.
 
-Out of Release 2 scope: Level 3 Advanced View content (OPC Metrics +
-Quality Adoption Metrics), full Pricing Diagnostic Flow as
-live mechanic, post-sim Diagnostic Tool, manager dashboard. The Advanced View tab
-ships **locked / Coming Soon** in R2; content lands in R3.
+**Historical context:** R2 was originally targeted at 2026-06-18
+(Advanced View locked) after the original MVP date of 2026-05-18
+slipped. R2 becomes a pre-launch milestone rather than the final
+destination. The R2 scope items below (partner detail rework,
+SCORM packaging, and so on) are historical about how the sim got
+here. Level 3 content (OPC Metrics + Quality Adoption Metrics),
+full Pricing Diagnostic Flow as live mechanic, post-sim
+Diagnostic Tool, and manager dashboard were originally out of R2
+scope but all ship for the September launch.
 
 ## Source documents
 
@@ -359,8 +366,12 @@ based on the shape flag.
   Mirrors the back half of Alex's Diagnostic Flow taught in
   clearance.
 - **Objection phase was removed in May 2026.** No SME-validated
-  content for objection responses, so we pulled it rather than
-  fabricate scoring.
+  content for objection responses at the time, so we pulled it
+  rather than fabricate scoring. **Objection returns for the
+  September 2026 launch, but as a round scenario type** (each
+  round is an objection scenario diagnosed via the Pricing
+  Diagnostic Flow), **not as a fourth conversation phase**.
+  Full trajectory in the Post-2026-07-13 tweaks section.
 - Each phase has 3 options scored on `compliance` and `styleMatch`.
   "Optimal" Diagnosis / Pitch are derived at grading time as the
   highest-`trustChange` option (metricEffects sum as tiebreak), so
@@ -1893,10 +1904,14 @@ Level 3 (OPC Application) unlocks alongside Level 2.
   called **"Pricing Diagnostic Flow"** everywhere in
   user-facing copy, matching the framework it walks. Previously
   we distinguished them (framework name vs tool name); collapsing
-  them simplifies the mental model at the cost of a slightly
-  longer label. Full name used everywhere in prose; **no short
-  form nickname** (earlier "the Diagnostic Flow" short form is
-  retired). Drawer header, launcher tab, tutorial steps, guide
+  them simplifies the mental model.
+  Naming trajectory this session: first tried the SME's full
+  framework name "Pricing Diagnostic to Pitch Flow"; client
+  came back saying it was too long for the launcher tab and
+  verbose in prose; shortened to **"Pricing Diagnostic Flow"**
+  as the settled form. Full name used everywhere in prose;
+  **no short form nickname** (earlier "the Diagnostic Flow"
+  short form is retired). Drawer header, launcher tab, tutorial steps, guide
   panel step, reveal narration, aria-label, action card copy all
   updated. Internal identifiers (`IssueTreeHelper` component,
   `data/issueTree.ts`, `IssueTreePath`, `issueTreePath`,
@@ -1909,10 +1924,13 @@ Level 3 (OPC Application) unlocks alongside Level 2.
   with an arrow), matches the name, and preserves the
   unmissable visual correlation between clearance teaching and
   the sim tool.
-- **Launcher tab label restacked as four lines** to fit the full
-  name: `Pricing / Diagnostic / to Pitch / Flow` at fontSize
-  8.5, letterSpacing 0.04em, lineHeight 1.15. Tab grows a touch
-  taller; horizontal padding unchanged.
+- **Launcher tab label stacked as three lines** to fit the
+  shortened name: `Pricing / Diagnostic / Flow` at fontSize
+  9.5, letterSpacing 0.06em, lineHeight 1.15. Tab height
+  approximates the original single-line "COACH" tab; horizontal
+  padding unchanged. (Briefly stacked as four lines when the
+  full "Pricing Diagnostic to Pitch Flow" name was in use; that
+  version was tighter and taller.)
 - **Residual `TreeDeciduous` fix** on the launcher tab. The
   earlier tree-to-lightbulb rename missed the `HelperLauncherTab`
   component in `PartnerDetailScreen.tsx` (only the drawer's
