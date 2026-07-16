@@ -16,7 +16,6 @@ import {
   Lock,
   CalendarClock,
   Percent,
-  Coins,
   Info,
 } from 'lucide-react';
 import type {
@@ -421,7 +420,6 @@ export function PartnerDetailScreen({
             <ProfileMetaFields
               lastPricingContactDaysAgo={partner.metrics.lastPricingContactDaysAgo}
               pricingCoverageQTD={partner.metrics.pricingCoverageQTD}
-              partnerValueAbrn={partner.metrics.partnerValueAbrn}
             />
           </div>
 
@@ -855,7 +853,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(6, 1fr)',
+          gridTemplateColumns: 'repeat(7, 1fr)',
           gap: 8,
         }}
       >
@@ -865,6 +863,15 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           value={`${m.erpd.toFixed(1)}%`}
           changeText={`${m.erpdChange < 0 ? '↓' : '↑'}${Math.abs(m.erpdChange).toFixed(2)}`}
           highlight
+        />
+        <BigMetric
+          label={metricDefinitions.partnerValueAbrn.label}
+          helpText={metricDefinitions.partnerValueAbrn.helpText}
+          value={
+            m.partnerValueAbrn !== undefined
+              ? m.partnerValueAbrn.toLocaleString('en-US')
+              : '-'
+          }
         />
         <BigMetric
           label={metricDefinitions.rpdPublic.label}
@@ -1328,16 +1335,13 @@ function DiscountRow({ item }: { item: DiscountProduct }) {
 function ProfileMetaFields({
   lastPricingContactDaysAgo,
   pricingCoverageQTD,
-  partnerValueAbrn,
 }: {
   lastPricingContactDaysAgo?: number;
   pricingCoverageQTD?: number;
-  partnerValueAbrn?: number;
 }) {
   if (
     lastPricingContactDaysAgo === undefined &&
-    pricingCoverageQTD === undefined &&
-    partnerValueAbrn === undefined
+    pricingCoverageQTD === undefined
   ) {
     return null;
   }
@@ -1352,13 +1356,6 @@ function ProfileMetaFields({
         gap: 10,
       }}
     >
-      {partnerValueAbrn !== undefined && (
-        <ProfileMetaRow
-          icon={<Coins size={14} style={{ color: 'var(--brand-navy)' }} />}
-          metricKey="partnerValueAbrn"
-          value={partnerValueAbrn.toLocaleString('en-US')}
-        />
-      )}
       {lastPricingContactDaysAgo !== undefined && (
         <ProfileMetaRow
           icon={<CalendarClock size={14} style={{ color: 'var(--brand-navy)' }} />}
@@ -1399,7 +1396,7 @@ function ProfileMetaRow({
   value,
 }: {
   icon: React.ReactNode;
-  metricKey: 'lastPricingContact' | 'pricingCoverageQTD' | 'partnerValueAbrn';
+  metricKey: 'lastPricingContact' | 'pricingCoverageQTD';
   value: string;
 }) {
   const def = metricDefinitions[metricKey];
