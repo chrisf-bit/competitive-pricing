@@ -63,6 +63,16 @@ export interface MiniScenario {
   objective: string;
   /** Visual theme - drives cover-card gradient + icon selection. */
   theme: MiniScenarioTheme;
+  /**
+   * URL for the property hero photo shown on the case-file cover.
+   * Currently sourced from Unsplash CDN URLs already validated by the
+   * existing partner records - joins the pre-existing SCORM debt
+   * (runtime network call, banned in the CLAUDE.md rules for a
+   * self-contained SCORM zip). Both this and the existing partner
+   * images should be swapped to bundled WebP under
+   * client/src/assets/ before final ship.
+   */
+  heroImage: string;
   steps: MiniScenarioStep[];
   goodOutcome: string;
   badOutcome: string;
@@ -77,6 +87,8 @@ export const miniScenarios: MiniScenario[] = [
     objective:
       "Recognise that a Brand.com gap is a signal to diagnose, not a reason to pressure the partner, and guide the conversation toward a compliant, performance-led next step.",
     theme: 'brand-gap',
+    heroImage:
+      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800&h=1000&fit=crop',
     steps: [
       {
         id: 'signal',
@@ -182,6 +194,8 @@ export const miniScenarios: MiniScenario[] = [
     objective:
       "Identify that the issue is device-specific, diagnose the likely setup gap, and propose a targeted mobile solution without sounding forceful.",
     theme: 'mobile-gap',
+    heroImage:
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=1000&fit=crop',
     steps: [
       {
         id: 'signal',
@@ -271,6 +285,8 @@ export const miniScenarios: MiniScenario[] = [
     objective:
       "Recognise low-quality Genius adoption, explain why the discount is not delivering real traveller value, and guide the partner back to fixing the base price first.",
     theme: 'genius-offset',
+    heroImage:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=1000&fit=crop',
     steps: [
       {
         id: 'signal',
@@ -362,6 +378,8 @@ export const miniScenarios: MiniScenario[] = [
     objective:
       "Recognise that the gap may come from family setup, not broad pricing, and guide the partner through a foundations-first fix.",
     theme: 'family-undercut',
+    heroImage:
+      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&h=1000&fit=crop',
     steps: [
       {
         id: 'signal',

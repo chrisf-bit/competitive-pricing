@@ -333,36 +333,34 @@ function ScenarioCover({
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
       style={{
-        flexBasis: '38%',
-        maxWidth: 420,
+        flexBasis: '36%',
+        maxWidth: 440,
         minWidth: 320,
         background: themeGradient(scenario.theme),
         color: 'var(--white)',
-        padding: '32px 32px 40px',
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
-        gap: 24,
         position: 'relative',
         overflow: 'hidden',
       }}
     >
-      {/* Subtle inner texture for depth */}
+      {/* Text header - loads at the top for natural top-down reading.
+          Case file badge, property name, scenario title. Objective
+          copy has moved to the outcome card at the end of the
+          scenario so the cover stays focused on WHERE and WHAT. */}
       <div
         style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            'radial-gradient(ellipse at 80% 10%, rgba(255,255,255,0.12) 0%, transparent 55%)',
-          pointerEvents: 'none',
+          position: 'relative',
+          zIndex: 2,
+          padding: '28px 28px 20px',
         }}
-      />
-
-      <div style={{ position: 'relative', zIndex: 1 }}>
+      >
         <span
           style={{
-            display: 'inline-block',
-            padding: '4px 12px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '4px 12px 4px 8px',
             fontSize: 10,
             fontWeight: 800,
             textTransform: 'uppercase',
@@ -371,98 +369,73 @@ function ScenarioCover({
             background: 'rgba(0,0,0,0.28)',
             border: '1px solid rgba(254,186,2,0.4)',
             borderRadius: 100,
-            marginBottom: 20,
+            marginBottom: 16,
           }}
         >
+          <ThemeIcon theme={scenario.theme} size={12} />
           Case file {scenarioIndex + 1}
         </span>
         <div
           style={{
-            fontSize: 12,
+            fontSize: 11,
             fontWeight: 700,
             textTransform: 'uppercase',
             letterSpacing: '0.14em',
-            color: 'rgba(255,255,255,0.65)',
-            marginBottom: 6,
-          }}
-        >
-          Property
-        </div>
-        <h2
-          style={{
-            fontSize: 28,
-            fontWeight: 800,
-            color: 'var(--white)',
-            margin: 0,
-            lineHeight: 1.15,
-            letterSpacing: '-0.01em',
+            color: 'rgba(255,255,255,0.62)',
+            marginBottom: 4,
           }}
         >
           {scenario.propertyName}
-        </h2>
-      </div>
-
-      {/* Centre icon block - placeholder for eventual property photo */}
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 1,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '24px 0',
-        }}
-      >
-        <div
-          style={{
-            width: 180,
-            height: 180,
-            borderRadius: '50%',
-            background: 'rgba(255,255,255,0.06)',
-            border: '1px solid rgba(255,255,255,0.12)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: 'inset 0 4px 32px rgba(0,0,0,0.25)',
-          }}
-        >
-          <ThemeIcon theme={scenario.theme} />
         </div>
-      </div>
-
-      <div style={{ position: 'relative', zIndex: 1 }}>
-        <div
+        <h2
           style={{
-            fontSize: 12,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            letterSpacing: '0.14em',
-            color: 'rgba(255,255,255,0.65)',
-            marginBottom: 6,
-          }}
-        >
-          The situation
-        </div>
-        <div
-          style={{
-            fontSize: 16,
-            fontWeight: 700,
+            fontSize: 26,
+            fontWeight: 800,
             color: 'var(--white)',
-            lineHeight: 1.35,
-            marginBottom: 12,
+            margin: 0,
+            lineHeight: 1.2,
+            letterSpacing: '-0.01em',
           }}
         >
           {scenario.scenarioTitle}
-        </div>
+        </h2>
+      </div>
+
+      {/* Photo fills the remainder. Gradient overlay at the top of the
+          image so the header text stays crisp when the photo is
+          bright. */}
+      <div
+        style={{
+          flex: 1,
+          position: 'relative',
+          overflow: 'hidden',
+          minHeight: 220,
+        }}
+      >
+        <img
+          src={scenario.heroImage}
+          alt={scenario.propertyName}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            display: 'block',
+          }}
+        />
+        {/* Top gradient blends into the theme colour above */}
         <div
           style={{
-            fontSize: 13,
-            color: 'rgba(255,255,255,0.82)',
-            lineHeight: 1.55,
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            height: 60,
+            background:
+              'linear-gradient(to bottom, rgba(0,0,0,0.35), transparent)',
+            pointerEvents: 'none',
           }}
-        >
-          {scenario.objective}
-        </div>
+        />
       </div>
     </motion.div>
   );
@@ -728,7 +701,9 @@ function InteractionPanel({
           })}
         </div>
 
-        {/* Coaching + next-step affordance */}
+        {/* Coaching + next-step affordance. Plain white card with only a
+            coloured left rail + tiny label, so the correct option
+            above remains the single clear "answer" moment on-screen. */}
         {pickedId !== null && (
           <motion.div
             initial={{ opacity: 0, y: 6 }}
@@ -736,63 +711,40 @@ function InteractionPanel({
             transition={{ duration: 0.25, ease: 'easeOut' }}
             style={{
               marginTop: 4,
-              padding: '14px 16px',
-              background: stepCorrect ? 'var(--success-bg)' : 'var(--warning-bg)',
-              border: `1px solid ${
+              padding: '12px 16px',
+              background: 'var(--white)',
+              border: '1px solid rgba(0, 30, 60, 0.10)',
+              borderLeft: `3px solid ${
                 stepCorrect ? 'var(--success)' : 'var(--warning)'
               }`,
-              borderRadius: 'var(--radius-md)',
-              display: 'flex',
-              gap: 12,
-              alignItems: 'flex-start',
+              borderRadius: 'var(--radius-sm)',
             }}
           >
             <div
               style={{
-                flexShrink: 0,
-                width: 26,
-                height: 26,
-                borderRadius: '50%',
-                background: stepCorrect ? 'var(--success)' : 'var(--warning)',
-                color: 'var(--white)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                fontSize: 10,
+                fontWeight: 800,
+                textTransform: 'uppercase',
+                letterSpacing: '0.16em',
+                color: stepCorrect ? 'var(--success)' : 'var(--warning)',
+                marginBottom: 4,
               }}
             >
-              {stepCorrect ? (
-                <Check size={14} strokeWidth={3} />
-              ) : (
-                <AlertTriangle size={14} strokeWidth={2.5} />
-              )}
+              Why
             </div>
-            <div style={{ flex: 1 }}>
-              <div
-                style={{
-                  fontSize: 12,
-                  fontWeight: 800,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.14em',
-                  color: stepCorrect ? 'var(--success)' : 'var(--warning)',
-                  marginBottom: 4,
-                }}
-              >
-                {stepCorrect ? 'Nice call' : 'Not quite'}
-              </div>
-              <div
-                style={{
-                  fontSize: 13,
-                  color: 'var(--brand-navy)',
-                  lineHeight: 1.55,
-                }}
-              >
-                {stepCorrect
-                  ? step.correctCoaching ??
-                    'That\'s the strongest choice at this step.'
-                  : `The strongest pick here was ${step.correctOptionId}. ${
-                      step.correctCoaching ?? ''
-                    }`}
-              </div>
+            <div
+              style={{
+                fontSize: 13,
+                color: 'var(--brand-navy)',
+                lineHeight: 1.55,
+              }}
+            >
+              {stepCorrect
+                ? step.correctCoaching ??
+                  'That\'s the strongest choice at this step.'
+                : `The strongest pick here was ${step.correctOptionId}. ${
+                    step.correctCoaching ?? ''
+                  }`}
             </div>
           </motion.div>
         )}
@@ -932,49 +884,55 @@ function PriorStepChip({
   pickedText: string;
   correct: boolean;
 }) {
+  // Breadcrumb-style: neutral background, tiny status dot as the only
+  // colour signal. Reads as a subtle history trail rather than another
+  // green/amber panel competing with the current step's answer.
   return (
     <div
       style={{
-        padding: '10px 14px',
-        background: correct ? 'var(--success-bg)' : 'var(--warning-bg)',
-        border: `1px solid ${correct ? 'var(--success)' : 'var(--warning)'}`,
+        padding: '8px 12px',
+        background: 'var(--white)',
+        border: '1px solid rgba(0, 30, 60, 0.08)',
         borderRadius: 'var(--radius-sm)',
         display: 'flex',
         gap: 10,
-        alignItems: 'flex-start',
+        alignItems: 'center',
       }}
     >
       <div
         style={{
           flexShrink: 0,
-          width: 20,
-          height: 20,
+          width: 8,
+          height: 8,
           borderRadius: '50%',
           background: correct ? 'var(--success)' : 'var(--warning)',
-          color: 'var(--white)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 11,
+        }}
+      />
+      <span
+        style={{
+          fontSize: 10,
           fontWeight: 800,
+          textTransform: 'uppercase',
+          letterSpacing: '0.14em',
+          color: 'rgba(0, 30, 60, 0.65)',
+          flexShrink: 0,
         }}
       >
-        {correct ? <Check size={11} strokeWidth={3} /> : <X size={11} strokeWidth={3} />}
-      </div>
-      <div style={{ flex: 1, fontSize: 12, color: 'var(--brand-navy)', lineHeight: 1.45 }}>
-        <span
-          style={{
-            fontWeight: 800,
-            textTransform: 'uppercase',
-            letterSpacing: '0.1em',
-            marginRight: 8,
-            fontSize: 10,
-          }}
-        >
-          Step {index} · {label}
-        </span>
-        <span style={{ fontStyle: 'italic', opacity: 0.85 }}>{pickedText}</span>
-      </div>
+        Step {index} · {label}
+      </span>
+      <span
+        style={{
+          fontSize: 12,
+          color: 'rgba(0, 30, 60, 0.6)',
+          lineHeight: 1.4,
+          fontStyle: 'italic',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {pickedText}
+      </span>
     </div>
   );
 }
