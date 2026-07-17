@@ -76,6 +76,7 @@ export function MiniScenariosScreen({
   const [pickedId, setPickedId] = useState<'A' | 'B' | 'C' | null>(null);
   const [progress, setProgress] = useState<ScenarioProgress[]>([]);
   const [showOutcome, setShowOutcome] = useState(false);
+  const [showSummary, setShowSummary] = useState(false);
 
   const scenario: MiniScenario | undefined = scenarios[scenarioIndex];
   const step: MiniScenarioStep | undefined = scenario?.steps[stepIndex];
@@ -128,26 +129,31 @@ export function MiniScenariosScreen({
   function handleAdvanceScenario() {
     setShowOutcome(false);
     if (isLastScenario) {
-      // Emit all KC results.
-      const kc: KnowledgeCheckResult[] = [];
-      for (const scen of scenarios) {
-        const scenProg = progress.find((p) => p.scenarioId === scen.id);
-        if (!scenProg) continue;
-        for (const step of scen.steps) {
-          const r = scenProg.stepResults.find((s) => s.stepId === step.id);
-          if (!r) continue;
-          kc.push({
-            itemId: miniScenarioItemId(scen.id, step.id),
-            correct: r.correct,
-            attempts: 1,
-          });
-        }
-      }
-      onComplete(kc);
+      // Reveal the summary before firing onComplete so the learner
+      // gets a recap of how they did across the four case files.
+      setShowSummary(true);
       return;
     }
     setScenarioIndex((i) => i + 1);
     setStepIndex(0);
+  }
+
+  function handleFinishActivity() {
+    const kc: KnowledgeCheckResult[] = [];
+    for (const scen of scenarios) {
+      const scenProg = progress.find((p) => p.scenarioId === scen.id);
+      if (!scenProg) continue;
+      for (const step of scen.steps) {
+        const r = scenProg.stepResults.find((s) => s.stepId === step.id);
+        if (!r) continue;
+        kc.push({
+          itemId: miniScenarioItemId(scen.id, step.id),
+          correct: r.correct,
+          attempts: 1,
+        });
+      }
+    }
+    onComplete(kc);
   }
 
   if (!scenario) {
@@ -162,6 +168,16 @@ export function MiniScenariosScreen({
 
   const allCorrect = currentProgress.stepResults.every((r) => r.correct);
   const stepCorrect = pickedId === step?.correctOptionId;
+
+  if (showSummary) {
+    return (
+      <SummaryPanel
+        scenarios={scenarios}
+        progress={progress}
+        onFinish={handleFinishActivity}
+      />
+    );
+  }
 
   return (
     <div
@@ -1067,10 +1083,302 @@ function OutcomePanel({
             e.currentTarget.style.background = 'var(--brand-yellow)';
           }}
         >
-          {isLastScenario ? 'Finish activity' : 'Next scenario'}
+          {isLastScenario ? 'See warm-up summary' : 'Next scenario'}
           <ChevronRight size={17} />
         </button>
       </div>
     </motion.div>
+  );
+}
+
+// ── Summary panel (end of all scenarios) ──
+
+function SummaryPanel({
+  scenarios,
+  progress,
+  onFinish,
+}: {
+  scenarios: MiniScenario[];
+  progress: ScenarioProgress[];
+  onFinish: () => void;
+}) {
+  // Aggregate across all four scenarios: total correct steps and
+  // per-scenario step counts.
+  const perScenario = scenarios.map((sc) => {
+    const scProg = progress.find((p) => p.scenarioId === sc.id);
+    const correct = scProg?.stepResults.filter((r) => r.correct).length ?? 0;
+    const total = sc.steps.length;
+    return { scenario: sc, correct, total, allCorrect: correct === total };
+  });
+  const totalCorrect = perScenario.reduce((s, r) => s + r.correct, 0);
+  const totalSteps = perScenario.reduce((s, r) => s + r.total, 0);
+  const perfectCount = perScenario.filter((r) => r.allCorrect).length;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: 'easeOut' }}
+      style={{
+        height: '100%',
+        overflowY: 'auto',
+        background: 'var(--off-white)',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: 960,
+          width: '100%',
+          margin: '0 auto',
+          padding: '40px 32px 48px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 28,
+          flex: 1,
+        }}
+      >
+        {/* Header */}
+        <div style={{ textAlign: 'center' }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.2em',
+              color: 'var(--brand-yellow)',
+              marginBottom: 6,
+            }}
+          >
+            Warm up complete
+          </div>
+          <h1
+            style={{
+              fontSize: 30,
+              fontWeight: 800,
+              color: 'var(--brand-navy)',
+              margin: 0,
+              lineHeight: 1.15,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            How you handled the four case files
+          </h1>
+        </div>
+
+        {/* Overall stats banner */}
+        <div
+          style={{
+            padding: '20px 24px',
+            background: 'var(--white)',
+            border: '1px solid rgba(0, 30, 60, 0.10)',
+            borderRadius: 'var(--radius-lg)',
+            display: 'flex',
+            gap: 32,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <StatBlock
+            value={`${totalCorrect} / ${totalSteps}`}
+            label="Correct decisions"
+          />
+          <div
+            style={{
+              width: 1,
+              height: 40,
+              background: 'rgba(0, 30, 60, 0.12)',
+            }}
+          />
+          <StatBlock
+            value={`${perfectCount} / ${scenarios.length}`}
+            label="Perfect case files"
+          />
+        </div>
+
+        {/* Per-scenario cards */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${scenarios.length}, 1fr)`,
+            gap: 14,
+          }}
+        >
+          {perScenario.map((row) => (
+            <ScenarioSummaryCard
+              key={row.scenario.id}
+              scenario={row.scenario}
+              correct={row.correct}
+              total={row.total}
+              allCorrect={row.allCorrect}
+            />
+          ))}
+        </div>
+
+        {/* Continue */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: 8 }}>
+          <button
+            onClick={onFinish}
+            style={{
+              background: 'var(--brand-yellow)',
+              color: 'var(--brand-navy)',
+              border: 'none',
+              padding: '14px 30px',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: 15,
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              cursor: 'pointer',
+              boxShadow: '0 6px 18px rgba(254,186,2,0.4)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'var(--brand-yellow-light)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'var(--brand-yellow)';
+            }}
+          >
+            Continue
+            <ChevronRight size={17} />
+          </button>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function StatBlock({ value, label }: { value: string; label: string }) {
+  return (
+    <div style={{ textAlign: 'center' }}>
+      <div
+        style={{
+          fontSize: 28,
+          fontWeight: 800,
+          color: 'var(--brand-navy)',
+          lineHeight: 1,
+          letterSpacing: '-0.02em',
+        }}
+      >
+        {value}
+      </div>
+      <div
+        style={{
+          marginTop: 4,
+          fontSize: 11,
+          fontWeight: 700,
+          textTransform: 'uppercase',
+          letterSpacing: '0.14em',
+          color: 'rgba(0, 30, 60, 0.6)',
+        }}
+      >
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function ScenarioSummaryCard({
+  scenario,
+  correct,
+  total,
+  allCorrect,
+}: {
+  scenario: MiniScenario;
+  correct: number;
+  total: number;
+  allCorrect: boolean;
+}) {
+  return (
+    <div
+      style={{
+        background: 'var(--white)',
+        border: '1px solid rgba(0, 30, 60, 0.10)',
+        borderRadius: 'var(--radius-lg)',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
+      <div
+        style={{
+          height: 100,
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        <img
+          src={scenario.heroImage}
+          alt={scenario.propertyName}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+        />
+      </div>
+      <div
+        style={{
+          padding: '12px 14px 14px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 8,
+          flex: 1,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 10,
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            letterSpacing: '0.14em',
+            color: 'rgba(0, 30, 60, 0.55)',
+          }}
+        >
+          {scenario.propertyName}
+        </div>
+        <div
+          style={{
+            fontSize: 14,
+            fontWeight: 700,
+            color: 'var(--brand-navy)',
+            lineHeight: 1.3,
+            flex: 1,
+          }}
+        >
+          {scenario.scenarioTitle}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            marginTop: 4,
+          }}
+        >
+          <div
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              background: allCorrect ? 'var(--success)' : 'var(--warning)',
+              flexShrink: 0,
+            }}
+          />
+          <span
+            style={{
+              fontSize: 12,
+              fontWeight: 700,
+              color: 'var(--brand-navy)',
+            }}
+          >
+            {correct} / {total} correct
+          </span>
+        </div>
+      </div>
+    </div>
   );
 }
