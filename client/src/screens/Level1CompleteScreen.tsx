@@ -69,7 +69,10 @@ export function Level1CompleteScreen({
         }}
       />
 
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.25, duration: 0.55, ease: 'easeOut' }}
         style={{
           position: 'relative',
           zIndex: 2,
@@ -77,8 +80,16 @@ export function Level1CompleteScreen({
           flexDirection: 'column',
           alignItems: 'center',
           textAlign: 'center',
-          padding: '0 32px',
+          padding: '40px 48px 44px',
           gap: 16,
+          maxWidth: 720,
+          background: 'rgba(6, 18, 42, 0.62)',
+          border: '1px solid rgba(255,255,255,0.14)',
+          borderRadius: 24,
+          backdropFilter: 'blur(14px)',
+          WebkitBackdropFilter: 'blur(14px)',
+          boxShadow:
+            '0 24px 64px rgba(0,10,30,0.55), inset 0 1px 0 rgba(255,255,255,0.08)',
         }}
       >
         <motion.div
@@ -210,7 +221,7 @@ export function Level1CompleteScreen({
             )}
           </motion.div>
         )}
-      </div>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0, y: 8 }}
