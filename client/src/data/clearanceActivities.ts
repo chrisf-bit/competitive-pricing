@@ -63,6 +63,14 @@ export const clearanceActivities: ClearanceActivityRef[] = [
       'A colleague has shared the Zoom AI transcript of a recent call with a partner. Click each highlighted phrase and judge whether it was safe to say.',
   },
   {
+    id: 'mini-scenarios',
+    label: 'Scenarios',
+    screen: 'l0-mini-scenarios',
+    title: 'Four quick case files',
+    subtitle:
+      "Four short scenarios drawn from real situations. For each one, walk the signal, diagnose the cause, land the right narrative, and pick the next step. You'll practise the diagnostic pattern in variety before you meet the framework by name in the next activity.",
+  },
+  {
     id: 'issue-tree',
     label: 'Diagnose',
     screen: 'l0-issue-tree-reveal',

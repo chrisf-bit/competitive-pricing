@@ -563,6 +563,7 @@ export type GameScreen =
   | 'l0-email-audit'
   | 'l0-inbox-triage'
   | 'l0-signal-vs-proof'
+  | 'l0-mini-scenarios'
   | 'l0-issue-tree-reveal'
   | 'l0-clearance-summary'
   | 'l0-cleared-celebration'

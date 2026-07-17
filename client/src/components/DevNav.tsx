@@ -32,6 +32,7 @@ const screenJumps: ScreenJump[] = [
   { screen: 'l0-gm-chat', label: 'GM Chat', group: 'level0' },
   { screen: 'l0-email-audit', label: 'Call Audit', group: 'level0' },
   { screen: 'l0-dashboard-hotspot', label: 'Data & Insights', group: 'level0' },
+  { screen: 'l0-mini-scenarios', label: 'Mini Scenarios', group: 'level0' },
   { screen: 'l0-issue-tree-reveal', label: 'Diagnostic Flow Reveal', group: 'level0' },
   { screen: 'l0-clearance-summary', label: 'Clearance Summary', group: 'level0' },
   { screen: 'l0-cleared-celebration', label: 'Cleared Celebration', group: 'level0' },

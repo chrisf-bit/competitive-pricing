@@ -14,6 +14,7 @@ import { GameMasterChatScreen } from './screens/GameMasterChatScreen';
 import { EmailAuditScreen } from './screens/EmailAuditScreen';
 import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
 import { IssueTreeRevealScreen } from './screens/IssueTreeRevealScreen';
+import { MiniScenariosScreen } from './screens/MiniScenariosScreen';
 import { ClearanceSummaryScreen } from './screens/ClearanceSummaryScreen';
 import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
 import { Level1CompleteScreen } from './screens/Level1CompleteScreen';
@@ -240,8 +241,18 @@ export default function App() {
                   if (state.level0Progress.cleared) {
                     game.markClearedForCurrentRegime();
                   }
-                  game.finishLevel0Activity('l0-issue-tree-reveal', results);
+                  game.finishLevel0Activity('l0-mini-scenarios', results);
                 }}
+              />
+            </ClearanceShell>
+          )}
+          {state.screen === 'l0-mini-scenarios' && (
+            <ClearanceShell currentScreen={state.screen}>
+              <MiniScenariosScreen
+                retryItemIds={state.level0RetryItemIds}
+                onComplete={(results) =>
+                  game.finishLevel0Activity('l0-issue-tree-reveal', results)
+                }
               />
             </ClearanceShell>
           )}

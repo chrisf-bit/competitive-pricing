@@ -13,6 +13,7 @@ import type { GameState, KnowledgeCheckResult, ParityRegime } from '../types';
 import { gmScript } from '../data/gameMasterScript';
 import { getEmailAudit } from '../data/emailAudit';
 import { dataInsightsChallenges } from '../data/dashboardHotspot';
+import { miniScenarios, miniScenarioTotalItems } from '../data/miniScenarios';
 
 interface ClearanceSummaryScreenProps {
   results: KnowledgeCheckResult[];
@@ -37,7 +38,7 @@ interface ClearanceSummaryScreenProps {
 const PASS_THRESHOLD = 0.8;
 
 interface ActivityDef {
-  id: 'gm-chat' | 'data-insights' | 'email-audit' | 'issue-tree';
+  id: 'gm-chat' | 'data-insights' | 'email-audit' | 'mini-scenarios' | 'issue-tree';
   label: string;
   description: string;
   screen: GameState['screen'];
@@ -73,6 +74,14 @@ const activities: ActivityDef[] = [
     screen: 'l0-email-audit',
     itemMatcher: (id) => id.startsWith('email-audit-'),
     totalItems: 5,
+  },
+  {
+    id: 'mini-scenarios',
+    label: 'Scenarios',
+    description: 'Four case files walked step by step: signal, diagnose, narrative, next step',
+    screen: 'l0-mini-scenarios',
+    itemMatcher: (id) => id.startsWith('mini-scenario-'),
+    totalItems: miniScenarioTotalItems,
   },
   {
     id: 'issue-tree',
@@ -172,6 +181,24 @@ function getMissedItemDetail(
         rationale: phrase.rationale.incorrect,
         source: phrase.source,
       };
+    }
+  }
+  // Mini-scenario steps. itemId shape: mini-scenario-{scenarioId}-{stepId}.
+  // We only surface the prompt (per the "don't reveal the answer" rule) but
+  // prefix it with the case-file name + step label so the learner can
+  // orient themselves before hitting Retry.
+  if (itemId.startsWith('mini-scenario-')) {
+    for (const scenario of miniScenarios) {
+      for (const step of scenario.steps) {
+        if (itemId === `mini-scenario-${scenario.id}-${step.id}`) {
+          return {
+            itemId,
+            prompt: `${scenario.propertyName} · Step ${scenario.steps.indexOf(step) + 1} (${step.label}): ${step.prompt}`,
+            correctText: '',
+            rationale: '',
+          };
+        }
+      }
     }
   }
   // Data & Insights challenges
