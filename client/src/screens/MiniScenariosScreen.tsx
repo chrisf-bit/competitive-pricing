@@ -714,9 +714,6 @@ function InteractionPanel({
               padding: '12px 16px',
               background: 'var(--white)',
               border: '1px solid rgba(0, 30, 60, 0.10)',
-              borderLeft: `3px solid ${
-                stepCorrect ? 'var(--success)' : 'var(--warning)'
-              }`,
               borderRadius: 'var(--radius-sm)',
             }}
           >
@@ -1020,7 +1017,6 @@ function OutcomePanel({
           marginTop: 12,
           padding: '14px 16px',
           background: 'rgba(0, 53, 128, 0.05)',
-          borderLeft: '3px solid var(--brand-navy)',
           borderRadius: 'var(--radius-sm)',
         }}
       >
