@@ -510,7 +510,12 @@ visual now matches.
   restores the engaged partner from a snapshot captured at
   `startConversation`, returns the action budget to 1, and routes
   back to the portfolio. A failed conversation leaves no permanent
-  metric or trust mark on the partner.
+  metric or trust mark on the partner. The retake only marks the
+  engaged partner as "previously engaged this round" when they
+  were the WRONG pick (checked via `getCorrectPartnerForRound`),
+  so right-partner-with-bad-responses can retake with the same
+  correct partner without Begin Conversation locking. See the
+  Retake bug fix note under Post-2026-07-13 tweaks for context.
 - **`roundStars` only goes up.** A retake or Practice Mode replay
   can raise the stored score, never lower it.
 
@@ -1972,18 +1977,58 @@ Level 3 (OPC Application) unlocks alongside Level 2.
   8200 is bigger than Crystal Water at 6061 (R1) so
   "biggest wins" pattern-matching fails; Raven Inn at 5800 is
   bigger than Velvet Sky at 4137 (R2), same purpose.
-- Renders as a new profile-meta row on Partner Detail alongside
-  Last Pricing Contact and Pricing Coverage. `Coins` icon,
-  neutral bold with thousands separators (en-US locale), no
-  colour coding because it's a scale not a severity axis.
-  Tooltip via `metricDefinitions.ts`.
+- **All five parked partners also carry the field** (John 3800,
+  Stavros 15200, Hannah 1200, Priya 9600, Yuki 1800) so any
+  future roster splice doesn't need a follow-up patch. Total
+  of 12 partner records populated across `initialPartners` and
+  `pendingPartners`.
+- **Renders as a KPI tile in the Driving Metrics row** between
+  eRPD and RPD Public. Grid template bumped from `repeat(6, 1fr)`
+  to `repeat(7, 1fr)`. Value uses `toLocaleString('en-US')` for
+  thousands separators. Falls back to `-` if the field is
+  undefined (all 12 records carry it today, but the guard stays
+  for type safety).
+  Client feedback moved it here from an earlier profile-meta row
+  placement below Notes; the tile row is a stronger signal
+  because it sits inside the KPI grid the learner reads at a
+  glance.
 - **Not added to the Portfolio card summary** deliberately.
   Teaches learners to open partners rather than deciding from
-  the card alone.
+  the card alone. Portfolio Guide step 3 tells them to open
+  candidates specifically to check Partner Value.
+- Tooltip via `metricDefinitions.ts` (`partnerValueAbrn` entry).
 - **Data & Insights table width bumped from 960px to 1120px**
   to accommodate the same Partner Value column added there in
   the earlier `dashboardHotspot.ts` pass. Competitor column was
   clipping at 960px after Partner Value was added.
+
+**Retake: don't block re-engaging the correct partner:**
+
+- Bug found by client 2026-07-17. When the learner picked the
+  correct partner but bombed the responses (0 stars from bad
+  in-conversation picks), retaking the round left Begin
+  Conversation permanently disabled on that partner. Portfolio
+  routed them back to Partner Detail, `alreadyEngaged` returned
+  true, gate stuck.
+- Root cause: `resetRoundForRetake` in `engine/gameEngine.ts`
+  unconditionally added the engaged partner to
+  `previouslyEngagedThisRound`. That list was designed to flag
+  WRONG picks so the learner doesn't waste a retake calling the
+  same wrong partner. Right partner + bad responses is a
+  different case (learner wants to retry the same correct call
+  with better answers).
+- Fix: `resetRoundForRetake` now checks the engaged partner
+  against `getCorrectPartnerForRound(regime, currentRound)` and
+  only adds them to `previouslyEngagedThisRound` when the pick
+  was wrong. Right partner retakes leave the flag list
+  untouched, so `alreadyEngaged` returns false and Begin
+  Conversation stays active.
+- Test matrix: (1) right partner + 0 stars -> retake with same
+  partner works. (2) wrong partner + 0 stars -> wrong partner
+  still flagged, retake with correct partner works. (3) wrong
+  partner + 0 stars, then retake with the same wrong partner
+  again -> still blocked (correct behaviour, don't waste a
+  retake on the same wrong call).
 
 **PPAI tip in the conversation Simulation Guide (evolved three
 times across this session):**
