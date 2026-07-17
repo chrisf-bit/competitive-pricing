@@ -64,11 +64,11 @@ export const clearanceActivities: ClearanceActivityRef[] = [
   },
   {
     id: 'mini-scenarios',
-    label: 'Scenarios',
+    label: 'Warm Up',
     screen: 'l0-mini-scenarios',
     title: 'Four quick case files',
     subtitle:
-      "Four short scenarios drawn from real situations. For each one, walk the signal, diagnose the cause, land the right narrative, and pick the next step. You'll practise the diagnostic pattern in variety before you meet the framework by name in the next activity.",
+      "Four short scenarios drawn from real situations. For each one, walk the signal, diagnose the cause, land the right narrative, and pick the next step. This will get you warmed ready for the mission ahead.",
   },
   {
     id: 'issue-tree',

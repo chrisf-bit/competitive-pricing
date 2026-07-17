@@ -77,7 +77,7 @@ const activities: ActivityDef[] = [
   },
   {
     id: 'mini-scenarios',
-    label: 'Scenarios',
+    label: 'Warm Up',
     description: 'Four case files walked step by step: signal, diagnose, narrative, next step',
     screen: 'l0-mini-scenarios',
     itemMatcher: (id) => id.startsWith('mini-scenario-'),
