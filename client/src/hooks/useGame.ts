@@ -183,6 +183,16 @@ export function useGame() {
     }));
   }, []);
 
+  /**
+   * Continue from the Level 1 Complete celebration into the Debrief.
+   * gameComplete is already set true by advanceRound when it routes
+   * here; the flip below covers the DevNav jump path where the tester
+   * lands on the screen without having actually played through.
+   */
+  const onContinueAfterLevel1Complete = useCallback(() => {
+    setState((s) => ({ ...s, screen: 'debrief', gameComplete: true }));
+  }, []);
+
   const onRestart = useCallback(() => {
     clearPersistedState();
     setState(createInitialState());
@@ -415,6 +425,7 @@ export function useGame() {
     onBackToPortfolio,
     onRestart,
     onPlayAgain,
+    onContinueAfterLevel1Complete,
     setLearnerMarket,
     setLearnerStrengths,
     setLearnerArchetype,

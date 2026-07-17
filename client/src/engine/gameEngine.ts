@@ -743,9 +743,18 @@ export function advanceRound(state: GameState): GameState {
   }
 
   if (state.currentRound >= TOTAL_ROUNDS) {
+    // If the learner has cleared every Level 1 round (1-10) with at
+    // least one star, celebrate before the debrief. Level 2 unlocks
+    // conceptually at this point (rounds 11-20). Won't fire until
+    // TOTAL_ROUNDS is bumped to 10 AND the learner clears all ten;
+    // partial completions (today's cap of 3) still route straight to
+    // the debrief.
+    const level1AllCleared = Array.from({ length: 10 }, (_, i) => i + 1).every(
+      (r) => (state.roundStars[r] ?? 0) >= 1,
+    );
     return {
       ...state,
-      screen: 'debrief',
+      screen: level1AllCleared ? 'level-1-complete' : 'debrief',
       gameComplete: true,
     };
   }

@@ -581,6 +581,10 @@ export type GameScreen =
   | 'conversation'
   | 'conversation-report'
   | 'l1-outcome'
+  // Celebration between Level 1 and Level 2. Fires from advanceRound
+  // when the learner clears every Level 1 round (1-10) with at least
+  // one star. Continue routes on to the debrief.
+  | 'level-1-complete'
   // ── Wrap-up ──
   | 'debrief';
 

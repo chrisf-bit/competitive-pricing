@@ -16,6 +16,7 @@ import { DashboardHotspotScreen } from './screens/DashboardHotspotScreen';
 import { IssueTreeRevealScreen } from './screens/IssueTreeRevealScreen';
 import { ClearanceSummaryScreen } from './screens/ClearanceSummaryScreen';
 import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
+import { Level1CompleteScreen } from './screens/Level1CompleteScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { RoundSelectScreen } from './screens/RoundSelectScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
@@ -97,7 +98,12 @@ export default function App() {
   }
 
   // Level 0 screens (and briefing) run chrome-free - no Header, no GuidePanel.
-  const isLevel0Chrome = state.screen === 'briefing' || state.screen.startsWith('l0-');
+  // The Level 1 Complete celebration is a full-bleed moment too - same
+  // treatment as the Clearance Cleared screen.
+  const isLevel0Chrome =
+    state.screen === 'briefing' ||
+    state.screen.startsWith('l0-') ||
+    state.screen === 'level-1-complete';
   // The conversation-report screen is a moment, not a panel. The Guide
   // doesn't have anything relevant to say while it's up, so hide it -
   // otherwise it sits beside the report showing empty section headers.
@@ -390,6 +396,14 @@ export default function App() {
               personaId={state.learnerProfile.archetype?.id ?? null}
               onContinue={game.onContinueAfterReport}
               onRetake={game.onRetakeAfterReport}
+            />
+          )}
+          {state.screen === 'level-1-complete' && (
+            <Level1CompleteScreen
+              playerName={state.learnerProfile.playerName}
+              archetype={state.learnerProfile.archetype}
+              avatarId={state.learnerProfile.avatarId}
+              onContinue={game.onContinueAfterLevel1Complete}
             />
           )}
           {state.screen === 'debrief' && game.score && (
