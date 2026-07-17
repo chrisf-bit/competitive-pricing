@@ -59,10 +59,13 @@ export const issueTreePhases: IssueTreePhase[] = [
     shortName: 'Overview',
     icon: Workflow,
     headline: 'Meet the Pricing Diagnostic Flow',
+    // Multi-paragraph body with **bold** inline markers. The screen
+    // renders these via a simple splitter (see IssueTreeRevealScreen)
+    // so we don't need a markdown library. Paragraphs are split on
+    // \n\n; **...** is turned into <strong>.
     body:
-      "A diagnostic flow that connects the pricing signals you spot to the commercial pitch you deliver. Not a checklist, more a mind map LPS can use to guide their thinking. Seven guiding questions in order. Starting point, not the final word - case-by-case judgment always beats strict adherence.",
-    narration:
-      "You'll see this same flow icon on a yellow tab on Partner Detail in the sim - tap it to open the Pricing Diagnostic Flow and walk it through on a real partner. Click through and I'll show you how it plays on a worked example.",
+      "The **Pricing Diagnostic Flow** helps you connect the pricing signals you identify with the commercial conversation you have.\n\nIt's not a checklist. It's a visual guide built around seven key questions to help structure your thinking. Use it as a starting point. Your judgement should always come first.\n\nYou'll find the **Pricing Diagnostic Flow** icon on the yellow **Partner Detail** tab throughout the simulation. Open it at any time to work through the flow using a live partner.\n\nLet's see how it works in practice.",
+    narration: '',
   },
   {
     id: 'trigger',

@@ -135,7 +135,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
             >
               {activePhase.headline}
             </h2>
-            <p
+            <div
               style={{
                 fontSize: 14.5,
                 color: 'rgba(255,255,255,0.82)',
@@ -144,8 +144,12 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
                 margin: '0 auto',
               }}
             >
-              {activePhase.body} {activePhase.narration}
-            </p>
+              {renderRichBody(
+                activePhase.narration
+                  ? `${activePhase.body} ${activePhase.narration}`
+                  : activePhase.body,
+              )}
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -195,6 +199,42 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
       </div>
     </div>
   );
+}
+
+// ───────────────────────── Rich-body renderer ─────────────────────────
+
+/**
+ * Renders phase body copy that may contain paragraph breaks (\n\n) and
+ * inline bold markers (**text**). Kept intentionally minimal so we
+ * don't pull in a markdown parser for one screen.
+ */
+function renderRichBody(text: string) {
+  const paragraphs = text.split(/\n{2,}/);
+  return paragraphs.map((para, pi) => {
+    const parts = para.split(/(\*\*[^*]+\*\*)/g).filter((s) => s.length > 0);
+    return (
+      <p
+        key={pi}
+        style={{
+          margin: pi === 0 ? '0 0 12px' : '0 0 12px',
+        }}
+      >
+        {parts.map((part, ci) => {
+          if (part.startsWith('**') && part.endsWith('**')) {
+            return (
+              <strong
+                key={ci}
+                style={{ color: 'var(--white)', fontWeight: 700 }}
+              >
+                {part.slice(2, -2)}
+              </strong>
+            );
+          }
+          return <span key={ci}>{part}</span>;
+        })}
+      </p>
+    );
+  });
 }
 
 // ───────────────────────── Phase chip (clickable) ─────────────────────────
