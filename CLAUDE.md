@@ -2163,6 +2163,220 @@ times across this session):**
   objection types documented in the Post-2026-07-13 tweaks
   section above.
 
+## Post-2026-07-19 additions
+
+Batch of additions on 2026-07-19 / 2026-07-20 covering a new
+between-levels celebration, a new scored clearance activity
+("Warm Up"), and copy fixes for the Diagnostic Flow reveal.
+
+### Level 1 Complete celebration screen
+
+New screen `'level-1-complete'` on the `GameScreen` union. Fires
+from `advanceRound` in `engine/gameEngine.ts` when the learner
+finishes the final playable round AND has cleared every Level 1
+round (1-10) with at least one star each. Partial completions
+(today's `TOTAL_ROUNDS = 3` cap, or any pre-launch state where
+some Level 1 rounds are still unplayable) still route straight to
+Debrief - the celebration only appears on a full ten-out-of-ten
+run.
+
+- File: `screens/Level1CompleteScreen.tsx`.
+- Same `cleared-dark.webp` backdrop as the Clearance Cleared
+  moment; same translucent-panel treatment (see below) so the two
+  celebration beats share a visual identity.
+- Trophy badge, "Ten out of ten, {name}." headline, sub-line
+  about Level 2 unlocking, green "Level 2 unlocked" pill, avatar
+  + persona chip. "See your debrief" CTA advances to Debrief via
+  `game.onContinueAfterLevel1Complete` (sets `gameComplete: true`
+  as a safety net for the DevNav-jump path).
+- Chrome-free like the l0- screens: `isLevel0Chrome` in App.tsx
+  now includes `screen === 'level-1-complete'`.
+- Available in DevNav under the Wrap group for testing before
+  TOTAL_ROUNDS is bumped to 10.
+
+### Translucent panel treatment on both celebration screens
+
+Both `ClearedCelebrationScreen` and `Level1CompleteScreen` wrap
+their content in a semi-transparent navy panel:
+```
+rgba(6, 18, 42, 0.38) fill
+1px solid rgba(255,255,255,0.14) border
+24px radius
+backdropFilter: blur(18px)
+maxWidth: 720
+```
+
+The backdrop-blur compensates for the low fill alpha; text stays
+legible against the busy `cleared-dark.webp` cityscape without
+washing the photo out. When adding future celebration moments
+that reuse this backdrop, use the same panel spec rather than
+inventing per-screen values.
+
+### "Warm Up" clearance activity (mini-scenarios)
+
+**Placement.** New `l0-mini-scenarios` screen inserted between
+Call Audit (`l0-email-audit`) and the Diagnostic Flow reveal
+(`l0-issue-tree-reveal`). Full flow through clearance now:
+Market -> Character -> Day one -> Data & Insights -> Call Audit
+-> **Warm Up** -> Diagnose -> Summary.
+
+**Naming.** User-facing label is **"Warm Up"** everywhere -
+ClearanceShell progress strip, Clearance Summary card, DevNav.
+Internal identifiers stay as `mini-scenarios` /
+`miniScenarioItemId` / `data/miniScenarios.ts` per the same
+rename precedent as Diagnosis Coach and Pricing Diagnostic Flow.
+
+**Structure.** Four case-file scenarios, each walking a mini
+four-step Pricing Diagnostic Flow (Signal, Diagnose, Narrative,
+Next step). Sixteen KC items total feed the 80% clearance gate.
+
+- **Scenario 1 (Hotel Castellana, `brand-gap` theme):** The
+  Brand.com channel gap. Teaches: signal-first, then diagnose;
+  don't pressure across channels.
+- **Scenario 2 (Coastal View Resort, `mobile-gap`):** The mobile
+  and app gap. Teaches: device-specific setup fix, not broad
+  price cut.
+- **Scenario 3 (Grandview Inn, `genius-offset`):** The offset
+  Genius discount. Teaches: base price first, then discount;
+  low-quality adoption pattern.
+- **Scenario 4 (Sunfield Apartments, `family-undercut`):** The
+  family and occupancy undercut. Teaches: Family Ready foundations-
+  first sequence; capacity setup before broader pricing.
+
+**Content authoring.** SME content used verbatim with three
+normalising passes: (1) smart quotes/dashes converted to plain,
+(2) "AM/PFR" role reference in Scenario 3 Step 3 replaced with
+"What is the strongest response?" per the role-agnostic copy
+rule, (3) "Family Ready" framework refs in Scenario 4 kept
+as-is (SME-confirmed well-known to learners from the manager
+briefing).
+
+**Distractor design.** All 32 wrong options rewritten in the
+2026-07-20 pass to match correct-answer length. The initial
+implementation had distractors that were consistently much
+shorter than the correct pick, so learners could pattern-match
+on length alone. Each triad now follows the "close but not
+quite" rule from the existing Distractor design section - at
+least one plausible near-miss per triad; the other clearly
+wrong. Also swapped two distractors that used "parity" as
+internal-strategy shorthand (Sc1 Step 3 C, Sc4 Step 3 C) for
+regime-neutral misdirections that carry the same wrong intent
+without the compliance-red-flag word.
+
+**Files.**
+- `data/miniScenarios.ts` - scenario content + itemId helpers.
+  KC itemIds are `mini-scenario-{scenarioId}-{stepId}` (stable;
+  used by the Clearance Summary retry filter).
+- `screens/MiniScenariosScreen.tsx` - the case-file interaction
+  screen. Local state (scenario index, step index, picked
+  option, per-scenario progress, showOutcome flag, showSummary
+  flag). No global state - all bookkeeping is component-local
+  and emits results via `onComplete` at the end.
+
+**Layout.** Two-panel case-file layout:
+- **Left panel (~36% width, min 320 max 440):** themed gradient
+  background + text header at the top (Case File badge, property
+  name, scenario title) + property photo hero filling the
+  remainder. Text-first at the TOP so the read flows naturally
+  top-to-bottom on the left, then handoff to the right panel's
+  step interaction. Objective copy was pulled from the cover
+  (was originally at the bottom, causing "start reading from
+  bottom-left" feedback) and now appears only on the outcome
+  card at the end of each scenario.
+- **Right panel (interaction):** step-dot indicator across the
+  top, breadcrumb chips for prior-step picks, "From the data"
+  card if the step has `showBullets`, italic context note if the
+  step has `contextNote`, prompt in navy bold, three tap-card
+  options, reveal-answer coaching card, Next button. Full-width
+  outcome panel replaces the interaction on scenario end.
+
+**Post-pick colour discipline.** Only the correct option keeps
+a green background - that's the ONE clear "answer" moment
+on-screen. Coaching card is plain white with a small coloured
+"Why" label header (green for correct, warning-amber for
+incorrect); no left-border rail. Prior step chips are neutral
+breadcrumb bars with a tiny status dot (green/amber). Wrong
+picks show red bg only on the chosen option, dim the others.
+This layout came from user feedback that "3 green panels all
+saying the same thing" competed for attention - the discipline
+matters, don't loosen it when adding future post-pick
+affordances.
+
+**Summary screen.** After the fourth scenario's outcome card,
+the learner sees a Warm Up summary panel (full-width, replaces
+the two-panel layout entirely). Two stat blocks (correct
+decisions X/16, perfect case files X/4) + four scenario cards
+in a grid (photo thumbnail, property name, scenario title,
+green/amber status dot with N/4 correct). Continue advances to
+the Diagnostic Flow reveal.
+
+**Retry.** Runs the WHOLE scenario if any step in it was missed
+(not partial steps). Simpler than mid-scenario resume and keeps
+the case-file flow intact. `screens/MiniScenariosScreen.tsx`
+filters scenarios to those with at least one failed step in
+`retryItemIds`.
+
+**Property images.** Photos on each cover reuse verified Unsplash
+URLs from the parked partner records (`pendingPartners` in
+`data/partners.ts`) to avoid inventing URLs. Same latent SCORM
+debt as the existing partner images (runtime CDN call, banned
+per the SCORM rule) - flagged in the `heroImage` doc string.
+The eventual WebP swap for existing partner images should sweep
+these too.
+
+### Diagnostic Flow reveal - Overview copy rewrite + rich body
+
+The Overview card (step 0 of the reveal) got fresh copy with
+multi-paragraph structure and bold references to "Pricing
+Diagnostic Flow" and "Partner Detail". The single-`<p>` renderer
+in `screens/IssueTreeRevealScreen.tsx` couldn't handle either,
+so added a small `renderRichBody(text)` helper:
+- Paragraphs split on `\n\n`
+- Inline `**text**` markers wrap in `<strong>`
+- No markdown library
+
+Kept intentionally tiny - only the Overview needs it today. The
+data file (`data/issueTreeReveal.ts`) now uses `\n\n` and
+`**bold**` markers in the intro phase's `body`; the phase's
+`narration` field is set to `''`.
+
+### New feedback rule: no left-border "handle" accents
+
+Saved as `feedback_no_left_border_handles.md` in the memory
+system. Chris flagged the pattern on sight during this session as
+a tell-tale AI-generated UI pattern. **Never use `borderLeft:
+'3px solid ...'` (or similar) as a decorative accent on cards,
+callouts, or info panels.** Applies to all accent colours (green
+/amber/red/navy), not just one. Doesn't apply to `border` (all
+sides) or `borderBottom` for separator rules - just the decorative
+left-rail pattern. Pre-existing borderLeft usages elsewhere in the
+codebase haven't been swept; don't refactor them unless asked.
+This rule governs NEW work.
+
+### Things to avoid (this session)
+
+- Don't reintroduce left-border accent rails on any new cards.
+  See the feedback memory for the full rule; icon or tiny status
+  dot is the correct colour signal, not a borderLeft rail.
+- Don't restore the mini-scenarios cover panel with objective
+  copy at the bottom. Text at the top with photo below is the
+  natural reading order; objective moved to the outcome card.
+- Don't over-tint the mini-scenarios post-pick UI. Correct option
+  = green bg. Coaching = plain white with a coloured "Why"
+  label. Prior chips = neutral with a tiny dot. Adding more
+  green surfaces recreates the "three panels all say the same
+  thing" problem.
+- Don't shorten the mini-scenario distractors to be brief. Length
+  disparity gives away the correct answer; the current lengths
+  are deliberately comparable across each triad.
+- Don't route Warm Up straight to the Diagnostic Flow reveal on
+  the fourth outcome card's Continue. The summary screen is a
+  designed beat - the last outcome's CTA reads "See warm-up
+  summary" for that reason.
+- Don't restore "Mini Scenarios" / "Scenarios" as the learner-
+  facing label. It's "Warm Up" everywhere the learner sees it;
+  internal identifiers keep the `mini-scenarios` shape.
+
 ## How to run
 
 ```
@@ -2281,6 +2495,15 @@ to resolve before final delivery.
 ## Things to avoid
 
 - Don't reintroduce em dashes (saved as a feedback memory).
+- Don't decorate cards, callouts, or info panels with a thick
+  coloured `borderLeft` rail (e.g. `borderLeft: '3px solid ...'`).
+  Chris flags this pattern on sight as a tell-tale AI-generated
+  UI cliche - saved as a feedback memory. Colour signal for
+  status belongs in a small icon or tiny dot, not a decorative
+  left rail. Applies to all accent colours. Doesn't apply to
+  `border` (all sides) or `borderBottom` used for genuine
+  separator rules. Pre-existing borderLeft usages elsewhere
+  haven't been swept; don't refactor them unless asked.
 - Don't add severity colour-coding to Portfolio / Partner Detail
   metrics - it makes "spot the bad partner" trivial.
 - Don't add Level 0/1/2 prefix labels to learner-facing UI.
