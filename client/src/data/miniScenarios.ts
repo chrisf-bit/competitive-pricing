@@ -99,14 +99,17 @@ export const miniScenarios: MiniScenario[] = [
         ],
         prompt: 'What should you take from this first?',
         options: [
-          { id: 'A', text: 'The partner must change their prices immediately.' },
+          {
+            id: 'A',
+            text: 'The partner is deliberately trying to reduce their volume on Booking.com and steer travellers to their direct site, which needs addressing straight away.',
+          },
           {
             id: 'B',
             text: 'This is a signal that the partner could be more competitive on Booking.com and the cause needs to be understood.',
           },
           {
             id: 'C',
-            text: 'The issue should be ignored because pricing is only one performance factor.',
+            text: "The partner's overall performance is likely fine because they are competitive on their direct site, so no follow-up is needed unless another metric moves.",
           },
         ],
         correctOptionId: 'B',
@@ -120,7 +123,7 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: '"You need to match Booking.com with your direct channel."',
+            text: '"Your prices on Booking.com need to align with your direct site if you want to stay competitive here, so let\'s talk through how you can bring them in line across both channels."',
           },
           {
             id: 'B',
@@ -128,7 +131,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: '"If this continues, your visibility will drop."',
+            text: '"If this pattern continues you\'ll see your visibility on Booking.com drop and your ranking start to slide, so it would be worth bringing your prices here in line with your direct site."',
           },
         ],
         correctOptionId: 'B',
@@ -146,11 +149,11 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: '"If you want more bookings, you should always make Booking.com your cheapest channel."',
+            text: '"If you want to grow bookings you should always make sure Booking.com is your cheapest channel, because travellers will book wherever the price is best and that is what our platform is set up to reward with better visibility."',
           },
           {
             id: 'C',
-            text: '"We can ask for parity in every market if we see a direct gap."',
+            text: '"Whenever we see a partner more competitive on their direct site we should push back on that gap and require them to bring their Booking.com prices in line, especially in markets where they are formally required to do so."',
           },
         ],
         correctOptionId: 'A',
@@ -164,11 +167,11 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: 'Ask the partner to lower all their prices across every channel.',
+            text: 'Ask the partner to bring their prices across every channel in line with the price they show on Booking.com so travellers see a consistent offer wherever they search.',
           },
           {
             id: 'B',
-            text: 'End the discussion after sharing the benchmark.',
+            text: 'Share the benchmark data with the partner, thank them for their time, and leave the choice of any follow-up entirely with them without any coaching on what the data means for their performance.',
           },
           {
             id: 'C',
@@ -206,8 +209,14 @@ export const miniScenarios: MiniScenario[] = [
         ],
         prompt: 'What is the best interpretation of this signal?',
         options: [
-          { id: 'A', text: 'The partner must lower all public prices immediately.' },
-          { id: 'B', text: 'The partner is probably losing all demand because of reviews.' },
+          {
+            id: 'A',
+            text: 'The partner needs to lower all their public prices straight away to compete on both mobile and desktop across the platform.',
+          },
+          {
+            id: 'B',
+            text: 'The partner is probably losing demand overall because their review score or property content is holding them back rather than pricing on any specific device.',
+          },
           {
             id: 'C',
             text: 'The issue may be specific to mobile setup or device-level restrictions.',
@@ -228,8 +237,14 @@ export const miniScenarios: MiniScenario[] = [
             id: 'A',
             text: 'Check whether mobile rates are missing or whether device-specific restrictions are misaligned.',
           },
-          { id: 'B', text: 'Tell them competitor app pricing is not relevant.' },
-          { id: 'C', text: 'Ask them to match the competitor\'s app price everywhere.' },
+          {
+            id: 'B',
+            text: 'Explain to the partner that competitor pricing on other apps is not something they should worry about and refocus the conversation on their overall Booking.com performance.',
+          },
+          {
+            id: 'C',
+            text: "Ask the partner to match the competitor's app price across all their channels so they stay competitive with what mobile travellers are seeing elsewhere.",
+          },
         ],
         correctOptionId: 'A',
         correctCoaching:
@@ -242,13 +257,16 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: '"If you are not cheaper on mobile, Booking.com will punish your ranking."',
+            text: '"If you are not cheaper on mobile Booking.com will end up ranking you lower, so we need to make sure you are matching or beating what people are seeing on other apps to protect your visibility."',
           },
           {
             id: 'B',
             text: '"On mobile searches, your property is currently less attractive than peers, so you may be missing mobile demand. If you want, we can review whether a mobile rate would help you compete better for that audience."',
           },
-          { id: 'C', text: '"You need to run a public discount for everyone."' },
+          {
+            id: 'C',
+            text: '"You should run a broad public discount that everyone sees, because that is the simplest way to make sure your mobile pricing is competitive across every device and audience type."',
+          },
         ],
         correctOptionId: 'B',
         correctCoaching:
@@ -259,8 +277,14 @@ export const miniScenarios: MiniScenario[] = [
         label: 'Next step',
         prompt: 'What is the best next action?',
         options: [
-          { id: 'A', text: 'Recommend a broad discount across all channels.' },
-          { id: 'B', text: 'End the conversation after explaining the issue.' },
+          {
+            id: 'A',
+            text: 'Recommend the partner set up a broad discount that applies to every channel and audience so the price gap disappears in one move rather than in stages.',
+          },
+          {
+            id: 'B',
+            text: 'Share what you have found about the mobile gap, thank the partner for their time, and let them decide entirely on their own whether any follow-up is worth pursuing.',
+          },
           {
             id: 'C',
             text: 'Offer to review mobile setup and, if the partner wants, activate a targeted mobile rate for that audience.',
@@ -304,11 +328,11 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: 'This is a strong Genius setup because both public and Genius prices changed.',
+            text: 'This is a strong Genius setup because both public and member prices moved together, showing the partner is running a coordinated pricing change across their audience.',
           },
           {
             id: 'C',
-            text: 'This only affects loyal travellers, not public competitiveness.',
+            text: 'This only affects the loyal Genius audience, so the impact on public competitiveness or peer benchmarks is limited and does not need urgent follow-up.',
           },
         ],
         correctOptionId: 'A',
@@ -320,8 +344,14 @@ export const miniScenarios: MiniScenario[] = [
         label: 'Impact',
         prompt: 'Which explanation is best?',
         options: [
-          { id: 'A', text: '"The problem is only that travellers may complain."' },
-          { id: 'B', text: '"It does not matter if the discount is real as long as the badge shows."' },
+          {
+            id: 'A',
+            text: '"The main issue is that travellers might complain if they notice the base price went up, which could hurt reviews and how the partner is perceived by future guests."',
+          },
+          {
+            id: 'B',
+            text: '"It does not really matter whether the discount is genuine as long as the Genius badge shows on the listing, because that is what drives the audience to book in the first place."',
+          },
           {
             id: 'C',
             text: '"If the base price is inflated first, the discount stops feeling genuine, so travellers and algorithms see less real value and the product becomes less effective."',
@@ -336,8 +366,14 @@ export const miniScenarios: MiniScenario[] = [
         label: 'Narrative',
         prompt: 'What is the strongest response?',
         options: [
-          { id: 'A', text: '"You are not allowed to raise your public rates when using Genius."' },
-          { id: 'B', text: '"If you keep doing this, we may need to remove your visibility."' },
+          {
+            id: 'A',
+            text: '"You are not allowed to raise your public rates at the moment you activate Genius, so you will need to bring those prices back down before we can review the setup any further."',
+          },
+          {
+            id: 'B',
+            text: '"If you carry on with this pattern we may end up needing to reduce your visibility on the platform, so it would be worth adjusting your base price now before that becomes a problem."',
+          },
           {
             id: 'C',
             text: '"The goal is to make sure discounts create genuine value for travellers. If the base price rises first, the Genius offer becomes less meaningful. Let\'s review the base setup first so the member price reflects real savings."',
@@ -352,12 +388,18 @@ export const miniScenarios: MiniScenario[] = [
         label: 'Next step',
         prompt: 'What is the best next step?',
         options: [
-          { id: 'A', text: 'Pause all pricing conversations.' },
+          {
+            id: 'A',
+            text: 'Pause all pricing conversations with this partner until the Genius setup has been reviewed by another team, so we do not risk pushing them into another change too quickly.',
+          },
           {
             id: 'B',
             text: 'Review and correct the base price first, then make sure the Genius discount creates a genuine experienced price improvement.',
           },
-          { id: 'C', text: 'Add more discounts on top of Genius immediately.' },
+          {
+            id: 'C',
+            text: 'Layer additional public discounts on top of the current Genius setup straight away so the overall member price ends up more competitive against peers on the platform.',
+          },
         ],
         correctOptionId: 'B',
         correctCoaching:
@@ -394,8 +436,14 @@ export const miniScenarios: MiniScenario[] = [
             id: 'A',
             text: 'A family or occupancy setup issue is making the property look artificially expensive.',
           },
-          { id: 'B', text: 'The partner must lower all room rates.' },
-          { id: 'C', text: 'Reviews are probably the main reason.' },
+          {
+            id: 'B',
+            text: 'The partner needs to bring their base rates down across every room type so families see a more competitive offer whenever they search the platform.',
+          },
+          {
+            id: 'C',
+            text: "The property's review score or content is probably the real reason families are converting better on other sites, so pricing may not be the main lever here.",
+          },
         ],
         correctOptionId: 'A',
         correctCoaching:
@@ -408,8 +456,14 @@ export const miniScenarios: MiniScenario[] = [
           'The Family Ready Journey says the sequence is first Get found through capacity settings, then Get booked through child pricing and cot setup.',
         prompt: 'What should you check first?',
         options: [
-          { id: 'A', text: 'Add a public promotion immediately.' },
-          { id: 'B', text: 'Ask the partner to copy a competitor family offer.' },
+          {
+            id: 'A',
+            text: 'Set up a public promotion straight away so families searching now can see a more competitive rate while the deeper setup review happens in the background.',
+          },
+          {
+            id: 'B',
+            text: 'Ask the partner to copy the family offer that a nearby competitor is running so they can match what those travellers are already comparing against.',
+          },
           {
             id: 'C',
             text: 'Review adult, child, and infant capacity settings before discussing broader pricing actions.',
@@ -428,8 +482,14 @@ export const miniScenarios: MiniScenario[] = [
             id: 'A',
             text: '"Your setup may be making you look uncompetitive in family searches. Let\'s fix the child and occupancy configuration first so families can find and book the rooms you already want to sell."',
           },
-          { id: 'B', text: '"You need to run a family discount everywhere."' },
-          { id: 'C', text: '"This is mainly a parity problem."' },
+          {
+            id: 'B',
+            text: '"You should run a family discount that applies across every room type on the platform so any family traveller searching sees a lower rate than they did before."',
+          },
+          {
+            id: 'C',
+            text: '"This is really a broader pricing problem across all your channels, so the fix is to bring your family pricing on your direct site and other partners in line with what you are showing on Booking.com."',
+          },
         ],
         correctOptionId: 'A',
         correctCoaching:
@@ -446,8 +506,14 @@ export const miniScenarios: MiniScenario[] = [
             id: 'A',
             text: 'Guide the partner to correct child policies, occupancy and capacity settings, and derived children pricing, and review cots if relevant.',
           },
-          { id: 'B', text: 'Tell them to lower all base rates for family travellers.' },
-          { id: 'C', text: 'Leave the setup unchanged and monitor later.' },
+          {
+            id: 'B',
+            text: 'Tell the partner to lower all their base rates for family travellers on every channel they distribute through so the gap disappears in one clean move.',
+          },
+          {
+            id: 'C',
+            text: 'Leave the family setup as it is for now and monitor the numbers over the next few weeks to see whether the gap corrects itself before taking any action.',
+          },
         ],
         correctOptionId: 'A',
         correctCoaching:
