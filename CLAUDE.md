@@ -2385,6 +2385,145 @@ This rule governs NEW work.
   facing label. It's "Warm Up" everywhere the learner sees it;
   internal identifiers keep the `mini-scenarios` shape.
 
+## Post-2026-07-27 session (reporting / xAPI + small UI)
+
+Mostly reporting-and-data-pipeline work (which lives in external
+docs, not the codebase) plus two small sim changes. Captured here
+so the context survives.
+
+### xAPI reporting schema doc (v0.2)
+
+- **Deliverable file: `C:\Users\chris\Downloads\Data Pipeline
+  Schema v0.2.docx`** (saved alongside the original `Data Pipeline
+  Schema.docx`; the original is v0.1). This is the vendor-side
+  reporting spec that aligns the sim's xAPI emission to Booking's
+  target Snowflake schema.
+- **Booking's own source deck is
+  `C:\Users\chris\Downloads\Competitive Pricing 2026 - Reporting &
+  Data Pipeline WIP.pdf`** ("Learning Impact Ask"). Its **Data Map
+  (page 5 / page 8)** is the authority for the capability
+  framework: a "CAPABILITY DIMENSIONS" column (10 dimensions) each
+  tagged with L-codes (L0.1 through L3.5), and the six target
+  tables (FACT_GAME_EVENTS, FACT_DECISION_SCORES,
+  FACT_OBJECTION_PERFORMANCE, FACT_CLEARANCE, DIM_CAPABILITY_SCORES,
+  DIM_COACHING_FOCUS). Pipeline is Docebo (B.Learn) LRS -> Snowflake
+  -> Tableau; Booking's data team owns everything from Docebo
+  onward (rapid-learn's remit ends when statements land in Docebo).
+- **Chris has since moved the schema into a Google Doc shared with
+  Booking**, so future edits go there, not the docx. Don't assume
+  the docx is the live copy.
+
+**Decisions baked into v0.2:**
+
+- **Objections emit as stable codes `OBJ_1 ... OBJ_N`, never their
+  display names.** The code rides in `context.extensions.
+  objection-type` and is what lands in
+  `FACT_OBJECTION_PERFORMANCE.objection_type`. Names are display
+  labels only (they keep changing), joined back via a
+  **`DIM_OBJECTION`** lookup Booking maintains in Snowflake. Rationale:
+  a rename never disturbs historical data. rapid-learn hands over
+  the code-to-name list once; Booking owns the mapping table.
+- **Cross-Regional (KAM) = same sim, `regime: "cross-regional"`.**
+  Not a separate build (the sim is not made role-specific). 10
+  rounds in two levels of five, OPC (Advanced) metrics active in
+  every scenario. No new tables/columns; regime + level +
+  round-number + item-code already express it. See
+  [[project-cross-regional-kam]].
+- **Round numbering is continuous, not reset per level.** Standard:
+  L1 = rounds 1-10, L2 = rounds 11-20. Cross-Regional: L1 = rounds
+  1-5, L2 = rounds 6-10. `round-number` and the object-id round-M
+  both carry the continuous number; `level` carries the grouping.
+- **New statement type 3.16 "Level milestone completed"** fires a
+  `completed` at each celebration screen (clearance, Level 1, Level
+  2), not just at final debrief.
+- **Multiple objections per round** are supported already
+  (FACT_OBJECTION_PERFORMANCE keys per statement via `objection_id`,
+  so several rows per round is the expected shape).
+- **New Section 7 "Capability Code Map"** added to the doc: the
+  code inventory plus a proposed per-round capability-code mapping,
+  put to **L&D (not the data team) to confirm** - which capability
+  each round exercises is a learning-design call. Open questions
+  renumbered to section 8, Design Rationale to 9.
+- **Provenance note:** "capability dimensions", the L0.1-L3.5
+  codes, and `DIM_CAPABILITY_SCORES` are all Booking's (their Data
+  Map). The field names `item-code` / `capability-code` and the
+  machine slugs (`recognising-discrepancies`, etc.) are our
+  coinage. Booking's deck also uses "competency" interchangeably;
+  we standardised on "capability".
+
+### Objection catalogue (OBJ_N) - built this session
+
+Chris supplied the round-to-objection mapping; we turned it into
+the code catalogue. **22 objections total** (matches the Content
+Hub Section 26 XPC = 12 and Section 40 OPC = 10 after the split
+below):
+
+- **Level 1 (XPC): OBJ_1 through OBJ_12.** OBJ_1 Segmented Pricing
+  Conversation, OBJ_2 Brand.com Loyalty, OBJ_3 Competitive
+  Aggression, OBJ_4 Same Net Mindset, OBJ_5 Family Ready narrative,
+  OBJ_6 Billboard Effect in Reverse (Direct-Channel Focus), OBJ_7
+  "Value Proposition" Wall, OBJ_8 "Slippery Road" of Pricing, OBJ_9
+  Direct-is-Cheaper Strategy, OBJ_10 BSB/Payments Shield, OBJ_11
+  "Wholesaler Leak", OBJ_12 Risky Guest.
+- **Level 2 (OPC): OBJ_13 through OBJ_22.** OBJ_13 "Traveler-Centric"
+  Pivot, OBJ_14 "Global Stat" Credibility Gap, OBJ_15 "Peer Group"
+  Credibility Gap, OBJ_16 Internal vs External Data, OBJ_17
+  "Money-in-Bank", OBJ_18 Regional Office Shield, OBJ_19 "Too Unique"
+  Comp-Set Refusal, OBJ_20 Connect the Metrics Gap, OBJ_21 "Fake
+  Value" Trap (Genius Inflation), OBJ_22 "Action-to-Impact"
+  Counterfactual.
+- **OBJ_17 was split into two** (Money-in-Bank + Regional Office
+  Shield) at Chris's call, which is why the total is 22 not 21 and
+  L2 codes shifted from the original draft.
+- **Name variants were merged to single codes** (Chris to sanity
+  check): OBJ_1 absorbs the "Segmented" spellings; OBJ_2 absorbs
+  "The Partner Brand.com-Loyalty"; OBJ_3 absorbs "Competitive
+  Aggression Factor"; OBJ_6 absorbs "The Direct-Channel Focus";
+  OBJ_9 absorbs the "Direct-Is-Cheaper" variants.
+- The **round-to-objection map** (primary/support per round) is a
+  separate bridge/reference, NOT part of `DIM_OBJECTION` (a
+  dimension is one row per objection). It's also reconstructable
+  from the emitted statements, so it's documentation rather than a
+  required pipeline table. Full tables were delivered to Chris in
+  TSV for pasting into the Booking Google Doc.
+- **These codes are not in the sim code yet.** Objection is still a
+  planned round-scenario type (September 2026 launch), not built.
+  Today the only objection *name* rendered anywhere is "The Value
+  Proposition Wall" (a teaching example in the Diagnose reveal
+  Pitch step, `data/issueTreeReveal.ts`). No xAPI emission exists
+  in the app yet (only the SCORM wrapper in `util/scorm.ts`).
+
+### Reporting contingency discussed (not built)
+
+If neither the Snowflake/Tableau pipeline nor an LMS custom report
+is ready by launch, the fallback is a **manager + L&D dashboard fed
+by a daily Docebo export**, kept inside the client's own
+environment (IT will not allow us to host anything externally).
+Shape discussed: Google Sheets with an Apps Script daily pull/import
+(serverless inside their Workspace), a Lookups tab holding the
+DIM_OBJECTION + capability tables, and separate Manager (team
+roll-up, coaching focus, watch-list) and L&D (funnel, capability
+heatmap, round difficulty, objection performance) views. Floor
+regardless: standard Docebo completion/score reports already cover
+usage + headline performance. Build-side lever offered: also emit
+scored decisions as SCORM `cmi.interactions` so richer data
+survives even without the LRS export. All interim; nothing built.
+
+### Small sim changes (committed + pushed to
+`release-2-partner-detail`)
+
+- **Partner Value (ABRN ly) now on the Portfolio card** beside the
+  eRPD number, all partners, via the shared `MiniMetric` component
+  (matches RPD Pub weight/size). Reverses the earlier "keep it off
+  the card" decision; Portfolio Guide reworked so step 3 no longer
+  sends learners digging for it. Documented under the Post-2026-07-13
+  Partner Value bullet. Commits `3d1c2c2`, `7736fe9`.
+- **PPAI tip reworded** in the conversation Simulation Guide
+  (`GuidePanel.tsx`): title now "On the Job Tip", body "PPAI isn't
+  available inside this simulation. However, you can use it back on
+  the job to diagnose issues, shape your key message, and prep
+  before actual calls." Commit `7db7743`.
+
 ## How to run
 
 ```
