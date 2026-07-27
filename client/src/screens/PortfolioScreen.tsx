@@ -302,31 +302,14 @@ export function PortfolioScreen({
                   </div>
 
                   <div data-tutorial={i === 0 ? 'partner-value' : undefined}>
-                    <div
-                      style={{
-                        fontSize: 9,
-                        fontWeight: 700,
-                        color: 'var(--grey-400)',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                        marginBottom: 2,
-                      }}
-                    >
-                      Partner Value
-                    </div>
-                    <span
-                      style={{
-                        fontSize: 20,
-                        fontWeight: 900,
-                        color: 'var(--brand-navy)',
-                        lineHeight: 1,
-                        letterSpacing: '-0.02em',
-                      }}
-                    >
-                      {partner.metrics.partnerValueAbrn != null
-                        ? partner.metrics.partnerValueAbrn.toLocaleString('en-US')
-                        : '-'}
-                    </span>
+                    <MiniMetric
+                      label="Partner Value"
+                      valueText={
+                        partner.metrics.partnerValueAbrn != null
+                          ? partner.metrics.partnerValueAbrn.toLocaleString('en-US')
+                          : '-'
+                      }
+                    />
                   </div>
                 </div>
 
