@@ -583,8 +583,8 @@ function getGuideContent(
               },
               {
                 icon: <Sparkles size={12} />,
-                title: 'PPAI before the call',
-                text: "The Partner Performance AI (PPAI) tool isn't inside the sim. In real work you'd reach for it between the Pricing Diagnostic Flow and picking up the phone, to turn your diagnosis into a partner-facing narrative.",
+                title: 'On the Job Tip',
+                text: "PPAI isn't available inside this simulation. However, you can use it back on the job to diagnose issues, shape your key message, and prep before actual calls.",
               },
               ...(conversationPhase === 2
                 ? [{
