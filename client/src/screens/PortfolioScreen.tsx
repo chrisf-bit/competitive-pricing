@@ -262,46 +262,76 @@ export function PortfolioScreen({
                   justifyContent: 'space-between',
                 }}
               >
-                <div data-tutorial={i === 0 ? 'rpd-number' : undefined}>
-                  <div
-                    style={{
-                      fontSize: 9,
-                      fontWeight: 700,
-                      color: 'var(--grey-400)',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.08em',
-                      marginBottom: 2,
-                    }}
-                  >
-                    Experienced RPD
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                  <div data-tutorial={i === 0 ? 'rpd-number' : undefined}>
+                    <div
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 700,
+                        color: 'var(--grey-400)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        marginBottom: 2,
+                      }}
+                    >
+                      Experienced RPD
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+                      <span
+                        style={{
+                          fontSize: 26,
+                          fontWeight: 900,
+                          color: 'var(--brand-navy)',
+                          lineHeight: 1,
+                          letterSpacing: '-0.02em',
+                        }}
+                      >
+                        {partner.metrics.erpd.toFixed(1)}%
+                      </span>
+                      <span
+                        style={{
+                          fontSize: 12,
+                          fontWeight: 700,
+                          color: 'var(--grey-500)',
+                        }}
+                      >
+                        {partner.metrics.erpdChange < 0 ? '↓' : '↑'}
+                        {Math.abs(partner.metrics.erpdChange).toFixed(2)}
+                      </span>
+                    </div>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'baseline', gap: 8 }}>
+
+                  <div data-tutorial={i === 0 ? 'partner-value' : undefined}>
+                    <div
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 700,
+                        color: 'var(--grey-400)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.08em',
+                        marginBottom: 2,
+                      }}
+                    >
+                      Partner Value
+                    </div>
                     <span
                       style={{
-                        fontSize: 26,
+                        fontSize: 20,
                         fontWeight: 900,
                         color: 'var(--brand-navy)',
                         lineHeight: 1,
                         letterSpacing: '-0.02em',
                       }}
                     >
-                      {partner.metrics.erpd.toFixed(1)}%
-                    </span>
-                    <span
-                      style={{
-                        fontSize: 12,
-                        fontWeight: 700,
-                        color: 'var(--grey-500)',
-                      }}
-                    >
-                      {partner.metrics.erpdChange < 0 ? '↓' : '↑'}
-                      {Math.abs(partner.metrics.erpdChange).toFixed(2)}
+                      {partner.metrics.partnerValueAbrn != null
+                        ? partner.metrics.partnerValueAbrn.toLocaleString('en-US')
+                        : '-'}
                     </span>
                   </div>
                 </div>
 
                 {/* KPI mini-row - intentionally neutral; learners read and decide */}
-                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 14 }}>
+                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 10 }}>
                   <MiniMetric
                     label="RPD Pub"
                     valueText={`${partner.metrics.rpdPublic.toFixed(1)}%`}

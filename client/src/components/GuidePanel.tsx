@@ -444,7 +444,7 @@ function getGuideContent(
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:
-          'One partner needs your attention more than the others. Card metrics narrow the field; check Partner Value inside each profile before you commit.',
+          'One partner needs your attention more than the others. Compare the card metrics to shortlist, then open your top candidate to confirm before you commit.',
         steps: [
           {
             icon: <Eye size={13} />,
@@ -453,12 +453,12 @@ function getGuideContent(
           },
           {
             icon: <BarChart3 size={13} />,
-            text: 'Scan the cards for eRPD and Lose Price to shortlist candidates',
+            text: 'Compare eRPD, Partner Value and Lose Price across the cards to shortlist candidates',
             target: 'partner-card',
           },
           {
             icon: <BookOpen size={13} />,
-            text: 'Open each candidate to check Partner Value (ABRN ly)',
+            text: 'Open your strongest candidate to review the full picture before you commit',
             target: 'partner-card',
           },
           {

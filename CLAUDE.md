@@ -1992,10 +1992,18 @@ Level 3 (OPC Application) unlocks alongside Level 2.
   placement below Notes; the tile row is a stronger signal
   because it sits inside the KPI grid the learner reads at a
   glance.
-- **Not added to the Portfolio card summary** deliberately.
-  Teaches learners to open partners rather than deciding from
-  the card alone. Portfolio Guide step 3 tells them to open
-  candidates specifically to check Partner Value.
+- **Now shown on the Portfolio card** (added 2026-07-27 at
+  Chris's request), rendered as a prominent navy figure beside
+  the Experienced RPD number, mirroring the Partner Detail tile
+  placement. This reverses the earlier "keep it off the card"
+  decision (the rationale had been to force learners to open
+  partners before deciding). Because the number is now visible
+  on the card, the Portfolio Guide was reworked: step 2 compares
+  eRPD, Partner Value and Lose Price on the cards; step 3 now
+  says "open your strongest candidate to review the full picture"
+  rather than "open candidates to check Partner Value". Don't
+  restore the "not on the card" treatment without an explicit
+  request.
 - Tooltip via `metricDefinitions.ts` (`partnerValueAbrn` entry).
 - **Data & Insights table width bumped from 960px to 1120px**
   to accommodate the same Partner Value column added there in
