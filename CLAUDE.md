@@ -2524,6 +2524,79 @@ survives even without the LRS export. All interim; nothing built.
   the job to diagnose issues, shape your key message, and prep
   before actual calls." Commit `7db7743`.
 
+## Post-2026-07-30 session (OPC tab unlock + scaffold)
+
+Partner Detail's second metrics tab went from a permanently-locked
+placeholder to a conditionally-unlocked, structurally-complete OPC
+metrics view. Data is not wired yet by design (Chris: "build the
+structure, then add the data later"). Commits `90e4371`, `9501a5c`
+on `release-2-partner-detail`.
+
+### Tab rename (learner-facing only, internal id kept)
+
+- **"Advanced View" -> "On Platform Competitiveness"** in every
+  learner-facing string: the Partner Detail tab label, the locked-
+  tab placeholder heading, and the Partner Detail tutorial step in
+  `TutorialOverlay.tsx`. Same rename precedent as Diagnosis Coach /
+  Pricing Diagnostic Flow - the internal tab-state key stays
+  `'advanced'` (`activeTab: 'driving' | 'advanced'`), the
+  `AdvancedViewLocked` component name is kept, and the R2-scope
+  references to "Advanced View" earlier in this file are historical.
+  Don't rename the state key or component.
+
+### Conditional unlock (was: permanently locked)
+
+- The OPC tab **unlocks in the OPC-active window and stays locked
+  otherwise**. Gate in `PartnerDetailScreen.tsx`:
+  `const opcUnlocked = partner.persona.parityRegime ===
+  'cross-regional' || currentRound >= 11;`
+  - **Level 1 (rounds 1-10, standard journey):** locked. Keeps the
+    grey "Coming soon" pill + lock icon and the `AdvancedViewLocked`
+    placeholder exactly as before. Clicking the tab is disabled.
+  - **Level 2 (rounds 11-20):** unlocked (round >= 11).
+  - **Cross-Regional / KAM (any round):** unlocked, because OPC
+    metrics run in all ten of their rounds. Driven off the partner
+    record's `parityRegime`, not the round number.
+- `PartnerDetailTabBar` gained an `opcUnlocked: boolean` prop that
+  drives `locked={!opcUnlocked}` on the OPC `TabPill`. The render
+  switch shows `<OpcMetricsTab>` when unlocked, `<AdvancedViewLocked>`
+  as the locked fallback.
+- **Not reachable in today's build.** `TOTAL_ROUNDS` is capped at 3
+  and Cross-Regional isn't selectable, so nothing hits round 11+ or
+  a KAM partner. The unlocked tab auto-appears once Level 2 / KAM
+  content lands. To preview it before then you'd force `opcUnlocked`
+  true or add a temporary DevNav hook (not done).
+
+### OPC metric cards (structure built, data pending)
+
+- **New `PartnerOpcMetrics` type** (`types/index.ts`) + optional
+  `PartnerMetrics.opcMetrics` field. Same `SecondaryMetricValue`
+  (`{ value, deltaPct? }`) shape as the Driving Metrics secondary
+  cards. Every field optional.
+- **`OpcMetricsTab`** (`PartnerDetailScreen.tsx`) renders **eight**
+  OPC cards in a `repeat(4, 1fr)` grid (4+4), reusing
+  `SecondaryMetricCard`. Unpopulated cards render the dashed
+  **"Data pending"** state, so the grid is complete and it's obvious
+  where numbers are still owed. All comparators are "vs peer".
+  Order: Unsold Rooms, Sell Through Rate, Distribution of Search,
+  Visibility Share, Click Through Rate, Conversion, Search Price,
+  **Net Booked Share** (the 8th, added mid-session; framed in its
+  tooltip as the compound outcome of visibility, click-through,
+  conversion, and price competitiveness - ties to the Alex-chat A12
+  beat).
+- **All eight definitions/tooltips live in `metricDefinitions.ts`**
+  (seven pre-existed from the PDF page 2/3 pass; `netBookedShare`
+  added this session).
+- **Adding data later is a pure data edit** - drop an
+  `opcMetrics: { visibilityShare: { value: 10, deltaPct: -8 }, ... }`
+  block onto a partner in `partnerStateByRound.ts` (or the partner
+  record) and the cards populate. No further UI work.
+- **Scope note:** this is the 8-OPC-metric view only. The PDF's
+  separate Quality Adoption Metrics column (Weighted Adoption %,
+  Utilization %, Discount Depth, etc.) is NOT in this tab - Chris
+  chose "7 OPC metrics only" (later 8). Those definitions still sit
+  in `metricDefinitions.ts` for a future surface if needed.
+
 ## How to run
 
 ```
