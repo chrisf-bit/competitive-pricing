@@ -1054,6 +1054,12 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
           comparator="vs peer"
           format="number"
         />
+        <SecondaryMetricCard
+          metricKey="netBookedShare"
+          value={opc?.netBookedShare}
+          comparator="vs peer"
+          format="percent"
+        />
       </div>
     </div>
   );

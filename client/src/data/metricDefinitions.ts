@@ -179,6 +179,11 @@ export const metricDefinitions = {
     helpText:
       "The price shown to a typical searcher on this property's results card, vs peer group.",
   },
+  netBookedShare: {
+    label: 'Net Booked Share',
+    helpText:
+      "Share of net bookings the property captures relative to its peer group - a compound outcome that reflects how visibility, click-through, conversion and price competitiveness combine. Lower share = the property is winning fewer of the bookings available in its market.",
+  },
 } as const satisfies Record<string, MetricDefinition>;
 
 export type MetricKey = keyof typeof metricDefinitions;
