@@ -246,8 +246,6 @@ export interface PartnerOpcMetrics {
   conversion?: SecondaryMetricValue;
   /** Search Price, comparator vs peer. */
   searchPrice?: SecondaryMetricValue;
-  /** Net Booked Share, value is a %, comparator vs peer. */
-  netBookedShare?: SecondaryMetricValue;
 }
 
 export interface PartnerMetrics {

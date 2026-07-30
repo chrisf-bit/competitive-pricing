@@ -2573,20 +2573,18 @@ on `release-2-partner-detail`.
   `PartnerMetrics.opcMetrics` field. Same `SecondaryMetricValue`
   (`{ value, deltaPct? }`) shape as the Driving Metrics secondary
   cards. Every field optional.
-- **`OpcMetricsTab`** (`PartnerDetailScreen.tsx`) renders **eight**
-  OPC cards in a `repeat(4, 1fr)` grid (4+4), reusing
+- **`OpcMetricsTab`** (`PartnerDetailScreen.tsx`) renders **seven**
+  OPC cards in a `repeat(4, 1fr)` grid (4+3), reusing
   `SecondaryMetricCard`. Unpopulated cards render the dashed
   **"Data pending"** state, so the grid is complete and it's obvious
   where numbers are still owed. All comparators are "vs peer".
   Order: Unsold Rooms, Sell Through Rate, Distribution of Search,
-  Visibility Share, Click Through Rate, Conversion, Search Price,
-  **Net Booked Share** (the 8th, added mid-session; framed in its
-  tooltip as the compound outcome of visibility, click-through,
-  conversion, and price competitiveness - ties to the Alex-chat A12
-  beat).
-- **All eight definitions/tooltips live in `metricDefinitions.ts`**
-  (seven pre-existed from the PDF page 2/3 pass; `netBookedShare`
-  added this session).
+  Visibility Share, Click Through Rate, Conversion, Search Price.
+  (Net Booked Share was briefly added as an 8th card mid-session
+  then removed at Chris's request - don't reinstate it without an
+  explicit ask.)
+- **All seven definitions/tooltips live in `metricDefinitions.ts`**
+  from the PDF page 2/3 pass.
 - **Adding data later is a pure data edit** - drop an
   `opcMetrics: { visibilityShare: { value: 10, deltaPct: -8 }, ... }`
   block onto a partner in `partnerStateByRound.ts` (or the partner
