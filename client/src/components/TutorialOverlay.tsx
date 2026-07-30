@@ -239,7 +239,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-tabs',
     title: 'Metrics tabs',
     description:
-      "Driving Metrics is active and shows the headline KPIs, the eRPD Price Bucket strip, and the secondary metric tiles. Advanced View is locked - more metrics will unlock in a later release.",
+      "Driving Metrics shows the headline KPIs, the eRPD Price Bucket strip, and the secondary metric tiles. On Platform Competitiveness holds the on-platform competitiveness metrics and unlocks in the later rounds.",
     icon: <Layers size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
   },

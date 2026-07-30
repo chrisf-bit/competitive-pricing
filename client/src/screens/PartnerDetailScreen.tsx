@@ -139,9 +139,14 @@ export function PartnerDetailScreen({
     stepIndex: 0,
   };
 
-  // Tab state for the new R2 tabbed metrics block. Driving Metrics is
-  // active in R2; Advanced View ships locked (page 1 "Coming Soon"
-  // treatment) and unlocks in R3 with OPC / Quality Adoption content.
+  // Tab state for the tabbed metrics block. Driving Metrics is always
+  // available. The "On Platform Competitiveness" (OPC) tab is only
+  // unlocked in the OPC-active window: Level 2 rounds (11-20) for the
+  // standard journey, and every round of the Cross-Regional / KAM
+  // journey (OPC metrics run in all ten of their rounds). Level 1
+  // rounds keep the tab locked with the "Coming soon" pill.
+  const opcUnlocked =
+    partner.persona.parityRegime === 'cross-regional' || currentRound >= 11;
   const [activeTab, setActiveTab] = useState<'driving' | 'advanced'>('driving');
 
   return (
@@ -282,12 +287,18 @@ export function PartnerDetailScreen({
             <PartnerDetailTabBar
               active={activeTab}
               onSelect={setActiveTab}
+              opcUnlocked={opcUnlocked}
             />
 
             {activeTab === 'driving' && (
               <DrivingMetricsTab partner={partner} />
             )}
-            {activeTab === 'advanced' && <AdvancedViewLocked />}
+            {activeTab === 'advanced' &&
+              (opcUnlocked ? (
+                <OpcMetricsTab partner={partner} />
+              ) : (
+                <AdvancedViewLocked />
+              ))}
           </div>
 
           {/* Discount products - 3 column layout per Partner Metrics
@@ -713,9 +724,11 @@ function BigMetric({
 function PartnerDetailTabBar({
   active,
   onSelect,
+  opcUnlocked,
 }: {
   active: 'driving' | 'advanced';
   onSelect: (tab: 'driving' | 'advanced') => void;
+  opcUnlocked: boolean;
 }) {
   return (
     <div
@@ -734,14 +747,13 @@ function PartnerDetailTabBar({
         onClick={() => onSelect('driving')}
       />
       <TabPill
-        label="Advanced View"
+        label="On Platform Competitiveness"
         isActive={active === 'advanced'}
-        // Locked in R2 - clicking is a no-op. The lock icon and "Coming
-        // soon" pill carry the affordance.
-        locked
-        onClick={() => {
-          /* no-op while locked - content lands in R3 */
-        }}
+        // Unlocked in the OPC-active window (Level 2 rounds + every KAM
+        // round); locked otherwise, where the lock icon and "Coming
+        // soon" pill carry the affordance and clicking is a no-op.
+        locked={!opcUnlocked}
+        onClick={() => onSelect('advanced')}
       />
     </div>
   );
@@ -959,6 +971,95 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
 }
 
 /**
+ * On Platform Competitiveness tab - the seven OPC metric cards.
+ * Structurally identical to the Driving Metrics secondary-card row and
+ * reuses SecondaryMetricCard, so cards render in a "Data pending" state
+ * until per-partner OPC numbers are wired onto PartnerMetrics.opcMetrics.
+ * Only rendered when the tab is unlocked (Level 2 rounds + every KAM
+ * round) - the lock gate lives in PartnerDetailTabBar / the caller.
+ */
+function OpcMetricsTab({ partner }: { partner: PartnerState }) {
+  const opc = partner.metrics.opcMetrics;
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 6,
+          fontSize: 11,
+          color: 'var(--grey-400)',
+          fontStyle: 'italic',
+          lineHeight: 1.45,
+          marginTop: -4,
+        }}
+      >
+        <Info size={12} style={{ color: 'var(--grey-400)', flexShrink: 0 }} />
+        <span>
+          On-platform competitiveness metrics. Hover any (i) icon for the
+          definition.
+        </span>
+      </div>
+
+      {/* Seven OPC cards. All comparators are vs peer. Cards with no
+          authored value render "Data pending" so the grid stays
+          consistent and it's obvious where numbers are still owed. */}
+      <div
+        data-tutorial="partner-detail-opc"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: 8,
+        }}
+      >
+        <SecondaryMetricCard
+          metricKey="unsoldRooms"
+          value={opc?.unsoldRooms}
+          comparator="vs peer"
+          format="number"
+        />
+        <SecondaryMetricCard
+          metricKey="sellThroughRate"
+          value={opc?.sellThroughRate}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="distributionOfSearch"
+          value={opc?.distributionOfSearch}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="visibilityShare"
+          value={opc?.visibilityShare}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="clickThroughRate"
+          value={opc?.clickThroughRate}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="conversion"
+          value={opc?.conversion}
+          comparator="vs peer"
+          format="percent"
+        />
+        <SecondaryMetricCard
+          metricKey="searchPrice"
+          value={opc?.searchPrice}
+          comparator="vs peer"
+          format="number"
+        />
+      </div>
+    </div>
+  );
+}
+
+/**
  * Tooltip body for the Scenarios tile. Styled deliberately differently
  * from the prose-style tooltips used elsewhere (small brand-yellow
  * header + bullet list) so a learner can tell at a glance this is
@@ -1045,7 +1146,7 @@ function AdvancedViewLocked() {
         <Lock size={18} style={{ color: 'var(--grey-400)' }} />
       </div>
       <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--grey-600)', marginBottom: 4 }}>
-        Advanced View - coming soon
+        On Platform Competitiveness - coming soon
       </div>
       <div style={{ fontSize: 12, lineHeight: 1.5, maxWidth: 380, margin: '0 auto' }}>
         More metrics unlock in the next release. For now, stay on

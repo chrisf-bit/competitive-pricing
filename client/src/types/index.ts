@@ -222,6 +222,32 @@ export interface PartnerSecondaryMetrics {
   next3mRoomNights?: SecondaryMetricValue;
 }
 
+/**
+ * The seven On Platform Competitiveness (OPC) metrics shown on the
+ * unlocked "On Platform Competitiveness" tab of Partner Detail. Same
+ * value + optional-comparator shape as the secondary metrics, and every
+ * field is optional so partners render "Data pending" cards until the
+ * real per-partner numbers are wired in. The tab is only reachable in
+ * the OPC-active window (Level 2 rounds 11-20, and every Cross-Regional
+ * / KAM round); Level 1 rounds keep the tab locked.
+ */
+export interface PartnerOpcMetrics {
+  /** Unsold Rooms - inventory gaps, comparator vs peer. */
+  unsoldRooms?: SecondaryMetricValue;
+  /** Sell Through Rate, value is a %, comparator vs peer. */
+  sellThroughRate?: SecondaryMetricValue;
+  /** Distribution of Search, value is a %, comparator vs peer. */
+  distributionOfSearch?: SecondaryMetricValue;
+  /** Visibility Share, value is a %, comparator vs peer. */
+  visibilityShare?: SecondaryMetricValue;
+  /** Click Through Rate, value is a %, comparator vs peer. */
+  clickThroughRate?: SecondaryMetricValue;
+  /** Conversion, value is a %, comparator vs peer. */
+  conversion?: SecondaryMetricValue;
+  /** Search Price, comparator vs peer. */
+  searchPrice?: SecondaryMetricValue;
+}
+
 export interface PartnerMetrics {
   // ── New KPI structure (what the learner sees - sourced from the
   // KPI spec PFRs work with day-to-day) ──
@@ -253,6 +279,14 @@ export interface PartnerMetrics {
    * disappearing, so the row stays consistent across partners.
    */
   secondaryMetrics?: PartnerSecondaryMetrics;
+  /**
+   * The seven On Platform Competitiveness metric cards shown on the
+   * "On Platform Competitiveness" tab. Optional - cards render in a
+   * "Data pending" state until the per-partner numbers are wired in.
+   * Only surfaced when the tab is unlocked (Level 2 rounds 11-20 and
+   * every Cross-Regional / KAM round).
+   */
+  opcMetrics?: PartnerOpcMetrics;
   /**
    * Days between today and the learner's last pricing conversation
    * with this partner. Stored as a relative offset (not a fixed
