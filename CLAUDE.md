@@ -2589,11 +2589,34 @@ on `release-2-partner-detail`.
   `opcMetrics: { visibilityShare: { value: 10, deltaPct: -8 }, ... }`
   block onto a partner in `partnerStateByRound.ts` (or the partner
   record) and the cards populate. No further UI work.
-- **Scope note:** this is the 8-OPC-metric view only. The PDF's
+- **Scope note:** this is the 7-OPC-metric view only. The PDF's
   separate Quality Adoption Metrics column (Weighted Adoption %,
   Utilization %, Discount Depth, etc.) is NOT in this tab - Chris
-  chose "7 OPC metrics only" (later 8). Those definitions still sit
-  in `metricDefinitions.ts` for a future surface if needed.
+  chose "7 OPC metrics only". Those definitions still sit in
+  `metricDefinitions.ts` for a future surface if needed.
+
+### Day one with Alex - transition-message reword (2026-07-31)
+
+Reviewer flagged that the Alex knowledge-check chat
+(`data/gameMasterScript.ts`) signalled the end prematurely. Three
+inter-question `message` beats used "one more ... then we'll shift
+gears" language while several questions still followed, so the
+wind-down was promised repeatedly and mid-chat. Commit `5421708`.
+
+- Reworded the three offending beats to neutral topic-transitions:
+  before A5 ("A couple more on the fundamentals before we move
+  on." - there are two, A5 + A6, not one), before A7 ("Some
+  context to set up the next few questions."), and before A9 ("Now
+  the OPC metric family, which sets up the next few questions.").
+- **The genuine end-markers were left as-is:** "Now an important
+  one" before B1 and "One last one" before B2 (the actual final
+  question). Rule going forward: reserve "one more" / "last one" /
+  wind-down phrasing for the beat immediately before the very last
+  question (B2); interstitial beats should read as topic hand-offs,
+  not countdowns.
+- The retry-flow "one more I want to double-check" message in
+  `GameMasterChatScreen.tsx` is correct and untouched - it only
+  fires when exactly one failed item is being re-asked.
 
 ## How to run
 
