@@ -124,7 +124,7 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
-    text: "Right. One more on the fundamentals, then we'll shift gears.",
+    text: "Right. A couple more on the fundamentals before we move on.",
   },
   {
     type: 'question',
@@ -166,7 +166,7 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
-    text: "One more piece of context before we shift gears. When you look at a partner's pricing there are two flavours of competitiveness. On-Platform Competitiveness - OPC - is how they stack up against their peer set inside Booking.com. Cross-Platform Competitiveness is how they compare with their own Brand.com rates and other OTAs. Both matter, but there's a reason we start on-platform.",
+    text: "Some context to set up the next few questions. When you look at a partner's pricing there are two flavours of competitiveness. On-Platform Competitiveness - OPC - is how they stack up against their peer set inside Booking.com. Cross-Platform Competitiveness is how they compare with their own Brand.com rates and other OTAs. Both matter, but there's a reason we start on-platform.",
   },
   {
     type: 'question',
@@ -216,7 +216,7 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
-    text: "One more thing about OPC before we shift gears. When Level 2 unlocks and you get access to the OPC dashboard, you'll see a family of six new metrics. I'm not going to walk you through how to use each one in a diagnostic (that's the TLX training that lands with the dashboard). But it's worth knowing how each one links to eRPD, because that's the anchor you've already got. Some of them feed into eRPD, some are downstream of it, and knowing which is which is how you'll read the dashboard when it arrives.",
+    text: "Now the OPC metric family, which sets up the next few questions. When Level 2 unlocks and you get access to the OPC dashboard, you'll see a family of six new metrics. I'm not going to walk you through how to use each one in a diagnostic (that's the TLX training that lands with the dashboard). But it's worth knowing how each one links to eRPD, because that's the anchor you've already got. Some of them feed into eRPD, some are downstream of it, and knowing which is which is how you'll read the dashboard when it arrives.",
   },
   {
     type: 'question',
