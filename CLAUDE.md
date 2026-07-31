@@ -2535,14 +2535,13 @@ on `release-2-partner-detail`.
 ### Tab rename (learner-facing only, internal id kept)
 
 - **"Advanced View" -> "On Platform Competitiveness"** in every
-  learner-facing string: the Partner Detail tab label, the locked-
-  tab placeholder heading, and the Partner Detail tutorial step in
-  `TutorialOverlay.tsx`. Same rename precedent as Diagnosis Coach /
-  Pricing Diagnostic Flow - the internal tab-state key stays
-  `'advanced'` (`activeTab: 'driving' | 'advanced'`), the
-  `AdvancedViewLocked` component name is kept, and the R2-scope
-  references to "Advanced View" earlier in this file are historical.
-  Don't rename the state key or component.
+  learner-facing string: the Partner Detail tab label and the
+  Partner Detail tutorial step in `TutorialOverlay.tsx`. Same rename
+  precedent as Diagnosis Coach / Pricing Diagnostic Flow - the
+  internal tab-state key stays `'advanced'`
+  (`activeTab: 'driving' | 'advanced'`) and the R2-scope references
+  to "Advanced View" earlier in this file are historical. Don't
+  rename the state key.
 
 ### Conditional unlock (was: permanently locked)
 
@@ -2550,17 +2549,24 @@ on `release-2-partner-detail`.
   otherwise**. Gate in `PartnerDetailScreen.tsx`:
   `const opcUnlocked = partner.persona.parityRegime ===
   'cross-regional' || currentRound >= 11;`
-  - **Level 1 (rounds 1-10, standard journey):** locked. Keeps the
-    grey "Coming soon" pill + lock icon and the `AdvancedViewLocked`
-    placeholder exactly as before. Clicking the tab is disabled.
+  - **Level 1 (rounds 1-10, standard journey):** locked. The tab
+    renders **greyed out and unclickable** (grey text + not-allowed
+    cursor + `disabled`), with **no pill and no text** - the old
+    "Coming soon" pill and the `AdvancedViewLocked` placeholder were
+    removed on 2026-07-31 at Chris's request. This is a live feature
+    that unlocks in later rounds, not a future release, so a "Coming
+    soon" affordance was misleading. Don't reinstate any pill or
+    placeholder copy on the locked tab without an explicit ask.
   - **Level 2 (rounds 11-20):** unlocked (round >= 11).
   - **Cross-Regional / KAM (any round):** unlocked, because OPC
     metrics run in all ten of their rounds. Driven off the partner
     record's `parityRegime`, not the round number.
 - `PartnerDetailTabBar` gained an `opcUnlocked: boolean` prop that
-  drives `locked={!opcUnlocked}` on the OPC `TabPill`. The render
-  switch shows `<OpcMetricsTab>` when unlocked, `<AdvancedViewLocked>`
-  as the locked fallback.
+  drives `locked={!opcUnlocked}` on the OPC `TabPill`. Because a
+  locked `TabPill` is `disabled`, `activeTab` can never become
+  `'advanced'` while locked, so the render simply shows
+  `<OpcMetricsTab>` when `activeTab === 'advanced'` (no locked
+  fallback component needed).
 - **Not reachable in today's build.** `TOTAL_ROUNDS` is capped at 3
   and Cross-Regional isn't selectable, so nothing hits round 11+ or
   a KAM partner. The unlocked tab auto-appears once Level 2 / KAM

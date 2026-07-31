@@ -13,7 +13,6 @@ import {
   UserCircle,
   ChevronRight,
   Workflow,
-  Lock,
   CalendarClock,
   Percent,
   Info,
@@ -293,12 +292,10 @@ export function PartnerDetailScreen({
             {activeTab === 'driving' && (
               <DrivingMetricsTab partner={partner} />
             )}
-            {activeTab === 'advanced' &&
-              (opcUnlocked ? (
-                <OpcMetricsTab partner={partner} />
-              ) : (
-                <AdvancedViewLocked />
-              ))}
+            {/* The OPC tab is only selectable when unlocked (the locked
+                tab is disabled), so reaching 'advanced' implies
+                opcUnlocked. */}
+            {activeTab === 'advanced' && <OpcMetricsTab partner={partner} />}
           </div>
 
           {/* Discount products - 3 column layout per Partner Metrics
@@ -797,27 +794,11 @@ function TabPill({
         gap: 6,
       }}
     >
+      {/* Locked tabs (OPC on Level 1) render greyed + unclickable via
+          the grey color + not-allowed cursor + disabled attr above.
+          No "Coming soon" pill - the tab is a live feature that unlocks
+          in later rounds, not a future release. */}
       {label}
-      {locked && (
-        <span
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 4,
-            padding: '1px 6px',
-            borderRadius: 999,
-            background: 'var(--grey-100)',
-            color: 'var(--grey-400)',
-            fontSize: 9,
-            fontWeight: 800,
-            letterSpacing: '0.04em',
-            textTransform: 'uppercase',
-          }}
-        >
-          <Lock size={9} />
-          Coming soon
-        </span>
-      )}
     </button>
   );
 }
@@ -1116,43 +1097,6 @@ function ScenariosTooltipBody({ names }: { names: string[] }) {
           </li>
         ))}
       </ul>
-    </div>
-  );
-}
-
-function AdvancedViewLocked() {
-  return (
-    <div
-      style={{
-        padding: '36px 18px',
-        textAlign: 'center',
-        color: 'var(--grey-500)',
-        background: 'var(--off-white)',
-        borderRadius: 'var(--radius-md)',
-      }}
-    >
-      <div
-        style={{
-          width: 42,
-          height: 42,
-          margin: '0 auto 10px',
-          borderRadius: 12,
-          background: 'var(--grey-100)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        <Lock size={18} style={{ color: 'var(--grey-400)' }} />
-      </div>
-      <div style={{ fontSize: 14, fontWeight: 800, color: 'var(--grey-600)', marginBottom: 4 }}>
-        On Platform Competitiveness - coming soon
-      </div>
-      <div style={{ fontSize: 12, lineHeight: 1.5, maxWidth: 380, margin: '0 auto' }}>
-        More metrics unlock in the next release. For now, stay on
-        Driving Metrics for the data you need to diagnose this
-        partner.
-      </div>
     </div>
   );
 }
