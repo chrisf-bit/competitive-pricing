@@ -191,6 +191,32 @@ const oceanViewR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Riverside Boutique Hotel R4 (SME Round
+ * 4 priority), applied verbatim across all three regime variants.
+ * Anton's character, metrics and objection types (Value Proposition Wall
+ * + Slippery Road + Segmented Pricing + Family Ready) are identical;
+ * only the regulatory framing differs by regime.
+ */
+const riversideR4Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Anton is blue/green and won't be dictated to: don't argue the 30% cap - ask whether he's even full, then land the family and Genius fixes as a partnership.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect the Value Proposition Wall ("I only want 30% from you") plus a Slippery-Road pull toward "just lower your ADR" - break the wall by optimising the 30%, never a blanket cut.',
+  },
+  storyteller: {
+    oneLiner:
+      'Boutique with a self-inflicted gap: strong demand and forward pace, but families are priced as adults and the Genius discount is non-genuine (Public 6.0 / Loyal 0.3) - value hidden behind setup.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: Key OTA eRPD +6.56 in a month, family RPD above couple RPD, and Loyal RPD 0.3% against Public 6.0% - a family setup gap and a non-genuine Genius discount, not a broad price problem.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -293,6 +319,12 @@ export const personaHints: PersonaHintsByRound = {
   'ocean-view-wide': { 3: oceanViewR3Hints },
   'ocean-view-narrow': { 3: oceanViewR3Hints },
   'ocean-view-none': { 3: oceanViewR3Hints },
+
+  // Riverside Boutique Hotel R4 - the SME Round 4 priority across all
+  // three regime variants.
+  'riverside-wide': { 4: riversideR4Hints },
+  'riverside-narrow': { 4: riversideR4Hints },
+  'riverside-none': { 4: riversideR4Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },

@@ -9,6 +9,9 @@ import { silverHorizonWideR2 } from './scenarios/silver-horizon-wide-r2';
 import { oceanViewNoneR3 } from './scenarios/ocean-view-none-r3';
 import { oceanViewNarrowR3 } from './scenarios/ocean-view-narrow-r3';
 import { oceanViewWideR3 } from './scenarios/ocean-view-wide-r3';
+import { riversideNoneR4 } from './scenarios/riverside-none-r4';
+import { riversideNarrowR4 } from './scenarios/riverside-narrow-r4';
+import { riversideWideR4 } from './scenarios/riverside-wide-r4';
 
 /**
  * Branching conversation scenarios.
@@ -74,6 +77,15 @@ export const branchingScenarios: BranchingMap = {
   },
   'ocean-view-wide': {
     3: oceanViewWideR3,
+  },
+  'riverside-none': {
+    4: riversideNoneR4,
+  },
+  'riverside-narrow': {
+    4: riversideNarrowR4,
+  },
+  'riverside-wide': {
+    4: riversideWideR4,
   },
 };
 

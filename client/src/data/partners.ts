@@ -1005,7 +1005,150 @@ function oceanViewBase(args: {
   ];
 }
 
+/**
+ * Builds a Riverside Boutique Hotel partner record (SME Round 4
+ * priority, Hotel ID 202). Anton Müller is the GM of a
+ * "Marketing Contract Only" boutique - local autonomy, values guest
+ * quality and boutique positioning, dislikes being dictated to. Same
+ * brand, contact, profile and metrics across all three regime variants.
+ *
+ * Data: SME "Round 4" doc data set - a KEY OTA competitiveness gap with
+ * a sharp +6.56 MoM eRPD spike. eRPD 3.3% (Bucket 4) but Lose Price 47%,
+ * and the tell is Public RPD 6.0% vs Loyal RPD 0.3% (a non-genuine
+ * Genius discount: public base raised to offset Genius) plus family RPD
+ * running above couple RPD (an unintentional family setup gap). Strong
+ * demand and forward pace (room nights +40% vs peer, Next-3M +271%) but
+ * ABRN -59% YoY. Genius Programme and Family Rates active; three RPD
+ * scenarios (App, Family 2+1, Family 2+2); high eRPD x Partner Value.
+ * OPC layer carried on `opcMetrics`.
+ */
+function riversideBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Riverside Boutique Hotel',
+        propertyType: 'Boutique Hotel',
+        roomCount: 42,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'blue',
+        styleSecondary: 'green',
+        description:
+          "General Manager of a boutique on a Marketing-Contract-Only deal - significant local autonomy, a soft-brand affiliation used mainly for marketing and loyalty reach. Values guest quality, boutique positioning and building direct relationships, and won't be dictated to on daily rate strategy. Inquisitive and data-led: he changes course when the logic is sound and delivered as a partnership, not a demand.",
+        commercialGoal:
+          'Grow high-quality occupancy and ADR while protecting boutique positioning and the direct channel',
+      },
+      // Metrics map to the SME Round 4 data set (Hotel ID 202). The
+      // tells are the +6.56 MoM Key OTA eRPD spike, the Public 6.0% /
+      // Loyal 0.3% split (non-genuine Genius discount), and family RPD
+      // above couple RPD (unintentional family setup gap).
+      metrics: {
+        erpd: 3.3,
+        erpdChange: 6.56,
+        rpdPublic: 6.0,
+        rpdLoyal: 0.3,
+        losePricePublic: 47,
+        activeScenarios: 3,
+        activeScenarioNames: ['App', 'Family 2+1', 'Family 2+2'],
+        competitor: 'expedia',
+        secondaryMetrics: {
+          last30dAbrn: { value: 271, deltaPct: -59 },
+          last30dRoomNights: { value: 300, deltaPct: 40 },
+          last30dAdr: { value: 141, deltaPct: 8 },
+          last90dPageViews: { value: 13239, deltaPct: 39 },
+          last90dConversion: { value: 3.2, deltaPct: -3 },
+          next3mRoomNights: { value: 608, deltaPct: 271 },
+        },
+        // SME doc showed 2026-05-12; against an authoring date of
+        // 2026-08-03 that's 83 days back.
+        lastPricingContactDaysAgo: 83,
+        pricingCoverageQTD: 13,
+        // Not in Sheet 7's roster; the SME flags eRPD x Partner Value as
+        // high, so this sits mid-high - but below Marina's 8,200 so the
+        // R4 decoy Marina reads as "bigger" and "biggest value" fails.
+        partnerValueAbrn: 6500,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM).
+        opcMetrics: {
+          unsoldRooms: { value: 24 },
+          sellThroughRate: { value: -8 },
+          visibilityShare: { value: 12, deltaPct: -43 },
+          searchPrice: { value: 7 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 50,
+        visibility: 78,
+        conversion: 44,
+        revenue: 46,
+        discountQuality: 30,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Two products active per the SME data set: Genius Programme and
+      // Family Rates. But both are mis-tuned - the Genius discount is
+      // non-genuine and the family setup is incomplete, which is the gap.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Riverside Boutique Hotel (SME Round 4 priority, all three regimes) ──
+  // Key OTA gap with a sharp +6.56 MoM eRPD spike, an unintentional
+  // family setup gap and a non-genuine Genius discount, behind a "Value
+  // Proposition Wall" (deliberate 30% volume cap). Objection: Value
+  // Proposition Wall + Slippery Road + Segmented Pricing + Family Ready.
+  ...riversideBase({
+    id: 'riverside-wide',
+    parityRegime: 'wide',
+    location: 'Charleston, USA',
+    contactName: 'Anton Müller',
+    propertyImage:
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+  }),
+  ...riversideBase({
+    id: 'riverside-narrow',
+    parityRegime: 'narrow',
+    location: 'Bath, UK',
+    contactName: 'Anton Müller',
+    propertyImage:
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+  }),
+  ...riversideBase({
+    id: 'riverside-none',
+    parityRegime: 'none',
+    location: 'Seville, Spain',
+    contactName: 'Anton Müller',
+    propertyImage:
+      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
+  }),
+
   // ── Ocean View Resort (SME Round 3 priority, all three regimes) ──
   // Brand.com Competitiveness Gap driven by the Billboard Effect in
   // Reverse - Camila keeps Booking.com marked up 5.5% to push direct
