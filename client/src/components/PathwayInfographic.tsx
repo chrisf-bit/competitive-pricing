@@ -41,19 +41,21 @@ const CENTRE: Record<number, { x: number; y: number; r: number }> = {
 };
 
 type Layout =
-  // `vAlign` decides whether revealed text sits centred on the marker
-  // or is pinned above it (for low markers whose text would otherwise
-  // run off the bottom of the image).
-  | { mode: 'right'; w: number; vAlign: 'center' | 'above' }
+  // `vAlign` decides how revealed text sits relative to its marker:
+  //  - 'center': centred on the marker
+  //  - 'top':    block top roughly level with the top of the circle
+  //  - 'above':  pinned above the marker (low markers whose text would
+  //              otherwise run off the bottom of the image).
+  | { mode: 'right'; w: number; vAlign: 'center' | 'above' | 'top' }
   | { mode: 'abs'; x: number; y: number; w: number };
 
 // Where each step's text appears when revealed (its clear zone).
 const LAYOUT: Record<number, Layout> = {
-  1: { mode: 'right', w: 0.185, vAlign: 'center' },
+  1: { mode: 'right', w: 0.185, vAlign: 'top' },
   2: { mode: 'right', w: 0.25, vAlign: 'above' },
-  3: { mode: 'right', w: 0.185, vAlign: 'center' },
-  4: { mode: 'right', w: 0.19, vAlign: 'above' },
-  5: { mode: 'right', w: 0.175, vAlign: 'center' },
+  3: { mode: 'right', w: 0.24, vAlign: 'top' },
+  4: { mode: 'right', w: 0.19, vAlign: 'top' },
+  5: { mode: 'right', w: 0.22, vAlign: 'center' },
   6: { mode: 'right', w: 0.25, vAlign: 'center' },
   7: { mode: 'abs', x: 0.836, y: 0.52, w: 0.155 },
 };
@@ -189,6 +191,10 @@ export function PathwayInfographic({
                 // Pin the block's bottom just above the marker.
                 top = cy - c.r - 14;
                 translate = 'translateY(-100%)';
+              } else if (layout.vAlign === 'top') {
+                // Block top roughly level with the top of the circle.
+                top = cy - c.r;
+                translate = 'none';
               } else {
                 top = cy;
                 translate = 'translateY(-50%)';
