@@ -25,17 +25,19 @@ import { pathwayNodes } from '../data/issueTreeReveal';
 
 const DESIGN_W = 1891;
 const DESIGN_H = 1063;
-const ICON_R = 53; // icon-circle radius in design px
 
-// Icon-circle centres as fractions of the image (auto-detected).
-const CENTRE: Record<number, { x: number; y: number }> = {
-  1: { x: 0.056, y: 0.462 },
-  2: { x: 0.154, y: 0.896 },
-  3: { x: 0.338, y: 0.258 },
-  4: { x: 0.476, y: 0.860 },
-  5: { x: 0.638, y: 0.188 },
-  6: { x: 0.635, y: 0.704 },
-  7: { x: 0.847, y: 0.406 },
+// Icon-circle centres (fractions of the image) and per-node radius
+// (design px), both auto-detected from the WebP. Radius varies per
+// icon (node 7's circle is larger, node 4's slightly smaller), so the
+// highlight ring, hotspot and check badge track each icon exactly.
+const CENTRE: Record<number, { x: number; y: number; r: number }> = {
+  1: { x: 0.0554, y: 0.4619, r: 53 },
+  2: { x: 0.1534, y: 0.897, r: 53 },
+  3: { x: 0.3381, y: 0.2575, r: 53 },
+  4: { x: 0.4763, y: 0.8613, r: 51 },
+  5: { x: 0.6389, y: 0.1875, r: 53 },
+  6: { x: 0.6365, y: 0.7055, r: 54 },
+  7: { x: 0.8481, y: 0.4042, r: 59 },
 };
 
 type Layout =
@@ -56,7 +58,7 @@ const LAYOUT: Record<number, Layout> = {
   7: { mode: 'abs', x: 0.836, y: 0.52, w: 0.155 },
 };
 
-const RIGHT_OFFSET = ICON_R + 20; // icon radius + gap
+const GAP = 20; // gap from icon edge to right-hand text
 
 interface PathwayInfographicProps {
   activeStep: number | null;
@@ -81,11 +83,6 @@ export function PathwayInfographic({
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
-
-  // Guide the eye to the next unopened marker.
-  const firstUnvisited = pathwayNodes
-    .map((n) => n.stepNumber)
-    .find((s) => !visited.has(s));
 
   return (
     <div
@@ -121,46 +118,19 @@ export function PathwayInfographic({
           const c = CENTRE[n.stepNumber];
           const cx = c.x * DESIGN_W;
           const cy = c.y * DESIGN_H;
+          const r = c.r;
           const isActive = activeStep === n.stepNumber;
           const isVisited = visited.has(n.stepNumber);
-          const isHint = !isActive && firstUnvisited === n.stepNumber;
 
           return (
             <div key={n.id}>
-              {/* Highlight ring (active) / hint pulse (next unopened) */}
-              {(isActive || isHint) && (
-                <motion.div
-                  style={{
-                    position: 'absolute',
-                    left: cx - ICON_R - 5,
-                    top: cy - ICON_R - 5,
-                    width: (ICON_R + 5) * 2,
-                    height: (ICON_R + 5) * 2,
-                    borderRadius: '50%',
-                    border: '5px solid var(--brand-yellow)',
-                    pointerEvents: 'none',
-                    boxShadow: '0 0 22px rgba(254,186,2,0.6)',
-                  }}
-                  animate={
-                    isActive
-                      ? { opacity: 1, scale: 1 }
-                      : { opacity: [0.9, 0.35, 0.9], scale: [1, 1.08, 1] }
-                  }
-                  transition={
-                    isActive
-                      ? { duration: 0.2 }
-                      : { duration: 1.8, repeat: Infinity, ease: 'easeInOut' }
-                  }
-                />
-              )}
-
               {/* Visited check badge */}
               {isVisited && !isActive && (
                 <div
                   style={{
                     position: 'absolute',
-                    left: cx + ICON_R - 20,
-                    top: cy - ICON_R - 8,
+                    left: cx + r - 20,
+                    top: cy - r - 8,
                     width: 40,
                     height: 40,
                     borderRadius: '50%',
@@ -182,10 +152,10 @@ export function PathwayInfographic({
                 aria-label={`Reveal step ${n.stepNumber}: ${n.title}`}
                 style={{
                   position: 'absolute',
-                  left: cx - ICON_R - 6,
-                  top: cy - ICON_R - 6,
-                  width: (ICON_R + 6) * 2,
-                  height: (ICON_R + 6) * 2,
+                  left: cx - r - 6,
+                  top: cy - r - 6,
+                  width: (r + 6) * 2,
+                  height: (r + 6) * 2,
                   borderRadius: '50%',
                   background: 'transparent',
                   border: 'none',
@@ -214,10 +184,10 @@ export function PathwayInfographic({
               top = layout.y * DESIGN_H;
               translate = 'translateY(-50%)';
             } else {
-              left = c.x * DESIGN_W + RIGHT_OFFSET;
+              left = c.x * DESIGN_W + c.r + GAP;
               if (layout.vAlign === 'above') {
                 // Pin the block's bottom just above the marker.
-                top = cy - ICON_R - 14;
+                top = cy - c.r - 14;
                 translate = 'translateY(-100%)';
               } else {
                 top = cy;

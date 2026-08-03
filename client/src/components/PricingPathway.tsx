@@ -73,7 +73,7 @@ const CONFIG = {
     road: 9,
     numFont: 12,
     labelFont: 0,
-    phaseFont: 10,
+    phaseFont: 19,
     showLabels: false,
     showPhases: true,
   },
@@ -119,13 +119,6 @@ export function PricingPathway({
     return { phase, idxs };
   }).filter((g) => g.idxs.length > 0);
 
-  const dividers: number[] = [];
-  for (let g = 0; g < phaseGroups.length - 1; g++) {
-    const lastOfThis = phaseGroups[g].idxs[phaseGroups[g].idxs.length - 1];
-    const firstOfNext = phaseGroups[g + 1].idxs[0];
-    dividers.push((pts[lastOfThis].x + pts[firstOfNext].x) / 2);
-  }
-
   return (
     <svg
       viewBox={`0 0 ${c.W} ${c.H}`}
@@ -136,21 +129,6 @@ export function PricingPathway({
       role="img"
       aria-label="The Pricing Pathway: seven steps across Prioritize, Diagnose and Act"
     >
-      {/* Phase dividers */}
-      {c.showPhases &&
-        dividers.map((x, i) => (
-          <line
-            key={`div-${i}`}
-            x1={x}
-            y1={c.showLabels ? 42 : 24}
-            x2={x}
-            y2={c.H - (c.showLabels ? 8 : 6)}
-            stroke="rgba(255,255,255,0.09)"
-            strokeWidth={1}
-            strokeDasharray="3 5"
-          />
-        ))}
-
       {/* Phase labels */}
       {c.showPhases &&
         phaseGroups.map((g, gi) => {
@@ -164,7 +142,7 @@ export function PricingPathway({
               textAnchor="middle"
               fontSize={c.phaseFont}
               fontWeight={800}
-              letterSpacing="0.08em"
+              letterSpacing="0.03em"
               fill="var(--brand-yellow)"
               style={{ textTransform: 'uppercase' }}
             >
@@ -181,15 +159,6 @@ export function PricingPathway({
         strokeWidth={c.road}
         strokeLinecap="round"
         strokeLinejoin="round"
-      />
-      {/* Dashed centre line for the road read */}
-      <path
-        d={roadPath}
-        fill="none"
-        stroke="rgba(255,255,255,0.22)"
-        strokeWidth={1.5}
-        strokeDasharray="2 10"
-        strokeLinecap="round"
       />
       {/* Progress road (yellow), fills up to fillFraction */}
       <motion.path
