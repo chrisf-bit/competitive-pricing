@@ -535,7 +535,6 @@ export function PartnerDetailScreen({
         {!helperOpen && (
           <HelperLauncherTab
             key="launcher"
-            hasProgress={helperState.path.trigger !== undefined}
             onOpen={() => {
               setHelperOpen(true);
               onMarkIssueTreeHelperOpened();
@@ -1469,10 +1468,8 @@ function ProfileMetaRow({
 }
 
 function HelperLauncherTab({
-  hasProgress,
   onOpen,
 }: {
-  hasProgress: boolean;
   onOpen: () => void;
 }) {
   return (
@@ -1524,24 +1521,7 @@ function HelperLauncherTab({
         e.currentTarget.style.paddingRight = '20px';
       }}
     >
-      <span style={{ position: 'relative', display: 'inline-flex' }}>
-        <PathwayGlyph size={38} color="var(--brand-navy-dark)" strokeWidth={2.6} />
-        {hasProgress && (
-          <span
-            aria-label="In progress"
-            style={{
-              position: 'absolute',
-              top: -5,
-              right: -5,
-              width: 10,
-              height: 10,
-              borderRadius: '50%',
-              background: 'var(--brand-navy-dark)',
-              border: '2px solid var(--brand-yellow)',
-            }}
-          />
-        )}
-      </span>
+      <PathwayGlyph size={38} color="var(--brand-navy-dark)" strokeWidth={2.6} />
       {/* Framework name stacked as three lines. */}
       <span
         style={{
