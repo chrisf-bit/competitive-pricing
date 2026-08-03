@@ -58,6 +58,11 @@ export const portfolioByRound: Partial<
     // baselines (Bucket 3) so Riverside's +6.56 eRPD spike + family gap
     // read as the clear call.
     4: ['riverside-none', 'marina', 'carlos'],
+
+    // R5 - Emerald Peak Lodge is the SME-approved priority (Bucket 6 /
+    // 100% Lose Price); Marina and Carlos hold the distractor slots at
+    // their healthy R5 baselines.
+    5: ['emerald-peak-none', 'marina', 'carlos'],
   },
   // Narrow Parity: uses regime-specific distractor variants
   // (-narrow suffix) so all three cards per round are in the UK
@@ -69,6 +74,7 @@ export const portfolioByRound: Partial<
     2: ['silver-horizon-narrow', 'raven-inn-narrow', 'driftwood-bay-narrow'],
     3: ['ocean-view-narrow', 'marina-narrow', 'carlos-narrow'],
     4: ['riverside-narrow', 'marina-narrow', 'carlos-narrow'],
+    5: ['emerald-peak-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
@@ -77,6 +83,7 @@ export const portfolioByRound: Partial<
     2: ['silver-horizon-wide', 'raven-inn-wide', 'driftwood-bay-wide'],
     3: ['ocean-view-wide', 'marina-wide', 'carlos-wide'],
     4: ['riverside-wide', 'marina-wide', 'carlos-wide'],
+    5: ['emerald-peak-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 

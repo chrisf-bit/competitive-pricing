@@ -1118,7 +1118,152 @@ function riversideBase(args: {
   ];
 }
 
+/**
+ * Builds an Emerald Peak Lodge partner record (SME Round 5 priority,
+ * Hotel ID 11). Sophia Chen is the GM of a FRANCHISE - limited local
+ * autonomy, bound by central brand rules; head office keeps the direct
+ * site cheaper by policy ("Direct-is-Cheaper"). Same brand, contact,
+ * profile and metrics across all three regime variants.
+ *
+ * Data: SME "Round 5" doc data set - an intentional Brand.com
+ * competitiveness gap. eRPD 10.2% (Bucket 6), Lose Price 100%, Public
+ * RPD 12.7% vs Loyal RPD 3.6% (a Fake-Value Genius markup: base inflated
+ * to offset the Genius discount). Yet the property WINS on demand (room
+ * nights +110% vs peer, conversion +42%, premium ADR +31%) - premium
+ * demand, not distressed. Genius Programme, Family Rates and Payments
+ * active; two RPD scenarios (Brand Scenario, Family 2+1); 0% pricing
+ * coverage. OPC layer carried on `opcMetrics`.
+ */
+function emeraldPeakBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Emerald Peak Lodge',
+        propertyType: 'Lodge',
+        roomCount: 88,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'red',
+        styleSecondary: 'blue',
+        description:
+          "General Manager of a franchise lodge operating under chain brand standards with limited local autonomy. Values brand compliance and franchise standing, and is bound by central rules on rate parity and loyalty pricing - head office keeps the direct site cheaper by policy. Direct, decisive and ROI-focused, but can't authorise anything that breaks internal rules; she'll move on a targeted, compliant solution, not a flat rate drop.",
+        commercialGoal:
+          'Hit revenue and occupancy targets while staying fully compliant with head-office rate policy',
+      },
+      // Metrics map to the SME Round 5 data set (Hotel ID 11). The tell
+      // is an intentional Brand.com gap (Lose Price 100%, eRPD 10.2% /
+      // Bucket 6) sitting behind exceptional demand performance - the
+      // problem is policy, not appeal.
+      metrics: {
+        erpd: 10.2,
+        erpdChange: 3.4,
+        rpdPublic: 12.7,
+        rpdLoyal: 3.6,
+        losePricePublic: 100,
+        activeScenarios: 2,
+        activeScenarioNames: ['Brand Scenario', 'Family 2+1'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 444, deltaPct: 6 },
+          last30dRoomNights: { value: 381, deltaPct: 110 },
+          last30dAdr: { value: 158, deltaPct: 31 },
+          last90dPageViews: { value: 14050, deltaPct: 72 },
+          last90dConversion: { value: 5.0, deltaPct: 42 },
+          next3mRoomNights: { value: 402, deltaPct: 98 },
+        },
+        // SME doc showed 2026-03-12; against an authoring date of
+        // 2026-08-03 that's 144 days back - a ~5-month gap that fits the
+        // 0% pricing coverage (completely un-actioned).
+        lastPricingContactDaysAgo: 144,
+        pricingCoverageQTD: 0,
+        // Not in Sheet 7's roster; sits mid-high but below Marina's
+        // 8,200 so the R5 decoy Marina reads as "bigger" and "biggest
+        // value" fails - Emerald Peak is the call on Bucket 6 / 100%
+        // Lose Price.
+        partnerValueAbrn: 7000,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM).
+        opcMetrics: {
+          unsoldRooms: { value: 12 },
+          sellThroughRate: { value: -9 },
+          visibilityShare: { value: 17, deltaPct: -35 },
+          searchPrice: { value: 10 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 58,
+        visibility: 88,
+        conversion: 60,
+        revenue: 52,
+        discountQuality: 34,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Three products active per the SME data set: Genius Programme,
+      // Family Rates and Payments. But the Genius discount is
+      // Fake-Value (base inflated to offset it) and the family setup is
+      // misaligned - the gap sits inside "active" products.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Emerald Peak Lodge (SME Round 5 priority, all three regimes) ──
+  // Intentional Brand.com gap driven by a franchise "Direct-is-Cheaper"
+  // head-office policy - Lose Price 100%, Bucket 6, yet winning on demand
+  // (+110% room nights vs peer). Objection: Direct-is-Cheaper + Segmented
+  // Pricing + Family Ready. The win is a compliant, fenced family rate.
+  ...emeraldPeakBase({
+    id: 'emerald-peak-wide',
+    parityRegime: 'wide',
+    location: 'Aspen, USA',
+    contactName: 'Sophia Chen',
+    propertyImage:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+  }),
+  ...emeraldPeakBase({
+    id: 'emerald-peak-narrow',
+    parityRegime: 'narrow',
+    location: 'Lake District, UK',
+    contactName: 'Sophia Chen',
+    propertyImage:
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
+  }),
+  ...emeraldPeakBase({
+    id: 'emerald-peak-none',
+    parityRegime: 'none',
+    location: 'Sierra Nevada, Spain',
+    contactName: 'Sophia Chen',
+    propertyImage:
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop',
+  }),
+
   // ── Riverside Boutique Hotel (SME Round 4 priority, all three regimes) ──
   // Key OTA gap with a sharp +6.56 MoM eRPD spike, an unintentional
   // family setup gap and a non-genuine Genius discount, behind a "Value

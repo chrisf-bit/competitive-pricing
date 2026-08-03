@@ -42,7 +42,7 @@ export const correctPartnerPerRound: Partial<
     2: 'silver-horizon-none',
     3: 'ocean-view-none',
     4: 'riverside-none',
-    5: 'noble-falcon-none',
+    5: 'emerald-peak-none',
     6: 'noble-falcon-none',
     7: 'noble-falcon-none',
     8: 'noble-falcon-none',
@@ -60,12 +60,14 @@ export const correctPartnerPerRound: Partial<
     2: 'silver-horizon-narrow',
     3: 'ocean-view-narrow',
     4: 'riverside-narrow',
+    5: 'emerald-peak-narrow',
   },
   wide: {
     1: 'royal-crest-wide',
     2: 'silver-horizon-wide',
     3: 'ocean-view-wide',
     4: 'riverside-wide',
+    5: 'emerald-peak-wide',
   },
   // cross-regional: pending partner data.
 };

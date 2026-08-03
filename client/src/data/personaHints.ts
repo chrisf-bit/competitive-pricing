@@ -217,6 +217,32 @@ const riversideR4Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Emerald Peak Lodge R5 (SME Round 5
+ * priority), applied verbatim across all three regime variants. Sophia's
+ * character, metrics and objection types (Direct-is-Cheaper + Segmented
+ * Pricing + Family Ready) are identical; only the regulatory framing
+ * differs by regime.
+ */
+const emeraldPeakR5Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      'Sophia is red/blue and policy-bound: don\'t ask for a flat drop she can\'t authorise - break the "we\'re just a billboard" belief with the 90% discovery stat, then land a compliant, targeted family rate.',
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect "head office keeps our site cheaper, no discussion" and a hard no on any ADR-wide cut; the way through is a fenced family rate corporate won\'t police, with a concrete return.',
+  },
+  storyteller: {
+    oneLiner:
+      'Winning on Booking.com yet capped by policy: converting +42% vs peer at a premium ADR, but a mandated direct-cheaper rate leaves Lose Price at 100% and the family segment on the table.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: strong on every demand metric (room nights +110%, conversion +42% vs peer) yet Lose Price 100% and eRPD 10.2% - a deliberate direct-cheaper policy plus a Fake-Value Genius markup (Public 12.7 / Loyal 3.6).',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -325,6 +351,12 @@ export const personaHints: PersonaHintsByRound = {
   'riverside-wide': { 4: riversideR4Hints },
   'riverside-narrow': { 4: riversideR4Hints },
   'riverside-none': { 4: riversideR4Hints },
+
+  // Emerald Peak Lodge R5 - the SME Round 5 priority across all three
+  // regime variants.
+  'emerald-peak-wide': { 5: emeraldPeakR5Hints },
+  'emerald-peak-narrow': { 5: emeraldPeakR5Hints },
+  'emerald-peak-none': { 5: emeraldPeakR5Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },

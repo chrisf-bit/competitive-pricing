@@ -12,6 +12,9 @@ import { oceanViewWideR3 } from './scenarios/ocean-view-wide-r3';
 import { riversideNoneR4 } from './scenarios/riverside-none-r4';
 import { riversideNarrowR4 } from './scenarios/riverside-narrow-r4';
 import { riversideWideR4 } from './scenarios/riverside-wide-r4';
+import { emeraldPeakNoneR5 } from './scenarios/emerald-peak-none-r5';
+import { emeraldPeakNarrowR5 } from './scenarios/emerald-peak-narrow-r5';
+import { emeraldPeakWideR5 } from './scenarios/emerald-peak-wide-r5';
 
 /**
  * Branching conversation scenarios.
@@ -86,6 +89,15 @@ export const branchingScenarios: BranchingMap = {
   },
   'riverside-wide': {
     4: riversideWideR4,
+  },
+  'emerald-peak-none': {
+    5: emeraldPeakNoneR5,
+  },
+  'emerald-peak-narrow': {
+    5: emeraldPeakNarrowR5,
+  },
+  'emerald-peak-wide': {
+    5: emeraldPeakWideR5,
   },
 };
 
