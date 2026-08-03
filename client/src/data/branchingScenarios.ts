@@ -6,9 +6,9 @@ import { royalCrestWideR1 } from './scenarios/royal-crest-wide-r1';
 import { silverHorizonNoneR2 } from './scenarios/silver-horizon-none-r2';
 import { silverHorizonNarrowR2 } from './scenarios/silver-horizon-narrow-r2';
 import { silverHorizonWideR2 } from './scenarios/silver-horizon-wide-r2';
-import { nobleFalconNoneR3 } from './scenarios/noble-falcon-none-r3';
-import { nobleFalconNarrowR3 } from './scenarios/noble-falcon-narrow-r3';
-import { nobleFalconWideR3 } from './scenarios/noble-falcon-wide-r3';
+import { oceanViewNoneR3 } from './scenarios/ocean-view-none-r3';
+import { oceanViewNarrowR3 } from './scenarios/ocean-view-narrow-r3';
+import { oceanViewWideR3 } from './scenarios/ocean-view-wide-r3';
 
 /**
  * Branching conversation scenarios.
@@ -66,14 +66,14 @@ export const branchingScenarios: BranchingMap = {
   'silver-horizon-wide': {
     2: silverHorizonWideR2,
   },
-  'noble-falcon-none': {
-    3: nobleFalconNoneR3,
+  'ocean-view-none': {
+    3: oceanViewNoneR3,
   },
-  'noble-falcon-narrow': {
-    3: nobleFalconNarrowR3,
+  'ocean-view-narrow': {
+    3: oceanViewNarrowR3,
   },
-  'noble-falcon-wide': {
-    3: nobleFalconWideR3,
+  'ocean-view-wide': {
+    3: oceanViewWideR3,
   },
 };
 

@@ -165,6 +165,32 @@ const silverHorizonR2Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Ocean View Resort R3 (SME Round 3
+ * priority), applied verbatim across all three regime variants. Camila's
+ * character, metrics and objection types (Billboard Effect in Reverse +
+ * Segmented Pricing) are identical; only the regulatory framing differs
+ * by regime.
+ */
+const oceanViewR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      'Camila is blue/red and experienced: win with the search-engine logic, not pressure - show a markup here loses the guest to a competitor on the same page, then land a fenced test.',
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect the reverse-billboard belief ("a higher price here pushes guests to book direct") and margin protection; counter with how travellers actually search, and offer member-only site deals so she keeps her direct incentive.',
+  },
+  storyteller: {
+    oneLiner:
+      'Visibility debt in plain sight: converts +39% vs peer once seen, but page views -61% and bookings -48% because a deliberate 5.5% markup buries her in search - the billboard is working in reverse.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: conversion +39% vs peer but page views -61% and Lose Price Brand 97% - she is not chosen because she is barely seen; the Brand Scenario and 0% coverage are the wedge.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -261,6 +287,12 @@ export const personaHints: PersonaHintsByRound = {
   'silver-horizon-wide': { 2: silverHorizonR2Hints },
   'silver-horizon-narrow': { 2: silverHorizonR2Hints },
   'silver-horizon-none': { 2: silverHorizonR2Hints },
+
+  // Ocean View Resort R3 - the SME Round 3 priority across all three
+  // regime variants (retires Noble Falcon as the R3 hints owner).
+  'ocean-view-wide': { 3: oceanViewR3Hints },
+  'ocean-view-narrow': { 3: oceanViewR3Hints },
+  'ocean-view-none': { 3: oceanViewR3Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },

@@ -40,7 +40,7 @@ export const correctPartnerPerRound: Partial<
     // bypasses the cap.
     1: 'royal-crest-none',
     2: 'silver-horizon-none',
-    3: 'noble-falcon-none',
+    3: 'ocean-view-none',
     4: 'noble-falcon-none',
     5: 'noble-falcon-none',
     6: 'noble-falcon-none',
@@ -58,12 +58,12 @@ export const correctPartnerPerRound: Partial<
   narrow: {
     1: 'royal-crest-narrow',
     2: 'silver-horizon-narrow',
-    3: 'noble-falcon-narrow',
+    3: 'ocean-view-narrow',
   },
   wide: {
     1: 'royal-crest-wide',
     2: 'silver-horizon-wide',
-    3: 'noble-falcon-wide',
+    3: 'ocean-view-wide',
   },
   // cross-regional: pending partner data.
 };

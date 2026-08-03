@@ -887,7 +887,156 @@ function silverHorizonBase(args: {
   ];
 }
 
+/**
+ * Builds an Ocean View Resort partner record (SME Round 3 priority,
+ * Hotel ID 60). Camila Ross is a Property Manager / vacation-rental
+ * agency who deliberately keeps Booking.com marked up ~5.5% vs her own
+ * website to push guests to book direct - the "Billboard Effect in
+ * Reverse." Same brand, contact, profile and metrics across all three
+ * regime variants; only location, parityRegime, image and id differ.
+ *
+ * Data: SME "Round 3" doc data set - an intentional Brand.com
+ * competitiveness gap. eRPD 5.5% (Bucket 4), Lose Price Brand 97%,
+ * Public = Loyal RPD 5.5% (no Genius). The signature is visibility
+ * debt: conversion +39% vs peer once seen, but page views -61% and
+ * bookings -48% because the markup buries her in search. Base Rate
+ * Plan, Family Rates and Payments active; two RPD scenarios (Brand,
+ * App); 0% pricing coverage (completely un-actioned). OPC layer carried
+ * on `opcMetrics` (the child-rate config gap, indexing families +8%).
+ */
+function oceanViewBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Ocean View Resort',
+        propertyType: 'Resort',
+        roomCount: 110,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'blue',
+        styleSecondary: 'red',
+        description:
+          "Property Manager for a vacation-rental agency running several owners' properties with highly delegated commercial autonomy. Values owner satisfaction and portfolio-wide RevPAR, and fiercely protects the agency's profitable direct channel - she deliberately keeps Booking.com marked up to push guests to book direct. Experienced and evidence-led: she changes course when the search-behaviour logic and the data stack up, and commits to structured tests.",
+        commercialGoal:
+          "Protect the agency's direct-channel margin and owner satisfaction while recovering portfolio-wide RevPAR",
+      },
+      // Metrics map to the SME Round 3 data set (Hotel ID 60). The
+      // signature is visibility debt: strong on-page conversion but a
+      // collapse in page views / bookings driven by a deliberate 5.5%
+      // Brand.com markup.
+      metrics: {
+        erpd: 5.5,
+        erpdChange: 0.19,
+        rpdPublic: 5.5,
+        rpdLoyal: 5.5,
+        losePricePublic: 97,
+        activeScenarios: 2,
+        activeScenarioNames: ['Brand Scenario', 'App'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 1, deltaPct: -100 },
+          last30dRoomNights: { value: 132, deltaPct: -50 },
+          last30dAdr: { value: 136, deltaPct: 4 },
+          last90dPageViews: { value: 4140, deltaPct: -61 },
+          last90dConversion: { value: 4.3, deltaPct: 39 },
+          next3mRoomNights: { value: 123, deltaPct: -48 },
+        },
+        // SME doc showed 2025-10-28; against an authoring date of
+        // 2026-08-03 that's 279 days back - a ~9-month gap that fits
+        // the 0% pricing coverage (completely un-actioned).
+        lastPricingContactDaysAgo: 279,
+        pricingCoverageQTD: 0,
+        // Not in Sheet 7's roster; sized to sit below Marina's 8,200
+        // so "biggest value" pattern-matching picks the wrong partner
+        // at R3 - Ocean View is the call on visibility debt (97% Lose
+        // Price, page views -61%), not size.
+        partnerValueAbrn: 7000,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM). Note the
+        // headline search price is actually -3% vs peers; the real leak
+        // is families indexing +8% from missing child rates.
+        opcMetrics: {
+          unsoldRooms: { value: 45 },
+          sellThroughRate: { value: -18 },
+          visibilityShare: { value: 20, deltaPct: -33 },
+          searchPrice: { value: -3 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 55,
+        visibility: 30,
+        conversion: 62,
+        revenue: 35,
+        discountQuality: 30,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Three products active per the SME data set: Base Rate Plan,
+      // Family Rates and Payments. No Genius, no targeted public-pricing
+      // levers - she relies entirely on a flat base rate, which is the
+      // gap.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Ocean View Resort (SME Round 3 priority, all three regimes) ──
+  // Brand.com Competitiveness Gap driven by the Billboard Effect in
+  // Reverse - Camila keeps Booking.com marked up 5.5% to push direct
+  // bookings; the result is visibility debt (converts +39% vs peer but
+  // page views -61%). Objection: Billboard Effect in Reverse + Segmented
+  // Pricing. Retires Noble Falcon as the R3 priority.
+  ...oceanViewBase({
+    id: 'ocean-view-wide',
+    parityRegime: 'wide',
+    location: 'San Diego, USA',
+    contactName: 'Camila Ross',
+    propertyImage:
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop',
+  }),
+  ...oceanViewBase({
+    id: 'ocean-view-narrow',
+    parityRegime: 'narrow',
+    location: 'Brighton, UK',
+    contactName: 'Camila Ross',
+    propertyImage:
+      'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=250&fit=crop',
+  }),
+  ...oceanViewBase({
+    id: 'ocean-view-none',
+    parityRegime: 'none',
+    location: 'Alicante, Spain',
+    contactName: 'Camila Ross',
+    propertyImage:
+      'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&h=250&fit=crop',
+  }),
+
   // ── Silver Horizon Resort (SME Round 2 priority, all three regimes) ──
   // Key OTA Competitiveness Gap - Expedia undercutting via margin cuts
   // on the International and Family segments. Strong platform demand but

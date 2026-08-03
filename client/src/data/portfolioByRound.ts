@@ -51,7 +51,7 @@ export const portfolioByRound: Partial<
     // baselines from partnerStateByRound.ts (Marina improving,
     // Carlos's misconfigured Country Rate compounding but milder
     // than Noble Falcon's structural Bucket-7 crisis).
-    3: ['noble-falcon-none', 'marina', 'carlos'],
+    3: ['ocean-view-none', 'marina', 'carlos'],
   },
   // Narrow Parity: uses regime-specific distractor variants
   // (-narrow suffix) so all three cards per round are in the UK
@@ -61,14 +61,14 @@ export const portfolioByRound: Partial<
   narrow: {
     1: ['marina-narrow', 'royal-crest-narrow', 'carlos-narrow'],
     2: ['silver-horizon-narrow', 'raven-inn-narrow', 'driftwood-bay-narrow'],
-    3: ['noble-falcon-narrow', 'marina-narrow', 'carlos-narrow'],
+    3: ['ocean-view-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
   wide: {
     1: ['marina-wide', 'royal-crest-wide', 'carlos-wide'],
     2: ['silver-horizon-wide', 'raven-inn-wide', 'driftwood-bay-wide'],
-    3: ['noble-falcon-wide', 'marina-wide', 'carlos-wide'],
+    3: ['ocean-view-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 
