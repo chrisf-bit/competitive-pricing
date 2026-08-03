@@ -113,6 +113,58 @@ const nobleFalconR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Royal Crest Hotel R1 (SME Round 1
+ * priority), applied verbatim across all three regime variants. Liam's
+ * character, metrics and objection types (Segmented Pricing + Brand.com
+ * Loyalty) are identical; only the regulatory framing differs by
+ * regime.
+ */
+const royalCrestR1Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      'Liam is red/blue and time-pressured: open with the traffic-versus-pace anomaly, then a straight question about his strategy - skip the warm-up.',
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect a Brand.com-loyalty wall ("no OTA above 30%"); don\'t ask for a general drop - pitch a fenced, targeted tool (Country / Mobile Rate) that protects his ADR.',
+  },
+  storyteller: {
+    oneLiner:
+      'Free billboard, no checkout: page views +20% vs peer but forward room nights -20%, because his own direct site is the cheaper option.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: Page views +20% vs peer while conversion -4% and Lose Price 99% - the App, Mdot and Brand scenarios flag where he leaks.',
+  },
+};
+
+/**
+ * Shared persona hint content for Silver Horizon Resort R2 (SME Round 2
+ * priority), applied verbatim across all three regime variants. Chloe's
+ * character, metrics and objection types (Competitive Aggression + Same
+ * Net Mindset + Family Ready) are identical; only the regulatory framing
+ * differs by regime.
+ */
+const silverHorizonR2Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      'Chloe is blue/red: skip the rapport, open with the net-revenue maths - the 32% YoY room-night drop against strong forward volume - and let her follow the logic.',
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect "Expedia cuts margin, I give everyone the same rate - you burn margin too." Don\'t price-war: refuse the race to the bottom and pivot to unsold rooms and the family/international upside.',
+  },
+  storyteller: {
+    oneLiner:
+      'Winning the traffic, losing the value: page views +71% and conversion +28% vs peer, but a sharp Key OTA spike is bleeding the high-value International and Family segments to Expedia.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: eRPD jumped +4.71 in a month and ABRN is -32% YoY despite +119% room nights vs peer - the International and Family 2+1/2+2 scenarios flag exactly where Expedia undercuts.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -198,6 +250,18 @@ export const personaHints: PersonaHintsByRound = {
   // three regime variants (Wide / Narrow / None). Sarah's character,
   // the metrics, and the objection types are identical; only the
   // regulatory framing of the conversation differs by regime.
+  // Royal Crest Hotel R1 - the SME Round 1 priority across all three
+  // regime variants (retires Crystal Water as the R1 hints owner).
+  'royal-crest-wide': { 1: royalCrestR1Hints },
+  'royal-crest-narrow': { 1: royalCrestR1Hints },
+  'royal-crest-none': { 1: royalCrestR1Hints },
+
+  // Silver Horizon Resort R2 - the SME Round 2 priority across all
+  // three regime variants (retires Velvet Sky as the R2 hints owner).
+  'silver-horizon-wide': { 2: silverHorizonR2Hints },
+  'silver-horizon-narrow': { 2: silverHorizonR2Hints },
+  'silver-horizon-none': { 2: silverHorizonR2Hints },
+
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },
   'crystal-water-none': { 1: crystalWaterR1Hints },

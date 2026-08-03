@@ -38,8 +38,8 @@ export const correctPartnerPerRound: Partial<
     // 3 in gameEngine.ts). The entries past R3 are kept so the
     // grading layer always has an answer if a stray code path
     // bypasses the cap.
-    1: 'crystal-water-none',
-    2: 'velvet-sky-none',
+    1: 'royal-crest-none',
+    2: 'silver-horizon-none',
     3: 'noble-falcon-none',
     4: 'noble-falcon-none',
     5: 'noble-falcon-none',
@@ -56,13 +56,13 @@ export const correctPartnerPerRound: Partial<
   // conversation differs by regime. R4-R10 pending the broader
   // partner-data drop.
   narrow: {
-    1: 'crystal-water-narrow',
-    2: 'velvet-sky-narrow',
+    1: 'royal-crest-narrow',
+    2: 'silver-horizon-narrow',
     3: 'noble-falcon-narrow',
   },
   wide: {
-    1: 'crystal-water-wide',
-    2: 'velvet-sky-wide',
+    1: 'royal-crest-wide',
+    2: 'silver-horizon-wide',
     3: 'noble-falcon-wide',
   },
   // cross-regional: pending partner data.

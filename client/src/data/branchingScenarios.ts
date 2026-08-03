@@ -1,11 +1,11 @@
 import type { BranchingConversationTree } from '../types';
 import { johnR1 } from './scenarios/john-r1';
-import { crystalWaterNoneR1 } from './scenarios/crystal-water-none-r1';
-import { crystalWaterNarrowR1 } from './scenarios/crystal-water-narrow-r1';
-import { crystalWaterWideR1 } from './scenarios/crystal-water-wide-r1';
-import { velvetSkyNoneR2 } from './scenarios/velvet-sky-none-r2';
-import { velvetSkyNarrowR2 } from './scenarios/velvet-sky-narrow-r2';
-import { velvetSkyWideR2 } from './scenarios/velvet-sky-wide-r2';
+import { royalCrestNoneR1 } from './scenarios/royal-crest-none-r1';
+import { royalCrestNarrowR1 } from './scenarios/royal-crest-narrow-r1';
+import { royalCrestWideR1 } from './scenarios/royal-crest-wide-r1';
+import { silverHorizonNoneR2 } from './scenarios/silver-horizon-none-r2';
+import { silverHorizonNarrowR2 } from './scenarios/silver-horizon-narrow-r2';
+import { silverHorizonWideR2 } from './scenarios/silver-horizon-wide-r2';
 import { nobleFalconNoneR3 } from './scenarios/noble-falcon-none-r3';
 import { nobleFalconNarrowR3 } from './scenarios/noble-falcon-narrow-r3';
 import { nobleFalconWideR3 } from './scenarios/noble-falcon-wide-r3';
@@ -20,11 +20,13 @@ import { nobleFalconWideR3 } from './scenarios/noble-falcon-wide-r3';
  * both.
  *
  * Coverage today:
- *   - Crystal Water Resort R1 across all three regime variants - the
- *     SME-approved "Brand.com Competitiveness Gap" scenario (Sarah
- *     Bennett running cheaper promotional rates on her direct brand
- *     site, capping conversion on Booking.com despite a 202% page
- *     view spike vs peer).
+ *   - Royal Crest Hotel R1 across all three regime variants - the
+ *     final SME Round 1 scenario (Liam O'Connell, Property Manager,
+ *     Brand.com Competitiveness Gap; page views +20% vs peer but
+ *     forward pace -20% because his direct site undercuts Booking.com).
+ *     Objection: Segmented Pricing Conversation + Brand.com Loyalty.
+ *     Retired Crystal Water Resort as the R1 priority (its files stay
+ *     on disk, unregistered).
  *   - Velvet Sky Boutique Hotel R2 across all three regime variants
  *     - SME-approved Brand.com Competitiveness Gap (John Whitford,
  *     aggressive direct-site discounting, no active Booking.com
@@ -46,23 +48,23 @@ export const branchingScenarios: BranchingMap = {
   john: {
     1: johnR1,
   },
-  'crystal-water-none': {
-    1: crystalWaterNoneR1,
+  'royal-crest-none': {
+    1: royalCrestNoneR1,
   },
-  'crystal-water-narrow': {
-    1: crystalWaterNarrowR1,
+  'royal-crest-narrow': {
+    1: royalCrestNarrowR1,
   },
-  'crystal-water-wide': {
-    1: crystalWaterWideR1,
+  'royal-crest-wide': {
+    1: royalCrestWideR1,
   },
-  'velvet-sky-none': {
-    2: velvetSkyNoneR2,
+  'silver-horizon-none': {
+    2: silverHorizonNoneR2,
   },
-  'velvet-sky-narrow': {
-    2: velvetSkyNarrowR2,
+  'silver-horizon-narrow': {
+    2: silverHorizonNarrowR2,
   },
-  'velvet-sky-wide': {
-    2: velvetSkyWideR2,
+  'silver-horizon-wide': {
+    2: silverHorizonWideR2,
   },
   'noble-falcon-none': {
     3: nobleFalconNoneR3,

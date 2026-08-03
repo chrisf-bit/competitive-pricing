@@ -36,7 +36,7 @@ export const portfolioByRound: Partial<
     // partnerStateByRound.ts keep both looking healthy / mid-pack so
     // the puzzle reads cleanly: Crystal Water's 99% Lose Price + the
     // 202% page-view spike vs peer is the unmissable signal.
-    1: ['marina', 'crystal-water-none', 'carlos'],
+    1: ['marina', 'royal-crest-none', 'carlos'],
 
     // R2 - Velvet Sky Boutique Hotel is the SME-approved priority;
     // Raven Inn and Driftwood Bay Resort are the distractors. Raven
@@ -44,7 +44,7 @@ export const portfolioByRound: Partial<
     // Driftwood Bay is a moderate Brand profile (Bucket 4 / eRPD
     // 3.4%). Both clearly read as less-severe than Velvet Sky's
     // 99% Lose Price + Bucket 4 + eRPD 5.0%.
-    2: ['velvet-sky-none', 'raven-inn', 'driftwood-bay'],
+    2: ['silver-horizon-none', 'raven-inn', 'driftwood-bay'],
 
     // R3 - The Noble Falcon Inn is the SME-approved priority; Marina
     // and Carlos hold the distractor slots, surfaced at their R3
@@ -59,15 +59,15 @@ export const portfolioByRound: Partial<
   // baselines, and persona hints with their base counterparts via
   // the regime-suffix alias fallback in the engine.
   narrow: {
-    1: ['marina-narrow', 'crystal-water-narrow', 'carlos-narrow'],
-    2: ['velvet-sky-narrow', 'raven-inn-narrow', 'driftwood-bay-narrow'],
+    1: ['marina-narrow', 'royal-crest-narrow', 'carlos-narrow'],
+    2: ['silver-horizon-narrow', 'raven-inn-narrow', 'driftwood-bay-narrow'],
     3: ['noble-falcon-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
   wide: {
-    1: ['marina-wide', 'crystal-water-wide', 'carlos-wide'],
-    2: ['velvet-sky-wide', 'raven-inn-wide', 'driftwood-bay-wide'],
+    1: ['marina-wide', 'royal-crest-wide', 'carlos-wide'],
+    2: ['silver-horizon-wide', 'raven-inn-wide', 'driftwood-bay-wide'],
     3: ['noble-falcon-wide', 'marina-wide', 'carlos-wide'],
   },
 };

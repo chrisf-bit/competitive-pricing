@@ -657,7 +657,298 @@ function driftwoodBayBase(args: {
   }];
 }
 
+/**
+ * Builds a Royal Crest Hotel partner record (SME Round 1 priority,
+ * Hotel ID 16). Liam O'Connell is a Property Manager / vacation-rental
+ * agency protecting his direct channel ("no OTA above 30%"). Same
+ * brand, contact, profile and metrics across all three regime variants
+ * - only location, parityRegime, image and id differ. The contact name
+ * stays 'Liam O'Connell' across regimes (the SME script addresses him
+ * by first name in every regime column).
+ *
+ * Data: SME "Round 1" doc data set - Brand.com Competitiveness Gap.
+ * eRPD 5.2% (Bucket 4), Lose Price 99%, page views +20% vs peer but
+ * conversion -4% and Next-3M room nights -20%. Public and Loyal RPD
+ * both sit at 5.2% (no Genius active). Three RPD scenarios flagged
+ * (App, Mdot, Brand); the only foundation product active is Family
+ * Rates. OPC layer (locked until Level 2) carried on `opcMetrics`.
+ */
+function royalCrestBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Royal Crest Hotel',
+        propertyType: 'Hotel',
+        roomCount: 120,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'red',
+        styleSecondary: 'blue',
+        description:
+          "Property Manager running several owners' properties with highly delegated commercial autonomy. Profit-first and protective of the direct channel - keeps a strict policy that no OTA takes more than 30% of the business. Direct and time-pressured, but evidence-driven: he wants proof and a controlled experiment before he commits, and rewards a tight ROI case.",
+        commercialGoal:
+          'Protect direct-channel margin and portfolio-wide RevPAR while filling unsold rooms',
+      },
+      // Metrics map to the SME Round 1 data set (Hotel ID 16). Same
+      // baseline across all three regime variants; the regime only
+      // changes the regulatory framing of the conversation.
+      metrics: {
+        erpd: 5.2,
+        erpdChange: 0.62,
+        rpdPublic: 5.2,
+        rpdLoyal: 5.2,
+        losePricePublic: 99,
+        activeScenarios: 3,
+        activeScenarioNames: ['App', 'Mdot', 'Brand Scenario'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 283, deltaPct: -22 },
+          last30dRoomNights: { value: 325, deltaPct: 8 },
+          last30dAdr: { value: 145, deltaPct: 5 },
+          last90dPageViews: { value: 17518, deltaPct: 20 },
+          last90dConversion: { value: 2.7, deltaPct: -4 },
+          next3mRoomNights: { value: 259, deltaPct: -20 },
+        },
+        // SME doc showed 2026-05-12; against an authoring date of
+        // 2026-08-03 that's 83 days back. Stored as an offset so the
+        // gap stays constant across replays. The long gap fits the
+        // low (20%) pricing coverage - an under-steered partner.
+        lastPricingContactDaysAgo: 83,
+        pricingCoverageQTD: 20,
+        // Not in Sheet 7's roster; annualised from the 283 Last-30D
+        // ABRN and sized to sit below Marina's 8,200 so "biggest
+        // value" pattern-matching fails - Royal Crest is the R1 call
+        // on pricing risk (99% Lose Price / Bucket 4), not size.
+        partnerValueAbrn: 4200,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM), so it
+        // is invisible at Round 1 but ready for the future round.
+        opcMetrics: {
+          unsoldRooms: { value: 50 },
+          sellThroughRate: { value: -10 },
+          visibilityShare: { value: 10.3, deltaPct: -43 },
+          searchPrice: { value: 7 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 52,
+        visibility: 82,
+        conversion: 27,
+        revenue: 40,
+        discountQuality: 25,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Adoption mirrors the SME data set: only Family Rates is active.
+      // No Genius, no public-pricing levers - he prices through his
+      // direct brand site, which is exactly the gap.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
+/**
+ * Builds a Silver Horizon Resort partner record (SME Round 2 priority,
+ * Hotel ID 209). Chloe Davies is a Multi-Property Professional running
+ * a portfolio of vacation-rental units - net-revenue maths, margin
+ * optimisation and ROI. Same brand, contact, profile and metrics across
+ * all three regime variants; only location, parityRegime, image and id
+ * differ. The contact name stays 'Chloe Davies' across regimes.
+ *
+ * Data: SME "Round 2" doc data set - a KEY OTA competitiveness gap
+ * (Expedia undercutting via margin cuts on International + Family
+ * segments). eRPD 1.9% (Bucket 3) but a sharp +4.71 MoM spike, Lose
+ * Price 42%, Public RPD 3.9% / Loyal RPD -3.0%. Strong platform demand
+ * (room nights +119% vs peer, forward pace +81%) but ABRN -32% YoY and
+ * ADR -7% - value leaking on the high-value segments. Genius Programme
+ * and Family Rates active; three RPD scenarios (International, Family
+ * 2+1, Family 2+2). OPC layer carried on `opcMetrics`.
+ */
+function silverHorizonBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Silver Horizon Resort',
+        propertyType: 'Vacation Rental',
+        roomCount: 64,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'blue',
+        styleSecondary: 'red',
+        description:
+          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimisation and strict ROI when balancing channels. Fields aggressive competitor calls (Expedia) and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
+        commercialGoal:
+          'Maximise net revenue and margin across the portfolio while balancing a mix of distribution channels',
+      },
+      // Metrics map to the SME Round 2 data set (Hotel ID 209). The
+      // headline is the sharp +4.71 MoM spike in Key OTA eRPD against
+      // otherwise strong platform demand - value leaking on the
+      // International and Family segments.
+      metrics: {
+        erpd: 1.9,
+        erpdChange: 4.71,
+        rpdPublic: 3.9,
+        rpdLoyal: -3.0,
+        losePricePublic: 42,
+        activeScenarios: 3,
+        activeScenarioNames: ['International', 'Family 2+1', 'Family 2+2'],
+        competitor: 'expedia',
+        secondaryMetrics: {
+          last30dAbrn: { value: 389, deltaPct: -32 },
+          last30dRoomNights: { value: 333, deltaPct: 119 },
+          last30dAdr: { value: 128, deltaPct: -7 },
+          last90dPageViews: { value: 16880, deltaPct: 71 },
+          last90dConversion: { value: 4.2, deltaPct: 28 },
+          next3mRoomNights: { value: 445, deltaPct: 81 },
+        },
+        // SME doc showed 2026-05-12; against an authoring date of
+        // 2026-08-03 that's 83 days back. Stored as an offset.
+        lastPricingContactDaysAgo: 83,
+        pricingCoverageQTD: 14,
+        // Not in Sheet 7's roster; sized to sit below Raven Inn's
+        // 5,800 so "biggest value" pattern-matching picks the wrong
+        // partner at R2 - Silver Horizon is the call on the sharp
+        // eRPD spike and segment leakage, not size.
+        partnerValueAbrn: 5200,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM).
+        opcMetrics: {
+          unsoldRooms: { value: 15 },
+          sellThroughRate: { value: -8 },
+          visibilityShare: { value: 13, deltaPct: -13 },
+          searchPrice: { value: 6 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 48,
+        visibility: 90,
+        conversion: 42,
+        revenue: 45,
+        discountQuality: 35,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Two products active per the SME data set: Genius Programme and
+      // Family Rates. Everything else inactive - the gap is the Key OTA
+      // undercutting the International and Family scenarios, not a bare
+      // toolkit.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'inactive', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Silver Horizon Resort (SME Round 2 priority, all three regimes) ──
+  // Key OTA Competitiveness Gap - Expedia undercutting via margin cuts
+  // on the International and Family segments. Strong platform demand but
+  // ABRN -32% YoY. Objection: Competitive Aggression + Same Net Mindset
+  // + Family Ready. Retires Velvet Sky as the R2 priority.
+  ...silverHorizonBase({
+    id: 'silver-horizon-wide',
+    parityRegime: 'wide',
+    location: 'Orlando, USA',
+    contactName: 'Chloe Davies',
+    propertyImage:
+      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop',
+  }),
+  ...silverHorizonBase({
+    id: 'silver-horizon-narrow',
+    parityRegime: 'narrow',
+    location: 'Lake District, UK',
+    contactName: 'Chloe Davies',
+    propertyImage:
+      'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&h=250&fit=crop',
+  }),
+  ...silverHorizonBase({
+    id: 'silver-horizon-none',
+    parityRegime: 'none',
+    location: 'Costa Brava, Spain',
+    contactName: 'Chloe Davies',
+    propertyImage:
+      'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400&h=250&fit=crop',
+  }),
+
+  // ── Royal Crest Hotel (SME Round 1 priority, all three regimes) ──
+  // Brand.com Competitiveness Gap - Liam O'Connell protects his direct
+  // channel; page views +20% vs peer but conversion and forward pace
+  // lag because his own site undercuts Booking.com. Objection: The
+  // Segmented Pricing Conversation + Brand.com Loyalty. Retires Crystal
+  // Water as the R1 priority.
+  ...royalCrestBase({
+    id: 'royal-crest-wide',
+    parityRegime: 'wide',
+    location: 'Miami Beach, USA',
+    contactName: "Liam O'Connell",
+    propertyImage:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+  }),
+  ...royalCrestBase({
+    id: 'royal-crest-narrow',
+    parityRegime: 'narrow',
+    location: 'Cotswolds, UK',
+    contactName: "Liam O'Connell",
+    propertyImage:
+      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
+  }),
+  ...royalCrestBase({
+    id: 'royal-crest-none',
+    parityRegime: 'none',
+    location: 'Costa del Sol, Spain',
+    contactName: "Liam O'Connell",
+    propertyImage:
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop',
+  }),
+
   // ── Crystal Water Resort (Wide Parity / Miami) ──
   // SME-approved R1 priority - Brand.com Competitiveness Gap caused
   // by Sarah's promotional rate on her direct brand site undercutting
