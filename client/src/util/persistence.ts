@@ -19,6 +19,18 @@ import { getScormAdapter } from './scorm';
  * ignored on load rather than crashing the app.
  */
 const STORAGE_KEY = 'rateRight:state:v1';
+
+/**
+ * One-time round-progress reset token. Round stars are keyed by round
+ * NUMBER, not by partner, so when the final SME scenarios replaced the
+ * POC partners the old "completed" stars carried over and marked the
+ * new, never-played rounds as done. Bumping this token drops any
+ * persisted `roundStars` exactly once per learner on next load, while
+ * preserving clearance status and profile. Bump the value again if a
+ * future content change should re-clear round progress without forcing
+ * a full re-clearance.
+ */
+const ROUNDS_RESET_TOKEN = 'final-scenarios-2026-08';
 const SCORM_SUSPEND_KEY = 'cmi.suspend_data';
 const SCORM_STUDENT_NAME_KEY = 'cmi.core.student_name';
 const SCORM_LESSON_STATUS_KEY = 'cmi.core.lesson_status';
@@ -38,6 +50,12 @@ export interface PersistedState {
   level0ClearedForRegime?: ParityRegime | null;
   /** Best stars earned for each completed round (1-indexed by round). */
   roundStars: Record<number, 0 | 1 | 2 | 3>;
+  /**
+   * Token guarding a one-time round-progress reset. When the stored
+   * token doesn't match ROUNDS_RESET_TOKEN, roundStars is dropped on
+   * load (clearance and profile are kept).
+   */
+  roundsResetToken?: string;
 }
 
 function parsePayload(raw: string | null): PersistedState | null {
@@ -46,11 +64,16 @@ function parsePayload(raw: string | null): PersistedState | null {
     const parsed = JSON.parse(raw) as PersistedState;
     if (!parsed || typeof parsed !== 'object') return null;
     if (!parsed.learnerProfile || typeof parsed.level0Cleared !== 'boolean') return null;
+    // One-time round-progress reset: if the token is stale, drop
+    // roundStars but keep clearance + profile. Stamped current on the
+    // next save.
+    const roundsCurrent = parsed.roundsResetToken === ROUNDS_RESET_TOKEN;
     return {
       learnerProfile: parsed.learnerProfile,
       level0Cleared: parsed.level0Cleared,
       level0ClearedForRegime: parsed.level0ClearedForRegime ?? null,
-      roundStars: parsed.roundStars ?? {},
+      roundStars: roundsCurrent ? parsed.roundStars ?? {} : {},
+      roundsResetToken: ROUNDS_RESET_TOKEN,
     };
   } catch {
     return null;
@@ -77,6 +100,7 @@ export function savePersistedState(state: GameState): void {
     level0Cleared: state.level0Progress.cleared,
     level0ClearedForRegime: state.level0Progress.clearedForRegime,
     roundStars: state.roundStars,
+    roundsResetToken: ROUNDS_RESET_TOKEN,
   };
   const serialised = JSON.stringify(payload);
   const scorm = getScormAdapter();
