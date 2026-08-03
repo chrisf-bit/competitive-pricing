@@ -5,7 +5,6 @@ import {
   Play,
   RotateCcw,
   Check,
-  Sparkles,
   ChevronRight,
 } from 'lucide-react';
 import roundSelectBackdrop from '../assets/round-select-backdrop.webp';
@@ -433,12 +432,7 @@ function RoundTile({
               : 'rgba(255,255,255,0.65)',
         }}
       >
-        {isLevel2 ? (
-          <>
-            <Sparkles size={11} />
-            Coming soon
-          </>
-        ) : isCurrent ? (
+        {isLevel2 ? null : isCurrent ? (
           <>
             <Play size={11} fill="currentColor" />
             Start round
@@ -454,12 +448,7 @@ function RoundTile({
             <Check size={11} />
             Full stars earned
           </>
-        ) : (
-          <>
-            <Lock size={11} />
-            Coming soon
-          </>
-        )}
+        ) : null}
       </div>
     </button>
   );
