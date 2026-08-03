@@ -13,7 +13,7 @@ import {
   Clock,
   BookOpen,
   Globe,
-  Workflow,
+  Route,
   UserCircle,
   Layers,
   Gauge,
@@ -212,10 +212,10 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
   },
   {
     target: 'issue-tree-helper',
-    title: 'Pricing Diagnostic Flow',
+    title: 'The Pricing Pathway',
     description:
-      "When you open a partner you'll see a yellow tab pinned to the right edge. Tap it to open the Pricing Diagnostic Flow, which walks you through the diagnosis with you - trigger, root cause, metric, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close it to peek at the metrics and pick up where you left off.",
-    icon: <Workflow size={18} style={{ color: 'var(--brand-yellow)' }} />,
+      "When you open a partner you'll see a yellow winding-road tab pinned to the right edge. Tap it to open The Pricing Pathway, which walks the route with you - trigger, primary check, diagnose, evidence, plan, hook - so you arrive at the call with a clear plan. Your picks save per partner, so you can close it to peek at the metrics and pick up where you left off.",
+    icon: <Route size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },
 ];
@@ -296,17 +296,17 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
   },
   {
     target: 'partner-detail-tree-tab',
-    title: 'Pricing Diagnostic Flow',
+    title: 'The Pricing Pathway',
     description:
-      "Yellow tab pinned to the right edge - tap to open the Pricing Diagnostic Flow drawer. Walks you through Trigger, Issue, Intent, Root Cause, Metric Insight, and Hook so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
-    icon: <Workflow size={18} style={{ color: 'var(--brand-yellow)' }} />,
+      "Yellow winding-road tab pinned to the right edge - tap to open The Pricing Pathway drawer. Walks you along the route - Trigger, Primary Check, Diagnose, Evidence, Plan, and Hook - so you arrive at the call with a clear diagnosis. Picks save per partner, so you can close it any time.",
+    icon: <Route size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'left',
   },
   {
     target: 'partner-detail-action',
     title: 'Begin Conversation',
     description:
-      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open the Pricing Diagnostic Flow at least once first - that gate teaches the diagnostic habit.",
+      "The action card on the bottom right. Click Begin Conversation when you're ready to engage the partner. In Round 1 you'll need to open The Pricing Pathway at least once first - that gate teaches the diagnostic habit.",
     icon: <PlayCircle size={18} style={{ color: 'var(--success)' }} />,
     position: 'left',
   },

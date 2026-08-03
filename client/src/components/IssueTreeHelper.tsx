@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, Workflow, RotateCcw, Sparkles, Target } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, RotateCcw, Sparkles, Target } from 'lucide-react';
 import type { IssueTreeHelperState, IssueTreePath } from '../types';
 import {
   triggers,
@@ -15,6 +15,9 @@ import {
   getMetricInsight,
   getHook,
 } from '../data/issueTree';
+import { PricingPathway } from './PricingPathway';
+import { PathwayGlyph } from './PathwayGlyph';
+import { pathwayNodes } from '../data/issueTreeReveal';
 
 /**
  * Issue Tree Helper - a guided wizard that walks the learner through
@@ -64,6 +67,16 @@ interface IssueTreeHelperProps {
 
 const STEP_COUNT = 6;
 
+/**
+ * Loose map from the drawer's six wizard steps onto the seven-node
+ * Pricing Pathway road, so the mini road highlights roughly where the
+ * learner is. Steps 2 (Intent) and 3 (Root cause) both sit on the
+ * Diagnose node. The drawer walks up to the Hook (node index 5); the
+ * Pitch (node index 6) is delivered live on the call, so it never
+ * fills here - reinforcing the divergence taught in the reveal.
+ */
+const WIZARD_STEP_TO_NODE = [0, 1, 2, 2, 3, 5];
+
 export function IssueTreeHelper({
   partnerName,
   partnerFirstName,
@@ -90,6 +103,7 @@ export function IssueTreeHelper({
   );
 
   const isComplete = stepIndex >= STEP_COUNT;
+  const activeNode = isComplete ? 5 : (WIZARD_STEP_TO_NODE[stepIndex] ?? 0);
   const canBack = stepIndex > 0;
   const canForward =
     (stepIndex === 0 && !!path.trigger) ||
@@ -179,11 +193,11 @@ export function IssueTreeHelper({
               flexShrink: 0,
             }}
           >
-            <Workflow size={16} />
+            <PathwayGlyph size={17} color="var(--brand-yellow)" strokeWidth={2.4} />
           </div>
           <div style={{ minWidth: 0 }}>
             <div style={{ fontSize: 14, fontWeight: 800 }}>
-              Pricing Diagnostic Flow
+              The Pricing Pathway
             </div>
             <div
               style={{
@@ -218,37 +232,24 @@ export function IssueTreeHelper({
         </button>
       </div>
 
-      {/* Step progress bar */}
+      {/* Mini Pricing Pathway - the same winding road taught in
+          clearance, tracking roughly where the learner is. Dark band
+          so the white-on-navy road renders correctly. */}
       <div
         style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 4,
-          padding: '10px 18px',
-          background: 'var(--off-white)',
+          background: 'var(--brand-navy-dark)',
+          padding: '8px 14px',
           borderBottom: '1px solid var(--grey-100)',
         }}
       >
-        {Array.from({ length: STEP_COUNT }).map((_, i) => {
-          const isActive = i === stepIndex && !isComplete;
-          const isDone = i < stepIndex || isComplete;
-          return (
-            <div
-              key={i}
-              style={{
-                flex: 1,
-                height: 4,
-                borderRadius: 2,
-                background: isActive
-                  ? 'var(--brand-navy)'
-                  : isDone
-                    ? 'var(--brand-blue)'
-                    : 'var(--grey-200)',
-                transition: 'background 0.2s ease',
-              }}
-            />
-          );
-        })}
+        <div style={{ height: 60 }}>
+          <PricingPathway
+            nodes={pathwayNodes}
+            activeIndex={activeNode}
+            fillIndex={activeNode}
+            variant="mini"
+          />
+        </div>
       </div>
 
       {/* Step body */}

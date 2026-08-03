@@ -16,7 +16,7 @@ import {
   Gauge,
   Tag,
   Sparkles,
-  Workflow,
+  Route,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -520,14 +520,14 @@ function getGuideContent(
             text: 'Read the Discount Products - active vs inactive',
             target: 'partner-detail-discounts',
           },
-          // Round 1 introduces the Pricing Diagnostic Flow
-          // drawer as a mandatory pre-call step. The yellow flow tab
-          // to the right is the entry point. After Round 1 the step
+          // Round 1 introduces The Pricing Pathway
+          // drawer as a mandatory pre-call step. The yellow winding-road
+          // tab to the right is the entry point. After Round 1 the step
           // drops away.
           ...(currentRound === 1
             ? [{
-                icon: <Workflow size={13} />,
-                text: 'Open the Pricing Diagnostic Flow (yellow tab, right edge)',
+                icon: <Route size={13} />,
+                text: 'Open The Pricing Pathway (yellow tab, right edge)',
                 target: 'partner-detail-tree-tab',
               }]
             : []),

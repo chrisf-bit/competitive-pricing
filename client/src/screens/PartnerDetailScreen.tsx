@@ -12,7 +12,6 @@ import {
   History,
   UserCircle,
   ChevronRight,
-  Workflow,
   CalendarClock,
   Percent,
   Info,
@@ -31,6 +30,7 @@ import {
 import { getPersonaById, type SuperPowerPersona } from '../data/characters';
 import { getPersonaHint } from '../data/personaHints';
 import { IssueTreeHelper } from '../components/IssueTreeHelper';
+import { PathwayGlyph } from '../components/PathwayGlyph';
 import { getBranchingScenario } from '../data/branchingScenarios';
 import { MetricLabel } from '../components/MetricLabel';
 import { PriceBucketStrip } from '../components/PriceBucketStrip';
@@ -519,7 +519,7 @@ export function PartnerDetailScreen({
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
                   {alreadyEngaged
                     ? 'Already engaged this round'
-                    : 'Open the Pricing Diagnostic Flow before you engage'}
+                    : 'Open The Pricing Pathway before you engage'}
                 </div>
               </div>
             )}
@@ -1479,8 +1479,8 @@ function HelperLauncherTab({
     <motion.button
       data-tutorial="partner-detail-tree-tab"
       onClick={onOpen}
-      aria-label="Open Pricing Diagnostic Flow"
-      title="Pricing Diagnostic Flow"
+      aria-label="Open The Pricing Pathway"
+      title="The Pricing Pathway"
       initial={{ opacity: 0, x: 12, y: '-50%' }}
       animate={{
         opacity: 1,
@@ -1525,7 +1525,7 @@ function HelperLauncherTab({
       }}
     >
       <span style={{ position: 'relative', display: 'inline-flex' }}>
-        <Workflow size={36} strokeWidth={2.5} />
+        <PathwayGlyph size={38} color="var(--brand-navy-dark)" strokeWidth={2.6} />
         {hasProgress && (
           <span
             aria-label="In progress"
@@ -1553,9 +1553,9 @@ function HelperLauncherTab({
           textAlign: 'center',
         }}
       >
+        The<br />
         Pricing<br />
-        Diagnostic<br />
-        Flow
+        Pathway
       </span>
     </motion.button>
   );

@@ -25,7 +25,7 @@ import type { KnowledgeCheckResult } from '../types';
  * Mini-scenarios clearance activity.
  *
  * Four case-file scenarios, each walking a 4-step mini Pricing
- * Diagnostic Flow (Signal, Diagnose, Narrative, Next step). Learner
+ * Pathway (Signal, Diagnose, Narrative, Next step). Learner
  * works through them one at a time; each step is scored via a
  * KnowledgeCheckResult with a stable itemId so the Clearance Summary
  * retry path can target just the steps they missed.

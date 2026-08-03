@@ -2,8 +2,8 @@
  * Mini-scenarios activity content.
  *
  * Four short case files inserted into clearance between Call Audit and
- * the Diagnostic Flow reveal. Each scenario walks a mini-version of the
- * Pricing Diagnostic Flow (Signal, Diagnose, Narrative, Next step) on a
+ * the Pricing Pathway reveal. Each scenario walks a mini-version of the
+ * Pricing Pathway (Signal, Diagnose, Narrative, Next step) on a
  * different pricing situation. Purpose: exercise the diagnostic
  * pattern in variety BEFORE Alex formalises it as the seven-step
  * framework in the reveal that follows.
