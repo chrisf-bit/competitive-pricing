@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { seededShuffle } from '../util/seededShuffle';
 import { motion } from 'framer-motion';
 import {
   User,
@@ -103,6 +104,20 @@ export function BranchingConversationScreen({
       ? tree.steps[prevStepIndex]?.options.find((o) => o.id === prevChoiceId)
       : undefined;
   const partnerPrompt = prevOption?.nextPrompt ?? currentStep?.partnerPrompt ?? '';
+
+  // Randomise option order at render time so the optimal pick isn't
+  // always first. Seeded on the step's option ids so the layout is
+  // stable across a retake / practice replay of the same step.
+  const displayedOptions = useMemo(
+    () =>
+      currentStep
+        ? seededShuffle(
+            currentStep.options,
+            currentStep.options.map((o) => o.id).join('|'),
+          )
+        : [],
+    [currentStep],
+  );
 
   const handleSelect = (optionId: string) => {
     setSelectedOption(optionId);
@@ -556,7 +571,7 @@ export function BranchingConversationScreen({
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {currentStep?.options.map((option) => {
+              {displayedOptions.map((option) => {
                 const isHovered = hoveredOption === option.id;
                 const isSelected = selectedOption === option.id;
                 return (

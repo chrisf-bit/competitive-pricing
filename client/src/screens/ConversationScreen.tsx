@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { seededShuffle } from '../util/seededShuffle';
 import { motion } from 'framer-motion';
 import {
   User,
@@ -106,6 +107,17 @@ export function ConversationScreen({
   );
   const partnerPrompt =
     prevNode?.nextPhasePrompt ?? phase?.partnerPrompt ?? '';
+
+  // Randomise option order at render time so the optimal pick isn't
+  // always first. Seeded on the phase's option ids so the layout is
+  // stable across a retake / practice replay.
+  const displayedOptions = useMemo(
+    () =>
+      phase
+        ? seededShuffle(phase.options, phase.options.map((o) => o.id).join('|'))
+        : [],
+    [phase],
+  );
 
   const handleSelect = (optionId: string) => {
     setSelectedOption(optionId);
@@ -522,7 +534,7 @@ export function ConversationScreen({
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              {phase?.options.map((option) => {
+              {displayedOptions.map((option) => {
                 const isHovered = hoveredOption === option.id;
                 const isSelected = selectedOption === option.id;
                 const isDisabled = selectedOption !== null && !isSelected;
