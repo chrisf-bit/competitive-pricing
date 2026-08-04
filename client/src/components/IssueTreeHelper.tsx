@@ -134,13 +134,13 @@ export function IssueTreeHelper({
 
   return (
     <motion.div
-      // Right-side floating drawer. Sized like a chatbot window
-      // (not full-height) so it leaves most of the Partner Detail
-      // content visible while the learner walks through the
-      // diagnosis. Top-anchored below the Header so the right
-      // column's Action card (Begin Conversation) is never occluded
-      // - it sits in the viewport space below the drawer's bottom
-      // edge. Framer-motion handles the x slide entrance / exit.
+      // Right-side floating drawer. Sized like a chatbot window that
+      // grows to fit its content - never taller than needed - so it
+      // never scrolls internally and stays short enough to leave the
+      // Partner Detail Action card (Begin Conversation) visible below
+      // its bottom edge. Content is compact so even the tallest step
+      // (four options) fits without a fixed height. Framer-motion
+      // handles the x slide entrance / exit.
       initial={{ opacity: 0, x: 28 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: 28 }}
@@ -149,11 +149,9 @@ export function IssueTreeHelper({
         position: 'fixed',
         top: 80,
         right: 16,
-        width: 'min(400px, 92vw)',
-        // Cap the height so ~160px of viewport remains visible at
-        // the bottom for the Partner Detail Action card. 80 (top
-        // offset) + 160 (bottom buffer) = 240 reserved.
-        height: 'min(640px, calc(100vh - 240px))',
+        width: 'min(390px, 92vw)',
+        // Height fits the content (no fixed cap, no inner scroll).
+        height: 'auto',
         background: 'var(--white)',
         boxShadow: '-12px 16px 40px rgba(0,15,40,0.22)',
         border: '1px solid var(--grey-100)',
@@ -167,7 +165,7 @@ export function IssueTreeHelper({
       {/* Header */}
       <div
         style={{
-          padding: '16px 18px',
+          padding: '12px 16px',
           background:
             'linear-gradient(135deg, var(--brand-navy) 0%, var(--brand-navy-light) 100%)',
           color: 'var(--white)',
@@ -238,11 +236,11 @@ export function IssueTreeHelper({
       <div
         style={{
           background: 'var(--brand-navy-dark)',
-          padding: '8px 14px',
+          padding: '6px 14px',
           borderBottom: '1px solid var(--grey-100)',
         }}
       >
-        <div style={{ height: 60 }}>
+        <div style={{ height: 52 }}>
           <PricingPathway
             nodes={pathwayNodes}
             activeIndex={activeNode}
@@ -252,12 +250,12 @@ export function IssueTreeHelper({
         </div>
       </div>
 
-      {/* Step body */}
+      {/* Step body - no inner scroll; the drawer grows to fit it. */}
       <div
         style={{
           flex: 1,
-          overflowY: 'auto',
-          padding: 18,
+          overflow: 'visible',
+          padding: '14px 16px',
         }}
       >
         {!isComplete && (
@@ -276,11 +274,11 @@ export function IssueTreeHelper({
             </div>
             <h3
               style={{
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: 800,
                 color: 'var(--brand-navy)',
                 margin: 0,
-                marginBottom: 10,
+                marginBottom: 8,
                 lineHeight: 1.3,
               }}
             >
@@ -298,10 +296,10 @@ export function IssueTreeHelper({
             {stepIndex === 0 && (
               <p
                 style={{
-                  fontSize: 12.5,
+                  fontSize: 11.5,
                   color: 'var(--grey-600)',
-                  lineHeight: 1.55,
-                  margin: '0 0 12px',
+                  lineHeight: 1.4,
+                  margin: '0 0 8px',
                   fontStyle: 'italic',
                 }}
               >
@@ -391,7 +389,7 @@ export function IssueTreeHelper({
       {/* Footer */}
       <div
         style={{
-          padding: '10px 18px',
+          padding: '8px 16px',
           borderTop: '1px solid var(--grey-100)',
           display: 'flex',
           alignItems: 'center',
@@ -522,12 +520,12 @@ function OptionCard({
         display: 'block',
         width: '100%',
         textAlign: 'left',
-        padding: '11px 13px',
+        padding: '8px 11px',
         background: selected ? 'rgba(254,186,2,0.10)' : idleBackground,
         border: selected ? '2px solid var(--brand-yellow)' : idleBorder,
         borderRadius: 'var(--radius-md)',
         cursor: 'pointer',
-        marginBottom: 8,
+        marginBottom: 6,
         transition: 'all 0.15s ease',
       }}
       onMouseEnter={(e) => {
@@ -547,7 +545,7 @@ function OptionCard({
           alignItems: 'center',
           justifyContent: 'space-between',
           gap: 8,
-          marginBottom: 3,
+          marginBottom: 2,
         }}
       >
         <div
@@ -581,7 +579,7 @@ function OptionCard({
           </span>
         )}
       </div>
-      <div style={{ fontSize: 12, color: 'var(--grey-500)', lineHeight: 1.4 }}>
+      <div style={{ fontSize: 11.5, color: 'var(--grey-500)', lineHeight: 1.35 }}>
         {description}
       </div>
     </button>
