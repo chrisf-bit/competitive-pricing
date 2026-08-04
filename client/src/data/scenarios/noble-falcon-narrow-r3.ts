@@ -27,7 +27,7 @@ import {
  *     used verbatim in the optimal pick.
  *   - The risky option pushes for cross-channel sync (alignment with
  *     other OTAs as well as Brand.com) - that overreaches Narrow's
- *     mandate and reads as Wide-parity behaviour in a Narrow context.
+ *     mandate and reads as Wide-parity behavior in a Narrow context.
  *
  * Internal metric names (eRPD, Lose Price Public, Price Bucket) do
  * not appear in any option's playerDialogue, including the risky
@@ -86,7 +86,7 @@ const step3FrameValue: BranchingStep = {
   id: 'frame-value',
   label: 'Frame the platform value',
   partnerPrompt:
-    "That is an ownership trade-off. We prioritise brand control and our direct loyal base over top-funnel platform exposure, even if some rooms stay empty.",
+    "That is an ownership trade-off. We prioritize brand control and our direct loyal base over top-funnel platform exposure, even if some rooms stay empty.",
   options: step3Options,
 };
 

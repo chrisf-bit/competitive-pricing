@@ -139,7 +139,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "Our data shows you're more competitive elsewhere when it comes to families. You mentioned the 30% cap - but are you at 100% occupancy? How are you securing advance bookings for the other 70%? There's a lot of availability over the next few months.",
     partnerResponse:
-      "We don't want advance bookings at a lower price - we're waiting for peak. And there are periods we're not performing on any channel. Apart from families, which I can fix, what can we do to optimise with you?",
+      "We don't want advance bookings at a lower price - we're waiting for peak. And there are periods we're not performing on any channel. Apart from families, which I can fix, what can we do to optimize with you?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -236,7 +236,7 @@ const step4: BranchingStep = {
   id: 'align-ask',
   label: 'Ask for direct-website alignment, backed by data',
   partnerPrompt:
-    "We don't want advance bookings at a lower price - we're waiting for peak. And there are periods we're not performing on any channel. Apart from families, which I can fix, what can we do to optimise with you?",
+    "We don't want advance bookings at a lower price - we're waiting for peak. And there are periods we're not performing on any channel. Apart from families, which I can fix, what can we do to optimize with you?",
   options: step4Options,
 };
 
@@ -247,9 +247,9 @@ const step5Options: BranchingOption[] = [
     id: 'rb-r4-narrow-step5-correct',
     label: 'Diagnose the non-genuine Genius discount; align base + family, close',
     description:
-      "SME-prescribed pitch: he isn't getting the best out of Genius because the discount reads as non-genuine; aligning both base and family rates optimises the 30% share with higher-value guests. Commit to a follow-up.",
+      "SME-prescribed pitch: he isn't getting the best out of Genius because the discount reads as non-genuine; aligning both base and family rates optimizes the 30% share with higher-value guests. Commit to a follow-up.",
     playerDialogue:
-      "You're not getting the best out of Genius - travellers can see the discount isn't genuine, which blunts it. If you align both your base and family rates, you optimise that 30% share with higher-spending, longer-staying guests. Right now families book other Genius properties because they don't get a competitive offer from you. I'll set it up and send a follow-up.",
+      "You're not getting the best out of Genius - travelers can see the discount isn't genuine, which blunts it. If you align both your base and family rates, you optimize that 30% share with higher-spending, longer-staying guests. Right now families book other Genius properties because they don't get a competitive offer from you. I'll set it up and send a follow-up.",
     partnerResponse:
       "The data logic is clear. The family rates and the Genius discount aren't working - let's adjust both to regain our visibility and booking share.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Treats the symptom, not the cause - a deeper discount on an inflated base doesn't restore genuine value.",
     playerDialogue:
-      "Just deepen your Genius discount - make it 20% - and the Genius travellers will come back.",
+      "Just deepen your Genius discount - make it 20% - and the Genius travelers will come back.",
     partnerResponse:
       "A deeper discount on an inflated base is the same problem, isn't it? That doesn't fix the value.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

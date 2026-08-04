@@ -86,7 +86,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             <p style={{ margin: 0 }}>
               A portfolio of partner accounts is under pressure on Booking.com. Their
               visibility on Booking.com is slipping. Their prices are less competitive than
-              they could be. Travellers are choosing other options. Much of it is fixable,
+              they could be. Travelers are choosing other options. Much of it is fixable,
               if you know what to look for, what to ask, and how to help the partner find
               the right next step for their performance on Booking.com.
             </p>

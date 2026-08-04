@@ -266,7 +266,7 @@ export const dataInsightsChallenges: DataInsightsChallenge[] = [
       "Hotel Valle's Public RPD is 10.3% but Loyal RPD is only 0.7%. What's the most likely story here?",
     correctHotelId: 'b',
     options: [
-      { hotelId: 'a', label: 'The Genius programme is misconfigured' },
+      { hotelId: 'a', label: 'The Genius program is misconfigured' },
       {
         hotelId: 'b',
         label: 'The base price is uncompetitive; the Genius discount is masking it',
@@ -276,9 +276,9 @@ export const dataInsightsChallenges: DataInsightsChallenge[] = [
     ],
     feedback: {
       correct:
-        "Spot on. Public RPD is what non-logged-in travellers see; Loyal RPD is what Genius members see. The gap means Genius is doing its job - travellers using it get a competitive price - but the underlying public price is weak. The take-away here is that loyal price is masking the underneath issue and the partner is using Genius rate as base price.",
+        "Spot on. Public RPD is what non-logged-in travelers see; Loyal RPD is what Genius members see. The gap means Genius is doing its job - travelers using it get a competitive price - but the underlying public price is weak. The take-away here is that loyal price is masking the underneath issue and the partner is using Genius rate as base price.",
       incorrect:
-        "It's the base-price-masked-by-Genius story. Non-logged-in travellers (Public RPD) see Booking.com as 10.3% off-pitch, but Genius members (Loyal RPD) get a near-perfect 0.7% - because the Genius discount lowers what they actually see. The internal read is that the public price is the problem; whether and how to raise that with the partner is a separate compliance question.",
+        "It's the base-price-masked-by-Genius story. Non-logged-in travelers (Public RPD) see Booking.com as 10.3% off-pitch, but Genius members (Loyal RPD) get a near-perfect 0.7% - because the Genius discount lowers what they actually see. The internal read is that the public price is the problem; whether and how to raise that with the partner is a separate compliance question.",
     },
   },
 ];

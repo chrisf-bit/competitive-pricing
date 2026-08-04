@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: explain the lost-checkout dynamic, ask her to provide the same rates and conditions she gives other third-party channels, then pivot to how she's capturing the family and international segments behind the volume drop.",
     playerDialogue:
-      "When we show a higher price, travellers buy from a cheaper competitor on our search page instead of booking with you. To maximise traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels. And how are you capturing the family and international segments that are driving the drop?",
+      "When we show a higher price, travelers buy from a cheaper competitor on our search page instead of booking with you. To maximize traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels. And how are you capturing the family and international segments that are driving the drop?",
     partnerResponse:
       "Families are a headache for vacation rentals. We restrict our double rooms from family searches and don't offer free cots - we prefer to sell those larger units directly, where we control the guest risk. For international bookers we're not running any specific campaigns.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

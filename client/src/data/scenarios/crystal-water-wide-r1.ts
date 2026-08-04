@@ -39,9 +39,9 @@ const step1Options: BranchingOption[] = [
     id: 'cw-r1-wide-step1-correct',
     label: 'Mirror the data: traffic up, conversion stuck on price',
     description:
-      "Use the doc-prescribed opener: validate the volume signal, then explain the meta-search behaviour pattern that's capping conversion - travellers compare on Booking.com and book the cheaper rate elsewhere.",
+      "Use the doc-prescribed opener: validate the volume signal, then explain the meta-search behavior pattern that's capping conversion - travelers compare on Booking.com and book the cheaper rate elsewhere.",
     playerDialogue:
-      "That aligns exactly with what the data is showing. Your traffic here is massive, but conversion is hitting a wall, so travellers are finding you on Booking.com, doing a quick meta-search comparison, and booking the cheaper rate elsewhere.",
+      "That aligns exactly with what the data is showing. Your traffic here is massive, but conversion is hitting a wall, so travelers are finding you on Booking.com, doing a quick meta-search comparison, and booking the cheaper rate elsewhere.",
     partnerResponse:
       "Right, and honestly, that saves us on commission. We have to look at our margins.",
     styleMatch: { red: 2, yellow: 1, green: 0, blue: 1 },
@@ -72,7 +72,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "Well Sarah, shifting share away from us right now is actually a huge mistake. If you keep ignoring our platform, your traffic will eventually drop to zero and your brand site won't be able to replace that lost volume.",
     partnerResponse:
-      "Telling me my business is going to collapse if I don't prioritise you is the wrong opener.",
+      "Telling me my business is going to collapse if I don't prioritize you is the wrong opener.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
     assertiveness: 3,
     compliance: 'risky',
@@ -95,11 +95,11 @@ const step2Options: BranchingOption[] = [
     id: 'cw-r1-wide-step2-correct',
     label: 'Acknowledge the margin worry, surface the meta-search leak',
     description:
-      "Use the doc-prescribed pivot: honour the margin concern, then surface that the price gap is leaking to third-party OTAs on meta-search (not just her direct site), and pitch matching the rate to capture the 202% traffic surplus.",
+      "Use the doc-prescribed pivot: honor the margin concern, then surface that the price gap is leaking to third-party OTAs on meta-search (not just her direct site), and pitch matching the rate to capture the 202% traffic surplus.",
     playerDialogue:
       "I completely understand protecting your margins. But right now, that gap is causing a leak to third-party OTAs on meta-search, not just your direct site. If you match that rate on Booking.com, you would benefit from that 202% traffic vs peer group from a channel that handles all the global marketing costs for you.",
     partnerResponse:
-      "I didn't realise third-party OTAs were undercutting us on meta.",
+      "I didn't realize third-party OTAs were undercutting us on meta.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,
     compliance: 'safe',
@@ -196,7 +196,7 @@ const step3Close: BranchingStep = {
   id: 'close-rate-alignment',
   label: 'Close with a rate-alignment pilot',
   partnerPrompt:
-    "I didn't realise third-party OTAs were undercutting us on meta.",
+    "I didn't realize third-party OTAs were undercutting us on meta.",
   options: step3Options,
 };
 

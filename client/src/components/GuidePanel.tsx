@@ -470,7 +470,7 @@ function getGuideContent(
         tips: [
           {
             icon: <AlertTriangle size={12} />,
-            title: 'Prioritise wisely',
+            title: 'Prioritize wisely',
             text: 'One partner per round. Pick the one whose numbers need you most - neglected partners drift.',
           },
           {

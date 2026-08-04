@@ -17,7 +17,7 @@ import type { ConversationTree } from '../types';
  *
  * Emily Carter (Hotel Manager) is green / blue primary - amiable
  * and analytical, prefers data-led conversations and collaborative
- * planning. Style scoring rewards green / blue, penalises red /
+ * planning. Style scoring rewards green / blue, penalizes red /
  * yellow when the AM pushes too hard or gets too expressive.
  */
 export const ravenInnR2: ConversationTree = {
@@ -60,7 +60,7 @@ export const ravenInnR2: ConversationTree = {
             description:
               "Frame the call around an aggressive growth play. Out of step with her steady, analytical pace.",
             playerDialogue:
-              "Emily, you're under-utilising the platform. Let's stop being conservative and put some real growth tools on the account today.",
+              "Emily, you're under-utilizing the platform. Let's stop being conservative and put some real growth tools on the account today.",
             styleMatch: { blue: -1, green: -2, red: 2, yellow: 1 },
             assertiveness: 3,
             compliance: 'safe',

@@ -7,7 +7,7 @@ import { Signal, Wifi, BatteryFull } from 'lucide-react';
  * children render as normal inside, and the frame just provides the
  * outer chrome (phone body, laptop bezel + hinge, etc).
  *
- * Each frame fills the viewport with a backdrop and centres a fake
+ * Each frame fills the viewport with a backdrop and centers a fake
  * device with the children rendered inside the "screen" area. Children
  * should set their own outer container to height: 100% so they fill
  * the inner screen properly.

@@ -34,7 +34,7 @@ export function CharacterBuildScreen({
   // imagesReady to true and the grid fades in as a complete row.
   const [imagesReady, setImagesReady] = useState(false);
   useEffect(() => {
-    let cancelled = false;
+    let canceled = false;
     const loaders = characterAvatars.map((a) => {
       const img = new Image();
       img.src = a.dataUri;
@@ -50,13 +50,13 @@ export function CharacterBuildScreen({
     });
     // 2.5s safety net so the screen never gets stuck if a fetch hangs.
     const fallback = setTimeout(() => {
-      if (!cancelled) setImagesReady(true);
+      if (!canceled) setImagesReady(true);
     }, 2500);
     Promise.all(loaders).then(() => {
-      if (!cancelled) setImagesReady(true);
+      if (!canceled) setImagesReady(true);
     });
     return () => {
-      cancelled = true;
+      canceled = true;
       clearTimeout(fallback);
     };
   }, []);
@@ -288,7 +288,7 @@ function AvatarTile({
           width: '100%',
           height: '100%',
           // Per-avatar fit/position/scale overrides. Defaults are
-          // 'cover' centred, which suits the seven square-framed
+          // 'cover' centered, which suits the seven square-framed
           // illustrations. Marcus's WebP isn't quite square so uses
           // 'contain' to avoid cover cropping his hair flat.
           objectFit: avatar.objectFit ?? 'cover',
@@ -503,7 +503,7 @@ function PersonaCard({
 
       {/* In-game impact strip. Tells the learner what the persona
           actually does during play - so the pick doesn't read as
-          pure flavour. Kept short and honest to the chip that
+          pure flavor. Kept short and honest to the chip that
           renders on Partner Detail during play. */}
       <div
         style={{

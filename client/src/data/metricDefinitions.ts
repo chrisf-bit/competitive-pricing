@@ -27,12 +27,12 @@ export const metricDefinitions = {
   erpd: {
     label: 'eRPD',
     helpText:
-      "Experienced RPD - the relative price difference between what travellers see on Booking.com and what they'd pay on a key OTA or Brand.com. Higher % = partner is more expensive on our platform.",
+      "Experienced RPD - the relative price difference between what travelers see on Booking.com and what they'd pay on a key OTA or Brand.com. Higher % = partner is more expensive on our platform.",
   },
   rpdPublic: {
     label: 'RPD Public',
     helpText:
-      'Public RPD - the price comparison for travellers who are NOT logged into a Genius account. Reflects the rate seen by the bulk of traffic.',
+      'Public RPD - the price comparison for travelers who are NOT logged into a Genius account. Reflects the rate seen by the bulk of traffic.',
   },
   rpdLoyal: {
     label: 'RPD Loyal',
@@ -59,7 +59,7 @@ export const metricDefinitions = {
   priceBucket: {
     label: 'eRPD Price Bucket',
     helpText:
-      'Where this partner sits on the seven-bucket Booking.com price spectrum. Bucket 1 (eRPD ≤ -3%) = most competitive; Bucket 7 (eRPD > 12%) = least competitive. Used for internal portfolio prioritisation only - never quoted to the partner.',
+      'Where this partner sits on the seven-bucket Booking.com price spectrum. Bucket 1 (eRPD ≤ -3%) = most competitive; Bucket 7 (eRPD > 12%) = least competitive. Used for internal portfolio prioritization only - never quoted to the partner.',
   },
 
   // ── Secondary metrics row (PDF page 1) ──
@@ -135,7 +135,7 @@ export const metricDefinitions = {
   trueDiscountFraction: {
     label: 'True discount fraction',
     helpText:
-      'Share of the discount that genuinely flowed through to travellers (vs being absorbed elsewhere), with measurable impact on eRPD.',
+      'Share of the discount that genuinely flowed through to travelers (vs being absorbed elsewhere), with measurable impact on eRPD.',
   },
   trueDiscountContribution: {
     label: 'True discount contribution',

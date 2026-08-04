@@ -112,7 +112,7 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
     target: 'market-bar',
     title: 'Market Update',
     description:
-      'Market conditions change each round. Demand trends and seasonal factors affect all partners. Check this before deciding who to prioritise.',
+      'Market conditions change each round. Demand trends and seasonal factors affect all partners. Check this before deciding who to prioritize.',
     icon: <Globe size={18} style={{ color: 'var(--brand-blue-light)' }} />,
     position: 'bottom',
   },
@@ -120,7 +120,7 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
     target: 'partner-card',
     title: 'Partner Cards',
     description:
-      "Each card shows the property name, headline KPIs, and the relationship status. Read the numbers - there's no severity colour-coding on the metrics, so you have to spot the priority yourself. Click a card to open the partner.",
+      "Each card shows the property name, headline KPIs, and the relationship status. Read the numbers - there's no severity color-coding on the metrics, so you have to spot the priority yourself. Click a card to open the partner.",
     icon: <Users size={18} style={{ color: 'var(--brand-blue-light)' }} />,
     position: 'right',
   },
@@ -198,7 +198,7 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
     target: 'mini-metrics',
     title: 'Supporting KPIs',
     description:
-      'RPD Public is the gap on what non-logged-in travellers see; RPD Loyal covers Genius members. "Lose Price" is the share of public traffic where the partner is losing on price. "Scenarios" is the count of active pricing scenarios on the account.',
+      'RPD Public is the gap on what non-logged-in travelers see; RPD Loyal covers Genius members. "Lose Price" is the share of public traffic where the partner is losing on price. "Scenarios" is the count of active pricing scenarios on the account.',
     icon: <Eye size={18} style={{ color: 'var(--brand-blue-light)' }} />,
     position: 'left',
   },
@@ -341,7 +341,7 @@ export function TutorialOverlay({ onClose, onStartGame, mode = 'portfolio' }: Tu
     // Try measuring immediately after layout; if the target isn't laid
     // out yet (mid-animation, just-mounted card, etc.) retry on rAF
     // for up to ~30 frames before giving up. Without the retry the
-    // tooltip lands in screen-centre and never recovers.
+    // tooltip lands in screen-center and never recovers.
     let raf: number | null = null;
     let frames = 0;
     const tick = () => {

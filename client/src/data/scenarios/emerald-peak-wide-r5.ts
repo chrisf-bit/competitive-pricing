@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "Right now your visibility is being heavily impacted by your price competitiveness, so we're losing demand for you on our platform. Before I go further - what's your current strategy, and what are your goals with us?",
     partnerResponse:
-      "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travellers see us on your platform and then click to our website to book.",
+      "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -79,9 +79,9 @@ const step2Options: BranchingOption[] = [
     id: 'ep-r5-wide-step2-correct',
     label: 'Use the 90% discovery stat; the gap hurts both channels',
     description:
-      "SME-prescribed counter: 90% of Booking.com bookers discover the property here first, so if she's uncompetitive travellers never find her and never reach her website either - the structural gap lowers ranking and discovery for BOTH channels.",
+      "SME-prescribed counter: 90% of Booking.com bookers discover the property here first, so if she's uncompetitive travelers never find her and never reach her website either - the structural gap lowers ranking and discovery for BOTH channels.",
     playerDialogue:
-      "I understand the intent. But guest behaviour has changed - up to 90% of the customers who book with us discover the property on our platform first. When your pricing here is uncompetitive, travellers can't find you on the results page, and they won't gravitate to your website either. This structural gap is lowering ranking and discovery for both channels.",
+      "I understand the intent. But guest behavior has changed - up to 90% of the customers who book with us discover the property on our platform first. When your pricing here is uncompetitive, travelers can't find you on the results page, and they won't gravitate to your website either. This structural gap is lowering ranking and discovery for both channels.",
     partnerResponse:
       "The brand requires a rate advantage on our own website, no discussion. I cannot authorise a flat rate drop on Booking.com that impacts our ADR or breaks internal policies.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -108,9 +108,9 @@ const step2Options: BranchingOption[] = [
     id: 'ep-r5-wide-step2-lecture',
     label: 'Tell her the strategy is outdated',
     description:
-      "Dismiss the head-office strategy as outdated and travellers as lazy. Lecturing a GM who's simply following mandated policy shuts the conversation down.",
+      "Dismiss the head-office strategy as outdated and travelers as lazy. Lecturing a GM who's simply following mandated policy shuts the conversation down.",
     playerDialogue:
-      "Honestly, that whole billboard strategy is outdated - travellers are lazy, they just book whatever's cheapest in front of them.",
+      "Honestly, that whole billboard strategy is outdated - travelers are lazy, they just book whatever's cheapest in front of them.",
     partnerResponse:
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -124,7 +124,7 @@ const step2: BranchingStep = {
   id: 'billboard-counter',
   label: 'Break the reverse-billboard belief',
   partnerPrompt:
-    "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travellers see us on your platform and then click to our website to book.",
+    "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
   options: step2Options,
 };
 
@@ -135,9 +135,9 @@ const step3Options: BranchingOption[] = [
     id: 'ep-r5-wide-step3-correct',
     label: 'Respect brand integrity; ask for the same third-party + direct rates',
     description:
-      "SME-prescribed ask: don't threaten her brand integrity - to optimise the 90% who discover her through us, ask for the same rates and conditions she gives third parties and her direct channel, framed as leveraging Booking.com's marketing scale and metasearch presence.",
+      "SME-prescribed ask: don't threaten her brand integrity - to optimize the 90% who discover her through us, ask for the same rates and conditions she gives third parties and her direct channel, framed as leveraging Booking.com's marketing scale and metasearch presence.",
     playerDialogue:
-      "We don't want to compromise your brand integrity. But to optimise the 90% of travellers who discover you through us, we'd ask for the same rates and conditions you provide to third parties and your direct channel. When you leverage our global marketing scale and metasearch presence, you secure that incremental demand.",
+      "We don't want to compromise your brand integrity. But to optimize the 90% of travelers who discover you through us, we'd ask for the same rates and conditions you provide to third parties and your direct channel. When you leverage our global marketing scale and metasearch presence, you secure that incremental demand.",
     partnerResponse:
       "How can I match rates without violating my brand rules?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -220,9 +220,9 @@ const step4Options: BranchingOption[] = [
     id: 'ep-r5-wide-step4-ranking-threat',
     label: 'Threaten a visibility penalty',
     description:
-      "Threaten to keep her visibility penalised until she aligns. Threatening ranking/visibility over her pricing is banned in every regime.",
+      "Threaten to keep her visibility penalized until she aligns. Threatening ranking/visibility over her pricing is banned in every regime.",
     playerDialogue:
-      "If you don't align, our system will keep penalising your visibility until you do - it's only going to get worse.",
+      "If you don't align, our system will keep penalizing your visibility until you do - it's only going to get worse.",
     partnerResponse:
       "Threatening my visibility to force my hand is exactly the wrong move. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

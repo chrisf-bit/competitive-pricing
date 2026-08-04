@@ -39,7 +39,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Use the doc-prescribed opener: respect Sarah's direct-brand strategy, then surface the free-billboard dynamic created by the Brand.com price gap on Booking.com specifically.",
     playerDialogue:
-      "It makes total sense to build your direct brand. But let's look at the actual cost of that strategy. Right now, your public base rate on Booking.com is higher compared to your brand site. Because of that gap, travellers use us as a free billboard, but then leave to book directly with you.",
+      "It makes total sense to build your direct brand. But let's look at the actual cost of that strategy. Right now, your public base rate on Booking.com is higher compared to your brand site. Because of that gap, travelers use us as a free billboard, but then leave to book directly with you.",
     partnerResponse:
       "Exactly, that's the goal! It saves us the commission fee.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
@@ -151,9 +151,9 @@ const step3Options: BranchingOption[] = [
     description:
       "Use the doc-prescribed close: only a guest who was 100% committed counts as 'free' - everyone else is incremental volume she'd otherwise lose to a competitor on Booking.com.",
     playerDialogue:
-      "Only if that guest was 100% committed to your site. Many global travellers will simply book a competitor if your price is not competitive. By giving us the same rate as your website, you could turn that traffic into incremental bookings from guests you would otherwise lose entirely.",
+      "Only if that guest was 100% committed to your site. Many global travelers will simply book a competitor if your price is not competitive. By giving us the same rate as your website, you could turn that traffic into incremental bookings from guests you would otherwise lose entirely.",
     partnerResponse:
-      "You have a point about the travellers who stick exclusively to one channel. Let's bring the base rates into parity for the next 30 days and see if total revenue increases.",
+      "You have a point about the travelers who stick exclusively to one channel. Let's bring the base rates into parity for the next 30 days and see if total revenue increases.",
     styleMatch: { red: 2, yellow: 2, green: 0, blue: 1 },
     assertiveness: 2,
     compliance: 'safe',

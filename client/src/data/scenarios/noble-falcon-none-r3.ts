@@ -91,7 +91,7 @@ const step3FrameValue: BranchingStep = {
   id: 'frame-value',
   label: 'Frame the platform value',
   partnerPrompt:
-    "That is an ownership trade-off. We prioritise brand control and our direct loyal base over top-funnel platform exposure, even if some rooms stay empty.",
+    "That is an ownership trade-off. We prioritize brand control and our direct loyal base over top-funnel platform exposure, even if some rooms stay empty.",
   options: step3Options,
 };
 

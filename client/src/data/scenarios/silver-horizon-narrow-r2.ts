@@ -280,7 +280,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach - price against Expedia for international and drop public rates to guarantee it. Other-OTA pricing and blanket discounting are both off the table in a Narrow market.",
     playerDialogue:
-      "And let's make sure you're cheaper than Expedia for international travellers - drop your public rates to guarantee it.",
+      "And let's make sure you're cheaper than Expedia for international travelers - drop your public rates to guarantee it.",
     partnerResponse:
       "Pricing against Expedia and blanket discounting - neither is on the table. Let's stick to my direct alignment.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

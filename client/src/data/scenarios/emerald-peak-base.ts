@@ -21,7 +21,7 @@ import type { IssueTreePath } from '../../types';
  * Sophia's style is red (driver) primary + blue (analytical/rules)
  * secondary: direct and ROI-focused, but strictly policy-bound - she
  * moves on a concrete, compliant, targeted solution, not a broad cut.
- * Scoring rewards red + blue and penalises soft green / empty yellow.
+ * Scoring rewards red + blue and penalizes soft green / empty yellow.
  *
  * Same intentional-Brand.com-first diagnosis as Royal Crest R1 /
  * Ocean View R3, so the Issue Tree path is shared with that shape.
@@ -39,4 +39,4 @@ export const emeraldPeakR5IssueTreePath: IssueTreePath = {
 // SME-prescribed AM opener (identical across regimes). Sophia's Step 1
 // partnerPrompt is her reply to this.
 export const emeraldPeakOpeningAm =
-  "Hi Sophia, thanks for joining the call. I've been analysing your performance - can I share some data with you?";
+  "Hi Sophia, thanks for joining the call. I've been analyzing your performance - can I share some data with you?";

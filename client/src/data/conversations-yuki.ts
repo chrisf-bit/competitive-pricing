@@ -2,7 +2,7 @@ import type { ConversationTree } from '../types';
 
 // ════════════════════════════════════════════════════════════
 //  YUKI - Round 1
-//  Focus: Introducing Genius Programme as a premium visibility
+//  Focus: Introducing Genius Program as a premium visibility
 //  tool (not discounting)
 // ════════════════════════════════════════════════════════════
 export const yukiR1: ConversationTree = {
@@ -31,7 +31,7 @@ export const yukiR1: ConversationTree = {
             label: 'Lead with data',
             description: 'Open with her performance numbers and a specific observation.',
             playerDialogue:
-              "Good morning, Yuki. I've been reviewing Ryokan Komorebi's performance on the platform, and I've identified some areas where I think we could work together to improve your visibility to the right travellers. Could I walk you through what I'm seeing?",
+              "Good morning, Yuki. I've been reviewing Ryokan Komorebi's performance on the platform, and I've identified some areas where I think we could work together to improve your visibility to the right travelers. Could I walk you through what I'm seeing?",
             styleMatch: { green: 0, blue: 2, red: 0, yellow: -1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -41,7 +41,7 @@ export const yukiR1: ConversationTree = {
             label: 'Lead with opportunity',
             description: 'Frame the call around a growth opportunity for luxury properties.',
             playerDialogue:
-              "Yuki, I've been looking at how luxury traditional properties in Kyoto are performing, and I think there's an opportunity to get Ryokan Komorebi in front of more high-quality travellers without compromising your positioning. I'd love to share what I've found.",
+              "Yuki, I've been looking at how luxury traditional properties in Kyoto are performing, and I think there's an opportunity to get Ryokan Komorebi in front of more high-quality travelers without compromising your positioning. I'd love to share what I've found.",
             styleMatch: { green: 0, blue: 0, red: 1, yellow: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -54,7 +54,7 @@ export const yukiR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "That is kind of you to ask. The season is steady. But I suspect you are calling about more than the cherry blossoms. What is on your mind?", emotion: 'neutral' },
             { trustThreshold: 'medium', text: "Thank you for asking. Spring is beautiful here, and our guests appreciate the seasonal kaiseki menu we prepare. We are not as full as I would like, though. Was there something specific you wished to discuss?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "How thoughtful. Spring is indeed our most special season. I have been thinking about how to reach more of the right travellers, actually. Perhaps you have some ideas?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "How thoughtful. Spring is indeed our most special season. I have been thinking about how to reach more of the right travelers, actually. Perhaps you have some ideas?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 5,
@@ -63,7 +63,7 @@ export const yukiR1: ConversationTree = {
           optionId: 'yuki-r1-opening-data',
           responses: [
             { trustThreshold: 'low', text: "I see. Before we proceed, I would like to understand how you are measuring our performance. We are a traditional ryokan - I want to be sure the comparison is appropriate.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "I appreciate that you have taken the time to analyse our data. Please, go ahead. I am always interested in understanding our position more clearly.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "I appreciate that you have taken the time to analyze our data. Please, go ahead. I am always interested in understanding our position more clearly.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Thank you. I have been looking at our numbers myself and I have some questions. Please share what you have found.", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -73,7 +73,7 @@ export const yukiR1: ConversationTree = {
           optionId: 'yuki-r1-opening-opportunity',
           responses: [
             { trustThreshold: 'low', text: "I appreciate the thought, but I am cautious about anything that might attract guests who are not the right fit for our experience. What exactly do you mean?", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That is interesting. Reaching the right travellers is very important to us. I would like to hear more, but I should say - we are very selective about our positioning.", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "That is interesting. Reaching the right travelers is very important to us. I would like to hear more, but I should say - we are very selective about our positioning.", emotion: 'neutral' },
             { trustThreshold: 'high', text: "That sounds promising. Connecting with the right guests is always our priority. Please tell me what you have in mind.", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -103,7 +103,7 @@ export const yukiR1: ConversationTree = {
             label: 'Read it as a pricing problem',
             description: 'Suggest the rate is sitting above what guests are willing to pay.',
             playerDialogue:
-              "What I'm seeing is that on the searches where Ryokan Komorebi appears, travellers are often choosing properties at a lower price point. My read is the rate may be sitting slightly above what comparable luxury ryokans in Kyoto are showing.",
+              "What I'm seeing is that on the searches where Ryokan Komorebi appears, travelers are often choosing properties at a lower price point. My read is the rate may be sitting slightly above what comparable luxury ryokans in Kyoto are showing.",
             styleMatch: { green: -1, blue: 1, red: 1, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -112,9 +112,9 @@ export const yukiR1: ConversationTree = {
             id: 'yuki-r1-diag-discoverability',
             label: 'Frame it as a discoverability gap, not a price one',
             description:
-              "Show that her rate is fine - the issue is the right travellers never see her in the filters and quality-signal sets where she'd naturally win.",
+              "Show that her rate is fine - the issue is the right travelers never see her in the filters and quality-signal sets where she'd naturally win.",
             playerDialogue:
-              "Here is what I find interesting. Your rate is right where it should be for a luxury ryokan in Kyoto - your parity is clean, your ADR is in line with comparable traditional properties. What's happening is more about being found. The travellers who would genuinely value Ryokan Komorebi - experienced, longer-stay, culturally-curious - tend to filter by quality signals before price. Because you have no Genius programme or other visibility marker active, you simply do not appear in the curated set they look at. They are not choosing someone else - they never see you in the first place.",
+              "Here is what I find interesting. Your rate is right where it should be for a luxury ryokan in Kyoto - your parity is clean, your ADR is in line with comparable traditional properties. What's happening is more about being found. The travelers who would genuinely value Ryokan Komorebi - experienced, longer-stay, culturally-curious - tend to filter by quality signals before price. Because you have no Genius program or other visibility marker active, you simply do not appear in the curated set they look at. They are not choosing someone else - they never see you in the first place.",
             styleMatch: { green: 2, blue: 2, red: 0, yellow: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -145,9 +145,9 @@ export const yukiR1: ConversationTree = {
         {
           optionId: 'yuki-r1-diag-discoverability',
           responses: [
-            { trustThreshold: 'low', text: "So our rate is appropriate, but the travellers who would value us most never see us. That is a relief - and also troubling. I would like to understand this better.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "So our rate is appropriate, but the travelers who would value us most never see us. That is a relief - and also troubling. I would like to understand this better.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "That is a thoughtful framing. So it is not that we are losing them to a cheaper option - we are not even appearing in their consideration set. Yes, that aligns with what we sense. Please continue.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Yes. That is exactly the dilemma I have felt but could not put into words. The right traveller would love what we offer, but we are invisible to them. Thank you for naming it.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Yes. That is exactly the dilemma I have felt but could not put into words. The right traveler would love what we offer, but we are invisible to them. Thank you for naming it.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 2, visibility: 1 },
           trustChange: 6,
@@ -165,9 +165,9 @@ export const yukiR1: ConversationTree = {
           {
             id: 'yuki-r1-recommendation-genius',
             label: 'Position Genius as premium visibility',
-            description: 'Frame the Genius Programme as a curated traveller programme, not a discount.',
+            description: 'Frame the Genius Program as a curated traveler program, not a discount.',
             playerDialogue:
-              "I completely understand, Yuki, and I would never suggest anything that undermines your positioning. The Genius Programme is actually designed with properties like yours in mind. Genius members are experienced, frequent travellers - they leave higher review scores, book longer stays, and are far less likely to cancel. The programme gives your property a visibility badge that signals quality, not price. It is about being discovered by the right traveller, not the bargain hunter.",
+              "I completely understand, Yuki, and I would never suggest anything that undermines your positioning. The Genius Program is actually designed with properties like yours in mind. Genius members are experienced, frequent travelers - they leave higher review scores, book longer stays, and are far less likely to cancel. The program gives your property a visibility badge that signals quality, not price. It is about being discovered by the right traveler, not the bargain hunter.",
             styleMatch: { green: 2, blue: 1, red: 0, yellow: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -177,7 +177,7 @@ export const yukiR1: ConversationTree = {
             label: 'Recommend Genius plus Mobile Rate',
             description: 'Suggest activating two discount products at once for maximum impact.',
             playerDialogue:
-              "I think the best approach would be to activate the Genius Programme and a Mobile Rate together. Genius gives you access to a premium traveller segment, and Mobile Rate captures the growing number of bookings made on phones. Together, they would significantly improve your RPD and visibility.",
+              "I think the best approach would be to activate the Genius Program and a Mobile Rate together. Genius gives you access to a premium traveler segment, and Mobile Rate captures the growing number of bookings made on phones. Together, they would significantly improve your RPD and visibility.",
             styleMatch: { green: -2, blue: 0, red: 1, yellow: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -198,9 +198,9 @@ export const yukiR1: ConversationTree = {
         {
           optionId: 'yuki-r1-recommendation-genius',
           responses: [
-            { trustThreshold: 'low', text: "That is an interesting perspective. But a discount is still a discount, even if you call it a programme. How large is the rate reduction? I would need to discuss this with my team before considering it.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "I appreciate how you have framed that. Higher review scores and longer stays - those are exactly the metrics that matter to us. What does the programme involve specifically? I would like to share the details with my operations manager.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "That resonates with me. We invest so much in creating an authentic experience - connecting with travellers who truly appreciate it is very important. Please tell me how we would get started. I will discuss it with my team this week.", emotion: 'positive' },
+            { trustThreshold: 'low', text: "That is an interesting perspective. But a discount is still a discount, even if you call it a program. How large is the rate reduction? I would need to discuss this with my team before considering it.", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I appreciate how you have framed that. Higher review scores and longer stays - those are exactly the metrics that matter to us. What does the program involve specifically? I would like to share the details with my operations manager.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "That resonates with me. We invest so much in creating an authentic experience - connecting with travelers who truly appreciate it is very important. Please tell me how we would get started. I will discuss it with my team this week.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 6, visibility: 4, conversion: 2 },
           trustChange: 5,
@@ -222,7 +222,7 @@ export const yukiR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "That is a thoughtful question. Our ideal guest is someone who comes for the cultural experience - the tea ceremony, the onsen, the kaiseki dinner. We do not want high volume. We want the right people.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "Thank you for asking that. We want guests who stay at least two nights and truly immerse themselves in the ryokan experience. Occupancy is important, but guest quality is more important. What would you recommend with that in mind?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "I am glad you asked. Our vision is to be the most respected traditional ryokan on the platform - not the most booked, but the most valued. We want travellers who seek authenticity. How can we reach more of them?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "I am glad you asked. Our vision is to be the most respected traditional ryokan on the platform - not the most booked, but the most valued. We want travelers who seek authenticity. How can we reach more of them?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, visibility: 2 },
           trustChange: 6,
@@ -286,7 +286,7 @@ export const yukiR2: ConversationTree = {
           optionId: 'yuki-r2-opening-listen',
           responses: [
             { trustThreshold: 'low', text: "Thank you. My team had mixed feelings. Some are open to change, others worry about the guest experience. I would like to hear your thoughts before we decide.", emotion: 'neutral' },
-            { trustThreshold: 'medium', text: "That means a great deal. My operations manager was actually quite positive about the Genius Programme. She felt it could attract the kind of traveller we want. We are cautiously open to doing more.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That means a great deal. My operations manager was actually quite positive about the Genius Program. She felt it could attract the kind of traveler we want. We are cautiously open to doing more.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Thank you for that respect. My team is on board with the direction we discussed. They trust the approach, and so do I. What would you suggest as our next step?", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -296,7 +296,7 @@ export const yukiR2: ConversationTree = {
           optionId: 'yuki-r2-opening-results',
           responses: [
             { trustThreshold: 'low', text: "I would like to see the numbers. I have been monitoring our bookings and I want to compare what you are seeing with what we are experiencing on the ground.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That is good to hear. I have noticed a few more enquiries recently. Please share the data - I would like to understand the full picture.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That is good to hear. I have noticed a few more inquiries recently. Please share the data - I would like to understand the full picture.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Wonderful. I felt something had shifted. Please walk me through the details - I want to share accurate information with my team.", emotion: 'positive' },
           ],
           metricEffects: {},
@@ -326,7 +326,7 @@ export const yukiR2: ConversationTree = {
             label: 'Reassure broadly',
             description: 'Note things are moving in the right direction without specifics.',
             playerDialogue:
-              "The picture is genuinely encouraging. The Genius programme is starting to bring in the kind of traveller you described - longer stays, higher review scores. Things are moving in the right direction.",
+              "The picture is genuinely encouraging. The Genius program is starting to bring in the kind of traveler you described - longer stays, higher review scores. Things are moving in the right direction.",
             styleMatch: { green: 2, blue: 0, red: 0, yellow: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -336,7 +336,7 @@ export const yukiR2: ConversationTree = {
             label: 'Reopen the rate question',
             description: 'Suggest the residual gap is still about price, despite the Genius improvement.',
             playerDialogue:
-              "Genius is helping, but the residual gap I see is still about price. To pull in more of the right travellers, my read is we may need to look again at where the rate sits.",
+              "Genius is helping, but the residual gap I see is still about price. To pull in more of the right travelers, my read is we may need to look again at where the rate sits.",
             styleMatch: { green: -2, blue: 0, red: 1, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -347,7 +347,7 @@ export const yukiR2: ConversationTree = {
             description:
               "Show that the bookings already coming in concentrate on specific high-value international source markets where Ryokan Komorebi could be far more visible.",
             playerDialogue:
-              "Here is what is interesting in the booking data. The guests responding most strongly to the Genius programme cluster around three source markets - Australia, the United States, and the UK. They book longer stays, leave the highest review scores, and they're the closest profile to the guest you described as ideal. Where there is still a gap is visibility to that exact audience: in those markets, comparable luxury ryokans are appearing more prominently in search than Ryokan Komorebi, so even the right travellers from those markets often don't see you. The gap is about being found by a specific audience, not about the rate.",
+              "Here is what is interesting in the booking data. The guests responding most strongly to the Genius program cluster around three source markets - Australia, the United States, and the UK. They book longer stays, leave the highest review scores, and they're the closest profile to the guest you described as ideal. Where there is still a gap is visibility to that exact audience: in those markets, comparable luxury ryokans are appearing more prominently in search than Ryokan Komorebi, so even the right travelers from those markets often don't see you. The gap is about being found by a specific audience, not about the rate.",
             styleMatch: { green: 2, blue: 2, red: 0, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -400,7 +400,7 @@ export const yukiR2: ConversationTree = {
             label: 'Recommend Country Rate for key markets',
             description: 'Suggest a Country Rate targeting luxury source markets like Australia and the US.',
             playerDialogue:
-              "Based on your booking data, your highest-value guests tend to come from Australia, the United States, and the UK. These travellers book longer stays and leave excellent reviews. A Country Rate would give you a small, targeted advantage when these travellers search - it is invisible to other markets. Think of it as a quiet welcome for the guests you most want to attract.",
+              "Based on your booking data, your highest-value guests tend to come from Australia, the United States, and the UK. These travelers book longer stays and leave excellent reviews. A Country Rate would give you a small, targeted advantage when these travelers search - it is invisible to other markets. Think of it as a quiet welcome for the guests you most want to attract.",
             styleMatch: { green: 2, blue: 2, red: 0, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -408,9 +408,9 @@ export const yukiR2: ConversationTree = {
           {
             id: 'yuki-r2-recommendation-mobile',
             label: 'Recommend Mobile Rate',
-            description: 'Suggest activating Mobile Rate with a focus on modern luxury travellers.',
+            description: 'Suggest activating Mobile Rate with a focus on modern luxury travelers.',
             playerDialogue:
-              "I would like to suggest adding a Mobile Rate. Over 65% of luxury travel searches in Japan now happen on mobile devices, and many of your ideal guests - international travellers researching their Kyoto stay - are browsing on their phones. A Mobile Rate ensures Ryokan Komorebi appears competitively in that channel. It does not change your base rate or what your existing guests see.",
+              "I would like to suggest adding a Mobile Rate. Over 65% of luxury travel searches in Japan now happen on mobile devices, and many of your ideal guests - international travelers researching their Kyoto stay - are browsing on their phones. A Mobile Rate ensures Ryokan Komorebi appears competitively in that channel. It does not change your base rate or what your existing guests see.",
             styleMatch: { green: 1, blue: 2, red: 0, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -444,7 +444,7 @@ export const yukiR2: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "65% on mobile... that is higher than I expected. But I worry that mobile bookings are more impulsive. Are those really the guests who will appreciate a traditional ryokan experience?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "That is a thoughtful suggestion. If it does not affect our base rate or what returning guests see, it feels like a safe step. How much of a discount are we discussing?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "I had not realised mobile was so dominant in the luxury segment. If this helps us reach international travellers during their research phase, I can see the value. Let us explore the details.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "I had not realized mobile was so dominant in the luxury segment. If this helps us reach international travelers during their research phase, I can see the value. Let us explore the details.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 5, visibility: 3, conversion: 2, revenue: 1 },
           trustChange: 4,
@@ -530,7 +530,7 @@ export const yukiR3: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "A seasonal approach is intriguing. Kyoto's seasons are central to our identity. I would like to hear your ideas, but I will need time to evaluate them properly.", emotion: 'neutral' },
             { trustThreshold: 'medium', text: "That is exactly how I think about our business - in harmony with the seasons. Each one brings a different guest and a different experience. I am very interested to hear your thoughts.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "You understand our business well. The seasons are everything to us - cherry blossom, summer festivals, autumn foliage, winter contemplation. Let us build a strategy that honours each one.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "You understand our business well. The seasons are everything to us - cherry blossom, summer festivals, autumn foliage, winter contemplation. Let us build a strategy that honors each one.", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 4,
@@ -559,7 +559,7 @@ export const yukiR3: ConversationTree = {
             label: 'Frame the position as strong throughout the year',
             description: 'Suggest the calendar is broadly healthy and the conversation should be about growth.',
             playerDialogue:
-              "The picture is genuinely strong across the calendar. The Genius programme and Country Rate have lifted the right kind of bookings, and there isn't a particular soft spot when I look year-round. So the conversation today is more about how to grow gracefully from a healthy base.",
+              "The picture is genuinely strong across the calendar. The Genius program and Country Rate have lifted the right kind of bookings, and there isn't a particular soft spot when I look year-round. So the conversation today is more about how to grow gracefully from a healthy base.",
             styleMatch: { green: 1, blue: 0, red: 0, yellow: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -643,7 +643,7 @@ export const yukiR3: ConversationTree = {
             label: 'Suggest an Early Booker Deal',
             description: 'Recommend an advance-purchase discount to lock in high-quality bookings.',
             playerDialogue:
-              "I think there is an opportunity with an Early Booker Deal. Your ideal guests - the ones who research carefully and plan a cultural trip to Kyoto - tend to book well in advance. An Early Booker Deal rewards that behaviour with a small incentive to commit early. It gives you better forecasting, reduces last-minute uncertainty, and attracts the planners and enthusiasts who appreciate what you offer most.",
+              "I think there is an opportunity with an Early Booker Deal. Your ideal guests - the ones who research carefully and plan a cultural trip to Kyoto - tend to book well in advance. An Early Booker Deal rewards that behavior with a small incentive to commit early. It gives you better forecasting, reduces last-minute uncertainty, and attracts the planners and enthusiasts who appreciate what you offer most.",
             styleMatch: { green: 1, blue: 2, red: 0, yellow: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -651,7 +651,7 @@ export const yukiR3: ConversationTree = {
           {
             id: 'yuki-r3-recommendation-maxstack',
             label: 'Recommend activating everything',
-            description: 'Push for all remaining discount products to maximise competitive position.',
+            description: 'Push for all remaining discount products to maximize competitive position.',
             playerDialogue:
               "Yuki, I think it is time to activate your full toolkit - Early Booker Deal, Country Rate for additional markets, and a Last-Minute Deal for any remaining availability close to check-in. Your RPD needs to come up significantly, and the only way to do that efficiently is to use all available tools.",
             styleMatch: { green: -2, blue: 0, red: 2, yellow: 0 },

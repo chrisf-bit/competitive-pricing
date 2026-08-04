@@ -32,7 +32,7 @@ import {
  */
 
 const liamWhyRisk =
-  "The international target is a valid angle, but I'm very cautious about anything that touches revenue. If I start offering discounts on your platform, even targeted ones, I worry it cannibalises the guests already willing to pay full price on our website. Why should we risk compromising our direct strategy for a lift - in theory?";
+  "The international target is a valid angle, but I'm very cautious about anything that touches revenue. If I start offering discounts on your platform, even targeted ones, I worry it cannibalizes the guests already willing to pay full price on our website. Why should we risk compromising our direct strategy for a lift - in theory?";
 
 // ───────── Step 2 - The segmented ask ─────────
 
@@ -41,9 +41,9 @@ const step2Options: BranchingOption[] = [
     id: 'rc-r1-none-step2-correct',
     label: 'Offer a voluntary US Country Rate, autonomy preserved',
     description:
-      "SME-prescribed ask: no general rate drop. Surface the lagging US-traveller share and offer a Country Rate he can choose to run for that segment, protecting his overall ADR - with the choice of strategy explicitly left to him.",
+      "SME-prescribed ask: no general rate drop. Surface the lagging US-traveler share and offer a Country Rate he can choose to run for that segment, protecting his overall ADR - with the choice of strategy explicitly left to him.",
     playerDialogue:
-      "I respect that. Our data does show your share of US travellers is lower than your peer group. Rather than a general rate drop, you could choose to run a Country Rate aimed only at the US market - that lifts conversion in that segment while protecting your overall ADR. The choice of pricing and distribution strategy stays entirely yours.",
+      "I respect that. Our data does show your share of US travelers is lower than your peer group. Rather than a general rate drop, you could choose to run a Country Rate aimed only at the US market - that lifts conversion in that segment while protecting your overall ADR. The choice of pricing and distribution strategy stays entirely yours.",
     partnerResponse: liamWhyRisk,
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,
@@ -97,7 +97,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: frame the gap as visibility he isn't earning with unique audiences, quantify the upside with the competitiveness stat, and de-risk it as a controlled test on a fenced segment.",
     playerDialogue:
-      "Right now your property isn't visible to unique audiences who wouldn't otherwise find you. Data shows improving price competitiveness by 10% on our platform generates, on average, 30% more bookings and 25% more revenue. By leveraging our visibility you can turn those new travellers into loyal guests. Based on your goals, would you be open to testing it on one fenced segment?",
+      "Right now your property isn't visible to unique audiences who wouldn't otherwise find you. Data shows improving price competitiveness by 10% on our platform generates, on average, 30% more bookings and 25% more revenue. By leveraging our visibility you can turn those new travelers into loyal guests. Based on your goals, would you be open to testing it on one fenced segment?",
     partnerResponse: liamControlledExperiment,
     styleMatch: { red: 2, yellow: 1, green: 0, blue: 2 },
     assertiveness: 2,
@@ -109,11 +109,11 @@ const step3Options: BranchingOption[] = [
     id: 'rc-r1-none-step3-full-commit',
     label: 'Cite the data but push for a full switch-on now',
     description:
-      "Right data, wrong ask - it brushes past his cannibalisation worry and pushes an all-segments switch-on instead of the fenced test that would earn his yes.",
+      "Right data, wrong ask - it brushes past his cannibalization worry and pushes an all-segments switch-on instead of the fenced test that would earn his yes.",
     playerDialogue:
       "The numbers are clear: 10% more competitive is 30% more bookings. Let's switch it on across every segment today and not overthink it.",
     partnerResponse:
-      "You just breezed straight past my concern about cannibalisation. I'm not flipping a switch on everything.",
+      "You just breezed straight past my concern about cannibalization. I'm not flipping a switch on everything.",
     styleMatch: { red: 1, yellow: 0, green: -1, blue: -1 },
     assertiveness: 2,
     compliance: 'safe',
@@ -123,9 +123,9 @@ const step3Options: BranchingOption[] = [
     id: 'rc-r1-none-step3-dismiss',
     label: 'Dismiss his concern and tell him to trust you',
     description:
-      "Wave away the cannibalisation worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
+      "Wave away the cannibalization worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
     playerDialogue:
-      "Honestly, cannibalisation is a bit of a myth partners tell themselves. Just trust me on this one and turn it on.",
+      "Honestly, cannibalization is a bit of a myth partners tell themselves. Just trust me on this one and turn it on.",
     partnerResponse:
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

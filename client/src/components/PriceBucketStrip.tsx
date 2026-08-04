@@ -31,14 +31,14 @@ interface BucketSpec {
   bucket: PriceBucket;
   /** Threshold copy shown on hover. */
   thresholdLabel: string;
-  /** Solid colour for this segment of the strip. */
+  /** Solid color for this segment of the strip. */
   color: string;
 }
 
 // Solid per-segment palette. We render them as discrete blocks rather
 // than a single CSS gradient so each segment can carry its own hover
 // tooltip with the threshold. The visual still reads as a smooth
-// green->red ramp because the colours are evenly stepped.
+// green->red ramp because the colors are evenly stepped.
 // Threshold labels use ≤ / > exactly per the SME PDF page 23
 // "Details" column - boundary values land in the lower bucket
 // (e.g. exactly 3.0 lands in Bucket 3, not Bucket 4). The

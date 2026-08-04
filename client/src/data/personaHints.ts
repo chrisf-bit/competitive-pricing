@@ -101,7 +101,7 @@ const nobleFalconR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'objection-navigator': {
     oneLiner:
-      'Expect a brand-policy defence; reframe around incremental demand and isolate risk via prepayment, not rate.',
+      'Expect a brand-policy defense; reframe around incremental demand and isolate risk via prepayment, not rate.',
   },
   storyteller: {
     oneLiner:
@@ -179,7 +179,7 @@ const oceanViewR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'objection-navigator': {
     oneLiner:
-      'Expect the reverse-billboard belief ("a higher price here pushes guests to book direct") and margin protection; counter with how travellers actually search, and offer member-only site deals so she keeps her direct incentive.',
+      'Expect the reverse-billboard belief ("a higher price here pushes guests to book direct") and margin protection; counter with how travelers actually search, and offer member-only site deals so she keeps her direct incentive.',
   },
   storyteller: {
     oneLiner:
@@ -205,7 +205,7 @@ const riversideR4Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'objection-navigator': {
     oneLiner:
-      'Expect the Value Proposition Wall ("I only want 30% from you") plus a Slippery-Road pull toward "just lower your ADR" - break the wall by optimising the 30%, never a blanket cut.',
+      'Expect the Value Proposition Wall ("I only want 30% from you") plus a Slippery-Road pull toward "just lower your ADR" - break the wall by optimizing the 30%, never a blanket cut.',
   },
   storyteller: {
     oneLiner:

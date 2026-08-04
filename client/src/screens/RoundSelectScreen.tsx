@@ -463,7 +463,7 @@ function StatusPill({
 }) {
   // Current pill sits on the bright brand-yellow tile, so dark navy
   // fill for contrast; Cleared pill sits on the bright green tile,
-  // so white fill with a deep-green text colour.
+  // so white fill with a deep-green text color.
   const bg =
     tone === 'current'
       ? 'var(--brand-navy-dark)'

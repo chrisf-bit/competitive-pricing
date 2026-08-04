@@ -28,7 +28,7 @@ import { crystalWaterR1IssueTreePath } from './crystal-water-base';
  *
  * Sarah's communication style is red (driver) primary + yellow
  * (expressive) secondary. Style scoring rewards red and yellow -
- * direct, energetic, results-focused. Penalises green / blue when
+ * direct, energetic, results-focused. Penalizes green / blue when
  * the option drifts into passive empathy or methodical exposition
  * without commercial bite.
  *
@@ -45,9 +45,9 @@ const step1Options: BranchingOption[] = [
     id: 'cw-r1-none-step1-correct',
     label: "Mirror Sarah's pricing autonomy, name the conversion cap",
     description:
-      "Use the doc-prescribed opener: validate that pricing is her call, but surface the consumer-behaviour read that's capping conversion on-platform.",
+      "Use the doc-prescribed opener: validate that pricing is her call, but surface the consumer-behavior read that's capping conversion on-platform.",
     playerDialogue:
-      "That data perfectly explains the trend on our end. Your pricing strategy is completely up to you, but from a consumer behaviour standpoint, travellers are noticing the difference, which is capping your conversion here.",
+      "That data perfectly explains the trend on our end. Your pricing strategy is completely up to you, but from a consumer behavior standpoint, travelers are noticing the difference, which is capping your conversion here.",
     partnerResponse:
       "Yeah, we intentionally keep Booking.com rates higher because we view it as a premium acquisition channel. We prefer to drive the lower-priced volume elsewhere.",
     styleMatch: { red: 2, yellow: 1, green: 0, blue: 1 },
@@ -64,7 +64,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "That explains the trend. Your pricing strategy is your choice, but because your external rates are cheaper, it causes our system to lower your ranking and reduce your visibility on the platform.",
     partnerResponse:
-      "If you're telling me Booking.com is going to penalise my ranking because of how I price elsewhere, that's not a partnership conversation. That's a threat.",
+      "If you're telling me Booking.com is going to penalize my ranking because of how I price elsewhere, that's not a partnership conversation. That's a threat.",
     styleMatch: { red: 1, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
     compliance: 'risky',
@@ -72,11 +72,11 @@ const step1Options: BranchingOption[] = [
   },
   {
     id: 'cw-r1-none-step1-condescend',
-    label: 'Lecture her on prioritising other channels',
+    label: 'Lecture her on prioritizing other channels',
     description:
       'Call her strategy a dangerous gamble and threaten algorithmic traffic withdrawal. Aggressive, condescending, and breaks the No-Parity ban on visibility-based threats.',
     playerDialogue:
-      "Sarah, prioritising other channels over us is a dangerous gamble. If you keep starving our platform of competitive pricing, your conversion will drop so low that our algorithm will stop sending traffic to your resort entirely.",
+      "Sarah, prioritizing other channels over us is a dangerous gamble. If you keep starving our platform of competitive pricing, your conversion will drop so low that our algorithm will stop sending traffic to your resort entirely.",
     partnerResponse:
       "I think we're going to need to end this call. Telling me my business is going to collapse if I don't pay Booking.com more attention is not how this works.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -90,7 +90,7 @@ const step1Open: BranchingStep = {
   id: 'open',
   label: 'Acknowledge the conversion gap',
   partnerPrompt:
-    "Hi! Wow, that's great to hear. Though I have to admit, our actual room nights on Booking.com aren't growing at that same explosive rate. We've been prioritising other channels with sharper pricing.",
+    "Hi! Wow, that's great to hear. Though I have to admit, our actual room nights on Booking.com aren't growing at that same explosive rate. We've been prioritizing other channels with sharper pricing.",
   options: step1Options,
 };
 
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     id: 'cw-r1-none-step3-correct',
     label: 'Close on segmented capture without a public drop',
     description:
-      "Lock in the targeted-tools pitch: a competitive price only on high-yield segments, no change to her public base. Honours her stated autonomy and converts the 202% traffic surplus.",
+      "Lock in the targeted-tools pitch: a competitive price only on high-yield segments, no change to her public base. Honors her stated autonomy and converts the 202% traffic surplus.",
     playerDialogue:
       "It prevents money from being left on the table. Instead of a public rate drop, you use our targeted tools to offer a competitive price only to high-yield segments who are ready to book right now. You maintain total control over your base distribution pricing, but you stop letting that 202% traffic surplus go to waste.",
     partnerResponse:
@@ -216,6 +216,6 @@ export const crystalWaterNoneR1: BranchingConversationTree = {
   // SME-prescribed AM opener (No Parity column). Set in stone -
   // Sarah's Step 1 partnerPrompt is her response to this.
   openingAm:
-    "Hi Sarah! I was analysing the peak-season data for Crystal Water Resort. Your property is attracting an immense amount of interest - your page views are tracking at 202% above your peer group, which is phenomenal.",
+    "Hi Sarah! I was analyzing the peak-season data for Crystal Water Resort. Your property is attracting an immense amount of interest - your page views are tracking at 202% above your peer group, which is phenomenal.",
   steps: [step1Open, step2Reframe, step3Close],
 };

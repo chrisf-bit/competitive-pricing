@@ -1239,11 +1239,11 @@ function SecondaryMetricLabel({
  * Discount Products grouped into the 3-column R2 layout
  * (Public Pricing / Genius Pricing / Foundations & Payments).
  * Records without a `category` field fall back into a flat list
- * rendered below the categorised grid, so parked-partner seed data
+ * rendered below the categorized grid, so parked-partner seed data
  * still displays cleanly.
  */
 function DiscountProductsGrid({ discounts }: { discounts: DiscountProduct[] }) {
-  const categorised: Record<DiscountCategory, DiscountProduct[]> = {
+  const categorized: Record<DiscountCategory, DiscountProduct[]> = {
     'public-pricing': [],
     'genius-pricing': [],
     'foundations-payments': [],
@@ -1251,13 +1251,13 @@ function DiscountProductsGrid({ discounts }: { discounts: DiscountProduct[] }) {
   const uncategorised: DiscountProduct[] = [];
   for (const d of discounts) {
     if (d.category) {
-      categorised[d.category].push(d);
+      categorized[d.category].push(d);
     } else {
       uncategorised.push(d);
     }
   }
 
-  const hasCategorised = Object.values(categorised).some((arr) => arr.length > 0);
+  const hasCategorised = Object.values(categorized).some((arr) => arr.length > 0);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -1269,9 +1269,9 @@ function DiscountProductsGrid({ discounts }: { discounts: DiscountProduct[] }) {
             gap: 12,
           }}
         >
-          <DiscountColumn title="Public Pricing" items={categorised['public-pricing']} />
-          <DiscountColumn title="Genius Pricing" items={categorised['genius-pricing']} />
-          <DiscountColumn title="Foundations & Payments" items={categorised['foundations-payments']} />
+          <DiscountColumn title="Public Pricing" items={categorized['public-pricing']} />
+          <DiscountColumn title="Genius Pricing" items={categorized['genius-pricing']} />
+          <DiscountColumn title="Foundations & Payments" items={categorized['foundations-payments']} />
         </div>
       )}
 

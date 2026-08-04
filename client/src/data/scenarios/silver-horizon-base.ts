@@ -7,7 +7,7 @@ import type { IssueTreePath } from '../../types';
  * Source: SME "Round 2" doc, Example 5 (Silver Horizon Resort, Hotel
  * ID 209). Chloe Davies is a Multi-Property Professional running a
  * portfolio of vacation-rental units - net-revenue maths, margin
- * optimisation and ROI. This is a KEY OTA competitiveness gap (Expedia
+ * optimization and ROI. This is a KEY OTA competitiveness gap (Expedia
  * undercutting via margin cuts on the International and Family
  * segments), not a Brand.com gap. Objection assigned: The Competitive
  * Aggression (main) + The Same Net Mindset (support) + the Family
@@ -22,7 +22,7 @@ import type { IssueTreePath } from '../../types';
  * Chloe's style is blue (analytical) primary + red (driver) secondary:
  * she leads with the numbers and ROI, is commercially decisive, and
  * won't be drawn into a platform price war. Scoring rewards blue + red
- * and penalises green/yellow warmth without a commercial case.
+ * and penalizes green/yellow warmth without a commercial case.
  *
  * The OPTIMAL line at each step is taken from the SME script; the two
  * distractors per step are authored to the "close but not quite" rule.

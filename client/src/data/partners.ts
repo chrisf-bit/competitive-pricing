@@ -66,7 +66,7 @@ function crystalWaterBase(args: {
         description:
           "Hotel Manager at a brand-affiliated resort that operates under a marketing contract only - no central pricing control. Direct, results-focused, and watches the daily ABRN and ADR numbers herself. Energetic and no-fluff; expects clear commercial logic and a concrete next step before she agrees to anything.",
         commercialGoal:
-          'Maximise resort revenue while protecting margin and reducing OTA commission cost',
+          'Maximize resort revenue while protecting margin and reducing OTA commission cost',
       },
       // Metrics map verbatim to the SME spreadsheet row 9 (Hotel ID 9
       // - Crystal Water Resort). Same baseline across all three
@@ -95,7 +95,7 @@ function crystalWaterBase(args: {
         // date of 2026-06-09 - that's 28 days back. Stored as an
         // offset so the gap stays constant across replays.
         lastPricingContactDaysAgo: 28,
-        // Only Genius Programme is active out of 11 products in the
+        // Only Genius Program is active out of 11 products in the
         // R2 taxonomy - sparse adoption that matches Sarah's
         // direct-first stance. Rendered as a low % to flag headroom.
         pricingCoverageQTD: 12,
@@ -114,7 +114,7 @@ function crystalWaterBase(args: {
       trust: 50,
       relationship: 'neutral',
       // Adoption mirrors the SME spreadsheet row 9: Genius
-      // Programme is the only active product. Everything else
+      // Program is the only active product. Everything else
       // (public-pricing levers, Genius tiers, base rate plan,
       // family rates, payments) is inactive. The sparse pattern
       // is the visual cue that Sarah's not using Booking.com's
@@ -124,7 +124,7 @@ function crystalWaterBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -232,7 +232,7 @@ function velvetSkyBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -332,7 +332,7 @@ function nobleFalconBase(args: {
       relationship: 'neutral',
       // Discount adoption mirrors the SME PDF Public/Genius/
       // Foundations grids. Public Pricing fully active, Genius
-      // running only the base programme (no 15/20/Dynamic tiers),
+      // running only the base program (no 15/20/Dynamic tiers),
       // Family Rates and Payments active in Foundations but no
       // Base Rate Plan (the partner's pricing is centrally
       // controlled - they're not setting their own base plan).
@@ -341,7 +341,7 @@ function nobleFalconBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'active', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'active', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -421,7 +421,7 @@ function marinaBase(args: {
       { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
       { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
       { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
       { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -457,7 +457,7 @@ function carlosBase(args: {
       styleSecondary: 'red',
       description:
         'Energetic apartment operator who loves innovation and new trends. Makes quick decisions but sometimes acts before thinking. Relationship-first communicator who thrives on enthusiasm.',
-      commercialGoal: 'Aggressive growth - maximise bookings across all channels',
+      commercialGoal: 'Aggressive growth - maximize bookings across all channels',
     },
     metrics: {
       erpd: 3.4,
@@ -487,7 +487,7 @@ function carlosBase(args: {
       { id: 'country-rate', label: 'Country Rates', status: 'misconfigured', category: 'public-pricing' },
       { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
       { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
       { id: 'genius-15', label: 'Genius 15%', status: 'active', category: 'genius-pricing' },
       { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -565,7 +565,7 @@ function ravenInnBase(args: {
       { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
       { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
       { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
       { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -644,7 +644,7 @@ function driftwoodBayBase(args: {
       { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
       { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
       { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
       { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -758,7 +758,7 @@ function royalCrestBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -776,7 +776,7 @@ function royalCrestBase(args: {
  * Builds a Silver Horizon Resort partner record (SME Round 2 priority,
  * Hotel ID 209). Chloe Davies is a Multi-Property Professional running
  * a portfolio of vacation-rental units - net-revenue maths, margin
- * optimisation and ROI. Same brand, contact, profile and metrics across
+ * optimization and ROI. Same brand, contact, profile and metrics across
  * all three regime variants; only location, parityRegime, image and id
  * differ. The contact name stays 'Chloe Davies' across regimes.
  *
@@ -785,7 +785,7 @@ function royalCrestBase(args: {
  * segments). eRPD 1.9% (Bucket 3) but a sharp +4.71 MoM spike, Lose
  * Price 42%, Public RPD 3.9% / Loyal RPD -3.0%. Strong platform demand
  * (room nights +119% vs peer, forward pace +81%) but ABRN -32% YoY and
- * ADR -7% - value leaking on the high-value segments. Genius Programme
+ * ADR -7% - value leaking on the high-value segments. Genius Program
  * and Family Rates active; three RPD scenarios (International, Family
  * 2+1, Family 2+2). OPC layer carried on `opcMetrics`.
  */
@@ -811,9 +811,9 @@ function silverHorizonBase(args: {
         style: 'blue',
         styleSecondary: 'red',
         description:
-          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimisation and strict ROI when balancing channels. Fields aggressive competitor calls (Expedia) and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
+          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimization and strict ROI when balancing channels. Fields aggressive competitor calls (Expedia) and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
         commercialGoal:
-          'Maximise net revenue and margin across the portfolio while balancing a mix of distribution channels',
+          'Maximize net revenue and margin across the portfolio while balancing a mix of distribution channels',
       },
       // Metrics map to the SME Round 2 data set (Hotel ID 209). The
       // headline is the sharp +4.71 MoM spike in Key OTA eRPD against
@@ -864,7 +864,7 @@ function silverHorizonBase(args: {
       metricHistory: [],
       trust: 50,
       relationship: 'neutral',
-      // Two products active per the SME data set: Genius Programme and
+      // Two products active per the SME data set: Genius Program and
       // Family Rates. Everything else inactive - the gap is the Key OTA
       // undercutting the International and Family scenarios, not a bare
       // toolkit.
@@ -873,7 +873,7 @@ function silverHorizonBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -926,7 +926,7 @@ function oceanViewBase(args: {
         style: 'blue',
         styleSecondary: 'red',
         description:
-          "Property Manager for a vacation-rental agency running several owners' properties with highly delegated commercial autonomy. Values owner satisfaction and portfolio-wide RevPAR, and fiercely protects the agency's profitable direct channel - she deliberately keeps Booking.com marked up to push guests to book direct. Experienced and evidence-led: she changes course when the search-behaviour logic and the data stack up, and commits to structured tests.",
+          "Property Manager for a vacation-rental agency running several owners' properties with highly delegated commercial autonomy. Values owner satisfaction and portfolio-wide RevPAR, and fiercely protects the agency's profitable direct channel - she deliberately keeps Booking.com marked up to push guests to book direct. Experienced and evidence-led: she changes course when the search-behavior logic and the data stack up, and commits to structured tests.",
         commercialGoal:
           "Protect the agency's direct-channel margin and owner satisfaction while recovering portfolio-wide RevPAR",
       },
@@ -991,7 +991,7 @@ function oceanViewBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -1018,7 +1018,7 @@ function oceanViewBase(args: {
  * Genius discount: public base raised to offset Genius) plus family RPD
  * running above couple RPD (an unintentional family setup gap). Strong
  * demand and forward pace (room nights +40% vs peer, Next-3M +271%) but
- * ABRN -59% YoY. Genius Programme and Family Rates active; three RPD
+ * ABRN -59% YoY. Genius Program and Family Rates active; three RPD
  * scenarios (App, Family 2+1, Family 2+2); high eRPD x Partner Value.
  * OPC layer carried on `opcMetrics`.
  */
@@ -1096,7 +1096,7 @@ function riversideBase(args: {
       metricHistory: [],
       trust: 50,
       relationship: 'neutral',
-      // Two products active per the SME data set: Genius Programme and
+      // Two products active per the SME data set: Genius Program and
       // Family Rates. But both are mis-tuned - the Genius discount is
       // non-genuine and the family setup is incomplete, which is the gap.
       discounts: [
@@ -1104,7 +1104,7 @@ function riversideBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -1130,7 +1130,7 @@ function riversideBase(args: {
  * RPD 12.7% vs Loyal RPD 3.6% (a Fake-Value Genius markup: base inflated
  * to offset the Genius discount). Yet the property WINS on demand (room
  * nights +110% vs peer, conversion +42%, premium ADR +31%) - premium
- * demand, not distressed. Genius Programme, Family Rates and Payments
+ * demand, not distressed. Genius Program, Family Rates and Payments
  * active; two RPD scenarios (Brand Scenario, Family 2+1); 0% pricing
  * coverage. OPC layer carried on `opcMetrics`.
  */
@@ -1210,7 +1210,7 @@ function emeraldPeakBase(args: {
       metricHistory: [],
       trust: 50,
       relationship: 'neutral',
-      // Three products active per the SME data set: Genius Programme,
+      // Three products active per the SME data set: Genius Program,
       // Family Rates and Payments. But the Genius discount is
       // Fake-Value (base inflated to offset it) and the family setup is
       // misaligned - the gap sits inside "active" products.
@@ -1219,7 +1219,7 @@ function emeraldPeakBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-        { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -1575,7 +1575,7 @@ export const pendingPartners: PartnerState[] = [
       style: 'red',
       styleSecondary: 'green',
       description:
-        "Owner-operator who prioritises his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
+        "Owner-operator who prioritizes his direct channel and treats Booking.com as a necessary tail. Acts on emotion when it comes to OTAs - has a hard 30% rule in his head. Needs reframing, not numbers, to shift his view.",
       commercialGoal: 'Grow direct bookings while keeping a brand-led identity',
     },
     metrics: {
@@ -1605,7 +1605,7 @@ export const pendingPartners: PartnerState[] = [
       { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
       { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
       { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
-      { id: 'genius-programme', label: 'Genius Programme', status: 'active', category: 'genius-pricing' },
+      { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
       { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
       { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
@@ -1663,7 +1663,7 @@ export const pendingPartners: PartnerState[] = [
     trust: 40,
     relationship: 'cool',
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'active' },
+      { id: 'genius', label: 'Genius Program', status: 'active' },
       { id: 'mobile-rate', label: 'Mobile Rate', status: 'active' },
       { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
       { id: 'last-minute', label: 'Last-Minute Deal', status: 'misconfigured' },
@@ -1714,7 +1714,7 @@ export const pendingPartners: PartnerState[] = [
     trust: 50,
     relationship: 'neutral',
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'inactive' },
+      { id: 'genius', label: 'Genius Program', status: 'inactive' },
       { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
       { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
       { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
@@ -1765,7 +1765,7 @@ export const pendingPartners: PartnerState[] = [
     trust: 35,
     relationship: 'cool',
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'active' },
+      { id: 'genius', label: 'Genius Program', status: 'active' },
       { id: 'mobile-rate', label: 'Mobile Rate', status: 'misconfigured' },
       { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
       { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },
@@ -1816,7 +1816,7 @@ export const pendingPartners: PartnerState[] = [
     trust: 50,
     relationship: 'neutral',
     discounts: [
-      { id: 'genius', label: 'Genius Programme', status: 'inactive' },
+      { id: 'genius', label: 'Genius Program', status: 'inactive' },
       { id: 'mobile-rate', label: 'Mobile Rate', status: 'inactive' },
       { id: 'country-rate', label: 'Country Rate', status: 'inactive' },
       { id: 'last-minute', label: 'Last-Minute Deal', status: 'inactive' },

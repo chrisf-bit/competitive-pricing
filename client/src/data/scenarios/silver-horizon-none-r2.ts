@@ -83,9 +83,9 @@ const step2Options: BranchingOption[] = [
     id: 'sh-r2-none-step2-correct',
     label: 'Preserve autonomy; frame best price as recoverable lost demand',
     description:
-      "SME-prescribed handling: her strategy is her call, but a higher price here sends the traveller to a competitor - an unrecoverable unsold room. Her best available price is the fastest way to regain visibility, and you surface her concern before pushing.",
+      "SME-prescribed handling: her strategy is her call, but a higher price here sends the traveler to a competitor - an unrecoverable unsold room. Her best available price is the fastest way to regain visibility, and you surface her concern before pushing.",
     playerDialogue:
-      "Your pricing strategy is entirely your decision. From the customer's side, though, a higher price here sends the traveller to a competitor's property - that's an unrecoverable unsold room. Your best available price on our platform is the fastest way to regain lost visibility and fill empty nights. What's your main concern about adjusting your position here?",
+      "Your pricing strategy is entirely your decision. From the customer's side, though, a higher price here sends the traveler to a competitor's property - that's an unrecoverable unsold room. Your best available price on our platform is the fastest way to regain lost visibility and fill empty nights. What's your main concern about adjusting your position here?",
     partnerResponse:
       "My worry is that if I offer a discount on Booking, customers just complete the booking there instead of finding me and booking on our own website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -98,7 +98,7 @@ const step2Options: BranchingOption[] = [
     id: 'sh-r2-none-step2-general-discount',
     label: 'Push a general public discount',
     description:
-      "Tell her to lower her public price across the board to stop losing the comparison. It pressures a general price cut a No Parity market doesn't allow, and it walks straight into her cannibalisation worry.",
+      "Tell her to lower her public price across the board to stop losing the comparison. It pressures a general price cut a No Parity market doesn't allow, and it walks straight into her cannibalization worry.",
     playerDialogue:
       "The fix is to lower your public price here across the board so you stop losing the comparison to cheaper competitors.",
     partnerResponse:
@@ -154,11 +154,11 @@ const step3Options: BranchingOption[] = [
     id: 'sh-r2-none-step3-general-discount',
     label: 'Fall back on a small general discount',
     description:
-      "Right that action is needed, wrong lever - a general discount across her rooms is the cannibalisation she just flagged, and it skips the targeted-segment opportunity entirely.",
+      "Right that action is needed, wrong lever - a general discount across her rooms is the cannibalization she just flagged, and it skips the targeted-segment opportunity entirely.",
     playerDialogue:
       "Let's just put a small discount across your rooms to get you competitive again and move some of that unsold inventory.",
     partnerResponse:
-      "A general discount is exactly the cannibalisation I just told you I'm worried about.",
+      "A general discount is exactly the cannibalization I just told you I'm worried about.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
     assertiveness: 2,
     compliance: 'borderline',
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: set the minimum-night guardrail she asked for, and pair it with Country Rates targeting international bookers - a zero-marketing-cost way to lift discoverability. Ask her to implement both.",
     playerDialogue:
-      "Absolutely - we can set a minimum-night stay on those rooms. And to maximise the impact, we'd pair that with Country Rates targeting international bookers. Are you okay implementing both to lift performance?",
+      "Absolutely - we can set a minimum-night stay on those rooms. And to maximize the impact, we'd pair that with Country Rates targeting international bookers. Are you okay implementing both to lift performance?",
     partnerResponse:
       "My domestic demand is solid, but I've no real strategy for international - so this could be a zero-marketing-cost way to boost discoverability through your platform. Let's give it a try!",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

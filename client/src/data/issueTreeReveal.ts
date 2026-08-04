@@ -105,7 +105,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     body:
       "The starting point. Something on Hotel Atlante has shifted - the eRPD has slipped for three weeks. Before doing anything else, you notice the signal and ask what conditions are driving it.",
     narration:
-      "Triggers come in four flavours: performance outcomes (room nights or conversion drops), data signals (competitiveness turning red, high unsold rooms, low sell-through), partner interactions (they raise a concern or point out a price difference), or programme changes (Genius or Preferred eligibility shifts). Any of them can start the Pathway.",
+      "Triggers come in four flavors: performance outcomes (room nights or conversion drops), data signals (competitiveness turning red, high unsold rooms, low sell-through), partner interactions (they raise a concern or point out a price difference), or program changes (Genius or Preferred eligibility shifts). Any of them can start the Pathway.",
   },
   {
     id: 'primary-check',
@@ -150,7 +150,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     subLabel: 'The Evidence, incl. RPD Scenarios',
     goal: 'Validate your hypothesis with data proof before action.',
     body:
-      "Validate your hypothesis with data proof before you act. Different causes show up as different patterns: structural constant non-competitive eRPD points to foundational choices; a Public vs Loyal RPD split points to a Genius or programme issue; non-structural changing eRPD points to promotions or external interventions. For Hotel Atlante, Public RPD is slipping while Loyal RPD holds steady - that confirms the Genius story.",
+      "Validate your hypothesis with data proof before you act. Different causes show up as different patterns: structural constant non-competitive eRPD points to foundational choices; a Public vs Loyal RPD split points to a Genius or program issue; non-structural changing eRPD points to promotions or external interventions. For Hotel Atlante, Public RPD is slipping while Loyal RPD holds steady - that confirms the Genius story.",
     narration:
       "Pull your proof from the RPD dashboard, an RPD Scenario or live check, OPC explainers (visibility share, CTR, conversion, search price vs ADR), and Extranet insights. If Loyal RPD had moved too, you'd be looking at a base-rate issue instead of a Genius one.",
   },
@@ -182,7 +182,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     subLabel: 'The Hook; Prepare for the conversation',
     goal: 'Choose the most effective entry point that makes the partner lean in, before you deliver the recommendation.',
     body:
-      "You have the evidence and the plan. Now choose the most effective entry point - the one that makes the partner lean in before you deliver the recommendation. This isn't re-analysing data; it's selecting the story from your diagnosis that lands best with this specific partner. For Hotel Atlante, an on-platform competitiveness narrative fits.",
+      "You have the evidence and the plan. Now choose the most effective entry point - the one that makes the partner lean in before you deliver the recommendation. This isn't re-analyzing data; it's selecting the story from your diagnosis that lands best with this specific partner. For Hotel Atlante, an on-platform competitiveness narrative fits.",
     narration:
       "RPD Scenarios and self-identified scenarios give you the hook - the concrete, data-backed insight that opens the door. Use PPAI to build the narrative and pull the supporting data points into a conversation-ready format. Frame safely: on-platform language only, no claims about the partner's business beyond what you can see.",
   },

@@ -439,7 +439,7 @@ function ScenarioCover({
             display: 'block',
           }}
         />
-        {/* Top gradient blends into the theme colour above */}
+        {/* Top gradient blends into the theme color above */}
         <div
           style={{
             position: 'absolute',
@@ -718,7 +718,7 @@ function InteractionPanel({
         </div>
 
         {/* Coaching + next-step affordance. Plain white card with only a
-            coloured left rail + tiny label, so the correct option
+            colored left rail + tiny label, so the correct option
             above remains the single clear "answer" moment on-screen. */}
         {pickedId !== null && (
           <motion.div
@@ -898,7 +898,7 @@ function PriorStepChip({
   correct: boolean;
 }) {
   // Breadcrumb-style: neutral background, tiny status dot as the only
-  // colour signal. Reads as a subtle history trail rather than another
+  // color signal. Reads as a subtle history trail rather than another
   // green/amber panel competing with the current step's answer.
   return (
     <div

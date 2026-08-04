@@ -51,9 +51,9 @@ const step1Options: BranchingOption[] = [
     id: 'vs-r2-wide-step1-penalty-warn',
     label: "Threaten an active account penalty if he doesn't match",
     description:
-      'Tell John the platform will actively penalise his account, drop his positioning score, and restrict his traffic if he doesn\'t match rates. Breaks the ban on threatening explicit penalties.',
+      'Tell John the platform will actively penalize his account, drop his positioning score, and restrict his traffic if he doesn\'t match rates. Breaks the ban on threatening explicit penalties.',
     playerDialogue:
-      "I understand, but by pushing public discounts elsewhere, you are undercutting us. If you don't match our rate immediately, our system will actively penalise your account, drop your positioning score, and restrict your traffic footprint.",
+      "I understand, but by pushing public discounts elsewhere, you are undercutting us. If you don't match our rate immediately, our system will actively penalize your account, drop your positioning score, and restrict your traffic footprint.",
     partnerResponse:
       "Threatening to throttle my traffic if I don't comply is not a commercial conversation. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
@@ -67,7 +67,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Open with a moralising lecture - accuse him of destroying his boutique positioning to save on a fee. Aggressive, condescending, and ignores the commercial logic John brought to the call.",
     playerDialogue:
-      "John, maximising volume through cheap public discounts is a losing strategy. You are destroying your property's premium boutique positioning just to save on a fee. Let's scrap those external discounts today before you do permanent damage.",
+      "John, maximizing volume through cheap public discounts is a losing strategy. You are destroying your property's premium boutique positioning just to save on a fee. Let's scrap those external discounts today before you do permanent damage.",
     partnerResponse:
       "Telling me my strategy is destroying my brand isn't going to land. I called you for a commercial discussion.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -92,7 +92,7 @@ const step2Options: BranchingOption[] = [
     id: 'vs-r2-wide-step2-correct',
     label: 'Affirm the direct goal, pitch fenced incentives + value-adds',
     description:
-      "Use the doc-prescribed pivot: confirm he can still incentivise direct, ask for public rate alignment across channels (the Wide-Parity ask), and reframe direct incentives as fenced member rates or value-adds like a welcome drink or early check-in.",
+      "Use the doc-prescribed pivot: confirm he can still incentivize direct, ask for public rate alignment across channels (the Wide-Parity ask), and reframe direct incentives as fenced member rates or value-adds like a welcome drink or early check-in.",
     playerDialogue:
       "Absolutely, and you can still do that. Under wide parity, we ask for public rate alignment across all channels. However, instead of public discounts on your site, we recommend using fenced direct incentives - like a closed member rate or value-adds like a free welcome drink.",
     partnerResponse:

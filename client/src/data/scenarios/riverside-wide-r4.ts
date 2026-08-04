@@ -11,7 +11,7 @@ import { riversideR4IssueTreePath, riversideOpeningAm } from './riverside-base';
  * Source: SME "Round 4" doc, Conversation 1 (Wide Parity). In a Wide
  * market the AM may ask Anton to provide the same rates, conditions and
  * availability he gives the Key OTA and his direct channel. The learner
- * must break the Value Proposition Wall (optimise the 30% rather than
+ * must break the Value Proposition Wall (optimize the 30% rather than
  * argue the cap), fix the unintentional family setup gap, and realign
  * the non-genuine Genius discount - all without an across-the-board ADR
  * drop (the Slippery Road trap) or being pushy (Anton dislikes being
@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: surface that his rates run higher than the Key OTA on family occupancy and that Genius isn't performing, then ask an open question about his goals before recommending anything.",
     playerDialogue:
-      "I've been looking at your competitiveness with us, and your rates are running higher than Expedia's - specifically on family occupancy. The Genius programme also isn't performing the way it should. Before I go further, what are your goals with us?",
+      "I've been looking at your competitiveness with us, and your rates are running higher than Expedia's - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
     partnerResponse:
       "Let me share our strategy. We deliberately cap our Booking.com volume at 30% to protect our own website - so if Genius isn't pulling numbers, that's by design. The family rates, though, aren't intentional. I'd happily give you the same rates as the other OTAs. How much am I leaving on the table on the family segment?",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
@@ -85,7 +85,7 @@ const step2Options: BranchingOption[] = [
     playerDialogue:
       "On families: over the past two years those bookings grew nearly twice as fast as any other segment, and they spend more, stay longer, and are 24% more likely to leave a review. By giving us the same rates you already give third parties, we can capture the incremental family demand you're missing right now.",
     partnerResponse:
-      "That's interesting - thank you for flagging it, we'll definitely fix it. Now, what about the Genius programme issue you mentioned?",
+      "That's interesting - thank you for flagging it, we'll definitely fix it. Now, what about the Genius program issue you mentioned?",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "Let me ask you something first. You mentioned the deliberate 30% cap - but are you actually at 100% occupancy? And how are you securing advance bookings for peak season? Looking at your calendar, there's a lot of availability - we're nowhere near that 30%.",
     partnerResponse:
-      "We don't want to lock in advance bookings at a lower price - we'd rather wait for the pick-up and get the best out of it. That said, there are periods where we're not performing well on any channel. What can we do to optimise our performance with you?",
+      "We don't want to lock in advance bookings at a lower price - we'd rather wait for the pick-up and get the best out of it. That said, there are periods where we're not performing well on any channel. What can we do to optimize our performance with you?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -182,7 +182,7 @@ const step3: BranchingStep = {
   id: 'value-wall',
   label: 'Break the Value Proposition Wall',
   partnerPrompt:
-    "That's interesting - thank you for flagging it, we'll definitely fix it. Now, what about the Genius programme issue you mentioned?",
+    "That's interesting - thank you for flagging it, we'll definitely fix it. Now, what about the Genius program issue you mentioned?",
   options: step3Options,
 };
 
@@ -238,7 +238,7 @@ const step4: BranchingStep = {
   id: 'competitiveness-ask',
   label: 'Ask for competitiveness, backed by data',
   partnerPrompt:
-    "We don't want to lock in advance bookings at a lower price - we'd rather wait for the pick-up and get the best out of it. That said, there are periods where we're not performing well on any channel. What can we do to optimise our performance with you?",
+    "We don't want to lock in advance bookings at a lower price - we'd rather wait for the pick-up and get the best out of it. That said, there are periods where we're not performing well on any channel. What can we do to optimize our performance with you?",
   options: step4Options,
 };
 
@@ -249,9 +249,9 @@ const step5Options: BranchingOption[] = [
     id: 'rb-r4-wide-step5-correct',
     label: 'Diagnose the non-genuine Genius discount; realign base + family, close',
     description:
-      "SME-prescribed pitch: his public base was raised to offset Genius, so the discount reads as non-genuine and conversion drops. Realign the base rate and set accurate family rates to optimise the 30% share with higher-value guests, then commit to a follow-up.",
+      "SME-prescribed pitch: his public base was raised to offset Genius, so the discount reads as non-genuine and conversion drops. Realign the base rate and set accurate family rates to optimize the 30% share with higher-value guests, then commit to a follow-up.",
     playerDialogue:
-      "I'd start with Genius. It looks like your public base was raised to offset the Genius discount, so travellers see a non-genuine discount and conversion drops. Realign the base and set accurate family rates, and you optimise that 30% share with higher-spending, longer-staying guests - right now families book rival Genius properties because your page lacks a competitive offer. I'll get it set up and send a follow-up to review the impact.",
+      "I'd start with Genius. It looks like your public base was raised to offset the Genius discount, so travelers see a non-genuine discount and conversion drops. Realign the base and set accurate family rates, and you optimize that 30% share with higher-spending, longer-staying guests - right now families book rival Genius properties because your page lacks a competitive offer. I'll get it set up and send a follow-up to review the impact.",
     partnerResponse:
       "The data logic is clear. The family rates and the Genius discount aren't working properly - let's adjust both to regain our visibility and booking share.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -266,7 +266,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Treats the symptom, not the cause - a deeper Genius discount on top of an inflated base doesn't restore genuine value, it just widens the same offset.",
     playerDialogue:
-      "Just deepen your Genius discount - make it 20% - and the Genius travellers will come back.",
+      "Just deepen your Genius discount - make it 20% - and the Genius travelers will come back.",
     partnerResponse:
       "A deeper discount on an inflated base is the same problem, isn't it? That doesn't fix the value.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

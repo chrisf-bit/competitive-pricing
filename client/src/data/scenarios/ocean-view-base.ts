@@ -21,8 +21,8 @@ import type { IssueTreePath } from '../../types';
  *
  * Camila's style is blue (analytical) primary + red (driver) secondary:
  * experienced and evidence-led - she changes course when the search-
- * behaviour logic and data stack up, and protects margin decisively.
- * Scoring rewards blue + red and penalises green/yellow warmth that
+ * behavior logic and data stack up, and protects margin decisively.
+ * Scoring rewards blue + red and penalizes green/yellow warmth that
  * lacks a commercial case.
  */
 

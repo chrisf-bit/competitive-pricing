@@ -31,7 +31,7 @@ function interpolate(text: string, vars: Record<string, string>): string {
 }
 
 type ChatMessage =
-  | { id: string; from: 'gm'; text: string; flavour?: 'normal' | 'correct' | 'incorrect' }
+  | { id: string; from: 'gm'; text: string; flavor?: 'normal' | 'correct' | 'incorrect' }
   | { id: string; from: 'learner'; text: string; isCorrect: boolean };
 
 interface ScriptCursor {
@@ -98,15 +98,15 @@ export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: G
       return;
     }
 
-    let cancelled = false;
+    let canceled = false;
 
     const run = async () => {
       if (beat.type === 'message') {
         await wait(MESSAGE_PAUSE_MS);
-        if (cancelled) return;
+        if (canceled) return;
         setIsTyping(true);
         await wait(TYPING_DELAY_MS);
-        if (cancelled) return;
+        if (canceled) return;
         setIsTyping(false);
         appendMessage({
           id: `m-${cursor.beatIndex}`,
@@ -115,16 +115,16 @@ export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: G
         });
         // Auto-advance to the next beat.
         await wait(MESSAGE_PAUSE_MS);
-        if (cancelled) return;
+        if (canceled) return;
         setCursor((c) => ({ beatIndex: c.beatIndex + 1, phase: 'awaiting' }));
       } else {
         // question beat
         if (cursor.phase === 'awaiting') {
           await wait(MESSAGE_PAUSE_MS);
-          if (cancelled) return;
+          if (canceled) return;
           setIsTyping(true);
           await wait(TYPING_DELAY_MS);
-          if (cancelled) return;
+          if (canceled) return;
           setIsTyping(false);
           appendMessage({
             id: `q-${cursor.beatIndex}-prompt`,
@@ -140,7 +140,7 @@ export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: G
 
     run();
     return () => {
-      cancelled = true;
+      canceled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cursor.beatIndex, cursor.phase]);
@@ -176,7 +176,7 @@ export function GameMasterChatScreen({ onComplete, playerName, retryItemIds }: G
       id: `q-${cursor.beatIndex}-followup`,
       from: 'gm',
       text: option.isCorrect ? question.followUp.correct : question.followUp.incorrect,
-      flavour: option.isCorrect ? 'correct' : 'incorrect',
+      flavor: option.isCorrect ? 'correct' : 'incorrect',
     });
 
     // Auto-advance to next beat
@@ -325,10 +325,10 @@ function MessageBubble({ msg }: { msg: ChatMessage }) {
         }}
       >
         {msg.text}
-        {isGM && msg.flavour === 'correct' && (
+        {isGM && msg.flavor === 'correct' && (
           <CorrectnessTag kind="correct" />
         )}
-        {isGM && msg.flavour === 'incorrect' && (
+        {isGM && msg.flavor === 'incorrect' && (
           <CorrectnessTag kind="incorrect" />
         )}
       </div>

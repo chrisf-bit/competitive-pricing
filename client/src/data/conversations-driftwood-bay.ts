@@ -6,7 +6,7 @@ import type { ConversationTree } from '../types';
  * Distractor partner used to round out the R2 portfolio. Data is
  * mapped from the SME spreadsheet mix sheet row 43 (The Oasis Palms
  * Resort) - eRPD 3.4% (Bucket 4), four active scenarios, Genius
- * Programme active. Reads as moderate / not the priority vs Velvet
+ * Program active. Reads as moderate / not the priority vs Velvet
  * Sky Boutique Hotel at R2.
  *
  * Author: Claude (filler). The conversation is realistic and
@@ -17,7 +17,7 @@ import type { ConversationTree } from '../types';
  *
  * Daniel Cruz (Hotel Manager) is yellow / green primary -
  * expressive and warm, energetic about his resort and quick to
- * engage. Style scoring rewards yellow / green, penalises blue when
+ * engage. Style scoring rewards yellow / green, penalizes blue when
  * the AM gets too analytical and slow-paced.
  */
 export const driftwoodBayR2: ConversationTree = {

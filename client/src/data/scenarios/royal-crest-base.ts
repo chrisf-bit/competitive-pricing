@@ -24,7 +24,7 @@ import type {
  * Liam's style is red (driver) primary + blue (analytical) secondary:
  * "let's get right to the point," profit-first, but wants proof and a
  * controlled experiment before he commits. Scoring rewards red + blue
- * and penalises green/yellow fluff without commercial substance.
+ * and penalizes green/yellow fluff without commercial substance.
  *
  * The OPTIMAL line at each step is taken from the SME script; the two
  * distractors per step are authored to the sim's "close but not quite"

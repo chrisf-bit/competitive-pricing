@@ -250,7 +250,7 @@ export function getRPDLevel(rpd: number): RPDLevel {
 
 /**
  * Maps an eRPD percentage to one of the seven Booking.com price
- * buckets used by LPS for internal portfolio prioritisation. Lower
+ * buckets used by LPS for internal portfolio prioritization. Lower
  * bucket = more competitive partner; higher bucket = partner is
  * more expensive than Key OTA / Brand.com and worth a call.
  *
@@ -269,7 +269,7 @@ export function getRPDLevel(rpd: number): RPDLevel {
  * Bucket 1 (not 2), etc.
  *
  * Internal-only data. Per the compliance rules, the bucket must
- * never appear in partner-facing copy - it's a prioritisation
+ * never appear in partner-facing copy - it's a prioritization
  * signal for the LPS, not a target to communicate to the partner.
  */
 export type PriceBucket = 1 | 2 | 3 | 4 | 5 | 6 | 7;
@@ -863,7 +863,7 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   // learner actually engaged with. Judging them across the whole
   // regime portfolio (21 partners today) produced nonsense on a
   // perfect run: 18 correctly-ignored partners showed up as "RPD
-  // declined, consider prioritising them earlier" and every one of
+  // declined, consider prioritizing them earlier" and every one of
   // them added a style-preference paragraph. Now the debrief only
   // speaks to the calls the learner made.
   const engagedPartners = state.partners.filter((p) =>
@@ -890,7 +890,7 @@ export function calculateScore(state: GameState): ScoreBreakdown {
       );
     } else if (rpdDelta < 0) {
       improvements.push(
-        `${partner.persona.name}'s Experienced RPD declined. Consider prioritising them earlier.`,
+        `${partner.persona.name}'s Experienced RPD declined. Consider prioritizing them earlier.`,
       );
     }
 

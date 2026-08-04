@@ -17,7 +17,7 @@ import rajImg from '../assets/avatars/raj.webp';
  *   - Avatar (visual identity, 8 hand-illustrated PNGs, 4 femme + 4 masc)
  *   - Super Power persona (one of 4, content sourced from the persona PDF)
  *
- * Super powers are flavour-only for MVP - they surface in the GM intro
+ * Super powers are flavor-only for MVP - they surface in the GM intro
  * and the debrief, but do not affect scoring. Mechanic differentiation
  * is post-MVP.
  */
@@ -36,7 +36,7 @@ export interface CharacterAvatar {
   /**
    * Soft-pastel tile background tuned to suit each illustration's
    * palette. Used by the character-pick grid (and any other surface
-   * that frames the avatar). Each avatar gets its own colour so the
+   * that frames the avatar). Each avatar gets its own color so the
    * row reads as a varied set rather than a uniform wall of tiles.
    */
   bgColor: string;
@@ -58,7 +58,7 @@ export interface CharacterAvatar {
   /**
    * Optional vertical translate, expressed as a percentage of the
    * tile height (positive = down, negative = up). Used to fine-tune
-   * the head position when scale alone doesn't get the centre line
+   * the head position when scale alone doesn't get the center line
    * matching the rest of the row.
    */
   translateY?: number;
@@ -80,7 +80,7 @@ export interface CharacterAvatar {
  * IDs are stable across the DiceBear migration so any saved
  * learnerProfile.avatarId values continue to resolve.
  *
- * Background colours are picked to complement each illustration's
+ * Background colors are picked to complement each illustration's
  * dominant accents without clashing - warm yellows / oranges for the
  * sunlit set, cooler blues / violets for the rest.
  */
@@ -137,7 +137,7 @@ export interface SuperPowerPersona {
   /**
    * Concrete, learner-facing description of what the persona does
    * during play. Rendered on the Character Build card so the pick
-   * doesn't feel like pure flavour. One line, present tense, names
+   * doesn't feel like pure flavor. One line, present tense, names
    * the actual UI effect (which chip, which highlight) so the
    * learner knows what to expect. Kept honest to what ships - if
    * you build a new persona effect, update this string first.

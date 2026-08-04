@@ -24,7 +24,7 @@ import type {
  *
  * Style scoring rewards blue (thinker) and green (amiable) - Anton
  * is blue primary + green secondary across all three variants. Red
- * (driver) and yellow (expressive) get penalised when they push too
+ * (driver) and yellow (expressive) get penalized when they push too
  * hard or get too loose-tongued for Anton's measured, process-led
  * tone.
  *
@@ -101,22 +101,22 @@ export const nobleFalconStep1Open: BranchingStep = {
   options: step1Options,
 };
 
-// ───────── Step 2 - Reframe search behaviour ─────────
+// ───────── Step 2 - Reframe search behavior ─────────
 // Shared across regimes. Anton has just defended his brand-cheaper
 // policy and his risk-filtering rationale. The optimal pick reframes
-// how travellers actually behave - they don't go direct, they pick
+// how travelers actually behave - they don't go direct, they pick
 // a competitor on the same search page.
 
 const step2Options: BranchingOption[] = [
   {
     id: 'nf-r1-search-reframe',
-    label: 'Reframe how travellers actually shop',
+    label: 'Reframe how travelers actually shop',
     description:
       "Show Anton that uncompetitive rates here don't drive guests direct - they just send them to a local competitor on the same search page.",
     playerDialogue:
       "I understand managing operational risk. But when prices here are not optimal, guests don't go direct - they simply book a cheaper local competitor on the same search page.",
     partnerResponse:
-      "That is an ownership trade-off. We prioritise brand control and our direct loyal base over top-funnel platform exposure, even if some rooms stay empty.",
+      "That is an ownership trade-off. We prioritize brand control and our direct loyal base over top-funnel platform exposure, even if some rooms stay empty.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -155,7 +155,7 @@ const step2Options: BranchingOption[] = [
 
 export const nobleFalconStep2ReframeSearch: BranchingStep = {
   id: 'reframe-search',
-  label: 'Reframe search behaviour',
+  label: 'Reframe search behavior',
   partnerPrompt:
     "Hello. It is our brand policy to keep our site cheaper. We also price higher externally to filter out 'risky' guests who cancel frequently or have invalid cards.",
   options: step2Options,

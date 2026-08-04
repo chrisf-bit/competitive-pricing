@@ -73,7 +73,7 @@ export function MetricLabel({
   // from the helpText prop shape. Plain strings are descriptions;
   // ReactNodes carry structured data (e.g. the active scenarios
   // list). The icon shape stays the same so the (i) affordance is
-  // consistent, but the colour differs so the learner can tell at
+  // consistent, but the color differs so the learner can tell at
   // a glance whether the tooltip will define the metric or show the
   // current value.
   const isDataVariant = typeof helpText !== 'string';

@@ -17,7 +17,7 @@ import type { ParityRegime } from '../types';
  *
  * If a regime+round combination isn't mapped here, the Portfolio
  * screen falls back to "show all partners whose parityRegime matches"
- * - the legacy behaviour for round / regime combinations not yet
+ * - the legacy behavior for round / regime combinations not yet
  * wired in.
  *
  * Sibling of `correctPartnerPerRound.ts`: that file says "which one
@@ -90,7 +90,7 @@ export const portfolioByRound: Partial<
 /**
  * Returns the explicit list of partner ids to render on the Portfolio
  * for this regime + round. Returns null when there's no explicit
- * mapping - the caller should fall back to its legacy behaviour
+ * mapping - the caller should fall back to its legacy behavior
  * (show all partners whose parityRegime matches).
  */
 export function getPortfolioForRound(

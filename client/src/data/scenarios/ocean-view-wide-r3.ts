@@ -11,7 +11,7 @@ import { oceanViewR3IssueTreePath } from './ocean-view-base';
  * Source: SME "Round 3" doc, Conversation 1 (Wide Parity). In a Wide
  * market the AM may proactively ask Camila to match her direct-website
  * rates on Booking.com. The learner must counter the reverse-billboard
- * belief with how travellers actually search, then land a base-rate
+ * belief with how travelers actually search, then land a base-rate
  * alignment paired with fenced member-only site deals so she keeps her
  * direct incentive. The risky distractors break the ranking-threat and
  * dictate-external-strategy bans.
@@ -26,9 +26,9 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge she converts well once seen, surface the -61% page views / -48% bookings visibility problem, then ask her to walk you through the rate strategy before recommending anything.",
     playerDialogue:
-      "You're right. Once travellers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and your bookings are 48% behind. Can you walk me through the strategy behind the rates you've listed with us?",
+      "You're right. Once travelers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and your bookings are 48% behind. Can you walk me through the strategy behind the rates you've listed with us?",
     partnerResponse:
-      "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realise it's cheaper to book directly with our agency, and then complete on our site.",
+      "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with our agency, and then complete on our site.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Names the data but jumps straight to the fix - drop the price - without understanding how she runs her channels. An experienced manager reads that as being sold to.",
     playerDialogue:
-      "Your bookings are down 48% - the fix is to bring your Booking.com rates down so travellers stop skipping you. Can we get that set up?",
+      "Your bookings are down 48% - the fix is to bring your Booking.com rates down so travelers stop skipping you. Can we get that set up?",
     partnerResponse:
       "You're prescribing a rate cut before you understand a thing about how we run our channels.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -78,11 +78,11 @@ const step1: BranchingStep = {
 const step2Options: BranchingOption[] = [
   {
     id: 'ov-r3-wide-step2-correct',
-    label: 'Explain how travellers actually search',
+    label: 'Explain how travelers actually search',
     description:
-      "SME-prescribed counter to the reverse-billboard belief: a traveller who sees a higher price here doesn't hunt for an unknown direct site - they book a cheaper local competitor on the same page. Then probe how she weighs that risk.",
+      "SME-prescribed counter to the reverse-billboard belief: a traveler who sees a higher price here doesn't hunt for an unknown direct site - they book a cheaper local competitor on the same page. Then probe how she weighs that risk.",
     playerDialogue:
-      "I understand the intent. But when a traveller sees a higher price here, they rarely go hunting for a direct site they don't know yet - they just book a cheaper local competitor on the same search page. How do you weigh the risk of losing those guests to local properties entirely?",
+      "I understand the intent. But when a traveler sees a higher price here, they rarely go hunting for a direct site they don't know yet - they just book a cheaper local competitor on the same search page. How do you weigh the risk of losing those guests to local properties entirely?",
     partnerResponse:
       "Some might book elsewhere, but we believe our repeat guests and brand strength capture the serious bookers. Why should we lower our base rate here and risk revenue on our direct channel?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -109,9 +109,9 @@ const step2Options: BranchingOption[] = [
     id: 'ov-r3-wide-step2-lecture',
     label: 'Call her strategy a myth',
     description:
-      "Dismiss the direct-booking belief as a myth and travellers as lazy. Condescending to an experienced operator - it shuts the conversation instead of reframing it.",
+      "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator - it shuts the conversation instead of reframing it.",
     playerDialogue:
-      "Honestly, the 'they'll book direct' idea is a myth - travellers are lazy, they just book whatever's cheapest in front of them.",
+      "Honestly, the 'they'll book direct' idea is a myth - travelers are lazy, they just book whatever's cheapest in front of them.",
     partnerResponse:
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -125,7 +125,7 @@ const step2: BranchingStep = {
   id: 'billboard-counter',
   label: 'Counter the reverse-billboard belief',
   partnerPrompt:
-    "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realise it's cheaper to book directly with our agency, and then complete on our site.",
+    "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with our agency, and then complete on our site.",
   options: step2Options,
 };
 

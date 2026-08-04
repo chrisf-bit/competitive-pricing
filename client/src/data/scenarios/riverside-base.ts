@@ -21,7 +21,7 @@ import type { IssueTreePath } from '../../types';
  * Anton's style is blue (analytical) primary + green (relationship)
  * secondary: inquisitive and data-led, wins on logic delivered
  * collaboratively, and reacts badly to being pushed or lectured.
- * Scoring rewards blue + green and penalises pushy red / empty yellow.
+ * Scoring rewards blue + green and penalizes pushy red / empty yellow.
  *
  * The Issue Tree path matches the SME's "unintentional / missing setup"
  * read of a changing Key OTA eRPD (the +6.56 MoM spike), so it lines up

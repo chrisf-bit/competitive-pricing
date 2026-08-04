@@ -28,9 +28,9 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: credit her strong on-page conversion (+39% vs peer), note that page views and future bookings are trending down and her prices read as consistently higher here, then ask - neutrally - about her strategy.",
     playerDialogue:
-      "On your performance with us: it's very positive that once a traveller lands on your page, your conversion is 39% higher than your competitors. But both your page views and your future bookings are trending down, and we can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
+      "On your performance with us: it's very positive that once a traveler lands on your page, your conversion is 39% higher than your competitors. But both your page views and your future bookings are trending down, and we can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
     partnerResponse:
-      "It's about channel costs. We intentionally keep our website prices lower to stimulate travellers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
+      "It's about channel costs. We intentionally keep our website prices lower to stimulate travelers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -71,7 +71,7 @@ const step1: BranchingStep = {
   id: 'probe',
   label: 'Credit conversion, surface the trend, probe',
   partnerPrompt:
-    "Good morning, Javier. We're focusing heavily on operational efficiency and, above all, maximising profitability - which means driving as much volume as possible through our own website.",
+    "Good morning, Javier. We're focusing heavily on operational efficiency and, above all, maximizing profitability - which means driving as much volume as possible through our own website.",
   options: step1Options,
 };
 
@@ -80,11 +80,11 @@ const step1: BranchingStep = {
 const step2Options: BranchingOption[] = [
   {
     id: 'ov-r3-none-step2-correct',
-    label: 'Explain search behaviour; keep autonomy, surface her concern',
+    label: 'Explain search behavior; keep autonomy, surface her concern',
     description:
-      "SME-prescribed counter: travellers don't open a new window to find her direct site - they pick a better-value alternative on the same page. Her strategy is hers, but her best price protects those bookings. Then ask for her biggest concern.",
+      "SME-prescribed counter: travelers don't open a new window to find her direct site - they pick a better-value alternative on the same page. Her strategy is hers, but her best price protects those bookings. Then ask for her biggest concern.",
     playerDialogue:
-      "Thank you for sharing. But when your prices aren't competitive here, travellers don't open a new window to find your direct site - they gravitate to better-value alternatives on the same search page. Your pricing strategy is entirely up to you, but offering your best price ensures you don't lose those bookings. What's your biggest concern?",
+      "Thank you for sharing. But when your prices aren't competitive here, travelers don't open a new window to find your direct site - they gravitate to better-value alternatives on the same search page. Your pricing strategy is entirely up to you, but offering your best price ensures you don't lose those bookings. What's your biggest concern?",
     partnerResponse:
       "My main concern is that if I offer my lowest public price on Booking.com, I'm giving up my unique commercial advantage.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -111,9 +111,9 @@ const step2Options: BranchingOption[] = [
     id: 'ov-r3-none-step2-lecture',
     label: 'Call her strategy a myth',
     description:
-      "Dismiss the direct-booking belief as a myth and travellers as lazy. Condescending to an experienced operator.",
+      "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator.",
     playerDialogue:
-      "The 'they'll book direct' idea is honestly a myth - travellers just book whatever's cheapest in front of them.",
+      "The 'they'll book direct' idea is honestly a myth - travelers just book whatever's cheapest in front of them.",
     partnerResponse:
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -127,7 +127,7 @@ const step2: BranchingStep = {
   id: 'billboard-counter',
   label: 'Counter the reverse-billboard belief',
   partnerPrompt:
-    "It's about channel costs. We intentionally keep our website prices lower to stimulate travellers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
+    "It's about channel costs. We intentionally keep our website prices lower to stimulate travelers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
   options: step2Options,
 };
 

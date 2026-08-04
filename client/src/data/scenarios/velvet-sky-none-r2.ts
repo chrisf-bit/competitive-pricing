@@ -27,23 +27,23 @@ import { velvetSkyR2IssueTreePath } from './velvet-sky-base';
  * John's communication style is red (driver) primary + blue (thinker)
  * secondary. He talks in commercial terms - margins, commission,
  * ROI - and weighs trade-offs before agreeing. Style scoring rewards
- * red and blue; penalises green / yellow when the option drifts into
+ * red and blue; penalizes green / yellow when the option drifts into
  * relational warmth or expressive looseness without commercial bite.
  *
  * Internal metric names do not appear in any option's playerDialogue,
  * including the risky picks.
  */
 
-// ───────── Step 1 - Reframe the price-gap behaviour ─────────
+// ───────── Step 1 - Reframe the price-gap behavior ─────────
 
 const step1Options: BranchingOption[] = [
   {
     id: 'vs-r2-none-step1-correct',
     label: "Mirror John's autonomy, name the consumer-search reality",
     description:
-      "Use the doc-prescribed opener: respect his pricing autonomy, then explain the side-by-side search behaviour that's losing him the booking on Booking.com regardless of his direct strategy.",
+      "Use the doc-prescribed opener: respect his pricing autonomy, then explain the side-by-side search behavior that's losing him the booking on Booking.com regardless of his direct strategy.",
     playerDialogue:
-      "You are entirely free to price your property however you choose. Most travellers compare properties side-by-side on Booking.com, though. If a partner is uncompetitive, the traveller doesn't go to their direct site - they simply book a cheaper competitor on Booking.com. By making your best price available to us, you instantly improve your discovery, which lifts your overall business.",
+      "You are entirely free to price your property however you choose. Most travelers compare properties side-by-side on Booking.com, though. If a partner is uncompetitive, the traveler doesn't go to their direct site - they simply book a cheaper competitor on Booking.com. By making your best price available to us, you instantly improve your discovery, which lifts your overall business.",
     partnerResponse:
       "I get that, but a rate drop across the board on Booking.com just doesn't work for my margin targets.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -70,11 +70,11 @@ const step1Options: BranchingOption[] = [
     id: 'vs-r2-none-step1-condescend',
     label: 'Lecture him on wasting the platform reach',
     description:
-      "Open with a sharp lecture - accuse him of wasting platform reach and threaten the algorithm will stop optimising his account. Patronising tone that hits red-driver partners particularly hard.",
+      "Open with a sharp lecture - accuse him of wasting platform reach and threaten the algorithm will stop optimizing his account. Patronising tone that hits red-driver partners particularly hard.",
     playerDialogue:
-      "John, you are completely wasting our platform's reach. Overcharging our users just to protect your website is a terrible strategy. If you keep ignoring our traffic, we will stop optimising your account entirely.",
+      "John, you are completely wasting our platform's reach. Overcharging our users just to protect your website is a terrible strategy. If you keep ignoring our traffic, we will stop optimizing your account entirely.",
     partnerResponse:
-      "Accusing me of overcharging and threatening to stop optimising my account is the wrong tone. I'm done.",
+      "Accusing me of overcharging and threatening to stop optimizing my account is the wrong tone. I'm done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
     assertiveness: 3,
     compliance: 'risky',
@@ -84,7 +84,7 @@ const step1Options: BranchingOption[] = [
 
 const step1Open: BranchingStep = {
   id: 'open',
-  label: 'Reframe the price-gap behaviour',
+  label: 'Reframe the price-gap behavior',
   partnerPrompt:
     "Yes, we choose to offer deep public discounts on our own site. We prefer to keep our direct channel as our lowest-priced option.",
   options: step1Options,
@@ -97,9 +97,9 @@ const step2Options: BranchingOption[] = [
     id: 'vs-r2-none-step2-correct',
     label: 'Decouple the ask from a public drop',
     description:
-      "Use the doc-prescribed pivot: explicitly say no public drop, respect his pricing autonomy, and surface Country Rate as the targeted lever for high-spending international travellers.",
+      "Use the doc-prescribed pivot: explicitly say no public drop, respect his pricing autonomy, and surface Country Rate as the targeted lever for high-spending international travelers.",
     playerDialogue:
-      "I'm definitely not suggesting a general rate drop. Your pricing strategy remains 100% your decision. Instead of an across-the-board reduction, you can decide to target your public better - for example using a Country Rate, aimed at catching high-spending international travellers.",
+      "I'm definitely not suggesting a general rate drop. Your pricing strategy remains 100% your decision. Instead of an across-the-board reduction, you can decide to target your public better - for example using a Country Rate, aimed at catching high-spending international travelers.",
     partnerResponse:
       "So I keep my public pricing exactly as it is, but open a backdoor for specific guests?",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

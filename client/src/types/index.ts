@@ -255,7 +255,7 @@ export interface PartnerMetrics {
   erpd: number;
   /** Change vs prior period; negative = improving, positive = worsening. */
   erpdChange: number;
-  /** Public RPD percentage - what non-logged-in travellers see. */
+  /** Public RPD percentage - what non-logged-in travelers see. */
   rpdPublic: number;
   /** Loyal RPD percentage - what Genius members see. */
   rpdLoyal: number;
@@ -342,7 +342,7 @@ export interface PartnerPersona {
   propertyImage: string;        // URL for property photo
   style: CommunicationStyle;
   styleSecondary: CommunicationStyle;
-  description: string;          // brief flavour text
+  description: string;          // brief flavor text
   commercialGoal: string;
   /**
    * Parity regime this partner operates under. Drives which conversation
@@ -460,7 +460,7 @@ export type IssueTreeTrigger =
   | 'performance-outcome'
   | 'pricing-signal'
   | 'interaction'
-  | 'programme';
+  | 'program';
 
 /**
  * Whether the partner's pricing pattern looks deliberate or accidental.

@@ -57,9 +57,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Right. Experienced Relative Price Difference - it tells us how much cheaper or more expensive Booking.com is compared to Brand.com and Key OTAs, based on what travellers actually see.",
+          "Right. Experienced Relative Price Difference - it tells us how much cheaper or more expensive Booking.com is compared to Brand.com and Key OTAs, based on what travelers actually see.",
         incorrect:
-          "Not quite. It's Experienced Relative Price Difference. Tells us how cheap or expensive we are compared to Brand.com and Key OTAs from the traveller's point of view.",
+          "Not quite. It's Experienced Relative Price Difference. Tells us how cheap or expensive we are compared to Brand.com and Key OTAs from the traveler's point of view.",
       },
     },
   },
@@ -97,9 +97,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          'Yep. Public RPD covers non-logged-in travellers, Loyal covers logged-in Genius members. We blend the two by share of searches.',
+          'Yep. Public RPD covers non-logged-in travelers, Loyal covers logged-in Genius members. We blend the two by share of searches.',
         incorrect:
-          "It's Public RPD and Loyal RPD. Public is non-logged-in travellers, Loyal is Genius members - we blend them by share of searches into one number.",
+          "It's Public RPD and Loyal RPD. Public is non-logged-in travelers, Loyal is Genius members - we blend them by share of searches into one number.",
       },
     },
   },
@@ -158,7 +158,7 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Yep. eRPD less than or equal to zero is the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value is sitting inside it. Purely internal prioritisation - it never goes into a partner conversation.",
+          "Yep. eRPD less than or equal to zero is the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value is sitting inside it. Purely internal prioritization - it never goes into a partner conversation.",
         incorrect:
           "It's eRPD less than or equal to zero - the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value sits inside that band, so we know where the healthy price competitiveness lives. Internal only, don't put it into a partner conversation.",
       },
@@ -166,7 +166,7 @@ export const gmScript: GMBeat[] = [
   },
   {
     type: 'message',
-    text: "Some context to set up the next few questions. When you look at a partner's pricing there are two flavours of competitiveness. On-Platform Competitiveness - OPC - is how they stack up against their peer set inside Booking.com. Cross-Platform Competitiveness is how they compare with their own Brand.com rates and other OTAs. Both matter, but there's a reason we start on-platform.",
+    text: "Some context to set up the next few questions. When you look at a partner's pricing there are two flavors of competitiveness. On-Platform Competitiveness - OPC - is how they stack up against their peer set inside Booking.com. Cross-Platform Competitiveness is how they compare with their own Brand.com rates and other OTAs. Both matter, but there's a reason we start on-platform.",
   },
   {
     type: 'question',
@@ -184,7 +184,7 @@ export const gmScript: GMBeat[] = [
         correct:
           "Yep. Around nine in ten. That's why On-Platform Competitiveness is the primary lever - win how you stack up against your peer set inside Booking.com and you win where the vast majority of your traffic lives.",
         incorrect:
-          "Around 90%. Nine in ten travellers who book on Booking.com discovered the property here, not somewhere else. That's why OPC - how you sit against your peer set inside the platform - is the lever we spend most of our time on.",
+          "Around 90%. Nine in ten travelers who book on Booking.com discovered the property here, not somewhere else. That's why OPC - how you sit against your peer set inside the platform - is the lever we spend most of our time on.",
       },
     },
   },
@@ -208,9 +208,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Right. On-Platform Competitiveness is regime-neutral because it's about how travellers experience Booking.com, not the partner's external strategy. You can lead with it in Wide, Narrow, and No Parity alike. Cross-platform framing carries regime-specific rules - in No Parity you can only raise it reactively if the partner brings it up first. And here's the bonus: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
+          "Right. On-Platform Competitiveness is regime-neutral because it's about how travelers experience Booking.com, not the partner's external strategy. You can lead with it in Wide, Narrow, and No Parity alike. Cross-platform framing carries regime-specific rules - in No Parity you can only raise it reactively if the partner brings it up first. And here's the bonus: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
         incorrect:
-          "It's the on-platform comparison. OPC is regime-neutral because it's about how travellers experience Booking.com, not the partner's external strategy - so it's safe in Wide, Narrow, and No Parity alike. Cross-platform framing needs the regime rules applied. And the payoff: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
+          "It's the on-platform comparison. OPC is regime-neutral because it's about how travelers experience Booking.com, not the partner's external strategy - so it's safe in Wide, Narrow, and No Parity alike. Cross-platform framing needs the regime rules applied. And the payoff: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
       },
     },
   },
@@ -281,9 +281,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          'Yep. Rising eRPD (worsening competitiveness) reduces the property\'s ranking and conversion. Fewer travellers see it, fewer of those who see it convert, so more inventory sits unsold at the end of the period. Sell Through Rate falls, Unsold Rooms rises. Both are supply-side symptoms of an upstream pricing problem.',
+          'Yep. Rising eRPD (worsening competitiveness) reduces the property\'s ranking and conversion. Fewer travelers see it, fewer of those who see it convert, so more inventory sits unsold at the end of the period. Sell Through Rate falls, Unsold Rooms rises. Both are supply-side symptoms of an upstream pricing problem.',
         incorrect:
-          "The connection runs from eRPD to Visibility Share to conversion to inventory. Rising eRPD hurts ranking, so fewer travellers see the property; fewer of those convert; so more rooms sit unsold. Sell Through Rate and Unsold Rooms are downstream symptoms of the pricing problem, not independent of it.",
+          "The connection runs from eRPD to Visibility Share to conversion to inventory. Rising eRPD hurts ranking, so fewer travelers see the property; fewer of those convert; so more rooms sit unsold. Sell Through Rate and Unsold Rooms are downstream symptoms of the pricing problem, not independent of it.",
       },
     },
   },

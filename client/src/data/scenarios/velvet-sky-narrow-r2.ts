@@ -94,7 +94,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Use the doc-prescribed pivot: align public Booking.com rates with his Brand.com to fix discovery, and run fenced member rates on his website to preserve his direct-booking edge - private incentives, not public discounts.",
     playerDialogue:
-      "Not necessarily. Instead of keeping your public rates cheaper - which actively suppresses your discovery on our platform - you can use fenced, private member rates on your website to incentivise direct bookings. That keeps your public face perfectly aligned.",
+      "Not necessarily. Instead of keeping your public rates cheaper - which actively suppresses your discovery on our platform - you can use fenced, private member rates on your website to incentivize direct bookings. That keeps your public face perfectly aligned.",
     partnerResponse:
       "Okay, I see how that protects my ranking. But I'm still hesitant to have the same price everywhere if I'm trying to boost specific slow periods.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -150,7 +150,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Use the doc-prescribed close: rule out an across-the-board rate drop, propose period- or segment-specific discounts that capture incremental volume without touching the base ADR.",
     playerDialogue:
-      "You don't have to lower your rates across the board. We can target specific periods or users to offer a discount only to underperforming traveller segments. You protect your base website ADR while capturing incremental volume you're currently missing.",
+      "You don't have to lower your rates across the board. We can target specific periods or users to offer a discount only to underperforming traveler segments. You protect your base website ADR while capturing incremental volume you're currently missing.",
     partnerResponse:
       "That's a fair compromise. Let's shift the direct site to member-only discounts and test a targeted discount with you.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

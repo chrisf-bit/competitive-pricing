@@ -10,7 +10,7 @@
  *
  * Copy sourced verbatim from the SME doc, with three edits per the
  * session's copy-review pass:
- *   - Smart quotes / em dashes / en dashes normalised (CLAUDE.md rule).
+ *   - Smart quotes / em dashes / en dashes normalized (CLAUDE.md rule).
  *   - Scenario 3 Step 3 prompt "What should the AM/PFR say?" replaced
  *     with "What is the strongest response?" (role-agnostic copy).
  *   - Family Ready framework references kept as-is (well-known to
@@ -85,7 +85,7 @@ export const miniScenarios: MiniScenario[] = [
     propertyName: 'Hotel Castellana',
     scenarioTitle: 'The Brand.com channel gap',
     objective:
-      "Recognise that a Brand.com gap is a signal to diagnose, not a reason to pressure the partner, and guide the conversation toward a compliant, performance-led next step.",
+      "Recognize that a Brand.com gap is a signal to diagnose, not a reason to pressure the partner, and guide the conversation toward a compliant, performance-led next step.",
     theme: 'brand-gap',
     heroImage:
       'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800&h=1000&fit=crop',
@@ -101,7 +101,7 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: 'The partner is deliberately trying to reduce their volume on Booking.com and steer travellers to their direct site, which needs addressing straight away.',
+            text: 'The partner is deliberately trying to reduce their volume on Booking.com and steer travelers to their direct site, which needs addressing straight away.',
           },
           {
             id: 'B',
@@ -149,7 +149,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: '"If you want to grow bookings you should always make sure Booking.com is your cheapest channel, because travellers will book wherever the price is best and that is what our platform is set up to reward with better visibility."',
+            text: '"If you want to grow bookings you should always make sure Booking.com is your cheapest channel, because travelers will book wherever the price is best and that is what our platform is set up to reward with better visibility."',
           },
           {
             id: 'C',
@@ -167,7 +167,7 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: 'Ask the partner to bring their prices across every channel in line with the price they show on Booking.com so travellers see a consistent offer wherever they search.',
+            text: 'Ask the partner to bring their prices across every channel in line with the price they show on Booking.com so travelers see a consistent offer wherever they search.',
           },
           {
             id: 'B',
@@ -243,7 +243,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: "Ask the partner to match the competitor's app price across all their channels so they stay competitive with what mobile travellers are seeing elsewhere.",
+            text: "Ask the partner to match the competitor's app price across all their channels so they stay competitive with what mobile travelers are seeing elsewhere.",
           },
         ],
         correctOptionId: 'A',
@@ -307,7 +307,7 @@ export const miniScenarios: MiniScenario[] = [
     propertyName: 'Grandview Inn',
     scenarioTitle: 'The offset Genius discount',
     objective:
-      "Recognise low-quality Genius adoption, explain why the discount is not delivering real traveller value, and guide the partner back to fixing the base price first.",
+      "Recognize low-quality Genius adoption, explain why the discount is not delivering real traveler value, and guide the partner back to fixing the base price first.",
     theme: 'genius-offset',
     heroImage:
       'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=1000&fit=crop',
@@ -337,7 +337,7 @@ export const miniScenarios: MiniScenario[] = [
         ],
         correctOptionId: 'A',
         correctCoaching:
-          'A public rate that climbs the moment Genius activates is the classic offset pattern - the member price is nominally discounted but the traveller sees no real saving.',
+          'A public rate that climbs the moment Genius activates is the classic offset pattern - the member price is nominally discounted but the traveler sees no real saving.',
       },
       {
         id: 'diagnose',
@@ -346,7 +346,7 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: '"The main issue is that travellers might complain if they notice the base price went up, which could hurt reviews and how the partner is perceived by future guests."',
+            text: '"The main issue is that travelers might complain if they notice the base price went up, which could hurt reviews and how the partner is perceived by future guests."',
           },
           {
             id: 'B',
@@ -354,12 +354,12 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: '"If the base price is inflated first, the discount stops feeling genuine, so travellers and algorithms see less real value and the product becomes less effective."',
+            text: '"If the base price is inflated first, the discount stops feeling genuine, so travelers and algorithms see less real value and the product becomes less effective."',
           },
         ],
         correctOptionId: 'C',
         correctCoaching:
-          'Both travellers and platform signals key off real value delivered. An inflated base undermines both.',
+          'Both travelers and platform signals key off real value delivered. An inflated base undermines both.',
       },
       {
         id: 'narrative',
@@ -376,12 +376,12 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: '"The goal is to make sure discounts create genuine value for travellers. If the base price rises first, the Genius offer becomes less meaningful. Let\'s review the base setup first so the member price reflects real savings."',
+            text: '"The goal is to make sure discounts create genuine value for travelers. If the base price rises first, the Genius offer becomes less meaningful. Let\'s review the base setup first so the member price reflects real savings."',
           },
         ],
         correctOptionId: 'C',
         correctCoaching:
-          'Anchor on traveller value, not on rules or threats. That frames the fix as improving the product for everyone.',
+          'Anchor on traveler value, not on rules or threats. That frames the fix as improving the product for everyone.',
       },
       {
         id: 'next-step',
@@ -407,7 +407,7 @@ export const miniScenarios: MiniScenario[] = [
       },
     ],
     goodOutcome:
-      'You identified low-quality adoption, explained the issue in a performance-led way, and guided the partner toward restoring genuine traveller value.',
+      'You identified low-quality adoption, explained the issue in a performance-led way, and guided the partner toward restoring genuine traveler value.',
     badOutcome:
       'You focused on the discount label instead of the real price experience, so the root cause remained unresolved.',
   },
@@ -418,7 +418,7 @@ export const miniScenarios: MiniScenario[] = [
     propertyName: 'Sunfield Apartments',
     scenarioTitle: 'The family and occupancy undercut',
     objective:
-      "Recognise that the gap may come from family setup, not broad pricing, and guide the partner through a foundations-first fix.",
+      "Recognize that the gap may come from family setup, not broad pricing, and guide the partner through a foundations-first fix.",
     theme: 'family-undercut',
     heroImage:
       'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&h=1000&fit=crop',
@@ -462,7 +462,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: 'Ask the partner to copy the family offer that a nearby competitor is running so they can match what those travellers are already comparing against.',
+            text: 'Ask the partner to copy the family offer that a nearby competitor is running so they can match what those travelers are already comparing against.',
           },
           {
             id: 'C',
@@ -484,7 +484,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: '"You should run a family discount that applies across every room type on the platform so any family traveller searching sees a lower rate than they did before."',
+            text: '"You should run a family discount that applies across every room type on the platform so any family traveler searching sees a lower rate than they did before."',
           },
           {
             id: 'C',
@@ -508,7 +508,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: 'Tell the partner to lower all their base rates for family travellers on every channel they distribute through so the gap disappears in one clean move.',
+            text: 'Tell the partner to lower all their base rates for family travelers on every channel they distribute through so the gap disappears in one clean move.',
           },
           {
             id: 'C',

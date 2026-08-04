@@ -92,7 +92,7 @@ export const priyaR1: ConversationTree = {
             label: 'Flag multiple issues broadly',
             description: 'Note there are several things to address without quantifying each.',
             playerDialogue:
-              "There are a few things going on here. Your discount setup needs work, you've got some price competitiveness issues, and there's room to optimise your Genius participation. I'd want to walk through each.",
+              "There are a few things going on here. Your discount setup needs work, you've got some price competitiveness issues, and there's room to optimize your Genius participation. I'd want to walk through each.",
             styleMatch: { red: -1, blue: 0, yellow: 0, green: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -173,7 +173,7 @@ export const priyaR1: ConversationTree = {
           },
           {
             id: 'priya-r1-rec-parity',
-            label: 'Prioritise the parity breach',
+            label: 'Prioritize the parity breach',
             description: 'Focus on resolving the major rate parity issue as the highest-impact fix.',
             playerDialogue:
               "Priority one is your rate parity issue. Your rates on at least two competing OTAs are undercutting your price here by 8-12%. That's destroying your RPD score and suppressing your visibility in search results. Until parity is fixed, no discount product will perform properly. I'd recommend contacting your channel manager today to align rates.",
@@ -234,7 +234,7 @@ export const priyaR1: ConversationTree = {
 
 // ════════════════════════════════════════════════════════════
 //  PRIYA SHARMA - Round 2
-//  Focus: Deeper rate parity strategy + Genius optimisation / Country Rate
+//  Focus: Deeper rate parity strategy + Genius optimization / Country Rate
 // ════════════════════════════════════════════════════════════
 export const priyaR2: ConversationTree = {
   partnerId: 'priya',
@@ -252,7 +252,7 @@ export const priyaR2: ConversationTree = {
             label: 'Anchor on the progress, then pivot',
             description: 'Acknowledge improvement and use the chain comparison to introduce the next action.',
             playerDialogue:
-              "Good - the RPD lift confirms the diagnosis was right. Now let's close that 15-point gap. I've analysed what your Pune and Bangalore properties are doing differently. Two things stand out: they're running Genius programme at a higher tier, and they've activated Country Rate targeting key source markets. I have a plan to get you to parity with them.",
+              "Good - the RPD lift confirms the diagnosis was right. Now let's close that 15-point gap. I've analyzed what your Pune and Bangalore properties are doing differently. Two things stand out: they're running Genius program at a higher tier, and they've activated Country Rate targeting key source markets. I have a plan to get you to parity with them.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -345,7 +345,7 @@ export const priyaR2: ConversationTree = {
             description:
               'Identify both gaps with quantified Pune/Bangalore comparison and clean segmentation case.',
             playerDialogue:
-              "Two specific gaps versus your sister properties, both quantifiable. One: Genius programme - you're at Level 1, Pune and Bangalore are at Level 2, which unlocks priority placement and a badge that converts 22% better on repeat traveller traffic. Two: Country Rate - Pune runs 12% targeting UK, US, Middle East and Southeast Asia and sees a 20% international booking uplift; you have it switched off. Importantly, those two products target different traveller segments - Genius for repeat/loyalty, Country Rate for international new-search - so there's minimal overlap and minimal cannibalisation. They explain the bulk of the 15-point gap independently.",
+              "Two specific gaps versus your sister properties, both quantifiable. One: Genius program - you're at Level 1, Pune and Bangalore are at Level 2, which unlocks priority placement and a badge that converts 22% better on repeat traveler traffic. Two: Country Rate - Pune runs 12% targeting UK, US, Middle East and Southeast Asia and sees a 20% international booking uplift; you have it switched off. Importantly, those two products target different traveler segments - Genius for repeat/loyalty, Country Rate for international new-search - so there's minimal overlap and minimal cannibalization. They explain the bulk of the 15-point gap independently.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -395,10 +395,10 @@ export const priyaR2: ConversationTree = {
         options: [
           {
             id: 'priya-r2-rec-genius',
-            label: 'Optimise Genius programme',
+            label: 'Optimize Genius program',
             description: 'Focus on upgrading her Genius participation for visibility and conversion gains.',
             playerDialogue:
-              "Your Genius programme is active but underoptimised. You're at Level 1 with a basic 10% discount. Moving to Level 2 with a 15% discount unlocks priority placement in search results and a Genius badge that converts 18% better with repeat travellers. In Mumbai, Genius Level 2 properties see an average 22% increase in bookings from high-value repeat guests. The 5% additional discount pays for itself within the first two weeks based on your room volume.",
+              "Your Genius program is active but underoptimised. You're at Level 1 with a basic 10% discount. Moving to Level 2 with a 15% discount unlocks priority placement in search results and a Genius badge that converts 18% better with repeat travelers. In Mumbai, Genius Level 2 properties see an average 22% increase in bookings from high-value repeat guests. The 5% additional discount pays for itself within the first two weeks based on your room volume.",
             styleMatch: { red: 1, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -408,7 +408,7 @@ export const priyaR2: ConversationTree = {
             label: 'Activate Country Rate',
             description: 'Recommend Country Rate to capture international demand without affecting domestic pricing.',
             playerDialogue:
-              "Country Rate targets international travellers searching from specific source markets. For Mumbai, that's primarily UK, US, Middle East, and Southeast Asia. You set a discounted rate for those markets only - domestic pricing stays completely untouched. Your Pune property runs this at 12% and sees a 20% increase in international bookings. The incremental volume more than covers the discount. Zero cannibalisation of your domestic rate.",
+              "Country Rate targets international travelers searching from specific source markets. For Mumbai, that's primarily UK, US, Middle East, and Southeast Asia. You set a discounted rate for those markets only - domestic pricing stays completely untouched. Your Pune property runs this at 12% and sees a 20% increase in international bookings. The incremental volume more than covers the discount. Zero cannibalization of your domestic rate.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -418,7 +418,7 @@ export const priyaR2: ConversationTree = {
             label: 'Layer both strategically',
             description: 'Present Genius upgrade and Country Rate as a coordinated revenue strategy.',
             playerDialogue:
-              "Here's the play. First, upgrade Genius to Level 2 - 15% discount, priority search placement, 22% average booking uplift from high-value repeat guests. Second, activate Country Rate at 12% targeting UK, US, Middle East, and Southeast Asia - your Pune property sees 20% more international bookings from this alone. The two products target different traveller segments, so there's minimal overlap. Combined projected impact: 8-point visibility boost, 6-point conversion improvement, and your RPD should close the gap on Pune within four weeks.",
+              "Here's the play. First, upgrade Genius to Level 2 - 15% discount, priority search placement, 22% average booking uplift from high-value repeat guests. Second, activate Country Rate at 12% targeting UK, US, Middle East, and Southeast Asia - your Pune property sees 20% more international bookings from this alone. The two products target different traveler segments, so there's minimal overlap. Combined projected impact: 8-point visibility boost, 6-point conversion improvement, and your RPD should close the gap on Pune within four weeks.",
             styleMatch: { red: 2, blue: 2, yellow: 1, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -440,18 +440,18 @@ export const priyaR2: ConversationTree = {
         {
           optionId: 'priya-r2-rec-country',
           responses: [
-            { trustThreshold: 'low', text: "Zero cannibalisation is a strong claim. How can you guarantee international guests aren't displacing domestic bookings at higher rates?", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Zero cannibalization is a strong claim. How can you guarantee international guests aren't displacing domestic bookings at higher rates?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Pune's 20% international uplift is a useful benchmark. I want to start with UK and Middle East - those are my strongest source markets. Set it up at 12%.", emotion: 'positive' },
             { trustThreshold: 'high', text: "No domestic rate impact and proven chain results. Activate it now. I'll brief my revenue director with the Pune comparison data.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 6, visibility: 5, conversion: 3, revenue: 4 },
           trustChange: 5,
-          nextPhasePrompt: "Country Rate is logical. But what happens if my domestic guests find out international travellers are getting a lower rate? That's a PR risk for a chain brand.",
+          nextPhasePrompt: "Country Rate is logical. But what happens if my domestic guests find out international travelers are getting a lower rate? That's a PR risk for a chain brand.",
         },
         {
           optionId: 'priya-r2-rec-both',
           responses: [
-            { trustThreshold: 'low', text: "Minimal overlap - I want to see the data on that. If I'm double-discounting the same traveller through Genius and Country Rate, my margin collapses.", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Minimal overlap - I want to see the data on that. If I'm double-discounting the same traveler through Genius and Country Rate, my margin collapses.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Different segments, minimal overlap, measurable within four weeks. That's a strong proposal. Walk me through the Genius upgrade first.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Closing the gap on Pune in four weeks - that's the target I'll hold you to. Let's implement both. Start with the Genius configuration.", emotion: 'positive' },
           ],
@@ -484,7 +484,7 @@ export const priyaR3: ConversationTree = {
             label: 'Present a strategic roadmap',
             description: 'Open with a structured three-pillar long-term strategy.',
             playerDialogue:
-              "Priya, for the leadership presentation I'd recommend framing a three-pillar strategy: sustained rate competitiveness through automated parity monitoring, demand capture through your now-optimised discount stack, and a seasonal pricing calendar to maximise RevPAR across peak and off-peak. Each pillar has measurable KPIs. I can help you build the deck with supporting data.",
+              "Priya, for the leadership presentation I'd recommend framing a three-pillar strategy: sustained rate competitiveness through automated parity monitoring, demand capture through your now-optimized discount stack, and a seasonal pricing calendar to maximize RevPAR across peak and off-peak. Each pillar has measurable KPIs. I can help you build the deck with supporting data.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 3,
             compliance: 'safe',
@@ -494,7 +494,7 @@ export const priyaR3: ConversationTree = {
             label: 'Co-create the strategy',
             description: 'Invite her to shape the long-term direction collaboratively.',
             playerDialogue:
-              "Congratulations on the turnaround. For the leadership presentation, I'd love to co-create the strategy with you. You know your chain's priorities and I know the platform levers. What themes does leadership care about most - market share, margin optimisation, or brand positioning?",
+              "Congratulations on the turnaround. For the leadership presentation, I'd love to co-create the strategy with you. You know your chain's priorities and I know the platform levers. What themes does leadership care about most - market share, margin optimization, or brand positioning?",
             styleMatch: { red: -1, blue: 1, yellow: 1, green: 2 },
             assertiveness: 1,
             compliance: 'safe',
@@ -627,7 +627,7 @@ export const priyaR3: ConversationTree = {
         options: [
           {
             id: 'priya-r3-rec-fullstack',
-            label: 'Present the full optimisation playbook',
+            label: 'Present the full optimization playbook',
             description: 'Lay out a comprehensive strategy covering parity, products, and seasonal pricing.',
             playerDialogue:
               "Here's the full playbook for the next two quarters. First, activate Early Booker Deal - you're the only property in the chain not running it, and it builds advance booking certainty. Your Pune property achieves 35% advance booking rate versus your 18%. Second, implement automated monthly parity monitoring so the breach we caught in round one never recurs. Third, build a seasonal pricing calendar - higher base rates in peak season when Mumbai demand is strong, targeted Country Rate and Genius promotions in shoulder months. Combined, this positions The Grand Residency for sustained top-quartile performance.",
@@ -648,9 +648,9 @@ export const priyaR3: ConversationTree = {
           {
             id: 'priya-r3-rec-cautious',
             label: 'Suggest consolidating current gains',
-            description: 'Recommend holding steady and optimising before adding more.',
+            description: 'Recommend holding steady and optimizing before adding more.',
             playerDialogue:
-              "Priya, you've made significant changes in a short period. My recommendation for next quarter would be to hold steady - monitor the impact of your Genius upgrade and Country Rate, fine-tune the discount percentages based on performance data, and avoid adding more complexity until we've fully optimised what's live. Stability builds confidence for your leadership presentation.",
+              "Priya, you've made significant changes in a short period. My recommendation for next quarter would be to hold steady - monitor the impact of your Genius upgrade and Country Rate, fine-tune the discount percentages based on performance data, and avoid adding more complexity until we've fully optimized what's live. Stability builds confidence for your leadership presentation.",
             styleMatch: { red: -2, blue: 1, yellow: 0, green: 1 },
             assertiveness: 1,
             compliance: 'safe',

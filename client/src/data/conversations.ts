@@ -77,7 +77,7 @@ const marinaR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "I'm open to hearing it, but I'd need to see the numbers before I commit to anything.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Go on - what kind of opportunity? I'd want to understand the specifics.", emotion: 'neutral' },
-            { trustThreshold: 'high', text: "Interesting. I'm always looking at ways to optimise. What have you found?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Interesting. I'm always looking at ways to optimize. What have you found?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 1,
@@ -186,7 +186,7 @@ const marinaR1: ConversationTree = {
             compliance: 'safe',
           },
           {
-            id: 'marina-r1-rec-analyse',
+            id: 'marina-r1-rec-analyze',
             label: 'Explore the data together',
             description: 'Walk through the dashboard collaboratively and let her draw conclusions.',
             playerDialogue:
@@ -207,7 +207,7 @@ const marinaR1: ConversationTree = {
           ],
           metricEffects: { experiencedRPD: 6, visibility: 4 },
           trustChange: 5,
-          nextPhasePrompt: "I can see the logic, but I need to think about the margin impact. What if it just cannibalises my direct bookings?",
+          nextPhasePrompt: "I can see the logic, but I need to think about the margin impact. What if it just cannibalizes my direct bookings?",
         },
         {
           optionId: 'marina-r1-rec-broad',
@@ -221,7 +221,7 @@ const marinaR1: ConversationTree = {
           nextPhasePrompt: "I need to be convinced this won't just erode my margins across the board.",
         },
         {
-          optionId: 'marina-r1-rec-analyse',
+          optionId: 'marina-r1-rec-analyze',
           responses: [
             { trustThreshold: 'low', text: "Yes, I'd prefer that. Let's look at the data together before we decide anything.", emotion: 'positive' },
             { trustThreshold: 'medium', text: "That's a good approach. I'd rather understand the full picture before making changes. Go ahead.", emotion: 'positive' },
@@ -411,7 +411,7 @@ const stavrosR1: ConversationTree = {
             label: 'Suggest adding Country Rate',
             description: 'Recommend another discount product to improve competitiveness.',
             playerDialogue:
-              "One quick win would be activating Country Rate for key source markets. That would target travellers from high-volume countries with a tailored discount, which should close the price gap you're currently losing on those segments.",
+              "One quick win would be activating Country Rate for key source markets. That would target travelers from high-volume countries with a tailored discount, which should close the price gap you're currently losing on those segments.",
             styleMatch: { red: 1, blue: 0, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -444,7 +444,7 @@ const stavrosR1: ConversationTree = {
           optionId: 'stavros-r1-rec-more-discounts',
           responses: [
             { trustThreshold: 'low', text: "I told you - I'm already discounting. Adding another discount on top of discounts? That's not strategy, that's desperation.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I can try it, but I'm sceptical. I've been adding discounts and nothing's moving. Are you sure more discounts is the answer?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I can try it, but I'm skeptical. I've been adding discounts and nothing's moving. Are you sure more discounts is the answer?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "Fine, I'll try it. But if this doesn't move the needle, we're having a different conversation next time.", emotion: 'cautious' },
           ],
           metricEffects: { experiencedRPD: 1 },
@@ -506,7 +506,7 @@ const hannahR1: ConversationTree = {
             label: 'Connect through guest experience',
             description: 'Start with what she cares about - her guests - then bridge to bookings.',
             playerDialogue:
-              "Hi Hannah, lovely to catch up. I can see your reviews are wonderful - guests clearly love the experience at Meadow Lane. I was actually thinking about how we could help more travellers discover what you offer. Would you be open to exploring that?",
+              "Hi Hannah, lovely to catch up. I can see your reviews are wonderful - guests clearly love the experience at Meadow Lane. I was actually thinking about how we could help more travelers discover what you offer. Would you be open to exploring that?",
             styleMatch: { green: 2, yellow: 1, blue: 0, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -527,7 +527,7 @@ const hannahR1: ConversationTree = {
         {
           optionId: 'hannah-r1-open-data',
           responses: [
-            { trustThreshold: 'low', text: "Oh. That sounds a bit... serious. My visibility dropped? I didn't realise. What's happened?", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Oh. That sounds a bit... serious. My visibility dropped? I didn't realize. What's happened?", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Performance data... right. I'm not really a numbers person to be honest, but go on - what's the concern?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "Oh okay. That's concerning. I had noticed fewer bookings coming through. What does the data say?", emotion: 'neutral' },
           ],
@@ -539,7 +539,7 @@ const hannahR1: ConversationTree = {
           responses: [
             { trustThreshold: 'low', text: "That's a lovely way to put it. I do worry sometimes that more bookings means the wrong kind of guest though...", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "Oh, that's so nice of you to say! I do put my heart into it. I'd love more people to experience Meadow Lane - what did you have in mind?", emotion: 'positive' },
-            { trustThreshold: 'high', text: "What a wonderful thought! I'd absolutely be open to that. The right kind of traveller would love it here. What are you thinking?", emotion: 'positive' },
+            { trustThreshold: 'high', text: "What a wonderful thought! I'd absolutely be open to that. The right kind of traveler would love it here. What are you thinking?", emotion: 'positive' },
           ],
           metricEffects: {},
           trustChange: 5,
@@ -568,7 +568,7 @@ const hannahR1: ConversationTree = {
             label: 'Suggest the price is too high',
             description: "Read it as a pricing problem - guests are choosing cheaper options nearby.",
             playerDialogue:
-              "What I'm seeing is that your price competitiveness has slipped against nearby guesthouses - on the searches where you're appearing, travellers are choosing the cheaper option. My read is the rate's a little above what the comparable set is showing.",
+              "What I'm seeing is that your price competitiveness has slipped against nearby guesthouses - on the searches where you're appearing, travelers are choosing the cheaper option. My read is the rate's a little above what the comparable set is showing.",
             styleMatch: { green: 0, yellow: 0, blue: 1, red: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -577,9 +577,9 @@ const hannahR1: ConversationTree = {
             id: 'hannah-r1-diag-visibility-gap',
             label: 'Frame it as a visibility gap, not a pricing problem',
             description:
-              "Explain that her rate is fine - the issue is she's missing the filters and segments where travellers are choosing other properties.",
+              "Explain that her rate is fine - the issue is she's missing the filters and segments where travelers are choosing other properties.",
             playerDialogue:
-              "Here's the encouraging bit - your rate is fine. Your pricing looks healthy and your ADR sits in line with comparable guesthouses. What's happening is more about visibility than price. Because you don't have a Last-Minute Deal or Genius active, you're disappearing from the filters that the travellers most likely to love Meadow Lane are using - last-minute weekend trips, mid-range romantic getaways. They never see you to choose between you and someone cheaper.",
+              "Here's the encouraging bit - your rate is fine. Your pricing looks healthy and your ADR sits in line with comparable guesthouses. What's happening is more about visibility than price. Because you don't have a Last-Minute Deal or Genius active, you're disappearing from the filters that the travelers most likely to love Meadow Lane are using - last-minute weekend trips, mid-range romantic getaways. They never see you to choose between you and someone cheaper.",
             styleMatch: { green: 2, yellow: 2, blue: 1, red: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -611,7 +611,7 @@ const hannahR1: ConversationTree = {
           optionId: 'hannah-r1-diag-visibility-gap',
           responses: [
             { trustThreshold: 'low', text: "Oh! That's a relief - I was bracing for you to tell me to drop my prices. So it's more about being found in the right places?", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That makes so much more sense. So it's not that my rate is wrong - it's that the right travellers aren't even seeing Meadow Lane to consider it. I like that framing. Tell me more.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That makes so much more sense. So it's not that my rate is wrong - it's that the right travelers aren't even seeing Meadow Lane to consider it. I like that framing. Tell me more.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes, that's exactly what I needed to hear. I knew the rate wasn't the issue - it's the discoverability. So what do we do about that without compromising the brand?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 2, visibility: 2 },
@@ -639,10 +639,10 @@ const hannahR1: ConversationTree = {
           },
           {
             id: 'hannah-r1-rec-genius',
-            label: 'Recommend Genius Programme',
-            description: 'Position Genius as a way to attract better-quality travellers.',
+            label: 'Recommend Genius Program',
+            description: 'Position Genius as a way to attract better-quality travelers.',
             playerDialogue:
-              "Have you looked at the Genius programme? It's actually designed for properties like yours. Genius members tend to be more experienced travellers who leave better reviews and book longer stays. The discount is small, and in return you get access to a higher-quality traveller segment that would genuinely appreciate what Meadow Lane offers.",
+              "Have you looked at the Genius program? It's actually designed for properties like yours. Genius members tend to be more experienced travelers who leave better reviews and book longer stays. The discount is small, and in return you get access to a higher-quality traveler segment that would genuinely appreciate what Meadow Lane offers.",
             styleMatch: { green: 1, yellow: 1, blue: 1, red: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -650,7 +650,7 @@ const hannahR1: ConversationTree = {
           {
             id: 'hannah-r1-rec-full',
             label: 'Recommend multiple discounts',
-            description: 'Push for a broader discount strategy to maximise impact.',
+            description: 'Push for a broader discount strategy to maximize impact.',
             playerDialogue:
               "Hannah, I know discounts feel uncomfortable, but the reality is that your competitors in the Cotswolds are using these tools and it's affecting your visibility. I'd recommend activating Genius, Mobile Rate, and a Last-Minute Deal to catch up.",
             styleMatch: { green: -2, yellow: -1, blue: 0, red: 1 },
@@ -675,8 +675,8 @@ const hannahR1: ConversationTree = {
           optionId: 'hannah-r1-rec-genius',
           responses: [
             { trustThreshold: 'low', text: "Genius members leave better reviews? I'd need to see evidence of that. It still feels like discounting to me.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Higher-quality travellers... that's interesting. I do care more about the right guest than the most guests. Tell me more about how it works.", emotion: 'positive' },
-            { trustThreshold: 'high', text: "Oh, I like the sound of that! Experienced travellers who appreciate quality - that's exactly who I want. How do I sign up?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Higher-quality travelers... that's interesting. I do care more about the right guest than the most guests. Tell me more about how it works.", emotion: 'positive' },
+            { trustThreshold: 'high', text: "Oh, I like the sound of that! Experienced travelers who appreciate quality - that's exactly who I want. How do I sign up?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 4, visibility: 3, conversion: 2 },
           trustChange: 4,
@@ -812,7 +812,7 @@ const marinaR2: ConversationTree = {
             description:
               'Identify that the remaining gap is concentrated on inbound traffic from her top source markets.',
             playerDialogue:
-              "Mobile is closing - your mobile booking share is up about 8 points since we activated it. Where you're still losing the price comparison is on inbound traffic from France, Germany, and the UK. Those three account for over 60% of your non-domestic search volume and you're being undercut on them specifically. Domestic Spanish travellers and mobile users are now fine; the gap is now country-specific.",
+              "Mobile is closing - your mobile booking share is up about 8 points since we activated it. Where you're still losing the price comparison is on inbound traffic from France, Germany, and the UK. Those three account for over 60% of your non-domestic search volume and you're being undercut on them specifically. Domestic Spanish travelers and mobile users are now fine; the gap is now country-specific.",
             styleMatch: { blue: 2, green: 1, red: 0, yellow: -1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -865,17 +865,17 @@ const marinaR2: ConversationTree = {
             label: 'Add Country Rate',
             description: 'Layer in Country Rate targeting key source markets.',
             playerDialogue:
-              "Based on the data, your top source markets are France, Germany, and the UK. Adding a Country Rate for these markets would give you a targeted competitive edge. It's a small discount visible only to travellers from those countries, so it's very precise.",
+              "Based on the data, your top source markets are France, Germany, and the UK. Adding a Country Rate for these markets would give you a targeted competitive edge. It's a small discount visible only to travelers from those countries, so it's very precise.",
             styleMatch: { blue: 2, green: 1, red: 1, yellow: 0 },
             assertiveness: 2,
             compliance: 'safe',
           },
           {
-            id: 'marina-r2-rec-optimise',
-            label: 'Optimise existing setup',
+            id: 'marina-r2-rec-optimize',
+            label: 'Optimize existing setup',
             description: 'Fine-tune what is already active rather than adding more.',
             playerDialogue:
-              "Before adding anything new, I think there's value in optimising what we have. Your Mobile Rate is active but I want to check the discount level is set correctly and review your room type pricing to make sure the RPD improvement is maximised.",
+              "Before adding anything new, I think there's value in optimizing what we have. Your Mobile Rate is active but I want to check the discount level is set correctly and review your room type pricing to make sure the RPD improvement is maximized.",
             styleMatch: { blue: 2, green: 2, red: -1, yellow: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -904,10 +904,10 @@ const marinaR2: ConversationTree = {
           trustChange: 4,
         },
         {
-          optionId: 'marina-r2-rec-optimise',
+          optionId: 'marina-r2-rec-optimize',
           responses: [
             { trustThreshold: 'low', text: "Yes, I'd prefer that. Get the foundations right before adding layers.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "Good thinking. I'd rather do fewer things well than lots of things poorly. Let's optimise.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "Good thinking. I'd rather do fewer things well than lots of things poorly. Let's optimize.", emotion: 'positive' },
             { trustThreshold: 'high', text: "I appreciate that approach. Let's make sure what we have is working at its best.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 3, visibility: 2, conversion: 2, revenue: 1 },
@@ -1088,7 +1088,7 @@ const stavrosR2: ConversationTree = {
             label: 'Add Country Rate for key markets',
             description: 'Target the international source markets where the visibility gap sits.',
             playerDialogue:
-              "Now that the product fix is in, let's layer in a Country Rate targeting your top source markets - Germany and the UK. That gives those travellers a more competitive rate without changing your base price, and closes the specific gap we just identified.",
+              "Now that the product fix is in, let's layer in a Country Rate targeting your top source markets - Germany and the UK. That gives those travelers a more competitive rate without changing your base price, and closes the specific gap we just identified.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1096,9 +1096,9 @@ const stavrosR2: ConversationTree = {
           {
             id: 'stavros-r2-rec-genius-deeper',
             label: 'Push Genius participation harder',
-            description: 'Recommend deepening the Genius discount to attract more repeat travellers.',
+            description: 'Recommend deepening the Genius discount to attract more repeat travelers.',
             playerDialogue:
-              "Before we add a new product, I'd push your Genius participation harder. You're at the conservative end of the range - moving to a deeper Genius discount unlocks priority placement for repeat travellers, which is a different audience to the source-market one we just talked about.",
+              "Before we add a new product, I'd push your Genius participation harder. You're at the conservative end of the range - moving to a deeper Genius discount unlocks priority placement for repeat travelers, which is a different audience to the source-market one we just talked about.",
             styleMatch: { red: 1, blue: 1, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1130,7 +1130,7 @@ const stavrosR2: ConversationTree = {
           optionId: 'stavros-r2-rec-genius-deeper',
           responses: [
             { trustThreshold: 'low', text: "Deeper Genius? That's giving away more margin on guests already coming in. Not sure that's the right move right now.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "Genius repeat traveller versus the source-market gap - they're different audiences. I'd want to be sure we're picking the right one first.", emotion: 'neutral' },
+            { trustThreshold: 'medium', text: "Genius repeat traveler versus the source-market gap - they're different audiences. I'd want to be sure we're picking the right one first.", emotion: 'neutral' },
             { trustThreshold: 'high', text: "Reasonable, but I'd rather close the source-market gap we just named first. Genius after that maybe.", emotion: 'neutral' },
           ],
           metricEffects: { experiencedRPD: 2, visibility: 1 },
@@ -1208,7 +1208,7 @@ const hannahR2: ConversationTree = {
         {
           optionId: 'hannah-r2-open-ask',
           responses: [
-            { trustThreshold: 'low', text: "Hmm, it's hard to tell yet. Maybe a few more enquiries? I'm not sure if it's related though.", emotion: 'neutral' },
+            { trustThreshold: 'low', text: "Hmm, it's hard to tell yet. Maybe a few more inquiries? I'm not sure if it's related though.", emotion: 'neutral' },
             { trustThreshold: 'medium', text: "Actually, yes! I had two lovely couples book midweek, which is unusual. They mentioned finding us on Booking.com.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Oh yes! It's been noticeably busier, especially midweek. And the guests have been wonderful - exactly the kind of people we love hosting!", emotion: 'positive' },
           ],
@@ -1239,7 +1239,7 @@ const hannahR2: ConversationTree = {
             label: 'Celebrate the broad uplift',
             description: 'Highlight that bookings are up across the board.',
             playerDialogue:
-              "The data is looking lovely - bookings are up, visibility is up, conversion is moving in the right direction. The change we made is doing its job and you're being seen by more travellers.",
+              "The data is looking lovely - bookings are up, visibility is up, conversion is moving in the right direction. The change we made is doing its job and you're being seen by more travelers.",
             styleMatch: { green: 1, yellow: 2, blue: 0, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1313,7 +1313,7 @@ const hannahR2: ConversationTree = {
             label: 'Suggest Genius (if not already active)',
             description: 'Position Genius as the natural next step.',
             playerDialogue:
-              "Given how well the initial change has worked, I think the Genius Programme would be a natural next step. It attracts experienced travellers who tend to leave great reviews. The discount is modest, and the quality of guest is typically exactly what a property like Meadow Lane attracts.",
+              "Given how well the initial change has worked, I think the Genius Program would be a natural next step. It attracts experienced travelers who tend to leave great reviews. The discount is modest, and the quality of guest is typically exactly what a property like Meadow Lane attracts.",
             styleMatch: { green: 2, yellow: 1, blue: 1, red: 0 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1344,7 +1344,7 @@ const hannahR2: ConversationTree = {
         {
           optionId: 'hannah-r2-rec-genius',
           responses: [
-            { trustThreshold: 'low', text: "Hmm, I'd want to understand the discount level. But the 'experienced traveller' angle appeals to me.", emotion: 'neutral' },
+            { trustThreshold: 'low', text: "Hmm, I'd want to understand the discount level. But the 'experienced traveler' angle appeals to me.", emotion: 'neutral' },
             { trustThreshold: 'medium', text: "That does sound like a good fit. If the guests are the kind who appreciate quality, I'm interested.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes! That sounds perfect for us. Let's do it.", emotion: 'positive' },
           ],
@@ -1414,7 +1414,7 @@ const marinaR3: ConversationTree = {
           {
             id: 'marina-r3-open-push',
             label: 'Push for more',
-            description: 'Emphasise there is still room to grow.',
+            description: 'Emphasize there is still room to grow.',
             playerDialogue:
               "Good, because there's still significant upside. You've made progress, but you're not yet at the competitive level of the top boutique hotels in Madrid. I want to help you close that gap.",
             styleMatch: { blue: 0, green: -1, red: 2, yellow: 0 },
@@ -1551,7 +1551,7 @@ const marinaR3: ConversationTree = {
             label: 'Recommend maintaining current strategy',
             description: 'Suggest staying the course rather than changing further.',
             playerDialogue:
-              "Honestly, Marina, I think the smart move is to maintain what's working. Your current setup is delivering results and I'd rather we protect that momentum than risk over-optimising. Let's revisit in 6 weeks when we have more data.",
+              "Honestly, Marina, I think the smart move is to maintain what's working. Your current setup is delivering results and I'd rather we protect that momentum than risk over-optimizing. Let's revisit in 6 weeks when we have more data.",
             styleMatch: { blue: 1, green: 2, red: -2, yellow: -1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1690,7 +1690,7 @@ const stavrosR3: ConversationTree = {
             label: 'Suggest the position is solid across the board',
             description: 'Frame current performance as broadly competitive in every period.',
             playerDialogue:
-              "Honestly, you're now competitive across the board - peak, shoulder and off-peak. There isn't a screaming gap anywhere. The conversation today is more about how we capitalise from a strong position than how we patch a problem.",
+              "Honestly, you're now competitive across the board - peak, shoulder and off-peak. There isn't a screaming gap anywhere. The conversation today is more about how we capitalize from a strong position than how we patch a problem.",
             styleMatch: { red: 0, blue: 0, yellow: 1, green: 1 },
             assertiveness: 1,
             compliance: 'safe',
@@ -1763,7 +1763,7 @@ const stavrosR3: ConversationTree = {
             label: 'Build a seasonal strategy',
             description: 'Create a pricing plan that varies by season and demand.',
             playerDialogue:
-              "Here's my recommendation for high season: maintain your current discount setup, but create an Early Booker Deal specifically for June-August to capture advance bookings. Then in shoulder season, we layer in more aggressive Country Rates. This way you maximise revenue in peak and drive volume in quiet periods.",
+              "Here's my recommendation for high season: maintain your current discount setup, but create an Early Booker Deal specifically for June-August to capture advance bookings. Then in shoulder season, we layer in more aggressive Country Rates. This way you maximize revenue in peak and drive volume in quiet periods.",
             styleMatch: { red: 2, blue: 2, yellow: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1773,7 +1773,7 @@ const stavrosR3: ConversationTree = {
             label: 'Focus on beating competitors',
             description: 'Position the strategy around competitive advantage.',
             playerDialogue:
-              "Your top three competitors on Kos are all using Early Booker and Country Rate strategies. Right now, you're catching up. My recommendation is to match their discount setup and then differentiate through your Genius programme and superior room types. Beat them on value, not just on price.",
+              "Your top three competitors on Kos are all using Early Booker and Country Rate strategies. Right now, you're catching up. My recommendation is to match their discount setup and then differentiate through your Genius program and superior room types. Beat them on value, not just on price.",
             styleMatch: { red: 2, blue: 1, yellow: 1, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1795,7 +1795,7 @@ const stavrosR3: ConversationTree = {
           optionId: 'stavros-r3-rec-seasonal',
           responses: [
             { trustThreshold: 'low', text: "Early Booker for peak, aggressive Country Rates for shoulder... that's structured. I can work with that.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That's a plan I can execute. Maximise peak, drive shoulder. Clear and actionable. Let's do it.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That's a plan I can execute. Maximize peak, drive shoulder. Clear and actionable. Let's do it.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Now that's the kind of strategic thinking I've been wanting. You understand my business. Let's implement it.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 7, visibility: 5, conversion: 4, revenue: 5 },
@@ -1924,7 +1924,7 @@ const hannahR3: ConversationTree = {
             label: 'Argue the momentum says push harder',
             description: 'Suggest the strong results are a sign to layer in more discount products.',
             playerDialogue:
-              "The momentum is real - my read is now's the moment to capitalise. Numbers like these suggest we should add more products and accelerate while travellers are responding so well.",
+              "The momentum is real - my read is now's the moment to capitalize. Numbers like these suggest we should add more products and accelerate while travelers are responding so well.",
             styleMatch: { green: -1, yellow: 0, blue: 0, red: 2 },
             assertiveness: 3,
             compliance: 'safe',
@@ -1935,7 +1935,7 @@ const hannahR3: ConversationTree = {
             description:
               "Show that current strength is in close-in bookings; she's still under-represented in advance-window searches.",
             playerDialogue:
-              "The current strength is mostly close-in - travellers booking within two weeks. Where you're still under-represented is the advance window: people planning trips one to three months ahead. Your direct and Genius guests already book early, but on Booking.com you barely appear in those advance searches. That's the next gentle gap - calendar certainty, not visibility-versus-price.",
+              "The current strength is mostly close-in - travelers booking within two weeks. Where you're still under-represented is the advance window: people planning trips one to three months ahead. Your direct and Genius guests already book early, but on Booking.com you barely appear in those advance searches. That's the next gentle gap - calendar certainty, not visibility-versus-price.",
             styleMatch: { green: 2, yellow: 1, blue: 2, red: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -1956,7 +1956,7 @@ const hannahR3: ConversationTree = {
         {
           optionId: 'hannah-r3-diag-now-push-more',
           responses: [
-            { trustThreshold: 'low', text: "Oh dear - 'capitalise' and 'more products' is exactly what worries me. I've felt comfortable with what we've done. I don't want to overdo it.", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Oh dear - 'capitalize' and 'more products' is exactly what worries me. I've felt comfortable with what we've done. I don't want to overdo it.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "I appreciate the enthusiasm but that's not how I want to grow. Gentle and right-fit, not 'accelerate'. Is there a softer read of the data?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "I know you mean well - but 'add more products' feels like the wrong direction for me. I'd rather one thoughtful step than several at once. What does the data actually suggest specifically?", emotion: 'neutral' },
           ],
@@ -1967,7 +1967,7 @@ const hannahR3: ConversationTree = {
           optionId: 'hannah-r3-diag-advance-window-gap',
           responses: [
             { trustThreshold: 'low', text: "Oh, I'd never thought about that gap. So my close-in is doing well, but I'm just not visible to advance planners. That feels like something we can fix without changing what works.", emotion: 'positive' },
-            { trustThreshold: 'medium', text: "That makes so much sense. Advance planners are exactly the kind of guests I'd love more of - they're organised, they value certainty. And it doesn't undermine what we've built. Tell me more.", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That makes so much sense. Advance planners are exactly the kind of guests I'd love more of - they're organized, they value certainty. And it doesn't undermine what we've built. Tell me more.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Yes - advance bookings would give me such peace of mind about my calendar! And it sounds like a gentle, well-fitting next step. I love it.", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 2, visibility: 1, revenue: 1 },
@@ -2003,11 +2003,11 @@ const hannahR3: ConversationTree = {
             compliance: 'safe',
           },
           {
-            id: 'hannah-r3-rec-maximise',
+            id: 'hannah-r3-rec-maximize',
             label: 'Push for maximum impact',
-            description: 'Recommend adding multiple new products to capitalise on momentum.',
+            description: 'Recommend adding multiple new products to capitalize on momentum.',
             playerDialogue:
-              "The momentum is incredible. I think now is the time to capitalise - add Early Booker, activate Mobile Rate fully, and consider Country Rate for your top markets. Let's make the most of this while things are going well.",
+              "The momentum is incredible. I think now is the time to capitalize - add Early Booker, activate Mobile Rate fully, and consider Country Rate for your top markets. Let's make the most of this while things are going well.",
             styleMatch: { green: -2, yellow: 0, blue: 0, red: 2 },
             assertiveness: 3,
             compliance: 'safe',
@@ -2036,7 +2036,7 @@ const hannahR3: ConversationTree = {
           trustChange: 5,
         },
         {
-          optionId: 'hannah-r3-rec-maximise',
+          optionId: 'hannah-r3-rec-maximize',
           responses: [
             { trustThreshold: 'low', text: "That's... a lot. I've been happy with the gradual approach. Let's not rush things.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "I know you mean well, but that feels like too much at once. Can we just pick one?", emotion: 'cautious' },

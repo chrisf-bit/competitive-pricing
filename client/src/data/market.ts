@@ -155,7 +155,7 @@ function getEngagedDetail(partnerId: string, round: number): string {
     },
     hannah: {
       1: 'Hannah is considering the approach you discussed. She wants to make sure it feels right for Meadow Lane.',
-      2: 'Hannah has seen positive results and is more open to further optimisation.',
+      2: 'Hannah has seen positive results and is more open to further optimization.',
       3: 'Hannah is enthusiastic about her progress and open to continued growth at a pace that suits her.',
     },
     carlos: {
@@ -183,7 +183,7 @@ function getNeglectedDetail(partnerId: string, round: number): string {
     marina: {
       1: 'Marina\'s metrics continued their gradual decline without intervention. She has not made any changes independently.',
       2: 'Marina has been waiting for follow-up. Her Experienced RPD has drifted further below market average.',
-      3: 'Marina appears to have deprioritised Booking.com optimisation. Metrics are stagnating.',
+      3: 'Marina appears to have deprioritised Booking.com optimization. Metrics are stagnating.',
     },
     stavros: {
       1: 'Stavros\'s frustration is growing. Without guidance, he has not identified the root cause of his performance issues.',

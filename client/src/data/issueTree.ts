@@ -78,10 +78,10 @@ export const triggers: TriggerOption[] = [
       'Something in a recent partner interaction (call, email, ticket) suggests pricing is off.',
   },
   {
-    id: 'programme',
-    label: 'Programme',
+    id: 'program',
+    label: 'Program',
     description:
-      'A discount programme is broken, missing or misconfigured.',
+      'A discount program is broken, missing or misconfigured.',
   },
 ];
 
@@ -113,7 +113,7 @@ export const intents: IntentOption[] = [
     id: 'unintentional',
     label: 'Unintentional',
     description:
-      "The partner doesn't realise this is happening - it's an oversight or misconfiguration.",
+      "The partner doesn't realize this is happening - it's an oversight or misconfiguration.",
   },
 ];
 
@@ -173,7 +173,7 @@ export const rootCauses: RootCauseOption[] = [
     id: 'structural-ota-first',
     label: 'Structural Partner Channel strategy (preferred OTA first)',
     description:
-      'Partner is favouring a different OTA channel as a strategic choice.',
+      'Partner is favoring a different OTA channel as a strategic choice.',
     validIssues: ['key-ota-erpd-not-competitive'],
     validIntents: ['intentional'],
   },

@@ -45,7 +45,7 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
         }}
       />
 
-      {/* Soft vignette to lift the title and centre piece off the image */}
+      {/* Soft vignette to lift the title and center piece off the image */}
       <div
         style={{
           position: 'absolute',
@@ -55,7 +55,7 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
         }}
       />
 
-      {/* Title block - centred vertically */}
+      {/* Title block - centered vertically */}
       <div
         style={{
           position: 'absolute',
@@ -251,13 +251,13 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
 }
 
 /**
- * Plane sitting in the centre of a 12-dot ring. The ring runs an
+ * Plane sitting in the center of a 12-dot ring. The ring runs an
  * opacity-wave animation that travels clockwise around the plane.
  * Sized as a self-contained square; layout above positions it.
  */
 function PlaneLoader() {
   const dotCount = 12;
-  const radius = 56; // px from centre of the loader square
+  const radius = 56; // px from center of the loader square
   const cycleSeconds = 1.6;
   const size = 160;
 

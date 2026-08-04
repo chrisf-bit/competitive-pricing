@@ -24,11 +24,11 @@ const step1Options: BranchingOption[] = [
     id: 'ov-r3-narrow-step1-correct',
     label: 'Acknowledge profitability, name the visibility collapse',
     description:
-      "SME-prescribed reveal: validate the profitability focus, then surface the hard problem - travellers aren't even seeing her, with page views 61% below peer and next-30-day room nights 48% behind.",
+      "SME-prescribed reveal: validate the profitability focus, then surface the hard problem - travelers aren't even seeing her, with page views 61% below peer and next-30-day room nights 48% behind.",
     playerDialogue:
-      "Maximising profitability is a good strategy. But your data on our platform shows a problem getting travellers to see your properties at all: your page views are 61% below your peer group, and your on-the-books room nights for the next 30 days are 48% behind.",
+      "Maximizing profitability is a good strategy. But your data on our platform shows a problem getting travelers to see your properties at all: your page views are 61% below your peer group, and your on-the-books room nights for the next 30 days are 48% behind.",
     partnerResponse:
-      "Oh - I didn't realise we were losing that much with you. Other channels are probably taking that share; we're not seeing a major drop in overall revenue. But I am concerned about that visibility gap versus our peer group. How do we reverse it?",
+      "Oh - I didn't realize we were losing that much with you. Other channels are probably taking that share; we're not seeing a major drop in overall revenue. But I am concerned about that visibility gap versus our peer group. How do we reverse it?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps straight to a price cut without understanding how she runs her channels - an experienced manager reads that as being sold to.",
     playerDialogue:
-      "Your bookings are down 48% - the fix is to drop your Booking.com prices so you stop losing travellers. Shall we set that up?",
+      "Your bookings are down 48% - the fix is to drop your Booking.com prices so you stop losing travelers. Shall we set that up?",
     partnerResponse:
       "You're prescribing a cut before you understand how we run our channels.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -69,7 +69,7 @@ const step1: BranchingStep = {
   id: 'probe',
   label: 'Reveal the visibility collapse',
   partnerPrompt:
-    "Good morning! It's been busy, but the pace is good. Our main focus this year is driving guests directly to our own site to maximise returns - so we keep our direct website about 5.5% cheaper to 'steal' some guests from you. We want travellers to see us on your platform, realise they can save by booking direct, and then click away to buy on our website.",
+    "Good morning! It's been busy, but the pace is good. Our main focus this year is driving guests directly to our own site to maximize returns - so we keep our direct website about 5.5% cheaper to 'steal' some guests from you. We want travelers to see us on your platform, realize they can save by booking direct, and then click away to buy on our website.",
   options: step1Options,
 };
 
@@ -78,11 +78,11 @@ const step1: BranchingStep = {
 const step2Options: BranchingOption[] = [
   {
     id: 'ov-r3-narrow-step2-correct',
-    label: 'Explain how travellers actually search',
+    label: 'Explain how travelers actually search',
     description:
-      "SME-prescribed counter: because the platform works like a search engine, a traveller who discovers her but doesn't find a competitive price just books a cheaper local competitor on the same page - they don't switch tabs to find her brand. Probe how she mitigates that.",
+      "SME-prescribed counter: because the platform works like a search engine, a traveler who discovers her but doesn't find a competitive price just books a cheaper local competitor on the same page - they don't switch tabs to find her brand. Probe how she mitigates that.",
     playerDialogue:
-      "Because our platform works like a search engine, a traveller who discovers you but doesn't find a competitive price just books elsewhere on our platform. They don't switch tabs to search your brand - they click a cheaper local competitor on the same page. How do you mitigate the risk of losing those bookings to your neighbours?",
+      "Because our platform works like a search engine, a traveler who discovers you but doesn't find a competitive price just books elsewhere on our platform. They don't switch tabs to search your brand - they click a cheaper local competitor on the same page. How do you mitigate the risk of losing those bookings to your neighbors?",
     partnerResponse:
       "We believe our brand awareness is strong enough to bring them over. If they really want one of our properties, they'll look for our name online.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -109,9 +109,9 @@ const step2Options: BranchingOption[] = [
     id: 'ov-r3-narrow-step2-lecture',
     label: 'Call her strategy a myth',
     description:
-      "Dismiss the direct-booking belief as a myth and travellers as lazy. Condescending to an experienced operator.",
+      "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator.",
     playerDialogue:
-      "The 'they'll book direct' idea is honestly a myth - travellers just book whatever's cheapest in front of them.",
+      "The 'they'll book direct' idea is honestly a myth - travelers just book whatever's cheapest in front of them.",
     partnerResponse:
       "Calling my strategy a myth isn't how to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -125,7 +125,7 @@ const step2: BranchingStep = {
   id: 'billboard-counter',
   label: 'Counter the reverse-billboard belief',
   partnerPrompt:
-    "Oh - I didn't realise we were losing that much with you. Other channels are probably taking that share; we're not seeing a major drop in overall revenue. But I am concerned about that visibility gap versus our peer group. How do we reverse it?",
+    "Oh - I didn't realize we were losing that much with you. Other channels are probably taking that share; we're not seeing a major drop in overall revenue. But I am concerned about that visibility gap versus our peer group. How do we reverse it?",
   options: step2Options,
 };
 

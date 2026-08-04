@@ -135,9 +135,9 @@ const step3Options: BranchingOption[] = [
     id: 'ep-r5-none-step3-correct',
     label: 'Explain the reverse billboard effect + 90% discovery',
     description:
-      "SME-prescribed counter: yes, it creates a reverse billboard effect - if travellers can't find her on the platform they won't hunt for her website, they'll book competitors. 90% of bookers discover the property here first.",
+      "SME-prescribed counter: yes, it creates a reverse billboard effect - if travelers can't find her on the platform they won't hunt for her website, they'll book competitors. 90% of bookers discover the property here first.",
     playerDialogue:
-      "I hear you - but yes, it does create a reverse 'billboard effect': if travellers can't find you on our platform, they won't go looking for your website, they'll book your competitors instead. Up to 90% of the customers who book with us discover the property here first - that's a powerful window for your entire visibility.",
+      "I hear you - but yes, it does create a reverse 'billboard effect': if travelers can't find you on our platform, they won't go looking for your website, they'll book your competitors instead. Up to 90% of the customers who book with us discover the property here first - that's a powerful window for your entire visibility.",
     partnerResponse:
       "Well... it's true. How can we improve this without causing friction with our internal policies?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Threaten to drop her ranking further until she fixes her price. Threatening visibility over pricing is banned in every regime.',
     playerDialogue:
-      "If travellers can't find you, our system will keep dropping your ranking further until you fix the price.",
+      "If travelers can't find you, our system will keep dropping your ranking further until you fix the price.",
     partnerResponse:
       "Threatening my ranking over a policy I don't control is not a conversation I'll have.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -191,9 +191,9 @@ const step4Options: BranchingOption[] = [
     id: 'ep-r5-none-step4-correct',
     label: 'Offer a fenced family rate, autonomy preserved',
     description:
-      "SME-prescribed solution: a policy-safe workaround - her family-traveller share lags peers, so instead of a general rate drop she can voluntarily use a family rate. The choice of strategy stays entirely hers.",
+      "SME-prescribed solution: a policy-safe workaround - her family-traveler share lags peers, so instead of a general rate drop she can voluntarily use a family rate. The choice of strategy stays entirely hers.",
     playerDialogue:
-      "We don't want to cause any friction - let's find something that aligns with your revenue goal without breaking policy. Our data shows your share of family travellers is lower than your peers. Instead of a general rate drop, you can use a family rate. Of course, the choice of distribution and pricing strategy stays entirely yours.",
+      "We don't want to cause any friction - let's find something that aligns with your revenue goal without breaking policy. Our data shows your share of family travelers is lower than your peers. Instead of a general rate drop, you can use a family rate. Of course, the choice of distribution and pricing strategy stays entirely yours.",
     partnerResponse:
       "Oh, that's a brilliant workaround! Corporate doesn't monitor opaque segment rates. What kind of traction can we get from that?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },

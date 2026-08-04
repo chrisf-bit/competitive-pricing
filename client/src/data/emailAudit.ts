@@ -19,7 +19,7 @@
  * Brand.com is approved phrasing in Narrow Parity but irrelevant in
  * No Parity, where the legal team specifically forbids any "parity"
  * framing. The audit shown to a learner reflects the regime they
- * picked at Market Select, so they only ever practise against rules
+ * picked at Market Select, so they only ever practice against rules
  * that will apply to their day-to-day work.
  */
 

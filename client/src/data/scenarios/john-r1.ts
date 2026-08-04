@@ -21,7 +21,7 @@ import type { BranchingConversationTree } from '../../types';
  *     other channel. The close asks for "the best price you're
  *     willing to make available to Booking.com" - the SME-prescribed
  *     No-Parity wording.
- *   - External-price knowledge is used internally for prioritisation;
+ *   - External-price knowledge is used internally for prioritization;
  *     not asserted to the partner as fact.
  *
  * Issue Tree path the learner should land on via the Helper:
@@ -76,7 +76,7 @@ export const johnR1: BranchingConversationTree = {
           playerDialogue:
             "Actually I wanted to look at your performance with us. You're tracking 40% behind last year on revenue - that's the conversation I'd like to have today.",
           partnerResponse:
-            "You're going straight to the numbers. Look, I prioritise my direct channel - that's where the value is. If Booking.com volume is lower, that's a trade-off I'm comfortable with.",
+            "You're going straight to the numbers. Look, I prioritize my direct channel - that's where the value is. If Booking.com volume is lower, that's a trade-off I'm comfortable with.",
           styleMatch: { red: 2, yellow: -1, green: -2, blue: 1 },
           assertiveness: 3,
           compliance: 'safe',
@@ -86,7 +86,7 @@ export const johnR1: BranchingConversationTree = {
           id: 'john-r1-open-discounts',
           label: 'Lead with a Genius pitch',
           description:
-            "Open by suggesting he turn on a new discount programme.",
+            "Open by suggesting he turn on a new discount program.",
           playerDialogue:
             "I had a look at your account and I think you should turn on the Genius weekend boost - it'll get you more bookings.",
           partnerResponse:
@@ -137,7 +137,7 @@ export const johnR1: BranchingConversationTree = {
         {
           id: 'john-r1-probe-warn',
           label: 'Warn him about losing visibility',
-          description: 'Push the consequence of de-prioritising Booking.com.',
+          description: 'Push the consequence of de-prioritizing Booking.com.',
           playerDialogue:
             "If you keep deprioritising us, your ranking will drop and you'll lose visibility. That'll hurt both of us.",
           partnerResponse:

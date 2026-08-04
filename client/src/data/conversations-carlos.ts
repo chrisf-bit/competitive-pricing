@@ -113,7 +113,7 @@ export const carlosR1: ConversationTree = {
             description:
               'Show that the stack is mostly right, but Country Rate is targeting the wrong markets and leaking discount.',
             playerDialogue:
-              "Here's the interesting bit. Your tools are mostly switched on and most of them are firing well - Genius, Mobile, Last-Minute are all earning their keep. But your Country Rate is set up wrong: it's targeting markets that already convert well at full price, while missing the source markets where travellers are actively comparing you with cheaper options. So you're giving discounts to people who'd have booked anyway, and your visibility on price-shopping searches from your real source markets is taking a hit. Same Country Rate budget, wrong direction.",
+              "Here's the interesting bit. Your tools are mostly switched on and most of them are firing well - Genius, Mobile, Last-Minute are all earning their keep. But your Country Rate is set up wrong: it's targeting markets that already convert well at full price, while missing the source markets where travelers are actively comparing you with cheaper options. So you're giving discounts to people who'd have booked anyway, and your visibility on price-shopping searches from your real source markets is taking a hit. Same Country Rate budget, wrong direction.",
             styleMatch: { yellow: 1, red: 1, blue: 2, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -166,7 +166,7 @@ export const carlosR1: ConversationTree = {
             label: 'Fix the Country Rate first',
             description: 'Explain that his Country Rate is misconfigured and needs correcting before adding more.',
             playerDialogue:
-              "So here's the thing, Carlos - you've actually got most of the right tools switched on already. But your Country Rate is misconfigured. It's targeting the wrong source markets, which means you're giving discounts to travellers who would've booked anyway, and missing the ones who need a nudge. Fixing that alone will improve your RPD and give you better return on every discount euro you spend.",
+              "So here's the thing, Carlos - you've actually got most of the right tools switched on already. But your Country Rate is misconfigured. It's targeting the wrong source markets, which means you're giving discounts to travelers who would've booked anyway, and missing the ones who need a nudge. Fixing that alone will improve your RPD and give you better return on every discount euro you spend.",
             styleMatch: { yellow: 1, red: 1, blue: 2, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -176,7 +176,7 @@ export const carlosR1: ConversationTree = {
             label: 'Activate Early Booker',
             description: 'Recommend switching on Early Booker to capture advance demand.',
             playerDialogue:
-              "Here's a big one you're missing - Early Booker Deal. Barcelona gets massive advance demand from international travellers planning city breaks. Right now those bookers are seeing better deals from your competitors who have Early Booker active. Switching it on would capture that demand before they book elsewhere.",
+              "Here's a big one you're missing - Early Booker Deal. Barcelona gets massive advance demand from international travelers planning city breaks. Right now those bookers are seeing better deals from your competitors who have Early Booker active. Switching it on would capture that demand before they book elsewhere.",
             styleMatch: { yellow: 2, red: 1, blue: 0, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -209,7 +209,7 @@ export const carlosR1: ConversationTree = {
           optionId: 'carlos-r1-rec-earlybook',
           responses: [
             { trustThreshold: 'low', text: "Early Booker... I looked at that before and wasn't sure. What percentage discount are we talking? I don't want to give away too much.", emotion: 'cautious' },
-            { trustThreshold: 'medium', text: "That makes total sense for Barcelona. Advance bookings from international travellers - yeah, I'm losing those. How quickly can I switch it on?", emotion: 'positive' },
+            { trustThreshold: 'medium', text: "That makes total sense for Barcelona. Advance bookings from international travelers - yeah, I'm losing those. How quickly can I switch it on?", emotion: 'positive' },
             { trustThreshold: 'high', text: "Why wasn't this on already? Let's activate it today. What do I need to do?", emotion: 'positive' },
           ],
           metricEffects: { experiencedRPD: 6, visibility: 4, conversion: 2 },
@@ -234,7 +234,7 @@ export const carlosR1: ConversationTree = {
 
 // ════════════════════════════════════════════════════════════
 //  CARLOS RIVERA - Round 2
-//  Focus: Optimise existing discount stack + improve conversion
+//  Focus: Optimize existing discount stack + improve conversion
 // ════════════════════════════════════════════════════════════
 export const carlosR2: ConversationTree = {
   partnerId: 'carlos',
@@ -334,7 +334,7 @@ export const carlosR2: ConversationTree = {
             label: 'Say push discounts harder',
             description: 'Read the momentum as a green light to deepen discount levels.',
             playerDialogue:
-              "Numbers are moving and momentum is real. My read is now's the time to push the discount levels deeper across the stack - lock in market share while travellers are responding.",
+              "Numbers are moving and momentum is real. My read is now's the time to push the discount levels deeper across the stack - lock in market share while travelers are responding.",
             styleMatch: { yellow: 1, red: 2, blue: -1, green: -1 },
             assertiveness: 3,
             compliance: 'safe',
@@ -345,7 +345,7 @@ export const carlosR2: ConversationTree = {
             description:
               "Show that visibility is outpacing conversion, and the active stack is overlapping in segments - so more eyes aren't translating into more bookings.",
             playerDialogue:
-              "Here's the more interesting bit. Visibility is up about 18 points since we fixed Country Rate, but conversion has only moved about 4 points - so more travellers are seeing Barceloneta Living but a chunk of them aren't booking. When I look at why, I see two things: your listing content hasn't been refreshed in months, and your discount products are overlapping in some segments - travellers are getting stacked discounts when one would have been enough. Same budget, more wasted euros, and lookers not converting.",
+              "Here's the more interesting bit. Visibility is up about 18 points since we fixed Country Rate, but conversion has only moved about 4 points - so more travelers are seeing Barceloneta Living but a chunk of them aren't booking. When I look at why, I see two things: your listing content hasn't been refreshed in months, and your discount products are overlapping in some segments - travelers are getting stacked discounts when one would have been enough. Same budget, more wasted euros, and lookers not converting.",
             styleMatch: { yellow: 1, red: 1, blue: 2, green: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -395,10 +395,10 @@ export const carlosR2: ConversationTree = {
         options: [
           {
             id: 'carlos-r2-rec-stack',
-            label: 'Optimise the discount stack',
+            label: 'Optimize the discount stack',
             description: 'Fine-tune how his active discounts work together for maximum impact.',
             playerDialogue:
-              "Right now your discounts are all active but they're not optimised as a stack. Your Genius discount, Mobile Rate, and Country Rate are overlapping in some segments, which means some travellers are getting deeper discounts than necessary. If we tighten the targeting - different discounts for different traveller segments - you get better ROI from the same discount budget.",
+              "Right now your discounts are all active but they're not optimized as a stack. Your Genius discount, Mobile Rate, and Country Rate are overlapping in some segments, which means some travelers are getting deeper discounts than necessary. If we tighten the targeting - different discounts for different traveler segments - you get better ROI from the same discount budget.",
             styleMatch: { yellow: 0, red: 1, blue: 2, green: 0 },
             assertiveness: 2,
             compliance: 'safe',
@@ -429,7 +429,7 @@ export const carlosR2: ConversationTree = {
         {
           optionId: 'carlos-r2-rec-stack',
           responses: [
-            { trustThreshold: 'low', text: "Overlapping discounts... I hadn't realised. But is this going to be complicated to set up? I don't want to spend hours in the extranet.", emotion: 'cautious' },
+            { trustThreshold: 'low', text: "Overlapping discounts... I hadn't realized. But is this going to be complicated to set up? I don't want to spend hours in the extranet.", emotion: 'cautious' },
             { trustThreshold: 'medium', text: "So I'm basically over-discounting some guests? That's wasted money. Yeah, let's tighten it up. Walk me through what to change.", emotion: 'positive' },
             { trustThreshold: 'high', text: "Smarter discounts, same budget, better returns - I'm in. Show me the targeting changes.", emotion: 'positive' },
           ],
@@ -577,7 +577,7 @@ export const carlosR3: ConversationTree = {
             description:
               "Show that peak is strong but off-peak is running at 50% - the year-round revenue gap is concentrated in the quiet months, not peak.",
             playerDialogue:
-              "Here's the cut that surprised me. Peak is strong - you're running at 80%-plus and your rate is right where it should be. Shoulder is okay. Off-peak though - November through March - you're running around 50% occupancy with rates that aren't pulling demand from the weekend city-break markets that ARE travelling in those months. The biggest unlock for your annual revenue isn't peak or visibility - it's the seasonal shape of your strategy.",
+              "Here's the cut that surprised me. Peak is strong - you're running at 80%-plus and your rate is right where it should be. Shoulder is okay. Off-peak though - November through March - you're running around 50% occupancy with rates that aren't pulling demand from the weekend city-break markets that ARE traveling in those months. The biggest unlock for your annual revenue isn't peak or visibility - it's the seasonal shape of your strategy.",
             styleMatch: { yellow: 1, red: 1, blue: 2, green: 1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -638,7 +638,7 @@ export const carlosR3: ConversationTree = {
           {
             id: 'carlos-r3-rec-growth',
             label: 'Focus on year-round occupancy',
-            description: 'Prioritise filling the quiet months to maximise annual revenue.',
+            description: 'Prioritize filling the quiet months to maximize annual revenue.',
             playerDialogue:
               "The biggest revenue unlock for Barceloneta Living isn't peak season - you're already strong there. It's the off-peak months where you're running 40-50% occupancy. If we get that up to 65-70% through smart seasonal promotions and targeted Country Rate offers, your annual revenue grows by 15-20% without touching your peak rates at all.",
             styleMatch: { yellow: 1, red: 2, blue: 1, green: 0 },
@@ -648,7 +648,7 @@ export const carlosR3: ConversationTree = {
           {
             id: 'carlos-r3-rec-premium',
             label: 'Go premium in peak',
-            description: 'Suggest raising peak rates while discounting off-peak to maximise yield.',
+            description: 'Suggest raising peak rates while discounting off-peak to maximize yield.',
             playerDialogue:
               "Here's a bold move - actually raise your peak season rates. Barcelona demand in summer is so strong that you can charge 10-15% more and still fill your 45 units. Then use that extra margin to fund aggressive off-peak promotions. High-low strategy - premium when demand is hot, promotional when it's cool.",
             styleMatch: { yellow: 1, red: 1, blue: 0, green: -1 },
