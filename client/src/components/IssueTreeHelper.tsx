@@ -149,8 +149,10 @@ export function IssueTreeHelper({
         position: 'fixed',
         top: 80,
         right: 16,
-        width: 'min(390px, 92vw)',
-        // Height fits the content (no fixed cap, no inner scroll).
+        width: 'min(440px, 94vw)',
+        // Height fits the content (no fixed cap, no inner scroll). The
+        // slightly wider panel keeps descriptions to fewer lines so
+        // readable body text still fits without a fixed height.
         height: 'auto',
         background: 'var(--white)',
         boxShadow: '-12px 16px 40px rgba(0,15,40,0.22)',
@@ -274,11 +276,11 @@ export function IssueTreeHelper({
             </div>
             <h3
               style={{
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: 800,
                 color: 'var(--brand-navy)',
                 margin: 0,
-                marginBottom: 8,
+                marginBottom: 9,
                 lineHeight: 1.3,
               }}
             >
@@ -296,10 +298,10 @@ export function IssueTreeHelper({
             {stepIndex === 0 && (
               <p
                 style={{
-                  fontSize: 11.5,
+                  fontSize: 12.5,
                   color: 'var(--grey-600)',
-                  lineHeight: 1.4,
-                  margin: '0 0 8px',
+                  lineHeight: 1.5,
+                  margin: '0 0 9px',
                   fontStyle: 'italic',
                 }}
               >
@@ -579,7 +581,7 @@ function OptionCard({
           </span>
         )}
       </div>
-      <div style={{ fontSize: 11.5, color: 'var(--grey-500)', lineHeight: 1.35 }}>
+      <div style={{ fontSize: 13, color: 'var(--grey-500)', lineHeight: 1.4 }}>
         {description}
       </div>
     </button>
