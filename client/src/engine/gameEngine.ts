@@ -56,7 +56,7 @@ function applyRoundBaseline(
 // Capped at the contiguous max of SME-approved priority content.
 // Today: R1 John (placeholder), R2 Marina (placeholder), R3 Noble
 // Falcon (SME-approved). Bump as each new priority drop lands.
-const TOTAL_ROUNDS = 6;
+const TOTAL_ROUNDS = 7;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 

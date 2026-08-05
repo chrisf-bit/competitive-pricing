@@ -1345,7 +1345,141 @@ function oceanfrontBase(args: {
   ];
 }
 
+function palaceGrandBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Palace Grand Resort',
+        propertyType: 'Resort',
+        roomCount: 184,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'green',
+        styleSecondary: 'blue',
+        description:
+          "Operations Manager at an independent resort with full local autonomy - practical, ROI-minded, and collaborative. He gives every channel the same net rate to keep things simple, and he weighs every recommendation against the operational load on his front desk. Persuade him it's an easy, low-friction fix backed by the numbers and he'll set it up with you on the spot.",
+        commercialGoal:
+          'Recover on-platform visibility and occupancy through low-friction setup fixes, without a price war',
+      },
+      // Metrics map to the SME Round 7 data set (Hotel ID 304). A KEY OTA
+      // gap with a sharp +10.95 MoM eRPD spike (eRPD 7.2% / Bucket 5,
+      // Lose Price 60%), concentrated in mobile (Mdot) and family (2+1 /
+      // 2+2) scenarios. Strong conversion (+45%) and bookings (+49%) but
+      // page views -53% and ABRN -46% YoY. His Mobile Rate is active but
+      // misconfigured (excluded dates + two rate plans).
+      metrics: {
+        erpd: 7.2,
+        erpdChange: 10.95,
+        rpdPublic: 8.9,
+        rpdLoyal: -1.3,
+        losePricePublic: 60,
+        activeScenarios: 3,
+        activeScenarioNames: ['Mdot', 'Family 2+1', 'Family 2+2'],
+        competitor: 'expedia',
+        secondaryMetrics: {
+          last30dAbrn: { value: 267, deltaPct: -46 },
+          last30dRoomNights: { value: 349, deltaPct: 49 },
+          last30dAdr: { value: 216, deltaPct: 6 },
+          last90dPageViews: { value: 6553, deltaPct: -53 },
+          last90dConversion: { value: 4.0, deltaPct: 45 },
+          next3mRoomNights: { value: 435, deltaPct: -9 },
+        },
+        // SME doc showed 2026-02-11; against an authoring date of
+        // 2026-08-05 that's 175 days back - a ~6-month gap that fits the
+        // 0% pricing coverage despite the huge +10.95 MoM spike.
+        lastPricingContactDaysAgo: 175,
+        pricingCoverageQTD: 0,
+        // Not in Sheet 7's roster; sits below Marina's 8,200 so the R7
+        // decoy Marina reads as "bigger" and "biggest value" fails -
+        // Palace Grand is the call on Bucket 5 / +10.95 spike.
+        partnerValueAbrn: 6800,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM).
+        // Visibility is holding (17% vs 16% peer) but search price runs
+        // +4% and conversion is weak, driving 21% unsold rooms.
+        opcMetrics: {
+          unsoldRooms: { value: 21 },
+          sellThroughRate: { value: -13 },
+          visibilityShare: { value: 17, deltaPct: 6 },
+          conversion: { value: 0.53 },
+          searchPrice: { value: 4 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 52,
+        visibility: 42,
+        conversion: 66,
+        revenue: 50,
+        discountQuality: 44,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Four products active per the SME data set: Mobile Rates (active
+      // but misconfigured - excluded dates + two rate plans), Genius
+      // Program, Family Rates and Payments.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Palace Grand Resort (SME Round 7 priority, all three regimes) ──
+  // Key OTA gap with a sharp +10.95 MoM eRPD spike (Bucket 5, Lose Price
+  // 60%), concentrated in mobile (Mdot) and family (2+1 / 2+2) searches
+  // where the competitor undercuts. Strong conversion (+45%) but page
+  // views -53%. Objection: The Same Net Mindset + Competitive Aggression
+  // + Family Ready. The win is refusing the price war, opening the family
+  // segment, and fixing the misconfigured mobile rate - not a rate cut.
+  ...palaceGrandBase({
+    id: 'palace-grand-wide',
+    parityRegime: 'wide',
+    location: 'Orlando, USA',
+    contactName: 'Ethan Nkosi',
+    propertyImage:
+      'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400&h=250&fit=crop',
+  }),
+  ...palaceGrandBase({
+    id: 'palace-grand-narrow',
+    parityRegime: 'narrow',
+    location: 'London, UK',
+    contactName: 'Ethan Nkosi',
+    propertyImage:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+  }),
+  ...palaceGrandBase({
+    id: 'palace-grand-none',
+    parityRegime: 'none',
+    location: 'Marbella, Spain',
+    contactName: 'Ethan Nkosi',
+    propertyImage:
+      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+  }),
+
   // ── Oceanfront Bliss Lodge (SME Round 6 priority, all three regimes) ──
   // Intentional Brand.com gap from a deliberate ~10% direct-cheaper play
   // (Brand.com Loyalty + reverse-billboard) - Lose Price 66%, Bucket 6,

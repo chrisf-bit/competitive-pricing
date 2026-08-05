@@ -269,6 +269,32 @@ const oceanfrontR6Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Palace Grand Resort R7 (SME Round 7
+ * priority), applied verbatim across all three regime variants. Ethan's
+ * character, metrics and objection types (Same Net Mindset + Competitive
+ * Aggression + Family Ready) are identical; only the regulatory framing
+ * differs by regime.
+ */
+const palaceGrandR7Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Ethan is green/blue and ops-minded: don't take his \"burn margin too\" bait - reframe to ROI and unsold rooms, then make the fix easy (correct his mobile-rate setup and add family rates together).",
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect the Same Net Mindset ("I give everyone the same rate, you cut margin too") plus a family-ops pushback; refuse the price war and de-risk the family fix as low-friction with a concrete return.',
+  },
+  storyteller: {
+    oneLiner:
+      'Winning the funnel, losing the traffic: converts +45% and books +49% vs peer, but a sharp +10.95 Key OTA spike on mobile and family searches has page views -53%.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: eRPD jumped +10.95 in a month with Loyal RPD -1.3% - the leak sits in the Mdot and Family 2+1 / 2+2 scenarios (competitor undercutting on mobile and family), plus a misconfigured mobile rate.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -389,6 +415,13 @@ export const personaHints: PersonaHintsByRound = {
   'oceanfront-wide': { 6: oceanfrontR6Hints },
   'oceanfront-narrow': { 6: oceanfrontR6Hints },
   'oceanfront-none': { 6: oceanfrontR6Hints },
+
+  // Palace Grand Resort R7 - the SME Round 7 priority across all three
+  // regime variants (Same Net Mindset + Competitive Aggression + Family
+  // Ready; Key OTA gap concentrated in mobile + family).
+  'palace-grand-wide': { 7: palaceGrandR7Hints },
+  'palace-grand-narrow': { 7: palaceGrandR7Hints },
+  'palace-grand-none': { 7: palaceGrandR7Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },
