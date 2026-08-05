@@ -1,46 +1,43 @@
 import { useLayoutEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
-import pricingPathway from '../assets/pricing-pathway.webp';
+import pathwayRoad from '../assets/pathway-road.webp';
 import { pathwayNodes } from '../data/issueTreeReveal';
 
 /**
  * The Pricing Pathway infographic - the SME's winding-road slide
- * reproduced in the sim, as a click-to-reveal. The road, icon circles
- * and node markers are baked into the WebP (`pricing-pathway.webp`, the
- * SME's stripped-down export with the background removed to transparency
- * so it sits directly on the navy reveal screen); clicking a numbered
- * marker reveals that step's question, sub-label and goal beside it.
- * Only one step shows at a time, so the texts never overlap.
+ * reproduced in the sim, as a click-to-reveal. The road, phase
+ * columns, headings, node markers and title are baked into the WebP
+ * (`pathway-road.webp`, the SME export with its white frame trimmed);
+ * clicking a numbered marker reveals that step's question, sub-label
+ * and goal beside it. Only one step shows at a time, so the texts
+ * never overlap.
  *
- * Layout technique: a fixed DESIGN_W x DESIGN_H stage is uniformly
- * `transform: scale()`d to the container width via a ResizeObserver.
- * Markers, highlight and revealed text all live in that one coordinate
- * space, so nothing can drift out of alignment with the art, and it
- * works without container-query units. DESIGN_W stays 1891 (the old
- * art's width) purely so the text/layout constants below don't need
- * re-tuning; DESIGN_H just tracks the new art's 1291x729 aspect. The
- * marker CENTRE values are fractions, so they're resolution-independent.
+ * Layout technique: a fixed DESIGN_W x DESIGN_H stage (the WebP's own
+ * pixel size) is uniformly `transform: scale()`d to the container
+ * width via a ResizeObserver. Markers, highlight and revealed text all
+ * live in that one coordinate space, so nothing can drift out of
+ * alignment with the art, and it works without container-query units.
  *
  * Controlled: the parent owns `activeStep` + `visited` so it can gate
  * Continue on all seven being opened.
  */
 
 const DESIGN_W = 1891;
-const DESIGN_H = 1068; // 1891 / (1291/729) - matches pricing-pathway.webp aspect
+const DESIGN_H = 1063;
 
-// Icon-circle centres (fractions of the image) + radius (design px),
-// auto-detected from the transparent WebP. The stripped art uses uniform
-// ~82px icon circles (r ~60 in this 1891-wide design space), so the
+// Icon-circle centres (fractions of the image) and per-node radius
+// (design px), both auto-detected from the WebP. Radius varies per
+// icon (node 7's circle is larger, node 4's slightly smaller), so the
 // highlight ring, hotspot and check badge track each icon exactly.
 const CENTRE: Record<number, { x: number; y: number; r: number }> = {
-  1: { x: 0.0554, y: 0.465, r: 60 },
-  2: { x: 0.1538, y: 0.8999, r: 60 },
-  3: { x: 0.3389, y: 0.2606, r: 60 },
-  4: { x: 0.4771, y: 0.8642, r: 60 },
-  5: { x: 0.6402, y: 0.192, r: 60 },
-  6: { x: 0.6379, y: 0.7092, r: 60 },
-  7: { x: 0.8497, y: 0.4081, r: 60 },
+  1: { x: 0.0554, y: 0.4619, r: 53 },
+  2: { x: 0.1534, y: 0.897, r: 53 },
+  3: { x: 0.3381, y: 0.2575, r: 53 },
+  4: { x: 0.4763, y: 0.8613, r: 51 },
+  5: { x: 0.6389, y: 0.1875, r: 53 },
+  6: { x: 0.6365, y: 0.7055, r: 54 },
+  7: { x: 0.8481, y: 0.4042, r: 59 },
 };
 
 type Layout =
@@ -111,7 +108,7 @@ export function PathwayInfographic({
         }}
       >
         <img
-          src={pricingPathway}
+          src={pathwayRoad}
           alt="The Pricing Pathway: seven steps across Prioritize, Diagnose and Act"
           width={DESIGN_W}
           height={DESIGN_H}
