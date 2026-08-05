@@ -278,71 +278,76 @@ DO list and the regime's specific constraints.
   to engage; that's the action. Partners they don't pick neglect
   silently between rounds.
 - The "right" partner each round is held in
-  `data/correctPartnerPerRound.ts` per regime per round. For
-  No-Parity the rotation is **Crystal Water Resort R1, Velvet Sky
-  Boutique Hotel R2, The Noble Falcon Inn R3** - all three are
-  SME-approved branching scenarios. For Narrow and Wide regimes,
-  each round uses the corresponding regime variant - same data,
-  same partner story, different regulatory framing.
-- **Per-round partner state is scripted** in
-  `data/partnerStateByRound.ts` and applied as an overlay by
-  `applyRoundBaseline` in three places: `createInitialState` (R1
-  starting state), `advanceRound` (after the round's neglect /
-  history updates, so the new round's baseline takes precedence),
-  and `startPracticeRound` (the baseline for whichever round is
-  being practised). The engine's conversation outcomes only nudge a
-  couple of legacy metric fields; without this overlay the headline
-  KPIs never move and the same partner stays worst forever. The
-  scripted arc for No-Parity today: R1 Crystal Water Resort in a
-  Brand.com Competitiveness Gap (Sarah Bennett running cheaper
-  promotional rates on her direct brand site, 202% page-view spike
-  vs peer but Conversion -52%, Lose Price 99%, only Genius Programme
-  active); R2 Velvet Sky Boutique Hotel in a milder but chronic
-  Brand.com gap (John Whitford aggressively discounting on his
-  direct site, zero active Booking.com pricing tools, Lose Price
-  99% with mild +0.53 YoY eRPD change); R3 The Noble Falcon Inn in
-  a structural Brand.com competitiveness gap (eRPD 17.0% with
-  +21.42 percentage points YoY, Lose Price 93%, four active
-  scenarios including the Brand Scenario). All three priorities
-  also stand up for Narrow and Wide regimes - same data, regime-
-  specific dialogue (see
-  `data/scenarios/crystal-water-{none,narrow,wide}-r1.ts`,
-  `data/scenarios/velvet-sky-{none,narrow,wide}-r2.ts`, and
-  `data/scenarios/noble-falcon-{none,narrow,wide}-r3.ts`).
-- **Conversation data covers Crystal Water Resort R1, Velvet Sky
-  Boutique Hotel R2, and The Noble Falcon Inn R3 as SME-approved
-  branching scenarios across all three regimes, plus Marina R1-R3
-  and Carlos R1-R3 as 3-phase distractors.** Rounds 4-10 are
-  non-playable today (TOTAL_ROUNDS is capped at 3 in
-  `gameEngine.ts`). `getConversationTree` returns undefined past
-  round 3, and `getBranchingScenario` resolves at R1 (Crystal
-  Water), R2 (Velvet Sky), and R3 (Noble Falcon); Practice Mode
-  handles missing rounds by locking those cards.
-- **No Parity, Narrow Parity, and Wide Parity are all selectable
-  today** in Market Select. Cross Regional is still gated. The
-  active roster is Marina, Carlos (R1 and R3 distractors), Raven
-  Inn and Driftwood Bay Resort (R2 distractors), plus the three
-  Crystal Water variants (R1 priority across regimes), the three
-  Velvet Sky variants (R2 priority across regimes), and the three
-  Noble Falcon variants (R3 priority across regimes). Distractor
-  partner records are tagged `parityRegime: 'none'` but appear on
-  all three regimes' portfolios via the explicit
-  `portfolioByRound` mapping. John Marston moved back to
-  `pendingPartners` in June 2026 alongside Stavros, Hannah, Priya,
-  Yuki.
+  `data/correctPartnerPerRound.ts` per regime per round. **All ten
+  Level 1 rounds now have SME-approved branching priority partners
+  across all three regimes** (Wide / Narrow / No Parity) - same
+  data and partner story per round, only the regulatory framing of
+  the dialogue changes by regime (the Wide / Narrow ids are the
+  `-wide` / `-narrow` variants of the same partner). The No-Parity
+  roster (see `data/scenarios/{partner}-{none,narrow,wide}-r{n}.ts`
+  and each `-base.ts` header for full detail):
+  - R1 Royal Crest Hotel (`royal-crest`) - Brand.com gap; Segmented
+    Pricing + Brand.com Loyalty.
+  - R2 Silver Horizon Resort (`silver-horizon`) - Key OTA gap;
+    Competitive Aggression.
+  - R3 Ocean View Resort (`ocean-view`) - structural Brand.com gap.
+  - R4 Riverside Boutique Hotel (`riverside`) - Key OTA gap; the
+    "Value Proposition" Wall + family setup + non-genuine Genius.
+  - R5 Emerald Peak Lodge (`emerald-peak`) - structural Brand.com
+    gap (Bucket 6 / 100% Lose Price).
+  - R6 Oceanfront Bliss Lodge (`oceanfront`) - Brand.com Loyalty +
+    Billboard Effect in Reverse.
+  - R7 Palace Grand Resort (`palace-grand`) - Key OTA gap; The Same
+    Net Mindset + Competitive Aggression + Family Ready.
+  - R8 The Hidden Valley Resort (`hidden-valley`) - Brand.com gap;
+    BSB / Payments Shield + Direct-Is-Cheaper (ends on a **soft no**).
+  - R9 Loft Living Inn (`loft-living`) - severe Key OTA gap (Bucket
+    7); The Wholesaler Leak + Competitive Aggression (ends on a
+    **soft no**).
+  - R10 The Noble Falcon Inn (`noble-falcon`) - structural Brand.com
+    gap (Bucket 7); The Risky Guest + brand-first supports (ends on a
+    **strong no**; the final Level 1 round - completing it routes to
+    the Level 1 Complete celebration).
+  The retired POC scenarios (Crystal Water Resort, Velvet Sky
+  Boutique Hotel, and the earlier R3 Noble Falcon / Anton Müller
+  placement) still have records and scenario files on disk but are
+  **unregistered** - dead data, not reachable.
+- **Per-round partner state.** Each priority partner appears in
+  exactly one round, so its own record metrics in `data/partners.ts`
+  are that round's headline state - the priorities generally carry no
+  `data/partnerStateByRound.ts` entry. What that file mostly holds
+  today is **healthy Bucket-3 decoy baselines for Marina and Carlos**
+  per round (R1, R3, and R4-R10) so the priority reads clearly as the
+  worst partner, plus legacy / parked entries. `applyRoundBaseline`
+  still overlays these in `createInitialState`, `advanceRound`, and
+  `startPracticeRound`; the engine's conversation outcomes only nudge
+  a couple of legacy metric fields, so without the record/baseline the
+  headline KPIs wouldn't move.
+- **Conversation data.** All ten priority partners are SME-approved
+  **branching** scenarios (`data/scenarios/{partner}-{none,narrow,
+  wide}-r{n}.ts`, shared pieces in `{partner}-base.ts`; R10 uses
+  `noble-falcon-r10-base.ts`), registered in
+  `data/branchingScenarios.ts`. `getBranchingScenario` resolves for
+  every round 1-10. Marina R1-R3 and Carlos R1-R3 remain 3-phase
+  distractors, with Raven Inn and Driftwood Bay as R2 distractors.
+  `TOTAL_ROUNDS = 10` in `gameEngine.ts` and `Header.tsx`.
+- **No Parity, Narrow Parity, and Wide Parity are all selectable**
+  in Market Select. Cross Regional is still gated. The decoys are
+  Marina and Carlos (R1, R3, and R4-R10) and Raven Inn + Driftwood
+  Bay Resort (R2). Distractor records are tagged
+  `parityRegime: 'none'` but appear on all three regimes' portfolios
+  via the explicit `portfolioByRound` mapping. John Marston, Stavros,
+  Hannah, Priya, and Yuki remain in `pendingPartners`.
 - **Per-round portfolio composition is explicit** in
-  `data/portfolioByRound.ts`. Three cards per round in the early
-  rounds (one priority + two distractors) is the design target -
-  Noble Falcon Inn doesn't appear on R1 or R2 because its static
-  metrics (eRPD 17% / Bucket 7) would dominate the puzzle visually
-  long before R3 is the right call. The mapping is the source of
-  truth on Portfolio renders - it ignores each partner's own
-  `parityRegime` field when an entry exists, which lets the same
-  distractor record (e.g. Marina with parityRegime 'none') appear
-  on Wide / Narrow / No-Parity portfolios without per-regime
-  clones. Sibling of `correctPartnerPerRound.ts`: keep them in sync
-  - the priority partner per round MUST be present in the
-  corresponding portfolio list, otherwise the round is unwinnable.
+  `data/portfolioByRound.ts` - three cards per round (one priority +
+  two decoys). The mapping is the source of truth on Portfolio
+  renders - it ignores each partner's own `parityRegime` field when
+  an entry exists, which lets the same decoy record (e.g. Marina with
+  parityRegime 'none') appear on Wide / Narrow / No-Parity portfolios
+  without per-regime clones. Sibling of `correctPartnerPerRound.ts`:
+  keep them in sync - the priority partner per round MUST be present
+  in the corresponding portfolio list, otherwise the round is
+  unwinnable.
 
 ### Conversation structure
 
@@ -398,14 +403,25 @@ based on the shape flag.
   and - eventually - by a stricter grader that scores the
   learner's Coach pick against the prescribed path. (Internal
   field name `issueTreePath` kept per the rename precedent.)
-- Branching scenarios live in `data/scenarios/{partner}-r{n}.ts`,
-  registered via `data/branchingScenarios.ts`. Coverage today: John
-  R1 (Wide Parity, Brand.com loyalist).
+- Branching scenarios live in
+  `data/scenarios/{partner}-{none,narrow,wide}-r{n}.ts` (shared
+  pieces in `{partner}-base.ts`), registered via
+  `data/branchingScenarios.ts`. Coverage today: **all ten Level 1
+  priority partners (R1-R10) across all three regimes** - see the
+  round roster under "Round mechanic" above.
+- **Response option order is shuffled at render time** so the optimal
+  pick isn't always first. `util/seededShuffle.ts` (FNV-1a hash +
+  mulberry32) reorders each step's options in a `useMemo` in
+  `BranchingConversationScreen` and `ConversationScreen`, seeded on
+  the option ids so a replay of the same round keeps the same layout.
+  The data files still list the optimal option first by authoring
+  convention; grading keys off ids, not array position, so authoring
+  and the `optimal: true` flag are unaffected.
 - Grading uses `gradeBranchingRound` in `engine/grading.ts`. Minimal
   pass for v1: floor = right partner + all picks `compliance: 'safe'`
-  + no -2 style mismatch. No "optimal diag / pitch" gate yet (will
-  tighten once 3+ branching scenarios exist and per-step `optimal`
-  tagging is consistent).
+  + no -2 style mismatch. No "optimal diag / pitch" gate yet (per-step
+  `optimal` tagging is now consistent across all ten branching
+  scenarios, so a stricter gate could layer on if desired).
 
 ### Distractor design
 
@@ -531,9 +547,10 @@ visual now matches.
 - `isPracticeMode` is a `GameState` flag. When true,
   `onContinueAfterReport` routes back to the Debrief instead of
   advancing the round.
-- Rounds without conversation data (currently 4-10) render as locked
-  "Coming soon" cards. They auto-unlock once the conversation data
-  is extended.
+- All ten rounds are playable now, so every Practice Mode card is
+  active. (The locked "Coming soon" treatment for rounds without
+  conversation data still exists in the code as a fallback, but no
+  Level 1 round hits it today.)
 
 ### Issue Tree Helper (guided diagnostic on Partner Detail)
 
@@ -683,11 +700,13 @@ SME authors know the slot they're filling):
 - Data Detective - unlocks biggest anomaly highlighted; mutes style
   cue
 
-**Coverage today:** R1 hints authored for Marina and Carlos plus
-the parked John and Stavros (kept in sync for reuse). R3 hints
-authored for The Noble Falcon Inn across all three regimes. R1
-priority (Crystal Water Resort) and R2 priority (Velvet Sky
-Boutique) hints land alongside the partner record drops.
+**Coverage today:** persona hints (`data/personaHints.ts`) are
+authored for all ten Level 1 priority partners R1-R10 (one shared
+`{partner}R{n}Hints` block per partner, applied verbatim across its
+three regime variants), plus the Marina / Carlos decoys and the
+parked John / Stavros records. Each entry is a single tight
+`oneLiner` per persona (Architect on approach, Navigator on
+pushback, Storyteller on story, Detective on anomaly).
 
 **State (`expandedBlindSpots: string[]` on `GameState`):** keys are
 `${partnerId}-${round}` strings. Resets on full restart
@@ -792,40 +811,25 @@ debate:
 ### Parity regimes
 
 - Four regimes: `wide`, `narrow`, `none`, `cross-regional`.
-- **Currently only No Parity is selectable** in the Market Select
-  screen. Narrow / Wide / Cross Regional are visually disabled
-  ("Coming soon" pill, dashed border, not-allowed cursor) until the
-  matching partner data lands (expected next week).
-- **The Noble Falcon Inn sits at R3 as a pedagogical stretch;
-  Sheet 7 places it at Round 10 as its target home.** SME's
-  Partner Data Set 46 (Sheet 7 of the "2026 Pricing Learning -
-  Data examples" workbook) tags Noble Falcon as Round 10 content.
-  It's been pulled forward to R3 in the current sim so testers
-  can experience a genuinely complex partner (eRPD 17%, +21pp
-  YoY, four active scenarios, Brand Scenario active) inside the
-  playable window, before R4-R9 SME priority content lands.
-  Noble Falcon moves back to Round 10 as the remaining rounds
-  get authored. Originally mis-slotted at R1 (the source doc was
-  titled "Rate Right - Round 1") and then briefly at R10 before
-  landing at R3 in 2026-06. Three regime variants of the same hotel (Wide /
-  Narrow / None) sit in `initialPartners` alongside Marina, John,
-  and Carlos; their data is shared via the `nobleFalconBase()`
-  helper in `data/partners.ts`, only location + `parityRegime` +
-  the property image differ. The contact `Anton Müller` is
-  consistent across all three (blue/thinker primary + red/driver
-  secondary). Conversation files are
-  `data/scenarios/noble-falcon-{none,narrow,wide}-r3.ts` - the
-  four regime-agnostic steps live in `noble-falcon-base.ts` and
-  only Steps 3 + 4 (the parity ask and the risk solution) carry
-  the regime-specific dialogue from the SME doc.
-- John R1 is a **placeholder** No-Parity Round 1 priority pending
-  the SME-approved Crystal Water Resort drop. Scenario file
-  `data/scenarios/john-r1.ts` is in the new branching shape; the
-  dialogue is No-Parity compliant - the AM never proactively
-  raises cross-channel pricing, cross-channel framing only kicks
-  in after John self-discloses his lower direct rate, and the
-  close asks for "the best price you're willing to make available
-  to Booking.com" rather than "syncing competitiveness".
+- **No Parity, Narrow Parity, and Wide Parity are all selectable**
+  in Market Select. Cross Regional is still visually disabled (dashed
+  border, not-allowed cursor) until its partner data + rules land.
+- **The Noble Falcon Inn is at Round 10 - its true home** (Sheet 7 of
+  the SME "2026 Pricing Learning - Data examples" workbook / Partner
+  Data Set 46 tags it Round 10). It was pulled forward to R3 as a
+  pedagogical stretch while R4-R9 were authored; now that all ten
+  rounds have real SME priority content, Ocean View Resort holds R3
+  and Noble Falcon has returned to R10 with its full SME Round 10
+  content. The R10 contact is **Adam Cole** (Revenue Manager, fully
+  managed by brand; blue primary + red secondary), the objection is
+  **The Risky Guest** plus brand-first supports, and it ends on a
+  **strong no** (Adam shuts the call down without committing). The
+  three regime variants share the `nobleFalconBase()` helper in
+  `data/partners.ts` (record metrics already match the R10 data set);
+  conversation files are
+  `data/scenarios/noble-falcon-{none,narrow,wide}-r10.ts` with shared
+  pieces in `noble-falcon-r10-base.ts`. The old `-r3` scenario files
+  (Anton Müller) are unregistered dead data.
 - Country-to-regime mapping is the single source of truth in
   `data/parityCountries.ts`. Wide is the default for any country not
   listed under No or Narrow. Cross Regional is tagged per-partner, not
@@ -2567,11 +2571,14 @@ on `release-2-partner-detail`.
   `'advanced'` while locked, so the render simply shows
   `<OpcMetricsTab>` when `activeTab === 'advanced'` (no locked
   fallback component needed).
-- **Not reachable in today's build.** `TOTAL_ROUNDS` is capped at 3
-  and Cross-Regional isn't selectable, so nothing hits round 11+ or
-  a KAM partner. The unlocked tab auto-appears once Level 2 / KAM
-  content lands. To preview it before then you'd force `opcUnlocked`
-  true or add a temporary DevNav hook (not done).
+- **Not reachable in today's build.** `TOTAL_ROUNDS` is 10 (all Level
+  1) and Cross-Regional isn't selectable, so nothing hits round 11+ or
+  a KAM partner - the OPC tab stays locked throughout Level 1. It
+  auto-appears once Level 2 / KAM content lands. To preview it before
+  then you'd force `opcUnlocked` true or add a temporary DevNav hook
+  (not done). Priority partner records now carry `opcMetrics` data
+  (added round-by-round as R1-R10 were authored), so the tab will
+  populate when it unlocks.
 
 ### OPC metric cards (structure built, data pending)
 
@@ -2623,6 +2630,60 @@ wind-down was promised repeatedly and mid-chat. Commit `5421708`.
 - The retry-flow "one more I want to double-check" message in
   `GameMasterChatScreen.tsx` is correct and untouched - it only
   fires when exactly one failed item is being re-asked.
+
+## Post-2026-08 session (Level 1 rounds 1-10 complete)
+
+The full Level 1 arc is now built and pushed to
+`release-2-partner-detail`. Ten SME-approved branching priority
+partners, one per round, each across all three parity regimes (Wide /
+Narrow / No Parity). This supersedes the earlier "capped at 3 / rounds
+4-10 non-playable" notes throughout this file.
+
+**The roster** (No-Parity id; `-wide` / `-narrow` variants share the
+same data, only the dialogue's regulatory framing differs):
+
+| R | Partner (`id`) | Contact | Gap | Objection | Ending |
+|---|---|---|---|---|---|
+| 1 | Royal Crest Hotel (`royal-crest`) | Liam O'Connell | Brand.com | Segmented Pricing + Brand.com Loyalty | normal |
+| 2 | Silver Horizon Resort (`silver-horizon`) | - | Key OTA | Competitive Aggression | normal |
+| 3 | Ocean View Resort (`ocean-view`) | - | Brand.com (structural) | brand-first | normal |
+| 4 | Riverside Boutique Hotel (`riverside`) | Anton Müller | Key OTA | "Value Proposition" Wall + family + Genius offset | normal |
+| 5 | Emerald Peak Lodge (`emerald-peak`) | - | Brand.com (structural) | brand-first | normal |
+| 6 | Oceanfront Bliss Lodge (`oceanfront`) | Priya Singh | Brand.com | Brand.com Loyalty + reverse Billboard | normal |
+| 7 | Palace Grand Resort (`palace-grand`) | Ethan Nkosi | Key OTA | Same Net Mindset + Competitive Aggression + Family Ready | normal |
+| 8 | The Hidden Valley Resort (`hidden-valley`) | Claire Thornton | Brand.com | BSB / Payments Shield + Direct-Is-Cheaper | **soft no** |
+| 9 | Loft Living Inn (`loft-living`) | Lucas Silva | Key OTA (Bucket 7) | Wholesaler Leak + Competitive Aggression | **soft no** |
+| 10 | The Noble Falcon Inn (`noble-falcon`) | Adam Cole | Brand.com (structural, Bucket 7) | The Risky Guest + brand-first | **strong no** |
+
+**The 12-file-touch pattern per round** (repeat when authoring
+future rounds): (1) `data/scenarios/{partner}-base.ts` (issueTreePath +
+shared opener), (2-4) `data/scenarios/{partner}-{wide,narrow,none}-r{n}.ts`
+branching trees, (5) `data/partners.ts` `{partner}Base()` helper + 3
+call sites, (6) `data/personaHints.ts` `{partner}R{n}Hints` + 3 map
+entries, (7) `data/partnerStateByRound.ts` healthy Bucket-3 R{n} decoy
+baselines for Marina + Carlos, (8) `data/branchingScenarios.ts`, (9)
+`data/correctPartnerPerRound.ts`, (10) `data/portfolioByRound.ts`, (11)
+`TOTAL_ROUNDS` in `gameEngine.ts` + `Header.tsx`, (12) `npm run build`
+then commit + push. `tsc` catches identifier/type breakage; string-id
+breakage (e.g. the `genius-programme` discount id) is not caught by
+tsc, so keep those exact.
+
+**Endings:** R8 and R9 end on a *soft no* (the partner defers to next
+month; the win is a compliant, trust-preserving conversation that earns
+the follow-up) and R10 on a *strong no* (the partner shuts the call
+down without committing). In all three the star grading is on the
+process, not the outcome - the outcome is scripted regardless of how
+well the learner plays.
+
+**Other recent work reflected in this file:** the framework rename to
+**The Pricing Pathway** (drawer + clearance reveal + winding-road
+motif; internal `issueTree*` identifiers kept), **seeded option
+shuffling** (`util/seededShuffle.ts`), Round Select "Coming soon"
+labels removed (lock icon kept), the one-time rounds-reset token in
+`util/persistence.ts` (drops stale round stars once, preserves
+clearance), and a full **American English** sweep of user-facing copy.
+Retired POC scenarios (Crystal Water R1, Velvet Sky R2, Noble Falcon /
+Anton at R3) remain on disk as unregistered dead data.
 
 ## How to run
 
@@ -2687,34 +2748,31 @@ to resolve before final delivery.
 
 ### Round / regime gates that scale with content
 
-- **TOTAL_ROUNDS capped at 3** in `engine/gameEngine.ts` and
-  `components/Header.tsx`. Bump as each additional round's SME
-  priority content lands. Header dots, Practice Mode grid, and
-  Debrief grading all derive from this constant so the bump is
-  one-line.
-- **Advanced View tab locked** on Partner Detail. Unlocks in R3
-  with the OPC + Quality Adoption Metrics content drop.
+- **TOTAL_ROUNDS is now 10** in `engine/gameEngine.ts` and
+  `components/Header.tsx` - all ten Level 1 rounds have SME-approved
+  priority content, and completing them routes to the Level 1
+  Complete celebration. (Rounds 11-20 / Level 2 are still to come.)
+  Header dots, Practice Mode grid, and Debrief grading all derive
+  from this constant.
+- **On Platform Competitiveness tab** on Partner Detail unlocks in
+  the OPC-active window (round >= 11 or a Cross-Regional partner); at
+  Level 1 (rounds 1-10) it stays greyed out. See the Post-2026-07-30
+  session notes for the conditional-unlock detail.
 - **Cross-Regional regime** still flagged `available: false` in
   `data/learnerMarkets.ts`. Either remove the card from Market
   Select entirely if it won't ship, or unlock when content lands.
   Today it falls back to Wide Parity if accessed.
-- **Practice Mode locked R4-R10 cards** auto-scale with
-  TOTAL_ROUNDS - no manual action needed.
+- **Practice Mode cards** auto-scale with TOTAL_ROUNDS - all ten are
+  active today; no manual action needed.
 
-### Functional gaps to close before final ship
+### Functional gaps closed
 
-- **Randomise conversation option positions at render time.** Every
-  branching `BranchingStep.options` array and every 3-phase
-  `phase.options` array currently lists the OPTIMAL pick first by
-  authoring convention - a pattern testers will spot in a few clicks
-  ("the right answer is always the top one"). Before live launch,
-  shuffle the option order at render time in
-  `BranchingConversationScreen` and `ConversationScreen`, ideally
-  with a seeded random so a replay of the same round shows the same
-  layout (so the learner isn't disoriented by reshuffled positions
-  mid-attempt). The data files do not need to change - the
-  `optimal: true` flag and the grading layer key off ids, not array
-  position.
+- **Randomise conversation option positions - DONE.** Options are
+  shuffled at render time via `util/seededShuffle.ts` (FNV-1a +
+  mulberry32) in a `useMemo` in `BranchingConversationScreen` and
+  `ConversationScreen`, seeded on the option ids so a replay keeps
+  the same layout. The data files still list the optimal option
+  first; grading keys off ids, not array position.
 
 ### Decisions to confirm before final ship
 
