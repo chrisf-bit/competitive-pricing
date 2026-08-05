@@ -69,7 +69,10 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         </span>
       </div>
 
-      {/* Infographic */}
+      {/* Infographic - left-aligned and flush to the screen's left edge
+          (no left padding) so the road's start bleeds off the left edge
+          and reads as part of the UI. maxWidth keeps the height in
+          bounds so the reveal doesn't need to scroll. */}
       <div
         style={{
           flex: 1,
@@ -77,8 +80,8 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
           overflowY: 'auto',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
-          padding: '8px 20px 0',
+          justifyContent: 'flex-start',
+          padding: '8px 20px 0 0',
         }}
       >
         <div style={{ width: '100%', maxWidth: 1120 }}>
