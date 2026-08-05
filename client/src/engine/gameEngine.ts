@@ -54,9 +54,10 @@ function applyRoundBaseline(
 // values, so a count rendered no real information and added a
 // redundant Actions pill to the Header.
 // Capped at the contiguous max of SME-approved priority content.
-// Today: R1 John (placeholder), R2 Marina (placeholder), R3 Noble
-// Falcon (SME-approved). Bump as each new priority drop lands.
-const TOTAL_ROUNDS = 9;
+// All ten Level 1 rounds now have SME-approved priority scenarios
+// (R1 Royal Crest ... R10 Noble Falcon). Completing all ten routes
+// to the Level 1 Complete celebration.
+const TOTAL_ROUNDS = 10;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 

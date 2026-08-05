@@ -83,6 +83,12 @@ export const portfolioByRound: Partial<
     // gap, Bucket 7 / wholesaler leak); Marina and Carlos hold the
     // distractor slots at their healthy R9 baselines (Bucket 3).
     9: ['loft-living-none', 'marina', 'carlos'],
+
+    // R10 - The Noble Falcon Inn is the SME-approved priority and the
+    // final Level 1 round (structural Brand.com gap, Bucket 7 / Risky
+    // Guest); Marina and Carlos hold the distractor slots at their
+    // healthy R10 baselines (Bucket 3).
+    10: ['noble-falcon-none', 'marina', 'carlos'],
   },
   // Narrow Parity: uses regime-specific distractor variants
   // (-narrow suffix) so all three cards per round are in the UK
@@ -99,6 +105,7 @@ export const portfolioByRound: Partial<
     7: ['palace-grand-narrow', 'marina-narrow', 'carlos-narrow'],
     8: ['hidden-valley-narrow', 'marina-narrow', 'carlos-narrow'],
     9: ['loft-living-narrow', 'marina-narrow', 'carlos-narrow'],
+    10: ['noble-falcon-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
@@ -112,6 +119,7 @@ export const portfolioByRound: Partial<
     7: ['palace-grand-wide', 'marina-wide', 'carlos-wide'],
     8: ['hidden-valley-wide', 'marina-wide', 'carlos-wide'],
     9: ['loft-living-wide', 'marina-wide', 'carlos-wide'],
+    10: ['noble-falcon-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 

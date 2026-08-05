@@ -14,15 +14,15 @@ function initialsFromName(name: string): string {
 
 /**
  * Builds a Noble Falcon Inn partner record. The same hotel brand,
- * contact (Anton Müller), profile, and metrics show up in all three
+ * contact (Adam Cole), profile, and metrics show up in all three
  * regime variants - only location, parityRegime, the property image,
  * and the partner id differ. Wrapping the shared content in a helper
  * keeps the three variants in sync if SME edits the profile or the
  * metrics later. Returns an array so the call site can spread the
  * record into `initialPartners` inline.
  *
- * Anton's role title is "Brand Revenue Lead" (SME-confirmed).
- * Pricing Coverage QTD is 64% (SME-confirmed in 2026-06).
+ * Adam Cole's role title is "Revenue Manager" (SME Round 10 doc).
+ * Pricing Coverage QTD is 64% (SME-confirmed).
  */
 /**
  * Builds a Crystal Water Resort partner record. Same hotel brand,
@@ -251,9 +251,8 @@ function nobleFalconBase(args: {
   parityRegime: ParityRegime;
   location: string;
   propertyImage: string;
-  /** Regime-specific contact name. First name 'Anton' stays constant
-   *  so SME dialogue still reads correctly; surname shifts to match
-   *  the country. */
+  /** Contact name. 'Adam Cole' across all three regimes, matching the
+   *  SME Round 10 dialogue. */
   contactName: string;
 }): PartnerState[] {
   return [
@@ -271,7 +270,7 @@ function nobleFalconBase(args: {
         style: 'blue',
         styleSecondary: 'red',
         description:
-          'Brand Revenue Lead for a fully-managed-by-brand property. Operates within a centrally controlled pricing model with limited local autonomy. Process-led and measured in tone; values consistency, brand standards, and guest experience over local commercial flexibility.',
+          "Revenue Manager for a fully-managed-by-brand property with limited local autonomy. Process-led and measured, he works to a head-office directive that keeps the direct site cheaper, and he uses a higher Booking.com price to filter out 'risky' guests. He guards his brand's autonomy closely, bristles at advice on how to run his own website, and will end a call rather than be pushed - separate price from risk and stay respectful, and even then he may not commit.",
         commercialGoal:
           'Hit brand-set commercial KPIs without compromising brand consistency or guest experience',
       },
@@ -302,22 +301,30 @@ function nobleFalconBase(args: {
           next3mRoomNights: { value: 1515, deltaPct: 81 },
         },
         // Stored as a relative offset so the gap between today and
-        // the last contact stays constant across replays. The PDF
-        // showed 2026-05-13 against an authoring date of 2026-06-04
-        // - that's 22 days back, so we encode 22 here. Render time
-        // resolves it to "today - 22 days" in PartnerDetailScreen.
-        lastPricingContactDaysAgo: 22,
+        // the last contact stays constant across replays. The SME R10
+        // doc showed 2026-05-13 against an authoring date of 2026-08-05
+        // - that's 84 days back, so we encode 84 here. Render time
+        // resolves it to "today - 84 days" in PartnerDetailScreen.
+        lastPricingContactDaysAgo: 84,
         pricingCoverageQTD: 64,
         // Partner Data Set 46, Sheet 7 row 39 (The Noble Falcon Inn).
-        // Sheet 7 places this at Round 10 (its target home). It's
-        // pulled forward to R3 in the current sim as a deliberate
-        // pedagogical stretch - lets testers see a genuinely complex
-        // partner (eRPD 17%, +21pp YoY, four active scenarios) inside
-        // the playable window while R4-R9 SME content is still
-        // pending. Noble Falcon moves back to Round 10 as the
-        // remaining rounds get authored. Full-year 2025 ABRN,
-        // unchanged by round placement.
+        // Sheet 7 places this at Round 10, its target home - now the
+        // final Level 1 round with the SME Round 10 content (Adam Cole,
+        // The Risky Guest, strong-no ending). Full-year 2025 ABRN.
         partnerValueAbrn: 13957,
+        // OPC layer from the SME Round 10 doc - only surfaced when the
+        // On Platform Competitiveness tab unlocks (Level 2 / KAM); at
+        // R10 (Level 1) the tab stays locked, so this is future data.
+        // Search price -15.2% vs peer, but conversion 1.3% and
+        // visibility share 14.5% both lag - the gap hides in families.
+        opcMetrics: {
+          unsoldRooms: { value: 21.3 },
+          sellThroughRate: { value: 18.4 },
+          visibilityShare: { value: 14.5 },
+          clickThroughRate: { value: 15.5 },
+          conversion: { value: 1.3 },
+          searchPrice: { value: -15.2 },
+        },
         // Legacy fields - kept for type compatibility and the old
         // conversation system; not surfaced on the R2 Partner Detail.
         experiencedRPD: 35,
@@ -2041,41 +2048,34 @@ export const initialPartners: PartnerState[] = [
   ...marinaBase({ id: 'marina-narrow', parityRegime: 'narrow', location: 'London, UK', contactName: 'Marina Ashworth' }),
   ...marinaBase({ id: 'marina-wide', parityRegime: 'wide', location: 'New York, USA', contactName: 'Marina Brown' }),
 
-  // ── The Noble Falcon Inn (Wide Parity / New York) ──
-  // Brand.com Competitiveness Gap scenario. Same hotel brand and
-  // contact (Anton Müller) shows up in all three regime variants -
-  // only location + parityRegime + the regime-specific dialogue
-  // change. Sourced from the SME "Brand.com Competitiveness Gap"
-  // doc and slotted at Round 3 across all three variants (see
-  // branchingScenarios.ts and partnerStateByRound.ts). John holds
-  // R1 as a placeholder priority pending the SME-approved Crystal
-  // Water Resort drop.
+  // ── The Noble Falcon Inn (SME Round 10 priority, all three regimes) ──
+  // The final Level 1 round and Noble Falcon's true home (Sheet 7 places
+  // it at Round 10). Structural Brand.com gap (eRPD 17% / Bucket 7)
+  // fronted by The Risky Guest objection. Contact is Adam Cole across all
+  // three regimes; only location + parityRegime + the regime-specific
+  // dialogue change (see noble-falcon-{wide,narrow,none}-r10.ts). Ends on
+  // a strong no - Adam shuts the call down without committing.
   ...nobleFalconBase({
     id: 'noble-falcon-wide',
     parityRegime: 'wide',
     location: 'New York, USA',
-    contactName: 'Anton Müller',
+    contactName: 'Adam Cole',
     propertyImage:
       'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=250&fit=crop',
   }),
-
-  // ── The Noble Falcon Inn (Narrow Parity / London) ──
   ...nobleFalconBase({
     id: 'noble-falcon-narrow',
     parityRegime: 'narrow',
     location: 'London, UK',
-    contactName: 'Anton Walters',
+    contactName: 'Adam Cole',
     propertyImage:
       'https://images.unsplash.com/photo-1455587734955-081b22074882?w=400&h=250&fit=crop',
   }),
-
-  // ── The Noble Falcon Inn (No Parity / Seville) ──
-  // The No-Parity R3 priority partner.
   ...nobleFalconBase({
     id: 'noble-falcon-none',
     parityRegime: 'none',
     location: 'Seville, Spain',
-    contactName: 'Anton Vega',
+    contactName: 'Adam Cole',
     propertyImage:
       'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
   }),

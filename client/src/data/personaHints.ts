@@ -90,26 +90,28 @@ const velvetSkyR2Hints: Partial<Record<PersonaId, PersonaHint>> = {
 };
 
 /**
- * Shared persona hint content for The Noble Falcon Inn R3, applied
- * verbatim across all three regime variants. Anton's character +
- * metrics + objections are constant.
+ * Shared persona hint content for The Noble Falcon Inn R10 (SME Round 10
+ * priority, the final Level 1 round), applied verbatim across all three
+ * regime variants. Adam Cole's character, metrics and objection stack
+ * (The Risky Guest + brand-first supports) are constant; only the
+ * regulatory framing differs by regime. This round ends on a strong no.
  */
-const nobleFalconR3Hints: Partial<Record<PersonaId, PersonaHint>> = {
+const nobleFalconR10Hints: Partial<Record<PersonaId, PersonaHint>> = {
   'conversation-architect': {
     oneLiner:
-      'Anton works inside brand policy: lead with curiosity about his constraints, then steer toward pilots that fit his frame.',
+      "Adam is blue/red and works to a head-office directive: separate price from risk (targeted prepayment, not a higher rate), respect his autonomy over his own site, and expect a firm no even done well.",
   },
   'objection-navigator': {
     oneLiner:
-      'Expect a brand-policy defense; reframe around incremental demand and isolate risk via prepayment, not rate.',
+      'Expect The Risky Guest ("a higher price here filters out risky bookings") plus a brand-first defense; isolate the risk with prepayment on specific dates while keeping the base rate competitive - never a rate threat.',
   },
   storyteller: {
     oneLiner:
-      'Structural Brand.com lockstep: visibility climbing, conversion collapsing, family scenarios flagging - brand policy costs volume.',
+      'Brand policy costs volume: Page Views +26% vs peer while Conversion -17% and Lose Price 93% - a structural Brand.com gap he defends with a risk-filtering story.',
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: Page Views +26% vs peer while Conversion -17% and Lose Price 93% - Family 2+1/2+2 scenarios are your wedge.',
+      'Anomaly: Public RPD 20.0% but Loyal RPD only 5.9% - Genius is adopted yet the base was raised to offset it; the Family 2+1/2+2 setup gap (children priced as adults) is your wedge.',
   },
 };
 
@@ -499,9 +501,9 @@ export const personaHints: PersonaHintsByRound = {
   'velvet-sky-none': { 2: velvetSkyR2Hints },
   // Noble Falcon Inn R3 - same persona hint content across all three
   // regime variants.
-  'noble-falcon-wide': { 3: nobleFalconR3Hints },
-  'noble-falcon-narrow': { 3: nobleFalconR3Hints },
-  'noble-falcon-none': { 3: nobleFalconR3Hints },
+  'noble-falcon-wide': { 10: nobleFalconR10Hints },
+  'noble-falcon-narrow': { 10: nobleFalconR10Hints },
+  'noble-falcon-none': { 10: nobleFalconR10Hints },
 };
 
 export function getPersonaHint(

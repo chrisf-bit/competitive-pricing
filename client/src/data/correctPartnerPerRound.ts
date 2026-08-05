@@ -65,6 +65,7 @@ export const correctPartnerPerRound: Partial<
     7: 'palace-grand-narrow',
     8: 'hidden-valley-narrow',
     9: 'loft-living-narrow',
+    10: 'noble-falcon-narrow',
   },
   wide: {
     1: 'royal-crest-wide',
@@ -76,6 +77,7 @@ export const correctPartnerPerRound: Partial<
     7: 'palace-grand-wide',
     8: 'hidden-valley-wide',
     9: 'loft-living-wide',
+    10: 'noble-falcon-wide',
   },
   // cross-regional: pending partner data.
 };

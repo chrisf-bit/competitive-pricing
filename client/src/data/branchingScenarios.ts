@@ -27,6 +27,9 @@ import { hiddenValleyWideR8 } from './scenarios/hidden-valley-wide-r8';
 import { loftLivingNoneR9 } from './scenarios/loft-living-none-r9';
 import { loftLivingNarrowR9 } from './scenarios/loft-living-narrow-r9';
 import { loftLivingWideR9 } from './scenarios/loft-living-wide-r9';
+import { nobleFalconNoneR10 } from './scenarios/noble-falcon-none-r10';
+import { nobleFalconNarrowR10 } from './scenarios/noble-falcon-narrow-r10';
+import { nobleFalconWideR10 } from './scenarios/noble-falcon-wide-r10';
 
 /**
  * Branching conversation scenarios.
@@ -146,6 +149,15 @@ export const branchingScenarios: BranchingMap = {
   },
   'loft-living-wide': {
     9: loftLivingWideR9,
+  },
+  'noble-falcon-none': {
+    10: nobleFalconNoneR10,
+  },
+  'noble-falcon-narrow': {
+    10: nobleFalconNarrowR10,
+  },
+  'noble-falcon-wide': {
+    10: nobleFalconWideR10,
   },
 };
 
