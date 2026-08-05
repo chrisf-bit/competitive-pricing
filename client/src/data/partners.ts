@@ -1233,7 +1233,150 @@ function emeraldPeakBase(args: {
   ];
 }
 
+/**
+ * Builds an Oceanfront Bliss Lodge partner record (SME Round 6 priority,
+ * Hotel ID 132). Priya Singh is the owner of an INDEPENDENT lodge - full
+ * local autonomy, values simple ROI and occupancy, quick to act on a
+ * clear commercial incentive. Same brand, contact, profile and metrics
+ * across all three regime variants.
+ *
+ * Data: SME "Round 6" doc data set - an intentional Brand.com
+ * competitiveness gap. eRPD 9.6% (Bucket 6), Lose Price 66%, Public =
+ * Loyal RPD 9.6% (no Genius; consistent direct-first). The signature is
+ * visibility debt from a deliberate ~10% direct-cheaper play: conversion
+ * +17% vs peer once seen, but page views -89% and ABRN -84% YoY. Family
+ * Rates and Payments active; one RPD scenario (Brand Scenario); 0%
+ * pricing coverage. OPC layer carried on `opcMetrics`.
+ */
+function oceanfrontBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Oceanfront Bliss Lodge',
+        propertyType: 'Lodge',
+        roomCount: 58,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'blue',
+        styleSecondary: 'red',
+        description:
+          "Owner of an independent lodge with full local autonomy - she sets rates and distribution herself, values simple ROI and occupancy, and is quick to act on a clear commercial incentive. Protects her direct channel and caps OTA share at 30%, but she's persuadable: land the acquisition-cost math and she'll move fast.",
+        commercialGoal:
+          'Maximize ROI and occupancy across channels while protecting the direct-booking base',
+      },
+      // Metrics map to the SME Round 6 data set (Hotel ID 132). The tell
+      // is a deliberate ~10% direct-cheaper Brand.com gap (Lose Price
+      // 66%, eRPD 9.6% / Bucket 6) sitting behind a visibility collapse -
+      // strong conversion, almost no page views.
+      metrics: {
+        erpd: 9.6,
+        erpdChange: -2.69,
+        rpdPublic: 9.6,
+        rpdLoyal: 9.6,
+        losePricePublic: 66,
+        activeScenarios: 1,
+        activeScenarioNames: ['Brand Scenario'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 13, deltaPct: -84 },
+          last30dRoomNights: { value: 71, deltaPct: -34 },
+          last30dAdr: { value: 159, deltaPct: 23 },
+          last90dPageViews: { value: 2448, deltaPct: -89 },
+          last90dConversion: { value: 4.8, deltaPct: 17 },
+          next3mRoomNights: { value: 113, deltaPct: -56 },
+        },
+        // SME doc showed 2026-03-12; against an authoring date of
+        // 2026-08-05 that's 146 days back - a ~5-month gap that fits the
+        // 0% pricing coverage (completely un-actioned).
+        lastPricingContactDaysAgo: 146,
+        pricingCoverageQTD: 0,
+        // Not in Sheet 7's roster; sits mid but below Marina's 8,200 so
+        // the R6 decoy Marina reads as "bigger" and "biggest value"
+        // fails - Oceanfront is the call on Bucket 6 / visibility debt.
+        partnerValueAbrn: 6000,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM).
+        opcMetrics: {
+          unsoldRooms: { value: 17 },
+          sellThroughRate: { value: -12 },
+          visibilityShare: { value: 17, deltaPct: -32 },
+          searchPrice: { value: 4 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 58,
+        visibility: 20,
+        conversion: 62,
+        revenue: 40,
+        discountQuality: 28,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Two products active per the SME data set: Family Rates and
+      // Payments. No Genius, no base rate plan, no targeted public
+      // pricing - a lean, direct-first setup.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Oceanfront Bliss Lodge (SME Round 6 priority, all three regimes) ──
+  // Intentional Brand.com gap from a deliberate ~10% direct-cheaper play
+  // (Brand.com Loyalty + reverse-billboard) - Lose Price 66%, Bucket 6,
+  // page views -89% despite strong conversion. Objection: Brand.com
+  // Loyalty + Billboard Effect in Reverse. The win is the
+  // acquisition-cost math, not a flat rate drop.
+  ...oceanfrontBase({
+    id: 'oceanfront-wide',
+    parityRegime: 'wide',
+    location: 'San Diego, USA',
+    contactName: 'Priya Singh',
+    propertyImage:
+      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop',
+  }),
+  ...oceanfrontBase({
+    id: 'oceanfront-narrow',
+    parityRegime: 'narrow',
+    location: 'Cornwall, UK',
+    contactName: 'Priya Singh',
+    propertyImage:
+      'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&h=250&fit=crop',
+  }),
+  ...oceanfrontBase({
+    id: 'oceanfront-none',
+    parityRegime: 'none',
+    location: 'Málaga, Spain',
+    contactName: 'Priya Singh',
+    propertyImage:
+      'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&h=250&fit=crop',
+  }),
+
   // ── Emerald Peak Lodge (SME Round 5 priority, all three regimes) ──
   // Intentional Brand.com gap driven by a franchise "Direct-is-Cheaper"
   // head-office policy - Lose Price 100%, Bucket 6, yet winning on demand

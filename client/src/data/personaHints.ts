@@ -243,6 +243,32 @@ const emeraldPeakR5Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Oceanfront Bliss Lodge R6 (SME Round 6
+ * priority), applied verbatim across all three regime variants. Priya's
+ * character, metrics and objection types (Brand.com Loyalty + Billboard
+ * Effect in Reverse) are identical; only the regulatory framing differs
+ * by regime.
+ */
+const oceanfrontR6Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Priya is blue/red and ROI-driven: don't argue her 30% cap - win with the acquisition-cost math (her ~10% direct acquisition cost is higher than your commission), then land the ask.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect Brand.com Loyalty ("never let an OTA past 30%, I\'d leave rooms empty first") plus the reverse-billboard belief; reframe from "stealing direct guests" to "finding net-new guests," backed by the acquisition-cost sum.',
+  },
+  storyteller: {
+    oneLiner:
+      'Visibility debt from a deliberate 10% direct-cheaper play: converts +17% vs peer once seen, but page views -89% and ABRN -84% YoY because the markup buries her in search.',
+  },
+  'data-detective': {
+    oneLiner:
+      "Anomaly: conversion +17% vs peer but page views -89% and Lose Price 66% - she's barely seen, not un-chosen; the Brand Scenario and 0% coverage are the wedge.",
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -357,6 +383,12 @@ export const personaHints: PersonaHintsByRound = {
   'emerald-peak-wide': { 5: emeraldPeakR5Hints },
   'emerald-peak-narrow': { 5: emeraldPeakR5Hints },
   'emerald-peak-none': { 5: emeraldPeakR5Hints },
+
+  // Oceanfront Bliss Lodge R6 - the SME Round 6 priority across all
+  // three regime variants.
+  'oceanfront-wide': { 6: oceanfrontR6Hints },
+  'oceanfront-narrow': { 6: oceanfrontR6Hints },
+  'oceanfront-none': { 6: oceanfrontR6Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },

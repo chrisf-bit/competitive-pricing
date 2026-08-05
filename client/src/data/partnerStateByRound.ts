@@ -250,6 +250,36 @@ export const partnerStateByRound: Record<
         rateParity: 'clean',
       },
     },
+    // R6 decoy profile: healthy Bucket 3 against Oceanfront Bliss's
+    // Bucket 6 / visibility-debt collapse, so the priority is clear.
+    6: {
+      metrics: {
+        erpd: 2.1,
+        erpdChange: -0.7,
+        rpdPublic: 3.1,
+        rpdLoyal: -0.9,
+        losePricePublic: 31,
+        activeScenarios: 1,
+        activeScenarioNames: ['Brand.com'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 940, deltaPct: 3 },
+          last30dRoomNights: { value: 580, deltaPct: 4 },
+          last30dAdr: { value: 148, deltaPct: 1 },
+          last90dPageViews: { value: 0 },
+          last90dConversion: { value: 2.3, deltaPct: 2 },
+          next3mRoomNights: { value: 102, deltaPct: 3 },
+        },
+        lastPricingContactDaysAgo: 34,
+        pricingCoverageQTD: 45,
+        experiencedRPD: 68,
+        visibility: 74,
+        conversion: 56,
+        revenue: 65,
+        discountQuality: 60,
+        rateParity: 'clean',
+      },
+    },
   },
   // John's baselines are retained even though John moved to
   // pendingPartners in June 2026 - keeps the data on disk in case
@@ -442,6 +472,36 @@ export const partnerStateByRound: Record<
         conversion: 48,
         revenue: 54,
         discountQuality: 50,
+        rateParity: 'clean',
+      },
+    },
+    // R6 decoy profile: healthy Bucket 3, clearly less urgent than
+    // Oceanfront Bliss's Bucket 6 gap.
+    6: {
+      metrics: {
+        erpd: 2.7,
+        erpdChange: 0.3,
+        rpdPublic: 3.7,
+        rpdLoyal: -0.3,
+        losePricePublic: 37,
+        activeScenarios: 1,
+        activeScenarioNames: ['Brand.com'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 1130, deltaPct: 2 },
+          last30dRoomNights: { value: 645, deltaPct: 3 },
+          last30dAdr: { value: 125, deltaPct: 1 },
+          last90dPageViews: { value: 0 },
+          last90dConversion: { value: 1.9, deltaPct: 1 },
+          next3mRoomNights: { value: 95, deltaPct: 2 },
+        },
+        lastPricingContactDaysAgo: 44,
+        pricingCoverageQTD: 42,
+        experiencedRPD: 55,
+        visibility: 61,
+        conversion: 47,
+        revenue: 53,
+        discountQuality: 49,
         rateParity: 'clean',
       },
     },
