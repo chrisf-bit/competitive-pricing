@@ -45,7 +45,7 @@ export const correctPartnerPerRound: Partial<
     5: 'emerald-peak-none',
     6: 'oceanfront-none',
     7: 'palace-grand-none',
-    8: 'noble-falcon-none',
+    8: 'hidden-valley-none',
     9: 'noble-falcon-none',
     10: 'noble-falcon-none',
   },
@@ -63,6 +63,7 @@ export const correctPartnerPerRound: Partial<
     5: 'emerald-peak-narrow',
     6: 'oceanfront-narrow',
     7: 'palace-grand-narrow',
+    8: 'hidden-valley-narrow',
   },
   wide: {
     1: 'royal-crest-wide',
@@ -72,6 +73,7 @@ export const correctPartnerPerRound: Partial<
     5: 'emerald-peak-wide',
     6: 'oceanfront-wide',
     7: 'palace-grand-wide',
+    8: 'hidden-valley-wide',
   },
   // cross-regional: pending partner data.
 };

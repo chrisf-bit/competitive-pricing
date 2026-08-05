@@ -21,6 +21,9 @@ import { oceanfrontWideR6 } from './scenarios/oceanfront-wide-r6';
 import { palaceGrandNoneR7 } from './scenarios/palace-grand-none-r7';
 import { palaceGrandNarrowR7 } from './scenarios/palace-grand-narrow-r7';
 import { palaceGrandWideR7 } from './scenarios/palace-grand-wide-r7';
+import { hiddenValleyNoneR8 } from './scenarios/hidden-valley-none-r8';
+import { hiddenValleyNarrowR8 } from './scenarios/hidden-valley-narrow-r8';
+import { hiddenValleyWideR8 } from './scenarios/hidden-valley-wide-r8';
 
 /**
  * Branching conversation scenarios.
@@ -122,6 +125,15 @@ export const branchingScenarios: BranchingMap = {
   },
   'palace-grand-wide': {
     7: palaceGrandWideR7,
+  },
+  'hidden-valley-none': {
+    8: hiddenValleyNoneR8,
+  },
+  'hidden-valley-narrow': {
+    8: hiddenValleyNarrowR8,
+  },
+  'hidden-valley-wide': {
+    8: hiddenValleyWideR8,
   },
 };
 

@@ -1447,7 +1447,141 @@ function palaceGrandBase(args: {
   ];
 }
 
+function hiddenValleyBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'The Hidden Valley Resort',
+        propertyType: 'Resort',
+        roomCount: 96,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'blue',
+        styleSecondary: 'red',
+        description:
+          "Revenue Manager at a franchise property with limited local autonomy - she works to a central, brand-mandated policy and leads with the data. Head office keeps the direct site cheaper by design to 'own' the guest, and she reads Booking Sponsored Benefit as Booking.com taking control of her price. She guards her brand reputation closely and won't be rushed into a decision.",
+        commercialGoal:
+          'Protect brand reputation and direct-booking share while staying compliant with head-office pricing policy',
+      },
+      // Metrics map to the SME Round 8 data set (Hotel ID 39). A
+      // structural Brand.com gap (eRPD 7.3% / Bucket 5, +1.38 MoM) where
+      // Public RPD and Loyal RPD are both 7.3% - no Genius gap, she leans
+      // on BSB to equalize price. Page views hold near peer and ABRN is
+      // +65% YoY, but next-3M room nights pace -50%. Lose Price 50% per
+      // the SME Data Insight + Value Pitch (the raw table shows 99%).
+      metrics: {
+        erpd: 7.3,
+        erpdChange: 1.38,
+        rpdPublic: 7.3,
+        rpdLoyal: 7.3,
+        losePricePublic: 50,
+        activeScenarios: 3,
+        activeScenarioNames: ['Family 2+1', 'Family 2+2', 'Brand Scenario'],
+        competitor: 'brand',
+        secondaryMetrics: {
+          last30dAbrn: { value: 255, deltaPct: 65 },
+          last30dRoomNights: { value: 324, deltaPct: -8 },
+          last30dAdr: { value: 165, deltaPct: 5 },
+          last90dPageViews: { value: 13668, deltaPct: 2 },
+          last90dConversion: { value: 3.4, deltaPct: -6 },
+          next3mRoomNights: { value: 222, deltaPct: -50 },
+        },
+        // SME doc showed 2025-12-19; against an authoring date of
+        // 2026-08-05 that's 229 days back - a ~7.5-month gap that fits the
+        // 0% pricing coverage (her uncompetitive setup has been missed).
+        lastPricingContactDaysAgo: 229,
+        pricingCoverageQTD: 0,
+        // Not in Sheet 7's roster; sits below Marina's 8,200 so the R8
+        // decoy Marina reads as "bigger" and "biggest value" fails -
+        // Hidden Valley is the call on Bucket 5 / structural Brand gap.
+        partnerValueAbrn: 7100,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM). Search
+        // price +10% vs peer with visibility share 21% vs 28% median.
+        opcMetrics: {
+          unsoldRooms: { value: 24 },
+          sellThroughRate: { value: -8 },
+          visibilityShare: { value: 21, deltaPct: -25 },
+          clickThroughRate: { value: 5.4 },
+          conversion: { value: 1.2 },
+          searchPrice: { value: 10 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 52,
+        visibility: 46,
+        conversion: 58,
+        revenue: 48,
+        discountQuality: 40,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Three products active per the SME data set: Portfolio Deals,
+      // Family Rates and Payments. No Genius (Public RPD = Loyal RPD,
+      // consistent with no Genius discount running); BSB / Payments is
+      // the shield she relies on.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── The Hidden Valley Resort (SME Round 8 priority, all three regimes) ──
+  // Structural Brand.com gap (eRPD 7.3% / Bucket 5), Public RPD = Loyal
+  // RPD = 7.3% (no Genius gap - leaning on BSB to equalize). Objection:
+  // BSB / Payments Shield + Direct-Is-Cheaper + Family Ready. Ends on a
+  // SOFT NO - the win is a compliant, trust-preserving conversation that
+  // reframes BSB as a shield and earns a follow-up, not a same-call yes.
+  ...hiddenValleyBase({
+    id: 'hidden-valley-wide',
+    parityRegime: 'wide',
+    location: 'Aspen, USA',
+    contactName: 'Claire Thornton',
+    propertyImage:
+      'https://images.unsplash.com/photo-1596436889106-be35e843f974?w=400&h=250&fit=crop',
+  }),
+  ...hiddenValleyBase({
+    id: 'hidden-valley-narrow',
+    parityRegime: 'narrow',
+    location: 'Lake District, UK',
+    contactName: 'Claire Thornton',
+    propertyImage:
+      'https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=400&h=250&fit=crop',
+  }),
+  ...hiddenValleyBase({
+    id: 'hidden-valley-none',
+    parityRegime: 'none',
+    location: 'Sierra Nevada, Spain',
+    contactName: 'Claire Thornton',
+    propertyImage:
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+  }),
+
   // ── Palace Grand Resort (SME Round 7 priority, all three regimes) ──
   // Key OTA gap with a sharp +10.95 MoM eRPD spike (Bucket 5, Lose Price
   // 60%), concentrated in mobile (Mdot) and family (2+1 / 2+2) searches

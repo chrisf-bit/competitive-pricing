@@ -73,6 +73,11 @@ export const portfolioByRound: Partial<
     // Bucket 5 / +10.95 MoM spike); Marina and Carlos hold the distractor
     // slots at their healthy R7 baselines (Bucket 3).
     7: ['palace-grand-none', 'marina', 'carlos'],
+
+    // R8 - The Hidden Valley Resort is the SME-approved priority
+    // (structural Brand.com gap, Bucket 5 / BSB shield); Marina and Carlos
+    // hold the distractor slots at their healthy R8 baselines (Bucket 3).
+    8: ['hidden-valley-none', 'marina', 'carlos'],
   },
   // Narrow Parity: uses regime-specific distractor variants
   // (-narrow suffix) so all three cards per round are in the UK
@@ -87,6 +92,7 @@ export const portfolioByRound: Partial<
     5: ['emerald-peak-narrow', 'marina-narrow', 'carlos-narrow'],
     6: ['oceanfront-narrow', 'marina-narrow', 'carlos-narrow'],
     7: ['palace-grand-narrow', 'marina-narrow', 'carlos-narrow'],
+    8: ['hidden-valley-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
@@ -98,6 +104,7 @@ export const portfolioByRound: Partial<
     5: ['emerald-peak-wide', 'marina-wide', 'carlos-wide'],
     6: ['oceanfront-wide', 'marina-wide', 'carlos-wide'],
     7: ['palace-grand-wide', 'marina-wide', 'carlos-wide'],
+    8: ['hidden-valley-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 

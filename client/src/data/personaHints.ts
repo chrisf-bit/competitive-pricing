@@ -295,6 +295,32 @@ const palaceGrandR7Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for The Hidden Valley Resort R8 (SME Round 8
+ * priority), applied verbatim across all three regime variants. Claire's
+ * character, metrics and objection types (BSB / Payments Shield +
+ * Direct-Is-Cheaper + Family Ready) are identical; only the regulatory
+ * framing differs by regime. This round ends on a soft no by design.
+ */
+const hiddenValleyR8Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Claire is blue/red and works to a head-office policy: lead with data, reframe BSB as a funded shield (not lost control), and don't push for a yes today - she'll defer, so earn the follow-up.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect the BSB / Payments Shield ("you take control of my price") plus Direct-Is-Cheaper and a brand-reputation / bad-review worry; separate the price opportunity from the review risk and let her reconsider.',
+  },
+  storyteller: {
+    oneLiner:
+      "Winning YoY, losing the future: ABRN +65% year-on-year but next-3M room nights pace -50% and search price runs +10% vs peers - a structural Brand.com gap she masks with BSB.",
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: Public RPD and Loyal RPD are both 7.3% - no Genius gap at all, so BSB is the only thing equalizing her price; the Brand Scenario and Family 2+1 / 2+2 flags mark where the gap sits.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -422,6 +448,13 @@ export const personaHints: PersonaHintsByRound = {
   'palace-grand-wide': { 7: palaceGrandR7Hints },
   'palace-grand-narrow': { 7: palaceGrandR7Hints },
   'palace-grand-none': { 7: palaceGrandR7Hints },
+
+  // The Hidden Valley Resort R8 - the SME Round 8 priority across all
+  // three regime variants (BSB / Payments Shield + Direct-Is-Cheaper +
+  // Family Ready; structural Brand.com gap, ends on a soft no).
+  'hidden-valley-wide': { 8: hiddenValleyR8Hints },
+  'hidden-valley-narrow': { 8: hiddenValleyR8Hints },
+  'hidden-valley-none': { 8: hiddenValleyR8Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },
