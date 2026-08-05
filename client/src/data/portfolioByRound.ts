@@ -78,6 +78,11 @@ export const portfolioByRound: Partial<
     // (structural Brand.com gap, Bucket 5 / BSB shield); Marina and Carlos
     // hold the distractor slots at their healthy R8 baselines (Bucket 3).
     8: ['hidden-valley-none', 'marina', 'carlos'],
+
+    // R9 - Loft Living Inn is the SME-approved priority (severe Key OTA
+    // gap, Bucket 7 / wholesaler leak); Marina and Carlos hold the
+    // distractor slots at their healthy R9 baselines (Bucket 3).
+    9: ['loft-living-none', 'marina', 'carlos'],
   },
   // Narrow Parity: uses regime-specific distractor variants
   // (-narrow suffix) so all three cards per round are in the UK
@@ -93,6 +98,7 @@ export const portfolioByRound: Partial<
     6: ['oceanfront-narrow', 'marina-narrow', 'carlos-narrow'],
     7: ['palace-grand-narrow', 'marina-narrow', 'carlos-narrow'],
     8: ['hidden-valley-narrow', 'marina-narrow', 'carlos-narrow'],
+    9: ['loft-living-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
@@ -105,6 +111,7 @@ export const portfolioByRound: Partial<
     6: ['oceanfront-wide', 'marina-wide', 'carlos-wide'],
     7: ['palace-grand-wide', 'marina-wide', 'carlos-wide'],
     8: ['hidden-valley-wide', 'marina-wide', 'carlos-wide'],
+    9: ['loft-living-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 

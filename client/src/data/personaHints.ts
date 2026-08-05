@@ -321,6 +321,32 @@ const hiddenValleyR8Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+/**
+ * Shared persona hint content for Loft Living Inn R9 (SME Round 9
+ * priority), applied verbatim across all three regime variants. Lucas's
+ * character, metrics and objection types (Wholesaler Leak + Competitive
+ * Aggression) are identical; only the regulatory framing differs by
+ * regime. This round ends on a soft no by design.
+ */
+const loftLivingR9Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Lucas is red/blue and margin-led: acknowledge the leak, reframe B2B as a leakage tax once it hits B2C, and don't chase a yes today - he'll defer, so earn the follow-up with proof.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Expect the Wholesaler Leak ("Partner Offer is undercutting me") plus Competitive Aggression from Expedia; clarify Booking.com isn\'t the source, avoid a price war, and offer a fenced mobile fix.',
+  },
+  storyteller: {
+    oneLiner:
+      "High rate, empty rooms: ADR is +88% vs peer but room nights -44% and conversion -68% - a wholesale rate leak is undercutting his public price and burying his visibility.",
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: eRPD spiked +30.75 in a month to 31.7% (Bucket 7) with Lose Price 97% - the Wholesaler and App scenarios mark the leak, and his active mobile rate is misconfigured (weekends + long windows excluded).',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -455,6 +481,13 @@ export const personaHints: PersonaHintsByRound = {
   'hidden-valley-wide': { 8: hiddenValleyR8Hints },
   'hidden-valley-narrow': { 8: hiddenValleyR8Hints },
   'hidden-valley-none': { 8: hiddenValleyR8Hints },
+
+  // Loft Living Inn R9 - the SME Round 9 priority across all three regime
+  // variants (Wholesaler Leak + Competitive Aggression; severe Key OTA gap
+  // from a B2B leak, ends on a soft no).
+  'loft-living-wide': { 9: loftLivingR9Hints },
+  'loft-living-narrow': { 9: loftLivingR9Hints },
+  'loft-living-none': { 9: loftLivingR9Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },

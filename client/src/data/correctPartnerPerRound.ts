@@ -46,7 +46,7 @@ export const correctPartnerPerRound: Partial<
     6: 'oceanfront-none',
     7: 'palace-grand-none',
     8: 'hidden-valley-none',
-    9: 'noble-falcon-none',
+    9: 'loft-living-none',
     10: 'noble-falcon-none',
   },
   // Narrow + Wide regimes stand up R1 (Crystal Water Resort), R2
@@ -64,6 +64,7 @@ export const correctPartnerPerRound: Partial<
     6: 'oceanfront-narrow',
     7: 'palace-grand-narrow',
     8: 'hidden-valley-narrow',
+    9: 'loft-living-narrow',
   },
   wide: {
     1: 'royal-crest-wide',
@@ -74,6 +75,7 @@ export const correctPartnerPerRound: Partial<
     6: 'oceanfront-wide',
     7: 'palace-grand-wide',
     8: 'hidden-valley-wide',
+    9: 'loft-living-wide',
   },
   // cross-regional: pending partner data.
 };

@@ -1550,7 +1550,142 @@ function hiddenValleyBase(args: {
   ];
 }
 
+function loftLivingBase(args: {
+  id: string;
+  parityRegime: ParityRegime;
+  location: string;
+  propertyImage: string;
+  contactName: string;
+}): PartnerState[] {
+  return [
+    {
+      persona: {
+        id: args.id,
+        name: args.contactName,
+        propertyName: 'Loft Living Inn',
+        propertyType: 'Vacation Rental',
+        roomCount: 46,
+        location: args.location,
+        parityRegime: args.parityRegime,
+        avatar: initialsFromName(args.contactName),
+        propertyImage: args.propertyImage,
+        style: 'red',
+        styleSecondary: 'blue',
+        description:
+          "PMC Revenue Manager running a portfolio of vacation-rental units as a commercially minded business with strong autonomy. He responds to revenue impact, margin logic, and ROI across channels, and he wants proof before he moves. He's frustrated that his B2B / wholesale rates are leaking into public search and blames Booking.com for surfacing them - lead with the commercial case, not a price cut.",
+        commercialGoal:
+          'Protect ADR and margin while recovering lost visibility and demand across channels',
+      },
+      // Metrics map to the SME Round 9 data set (Hotel ID 301). A SEVERE
+      // Key OTA gap (eRPD 31.7% / Bucket 7, +30.75 MoM) from B2B /
+      // wholesale rates leaking into public B2C. ADR is +88% above peer
+      // but room nights -44%, conversion -68%, next-3M pace -46%. His
+      // mobile rate is active but misconfigured (weekends + long booking
+      // windows excluded, base rate outran the discount).
+      metrics: {
+        erpd: 31.7,
+        erpdChange: 30.75,
+        rpdPublic: 35.4,
+        rpdLoyal: 29.9,
+        losePricePublic: 97,
+        activeScenarios: 3,
+        activeScenarioNames: ['Wholesaler', 'App', 'Brand Scenario'],
+        competitor: 'expedia',
+        secondaryMetrics: {
+          last30dAbrn: { value: 170, deltaPct: -28 },
+          last30dRoomNights: { value: 88, deltaPct: -44 },
+          last30dAdr: { value: 64, deltaPct: 88 },
+          last90dPageViews: { value: 23115, deltaPct: 65 },
+          last90dConversion: { value: 0.7, deltaPct: -68 },
+          next3mRoomNights: { value: 25, deltaPct: -46 },
+        },
+        // SME doc showed 2026-04-12; against an authoring date of
+        // 2026-08-05 that's 115 days back - a ~3.8-month gap.
+        lastPricingContactDaysAgo: 115,
+        pricingCoverageQTD: 20,
+        // Not in Sheet 7's roster; the SME notes its prioritization index
+        // (eRPD x Partner Value) is on the higher end, but Bucket 7 alone
+        // makes it the obvious call - kept below Marina's 8,200 so the
+        // "biggest value wins" shortcut still fails.
+        partnerValueAbrn: 7500,
+        // OPC layer from the SME doc - only surfaced when the On
+        // Platform Competitiveness tab unlocks (Level 2 / KAM). Search
+        // price +12% vs peer, visibility 8% vs 23% median.
+        opcMetrics: {
+          unsoldRooms: { value: 33 },
+          sellThroughRate: { value: -7 },
+          visibilityShare: { value: 8, deltaPct: -65 },
+          clickThroughRate: { value: 3.2 },
+          conversion: { value: 0.84 },
+          searchPrice: { value: 12 },
+        },
+        // Legacy fields - kept for type compatibility.
+        experiencedRPD: 85,
+        visibility: 22,
+        conversion: 28,
+        revenue: 44,
+        discountQuality: 30,
+        rateParity: 'major',
+      },
+      metricHistory: [],
+      trust: 50,
+      relationship: 'neutral',
+      // Heavily-tooled MPP per the SME data set: Mobile Rates, Country
+      // Rates, Portfolio Deals, Campaigns, Genius Program, Family Rates
+      // and Payments all active. The mobile rate is active but
+      // misconfigured (weekends + long windows excluded) - the fenced fix.
+      discounts: [
+        { id: 'mobile-rate', label: 'Mobile Rates', status: 'active', category: 'public-pricing' },
+        { id: 'country-rate', label: 'Country Rates', status: 'active', category: 'public-pricing' },
+        { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
+        { id: 'campaigns', label: 'Campaigns', status: 'active', category: 'public-pricing' },
+        { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
+        { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
+        { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
+      ],
+      conversationLog: [],
+      pendingActions: [],
+    },
+  ];
+}
+
 export const initialPartners: PartnerState[] = [
+  // ── Loft Living Inn (SME Round 9 priority, all three regimes) ──
+  // SEVERE Key OTA gap (eRPD 31.7% / Bucket 7, +30.75 MoM) from a B2B /
+  // wholesale rate leak into public B2C via Partner Offer. High ADR (+88%
+  // vs peer) masks a collapse in room nights (-44%) and conversion
+  // (-68%). Objection: The Wholesaler Leak + Competitive Aggression. Ends
+  // on a SOFT NO - the win is a compliant, trust-preserving conversation
+  // that reframes B2B as a leakage tax and offers a fenced mobile fix.
+  ...loftLivingBase({
+    id: 'loft-living-wide',
+    parityRegime: 'wide',
+    location: 'Austin, USA',
+    contactName: 'Lucas Silva',
+    propertyImage:
+      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop',
+  }),
+  ...loftLivingBase({
+    id: 'loft-living-narrow',
+    parityRegime: 'narrow',
+    location: 'Manchester, UK',
+    contactName: 'Lucas Silva',
+    propertyImage:
+      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=250&fit=crop',
+  }),
+  ...loftLivingBase({
+    id: 'loft-living-none',
+    parityRegime: 'none',
+    location: 'Seville, Spain',
+    contactName: 'Lucas Silva',
+    propertyImage:
+      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=250&fit=crop',
+  }),
+
   // ── The Hidden Valley Resort (SME Round 8 priority, all three regimes) ──
   // Structural Brand.com gap (eRPD 7.3% / Bucket 5), Public RPD = Loyal
   // RPD = 7.3% (no Genius gap - leaning on BSB to equalize). Objection:

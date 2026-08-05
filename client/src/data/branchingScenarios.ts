@@ -24,6 +24,9 @@ import { palaceGrandWideR7 } from './scenarios/palace-grand-wide-r7';
 import { hiddenValleyNoneR8 } from './scenarios/hidden-valley-none-r8';
 import { hiddenValleyNarrowR8 } from './scenarios/hidden-valley-narrow-r8';
 import { hiddenValleyWideR8 } from './scenarios/hidden-valley-wide-r8';
+import { loftLivingNoneR9 } from './scenarios/loft-living-none-r9';
+import { loftLivingNarrowR9 } from './scenarios/loft-living-narrow-r9';
+import { loftLivingWideR9 } from './scenarios/loft-living-wide-r9';
 
 /**
  * Branching conversation scenarios.
@@ -134,6 +137,15 @@ export const branchingScenarios: BranchingMap = {
   },
   'hidden-valley-wide': {
     8: hiddenValleyWideR8,
+  },
+  'loft-living-none': {
+    9: loftLivingNoneR9,
+  },
+  'loft-living-narrow': {
+    9: loftLivingNarrowR9,
+  },
+  'loft-living-wide': {
+    9: loftLivingWideR9,
   },
 };
 
