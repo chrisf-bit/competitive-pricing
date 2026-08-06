@@ -48,6 +48,18 @@ export const correctPartnerPerRound: Partial<
     8: 'hidden-valley-none',
     9: 'loft-living-none',
     10: 'noble-falcon-none',
+    // Level 2 (OPC): the six lead partners revisited through the OPC
+    // lens. Same partner ids as their Level 1 rounds.
+    11: 'royal-crest-none',
+    12: 'silver-horizon-none',
+    13: 'ocean-view-none',
+    14: 'riverside-none',
+    15: 'emerald-peak-none',
+    16: 'oceanfront-none',
+    17: 'palace-grand-none',
+    18: 'hidden-valley-none',
+    19: 'loft-living-none',
+    20: 'noble-falcon-none',
   },
   // Narrow + Wide regimes stand up R1 (Crystal Water Resort), R2
   // (Velvet Sky Boutique Hotel) and R3 (Noble Falcon Inn) with the
@@ -66,6 +78,16 @@ export const correctPartnerPerRound: Partial<
     8: 'hidden-valley-narrow',
     9: 'loft-living-narrow',
     10: 'noble-falcon-narrow',
+    11: 'royal-crest-narrow',
+    12: 'silver-horizon-narrow',
+    13: 'ocean-view-narrow',
+    14: 'riverside-narrow',
+    15: 'emerald-peak-narrow',
+    16: 'oceanfront-narrow',
+    17: 'palace-grand-narrow',
+    18: 'hidden-valley-narrow',
+    19: 'loft-living-narrow',
+    20: 'noble-falcon-narrow',
   },
   wide: {
     1: 'royal-crest-wide',
@@ -78,6 +100,16 @@ export const correctPartnerPerRound: Partial<
     8: 'hidden-valley-wide',
     9: 'loft-living-wide',
     10: 'noble-falcon-wide',
+    11: 'royal-crest-wide',
+    12: 'silver-horizon-wide',
+    13: 'ocean-view-wide',
+    14: 'riverside-wide',
+    15: 'emerald-peak-wide',
+    16: 'oceanfront-wide',
+    17: 'palace-grand-wide',
+    18: 'hidden-valley-wide',
+    19: 'loft-living-wide',
+    20: 'noble-falcon-wide',
   },
   // cross-regional: pending partner data.
 };

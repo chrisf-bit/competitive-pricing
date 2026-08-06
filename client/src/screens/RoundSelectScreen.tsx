@@ -10,16 +10,18 @@ import {
 import roundSelectBackdrop from '../assets/round-select-backdrop.webp';
 
 /**
- * Rounds available to play today. Bump these as SME-approved
- * content lands. The rest render as locked "Coming Soon" tiles.
+ * Rounds available to play today. Mirrors TOTAL_ROUNDS in the engine -
+ * bump both together as SME-approved content lands. Everything past the
+ * cap renders as a locked tile. Today: all of Level 1 (1-10) and all of
+ * Level 2 OPC (11-20) are playable.
  */
-const AVAILABLE_ROUNDS = [1, 2, 3] as const;
+const AVAILABLE_ROUNDS = Array.from({ length: 20 }, (_, i) => i + 1);
 
 /**
- * Level 1 = existing partner-portfolio content (rounds 1-10).
- * Level 2 = OPC / Advanced View content that unlocks in R3
- * (rounds 11-20). All Level 2 tiles ship locked with a
- * "Coming Soon" tag alongside their round number.
+ * Level 1 = partner-portfolio content (rounds 1-10). Level 2 = OPC
+ * rounds (11-20): the same lead partners revisited through the
+ * On-Platform Competitiveness lens. Tiles beyond AVAILABLE_ROUNDS
+ * render locked; the unlocked Level 2 tiles carry the OPC styling.
  */
 const LEVEL_1_ROUNDS = Array.from({ length: 10 }, (_, i) => i + 1);
 const LEVEL_2_ROUNDS = Array.from({ length: 10 }, (_, i) => i + 11);
@@ -159,7 +161,7 @@ export function RoundSelectScreen({
           rounds={LEVEL_1_ROUNDS}
           activeRound={activeRound}
           roundStars={roundStars}
-          isLevel2Locked={false}
+          isLevel2={false}
           onEnterRound={onEnterRound}
         />
 
@@ -169,7 +171,7 @@ export function RoundSelectScreen({
           rounds={LEVEL_2_ROUNDS}
           activeRound={activeRound}
           roundStars={roundStars}
-          isLevel2Locked
+          isLevel2
           onEnterRound={onEnterRound}
         />
       </div>
@@ -183,7 +185,7 @@ function LevelBlock({
   rounds,
   activeRound,
   roundStars,
-  isLevel2Locked,
+  isLevel2,
   onEnterRound,
 }: {
   label: string;
@@ -191,7 +193,7 @@ function LevelBlock({
   rounds: number[];
   activeRound: number | null;
   roundStars: Record<number, 0 | 1 | 2 | 3>;
-  isLevel2Locked: boolean;
+  isLevel2: boolean;
   onEnterRound: (round: number) => void;
 }) {
   return (
@@ -216,7 +218,7 @@ function LevelBlock({
             fontWeight: 800,
             letterSpacing: '0.14em',
             textTransform: 'uppercase',
-            color: isLevel2Locked ? 'rgba(255,255,255,0.4)' : 'var(--brand-yellow)',
+            color: 'var(--brand-yellow)',
           }}
         >
           {label}
@@ -250,9 +252,8 @@ function LevelBlock({
         {rounds.map((round) => {
           const stars = roundStars[round] ?? 0;
           const isCompleted = stars >= 1;
-          const isCurrent = round === activeRound && !isLevel2Locked;
+          const isCurrent = round === activeRound;
           const isPlayable =
-            !isLevel2Locked &&
             (AVAILABLE_ROUNDS as readonly number[]).includes(round) &&
             (isCurrent || isCompleted);
           const isLocked = !isPlayable;
@@ -264,7 +265,7 @@ function LevelBlock({
               isCurrent={isCurrent}
               isCompleted={isCompleted}
               isLocked={isLocked}
-              isLevel2={isLevel2Locked}
+              isLevel2={isLevel2}
               onEnter={() => onEnterRound(round)}
             />
           );

@@ -2757,6 +2757,129 @@ A transparent-background version was built and then reverted:
   text/layout constants don't need re-tuning; `CENTRE` values are
   fractions so they're resolution-independent.
 
+## Level 2 built (OPC rounds 11-20, complete) (2026-08)
+
+**All ten Level 2 (On-Platform Competitiveness) rounds are built** and
+compile clean. `TOTAL_ROUNDS` is now **20** - the full 20-round journey
+(Level 1 R1-R10 + Level 2 R11-R20) is playable end to end. Level 2
+reuses the ten Level 1 lead partners as the round priorities, revisited
+through the OPC lens the learner unlocked - each round is the SME's
+"follow-up call" to that partner's Level 1 conversation (the dialogue
+references the earlier call: R11=R1's partner, R12=R2, ... R20=R10).
+Source: SME "Round 11-20" docx scenarios in
+`~/Booking.com/.../Simulation/Scenarios/`.
+
+**The roster** (priority partner reused from its Level 1 round; contact
++ style come from the existing partner record):
+
+| R | Partner (`id`) | Contact | OPC objections | Ending |
+|---|---|---|---|---|
+| 11 | Royal Crest (`royal-crest`) | Liam O'Connell (red/blue) | Traveler-Centric Pivot, Global Stat, Peer Group, Internal vs External | agrees (mobile test) |
+| 12 | Silver Horizon (`silver-horizon`) | Chloe Davies (blue/red) | Money-in-Bank, Regional Office Shield | agrees (Getaway Deal) |
+| 13 | Ocean View (`ocean-view`) | Camila Ross (blue/red) | Too Unique, Peer Group, Connect Metrics, Internal vs External | agrees (family-config fix) |
+| 14 | Riverside (`riverside`) | Anton Müller (blue/green) | Too Unique, Global Stat, Peer Group, Connect Metrics, Internal vs External | agrees (US Country Rate) |
+| 15 | Emerald Peak (`emerald-peak`) | Sophia Chen (red/blue) | Traveler-Centric Pivot, Fake Value (Genius Inflation) | **hard no** |
+| 16 | Oceanfront (`oceanfront`) | Priya Singh (blue/red) | Internal vs External, Traveler-Centric, Fake Value | **soft no** (defers, wants projections) |
+| 17 | Palace Grand (`palace-grand`) | Ethan Nkosi (green/blue) | Money-in-Bank, Regional Office Shield | agrees (EEA Country Rate) |
+| 18 | Hidden Valley (`hidden-valley`) | Claire Thornton (blue/red) | Money-in-Bank, Regional Office Shield | agrees (deals workaround; mobile rate blocked by her brand rules) |
+| 19 | Loft Living (`loft-living`) | Lucas Silva (red/blue) | Money-in-Bank, Regional Office Shield | agrees (mobile rate; wholesaler-leak + regional-ban context) |
+| 20 | Noble Falcon (`noble-falcon`) | Adam Cole (blue/red) | Action-to-Impact Counterfactual | agrees, **warm forward close** (final round; family-config fix + 2027 non-refundable discoverability) |
+
+**Key design decisions for Level 2:**
+
+- **Regime-neutral scenarios.** Unlike Level 1 (three regime files per
+  round with different regulatory framing), the OPC conversation is
+  identical across Wide / Narrow / No Parity - the parity-specific
+  talking points in the docs are Level 1 XPC recap, not the OPC call.
+  Each round is **one file with a factory**
+  (`data/scenarios/{partner}-r{n}.ts`, exporting e.g.
+  `royalCrestR11(partnerId)`); `branchingScenarios.ts` calls the factory
+  three times to stamp the `-none/-narrow/-wide` id. Six new scenario
+  files total, not eighteen.
+- **Distractors are Claude-authored.** The SME docs give a single
+  worked-example transcript per round (the ideal call), not 3-option
+  branching trees. Chris approved authoring the two distractors per AM
+  turn to the existing "close but not quite" rule (one near-miss, one
+  clearer miss). **These need SME sign-off** for all of R11-R20 - logged
+  in the pre-production checklist below. The optimal line at each step is
+  the SME transcript verbatim; the partner responses are the SME's.
+- **R17-R20 note.** R17-R19 all carry the same primary objection pairing
+  (Money-in-Bank + Regional Office Shield) but distinct mechanics: R17 an
+  EEA-family gap (child misconfig + missing EEA country rate), R18 a
+  brand-rules bind where the mobile rate is off-limits so the optimal
+  finds a deals workaround, R19 a mobile misconfiguration (weekend/window
+  exclusions). R20 (Noble Falcon, Adam Cole) is the final round - an
+  "Action-to-Impact Counterfactual" (he's ~15% below peers yet not
+  converting, because children are charged as adults) that closes warm
+  and forward-looking on a 2027 partnership. The R18 optimal deliberately
+  respects the partner's own brand rules rather than pushing the
+  forbidden tool.
+- **Reused partner records = no per-round priority baselines.** The six
+  priority records already carried the correct L2 driving + OPC data
+  (the R1-R10 authoring populated `opcMetrics` forward). L2 reuses the
+  same partner snapshot, so `partnerStateByRound` needs no priority
+  entries for R11-R20 - the record is the state. `opcMetrics.visibilityShare`
+  now uses the new `peerValue` field (see below) instead of `deltaPct`.
+- **Decoys.** Marina and Carlos (and their `-narrow/-wide` variants) are
+  the two distractor cards each round, at new healthy Level 2 baselines
+  in `partnerStateByRound.ts` (`marinaL2DecoyMetrics()` /
+  `carlosL2DecoyMetrics()`, shared verbatim across R11-R20). They carry
+  a **clean OPC profile** (low unsold, positive sell-through, visibility
+  at/above peer) so the priority reads as the clear call on the now-
+  unlocked OPC tab.
+- **OPC `peerValue`.** `SecondaryMetricValue` gained an optional
+  `peerValue?: number`; the OPC `visibilityShare` card renders
+  "{peerValue}% peer" (a side-by-side benchmark) instead of a relative
+  deltaPct, matching the SME docs' partner-vs-peer-median framing.
+- **Endings.** R15 (hard no) and R16 (soft no, defers for projections)
+  are scripted no's - the star grading is on the **process** (a
+  compliant, well-diagnosed, trust-preserving call), not the outcome.
+  Same principle as the Level 1 soft/strong-no rounds (R8-R10). The
+  optimal close neither capitulates nor pushes harder.
+- **Objection catalogue.** These rounds carry the OPC objections
+  OBJ_13-OBJ_22 from the Content Hub (multiple per round). They are
+  documented in scenario headers but not yet emitted as xAPI - Objection
+  emission is still the planned reporting workstream, not built.
+
+**Level 1 -> Level 2 transition + celebrations (engine rework).**
+`advanceRound` no longer treats round 10 as terminal. Finishing round 10
+(with all of Level 1 cleared) fires the **Level 1 Complete** celebration
+as a mid-journey milestone that then continues into Level 2 - its CTA is
+now "Continue to Level 2" -> Round Select (its old "See your debrief" is
+kept only for the legacy no-Level-2 case, detected via `gameComplete`).
+The **Level 2 Complete** celebration (`Level2CompleteScreen`, screen id
+`level-2-complete`, "Twenty out of twenty", CTA "See your summary") fires
+when all of rounds 11-20 are cleared - **now live** (`TOTAL_ROUNDS = 20`)
+at the end of round 20. Constants: `LEVEL_1_LAST_ROUND = 10`,
+`LEVEL_2_LAST_ROUND = 20`, `TOTAL_ROUNDS` typed `number` (not literal) so
+the boundary comparisons don't trip TS.
+
+**Round Select unlock.** `AVAILABLE_ROUNDS` in `RoundSelectScreen` was
+stale at `[1,2,3]`; it now tracks the cap (1-20). The Level 2 block is no
+longer wholesale-locked - tiles unlock per-round like Level 1 (all of
+11-20 playable). `LevelBlock`'s `isLevel2Locked` prop became `isLevel2`
+(styling only; lock is computed per tile). Header dot count mirrors
+`TOTAL_ROUNDS = 20`.
+
+**The 12-touch pattern still holds** (see the Level 1 build note), with
+the L2 simplifications: one scenario file + factory instead of three;
+no priority `partnerStateByRound` entry; `correctPartnerPerRound`,
+`portfolioByRound`, `personaHints`, and `branchingScenarios` each gain
+R11-R20 across all three regimes.
+
+**SME data reconciliations (flag on next SME pass):**
+- **R12 Silver Horizon visibility direction.** The Round 12 data table
+  showed visibility 13% vs 15% peer (below), but its own transcript
+  frames visibility as *above* peer ("demand is there, you lose them at
+  checkout" - the whole Money-in-Bank lesson). The record was corrected
+  to 17% vs 15% (above peer) so the OPC tab matches the call. Flagged in
+  a code comment on the `silver-horizon` record.
+- **R14 doc identity.** The original Round 14 docx mislabeled the data
+  block as Emerald Peak (Hotel 11); Chris's fix doc corrected it to
+  Riverside Boutique (Hotel 202). Built as Riverside. The fix doc also
+  labels the data set "Red Brick Boutique" in one spot - another SME
+  naming variant for the same Hotel ID 202 / Riverside.
+
 ## How to run
 
 ```
@@ -2820,16 +2943,29 @@ to resolve before final delivery.
 
 ### Round / regime gates that scale with content
 
-- **TOTAL_ROUNDS is now 10** in `engine/gameEngine.ts` and
-  `components/Header.tsx` - all ten Level 1 rounds have SME-approved
-  priority content, and completing them routes to the Level 1
-  Complete celebration. (Rounds 11-20 / Level 2 are still to come.)
-  Header dots, Practice Mode grid, and Debrief grading all derive
-  from this constant.
+- **TOTAL_ROUNDS is now 20** in `engine/gameEngine.ts` and
+  `components/Header.tsx` - the full 20-round journey (Level 1 R1-R10 +
+  Level 2 OPC R11-R20) has priority content and is playable end to end.
+  Finishing R10 fires the Level 1 Complete celebration and continues into
+  Level 2; finishing R20 (all of 11-20 cleared) fires the Level 2
+  Complete celebration. Header dots, Practice Mode grid, Round Select,
+  and Debrief grading all derive from this constant.
+- **Level 2 distractors need SME sign-off.** The SME Round 11-20 docs
+  supplied a single ideal-call transcript each, not option triads;
+  Claude authored the two distractors per AM turn (optimal line is the
+  SME transcript verbatim). Files: `data/scenarios/{royal-crest-r11,
+  silver-horizon-r12,ocean-view-r13,riverside-r14,emerald-peak-r15,
+  oceanfront-r16,palace-grand-r17,hidden-valley-r18,loft-living-r19,
+  noble-falcon-r20}.ts`. Have the SME review the distractor dialogue for
+  compliance across all three regimes before final ship. Same open item
+  exists for the L2 persona hints (`personaHints.ts`, the
+  `*R{11..20}Hints` blocks) and the healthy L2 decoy baselines for
+  Marina / Carlos.
 - **On Platform Competitiveness tab** on Partner Detail unlocks in
   the OPC-active window (round >= 11 or a Cross-Regional partner); at
-  Level 1 (rounds 1-10) it stays greyed out. See the Post-2026-07-30
-  session notes for the conditional-unlock detail.
+  Level 1 (rounds 1-10) it stays greyed out. It is now reachable in the
+  build (R11-R20 are playable). See the Post-2026-07-30 session notes
+  for the conditional-unlock detail.
 - **Cross-Regional regime** still flagged `available: false` in
   `data/learnerMarkets.ts`. Either remove the card from Market
   Select entirely if it won't ship, or unlock when content lands.

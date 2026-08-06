@@ -18,6 +18,7 @@ import { MiniScenariosScreen } from './screens/MiniScenariosScreen';
 import { ClearanceSummaryScreen } from './screens/ClearanceSummaryScreen';
 import { ClearedCelebrationScreen } from './screens/ClearedCelebrationScreen';
 import { Level1CompleteScreen } from './screens/Level1CompleteScreen';
+import { Level2CompleteScreen } from './screens/Level2CompleteScreen';
 import { PortfolioScreen } from './screens/PortfolioScreen';
 import { RoundSelectScreen } from './screens/RoundSelectScreen';
 import { PartnerDetailScreen } from './screens/PartnerDetailScreen';
@@ -104,7 +105,8 @@ export default function App() {
   const isLevel0Chrome =
     state.screen === 'briefing' ||
     state.screen.startsWith('l0-') ||
-    state.screen === 'level-1-complete';
+    state.screen === 'level-1-complete' ||
+    state.screen === 'level-2-complete';
   // The conversation-report screen is a moment, not a panel. The Guide
   // doesn't have anything relevant to say while it's up, so hide it -
   // otherwise it sits beside the report showing empty section headers.
@@ -415,6 +417,17 @@ export default function App() {
               archetype={state.learnerProfile.archetype}
               avatarId={state.learnerProfile.avatarId}
               onContinue={game.onContinueAfterLevel1Complete}
+              ctaLabel={
+                state.gameComplete ? 'See your debrief' : 'Continue to Level 2'
+              }
+            />
+          )}
+          {state.screen === 'level-2-complete' && (
+            <Level2CompleteScreen
+              playerName={state.learnerProfile.playerName}
+              archetype={state.learnerProfile.archetype}
+              avatarId={state.learnerProfile.avatarId}
+              onContinue={game.onContinueAfterLevel2Complete}
             />
           )}
           {state.screen === 'debrief' && game.score && (

@@ -54,10 +54,20 @@ function applyRoundBaseline(
 // values, so a count rendered no real information and added a
 // redundant Actions pill to the Header.
 // Capped at the contiguous max of SME-approved priority content.
-// All ten Level 1 rounds now have SME-approved priority scenarios
-// (R1 Royal Crest ... R10 Noble Falcon). Completing all ten routes
-// to the Level 1 Complete celebration.
-const TOTAL_ROUNDS = 10;
+// Level 1 (R1 Royal Crest ... R10 Noble Falcon) and Level 2 (OPC rounds
+// R11-R20 - the ten lead partners revisited through the On-Platform
+// Competitiveness lens) are both complete. Completing round 10 routes
+// to the Level 1 Complete celebration and continues into Level 2;
+// completing round 20 (with all of 11-20 cleared) routes to the Level 2
+// Complete celebration.
+// Typed as `number` (not the literal) so the level-boundary
+// comparisons below don't trip TS's "no overlap between literals" check.
+const TOTAL_ROUNDS: number = 20;
+// The last round of each level. The Level 1 -> Level 2 boundary fires
+// the Level 1 Complete celebration mid-journey (not terminal) whenever
+// Level 2 content exists beyond it.
+const LEVEL_1_LAST_ROUND = 10;
+const LEVEL_2_LAST_ROUND = 20;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 
@@ -743,19 +753,33 @@ export function advanceRound(state: GameState): GameState {
     return state;
   }
 
-  if (state.currentRound >= TOTAL_ROUNDS) {
-    // If the learner has cleared every Level 1 round (1-10) with at
-    // least one star, celebrate before the debrief. Level 2 unlocks
-    // conceptually at this point (rounds 11-20). Won't fire until
-    // TOTAL_ROUNDS is bumped to 10 AND the learner clears all ten;
-    // partial completions (today's cap of 3) still route straight to
-    // the debrief.
-    const level1AllCleared = Array.from({ length: 10 }, (_, i) => i + 1).every(
+  const allCleared = (from: number, to: number): boolean =>
+    Array.from({ length: to - from + 1 }, (_, i) => from + i).every(
       (r) => (state.roundStars[r] ?? 0) >= 1,
     );
+
+  if (state.currentRound >= TOTAL_ROUNDS) {
+    // Terminal: the learner just finished the last authored round.
+    // Route to a level-completion celebration when a whole level was
+    // cleared here, otherwise straight to the debrief.
+    //   - At the Level 2 boundary (round 20, once 17-20 land) with all
+    //     of 11-20 cleared -> the Level 2 Complete celebration.
+    //   - Legacy path: if no Level 2 content exists yet
+    //     (TOTAL_ROUNDS === 10) and all of Level 1 is cleared -> the
+    //     Level 1 Complete celebration (terminal in that case).
+    //   - Everything else -> debrief.
+    let screen: GameState['screen'] = 'debrief';
+    if (TOTAL_ROUNDS >= LEVEL_2_LAST_ROUND && allCleared(11, LEVEL_2_LAST_ROUND)) {
+      screen = 'level-2-complete';
+    } else if (
+      TOTAL_ROUNDS === LEVEL_1_LAST_ROUND &&
+      allCleared(1, LEVEL_1_LAST_ROUND)
+    ) {
+      screen = 'level-1-complete';
+    }
     return {
       ...state,
-      screen: level1AllCleared ? 'level-1-complete' : 'debrief',
+      screen,
       gameComplete: true,
     };
   }
@@ -813,14 +837,25 @@ export function advanceRound(state: GameState): GameState {
     state.partners.map((p) => p.persona.id),
   );
 
+  // Level 1 -> Level 2 boundary: finishing round 10 (with all of
+  // Level 1 cleared, and Level 2 content authored beyond it) fires the
+  // Level 1 Complete celebration as a mid-journey milestone. It is NOT
+  // terminal - state still advances to round 11 and the celebration's
+  // CTA continues on to Round Select with Level 2 unlocked.
+  const crossingIntoLevel2 =
+    state.currentRound === LEVEL_1_LAST_ROUND &&
+    TOTAL_ROUNDS > LEVEL_1_LAST_ROUND &&
+    allCleared(1, LEVEL_1_LAST_ROUND);
+
   return {
     ...state,
-    // Routes to the round-select hub. Learner picks the next round's
-    // tile to enter its portfolio. The between-round screen retired in
-    // 2026-06 was a passive summary - this one has a job (show star
-    // progress, unlock the next tile, offer retries) so the extra
-    // click earns its keep.
-    screen: 'round-select',
+    // Routes to the round-select hub (or the Level 1 Complete
+    // celebration at the Level 1 -> Level 2 boundary). Learner picks
+    // the next round's tile to enter its portfolio. The between-round
+    // screen retired in 2026-06 was a passive summary - this one has a
+    // job (show star progress, unlock the next tile, offer retries) so
+    // the extra click earns its keep.
+    screen: crossingIntoLevel2 ? 'level-1-complete' : 'round-select',
     currentRound: nextRound,
     actionsThisRound: [],
     previouslyEngagedThisRound: [],

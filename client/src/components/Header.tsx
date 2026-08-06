@@ -11,7 +11,10 @@ interface HeaderProps {
 // Capped at the contiguous max of SME-approved priority content.
 // Today: R1 John (placeholder), R2 Marina (placeholder), R3 Noble
 // Falcon (SME-approved). Bump as each new priority drop lands.
-const TOTAL_ROUNDS = 10;
+// Mirror of the engine TOTAL_ROUNDS - the overall contiguous cap of
+// authored rounds (Level 1 R1-R10 + Level 2 OPC R11-R20). Keep in sync
+// with engine/gameEngine.ts.
+const TOTAL_ROUNDS = 20;
 
 // `screen` kept on the prop interface even though Header no longer
 // branches on it - keeps the App.tsx callsite stable and gives us a

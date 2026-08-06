@@ -30,6 +30,20 @@ import { loftLivingWideR9 } from './scenarios/loft-living-wide-r9';
 import { nobleFalconNoneR10 } from './scenarios/noble-falcon-none-r10';
 import { nobleFalconNarrowR10 } from './scenarios/noble-falcon-narrow-r10';
 import { nobleFalconWideR10 } from './scenarios/noble-falcon-wide-r10';
+// ── Level 2 (OPC rounds 11-16) - the six lead partners revisited
+// through the On-Platform Competitiveness lens. Regime-neutral: each
+// factory stamps the engaged partner's regime-suffixed id onto one
+// shared tree, so the same steps serve all three regime portfolios.
+import { royalCrestR11 } from './scenarios/royal-crest-r11';
+import { silverHorizonR12 } from './scenarios/silver-horizon-r12';
+import { oceanViewR13 } from './scenarios/ocean-view-r13';
+import { riversideR14 } from './scenarios/riverside-r14';
+import { emeraldPeakR15 } from './scenarios/emerald-peak-r15';
+import { oceanfrontR16 } from './scenarios/oceanfront-r16';
+import { palaceGrandR17 } from './scenarios/palace-grand-r17';
+import { hiddenValleyR18 } from './scenarios/hidden-valley-r18';
+import { loftLivingR19 } from './scenarios/loft-living-r19';
+import { nobleFalconR20 } from './scenarios/noble-falcon-r20';
 
 /**
  * Branching conversation scenarios.
@@ -71,93 +85,123 @@ export const branchingScenarios: BranchingMap = {
   },
   'royal-crest-none': {
     1: royalCrestNoneR1,
+    11: royalCrestR11('royal-crest-none'),
   },
   'royal-crest-narrow': {
     1: royalCrestNarrowR1,
+    11: royalCrestR11('royal-crest-narrow'),
   },
   'royal-crest-wide': {
     1: royalCrestWideR1,
+    11: royalCrestR11('royal-crest-wide'),
   },
   'silver-horizon-none': {
     2: silverHorizonNoneR2,
+    12: silverHorizonR12('silver-horizon-none'),
   },
   'silver-horizon-narrow': {
     2: silverHorizonNarrowR2,
+    12: silverHorizonR12('silver-horizon-narrow'),
   },
   'silver-horizon-wide': {
     2: silverHorizonWideR2,
+    12: silverHorizonR12('silver-horizon-wide'),
   },
   'ocean-view-none': {
     3: oceanViewNoneR3,
+    13: oceanViewR13('ocean-view-none'),
   },
   'ocean-view-narrow': {
     3: oceanViewNarrowR3,
+    13: oceanViewR13('ocean-view-narrow'),
   },
   'ocean-view-wide': {
     3: oceanViewWideR3,
+    13: oceanViewR13('ocean-view-wide'),
   },
   'riverside-none': {
     4: riversideNoneR4,
+    14: riversideR14('riverside-none'),
   },
   'riverside-narrow': {
     4: riversideNarrowR4,
+    14: riversideR14('riverside-narrow'),
   },
   'riverside-wide': {
     4: riversideWideR4,
+    14: riversideR14('riverside-wide'),
   },
   'emerald-peak-none': {
     5: emeraldPeakNoneR5,
+    15: emeraldPeakR15('emerald-peak-none'),
   },
   'emerald-peak-narrow': {
     5: emeraldPeakNarrowR5,
+    15: emeraldPeakR15('emerald-peak-narrow'),
   },
   'emerald-peak-wide': {
     5: emeraldPeakWideR5,
+    15: emeraldPeakR15('emerald-peak-wide'),
   },
   'oceanfront-none': {
     6: oceanfrontNoneR6,
+    16: oceanfrontR16('oceanfront-none'),
   },
   'oceanfront-narrow': {
     6: oceanfrontNarrowR6,
+    16: oceanfrontR16('oceanfront-narrow'),
   },
   'oceanfront-wide': {
     6: oceanfrontWideR6,
+    16: oceanfrontR16('oceanfront-wide'),
   },
   'palace-grand-none': {
     7: palaceGrandNoneR7,
+    17: palaceGrandR17('palace-grand-none'),
   },
   'palace-grand-narrow': {
     7: palaceGrandNarrowR7,
+    17: palaceGrandR17('palace-grand-narrow'),
   },
   'palace-grand-wide': {
     7: palaceGrandWideR7,
+    17: palaceGrandR17('palace-grand-wide'),
   },
   'hidden-valley-none': {
     8: hiddenValleyNoneR8,
+    18: hiddenValleyR18('hidden-valley-none'),
   },
   'hidden-valley-narrow': {
     8: hiddenValleyNarrowR8,
+    18: hiddenValleyR18('hidden-valley-narrow'),
   },
   'hidden-valley-wide': {
     8: hiddenValleyWideR8,
+    18: hiddenValleyR18('hidden-valley-wide'),
   },
   'loft-living-none': {
     9: loftLivingNoneR9,
+    19: loftLivingR19('loft-living-none'),
   },
   'loft-living-narrow': {
     9: loftLivingNarrowR9,
+    19: loftLivingR19('loft-living-narrow'),
   },
   'loft-living-wide': {
     9: loftLivingWideR9,
+    19: loftLivingR19('loft-living-wide'),
   },
   'noble-falcon-none': {
     10: nobleFalconNoneR10,
+    20: nobleFalconR20('noble-falcon-none'),
   },
   'noble-falcon-narrow': {
     10: nobleFalconNarrowR10,
+    20: nobleFalconR20('noble-falcon-narrow'),
   },
   'noble-falcon-wide': {
     10: nobleFalconWideR10,
+    20: nobleFalconR20('noble-falcon-wide'),
   },
 };
 

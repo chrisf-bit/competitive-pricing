@@ -1149,15 +1149,20 @@ function SecondaryMetricCard({
     );
   }
 
+  // When a peer benchmark is supplied, the value is an absolute figure
+  // shown side-by-side with the peer (no leading '+' and no delta paren);
+  // otherwise it stays the signed-delta / value-only convention.
+  const hasPeer = value.peerValue !== undefined;
   const primary =
     format === 'percent'
-      ? `${value.value > 0 ? '+' : ''}${value.value}%`
+      ? `${!hasPeer && value.value > 0 ? '+' : ''}${value.value}%`
       : `${value.value.toLocaleString('en-GB')}`;
-  const delta =
-    value.deltaPct === undefined
+  const delta = hasPeer
+    ? `${value.peerValue}${format === 'percent' ? '%' : ''} peer`
+    : value.deltaPct === undefined
       ? '(xx)'
       : `(${value.deltaPct > 0 ? '+' : ''}${value.deltaPct}%)`;
-  const deltaIsPending = value.deltaPct === undefined;
+  const deltaIsPending = !hasPeer && value.deltaPct === undefined;
 
   return (
     <div

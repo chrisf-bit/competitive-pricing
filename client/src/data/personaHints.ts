@@ -349,6 +349,203 @@ const loftLivingR9Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+// ── Level 2 (OPC rounds 11-16) - the six lead partners revisited
+// through the On-Platform Competitiveness lens. One oneLiner per
+// persona, framed on the OPC story of the round. Shown on Partner
+// Detail (the learner's dashboard view), where internal / OPC metric
+// names are allowed. Applied verbatim across each partner's three
+// regime variants via the map entries below.
+
+const royalCrestR11Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Liam's red/blue: open on the forward signal (around half his rooms unsold), then land a controlled mobile test - skip the rapport.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "Expect 'the market is soft' and 'I don't buy generic averages' - pivot from last month to live traveler demand rather than arguing the numbers.",
+  },
+  storyteller: {
+    oneLiner:
+      'Brand-first premium: strong traffic, but a 7% search-price gap loses over half his searchers before they ever see his amenities.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: 50% unsold and visibility share 10.3% vs 17.9% peer while priced 7% above - he is seen less, not chosen less.',
+  },
+};
+
+const silverHorizonR12Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Chloe's blue/red: credit the strong demand first, then show the checkout drop-off - she needs the mechanism, not a lecture.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "She'll blame other OTAs cutting margin - don't chase the external source, bring it back to on-platform conversion she controls.",
+  },
+  storyteller: {
+    oneLiner:
+      'Money in the bank: plenty of traffic and visibility above peer, but a 6% checkout gap leaves around 15% of rooms unsold.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: visibility above the peer median yet sell-through -8% - the leak is at checkout, not discovery.',
+  },
+};
+
+const oceanViewR13Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Camila is warm and family-led: credit the guest-experience work before the numbers, then reveal the visibility gap.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "She'll say 'we're already 3% cheaper' - the catch is she IS cheaper for couples but families are priced as adults.",
+  },
+  storyteller: {
+    oneLiner:
+      'Cheaper on paper, expensive to families: a child-rate misconfig prices kids as adults, so 40% of searches skip her.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: priced below her comp-set yet 45% unsold and visibility 20% vs 30% - the family-rate setup indexes families +8%.',
+  },
+};
+
+const riversideR14Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Anton is blue/green and time-pressured: keep it brief, honour the brand, then connect the gap to the US couples he wants.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "He'll refuse the comp-set as 'too unique' - don't argue it; reframe via the traveler's journey and one high-value segment.",
+  },
+  storyteller: {
+    oneLiner:
+      'Premium boutique losing its ideal guest: US couples booking 30+ days out drift to peers over a 7% search gap.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: 24% unsold, visibility 12% vs 21%, and a 15% share loss concentrated in the exact US long-stay segment he prizes.',
+  },
+};
+
+const emeraldPeakR15Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Sophia is red/blue and decisive: give her the full picture, including the strong history, then name the inflate-to-fund pattern. She still says no - close clean.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "Expect 'our price reflects our value' and a brand-first trade-off - state the visibility fact, never threaten ranking. She declines regardless.",
+  },
+  storyteller: {
+    oneLiner:
+      'Fake value: she inflates her public price to fund the Genius discount, so her search price runs 10% high and non-logged-in mobile conversion drops 60%.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: Genius on just one room type, search price +10%, visibility 17% vs 26% - the discount is funded by an inflated base.',
+  },
+};
+
+const oceanfrontR16Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Priya's blue/red: credit last time's trial, probe whether she wants visibility from anywhere, then land the US Country Rate. She'll defer - set the follow-up.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "She'll say occupancy is where she expects and OTAs aren't her focus - use the billboard reframe, don't dictate her marketing.",
+  },
+  storyteller: {
+    oneLiner:
+      'Loyalty-first owner leaving US demand on the table: a 4% search gap loses around 25% of US share to nearby competitors.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: sell-through -12% and a ~25% US-share loss tied to a +4% search gap, while a fenced US rate leaves domestic rates untouched.',
+  },
+};
+
+const palaceGrandR17Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Ethan is green/blue and fed up with OTA noise - acknowledge the frustration first, then land the diagnosis on the European family gap.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "Expect 'it's just demand' and a price-war fear - rule out a price war; it's a targeted EEA family fix, not a blanket cut.",
+  },
+  storyteller: {
+    oneLiner:
+      'Cheap on average, expensive to European families: children charged as adults plus a missing EEA country rate index families +12%.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: 21% unsold and sell-through -13% while search price is only +4% overall - the gap hides at +12% in European family searches.',
+  },
+};
+
+const hiddenValleyR18Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Claire is blue/red and brand-bound - open partner-led on her priorities, clarify the Booking Sponsored Benefit honestly, then find a compliant workaround.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "Expect head-office ADR rules and a mobile-rate ban - don't push the forbidden tool; optimize her over-restricted early / last-minute deals.",
+  },
+  storyteller: {
+    oneLiner:
+      'Money-in-Bank franchise: 24% unsold accepted as a trade-off, search price +10% even with the Sponsored Benefit, mobile rate blocked by brand rules.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: visibility 21% vs 28% peer and search price +10% despite the Booking Sponsored Benefit - the residual gap is what caps her.',
+  },
+};
+
+const loftLivingR19Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Lucas is red/blue and margin-first - set the wholesaler leak aside, go device-specific, land the mobile rate without challenging his head office.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "Expect a regional-office ban on cuts plus wholesaler-leak blame - don't chase the leak; the mobile misconfig is the fixable lever.",
+  },
+  storyteller: {
+    oneLiner:
+      'Severe leak: 33% unsold, visibility 8% vs 23% peer, and a mobile discount that excludes 70% of mobile searches, dropping mobile conversion 80%.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: search price +12% overall but +18% on mobile - weekend and long-window exclusions mean most mobile searches miss his own discount.',
+  },
+};
+
+const nobleFalconR20Hints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      "Adam is blue/red and receptive - frame July as the opportunity, prove the family gap with a search he can reproduce, then turn the call forward to 2027.",
+  },
+  'objection-navigator': {
+    oneLiner:
+      "Expect the counterfactual: 'we're 15% below peers, so why don't we convert?' - the answer is a child-config gap, not price.",
+  },
+  storyteller: {
+    oneLiner:
+      'Cheap but not converting: children charged as adults quote a small family two premium rooms; fixing it is roughly 45 room nights next month.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: search price -15.2% (cheaper than peers) yet conversion 1.3% and visibility 14.5% - the leak is a family-search config, not price.',
+  },
+};
+
 export const personaHints: PersonaHintsByRound = {
   marina: {
     1: {
@@ -436,60 +633,60 @@ export const personaHints: PersonaHintsByRound = {
   // regulatory framing of the conversation differs by regime.
   // Royal Crest Hotel R1 - the SME Round 1 priority across all three
   // regime variants (retires Crystal Water as the R1 hints owner).
-  'royal-crest-wide': { 1: royalCrestR1Hints },
-  'royal-crest-narrow': { 1: royalCrestR1Hints },
-  'royal-crest-none': { 1: royalCrestR1Hints },
+  'royal-crest-wide': { 1: royalCrestR1Hints, 11: royalCrestR11Hints },
+  'royal-crest-narrow': { 1: royalCrestR1Hints, 11: royalCrestR11Hints },
+  'royal-crest-none': { 1: royalCrestR1Hints, 11: royalCrestR11Hints },
 
   // Silver Horizon Resort R2 - the SME Round 2 priority across all
   // three regime variants (retires Velvet Sky as the R2 hints owner).
-  'silver-horizon-wide': { 2: silverHorizonR2Hints },
-  'silver-horizon-narrow': { 2: silverHorizonR2Hints },
-  'silver-horizon-none': { 2: silverHorizonR2Hints },
+  'silver-horizon-wide': { 2: silverHorizonR2Hints, 12: silverHorizonR12Hints },
+  'silver-horizon-narrow': { 2: silverHorizonR2Hints, 12: silverHorizonR12Hints },
+  'silver-horizon-none': { 2: silverHorizonR2Hints, 12: silverHorizonR12Hints },
 
   // Ocean View Resort R3 - the SME Round 3 priority across all three
   // regime variants (retires Noble Falcon as the R3 hints owner).
-  'ocean-view-wide': { 3: oceanViewR3Hints },
-  'ocean-view-narrow': { 3: oceanViewR3Hints },
-  'ocean-view-none': { 3: oceanViewR3Hints },
+  'ocean-view-wide': { 3: oceanViewR3Hints, 13: oceanViewR13Hints },
+  'ocean-view-narrow': { 3: oceanViewR3Hints, 13: oceanViewR13Hints },
+  'ocean-view-none': { 3: oceanViewR3Hints, 13: oceanViewR13Hints },
 
   // Riverside Boutique Hotel R4 - the SME Round 4 priority across all
   // three regime variants.
-  'riverside-wide': { 4: riversideR4Hints },
-  'riverside-narrow': { 4: riversideR4Hints },
-  'riverside-none': { 4: riversideR4Hints },
+  'riverside-wide': { 4: riversideR4Hints, 14: riversideR14Hints },
+  'riverside-narrow': { 4: riversideR4Hints, 14: riversideR14Hints },
+  'riverside-none': { 4: riversideR4Hints, 14: riversideR14Hints },
 
   // Emerald Peak Lodge R5 - the SME Round 5 priority across all three
   // regime variants.
-  'emerald-peak-wide': { 5: emeraldPeakR5Hints },
-  'emerald-peak-narrow': { 5: emeraldPeakR5Hints },
-  'emerald-peak-none': { 5: emeraldPeakR5Hints },
+  'emerald-peak-wide': { 5: emeraldPeakR5Hints, 15: emeraldPeakR15Hints },
+  'emerald-peak-narrow': { 5: emeraldPeakR5Hints, 15: emeraldPeakR15Hints },
+  'emerald-peak-none': { 5: emeraldPeakR5Hints, 15: emeraldPeakR15Hints },
 
   // Oceanfront Bliss Lodge R6 - the SME Round 6 priority across all
   // three regime variants.
-  'oceanfront-wide': { 6: oceanfrontR6Hints },
-  'oceanfront-narrow': { 6: oceanfrontR6Hints },
-  'oceanfront-none': { 6: oceanfrontR6Hints },
+  'oceanfront-wide': { 6: oceanfrontR6Hints, 16: oceanfrontR16Hints },
+  'oceanfront-narrow': { 6: oceanfrontR6Hints, 16: oceanfrontR16Hints },
+  'oceanfront-none': { 6: oceanfrontR6Hints, 16: oceanfrontR16Hints },
 
   // Palace Grand Resort R7 - the SME Round 7 priority across all three
   // regime variants (Same Net Mindset + Competitive Aggression + Family
   // Ready; Key OTA gap concentrated in mobile + family).
-  'palace-grand-wide': { 7: palaceGrandR7Hints },
-  'palace-grand-narrow': { 7: palaceGrandR7Hints },
-  'palace-grand-none': { 7: palaceGrandR7Hints },
+  'palace-grand-wide': { 7: palaceGrandR7Hints, 17: palaceGrandR17Hints },
+  'palace-grand-narrow': { 7: palaceGrandR7Hints, 17: palaceGrandR17Hints },
+  'palace-grand-none': { 7: palaceGrandR7Hints, 17: palaceGrandR17Hints },
 
   // The Hidden Valley Resort R8 - the SME Round 8 priority across all
   // three regime variants (BSB / Payments Shield + Direct-Is-Cheaper +
   // Family Ready; structural Brand.com gap, ends on a soft no).
-  'hidden-valley-wide': { 8: hiddenValleyR8Hints },
-  'hidden-valley-narrow': { 8: hiddenValleyR8Hints },
-  'hidden-valley-none': { 8: hiddenValleyR8Hints },
+  'hidden-valley-wide': { 8: hiddenValleyR8Hints, 18: hiddenValleyR18Hints },
+  'hidden-valley-narrow': { 8: hiddenValleyR8Hints, 18: hiddenValleyR18Hints },
+  'hidden-valley-none': { 8: hiddenValleyR8Hints, 18: hiddenValleyR18Hints },
 
   // Loft Living Inn R9 - the SME Round 9 priority across all three regime
   // variants (Wholesaler Leak + Competitive Aggression; severe Key OTA gap
   // from a B2B leak, ends on a soft no).
-  'loft-living-wide': { 9: loftLivingR9Hints },
-  'loft-living-narrow': { 9: loftLivingR9Hints },
-  'loft-living-none': { 9: loftLivingR9Hints },
+  'loft-living-wide': { 9: loftLivingR9Hints, 19: loftLivingR19Hints },
+  'loft-living-narrow': { 9: loftLivingR9Hints, 19: loftLivingR19Hints },
+  'loft-living-none': { 9: loftLivingR9Hints, 19: loftLivingR19Hints },
 
   'crystal-water-wide': { 1: crystalWaterR1Hints },
   'crystal-water-narrow': { 1: crystalWaterR1Hints },
@@ -501,9 +698,9 @@ export const personaHints: PersonaHintsByRound = {
   'velvet-sky-none': { 2: velvetSkyR2Hints },
   // Noble Falcon Inn R3 - same persona hint content across all three
   // regime variants.
-  'noble-falcon-wide': { 10: nobleFalconR10Hints },
-  'noble-falcon-narrow': { 10: nobleFalconR10Hints },
-  'noble-falcon-none': { 10: nobleFalconR10Hints },
+  'noble-falcon-wide': { 10: nobleFalconR10Hints, 20: nobleFalconR20Hints },
+  'noble-falcon-narrow': { 10: nobleFalconR10Hints, 20: nobleFalconR20Hints },
+  'noble-falcon-none': { 10: nobleFalconR10Hints, 20: nobleFalconR20Hints },
 };
 
 export function getPersonaHint(

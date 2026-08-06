@@ -89,6 +89,23 @@ export const portfolioByRound: Partial<
     // Guest); Marina and Carlos hold the distractor slots at their
     // healthy R10 baselines (Bucket 3).
     10: ['noble-falcon-none', 'marina', 'carlos'],
+
+    // ── Level 2 (OPC rounds 11-16) ── The six Level 1 lead partners
+    // return as the round priorities, now read through the unlocked OPC
+    // tab. Marina and Carlos hold the distractor slots at their healthy
+    // Level 2 baselines (clean OPC profile - low unsold, positive
+    // sell-through, visibility at/above peer) so the priority reads as
+    // the clear call on the new lens.
+    11: ['royal-crest-none', 'marina', 'carlos'],
+    12: ['silver-horizon-none', 'marina', 'carlos'],
+    13: ['ocean-view-none', 'marina', 'carlos'],
+    14: ['riverside-none', 'marina', 'carlos'],
+    15: ['emerald-peak-none', 'marina', 'carlos'],
+    16: ['oceanfront-none', 'marina', 'carlos'],
+    17: ['palace-grand-none', 'marina', 'carlos'],
+    18: ['hidden-valley-none', 'marina', 'carlos'],
+    19: ['loft-living-none', 'marina', 'carlos'],
+    20: ['noble-falcon-none', 'marina', 'carlos'],
   },
   // Narrow Parity: uses regime-specific distractor variants
   // (-narrow suffix) so all three cards per round are in the UK
@@ -106,6 +123,16 @@ export const portfolioByRound: Partial<
     8: ['hidden-valley-narrow', 'marina-narrow', 'carlos-narrow'],
     9: ['loft-living-narrow', 'marina-narrow', 'carlos-narrow'],
     10: ['noble-falcon-narrow', 'marina-narrow', 'carlos-narrow'],
+    11: ['royal-crest-narrow', 'marina-narrow', 'carlos-narrow'],
+    12: ['silver-horizon-narrow', 'marina-narrow', 'carlos-narrow'],
+    13: ['ocean-view-narrow', 'marina-narrow', 'carlos-narrow'],
+    14: ['riverside-narrow', 'marina-narrow', 'carlos-narrow'],
+    15: ['emerald-peak-narrow', 'marina-narrow', 'carlos-narrow'],
+    16: ['oceanfront-narrow', 'marina-narrow', 'carlos-narrow'],
+    17: ['palace-grand-narrow', 'marina-narrow', 'carlos-narrow'],
+    18: ['hidden-valley-narrow', 'marina-narrow', 'carlos-narrow'],
+    19: ['loft-living-narrow', 'marina-narrow', 'carlos-narrow'],
+    20: ['noble-falcon-narrow', 'marina-narrow', 'carlos-narrow'],
   },
   // Wide Parity: same shape as Narrow with -wide suffixed distractor
   // variants so all three cards per round are in the US market.
@@ -120,6 +147,16 @@ export const portfolioByRound: Partial<
     8: ['hidden-valley-wide', 'marina-wide', 'carlos-wide'],
     9: ['loft-living-wide', 'marina-wide', 'carlos-wide'],
     10: ['noble-falcon-wide', 'marina-wide', 'carlos-wide'],
+    11: ['royal-crest-wide', 'marina-wide', 'carlos-wide'],
+    12: ['silver-horizon-wide', 'marina-wide', 'carlos-wide'],
+    13: ['ocean-view-wide', 'marina-wide', 'carlos-wide'],
+    14: ['riverside-wide', 'marina-wide', 'carlos-wide'],
+    15: ['emerald-peak-wide', 'marina-wide', 'carlos-wide'],
+    16: ['oceanfront-wide', 'marina-wide', 'carlos-wide'],
+    17: ['palace-grand-wide', 'marina-wide', 'carlos-wide'],
+    18: ['hidden-valley-wide', 'marina-wide', 'carlos-wide'],
+    19: ['loft-living-wide', 'marina-wide', 'carlos-wide'],
+    20: ['noble-falcon-wide', 'marina-wide', 'carlos-wide'],
   },
 };
 

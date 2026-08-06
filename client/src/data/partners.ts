@@ -743,7 +743,7 @@ function royalCrestBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 50 },
           sellThroughRate: { value: -10 },
-          visibilityShare: { value: 10.3, deltaPct: -43 },
+          visibilityShare: { value: 10.3, peerValue: 17.9 },
           searchPrice: { value: 7 },
         },
         // Legacy fields - kept for type compatibility.
@@ -857,7 +857,12 @@ function silverHorizonBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 15 },
           sellThroughRate: { value: -8 },
-          visibilityShare: { value: 13, deltaPct: -13 },
+          // SME data reconciliation: the Round 12 OPC conversation frames
+          // visibility as sitting just ABOVE the peer median (the "demand
+          // is there, you're losing them at checkout" lesson), so the tab
+          // matches the call. The Round 12 data table's 13% (below 15%)
+          // contradicted its own transcript - flagged for SME review.
+          visibilityShare: { value: 17, peerValue: 15 },
           searchPrice: { value: 6 },
         },
         // Legacy fields - kept for type compatibility.
@@ -975,7 +980,7 @@ function oceanViewBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 45 },
           sellThroughRate: { value: -18 },
-          visibilityShare: { value: 20, deltaPct: -33 },
+          visibilityShare: { value: 20, peerValue: 30 },
           searchPrice: { value: -3 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1089,7 +1094,7 @@ function riversideBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 24 },
           sellThroughRate: { value: -8 },
-          visibilityShare: { value: 12, deltaPct: -43 },
+          visibilityShare: { value: 12, peerValue: 21 },
           searchPrice: { value: 7 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1203,7 +1208,7 @@ function emeraldPeakBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 12 },
           sellThroughRate: { value: -9 },
-          visibilityShare: { value: 17, deltaPct: -35 },
+          visibilityShare: { value: 17, peerValue: 26 },
           searchPrice: { value: 10 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1316,7 +1321,7 @@ function oceanfrontBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 17 },
           sellThroughRate: { value: -12 },
-          visibilityShare: { value: 17, deltaPct: -32 },
+          visibilityShare: { value: 17, peerValue: 25 },
           searchPrice: { value: 4 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1417,7 +1422,7 @@ function palaceGrandBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 21 },
           sellThroughRate: { value: -13 },
-          visibilityShare: { value: 17, deltaPct: 6 },
+          visibilityShare: { value: 17, peerValue: 16 },
           conversion: { value: 0.53 },
           searchPrice: { value: 4 },
         },
@@ -1518,7 +1523,7 @@ function hiddenValleyBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 24 },
           sellThroughRate: { value: -8 },
-          visibilityShare: { value: 21, deltaPct: -25 },
+          visibilityShare: { value: 21, peerValue: 28 },
           clickThroughRate: { value: 5.4 },
           conversion: { value: 1.2 },
           searchPrice: { value: 10 },
@@ -1621,7 +1626,7 @@ function loftLivingBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 33 },
           sellThroughRate: { value: -7 },
-          visibilityShare: { value: 8, deltaPct: -65 },
+          visibilityShare: { value: 8, peerValue: 23 },
           clickThroughRate: { value: 3.2 },
           conversion: { value: 0.84 },
           searchPrice: { value: 12 },

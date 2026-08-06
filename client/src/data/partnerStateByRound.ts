@@ -95,6 +95,95 @@ function nobleFalconR3Metrics(): PartnerMetrics {
   };
 }
 
+/**
+ * Healthy Level 2 decoy baseline for Marina. Level 2 (rounds 11-16)
+ * reuses the six Level 1 lead partners as the round priorities and
+ * unlocks the On-Platform Competitiveness tab, so the decoys need a
+ * clean OPC profile too - low unsold inventory, positive forward
+ * sell-through, visibility at/above the peer median, and a near-parity
+ * search price. That way the priority partner reads as the clear call
+ * on the new OPC lens as well as the driving metrics. Shared verbatim
+ * across R11-R16 (a fresh object per call so the engine can mutate one
+ * round without touching the others). The healthy Bucket-3 driving
+ * numbers mirror Marina's Level 1 decoy baselines.
+ */
+function marinaL2DecoyMetrics(): PartnerMetrics {
+  return {
+    erpd: 2.1,
+    erpdChange: -0.6,
+    rpdPublic: 3.1,
+    rpdLoyal: -0.7,
+    losePricePublic: 29,
+    activeScenarios: 2,
+    activeScenarioNames: ['Brand.com', 'Mobile'],
+    competitor: 'brand',
+    secondaryMetrics: {
+      last30dAbrn: { value: 980, deltaPct: 4 },
+      last30dRoomNights: { value: 610, deltaPct: 5 },
+      last30dAdr: { value: 151, deltaPct: 1 },
+      last90dPageViews: { value: 0 },
+      last90dConversion: { value: 2.5, deltaPct: 2 },
+      next3mRoomNights: { value: 112, deltaPct: 4 },
+    },
+    // Healthy OPC: rooms are selling, visibility sits above the peer
+    // median, and the search price is essentially at parity.
+    opcMetrics: {
+      unsoldRooms: { value: 8 },
+      sellThroughRate: { value: 4 },
+      visibilityShare: { value: 22, peerValue: 20 },
+      searchPrice: { value: -1 },
+    },
+    lastPricingContactDaysAgo: 30,
+    pricingCoverageQTD: 55,
+    experiencedRPD: 72,
+    visibility: 80,
+    conversion: 61,
+    revenue: 70,
+    discountQuality: 65,
+    rateParity: 'clean',
+  };
+}
+
+/**
+ * Healthy Level 2 decoy baseline for Carlos - same purpose and shape
+ * as marinaL2DecoyMetrics, with slightly different numbers so the two
+ * decoy cards don't read as clones. Shared verbatim across R11-R16.
+ */
+function carlosL2DecoyMetrics(): PartnerMetrics {
+  return {
+    erpd: 2.6,
+    erpdChange: -0.3,
+    rpdPublic: 3.4,
+    rpdLoyal: -0.5,
+    losePricePublic: 33,
+    activeScenarios: 2,
+    activeScenarioNames: ['Brand.com', 'Country'],
+    competitor: 'expedia',
+    secondaryMetrics: {
+      last30dAbrn: { value: 640, deltaPct: 3 },
+      last30dRoomNights: { value: 410, deltaPct: 3 },
+      last30dAdr: { value: 132, deltaPct: 1 },
+      last90dPageViews: { value: 0 },
+      last90dConversion: { value: 2.3, deltaPct: 1 },
+      next3mRoomNights: { value: 78, deltaPct: 3 },
+    },
+    opcMetrics: {
+      unsoldRooms: { value: 10 },
+      sellThroughRate: { value: 2 },
+      visibilityShare: { value: 19, peerValue: 18 },
+      searchPrice: { value: 0 },
+    },
+    lastPricingContactDaysAgo: 26,
+    pricingCoverageQTD: 58,
+    experiencedRPD: 70,
+    visibility: 77,
+    conversion: 59,
+    revenue: 67,
+    discountQuality: 63,
+    rateParity: 'clean',
+  };
+}
+
 export const partnerStateByRound: Record<
   string,
   Record<number, PartnerStateBaseline>
@@ -392,6 +481,19 @@ export const partnerStateByRound: Record<
         rateParity: 'clean',
       },
     },
+    // Level 2 (R11-R16): Marina is a healthy decoy across all six OPC
+    // rounds so the reused lead partner reads as the clear priority on
+    // the unlocked OPC lens. Same clean profile each round.
+    11: { metrics: marinaL2DecoyMetrics() },
+    12: { metrics: marinaL2DecoyMetrics() },
+    13: { metrics: marinaL2DecoyMetrics() },
+    14: { metrics: marinaL2DecoyMetrics() },
+    15: { metrics: marinaL2DecoyMetrics() },
+    16: { metrics: marinaL2DecoyMetrics() },
+    17: { metrics: marinaL2DecoyMetrics() },
+    18: { metrics: marinaL2DecoyMetrics() },
+    19: { metrics: marinaL2DecoyMetrics() },
+    20: { metrics: marinaL2DecoyMetrics() },
   },
   // John's baselines are retained even though John moved to
   // pendingPartners in June 2026 - keeps the data on disk in case
@@ -729,6 +831,19 @@ export const partnerStateByRound: Record<
         rateParity: 'clean',
       },
     },
+    // Level 2 (R11-R16): Carlos is a healthy decoy across all six OPC
+    // rounds, same as Marina, so the reused lead partner is the clear
+    // priority on the unlocked OPC lens.
+    11: { metrics: carlosL2DecoyMetrics() },
+    12: { metrics: carlosL2DecoyMetrics() },
+    13: { metrics: carlosL2DecoyMetrics() },
+    14: { metrics: carlosL2DecoyMetrics() },
+    15: { metrics: carlosL2DecoyMetrics() },
+    16: { metrics: carlosL2DecoyMetrics() },
+    17: { metrics: carlosL2DecoyMetrics() },
+    18: { metrics: carlosL2DecoyMetrics() },
+    19: { metrics: carlosL2DecoyMetrics() },
+    20: { metrics: carlosL2DecoyMetrics() },
   },
 };
 

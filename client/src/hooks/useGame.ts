@@ -184,12 +184,27 @@ export function useGame() {
   }, []);
 
   /**
-   * Continue from the Level 1 Complete celebration into the Debrief.
-   * gameComplete is already set true by advanceRound when it routes
-   * here; the flip below covers the DevNav jump path where the tester
-   * lands on the screen without having actually played through.
+   * Continue from the Level 1 Complete celebration. Now that Level 2
+   * (rounds 11+) is authored, advanceRound reaches this screen as a
+   * mid-journey milestone: it has already advanced the state to round
+   * 11 and left gameComplete false, so Continue carries on into Level 2
+   * via Round Select. The legacy terminal case (no Level 2 content, so
+   * advanceRound set gameComplete true) still routes to the debrief.
    */
   const onContinueAfterLevel1Complete = useCallback(() => {
+    setState((s) =>
+      s.gameComplete
+        ? { ...s, screen: 'debrief' }
+        : { ...s, screen: 'round-select' },
+    );
+  }, []);
+
+  /**
+   * Continue from the Level 2 Complete celebration into the Debrief /
+   * summary. gameComplete is set true by advanceRound when it routes
+   * here; the flip below covers the DevNav jump path.
+   */
+  const onContinueAfterLevel2Complete = useCallback(() => {
     setState((s) => ({ ...s, screen: 'debrief', gameComplete: true }));
   }, []);
 
@@ -426,6 +441,7 @@ export function useGame() {
     onRestart,
     onPlayAgain,
     onContinueAfterLevel1Complete,
+    onContinueAfterLevel2Complete,
     setLearnerMarket,
     setLearnerStrengths,
     setLearnerArchetype,

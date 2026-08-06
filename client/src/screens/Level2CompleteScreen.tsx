@@ -5,27 +5,29 @@ import clearedImage from '../assets/cleared-dark.webp';
 import type { CharacterArchetype } from '../types';
 import { getAvatarById } from '../data/characters';
 
-interface Level1CompleteScreenProps {
+interface Level2CompleteScreenProps {
   playerName: string;
   archetype: CharacterArchetype | null;
   avatarId: string | null;
   onContinue: () => void;
-  /**
-   * Label for the CTA. Now that Level 2 is authored this is a
-   * mid-journey milestone, so the default carries the learner on into
-   * Level 2. Falls back to a debrief-facing label in the legacy
-   * terminal case (no Level 2 content built).
-   */
-  ctaLabel?: string;
 }
 
-export function Level1CompleteScreen({
+/**
+ * Celebration at the end of Level 2 (rounds 11-20). Fires from
+ * advanceRound once every Level 2 round is cleared with at least one
+ * star. Shares the translucent-panel treatment and cleared-dark.webp
+ * backdrop with the Clearance Cleared and Level 1 Complete beats so all
+ * three celebration moments read as one family (see the panel spec in
+ * CLAUDE.md). Dormant until rounds 17-20 land and TOTAL_ROUNDS reaches
+ * 20; reachable now via DevNav for testing. Continue routes to the
+ * debrief / summary.
+ */
+export function Level2CompleteScreen({
   playerName,
   archetype,
   avatarId,
   onContinue,
-  ctaLabel = 'Continue to Level 2',
-}: Level1CompleteScreenProps) {
+}: Level2CompleteScreenProps) {
   const [showContinue, setShowContinue] = useState(false);
 
   useEffect(() => {
@@ -48,9 +50,6 @@ export function Level1CompleteScreen({
         justifyContent: 'center',
       }}
     >
-      {/* Background image - darkened for legibility. Same asset as the
-          Clearance Cleared screen so the two celebration beats share
-          a visual identity. */}
       <motion.img
         src={clearedImage}
         alt=""
@@ -121,7 +120,7 @@ export function Level1CompleteScreen({
           }}
         >
           <Trophy size={14} strokeWidth={2.6} />
-          Level 1 Complete
+          Level 2 Complete
         </motion.div>
 
         <motion.h1
@@ -138,7 +137,7 @@ export function Level1CompleteScreen({
             margin: 0,
           }}
         >
-          Ten out of ten,{' '}
+          Twenty out of twenty,{' '}
           <span style={{ color: 'var(--brand-yellow)' }}>{playerName}</span>.
         </motion.h1>
 
@@ -155,12 +154,12 @@ export function Level1CompleteScreen({
             textShadow: '0 2px 14px rgba(0,15,40,0.95), 0 0 24px rgba(0,15,40,0.7)',
           }}
         >
-          You've cleared every Level 1 round. Level 2 is now unlocked -
-          more complex pricing situations that layer on the OPC metrics
-          you'll steer partners with next.
+          You've worked every partner through the On-Platform
+          Competitiveness lens and handled the toughest objections in the
+          book. That's the full journey - let's look at how you did.
         </motion.div>
 
-        {/* Level 2 unlocked pill */}
+        {/* Journey complete pill */}
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 6 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -183,7 +182,7 @@ export function Level1CompleteScreen({
           }}
         >
           <Sparkles size={13} strokeWidth={2.6} />
-          Level 2 unlocked
+          Journey complete
         </motion.div>
 
         {(avatar || archetype) && (
@@ -267,7 +266,7 @@ export function Level1CompleteScreen({
             e.currentTarget.style.background = 'var(--brand-yellow)';
           }}
         >
-          {ctaLabel}
+          See your summary
           <ChevronRight size={18} />
         </button>
       </motion.div>

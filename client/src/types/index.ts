@@ -195,6 +195,16 @@ export interface DiscountProduct {
 export interface SecondaryMetricValue {
   value: number;
   deltaPct?: number;
+  /**
+   * Optional peer-group absolute value for the comparator line, used
+   * by OPC metrics where the SME data gives both the partner's figure
+   * AND the peer benchmark (e.g. Visibility Share 10.3% vs 17.9% peer).
+   * When set, the card renders "{peerValue} peer" instead of the
+   * parenthesised deltaPct - it's a side-by-side benchmark, not a
+   * delta. Only Visibility Share carries it today; the other OPC
+   * cards keep the value-only / deltaPct convention.
+   */
+  peerValue?: number;
 }
 
 /**
@@ -618,8 +628,15 @@ export type GameScreen =
   | 'l1-outcome'
   // Celebration between Level 1 and Level 2. Fires from advanceRound
   // when the learner clears every Level 1 round (1-10) with at least
-  // one star. Continue routes on to the debrief.
+  // one star. When Level 2 content exists beyond round 10 (it does),
+  // Continue routes on into Level 2 via Round Select; if Level 2 isn't
+  // built yet it stays terminal and Continue routes to the debrief.
   | 'level-1-complete'
+  // Celebration at the end of Level 2. Fires from advanceRound when the
+  // learner clears every Level 2 round (11-20) with at least one star.
+  // Dormant until rounds 17-20 land (TOTAL_ROUNDS reaches 20); Continue
+  // routes to the debrief / summary.
+  | 'level-2-complete'
   // ── Wrap-up ──
   | 'debrief';
 

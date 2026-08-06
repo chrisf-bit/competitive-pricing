@@ -39,6 +39,7 @@ const screenJumps: ScreenJump[] = [
   { screen: 'round-select', label: 'Round Select', group: 'level1' },
   { screen: 'portfolio', label: 'Portfolio', group: 'level1' },
   { screen: 'level-1-complete', label: 'Level 1 Complete', group: 'wrap' },
+  { screen: 'level-2-complete', label: 'Level 2 Complete', group: 'wrap' },
   { screen: 'debrief', label: 'Debrief', group: 'wrap' },
 ];
 
