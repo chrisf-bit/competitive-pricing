@@ -2685,6 +2685,78 @@ clearance), and a full **American English** sweep of user-facing copy.
 Retired POC scenarios (Crystal Water R1, Velvet Sky R2, Noble Falcon /
 Anton at R3) remain on disk as unregistered dead data.
 
+## Asset format standards + Pricing Pathway reveal (2026-08)
+
+### Image / icon asset formats (the rules)
+
+Two constraints dominate: the production deliverable is a **self-contained
+SCORM zip with no runtime network calls**, and Vite must **fingerprint
+the asset into `dist/`** (so `import` it, never reference a URL).
+
+- **UI icons / glyphs / custom marks:** SVG - `lucide-react` for standard
+  icons, inline SVG components for custom marks
+  ([PathwayGlyph.tsx](client/src/components/PathwayGlyph.tsx),
+  [PricingPathway.tsx](client/src/components/PricingPathway.tsx)). Never
+  rasterize an icon.
+- **Backdrops / illustrations / photos:** compressed **WebP**, imported
+  and bundled. Not PNG/JPEG. WebP at 30-80KB replaced the old 1.5-2.2MB
+  PNGs with no visible loss.
+- **Never** `fetch`, CDN URLs, or external fonts.
+- **Outstanding debt:** partner `propertyImage` values and the Warm Up
+  mini-scenario hero images still use **Unsplash CDN URLs**
+  ([data/partners.ts](client/src/data/partners.ts),
+  [data/miniScenarios.ts](client/src/data/miniScenarios.ts)) - every
+  R1-R10 priority partner inherited that pattern. They must be downloaded,
+  converted to WebP, and bundled before the final SCORM package. Fine on
+  Render/dev (network works there); it's the blocker for the zip.
+
+### Pricing Pathway reveal - full-bleed experiment (reverted)
+
+The Diagnose/reveal screen ([IssueTreeRevealScreen.tsx](client/src/screens/IssueTreeRevealScreen.tsx)
++ [PathwayInfographic.tsx](client/src/components/PathwayInfographic.tsx))
+currently renders the **baked-in `pathway-road.webp`** (SME export with
+road, rings AND text baked in), centered, `maxWidth: 1120`. That is the
+live state after a revert.
+
+A transparent-background version was built and then reverted:
+- Chris supplied a stripped-down `PricingPathway.png` (1291x729, road +
+  numbered rings only, on a solid off-white canvas).
+- I produced a **matte-aware transparent WebP** (`pricing-pathway.webp`):
+  flood-fill the exterior off-white to alpha, keep interior circle fills
+  opaque, decontaminate edges so there's **no light fringe on navy**. The
+  script + technique are reusable (numpy + scipy.ndimage, background
+  `rgb(248,250,253)`).
+- Re-pointed the component at it, re-derived the 7 marker `CENTRE`
+  fractions by auto-detecting the blue circles, and **left-aligned** the
+  art so the road bled to the screen's left edge.
+- **Reverted** because it looked bad. Root cause was **composition, not
+  the treatment**: left-jamming the road left the right ~40% an empty
+  navy void.
+
+**Decisions for when this is revisited (Chris-confirmed):**
+- **Pale-blue outlined rings on navy are fine** - that's how the original
+  art reads. The transparent-on-navy approach is NOT the problem; do not
+  "fix" the ring styling. The transparent `pricing-pathway.webp` asset is
+  the right asset to reuse.
+- The fix is **balance/composition** - center it or fill the space, don't
+  force the start into the left edge. If reaching the screen edge is still
+  wanted, use a **matched lead-in bar**, not by shoving the whole image.
+- **Full-width bleed spec** (put to the SME): the real lever is **aspect
+  ratio, not pixels**. Full-width means `height = viewportWidth / aspect`;
+  the current art is ~1.77:1 (16:9), which at a 1920px-wide desktop is
+  1080px tall and overflows the reveal's no-scroll budget. For a
+  full-width bleed that fits, the road must be re-composed as a **wide,
+  shallow band ~3:1 to 3.5:1**. Format: **SVG ideal** (flat vector
+  line-art, infinite scale, tiny); else transparent WebP at **2560px**
+  wide (pragmatic) or **3840px** (bulletproof for 4K/retina fullscreen).
+- Re-composing the aspect costs **no manual coordinate work** - the marker
+  `CENTRE` fractions are auto-detected from the asset each time (the
+  detection is a numpy/scipy blob-centroid pass on the blue circles).
+- Coordinate convenience already in the component: `DESIGN_W` stays 1891
+  (the old art's width) and only `DESIGN_H` tracks the new aspect, so the
+  text/layout constants don't need re-tuning; `CENTRE` values are
+  fractions so they're resolution-independent.
+
 ## How to run
 
 ```
