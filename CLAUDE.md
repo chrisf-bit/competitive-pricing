@@ -1390,11 +1390,12 @@ above is superseded or extended, its header points here.
 - Inserted **after the cleared celebration** (which now routes here
   instead of `portfolio`) AND **between rounds** - `advanceRound`
   routes here instead of the next round's portfolio.
-- **Two levels of ten tiles each**. Level 1 = existing partner-
-  portfolio content (rounds 1-10; today only R1-R3 are playable per
-  TOTAL_ROUNDS, the rest render locked with "Coming Soon"). Level 2
-  = future OPC / Advanced View content (rounds 11-20, all locked
-  with a sparkles badge + OPC label).
+- **Two levels of ten tiles each**. Level 1 = partner-portfolio
+  content (rounds 1-10). Level 2 = OPC content (rounds 11-20).
+  **[Superseded - see "Level 2 built (OPC rounds 11-20, complete)"
+  below.]** Both levels are now fully playable (`TOTAL_ROUNDS = 20`);
+  tiles unlock per-round rather than the Level 2 block being locked
+  wholesale, and `AVAILABLE_ROUNDS` was fixed from its stale `[1,2,3]`.
 - **Current tile derived from `roundStars`**, not the engine's
   `currentRound`. Persistence restores roundStars but resets
   currentRound to 1, so a returning learner with rounds already
@@ -2571,14 +2572,13 @@ on `release-2-partner-detail`.
   `'advanced'` while locked, so the render simply shows
   `<OpcMetricsTab>` when `activeTab === 'advanced'` (no locked
   fallback component needed).
-- **Not reachable in today's build.** `TOTAL_ROUNDS` is 10 (all Level
-  1) and Cross-Regional isn't selectable, so nothing hits round 11+ or
-  a KAM partner - the OPC tab stays locked throughout Level 1. It
-  auto-appears once Level 2 / KAM content lands. To preview it before
-  then you'd force `opcUnlocked` true or add a temporary DevNav hook
-  (not done). Priority partner records now carry `opcMetrics` data
-  (added round-by-round as R1-R10 were authored), so the tab will
-  populate when it unlocks.
+- **Now reachable.** **[Superseded - this bullet described the state
+  when only R1-R10 existed.]** `TOTAL_ROUNDS` is now 20 and Level 2
+  (rounds 11-20) is built, so the OPC tab unlocks and populates for
+  every Level 2 round. Priority partner records carry `opcMetrics`
+  data (with `visibilityShare` now using `peerValue`); Cross-Regional
+  / KAM is still not selectable. See "Level 2 built (OPC rounds 11-20,
+  complete)" below.
 
 ### OPC metric cards (structure built, data pending)
 
