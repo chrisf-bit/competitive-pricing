@@ -1014,6 +1014,13 @@ debate:
   routes straight to the partner sim.
 - Otherwise it reads "Get clearance for mission" and routes to Market
   Select.
+- **Footer copy (2026-08).** The briefing footer reads "Business
+  Simulation" on the left and "Estimated duration: 90-120 minutes, best
+  split across 2 to 3 visits" on the right. "Demo" was dropped from the
+  label (it is no longer a demo), and the duration was corrected from a
+  stale "25 minutes" to reflect the full 20-round journey (clearance +
+  Levels 1-2). The multi-visit suggestion is honest because progress
+  persists (clearance status + round stars survive a reload / session).
 
 ### DevNav
 
