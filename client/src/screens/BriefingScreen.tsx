@@ -184,8 +184,8 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
           justifyContent: 'space-between',
         }}
       >
-        <span>Business Simulation Demo</span>
-        <span>Estimated duration: 25 minutes</span>
+        <span>Business Simulation</span>
+        <span>Estimated duration: 90-120 minutes, best split across 2 to 3 visits</span>
       </div>
     </div>
   );
