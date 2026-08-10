@@ -106,9 +106,11 @@ function ClearanceIntro({
       </h1>
       <p
         style={{
-          fontSize: 13.5,
-          color: 'rgba(255,255,255,0.7)',
-          lineHeight: 1.5,
+          fontSize: 14,
+          // Brightened for legibility / a comfortable WCAG AA margin on
+          // the translucent card over navy (~10:1).
+          color: 'rgba(255,255,255,0.9)',
+          lineHeight: 1.55,
           maxWidth: 720,
           margin: '0 auto',
         }}

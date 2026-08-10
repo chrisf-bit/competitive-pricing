@@ -121,23 +121,6 @@ export function PathwayInfographic({
 
             return (
               <div key={n.id}>
-                {/* Active glow ring behind the marker */}
-                {isActive && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      left: cx - half - 8,
-                      top: cy - half - 8,
-                      width: MARKER_DIA + 16,
-                      height: MARKER_DIA + 16,
-                      borderRadius: '50%',
-                      border: '4px solid var(--brand-yellow)',
-                      boxShadow: '0 0 0 5px rgba(254,186,2,0.28)',
-                      pointerEvents: 'none',
-                    }}
-                  />
-                )}
-
                 <button
                   onClick={() => onSelect(n.stepNumber)}
                   aria-label={`Reveal step ${n.stepNumber}: ${n.title}`}
@@ -168,7 +151,12 @@ export function PathwayInfographic({
                     height={MARKER_DIA}
                     style={{
                       display: 'block',
-                      filter: 'drop-shadow(0 4px 6px rgba(0,8,26,0.45))',
+                      // Active = a yellow glow that follows the circle
+                      // shape (via drop-shadow), so it stays perfectly
+                      // centred; a subtle depth shadow otherwise.
+                      filter: isActive
+                        ? 'drop-shadow(0 2px 3px rgba(0,8,26,0.4)) drop-shadow(0 0 4px #FEBA02) drop-shadow(0 0 8px #FEBA02)'
+                        : 'drop-shadow(0 3px 4px rgba(0,8,26,0.45))',
                     }}
                   />
                 </button>

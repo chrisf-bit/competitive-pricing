@@ -42,7 +42,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
       <div
         style={{
           flexShrink: 0,
-          padding: '6px 20px 0',
+          padding: '22px 20px 4px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
