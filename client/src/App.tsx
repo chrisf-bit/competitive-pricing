@@ -313,34 +313,35 @@ export default function App() {
           {state.screen === 'portfolio' && (
             <PortfolioScreen
               partners={(() => {
-                // No regime chosen yet (e.g. dev nav jumped straight
-                // here) - show every partner so the screen renders.
-                if (!state.learnerProfile.market) return state.partners;
-                // Prefer the explicit per-round portfolio mapping when
-                // defined. The mapping is the source of truth - it
-                // lists priority + distractors by partner id, and
-                // ignores parityRegime, so the same distractor partner
-                // record can appear on multiple regimes' portfolios
-                // without authoring per-regime clones of it.
-                const ids = getPortfolioForRound(
-                  state.learnerProfile.market.parityRegime,
-                  state.currentRound,
-                );
-                if (ids) {
-                  return state.partners.filter((p) =>
-                    ids.includes(p.persona.id),
-                  );
-                }
-                // Fallback: no explicit mapping for this regime+round,
-                // so show every partner whose parityRegime matches
-                // the learner's chosen regime. Used for round / regime
-                // combinations that haven't been wired into
-                // portfolioByRound yet.
-                return state.partners.filter(
-                  (p) =>
-                    p.persona.parityRegime ===
-                    state.learnerProfile.market!.parityRegime,
-                );
+                // The learner must only ever see the three partners for
+                // this round (one priority + two distractors from
+                // portfolioByRound), never the full roster. The mapping
+                // is the source of truth - it lists priority + distractors
+                // by partner id and ignores parityRegime, so the same
+                // distractor record can appear on multiple regimes'
+                // portfolios without per-regime clones.
+                //
+                // If no market is set (e.g. a DevNav jump straight to the
+                // portfolio, skipping Market Select) fall back to No
+                // Parity so the round still resolves to three cards
+                // rather than dumping every partner and regime variant.
+                const regime =
+                  state.learnerProfile.market?.parityRegime ?? 'none';
+                const ids =
+                  getPortfolioForRound(regime, state.currentRound) ??
+                  getPortfolioForRound('none', state.currentRound);
+                // A truly unmapped round (out of range) renders nothing
+                // rather than falling back to the whole roster. Map in
+                // id order (not initialPartners order) so the cards render
+                // in the mapping's order - the priority's slot cycles
+                // across rounds, so its position isn't a tell either.
+                return ids
+                  ? ids
+                      .map((id) =>
+                        state.partners.find((p) => p.persona.id === id),
+                      )
+                      .filter((p): p is NonNullable<typeof p> => !!p)
+                  : [];
               })()}
               // Merge actionsThisRound + previouslyEngagedThisRound so
               // a wrong-pick partner from before a retake still reads

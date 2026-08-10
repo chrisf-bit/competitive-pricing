@@ -332,22 +332,21 @@ DO list and the regime's specific constraints.
   distractors, with Raven Inn and Driftwood Bay as R2 distractors.
   `TOTAL_ROUNDS = 10` in `gameEngine.ts` and `Header.tsx`.
 - **No Parity, Narrow Parity, and Wide Parity are all selectable**
-  in Market Select. Cross Regional is still gated. The decoys are
-  Marina and Carlos (R1, R3, and R4-R10) and Raven Inn + Driftwood
-  Bay Resort (R2). Distractor records are tagged
-  `parityRegime: 'none'` but appear on all three regimes' portfolios
-  via the explicit `portfolioByRound` mapping. John Marston, Stavros,
-  Hannah, Priya, and Yuki remain in `pendingPartners`.
-- **Per-round portfolio composition is explicit** in
+  in Market Select. Cross Regional is still gated. **[Decoys
+  superseded - see "Decoy redesign: lead hotels decoy for each other"
+  below.]** The decoys are no longer the fixed Marina / Carlos (and
+  Raven / Driftwood) pair; each round's two non-priority cards are two
+  *other* lead hotels shown healthy. John Marston, Stavros, Hannah,
+  Priya, and Yuki remain in `pendingPartners`.
+- **Per-round portfolio composition** lives in
   `data/portfolioByRound.ts` - three cards per round (one priority +
-  two decoys). The mapping is the source of truth on Portfolio
-  renders - it ignores each partner's own `parityRegime` field when
-  an entry exists, which lets the same decoy record (e.g. Marina with
-  parityRegime 'none') appear on Wide / Narrow / No-Parity portfolios
-  without per-regime clones. Sibling of `correctPartnerPerRound.ts`:
-  keep them in sync - the priority partner per round MUST be present
-  in the corresponding portfolio list, otherwise the round is
-  unwinnable.
+  two decoys). **[Now generated - see the decoy-redesign section
+  below.]** It is built from a rotation table rather than hand-listed,
+  and card order follows the mapping. Sibling of
+  `correctPartnerPerRound.ts`: keep them in sync - the priority partner
+  per round MUST be present in the corresponding portfolio list,
+  otherwise the round is unwinnable (they are generated from the same
+  priority table, so they can't drift).
 
 ### Conversation structure
 
@@ -2886,6 +2885,78 @@ R11-R20 across all three regimes.
   Riverside Boutique (Hotel 202). Built as Riverside. The fix doc also
   labels the data set "Red Brick Boutique" in one spot - another SME
   naming variant for the same Hotel ID 202 / Riverside.
+
+## Decoy redesign: lead hotels decoy for each other (2026-08)
+
+Two things landed together here - a portfolio-render bug fix and a
+change to how decoys work.
+
+### Portfolio bug fix
+
+The Portfolio must only ever show the three cards for the round (one
+priority + two decoys), never the full roster. The old code returned
+*every* partner when no market was set - which happens on a DevNav jump
+straight to the portfolio - so it rendered all three regime variants of
+every hotel (each property three times). `App.tsx` now defaults the
+regime to No Parity when none is set, always resolves to the three
+mapped ids, and maps them in card order (never falls back to the whole
+roster). A wrong partner wrongly on that list was also why "Begin
+Conversation" looked broken: `startConversation` is a silent no-op for a
+partner with no conversation for the round, so engaging a hotel that
+isn't the round's priority (and had no call) did nothing.
+
+### Decoy design ("Option B")
+
+The two non-priority cards each round are now **two other lead hotels
+shown in a healthy state**, not the fixed Marina / Carlos pair. Every
+hotel is the priority twice (its Level 1 + Level 2 round) and a healthy
+decoy four times; its slot in the three-card row cycles 0/1/2; and its
+two priority rounds get different decoy pairs. So neither identity nor
+position tells the learner anything - they have to read the data. This
+replaces the old design where the same two decoys recurred every round
+(learners could just "pick the hotel that isn't Marina/Carlos"). Marina,
+Carlos, Raven Inn and Driftwood Bay are retired from the portfolios;
+their records and trees stay on disk, unused.
+
+Mechanics (all in `data/scenarios/healthy-decoys.ts` plus three small
+wiring loops):
+
+- **`HEALTHY_DECOY_ROUNDS`** - each hotel's four decoy rounds (never its
+  own priority round). The rotation: R1 Royal Crest / decoys Ocean View
+  + Emerald Peak; R2 Silver Horizon / Riverside + Oceanfront; ... (full
+  table lives in `PRIORITY_BY_ROUND` + `DECOYS_BY_ROUND` in
+  `portfolioByRound.ts`).
+- **`healthyDecoyMetricsFor(baseId)`** - a varied healthy profile per
+  hotel (competitive eRPD, low Lose Price, healthy OPC, a real ~10-point
+  Public/Loyal gap). Each hotel has its own numbers so two decoy cards
+  never read as clones. `partnerValueAbrn` is omitted so the
+  `applyRoundBaseline` merge keeps the hotel's real (identity) value.
+- **`buildHealthyDecoyScenario(partnerId, round)`** - a short "this hotel
+  is in good shape, nothing pressing today" branching call in the
+  manager's style. Engaging a wrong pick plays it, scores 0 (wrong
+  partner) and offers a retake - so Begin Conversation never dead-ends.
+- **`portfolioByRound.ts` is generated** from `PRIORITY_BY_ROUND` +
+  `DECOYS_BY_ROUND` + the position rule, for all 20 rounds x 3 markets.
+  Don't hand-edit the per-round arrays - change the tables.
+- **`partnerStateByRound.ts`** loops over `HEALTHY_DECOY_ROUNDS` to
+  register each hotel's healthy baseline at its decoy rounds (base-id
+  alias covers all three markets); the hotel's own round has no entry,
+  so it keeps its problem-state record.
+- **`branchingScenarios.ts`** loops to register the healthy call at each
+  hotel's decoy rounds per market (decoy rounds never overlap a hotel's
+  own priority rounds).
+
+Verified: every round x market resolves to three real records with the
+priority present and every card engageable; the priority is the clear
+worst on Lose Price *or* the eRPD MoM spike every round. Silver Horizon
+(R2/R12) and Riverside (R4/R14) are the subtle ones - their headline
+Lose Price sits close to the decoys', so the giveaway is the sharp eRPD
+spike, not the level (the same "read the movement" skill those rounds
+always tested).
+
+Dead data note: the old Marina / Carlos decoy baselines (including the
+L2 `marinaL2DecoyMetrics` / `carlosL2DecoyMetrics`) are still in
+`partnerStateByRound.ts` but no longer referenced by any portfolio.
 
 ## How to run
 

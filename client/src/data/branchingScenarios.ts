@@ -44,6 +44,10 @@ import { palaceGrandR17 } from './scenarios/palace-grand-r17';
 import { hiddenValleyR18 } from './scenarios/hidden-valley-r18';
 import { loftLivingR19 } from './scenarios/loft-living-r19';
 import { nobleFalconR20 } from './scenarios/noble-falcon-r20';
+import {
+  HEALTHY_DECOY_ROUNDS,
+  buildHealthyDecoyScenario,
+} from './scenarios/healthy-decoys';
 
 /**
  * Branching conversation scenarios.
@@ -204,6 +208,23 @@ export const branchingScenarios: BranchingMap = {
     20: nobleFalconR20('noble-falcon-wide'),
   },
 };
+
+// ── Healthy decoy calls (design "Option B") ─────────────────────────
+// Each lead hotel doubles as a healthy decoy in four other rounds. When
+// the learner engages a wrong pick there, this short "nothing pressing
+// today" call plays (scored 0 as the wrong partner, then a retake) so
+// Begin Conversation never dead-ends. Registered per market at each
+// hotel's decoy rounds; these rounds never overlap the hotel's own
+// priority rounds already registered above.
+for (const [baseId, rounds] of Object.entries(HEALTHY_DECOY_ROUNDS)) {
+  for (const regime of ['none', 'narrow', 'wide'] as const) {
+    const id = `${baseId}-${regime}`;
+    const bucket = (branchingScenarios[id] ??= {});
+    for (const round of rounds) {
+      bucket[round] = buildHealthyDecoyScenario(id, round);
+    }
+  }
+}
 
 export function getBranchingScenario(
   partnerId: string,

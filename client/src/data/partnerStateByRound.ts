@@ -1,4 +1,8 @@
 import type { PartnerMetrics } from '../types';
+import {
+  HEALTHY_DECOY_ROUNDS,
+  healthyDecoyMetricsFor,
+} from './scenarios/healthy-decoys';
 
 /**
  * Scripted per-round partner state baselines.
@@ -846,6 +850,22 @@ export const partnerStateByRound: Record<
     20: { metrics: carlosL2DecoyMetrics() },
   },
 };
+
+// ── Healthy decoy baselines (design "Option B") ─────────────────────
+// Each lead hotel appears as a decoy in four rounds (never its own
+// priority round). At those rounds it must read HEALTHY, not its
+// problem state, so the priority still stands out. Registered here
+// under the base id at each decoy round; getPartnerBaseline's base-id
+// alias means one entry per hotel-round covers all three markets. The
+// hotel's own priority round has no entry, so it keeps its problem-state
+// record. A fresh metrics object per round so the engine can mutate one
+// round without touching the others.
+for (const [baseId, rounds] of Object.entries(HEALTHY_DECOY_ROUNDS)) {
+  const entry = (partnerStateByRound[baseId] ??= {});
+  for (const round of rounds) {
+    entry[round] = { metrics: healthyDecoyMetricsFor(baseId) };
+  }
+}
 
 /**
  * Returns the baseline state for a given partner at a given round, or
