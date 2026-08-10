@@ -32,14 +32,20 @@ import { pathwayNodes } from '../data/issueTreeReveal';
 
 const DESIGN_W = 2560;
 const DESIGN_H = 853;
-const MARKER_DIA = 100; // ~0.039 of the road width, matching the art
+// Marker circle diameter in design px. The marker webps are now cropped
+// tight to the circle (centred), so this is the actual circle size; the
+// drop-shadow is added in CSS so it can't push the circle off its centre.
+const MARKER_DIA = 82;
 
+// Steps 3 and 5 are nudged down from the detected road centres so the
+// top markers clear the phase pills (the pills are baked into the road
+// art, so this is the code-side way to open that gap).
 const CENTRE: Record<number, { x: number; y: number }> = {
   1: { x: 0.224, y: 0.421 },
   2: { x: 0.301, y: 0.849 },
-  3: { x: 0.416, y: 0.225 },
+  3: { x: 0.416, y: 0.262 },
   4: { x: 0.492, y: 0.847 },
-  5: { x: 0.588, y: 0.286 },
+  5: { x: 0.588, y: 0.320 },
   6: { x: 0.628, y: 0.755 },
   7: { x: 0.724, y: 0.478 },
 };
@@ -160,7 +166,10 @@ export function PathwayInfographic({
                     alt=""
                     width={MARKER_DIA}
                     height={MARKER_DIA}
-                    style={{ display: 'block' }}
+                    style={{
+                      display: 'block',
+                      filter: 'drop-shadow(0 4px 6px rgba(0,8,26,0.45))',
+                    }}
                   />
                 </button>
 
@@ -191,7 +200,7 @@ export function PathwayInfographic({
         </div>
       </div>
 
-      {/* Revealed step text - fixed panel beneath the road. */}
+      {/* Revealed step text - fixed panel beneath the road, centred. */}
       <div
         style={{
           minHeight: 92,
@@ -201,6 +210,8 @@ export function PathwayInfographic({
           padding: '14px 20px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
         }}
       >
         {activeNode ? (
@@ -210,15 +221,23 @@ export function PathwayInfographic({
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
           >
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, flexWrap: 'wrap' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'baseline',
+                justifyContent: 'center',
+                gap: 10,
+                flexWrap: 'wrap',
+              }}
+            >
               <span
                 style={{
-                  fontSize: 12,
+                  fontSize: 19,
                   fontWeight: 800,
                   color: 'var(--brand-navy)',
                   background: 'var(--brand-yellow)',
-                  borderRadius: 6,
-                  padding: '2px 8px',
+                  borderRadius: 7,
+                  padding: '1px 10px',
                 }}
               >
                 Step {activeNode.stepNumber}
