@@ -78,10 +78,12 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          padding: '8px 20px 0',
+          padding: '8px 0 0',
         }}
       >
-        <div style={{ width: '100%', maxWidth: 1120 }}>
+        {/* Full-width bleed: the v1.2 art spans the screen so it reads
+            as part of it, not a boxed slide. */}
+        <div style={{ width: '100%' }}>
           <PathwayInfographic
             activeStep={activeStep}
             visited={visited}
