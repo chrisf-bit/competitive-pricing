@@ -151,12 +151,12 @@ export function PathwayInfographic({
                     height={MARKER_DIA}
                     style={{
                       display: 'block',
-                      // Active = a yellow glow that follows the circle
-                      // shape (via drop-shadow), so it stays perfectly
-                      // centred; a subtle depth shadow otherwise.
+                      // Flat markers (no depth shadow). Active step gets a
+                      // yellow glow that follows the circle shape via
+                      // drop-shadow, so it's always perfectly centred.
                       filter: isActive
-                        ? 'drop-shadow(0 2px 3px rgba(0,8,26,0.4)) drop-shadow(0 0 4px #FEBA02) drop-shadow(0 0 8px #FEBA02)'
-                        : 'drop-shadow(0 3px 4px rgba(0,8,26,0.45))',
+                        ? 'drop-shadow(0 0 4px #FEBA02) drop-shadow(0 0 9px #FEBA02)'
+                        : 'none',
                     }}
                   />
                 </button>
