@@ -1,4 +1,5 @@
 import type { ParityRegime } from '../types';
+import { kamPortfolioRow } from './kamLayout';
 
 /**
  * Per-round portfolio composition: which partner cards appear on the
@@ -81,12 +82,21 @@ function buildRegime(regime: ParityRegime): Record<number, string[]> {
   return map;
 }
 
+/** Cross-Regional (KAM) portfolio - its own layout (correct + close +
+ *  distractor, mixed parity), built from data/kamLayout.ts. */
+function buildKam(): Record<number, string[]> {
+  const map: Record<number, string[]> = {};
+  for (let r = 1; r <= 20; r++) map[r] = kamPortfolioRow(r);
+  return map;
+}
+
 export const portfolioByRound: Partial<
   Record<ParityRegime, Record<number, string[]>>
 > = {
   none: buildRegime('none'),
   narrow: buildRegime('narrow'),
   wide: buildRegime('wide'),
+  'cross-regional': buildKam(),
 };
 
 /**

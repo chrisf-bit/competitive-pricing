@@ -1,4 +1,5 @@
 import type { ParityRegime } from '../types';
+import { kamCorrectId } from './kamLayout';
 
 /**
  * Ground truth for "which partner should the learner have engaged
@@ -111,7 +112,12 @@ export const correctPartnerPerRound: Partial<
     19: 'loft-living-wide',
     20: 'noble-falcon-wide',
   },
-  // cross-regional: pending partner data.
+  // Cross-Regional (KAM): the ten lead hotels reframed as their parent
+  // partner companies, mixed parity per round. Built from the signed-off
+  // KAM layout (data/kamLayout.ts) so it can't drift from the portfolio.
+  'cross-regional': Object.fromEntries(
+    Array.from({ length: 20 }, (_, i) => [i + 1, kamCorrectId(i + 1)]),
+  ),
 };
 
 /**

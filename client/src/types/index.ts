@@ -358,8 +358,36 @@ export interface PartnerPersona {
    * Parity regime this partner operates under. Drives which conversation
    * options are legal (see ConversationOption.parityFilter). Optional for
    * backwards compatibility with the existing seed data.
+   *
+   * For Cross-Regional / KAM partners this is the partner's REAL market
+   * regime (wide / narrow / none, per the KAM playbook), NOT the journey.
+   * Cross-Regional membership is expressed by the `-cross-regional`
+   * partner id and the cross-regional entries in portfolioByRound /
+   * correctPartnerPerRound - a KAM round's three cards deliberately mix
+   * regimes, so the journey can't be a single parityRegime value.
    */
   parityRegime?: ParityRegime;
+
+  // ── Cross-Regional (KAM) identity pills ──
+  // Set only on the `-cross-regional` KAM records. When present, Partner
+  // Detail and the Portfolio card show the partner COMPANY (companyName)
+  // instead of the hotel name, plus the four KAM pills under it. Standard
+  // (single-property) records leave these undefined and render as before.
+  /**
+   * Partner company name shown for the game in the KAM journey ("Partner
+   * Name for the Game", roster Column I) - e.g. Royal Crest Hotel ->
+   * "Northumbrian Quays Hotel Management". Replaces propertyName in KAM
+   * display. Presence of this field is the signal to render KAM chrome.
+   */
+  companyName?: string;
+  /** KAM pill - the partner type (roster Column H): Hotel Management
+   *  Company / Managed Chain / Ownership Group. */
+  partnerType?: string;
+  /** KAM pill - HQ location, where the point of contact sits (Column J). */
+  hqLocation?: string;
+  /** KAM pill - number of properties in the portfolio (Column K),
+   *  replaces the room count for KAM partners. */
+  numberOfProperties?: number;
 }
 
 export interface PartnerState {
