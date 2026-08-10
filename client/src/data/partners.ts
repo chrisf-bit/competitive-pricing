@@ -1665,6 +1665,29 @@ function loftLivingBase(args: {
   ];
 }
 
+/**
+ * Cross-Regional (KAM) records reuse a lead hotel's base helper - the
+ * metrics already match the KAM metrics deck (same SME data set) - and
+ * layer on the KAM identity: the partner COMPANY name shown for the game
+ * plus the four pills (partner type, HQ location, property count).
+ * `parityRegime` carries the company's REAL market regime from the KAM
+ * playbook page 1 (fixed per company); the journey deliberately MIXES
+ * regimes per round via data/kamLayout.ts, so cross-regional membership
+ * is expressed by the `-cross-regional` id in the portfolio /
+ * correct-partner maps rather than by a single parityRegime value.
+ */
+function withKamPills(
+  states: PartnerState[],
+  pills: {
+    companyName: string;
+    partnerType: string;
+    hqLocation: string;
+    numberOfProperties: number;
+  },
+): PartnerState[] {
+  return states.map((s) => ({ ...s, persona: { ...s.persona, ...pills } }));
+}
+
 export const initialPartners: PartnerState[] = [
   // ── Loft Living Inn (SME Round 9 priority, all three regimes) ──
   // SEVERE Key OTA gap (eRPD 31.7% / Bucket 7, +30.75 MoM) from a B2B /
@@ -2092,6 +2115,56 @@ export const initialPartners: PartnerState[] = [
   ...carlosBase({ id: 'carlos', parityRegime: 'none', location: 'Barcelona, Spain', contactName: 'Carlos Rivera' }),
   ...carlosBase({ id: 'carlos-narrow', parityRegime: 'narrow', location: 'Manchester, UK', contactName: 'Carlos Reeves' }),
   ...carlosBase({ id: 'carlos-wide', parityRegime: 'wide', location: 'Los Angeles, USA', contactName: 'Carlos Rivera' }),
+
+  // ── Cross-Regional (KAM) partner companies ──────────────────────────
+  // The ten lead hotels reframed as their parent partner companies for
+  // the KAM journey. Each reuses the hotel's base metrics (already the
+  // KAM deck values) and adds the company name + four pills. Contact and
+  // persona style come from the base helper; parityRegime is the
+  // company's fixed market regime from the KAM playbook page 1. Every
+  // property image is a verified Unsplash URL already used in the
+  // roster (same SCORM debt as the rest - swap to bundled WebP before
+  // the final package).
+  ...withKamPills(
+    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: "Liam O'Connell", propertyImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop' }),
+    { companyName: 'Northumbrian Quays Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'London', numberOfProperties: 26 },
+  ),
+  ...withKamPills(
+    silverHorizonBase({ id: 'silver-horizon-cross-regional', parityRegime: 'wide', location: 'Costa Brava, Spain', contactName: 'Chloe Davies', propertyImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop' }),
+    { companyName: 'Hawkesbury Hotel Investments', partnerType: 'Ownership Group', hqLocation: 'Spain', numberOfProperties: 66 },
+  ),
+  ...withKamPills(
+    oceanViewBase({ id: 'ocean-view-cross-regional', parityRegime: 'narrow', location: 'Athens, Greece', contactName: 'Camila Ross', propertyImage: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop' }),
+    { companyName: 'Attica Harbour Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'Athens', numberOfProperties: 180 },
+  ),
+  ...withKamPills(
+    riversideBase({ id: 'riverside-cross-regional', parityRegime: 'none', location: 'Singapore', contactName: 'Anton Müller', propertyImage: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop' }),
+    { companyName: 'Golf + Leisure Clubs & Rental', partnerType: 'Hotel Management Company', hqLocation: 'Singapore', numberOfProperties: 54 },
+  ),
+  ...withKamPills(
+    emeraldPeakBase({ id: 'emerald-peak-cross-regional', parityRegime: 'narrow', location: 'Delhi, India', contactName: 'Sophia Chen', propertyImage: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&h=250&fit=crop' }),
+    { companyName: 'Aravalli Hotels', partnerType: 'Managed Chain', hqLocation: 'Delhi', numberOfProperties: 1850 },
+  ),
+  ...withKamPills(
+    oceanfrontBase({ id: 'oceanfront-cross-regional', parityRegime: 'wide', location: 'Amsterdam, Netherlands', contactName: 'Priya Singh', propertyImage: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400&h=250&fit=crop' }),
+    { companyName: 'Marlow & Keene Hotels', partnerType: 'Managed Chain', hqLocation: 'Amsterdam', numberOfProperties: 997 },
+  ),
+  ...withKamPills(
+    palaceGrandBase({ id: 'palace-grand-cross-regional', parityRegime: 'none', location: 'New York, USA', contactName: 'Ethan Nkosi', propertyImage: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400&h=250&fit=crop' }),
+    { companyName: 'Thames Hospitality Group', partnerType: 'Managed Chain', hqLocation: 'New York', numberOfProperties: 22 },
+  ),
+  ...withKamPills(
+    hiddenValleyBase({ id: 'hidden-valley-cross-regional', parityRegime: 'narrow', location: 'Rio de Janeiro, Brazil', contactName: 'Claire Thornton', propertyImage: 'https://images.unsplash.com/photo-1596436889106-be35e843f974?w=400&h=250&fit=crop' }),
+    { companyName: 'Valle do Paraiba Managed Hotels', partnerType: 'Managed Chain', hqLocation: 'Rio de Janeiro', numberOfProperties: 47 },
+  ),
+  ...withKamPills(
+    loftLivingBase({ id: 'loft-living-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: 'Lucas Silva', propertyImage: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop' }),
+    { companyName: 'Midtown River Ownership Group', partnerType: 'Ownership Group', hqLocation: 'London', numberOfProperties: 819 },
+  ),
+  ...withKamPills(
+    nobleFalconBase({ id: 'noble-falcon-cross-regional', parityRegime: 'none', location: 'Mexico City, Mexico', contactName: 'Adam Cole', propertyImage: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=250&fit=crop' }),
+    { companyName: 'Cuajimalpa Highlands Hospitality Group', partnerType: 'Ownership Group', hqLocation: 'Mexico', numberOfProperties: 25 },
+  ),
 
 ];
 
