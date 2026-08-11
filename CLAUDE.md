@@ -2708,13 +2708,19 @@ the asset into `dist/`** (so `import` it, never reference a URL).
   and bundled. Not PNG/JPEG. WebP at 30-80KB replaced the old 1.5-2.2MB
   PNGs with no visible loss.
 - **Never** `fetch`, CDN URLs, or external fonts.
-- **Outstanding debt:** partner `propertyImage` values and the Warm Up
-  mini-scenario hero images still use **Unsplash CDN URLs**
-  ([data/partners.ts](client/src/data/partners.ts),
-  [data/miniScenarios.ts](client/src/data/miniScenarios.ts)) - every
-  R1-R10 priority partner inherited that pattern. They must be downloaded,
-  converted to WebP, and bundled before the final SCORM package. Fine on
-  Render/dev (network works there); it's the blocker for the zip.
+- **CDN image debt - CLEARED (2026-08-11).** All property images (partner
+  `propertyImage`, Warm Up `heroImage`, and the KAM records) were Unsplash
+  CDN URLs - a runtime fetch banned in the SCORM zip. All 29 unique images
+  were downloaded, compressed to WebP (25 files under
+  [assets/properties/](client/src/assets/properties/)) and bundled. The
+  data now references them by short id (e.g. `"photo-1566073771259"`);
+  [data/propertyImages.ts](client/src/data/propertyImages.ts) maps id ->
+  bundled asset and `resolvePropertyImage(id)` is called at every `<img>`
+  render site (Partner Detail header, Portfolio card thumb, Warm Up hero).
+  Zero `unsplash` occurrences remain in src or in the dist bundle. Pattern
+  for a NEW property image: download + compress to WebP into
+  `assets/properties/`, import it in `propertyImages.ts`, add its id to the
+  map, and store that id (not a URL) in the data.
 
 ### Pricing Pathway reveal - full-bleed experiment (reverted)
 
@@ -3107,8 +3113,8 @@ is SME (the L1/L2 playbooks); everything decoy-side is Claude-authored.
   emitted yet).
 - **Close/distractor dialogue + near-miss baselines** are Claude-authored
   - SME sign-off needed, same as the main-journey decoys.
-- KAM property images reuse Unsplash CDN URLs (same SCORM debt as the
-  rest - convert to bundled WebP before the final package).
+- KAM property images are bundled WebP like the rest (the CDN image debt
+  was cleared 2026-08-11 - see Asset format standards).
 
 ## How to run
 
@@ -3200,9 +3206,8 @@ to resolve before final delivery.
   `data/learnerMarkets.ts`) - the full 20-round KAM journey is built and
   playable (see "## Cross-Regional (KAM) journey - BUILT"). Outstanding
   before final ship: SME sign-off on the Claude-authored close/distractor
-  decoy dialogue + baselines and the L2 objection tags; and the KAM
-  property images reuse Unsplash CDN URLs (same SCORM debt as the rest -
-  convert to bundled WebP).
+  decoy dialogue + baselines and the L2 objection tags. (The KAM property
+  images are bundled WebP - the CDN image debt was cleared 2026-08-11.)
 - **Practice Mode cards** auto-scale with TOTAL_ROUNDS - all ten are
   active today; no manual action needed.
 
