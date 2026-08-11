@@ -69,8 +69,8 @@ const activities: ActivityDef[] = [
   },
   {
     id: 'email-audit',
-    label: 'Email Audit',
-    description: 'Safe vs unsafe pricing phrases in a colleague\'s draft',
+    label: 'Call transcript audit',
+    description: 'Safe vs unsafe pricing phrases in a colleague\'s call transcript',
     screen: 'l0-email-audit',
     itemMatcher: (id) => id.startsWith('email-audit-'),
     totalItems: 5,
@@ -177,7 +177,7 @@ function getMissedItemDetail(
       return {
         itemId,
         prompt: `"${phrase.text}"`,
-        correctText: phrase.isSafe ? 'Safe to send' : 'Unsafe - rewrite',
+        correctText: phrase.isSafe ? 'Safe to say' : 'Unsafe - shouldn\'t have said it',
         rationale: phrase.rationale.incorrect,
         source: phrase.source,
       };
