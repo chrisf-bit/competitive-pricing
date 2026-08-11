@@ -220,8 +220,20 @@ export function PartnerDetailScreen({
             </div>
             <div>
               <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>
-                {partner.persona.companyName ?? partner.persona.propertyName}
+                {partner.persona.propertyName}
               </h2>
+              {partner.persona.companyName && (
+                <div
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: 'var(--grey-500)',
+                    marginTop: 1,
+                  }}
+                >
+                  {partner.persona.companyName}
+                </div>
+              )}
               <div
                 style={{
                   display: 'flex',
@@ -230,6 +242,7 @@ export function PartnerDetailScreen({
                   fontSize: 12,
                   color: 'var(--grey-400)',
                   fontWeight: 500,
+                  marginTop: 2,
                 }}
               >
                 <UserCircle size={12} />

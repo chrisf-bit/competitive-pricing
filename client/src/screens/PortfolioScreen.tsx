@@ -174,7 +174,7 @@ export function PortfolioScreen({
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                       <h3 style={{ fontSize: 14, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {partner.persona.companyName ?? partner.persona.propertyName}
+                        {partner.persona.propertyName}
                       </h3>
                       {engaged ? (
                         <span
@@ -205,9 +205,7 @@ export function PortfolioScreen({
                       }}
                     >
                       <Building2 size={10} />
-                      {partner.persona.companyName
-                        ? partner.persona.partnerType
-                        : partner.persona.propertyType}
+                      {partner.persona.companyName ?? partner.persona.propertyType}
                     </div>
                     <div
                       style={{
