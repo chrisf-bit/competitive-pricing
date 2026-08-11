@@ -416,11 +416,19 @@ based on the shape flag.
   The data files still list the optimal option first by authoring
   convention; grading keys off ids, not array position, so authoring
   and the `optimal: true` flag are unaffected.
-- Grading uses `gradeBranchingRound` in `engine/grading.ts`. Minimal
-  pass for v1: floor = right partner + all picks `compliance: 'safe'`
-  + no -2 style mismatch. No "optimal diag / pitch" gate yet (per-step
-  `optimal` tagging is now consistent across all ten branching
-  scenarios, so a stricter gate could layer on if desired).
+- Grading uses `gradeBranchingRound` in `engine/grading.ts`. The floor
+  (all must hold for >= 1 star) is: right partner + **optimal Diagnosis**
+  + **optimal Pitch** + all picks `compliance: 'safe'` + no -2 style
+  mismatch - mirroring the 3-phase floor. The optimal-diag/pitch gate was
+  added 2026-08-11 (previously the floor was only partner + safe + style,
+  and a wrong-but-polite call could clear with 1 star). Mapping onto
+  branching: **Pitch** = the final (close) pick is `optimal`; **Diagnosis**
+  = at least half of the earlier picks are `optimal`. Above the floor,
+  styleSum on the partner's primary style sets the tier (>= +5 -> 2 stars,
+  >= +6 -> 3). Verified: all priority rounds (standard + KAM, every regime)
+  still pass the floor on the SME-optimal path. This relies on every step
+  carrying a consistent `optimal: true` tag - keep that invariant when
+  authoring new scenarios or an optimal path could fail its own floor.
 
 ### Distractor design
 
@@ -3181,6 +3189,36 @@ Left intentionally as-is (timed polish, not dead-ends): Splash 4s intro,
 the 2.4s celebration button reveal. Dev-only rough edge still open:
 DevNav -> Debrief renders blank when `gameComplete` is false (fold a guard
 into the DevNav removal task).
+
+### End-to-end scoring audit (2026-08-11)
+
+A full sweep of all scoring after the gm-chat bug (clearance knowledge-
+checks + round star grading + debrief rollup). Core math verified sound
+(star thresholds, compliance capping, star monotonicity, A/B/C/D grade).
+Fixes shipped:
+- **Clearance:** Call Audit was the only activity with a hard-coded
+  `totalItems` (5); now derived per-regime from
+  `getEmailAudit(regime).phrases.length` so a per-regime phrase edit can't
+  reintroduce the gm-chat >100%/false-passing bug. (gm-chat itself already
+  fixed: matcher `/^[AB]\d+$/`, `totalItems = GM_ITEM_IDS.length` = 14.)
+  The retry/dedup path, cleared gate, and all four activities re-verified
+  consistent.
+- **Branching floor** now enforces optimal Diagnosis + Pitch (see the
+  grading bullet above).
+- **Debrief trade-off aggregate** redefined from 0-star (unreachable) to
+  1-star scrappy passes; denominator is now rounds-played.
+- **Debrief per-partner cards** dropped the "RPD Change" (always +0) and
+  "RPD Now" (legacy field) figures - same misleading-legacy-field issue as
+  the removed score tiles; Relationship status stays.
+- **Null-regime soft-lock** closed: both grade sites default regime to
+  'none' so a completed call always grades -> report + retake.
+
+Flagged, NOT yet changed (needs a call): **same partner reused in L1 and
+L2 collapses in `engagedPartnerIds`** (dedupes by id), so the Debrief
+Partner Outcomes grid shows ~10 cards for a 20-round run and Relationship
+Health averages only each partner's final trust. The A/B/C/D letter grade
+is unaffected (it reads `roundStars`). Fix if the outcomes grid matters:
+key engagement history by `${partnerId}-${round}`.
 
 ## How to run
 
