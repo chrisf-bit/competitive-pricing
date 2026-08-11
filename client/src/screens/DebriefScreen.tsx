@@ -118,13 +118,16 @@ export function DebriefScreen({
     reportLessonStatus('completed');
   }, []);
 
-  // Aggregate persona block: count strength-rounds (>= 2 stars) and
-  // trade-off-rounds (0 stars) across all attempted rounds. 1-star
-  // passes count as neither - the persona didn't clearly carry or cost.
+  // Aggregate persona block over the rounds actually played (roundStars
+  // only stores rounds the learner cleared). Strength = a clean pass
+  // (>= 2 stars); trade-off = a scrappy single-star pass, where the
+  // persona's trade-off showed even though they got through. (A 0-star
+  // round can't reach the debrief - you can't advance past it - so the
+  // old `=== 0` count was structurally always zero.)
   const persona = getPersonaById(personaId);
   const attemptedRounds = Object.values(roundStars);
   const strengthRounds = attemptedRounds.filter((s) => s >= 2).length;
-  const tradeOffRounds = attemptedRounds.filter((s) => s === 0).length;
+  const tradeOffRounds = attemptedRounds.filter((s) => s === 1).length;
 
   return (
     <div
@@ -198,7 +201,7 @@ export function DebriefScreen({
         {persona && attemptedRounds.length > 0 && (
           <PersonaAggregateBlock
             persona={persona}
-            totalRounds={TOTAL_ROUNDS_DISPLAYED}
+            totalRounds={attemptedRounds.length}
             strengthRounds={strengthRounds}
             tradeOffRounds={tradeOffRounds}
           />
@@ -794,11 +797,12 @@ function PersonaAggregateBlock({
         <strong style={{ color: 'var(--brand-navy)' }}>
           {strengthRounds} of {totalRounds}
         </strong>{' '}
-        rounds where your strength carried, and{' '}
+        rounds where your strength carried you to a clean pass, and{' '}
         <strong style={{ color: 'var(--brand-navy)' }}>
           {tradeOffRounds} of {totalRounds}
         </strong>{' '}
-        where the trade-off slowed you down. {persona.powerEffect.aggregateCoaching}
+        where you scraped through at a single star and the trade-off showed.{' '}
+        {persona.powerEffect.aggregateCoaching}
       </p>
     </div>
   );

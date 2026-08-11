@@ -258,8 +258,14 @@ export function gradeBranchingRound(input: {
   const styleSum = styleScores.reduce((a, b) => a + b, 0);
   const noActiveMismatch = styleScores.every((s) => s > -2);
 
-  // Heuristic diag/pitch correctness for the Report criterion readout.
-  // The grader's floor does NOT use these - they're informational.
+  // Diagnosis / pitch correctness. Every branching scenario tags its
+  // SME-preferred move at each step with `optimal: true`, so we map the
+  // 3-phase floor onto branching as: the Pitch is the final (close) pick,
+  // and the Diagnosis is the run of steps before it - the learner must
+  // have taken the optimal move on at least half of those. These now gate
+  // the floor (they used to be informational only), so a substantively
+  // wrong-but-polite call no longer clears with 1 star, and the Report's
+  // Diagnosis/Pitch ticks can't contradict the star award.
   const nonFinalPicks = pickedOptions.slice(0, -1);
   const finalPick = pickedOptions[pickedOptions.length - 1];
   const optimalNonFinal = nonFinalPicks.filter((o) => o.optimal).length;
@@ -271,6 +277,10 @@ export function gradeBranchingRound(input: {
   let failureReason: GradingFailureReason | null = null;
   if (!rightPartner) {
     failureReason = 'wrong-partner';
+  } else if (!diagnosisCorrect) {
+    failureReason = 'wrong-diagnosis';
+  } else if (!pitchCorrect) {
+    failureReason = 'wrong-pitch';
   } else if (!allCompliant) {
     failureReason = 'unsafe-pick';
   } else if (!noActiveMismatch) {
