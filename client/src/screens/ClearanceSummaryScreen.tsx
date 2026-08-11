@@ -234,6 +234,12 @@ export function ClearanceSummaryScreen({
   const totalCorrect = scorable.reduce((sum, a) => sum + a.correct, 0);
   const overallPct = totalAttempted === 0 ? 0 : totalCorrect / totalAttempted;
   const cleared = overallPct >= PASS_THRESHOLD && scorable.every((a) => a.attempted >= a.activity.totalItems);
+  // First activity the learner still needs to fix (not passing, or not
+  // fully attempted). Drives the bottom button when not cleared so it is
+  // an actionable "Retry to clear" rather than a dead disabled control.
+  const firstRetryable = scorable.find(
+    (a) => !a.passing || a.attempted < a.activity.totalItems,
+  );
 
   return (
     <div
@@ -308,14 +314,27 @@ export function ClearanceSummaryScreen({
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', maxWidth: 480 }}>
           {cleared
             ? "You're cleared. Time to put it into practice with real partners."
-            : 'You need 80% or higher to clear. Use the Retry buttons above to revisit the items you missed.'}
+            : firstRetryable
+              ? `You need 80% or higher to clear. Retry ${firstRetryable.activity.label} to raise your score - or use the Retry buttons on any activity above.`
+              : 'You need 80% or higher to clear.'}
         </div>
         <button
-          onClick={() => onContinue(cleared, overallPct)}
-          disabled={!cleared}
+          onClick={() => {
+            if (cleared) {
+              onContinue(cleared, overallPct);
+            } else if (firstRetryable) {
+              onRetry(
+                firstRetryable.activity.screen,
+                firstRetryable.activity.itemMatcher,
+              );
+            }
+          }}
+          disabled={!cleared && !firstRetryable}
           style={{
-            background: cleared ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.06)',
-            color: cleared ? 'var(--brand-navy)' : 'rgba(255,255,255,0.4)',
+            background:
+              cleared || firstRetryable ? 'var(--brand-yellow)' : 'rgba(255,255,255,0.06)',
+            color:
+              cleared || firstRetryable ? 'var(--brand-navy)' : 'rgba(255,255,255,0.4)',
             padding: '12px 26px',
             borderRadius: 'var(--radius-sm)',
             fontSize: 15,
@@ -323,20 +342,27 @@ export function ClearanceSummaryScreen({
             display: 'flex',
             alignItems: 'center',
             gap: 8,
-            border: cleared ? 'none' : '1.5px solid rgba(255,255,255,0.10)',
-            cursor: cleared ? 'pointer' : 'not-allowed',
-            boxShadow: cleared ? '0 6px 18px rgba(254, 186, 2, 0.25)' : 'none',
+            border: cleared || firstRetryable ? 'none' : '1.5px solid rgba(255,255,255,0.10)',
+            cursor: cleared || firstRetryable ? 'pointer' : 'not-allowed',
+            boxShadow:
+              cleared || firstRetryable ? '0 6px 18px rgba(254, 186, 2, 0.25)' : 'none',
             transition: 'background 0.15s ease',
             flexShrink: 0,
           }}
           onMouseEnter={(e) => {
-            if (cleared) e.currentTarget.style.background = 'var(--brand-yellow-light)';
+            if (cleared || firstRetryable)
+              e.currentTarget.style.background = 'var(--brand-yellow-light)';
           }}
           onMouseLeave={(e) => {
-            if (cleared) e.currentTarget.style.background = 'var(--brand-yellow)';
+            if (cleared || firstRetryable)
+              e.currentTarget.style.background = 'var(--brand-yellow)';
           }}
         >
-          {cleared ? 'Continue to the partner sim' : 'Locked - retry to clear'}
+          {cleared
+            ? 'Continue to the partner sim'
+            : firstRetryable
+              ? `Retry ${firstRetryable.activity.label} to clear`
+              : 'Locked'}
           <ChevronRight size={17} />
         </button>
       </div>
