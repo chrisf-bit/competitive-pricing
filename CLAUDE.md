@@ -3127,6 +3127,53 @@ npm run dev
 Hosted at the URL on Render configured via `render.yaml` (auto-deploy
 from `main` branch).
 
+## Roadmap to SCORM cutover (outstanding items, 2026-08-11)
+
+The full list of what stands between today and pulling the sim off
+Render to ship the self-contained SCORM zip. Grouped by whether it
+blocks the package, needs sign-off, is launch scope, or is a decision.
+Detail for the checklist items is in the Pre-production checklist below.
+
+**Hard blockers for the SCORM zip**
+1. ~~CDN images -> bundled WebP~~ **DONE (2026-08-11)** - see the CDN
+   image debt note under "Asset format standards".
+2. **Remove / gate the dev affordances** - DevNav, the Splash "Reset
+   progress" button, and the `?dev=1` flag.
+3. **SCORM Cloud smoke test** - verify `suspend_data` / `lesson_status`
+   / `score.raw` / `student_name` in a real LMS, and that
+   `npm run build:scorm` produces an accepted zip. The wrapper landed in
+   Phase 1 but has never been tested in an LMS.
+
+**Content / legal sign-offs**
+4. **SME sign-off** on Claude-authored content - L2 (R11-20) distractors,
+   the KAM close / distractor decoy dialogue + baselines, L2 persona
+   hints, and the L2 objection tags.
+5. **Legal** - confirm the distractor surname-only localisation pattern
+   (first name constant across regime variants, surname per regime).
+
+**Launch scope (September, bigger than the cutover)**
+6. **Objection as a round scenario type** - each round IS an objection
+   diagnosed via the Pricing Pathway; 21-22 named objection types
+   cataloged, not built.
+7. **xAPI emission + reporting integration** - only the SCORM wrapper
+   exists; behavioural data is a separate stream (see the reporting
+   workstream notes).
+
+**Pre-ship decisions**
+8. **Returning-learner routing** - cleared learners currently re-walk
+   Market Select + Character Build each visit; confirm or revert for
+   production.
+9. **Parked partner records** (John / Stavros / Hannah / Priya / Yuki) -
+   strip from the bundle or keep for future reuse.
+10. **Debrief Avg RPD Change + Revenue Impact tiles** - still read from
+    the legacy `experiencedRPD` / `revenue` fields that the branching
+    engine barely moves, so the numbers are largely cosmetic. Decide:
+    compute them from the new eRPD baselines, leave them as soft
+    indicators, or drop the tiles.
+11. **Nice-to-have** - code-split the ~1.5MB main JS chunk.
+
+Shortest path to a packageable zip is items 2 and 3 (1 is done).
+
 ## Pre-production checklist (remove / change before final SCORM deploy)
 
 A running list of features that exist for tester / reviewer
