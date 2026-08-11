@@ -16,7 +16,6 @@ import type {
   LearnerProfile,
 } from '../types';
 import { RelationshipBadge } from '../components/MetricBadge';
-import { initialPartners } from '../data/partners';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 import { TOTAL_ROUNDS } from '../engine/gameEngine';
 import { getPersonaById } from '../data/characters';
@@ -219,13 +218,6 @@ export function DebriefScreen({
           <h4 style={{ marginBottom: 16, fontSize: 14 }}>Partner Outcomes</h4>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 12 }}>
             {outcomePartners.map((partner) => {
-              const initial = initialPartners.find(
-                (p) => p.persona.id === partner.persona.id,
-              );
-              const rpdDelta = initial
-                ? partner.metrics.experiencedRPD - initial.metrics.experiencedRPD
-                : 0;
-
               return (
                 <div
                   key={partner.persona.id}
@@ -271,66 +263,6 @@ export function DebriefScreen({
                       </div>
                       <div style={{ fontSize: 11, color: 'var(--grey-400)' }}>
                         {partner.persona.propertyName}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    style={{
-                      display: 'grid',
-                      gridTemplateColumns: '1fr 1fr',
-                      gap: 8,
-                      marginBottom: 10,
-                    }}
-                  >
-                    <div>
-                      <div
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 600,
-                          color: 'var(--grey-400)',
-                          textTransform: 'uppercase',
-                          marginBottom: 2,
-                        }}
-                      >
-                        RPD Change
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 700,
-                          color:
-                            rpdDelta > 0
-                              ? 'var(--success)'
-                              : rpdDelta < 0
-                                ? 'var(--danger)'
-                                : 'var(--grey-500)',
-                        }}
-                      >
-                        {rpdDelta >= 0 ? '+' : ''}
-                        {rpdDelta}
-                      </div>
-                    </div>
-                    <div>
-                      <div
-                        style={{
-                          fontSize: 10,
-                          fontWeight: 600,
-                          color: 'var(--grey-400)',
-                          textTransform: 'uppercase',
-                          marginBottom: 2,
-                        }}
-                      >
-                        RPD Now
-                      </div>
-                      <div
-                        style={{
-                          fontSize: 18,
-                          fontWeight: 700,
-                          color: 'var(--brand-navy)',
-                        }}
-                      >
-                        {partner.metrics.experiencedRPD}
                       </div>
                     </div>
                   </div>

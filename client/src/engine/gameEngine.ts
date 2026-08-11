@@ -451,29 +451,28 @@ export function processConversationChoice(
     // Grade the round - 0/1/2/3 stars - and route to the report screen
     // so the learner sees their result before the round transition.
     // Stars never go down: a replay can only improve the stored score.
-    const regime = state.learnerProfile.market?.parityRegime ?? null;
-    let grade: LastConversationGrade | null = null;
+    // Default to 'none' (never null) so a completed call always grades -
+    // see the matching note on the branching path below.
+    const regime = state.learnerProfile.market?.parityRegime ?? 'none';
     let newRoundStars = state.roundStars;
-    if (regime) {
-      const result = gradeRound({
-        tree,
-        choices: newChoices,
-        selectedPartnerId: conv.partnerId,
-        regime,
-        partnerPrimaryStyle: partner.persona.style,
-      });
-      grade = {
-        partnerId: conv.partnerId,
-        round: state.currentRound,
-        ...result,
+    const result = gradeRound({
+      tree,
+      choices: newChoices,
+      selectedPartnerId: conv.partnerId,
+      regime,
+      partnerPrimaryStyle: partner.persona.style,
+    });
+    const grade: LastConversationGrade = {
+      partnerId: conv.partnerId,
+      round: state.currentRound,
+      ...result,
+    };
+    const previousBest = state.roundStars[state.currentRound] ?? 0;
+    if (result.stars > previousBest) {
+      newRoundStars = {
+        ...state.roundStars,
+        [state.currentRound]: result.stars,
       };
-      const previousBest = state.roundStars[state.currentRound] ?? 0;
-      if (result.stars > previousBest) {
-        newRoundStars = {
-          ...state.roundStars,
-          [state.currentRound]: result.stars,
-        };
-      }
     }
 
     // Stay on the conversation screen so the learner can read the
@@ -593,29 +592,32 @@ function processBranchingChoice(
     // floor = safe picks + no active style mismatch; 2 stars at
     // styleSum >= 5; 3 stars at styleSum >= 6. No "optimal diag /
     // pitch" gate since branching has no fixed phase semantics yet.
-    const regime = state.learnerProfile.market?.parityRegime ?? null;
-    let grade: LastConversationGrade | null = null;
+    // Default to 'none' (never null) so a completed call ALWAYS grades and
+    // yields a report + retake path. A null regime (only reachable via a
+    // DevNav jump that skips Market Select) previously left grade null,
+    // routed to portfolio with the partner marked engaged, and advanceRound
+    // no-op'd on <1 star - a soft-lock. 'none' matches the portfolio's own
+    // no-market fallback, so the engaged partner id lines up.
+    const regime = state.learnerProfile.market?.parityRegime ?? 'none';
     let newRoundStars = state.roundStars;
-    if (regime) {
-      const result = gradeBranchingRound({
-        tree,
-        choices: newChoices,
-        selectedPartnerId: conv.partnerId,
-        regime,
-        partnerPrimaryStyle: partner.persona.style,
-      });
-      grade = {
-        partnerId: conv.partnerId,
-        round: state.currentRound,
-        ...result,
+    const result = gradeBranchingRound({
+      tree,
+      choices: newChoices,
+      selectedPartnerId: conv.partnerId,
+      regime,
+      partnerPrimaryStyle: partner.persona.style,
+    });
+    const grade: LastConversationGrade = {
+      partnerId: conv.partnerId,
+      round: state.currentRound,
+      ...result,
+    };
+    const previousBest = state.roundStars[state.currentRound] ?? 0;
+    if (result.stars > previousBest) {
+      newRoundStars = {
+        ...state.roundStars,
+        [state.currentRound]: result.stars,
       };
-      const previousBest = state.roundStars[state.currentRound] ?? 0;
-      if (result.stars > previousBest) {
-        newRoundStars = {
-          ...state.roundStars,
-          [state.currentRound]: result.stars,
-        };
-      }
     }
 
     return {
@@ -968,7 +970,10 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   // per-round playthrough wouldn't clear the legacy thresholds and a
   // perfect run would inexplicably land at C / Developing. Stars are
   // the authoritative per-round score and roll up cleanly here:
-  // 3 rounds * 3 stars = 9 max; the percentage maps to A/B/C/D.
+  // TOTAL_ROUNDS * 3 stars max (60 for the full 20-round journey); the
+  // percentage maps to A/B/C/D. Note the denominator is the full
+  // TOTAL_ROUNDS, so a partial-run debrief (practice / DevNav) would read
+  // deflated - fine for the normal end-of-journey path.
   let totalStars = 0;
   for (const round of Object.keys(state.roundStars)) {
     totalStars += state.roundStars[Number(round)] ?? 0;

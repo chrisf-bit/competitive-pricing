@@ -240,7 +240,19 @@ export function ClearanceSummaryScreen({
 }: ClearanceSummaryScreenProps) {
   const [expandedActivity, setExpandedActivity] = useState<string | null>(null);
 
-  const activityScores = activities.map((a) => scoreActivity(a, results));
+  // Call Audit is the one activity whose item count varies by regime, so
+  // its total is resolved from the regime-specific phrase set here rather
+  // than a hard-coded literal (which could drift if an SME adds/removes a
+  // phrase in one regime - the same >100%/false-passing failure mode as
+  // the old gm-chat bug).
+  const activityScores = activities.map((a) =>
+    scoreActivity(
+      a.id === 'email-audit'
+        ? { ...a, totalItems: getEmailAudit(regime).phrases.length }
+        : a,
+      results,
+    ),
+  );
   const scorable = activityScores.filter((a) => !a.activity.completionOnly);
   const totalAttempted = scorable.reduce((sum, a) => sum + a.attempted, 0);
   const totalCorrect = scorable.reduce((sum, a) => sum + a.correct, 0);
