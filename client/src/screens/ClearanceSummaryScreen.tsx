@@ -37,6 +37,18 @@ interface ClearanceSummaryScreenProps {
 
 const PASS_THRESHOLD = 0.8;
 
+// Day-one-with-Alex scored item ids, derived from the script so the
+// matcher and the expected total can never drift. Previously the matcher
+// was `/^[AB]\d$/` (single digit - silently dropped A10-A12) and totalItems
+// was hard-coded to 5 while there are 14 questions. That made pct =
+// correct/5 exceed 1.0, so the activity showed "PASSING" even with items
+// missed and the overall % never lined up with the cards - the exact
+// "all green but not cleared" state reviewers hit.
+const GM_ITEM_IDS: string[] = gmScript
+  .filter((b) => b.type === 'question')
+  .map((b) => (b.type === 'question' ? b.question.itemId : ''))
+  .filter((id) => /^[AB]\d+$/.test(id));
+
 interface ActivityDef {
   id: 'gm-chat' | 'data-insights' | 'email-audit' | 'mini-scenarios' | 'issue-tree';
   label: string;
@@ -56,8 +68,8 @@ const activities: ActivityDef[] = [
     label: 'Day one with Alex',
     description: 'Pricing basics: eRPD and on-platform vs cross-channel',
     screen: 'l0-gm-chat',
-    itemMatcher: (id) => /^[AB]\d$/.test(id),
-    totalItems: 5,
+    itemMatcher: (id) => /^[AB]\d+$/.test(id),
+    totalItems: GM_ITEM_IDS.length,
   },
   {
     id: 'data-insights',
@@ -234,12 +246,16 @@ export function ClearanceSummaryScreen({
   const totalCorrect = scorable.reduce((sum, a) => sum + a.correct, 0);
   const overallPct = totalAttempted === 0 ? 0 : totalCorrect / totalAttempted;
   const cleared = overallPct >= PASS_THRESHOLD && scorable.every((a) => a.attempted >= a.activity.totalItems);
-  // First activity the learner still needs to fix (not passing, or not
-  // fully attempted). Drives the bottom button when not cleared so it is
-  // an actionable "Retry to clear" rather than a dead disabled control.
-  const firstRetryable = scorable.find(
-    (a) => !a.passing || a.attempted < a.activity.totalItems,
-  );
+  // The activity the learner should fix next: the first not passing / not
+  // fully attempted, else (defensive - so the button is NEVER a dead
+  // "Locked" while not cleared) the one with the most missed items, else
+  // the first scorable activity. scorable is always non-empty here.
+  const firstRetryable = !cleared
+    ? scorable.find((a) => !a.passing || a.attempted < a.activity.totalItems) ??
+      [...scorable].sort(
+        (a, b) => b.missedResults.length - a.missedResults.length,
+      )[0]
+    : undefined;
 
   return (
     <div
