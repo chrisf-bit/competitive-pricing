@@ -7,6 +7,7 @@ import {
 import type { PartnerState, MarketContext } from '../types';
 import { RelationshipBadge } from '../components/MetricBadge';
 import { useIdleNudge } from '../hooks/useIdleNudge';
+import { resolvePropertyImage } from '../data/propertyImages';
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
@@ -238,7 +239,7 @@ export function PortfolioScreen({
                     }}
                   >
                     <img
-                      src={partner.persona.propertyImage}
+                      src={resolvePropertyImage(partner.persona.propertyImage)}
                       alt={partner.persona.propertyName}
                       style={{
                         width: '100%',

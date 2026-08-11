@@ -390,7 +390,7 @@ function marinaBase(args: {
       location: args.location,
       parityRegime: args.parityRegime,
       avatar: initialsFromName(args.contactName),
-      propertyImage: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
+      propertyImage: 'photo-1551882547',
       style: 'blue',
       styleSecondary: 'green',
       description:
@@ -459,7 +459,7 @@ function carlosBase(args: {
       location: args.location,
       parityRegime: args.parityRegime,
       avatar: initialsFromName(args.contactName),
-      propertyImage: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=250&fit=crop',
+      propertyImage: 'photo-1522708323590',
       style: 'yellow',
       styleSecondary: 'red',
       description:
@@ -526,7 +526,7 @@ function ravenInnBase(args: {
       parityRegime: args.parityRegime,
       avatar: initialsFromName(args.contactName),
       propertyImage:
-        'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
+        'photo-1551918120',
       style: 'green',
       styleSecondary: 'blue',
       description:
@@ -604,7 +604,7 @@ function driftwoodBayBase(args: {
       parityRegime: args.parityRegime,
       avatar: initialsFromName(args.contactName),
       propertyImage:
-        'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+        'photo-1582719508461',
       style: 'yellow',
       styleSecondary: 'green',
       description:
@@ -1702,7 +1702,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Austin, USA',
     contactName: 'Lucas Silva',
     propertyImage:
-      'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop',
+      'photo-1502672260266',
   }),
   ...loftLivingBase({
     id: 'loft-living-narrow',
@@ -1710,7 +1710,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Manchester, UK',
     contactName: 'Lucas Silva',
     propertyImage:
-      'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=400&h=250&fit=crop',
+      'photo-1560448204',
   }),
   ...loftLivingBase({
     id: 'loft-living-none',
@@ -1718,7 +1718,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Seville, Spain',
     contactName: 'Lucas Silva',
     propertyImage:
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=400&h=250&fit=crop',
+      'photo-1522708323590',
   }),
 
   // ── The Hidden Valley Resort (SME Round 8 priority, all three regimes) ──
@@ -1733,7 +1733,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Aspen, USA',
     contactName: 'Claire Thornton',
     propertyImage:
-      'https://images.unsplash.com/photo-1596436889106-be35e843f974?w=400&h=250&fit=crop',
+      'photo-1596436889106',
   }),
   ...hiddenValleyBase({
     id: 'hidden-valley-narrow',
@@ -1741,7 +1741,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Lake District, UK',
     contactName: 'Claire Thornton',
     propertyImage:
-      'https://images.unsplash.com/photo-1610641818989-c2051b5e2cfd?w=400&h=250&fit=crop',
+      'photo-1610641818989',
   }),
   ...hiddenValleyBase({
     id: 'hidden-valley-none',
@@ -1749,7 +1749,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Sierra Nevada, Spain',
     contactName: 'Claire Thornton',
     propertyImage:
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+      'photo-1571896349842',
   }),
 
   // ── Palace Grand Resort (SME Round 7 priority, all three regimes) ──
@@ -1765,7 +1765,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Orlando, USA',
     contactName: 'Ethan Nkosi',
     propertyImage:
-      'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400&h=250&fit=crop',
+      'photo-1571003123894',
   }),
   ...palaceGrandBase({
     id: 'palace-grand-narrow',
@@ -1773,7 +1773,7 @@ export const initialPartners: PartnerState[] = [
     location: 'London, UK',
     contactName: 'Ethan Nkosi',
     propertyImage:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+      'photo-1566073771259',
   }),
   ...palaceGrandBase({
     id: 'palace-grand-none',
@@ -1781,7 +1781,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Marbella, Spain',
     contactName: 'Ethan Nkosi',
     propertyImage:
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+      'photo-1582719508461',
   }),
 
   // ── Oceanfront Bliss Lodge (SME Round 6 priority, all three regimes) ──
@@ -1796,7 +1796,7 @@ export const initialPartners: PartnerState[] = [
     location: 'San Diego, USA',
     contactName: 'Priya Singh',
     propertyImage:
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop',
+      'photo-1520250497591',
   }),
   ...oceanfrontBase({
     id: 'oceanfront-narrow',
@@ -1804,7 +1804,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Cornwall, UK',
     contactName: 'Priya Singh',
     propertyImage:
-      'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&h=250&fit=crop',
+      'photo-1533105079780',
   }),
   ...oceanfrontBase({
     id: 'oceanfront-none',
@@ -1812,7 +1812,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Málaga, Spain',
     contactName: 'Priya Singh',
     propertyImage:
-      'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&h=250&fit=crop',
+      'photo-1499793983690',
   }),
 
   // ── Emerald Peak Lodge (SME Round 5 priority, all three regimes) ──
@@ -1826,7 +1826,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Aspen, USA',
     contactName: 'Sophia Chen',
     propertyImage:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+      'photo-1566073771259',
   }),
   ...emeraldPeakBase({
     id: 'emerald-peak-narrow',
@@ -1834,7 +1834,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Lake District, UK',
     contactName: 'Sophia Chen',
     propertyImage:
-      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
+      'photo-1551882547',
   }),
   ...emeraldPeakBase({
     id: 'emerald-peak-none',
@@ -1842,7 +1842,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Sierra Nevada, Spain',
     contactName: 'Sophia Chen',
     propertyImage:
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop',
+      'photo-1512917774080',
   }),
 
   // ── Riverside Boutique Hotel (SME Round 4 priority, all three regimes) ──
@@ -1856,7 +1856,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Charleston, USA',
     contactName: 'Anton Müller',
     propertyImage:
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+      'photo-1582719508461',
   }),
   ...riversideBase({
     id: 'riverside-narrow',
@@ -1864,7 +1864,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Bath, UK',
     contactName: 'Anton Müller',
     propertyImage:
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+      'photo-1571896349842',
   }),
   ...riversideBase({
     id: 'riverside-none',
@@ -1872,7 +1872,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Seville, Spain',
     contactName: 'Anton Müller',
     propertyImage:
-      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
+      'photo-1602002418082',
   }),
 
   // ── Ocean View Resort (SME Round 3 priority, all three regimes) ──
@@ -1887,7 +1887,7 @@ export const initialPartners: PartnerState[] = [
     location: 'San Diego, USA',
     contactName: 'Camila Ross',
     propertyImage:
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop',
+      'photo-1520250497591',
   }),
   ...oceanViewBase({
     id: 'ocean-view-narrow',
@@ -1895,7 +1895,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Brighton, UK',
     contactName: 'Camila Ross',
     propertyImage:
-      'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=250&fit=crop',
+      'photo-1502920917128',
   }),
   ...oceanViewBase({
     id: 'ocean-view-none',
@@ -1903,7 +1903,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Alicante, Spain',
     contactName: 'Camila Ross',
     propertyImage:
-      'https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400&h=250&fit=crop',
+      'photo-1533105079780',
   }),
 
   // ── Silver Horizon Resort (SME Round 2 priority, all three regimes) ──
@@ -1917,7 +1917,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Orlando, USA',
     contactName: 'Chloe Davies',
     propertyImage:
-      'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop',
+      'photo-1512917774080',
   }),
   ...silverHorizonBase({
     id: 'silver-horizon-narrow',
@@ -1925,7 +1925,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Lake District, UK',
     contactName: 'Chloe Davies',
     propertyImage:
-      'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&h=250&fit=crop',
+      'photo-1499793983690',
   }),
   ...silverHorizonBase({
     id: 'silver-horizon-none',
@@ -1933,7 +1933,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Costa Brava, Spain',
     contactName: 'Chloe Davies',
     propertyImage:
-      'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400&h=250&fit=crop',
+      'photo-1540541338287',
   }),
 
   // ── Royal Crest Hotel (SME Round 1 priority, all three regimes) ──
@@ -1948,7 +1948,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Miami Beach, USA',
     contactName: "Liam O'Connell",
     propertyImage:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+      'photo-1566073771259',
   }),
   ...royalCrestBase({
     id: 'royal-crest-narrow',
@@ -1956,7 +1956,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Cotswolds, UK',
     contactName: "Liam O'Connell",
     propertyImage:
-      'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=250&fit=crop',
+      'photo-1551882547',
   }),
   ...royalCrestBase({
     id: 'royal-crest-none',
@@ -1964,7 +1964,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Costa del Sol, Spain',
     contactName: "Liam O'Connell",
     propertyImage:
-      'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop',
+      'photo-1520250497591',
   }),
 
   // ── Crystal Water Resort (Wide Parity / Miami) ──
@@ -1982,7 +1982,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Miami Beach, USA',
     contactName: 'Sarah Mitchell',
     propertyImage:
-      'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop',
+      'photo-1582719508461',
   }),
 
   // ── Crystal Water Resort (Narrow Parity / Cornwall) ──
@@ -1992,7 +1992,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Cornwall, UK',
     contactName: 'Sarah Bennett',
     propertyImage:
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=250&fit=crop',
+      'photo-1571896349842',
   }),
 
   // ── Crystal Water Resort (No Parity / Marbella) ──
@@ -2003,7 +2003,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Marbella, Spain',
     contactName: 'Sarah Beltrán',
     propertyImage:
-      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=400&h=250&fit=crop',
+      'photo-1602002418082',
   }),
 
   // ── Velvet Sky Boutique Hotel (Wide Parity / New York) ──
@@ -2020,7 +2020,7 @@ export const initialPartners: PartnerState[] = [
     location: 'New York, USA',
     contactName: 'John Whitfield',
     propertyImage:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+      'photo-1566073771259',
   }),
 
   // ── Velvet Sky Boutique Hotel (Narrow Parity / Edinburgh) ──
@@ -2030,7 +2030,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Edinburgh, UK',
     contactName: 'John Whitford',
     propertyImage:
-      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=400&h=250&fit=crop',
+      'photo-1568084680786',
   }),
 
   // ── Velvet Sky Boutique Hotel (No Parity / Madrid) ──
@@ -2041,7 +2041,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Madrid, Spain',
     contactName: 'John Vela',
     propertyImage:
-      'https://images.unsplash.com/photo-1570214476695-19bd467e6f7a?w=400&h=250&fit=crop',
+      'photo-1570214476695',
   }),
 
   // ── Raven Inn - R2 distractor across all three regimes ──
@@ -2089,7 +2089,7 @@ export const initialPartners: PartnerState[] = [
     location: 'New York, USA',
     contactName: 'Adam Cole',
     propertyImage:
-      'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=250&fit=crop',
+      'photo-1542314831',
   }),
   ...nobleFalconBase({
     id: 'noble-falcon-narrow',
@@ -2097,7 +2097,7 @@ export const initialPartners: PartnerState[] = [
     location: 'London, UK',
     contactName: 'Adam Cole',
     propertyImage:
-      'https://images.unsplash.com/photo-1455587734955-081b22074882?w=400&h=250&fit=crop',
+      'photo-1455587734955',
   }),
   ...nobleFalconBase({
     id: 'noble-falcon-none',
@@ -2105,7 +2105,7 @@ export const initialPartners: PartnerState[] = [
     location: 'Seville, Spain',
     contactName: 'Adam Cole',
     propertyImage:
-      'https://images.unsplash.com/photo-1551918120-9739cb430c6d?w=400&h=250&fit=crop',
+      'photo-1551918120',
   }),
 
   // ── Carlos - City Apartment Complex - distractor across all regimes ──
@@ -2126,43 +2126,43 @@ export const initialPartners: PartnerState[] = [
   // roster (same SCORM debt as the rest - swap to bundled WebP before
   // the final package).
   ...withKamPills(
-    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: "Liam O'Connell", propertyImage: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop' }),
+    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: "Liam O'Connell", propertyImage: 'photo-1566073771259' }),
     { companyName: 'Northumbrian Quays Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'London', numberOfProperties: 26 },
   ),
   ...withKamPills(
-    silverHorizonBase({ id: 'silver-horizon-cross-regional', parityRegime: 'wide', location: 'Costa Brava, Spain', contactName: 'Chloe Davies', propertyImage: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=400&h=250&fit=crop' }),
+    silverHorizonBase({ id: 'silver-horizon-cross-regional', parityRegime: 'wide', location: 'Costa Brava, Spain', contactName: 'Chloe Davies', propertyImage: 'photo-1512917774080' }),
     { companyName: 'Hawkesbury Hotel Investments', partnerType: 'Ownership Group', hqLocation: 'Spain', numberOfProperties: 66 },
   ),
   ...withKamPills(
-    oceanViewBase({ id: 'ocean-view-cross-regional', parityRegime: 'narrow', location: 'Athens, Greece', contactName: 'Camila Ross', propertyImage: 'https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400&h=250&fit=crop' }),
+    oceanViewBase({ id: 'ocean-view-cross-regional', parityRegime: 'narrow', location: 'Athens, Greece', contactName: 'Camila Ross', propertyImage: 'photo-1520250497591' }),
     { companyName: 'Attica Harbour Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'Athens', numberOfProperties: 180 },
   ),
   ...withKamPills(
-    riversideBase({ id: 'riverside-cross-regional', parityRegime: 'none', location: 'Singapore', contactName: 'Anton Müller', propertyImage: 'https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=250&fit=crop' }),
+    riversideBase({ id: 'riverside-cross-regional', parityRegime: 'none', location: 'Singapore', contactName: 'Anton Müller', propertyImage: 'photo-1582719508461' }),
     { companyName: 'Golf + Leisure Clubs & Rental', partnerType: 'Hotel Management Company', hqLocation: 'Singapore', numberOfProperties: 54 },
   ),
   ...withKamPills(
-    emeraldPeakBase({ id: 'emerald-peak-cross-regional', parityRegime: 'narrow', location: 'Delhi, India', contactName: 'Sophia Chen', propertyImage: 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?w=400&h=250&fit=crop' }),
+    emeraldPeakBase({ id: 'emerald-peak-cross-regional', parityRegime: 'narrow', location: 'Delhi, India', contactName: 'Sophia Chen', propertyImage: 'photo-1499793983690' }),
     { companyName: 'Aravalli Hotels', partnerType: 'Managed Chain', hqLocation: 'Delhi', numberOfProperties: 1850 },
   ),
   ...withKamPills(
-    oceanfrontBase({ id: 'oceanfront-cross-regional', parityRegime: 'wide', location: 'Amsterdam, Netherlands', contactName: 'Priya Singh', propertyImage: 'https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400&h=250&fit=crop' }),
+    oceanfrontBase({ id: 'oceanfront-cross-regional', parityRegime: 'wide', location: 'Amsterdam, Netherlands', contactName: 'Priya Singh', propertyImage: 'photo-1540541338287' }),
     { companyName: 'Marlow & Keene Hotels', partnerType: 'Managed Chain', hqLocation: 'Amsterdam', numberOfProperties: 997 },
   ),
   ...withKamPills(
-    palaceGrandBase({ id: 'palace-grand-cross-regional', parityRegime: 'none', location: 'New York, USA', contactName: 'Ethan Nkosi', propertyImage: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=400&h=250&fit=crop' }),
+    palaceGrandBase({ id: 'palace-grand-cross-regional', parityRegime: 'none', location: 'New York, USA', contactName: 'Ethan Nkosi', propertyImage: 'photo-1571003123894' }),
     { companyName: 'Thames Hospitality Group', partnerType: 'Managed Chain', hqLocation: 'New York', numberOfProperties: 22 },
   ),
   ...withKamPills(
-    hiddenValleyBase({ id: 'hidden-valley-cross-regional', parityRegime: 'narrow', location: 'Rio de Janeiro, Brazil', contactName: 'Claire Thornton', propertyImage: 'https://images.unsplash.com/photo-1596436889106-be35e843f974?w=400&h=250&fit=crop' }),
+    hiddenValleyBase({ id: 'hidden-valley-cross-regional', parityRegime: 'narrow', location: 'Rio de Janeiro, Brazil', contactName: 'Claire Thornton', propertyImage: 'photo-1596436889106' }),
     { companyName: 'Valle do Paraiba Managed Hotels', partnerType: 'Managed Chain', hqLocation: 'Rio de Janeiro', numberOfProperties: 47 },
   ),
   ...withKamPills(
-    loftLivingBase({ id: 'loft-living-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: 'Lucas Silva', propertyImage: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=400&h=250&fit=crop' }),
+    loftLivingBase({ id: 'loft-living-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: 'Lucas Silva', propertyImage: 'photo-1502672260266' }),
     { companyName: 'Midtown River Ownership Group', partnerType: 'Ownership Group', hqLocation: 'London', numberOfProperties: 819 },
   ),
   ...withKamPills(
-    nobleFalconBase({ id: 'noble-falcon-cross-regional', parityRegime: 'none', location: 'Mexico City, Mexico', contactName: 'Adam Cole', propertyImage: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=250&fit=crop' }),
+    nobleFalconBase({ id: 'noble-falcon-cross-regional', parityRegime: 'none', location: 'Mexico City, Mexico', contactName: 'Adam Cole', propertyImage: 'photo-1542314831' }),
     { companyName: 'Cuajimalpa Highlands Hospitality Group', partnerType: 'Ownership Group', hqLocation: 'Mexico', numberOfProperties: 25 },
   ),
 
@@ -2195,7 +2195,7 @@ export const pendingPartners: PartnerState[] = [
       parityRegime: 'none',
       avatar: 'JM',
       propertyImage:
-        'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=400&h=250&fit=crop',
+        'photo-1564501049412',
       style: 'red',
       styleSecondary: 'green',
       description:
@@ -2257,7 +2257,7 @@ export const pendingPartners: PartnerState[] = [
       parityRegime: 'none',
       avatar: 'SP',
       propertyImage:
-        'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=250&fit=crop',
+        'photo-1566073771259',
       style: 'red',
       styleSecondary: 'red',
       description:
@@ -2308,7 +2308,7 @@ export const pendingPartners: PartnerState[] = [
       location: 'Cotswolds, England',
       parityRegime: 'narrow',
       avatar: 'HW',
-      propertyImage: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&h=250&fit=crop',
+      propertyImage: 'photo-1510414842594',
       style: 'green',
       styleSecondary: 'yellow',
       description:
@@ -2359,7 +2359,7 @@ export const pendingPartners: PartnerState[] = [
       location: 'Mumbai, India',
       parityRegime: 'wide',
       avatar: 'PS',
-      propertyImage: 'https://images.unsplash.com/photo-1455587734955-081b22074882?w=400&h=250&fit=crop',
+      propertyImage: 'photo-1455587734955',
       style: 'red',
       styleSecondary: 'blue',
       description:
@@ -2410,7 +2410,7 @@ export const pendingPartners: PartnerState[] = [
       location: 'Kyoto, Japan',
       parityRegime: 'narrow',
       avatar: 'YT',
-      propertyImage: 'https://images.unsplash.com/photo-1542640244-7e672d6cef4e?w=400&h=250&fit=crop',
+      propertyImage: 'photo-1542640244',
       style: 'green',
       styleSecondary: 'blue',
       description:

@@ -19,6 +19,7 @@ import {
   type MiniScenarioStep,
   type MiniScenarioTheme,
 } from '../data/miniScenarios';
+import { resolvePropertyImage } from '../data/propertyImages';
 import type { KnowledgeCheckResult } from '../types';
 
 /**
@@ -429,7 +430,7 @@ function ScenarioCover({
         }}
       >
         <img
-          src={scenario.heroImage}
+          src={resolvePropertyImage(scenario.heroImage)}
           alt={scenario.propertyName}
           style={{
             width: '100%',
@@ -1310,7 +1311,7 @@ function ScenarioSummaryCard({
         }}
       >
         <img
-          src={scenario.heroImage}
+          src={resolvePropertyImage(scenario.heroImage)}
           alt={scenario.propertyName}
           style={{
             width: '100%',

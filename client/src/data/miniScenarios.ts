@@ -88,7 +88,7 @@ export const miniScenarios: MiniScenario[] = [
       "Recognize that a Brand.com gap is a signal to diagnose, not a reason to pressure the partner, and guide the conversation toward a compliant, performance-led next step.",
     theme: 'brand-gap',
     heroImage:
-      'https://images.unsplash.com/photo-1602002418082-a4443e081dd1?w=800&h=1000&fit=crop',
+      'photo-1602002418082',
     steps: [
       {
         id: 'signal',
@@ -198,7 +198,7 @@ export const miniScenarios: MiniScenario[] = [
       "Identify that the issue is device-specific, diagnose the likely setup gap, and propose a targeted mobile solution without sounding forceful.",
     theme: 'mobile-gap',
     heroImage:
-      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=1000&fit=crop',
+      'photo-1571896349842',
     steps: [
       {
         id: 'signal',
@@ -310,7 +310,7 @@ export const miniScenarios: MiniScenario[] = [
       "Recognize low-quality Genius adoption, explain why the discount is not delivering real traveler value, and guide the partner back to fixing the base price first.",
     theme: 'genius-offset',
     heroImage:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&h=1000&fit=crop',
+      'photo-1566073771259',
     steps: [
       {
         id: 'signal',
@@ -421,7 +421,7 @@ export const miniScenarios: MiniScenario[] = [
       "Recognize that the gap may come from family setup, not broad pricing, and guide the partner through a foundations-first fix.",
     theme: 'family-undercut',
     heroImage:
-      'https://images.unsplash.com/photo-1568084680786-a84f91d1153c?w=800&h=1000&fit=crop',
+      'photo-1568084680786',
     steps: [
       {
         id: 'signal',

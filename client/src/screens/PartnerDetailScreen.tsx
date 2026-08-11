@@ -35,6 +35,7 @@ import { getBranchingScenario } from '../data/branchingScenarios';
 import { MetricLabel } from '../components/MetricLabel';
 import { PriceBucketStrip } from '../components/PriceBucketStrip';
 import { metricDefinitions } from '../data/metricDefinitions';
+import { resolvePropertyImage } from '../data/propertyImages';
 import { useIdleNudge } from '../hooks/useIdleNudge';
 
 /** Learner-facing label for a partner's real parity regime (KAM pill). */
@@ -212,7 +213,7 @@ export function PartnerDetailScreen({
               }}
             >
               <img
-                src={partner.persona.propertyImage}
+                src={resolvePropertyImage(partner.persona.propertyImage)}
                 alt={partner.persona.propertyName}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
