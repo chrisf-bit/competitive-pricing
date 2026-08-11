@@ -3116,6 +3116,72 @@ is SME (the L1/L2 playbooks); everything decoy-side is Claude-authored.
 - KAM property images are bundled WebP like the rest (the CDN image debt
   was cleared 2026-08-11 - see Asset format standards).
 
+## UX dead-end audit + clearance scoring fix (2026-08-11)
+
+A reviewer deliberately failed the Warm Up and reported the Clearance
+Summary "locked with no instructions on how to proceed." Investigation +
+a full three-part dead-end audit (clearance screens / sim screens /
+router + engine gates) followed. Principle going forward: **in every
+reachable state the learner must have a clear, enabled way to move on** -
+no disabled dead-end buttons, no `return null` / empty renders without an
+escape, no silently-inert CTAs.
+
+**Clearance Summary (the reported issue).** Two bugs compounded:
+- The bottom button was disabled and read "Locked - retry to clear" - a
+  dead control where the eye lands, with the real Retry buttons up in the
+  activity cards. Now, when below 80%, that button is an **active "Retry
+  {activity} to clear"** that routes into the first flagged activity
+  (same `onRetry` the cards use), and the helper text names it.
+- **`gm-chat` (Day one with Alex) was mis-scored.** It has 14 questions
+  (A1-A12, B1, B2) but the summary matcher was `/^[AB]\d$/` (single digit -
+  silently dropped A10-A12) and `totalItems` was hard-coded to 5. So
+  `pct = correct/5` ran over 1.0 and the activity showed a green PASSING
+  pill even with items missed, while the pooled overall stayed at ~77% -
+  the "all cards green but not cleared" state. Fixed: `GM_ITEM_IDS` is
+  derived from `gmScript` (matcher `/^[AB]\d+$/`, `totalItems =
+  GM_ITEM_IDS.length` = 14), so the cards and the overall % agree.
+  Consequence: the Day-one 80% gate is now real (~12/14 needed) where it
+  used to pass almost automatically. `firstRetryable` was also hardened -
+  when not cleared it falls back to the most-missed activity, so the
+  button is never a dead "Locked".
+
+**Audit fixes (all shipped 2026-08-11).** No blocker existed on the
+normal path, but several latent inescapable/blank states were closed:
+- Both conversation screens did `if (!tree) return null` (blank,
+  inescapable - the Back button was inside the null-ed JSX). New shared
+  [ConversationMissing](client/src/components/ConversationMissing.tsx)
+  fallback ("This call isn't available" + Back to portfolio).
+- **Begin Conversation** could look enabled but silently no-op (the
+  `startConversation` `!tree` case). `canEngage` now also requires a
+  scenario to exist; the disabled card explains each case (already
+  engaged / no call set up / open the Pathway) with a next-step hint.
+- **Portfolio** could render zero cards (out-of-range round / desync) -
+  added an empty-state with a "Return to Round Select" action (new
+  `onReturnToRoundSelect` prop).
+- App.tsx partner-detail used `state.partners.find(...)!` (crash if the
+  record was missing) - guarded with an IIFE + `ConversationMissing`
+  fallback.
+- **Six legacy `GameScreen` union values** (`l0-inbox-triage`,
+  `l0-signal-vs-proof`, `l1-diagnose`, `l1-action-plan`, `l1-escalate`,
+  `l1-outcome`) had no render branch - latent blank pages. Removed from
+  the union (nothing referenced them; GuidePanel's `switch` has
+  defaults). Don't reintroduce a screen value without an App.tsx branch.
+- **Debrief Practice Mode** was hard-coded to 3 rounds while the engine
+  runs 20 (rounds 4-20 unreachable, wrong star math). Now derived from an
+  **exported** `TOTAL_ROUNDS` (`gameEngine.ts`; Header still keeps its own
+  copy - existing debt). `PRACTICE_AVAILABLE_ROUNDS` /
+  `TOTAL_ROUNDS_DISPLAYED` come from it.
+- Market Select shows "Choose a parity regime to continue." beside the
+  disabled Continue (every other gated screen already explains its gate).
+- Round Select: a **current Level 2 tile** now shows its "Start round" CTA
+  (the CTA row keys off `isLocked`, not `isLevel2`).
+- Warm Up empty-state: styled with a proper CTA instead of a bare button.
+
+Left intentionally as-is (timed polish, not dead-ends): Splash 4s intro,
+the 2.4s celebration button reveal. Dev-only rough edge still open:
+DevNav -> Debrief renders blank when `gameComplete` is false (fold a guard
+into the DevNav removal task).
+
 ## How to run
 
 ```
