@@ -850,8 +850,6 @@ export interface GameState {
 // ── Scoring ──
 
 export interface ScoreBreakdown {
-  portfolioRPD: number;         // average RPD improvement
-  revenueImpact: number;        // average revenue change
   relationshipHealth: number;   // average trust
   overallGrade: 'A' | 'B' | 'C' | 'D';
   highlights: string[];

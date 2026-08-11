@@ -888,8 +888,6 @@ export function enterRound(state: GameState, round: number): GameState {
 // ── Calculate final score ──
 export function calculateScore(state: GameState): ScoreBreakdown {
   const initialPartnerData = initialPartners;
-  let totalRPDImprovement = 0;
-  let totalRevenueChange = 0;
   let totalTrust = 0;
   const highlights: string[] = [];
   const improvements: string[] = [];
@@ -912,11 +910,12 @@ export function calculateScore(state: GameState): ScoreBreakdown {
     );
     if (!initial) continue;
 
+    // rpdDelta drives the highlight / improvement insight text below.
+    // (The old portfolioRPD / revenueImpact score tiles were dropped -
+    // they read from these legacy fields that the branching engine barely
+    // moves, so they were cosmetic. Stars are the authoritative score.)
     const rpdDelta = partner.metrics.experiencedRPD - initial.metrics.experiencedRPD;
-    const revDelta = partner.metrics.revenue - initial.metrics.revenue;
 
-    totalRPDImprovement += rpdDelta;
-    totalRevenueChange += revDelta;
     totalTrust += partner.trust;
 
     // Generate insights
@@ -961,8 +960,6 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   }
 
   const engagedCount = engagedPartners.length;
-  const avgRPD = engagedCount > 0 ? totalRPDImprovement / engagedCount : 0;
-  const avgRevenue = engagedCount > 0 ? totalRevenueChange / engagedCount : 0;
   const avgTrust = engagedCount > 0 ? totalTrust / engagedCount : 0;
 
   // Grade reads from per-round stars rather than the legacy metric
@@ -993,8 +990,6 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   }
 
   return {
-    portfolioRPD: Math.round(avgRPD),
-    revenueImpact: Math.round(avgRevenue),
     relationshipHealth: Math.round(avgTrust),
     overallGrade: grade,
     highlights,

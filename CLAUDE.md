@@ -3165,11 +3165,15 @@ Detail for the checklist items is in the Pre-production checklist below.
    production.
 9. **Parked partner records** (John / Stavros / Hannah / Priya / Yuki) -
    strip from the bundle or keep for future reuse.
-10. **Debrief Avg RPD Change + Revenue Impact tiles** - still read from
-    the legacy `experiencedRPD` / `revenue` fields that the branching
-    engine barely moves, so the numbers are largely cosmetic. Decide:
-    compute them from the new eRPD baselines, leave them as soft
-    indicators, or drop the tiles.
+10. ~~Debrief Avg RPD Change + Revenue Impact tiles~~ **DONE (2026-08-11,
+    dropped).** Chris chose to drop both - they read from the legacy
+    `experiencedRPD` / `revenue` fields the branching engine barely moves,
+    so the numbers were cosmetic and star grading already carries the real
+    signal. Removed the two tiles from the Debrief, the "Portfolio RPD"
+    line from the summary PDF, and the now-dead `portfolioRPD` /
+    `revenueImpact` fields from `ScoreBreakdown` + `calculateScore`.
+    Relationship Health stays. (`rpdDelta` is kept - it still feeds the
+    highlight / improvement insight text.)
 11. **Nice-to-have** - code-split the ~1.5MB main JS chunk.
 
 Shortest path to a packageable zip is items 2 and 3 (1 is done).
@@ -3217,12 +3221,16 @@ to resolve before final delivery.
   (e.g. Marina R1 at eRPD 2.4% / Bucket 3) so the priority puzzle
   reads cleanly. Numbers haven't been SME-validated for narrative
   coherence.
-- **Avg RPD Change + Revenue Impact tiles on Debrief** - still pulled
-  from the legacy `experiencedRPD` and `revenue` fields that the
-  new branching engine only nudges by a couple of points per
-  round. Numbers are largely cosmetic. Decide whether to compute
-  them from the new eRPD baselines, leave them as soft indicators,
-  or drop the tiles entirely.
+- **Avg RPD Change + Revenue Impact tiles on Debrief - REMOVED
+  (2026-08-11).** Chris chose to drop them: they read from the legacy
+  `experiencedRPD` / `revenue` fields the branching engine barely moves,
+  so the numbers were cosmetic while the star grading carries the real
+  signal. Gone from the Debrief tiles, the summary PDF, and
+  `ScoreBreakdown` / `calculateScore` (`portfolioRPD` + `revenueImpact`).
+  Relationship Health is the remaining headline tile. `rpdDelta` is kept
+  in `calculateScore` - it still feeds the highlight / improvement text.
+  Don't reintroduce these tiles without wiring them to the real eRPD
+  baselines.
 
 ### Round / regime gates that scale with content
 

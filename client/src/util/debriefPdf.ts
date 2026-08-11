@@ -235,10 +235,6 @@ function drawCoverBlock(
   rows.push(['Completed', completionDate]);
   rows.push(['Overall grade', args.score.overallGrade]);
   rows.push([
-    'Portfolio RPD',
-    `${Math.round(args.score.portfolioRPD)} avg`,
-  ]);
-  rows.push([
     'Relationship health',
     `${Math.round(args.score.relationshipHealth)} avg`,
   ]);
