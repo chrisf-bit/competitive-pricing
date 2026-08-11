@@ -6,6 +6,7 @@ import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
 import { DevNav } from './components/DevNav';
 import { ClearanceShell } from './components/ClearanceShell';
+import { ConversationMissing } from './components/ConversationMissing';
 import { SplashScreen } from './screens/SplashScreen';
 import { BriefingScreen } from './screens/BriefingScreen';
 import { MarketSelectScreen } from './screens/MarketSelectScreen';
@@ -352,17 +353,31 @@ export default function App() {
               ]}
               marketContext={state.marketContext}
               onSelectPartner={game.onSelectPartner}
+              onReturnToRoundSelect={() => game.goToScreen('round-select')}
             />
           )}
-          {state.screen === 'partner-detail' && state.selectedPartnerId && (
+          {state.screen === 'partner-detail' &&
+            (() => {
+              const partner = state.selectedPartnerId
+                ? state.partners.find(
+                    (p) => p.persona.id === state.selectedPartnerId,
+                  )
+                : undefined;
+              // Guard against a desync (selectedPartnerId set but the
+              // record isn't in state.partners) - render a way back rather
+              // than crash on partner.persona or show a blank screen.
+              if (!partner) {
+                return (
+                  <ConversationMissing onBack={game.onBackToPortfolio} />
+                );
+              }
+              return (
             <PartnerDetailScreen
-              partner={state.partners.find(
-                (p) => p.persona.id === state.selectedPartnerId,
-              )!}
+              partner={partner}
               currentRound={state.currentRound}
               alreadyEngaged={
-                state.actionsThisRound.includes(state.selectedPartnerId) ||
-                state.previouslyEngagedThisRound.includes(state.selectedPartnerId)
+                state.actionsThisRound.includes(partner.persona.id) ||
+                state.previouslyEngagedThisRound.includes(partner.persona.id)
               }
               personaId={state.learnerProfile.archetype?.id ?? null}
               issueTreeHelperStates={state.issueTreeHelperStates}
@@ -372,7 +387,8 @@ export default function App() {
               onStartConversation={game.onStartConversation}
               onBack={game.onBackToPortfolio}
             />
-          )}
+              );
+            })()}
           {state.screen === 'conversation' &&
             state.conversationInProgress &&
             state.conversationInProgress.shape !== 'branching' && (

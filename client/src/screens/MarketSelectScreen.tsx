@@ -55,7 +55,12 @@ export function MarketSelectScreen({ selected, onSelect, onContinue }: MarketSel
         </div>
 
         {/* Continue */}
-        <motion.div style={{ marginTop: 12 }}>
+        <motion.div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 14 }}>
+          {!selected && (
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.6)', fontWeight: 500 }}>
+              Choose a parity regime to continue.
+            </span>
+          )}
           <button
             onClick={onContinue}
             disabled={!selected}

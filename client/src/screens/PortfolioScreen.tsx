@@ -14,6 +14,10 @@ interface PortfolioScreenProps {
   actionsThisRound: string[];
   marketContext: MarketContext;
   onSelectPartner: (id: string) => void;
+  /** Escape hatch if the round resolves to no partner cards (out-of-range
+   *  round / desync) - guarantees the learner is never stuck on an empty
+   *  portfolio. */
+  onReturnToRoundSelect: () => void;
 }
 
 export function PortfolioScreen({
@@ -21,6 +25,7 @@ export function PortfolioScreen({
   actionsThisRound,
   marketContext,
   onSelectPartner,
+  onReturnToRoundSelect,
 }: PortfolioScreenProps) {
   // If the learner idles on Portfolio, pulse the first partner card
   // to draw the eye back to the primary decision. Enabled unconditionally
@@ -103,7 +108,48 @@ export function PortfolioScreen({
         </span>
       </div>
 
-      {/* Partner cards */}
+      {/* Empty-state fallback: if the round somehow resolves to no cards
+          (out-of-range round or a state desync), never leave the learner
+          on a blank grid with no way forward. */}
+      {partners.length === 0 ? (
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            gap: 12,
+            color: 'var(--grey-500)',
+          }}
+        >
+          <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--brand-navy)' }}>
+            No partners to show for this round
+          </div>
+          <div style={{ fontSize: 13, maxWidth: 340, lineHeight: 1.5 }}>
+            Something went out of step. Head back to Round Select and pick a
+            round to continue.
+          </div>
+          <button
+            onClick={onReturnToRoundSelect}
+            style={{
+              background: 'var(--brand-yellow)',
+              color: 'var(--brand-navy)',
+              border: 'none',
+              padding: '11px 22px',
+              borderRadius: 'var(--radius-sm)',
+              fontSize: 14,
+              fontWeight: 700,
+              cursor: 'pointer',
+              boxShadow: '0 4px 14px rgba(254,186,2,0.35)',
+            }}
+          >
+            Return to Round Select
+          </button>
+        </div>
+      ) : (
+      /* Partner cards */
       <div
         style={{
           flex: 1,
@@ -384,6 +430,7 @@ export function PortfolioScreen({
           );
         })}
       </div>
+      )}
 
     </div>
   );

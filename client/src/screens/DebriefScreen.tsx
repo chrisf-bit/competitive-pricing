@@ -18,14 +18,19 @@ import type {
 import { RelationshipBadge } from '../components/MetricBadge';
 import { initialPartners } from '../data/partners';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
+import { TOTAL_ROUNDS } from '../engine/gameEngine';
 import { getPersonaById } from '../data/characters';
 import { reportLessonStatus } from '../util/persistence';
 import { downloadDebriefPdf } from '../util/debriefPdf';
 
-const PRACTICE_AVAILABLE_ROUNDS = [1, 2, 3] as const;
-// Matches TOTAL_ROUNDS in gameEngine.ts - the contiguous playable max
-// (capped at SME-approved priority content). Bump as new drops land.
-const TOTAL_ROUNDS_DISPLAYED = 3;
+// Derived from the engine's TOTAL_ROUNDS so Practice Mode always covers
+// every playable round (all 20 today) - previously hard-coded to 3, which
+// left rounds 4-20 unreachable for practice and made the star math wrong.
+const PRACTICE_AVAILABLE_ROUNDS = Array.from(
+  { length: TOTAL_ROUNDS },
+  (_, i) => i + 1,
+);
+const TOTAL_ROUNDS_DISPLAYED = TOTAL_ROUNDS;
 
 interface DebriefScreenProps {
   score: ScoreBreakdown;

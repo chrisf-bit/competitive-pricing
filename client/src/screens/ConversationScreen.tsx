@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { seededShuffle } from '../util/seededShuffle';
+import { ConversationMissing } from '../components/ConversationMissing';
 import { motion } from 'framer-motion';
 import {
   User,
@@ -87,7 +88,7 @@ export function ConversationScreen({
   }, []);
 
   const tree = getConversationTree(partner.persona.id, currentRound);
-  if (!tree) return null;
+  if (!tree) return <ConversationMissing onBack={onBack} />;
 
   const phaseLabels = tree.phases.map((p) => p.phase.label);
   const isComplete = conversation.choices.length >= tree.phases.length;

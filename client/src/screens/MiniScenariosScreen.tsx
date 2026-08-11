@@ -159,10 +159,45 @@ export function MiniScenariosScreen({
 
   if (!scenario) {
     // No scenarios to run (shouldn't happen in practice - retry path
-    // only triggers when items are missed). Emit an empty result set.
+    // only triggers when items are missed). Styled empty-state with a
+    // clear CTA rather than a bare unstyled button.
     return (
-      <div style={{ padding: 32 }}>
-        <button onClick={() => onComplete([])}>Continue</button>
+      <div
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+          gap: 12,
+          background: 'var(--off-white)',
+          padding: 32,
+        }}
+      >
+        <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--brand-navy)' }}>
+          Nothing to review here
+        </div>
+        <div style={{ fontSize: 13, color: 'var(--grey-500)', maxWidth: 320, lineHeight: 1.5 }}>
+          You're all caught up on the Warm Up case files. Continue to your
+          clearance summary.
+        </div>
+        <button
+          onClick={() => onComplete([])}
+          style={{
+            background: 'var(--brand-yellow)',
+            color: 'var(--brand-navy)',
+            border: 'none',
+            padding: '11px 22px',
+            borderRadius: 'var(--radius-sm)',
+            fontSize: 14,
+            fontWeight: 700,
+            cursor: 'pointer',
+            boxShadow: '0 4px 14px rgba(254,186,2,0.35)',
+          }}
+        >
+          Continue
+        </button>
       </div>
     );
   }

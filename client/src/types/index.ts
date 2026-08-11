@@ -633,8 +633,6 @@ export type GameScreen =
   | 'l0-gm-chat'
   | 'l0-dashboard-hotspot'
   | 'l0-email-audit'
-  | 'l0-inbox-triage'
-  | 'l0-signal-vs-proof'
   | 'l0-mini-scenarios'
   | 'l0-issue-tree-reveal'
   | 'l0-clearance-summary'
@@ -648,12 +646,8 @@ export type GameScreen =
   // ── Level 1 (existing partner-portfolio sim, plus new outcome stage) ──
   | 'portfolio'
   | 'partner-detail'
-  | 'l1-diagnose'
-  | 'l1-action-plan'
-  | 'l1-escalate'
   | 'conversation'
   | 'conversation-report'
-  | 'l1-outcome'
   // Celebration between Level 1 and Level 2. Fires from advanceRound
   // when the learner clears every Level 1 round (1-10) with at least
   // one star. When Level 2 content exists beyond round 10 (it does),

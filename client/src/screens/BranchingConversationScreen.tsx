@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { seededShuffle } from '../util/seededShuffle';
+import { ConversationMissing } from '../components/ConversationMissing';
 import { motion } from 'framer-motion';
 import {
   User,
@@ -89,7 +90,7 @@ export function BranchingConversationScreen({
   }, []);
 
   const tree = getBranchingScenario(partner.persona.id, currentRound);
-  if (!tree) return null;
+  if (!tree) return <ConversationMissing onBack={onBack} />;
 
   const isComplete = conversation.choices.length >= tree.steps.length;
   const currentStep = tree.steps[conversation.phaseIndex];

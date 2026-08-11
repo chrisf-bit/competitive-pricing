@@ -32,6 +32,7 @@ import { getPersonaHint } from '../data/personaHints';
 import { IssueTreeHelper } from '../components/IssueTreeHelper';
 import { PathwayGlyph } from '../components/PathwayGlyph';
 import { getBranchingScenario } from '../data/branchingScenarios';
+import { getConversationTree } from '../data/conversations';
 import { MetricLabel } from '../components/MetricLabel';
 import { PriceBucketStrip } from '../components/PriceBucketStrip';
 import { metricDefinitions } from '../data/metricDefinitions';
@@ -113,11 +114,19 @@ export function PartnerDetailScreen({
   // has opened the Issue Tree Helper at least once - a one-shot
   // mandatory walk-through. Rounds 2+ the helper stays optional.
   const issueTreeGateBlocks = currentRound === 1 && !hasOpenedIssueTreeHelper;
+  // A conversation must actually exist for this partner-round, otherwise
+  // startConversation is a silent no-op and Begin Conversation would look
+  // like a dead button. Every reachable card (priority + decoys) has a
+  // registered scenario today; this guard keeps the CTA honest if a
+  // roster/round edit ever leaves a card without one.
+  const hasConversation =
+    !!getBranchingScenario(partner.persona.id, currentRound) ||
+    !!getConversationTree(partner.persona.id, currentRound);
   // One engagement per round: if a partner has already been engaged
   // (this round) AND the Issue Tree gate is satisfied, the learner is
   // free to start the call. The old explicit action budget was
   // retired in 2026-06 - see engine/gameEngine.ts for the rationale.
-  const canEngage = !alreadyEngaged && !issueTreeGateBlocks;
+  const canEngage = !alreadyEngaged && !issueTreeGateBlocks && hasConversation;
 
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
@@ -584,7 +593,16 @@ export function PartnerDetailScreen({
                 <div style={{ fontSize: 13, fontWeight: 600 }}>
                   {alreadyEngaged
                     ? 'Already engaged this round'
-                    : 'Open The Pricing Pathway before you engage'}
+                    : !hasConversation
+                      ? 'No call set up for this partner this round'
+                      : 'Open The Pricing Pathway before you engage'}
+                </div>
+                <div style={{ fontSize: 11.5, fontWeight: 500, color: 'var(--grey-400)', marginTop: 4, lineHeight: 1.45 }}>
+                  {alreadyEngaged
+                    ? 'The round advances from the call report. Use Back (top left) to review the other partners.'
+                    : !hasConversation
+                      ? 'Use Back (top left) and pick the partner who needs you most.'
+                      : 'Tap the yellow tab on the right to open it.'}
                 </div>
               </div>
             )}

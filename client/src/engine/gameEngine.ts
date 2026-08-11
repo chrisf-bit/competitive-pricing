@@ -62,7 +62,7 @@ function applyRoundBaseline(
 // Complete celebration.
 // Typed as `number` (not the literal) so the level-boundary
 // comparisons below don't trip TS's "no overlap between literals" check.
-const TOTAL_ROUNDS: number = 20;
+export const TOTAL_ROUNDS: number = 20;
 // The last round of each level. The Level 1 -> Level 2 boundary fires
 // the Level 1 Complete celebration mid-journey (not terminal) whenever
 // Level 2 content exists beyond it.

@@ -433,7 +433,7 @@ function RoundTile({
               : 'rgba(255,255,255,0.65)',
         }}
       >
-        {isLevel2 ? null : isCurrent ? (
+        {isLocked ? null : isCurrent ? (
           <>
             <Play size={11} fill="currentColor" />
             Start round
