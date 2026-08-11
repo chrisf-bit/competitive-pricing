@@ -47,7 +47,14 @@ import { nobleFalconR20 } from './scenarios/noble-falcon-r20';
 import {
   HEALTHY_DECOY_ROUNDS,
   buildHealthyDecoyScenario,
+  buildCloseDecoyScenario,
 } from './scenarios/healthy-decoys';
+import {
+  KAM_PRIORITY_BY_ROUND,
+  KAM_CLOSE_BY_ROUND,
+  KAM_DIST_BY_ROUND,
+} from './kamLayout';
+import { kamL1Factories } from './scenarios/kam-l1';
 
 /**
  * Branching conversation scenarios.
@@ -224,6 +231,44 @@ for (const [baseId, rounds] of Object.entries(HEALTHY_DECOY_ROUNDS)) {
       bucket[round] = buildHealthyDecoyScenario(id, round);
     }
   }
+}
+
+// ── Cross-Regional (KAM) journey ────────────────────────────────────
+// KAM reuses the ten lead hotels as `-cross-regional` ids across a mixed-
+// parity 20-round layout (data/kamLayout.ts). The correct card's L1 tree
+// carries the helicopter opener (kam-l1.ts) at rounds 1-10; its L2 tree
+// reuses the regime-neutral OPC factory at rounds 11-20 (each L2 factory
+// hard-codes the round that matches its base's KAM round). The close card
+// plays a near-miss "worth a look" call; the distractor card plays the
+// clean healthy call. Ids never collide - a company is the priority in
+// exactly its two rounds and a decoy only in others.
+const KAM_L2_FACTORIES: Record<string, (id: string) => BranchingConversationTree> = {
+  'royal-crest': royalCrestR11,
+  'silver-horizon': silverHorizonR12,
+  'ocean-view': oceanViewR13,
+  'riverside': riversideR14,
+  'emerald-peak': emeraldPeakR15,
+  'oceanfront': oceanfrontR16,
+  'palace-grand': palaceGrandR17,
+  'hidden-valley': hiddenValleyR18,
+  'loft-living': loftLivingR19,
+  'noble-falcon': nobleFalconR20,
+};
+
+for (let round = 1; round <= 20; round++) {
+  const priorityBase = KAM_PRIORITY_BY_ROUND[round];
+  const priorityId = `${priorityBase}-cross-regional`;
+  const pBucket = (branchingScenarios[priorityId] ??= {});
+  pBucket[round] =
+    round <= 10
+      ? kamL1Factories[priorityBase](priorityId)
+      : KAM_L2_FACTORIES[priorityBase](priorityId);
+
+  const closeId = `${KAM_CLOSE_BY_ROUND[round]}-cross-regional`;
+  (branchingScenarios[closeId] ??= {})[round] = buildCloseDecoyScenario(closeId, round);
+
+  const distId = `${KAM_DIST_BY_ROUND[round]}-cross-regional`;
+  (branchingScenarios[distId] ??= {})[round] = buildHealthyDecoyScenario(distId, round);
 }
 
 export function getBranchingScenario(

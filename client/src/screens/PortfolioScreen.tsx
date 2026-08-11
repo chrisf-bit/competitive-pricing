@@ -173,7 +173,7 @@ export function PortfolioScreen({
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 4 }}>
                       <h3 style={{ fontSize: 14, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                        {partner.persona.propertyName}
+                        {partner.persona.companyName ?? partner.persona.propertyName}
                       </h3>
                       {engaged ? (
                         <span
@@ -204,7 +204,9 @@ export function PortfolioScreen({
                       }}
                     >
                       <Building2 size={10} />
-                      {partner.persona.propertyType}
+                      {partner.persona.companyName
+                        ? partner.persona.partnerType
+                        : partner.persona.propertyType}
                     </div>
                     <div
                       style={{
@@ -218,7 +220,9 @@ export function PortfolioScreen({
                       <MapPin size={10} />
                       {partner.persona.location}
                       <span style={{ margin: '0 1px', color: 'var(--grey-200)' }}>|</span>
-                      {partner.persona.roomCount} rooms
+                      {partner.persona.companyName
+                        ? `${partner.persona.numberOfProperties} properties`
+                        : `${partner.persona.roomCount} rooms`}
                     </div>
                   </div>
 

@@ -2958,13 +2958,16 @@ Dead data note: the old Marina / Carlos decoy baselines (including the
 L2 `marinaL2DecoyMetrics` / `carlosL2DecoyMetrics`) are still in
 `partnerStateByRound.ts` but no longer referenced by any portfolio.
 
-## Cross-Regional (KAM) journey - BUILD IN PROGRESS (2026-08)
+## Cross-Regional (KAM) journey - BUILT (2026-08)
 
-The Cross-Regional / KAM (Key Account Manager) journey is being built on
-`release-2-partner-detail`. **Partially built - foundation + records are
-in and building clean; the conversation trees + UI are the remaining
-work.** Do not flip the Market Select unlock until the whole journey
-plays end to end.
+The Cross-Regional / KAM (Key Account Manager) journey is **built and
+playable end to end** on `release-2-partner-detail`, and Market Select
+now offers it (`available: true`). Builds clean; a vite-node smoke test
+confirms every one of the 20 rounds resolves to three real records with
+the priority present, every card engageable, regimes matching the
+playbook, and the priority reading as the clear worst on the headline
+card metrics. The close/distractor near-miss dialogue + baselines and the
+L2 objection tags still need SME sign-off (see reconciliations below).
 
 ### Confirmed spec (Chris, 2026-08-10)
 
@@ -3026,7 +3029,7 @@ plays end to end.
   R5 EmeraldPeak Narrow, R6 Oceanfront Wide, R7 PalaceGrand None,
   R8 HiddenValley Narrow, R9 LoftLiving Wide, R10 NobleFalcon None.
 
-### DONE (2 commits, both build clean, dormant behind locked market)
+### DONE (all of it)
 
 1. **Foundation** - four KAM pill fields on `PartnerPersona`
    (`companyName`, `partnerType`, `hqLocation`, `numberOfProperties`);
@@ -3039,37 +3042,62 @@ plays end to end.
    `initialPartners` via `withKamPills()`, reusing each hotel's base
    helper + company name + pills. Company / pill / contact table is in
    the commit and in [[project-cross-regional-kam]] memory.
+3. **10 L1 helicopter trees** - `data/scenarios/kam-l1.ts` (one file,
+   ten factories + `kamL1Factories` map). Per the L1 playbook's own
+   design note ("property-level dialogue does not change significantly"
+   from the AM version - only the Helicopter View opening does), each KAM
+   L1 tree **reuses the SME-approved standard tree for the company's
+   fixed regime** (`royalCrestWideR1`, `oceanViewNarrowR3`,
+   `riversideNoneR4`, ... per `KAM_REGIME`) via a `withHelicopter()`
+   wrapper that swaps only `openingAm` (the playbook's portfolio-framed
+   line 1) and `steps[0].partnerPrompt` (the partner's line 2). Every
+   option, response, compliance tag and objection-handling step is the
+   standard tree's, verbatim - so the KAM L1 trees are compliant and
+   consistent with the main journey by construction, no re-authoring.
+4. **L2 correct trees** - the existing regime-neutral OPC factories
+   (`royalCrestR11` ... `nobleFalconR20`) called with the
+   `-cross-regional` ids at rounds 11-20 (each factory already hard-codes
+   the round that matches its base's KAM round).
+5. **Decoy trees + baselines** - `healthy-decoys.ts` gained
+   `closeDecoyMetricsFor()` + `buildCloseDecoyScenario()` for the CLOSE
+   card (a short "worth a look but not urgent" call, 3 steps). Design
+   choice: the close near-miss keeps eRPD / eRPD-trend / Lose Price / the
+   RPD split at HEALTHY levels and puts its single soft flag on the
+   FORWARD BOOK (pace behind peers, ABRN dipping, unsold creeping up),
+   because some priorities read LOW on the headline axes (their tell is a
+   momentum spike or a structural gap, not the level) - an eRPD/Lose-Price
+   flag on the close card could wrongly out-worst a subtle priority
+   (Silver Horizon R2/R12, Riverside R4/R14, Hidden Valley R8/R18). The
+   DISTRACTOR card reuses `buildHealthyDecoyScenario`. Both decoy-call
+   builders' id-strip regex now also strips `-cross-regional`. Decoy
+   baselines registered under the `-cross-regional` ids per KAM decoy
+   round in `partnerStateByRound.ts` (a company's own priority round has
+   no entry, so its record still reads as the clear worst).
+6. **branchingScenarios registration** - one 1-20 loop registers the
+   priority (L1 factory <=10, L2 factory >=11), close and distractor for
+   every KAM round under the `-cross-regional` ids.
+7. **OPC-tab gate fix** - `PartnerDetailScreen.tsx` now gates purely on
+   `currentRound >= 11` (dropped the stale `parityRegime ===
+   'cross-regional'` clause that would have unlocked OPC at KAM L1).
+8. **Partner Detail + Portfolio UI** - when a record has `companyName`
+   both surfaces show the company name instead of the hotel name; Partner
+   Detail renders the four KAM pills (regime label, N properties, HQ,
+   partner type) and Portfolio swaps room count for `numberOfProperties`
+   and property type for partner type. `REGIME_LABEL` map added to
+   `PartnerDetailScreen.tsx`.
+9. **Market Select unlock** - Cross-Regional flipped to `available: true`
+   in `data/learnerMarkets.ts`.
+10. **Verified** - `tsc -b && vite build` clean; the smoke test above
+    passes for all 20 rounds.
 
-### TODO (remaining, in order)
-
-1. **10 L1 helicopter trees** - `data/scenarios/{partner}-kam-r{1..10}.ts`
-   (or similar), authored from the L1 playbook transcripts: optimal =
-   the AM line verbatim, plus two "close but not quite" distractors per
-   step; helicopter opening; the partner's fixed-regime compliance.
-   Pattern to copy: `royal-crest-r11.ts` (6 steps, 3 options, one
-   `optimal: true`).
-2. **Register L2 correct trees** - call the existing factories with the
-   `-cross-regional` ids at rounds 11-20 in `branchingScenarios.ts`.
-3. **Decoy trees + baselines** - close = a healthy profile with ONE soft
-   flag + a short "worth a look but not urgent" call; distractor = the
-   existing `buildHealthyDecoyScenario` pattern (clean/healthy). Wire via
-   `kamDecoyRoundsFor()`. `healthy-decoys.ts` regex must also strip
-   `-cross-regional` if those scenarios are reused. Register decoy
-   baselines in `partnerStateByRound.ts` for each KAM decoy round.
-4. **branchingScenarios registration** for all KAM correct + decoy
-   ids/rounds.
-5. **OPC-tab gate fix** in `PartnerDetailScreen.tsx`: change to
-   `currentRound >= 11` only (drop the `parityRegime === 'cross-regional'`
-   clause - it's now stale and would wrongly unlock OPC at KAM L1).
-6. **Partner Detail + Portfolio UI** - when a record has `companyName`,
-   show it instead of the hotel name and render the four pills; show
-   `numberOfProperties` in place of the room count.
-7. **Market Select unlock** - flip Cross-Regional to `available: true` in
-   `data/learnerMarkets.ts` (LAST, once it all plays). Round Select +
-   Header already handle 20 rounds via `TOTAL_ROUNDS`.
-8. **Verify** - vite-node smoke test that every KAM round x resolves to
-   three real records with the priority present and every card
-   engageable; playthrough; commit/push.
+**The 6-file-touch pattern for future KAM edits:** (1) `kam-l1.ts` (L1
+trees / helicopter openers), (2) `healthy-decoys.ts` (close + distractor
+metrics/calls), (3) `branchingScenarios.ts` (the 1-20 KAM loop), (4)
+`partnerStateByRound.ts` (the 1-20 KAM decoy-baseline loop), (5)
+`kamLayout.ts` (the layout tables - never hand-edit the generated
+portfolio arrays, change the tables), (6) `partners.ts`
+(`-cross-regional` records + `withKamPills`). The correct-partner content
+is SME (the L1/L2 playbooks); everything decoy-side is Claude-authored.
 
 ### Reconciliations to flag on the next SME pass
 
@@ -3168,10 +3196,13 @@ to resolve before final delivery.
   Level 1 (rounds 1-10) it stays greyed out. It is now reachable in the
   build (R11-R20 are playable). See the Post-2026-07-30 session notes
   for the conditional-unlock detail.
-- **Cross-Regional regime** still flagged `available: false` in
-  `data/learnerMarkets.ts`. Either remove the card from Market
-  Select entirely if it won't ship, or unlock when content lands.
-  Today it falls back to Wide Parity if accessed.
+- **Cross-Regional (KAM) regime is now live** (`available: true` in
+  `data/learnerMarkets.ts`) - the full 20-round KAM journey is built and
+  playable (see "## Cross-Regional (KAM) journey - BUILT"). Outstanding
+  before final ship: SME sign-off on the Claude-authored close/distractor
+  decoy dialogue + baselines and the L2 objection tags; and the KAM
+  property images reuse Unsplash CDN URLs (same SCORM debt as the rest -
+  convert to bundled WebP).
 - **Practice Mode cards** auto-scale with TOTAL_ROUNDS - all ten are
   active today; no manual action needed.
 

@@ -149,6 +149,48 @@ export function healthyDecoyMetricsFor(baseId: string): PartnerMetrics {
   return healthyMetrics(i < 0 ? 0 : i);
 }
 
+/**
+ * "Close" (near-miss) baseline metrics used for the KAM close card.
+ *
+ * Starts from a healthy profile but carries ONE soft flag: eRPD nudged
+ * into Bucket 4, a mildly rising trend, forward pace a touch behind
+ * peers, and slightly elevated unsold / negative sell-through. It reads
+ * as "worth a look, but not urgent" - plausibly second, but never the
+ * clear worst: the round's priority is always materially worse (Bucket
+ * 5-7, a sharp MoM spike, Lose Price 90%+ or a severe volume collapse).
+ * Varied per hotel so two decoy cards never read as clones.
+ */
+export function closeDecoyMetricsFor(baseId: string): PartnerMetrics {
+  const raw = HEALTHY_HOTELS.indexOf(baseId as (typeof HEALTHY_HOTELS)[number]);
+  const i = raw < 0 ? 0 : raw;
+  const m = healthyMetrics(i);
+  // Deliberately keep eRPD, its trend, Lose Price and the RPD split at
+  // HEALTHY (competitive) levels. Those are the headline card metrics, and
+  // some priorities read LOW on them (their tell is a momentum spike or a
+  // structural gap, not the level) - so a near-miss that carried an eRPD /
+  // Lose-Price flag could wrongly out-worst a subtle priority. The single
+  // soft flag lives on the FORWARD BOOK instead: pace behind peers, ABRN
+  // dipping, unsold creeping up, sell-through slightly negative. Enough to
+  // be "worth a look", never worse than the round's real priority.
+  return {
+    ...m,
+    secondaryMetrics: {
+      last30dAbrn: { value: 640 + i * 30, deltaPct: -3 - (i % 2) },
+      last30dRoomNights: { value: 360 + i * 18, deltaPct: -1 },
+      last30dAdr: { value: 140 + i * 3, deltaPct: 1 },
+      last90dPageViews: { value: 0 },
+      last90dConversion: { value: 2.3 + (i % 4) * 0.1, deltaPct: -1 },
+      next3mRoomNights: { value: 84 + i * 4, deltaPct: -7 - (i % 3) },
+    },
+    opcMetrics: {
+      unsoldRooms: { value: 16 + (i % 4) * 2 },
+      sellThroughRate: { value: -2 - (i % 2) },
+      visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
+      searchPrice: { value: 1 + (i % 2) },
+    },
+  };
+}
+
 // ── The healthy "nothing pressing today" call ───────────────────────
 
 function stylePlus(primary: CommunicationStyle, v: number): Record<CommunicationStyle, number> {
@@ -329,7 +371,7 @@ export function buildHealthyDecoyScenario(
   partnerId: string,
   round: number,
 ): BranchingConversationTree {
-  const baseId = partnerId.replace(/-(none|narrow|wide)$/, '');
+  const baseId = partnerId.replace(/-(none|narrow|wide|cross-regional)$/, '');
   const meta = HOTEL_META[baseId] ?? HOTEL_META['royal-crest'];
   return {
     conversationShape: 'branching',
@@ -337,5 +379,195 @@ export function buildHealthyDecoyScenario(
     round,
     openingAm: `Hi ${meta.contact}, thanks for making time. I wanted to do a quick check-in on your performance - is now still okay?`,
     steps: healthySteps(meta),
+  };
+}
+
+// ── The "close" near-miss call (KAM close card) ─────────────────────
+// A short call for a partner in good shape overall, with one soft area
+// worth a light look but nothing urgent. Engaging it is still the wrong
+// pick for the round (scores 0, then a retake); the point is a coherent,
+// compliant, non-priority conversation so Begin Conversation never
+// dead-ends and the "worth a look but not urgent" read holds up.
+
+function closeSteps(meta: HotelMeta): BranchingStep[] {
+  const s = meta.style;
+  const step1: BranchingOption[] = [
+    {
+      id: 'cd-open-correct',
+      label: 'Name the one soft area, keep it proportionate',
+      description:
+        'Acknowledge the property is broadly healthy, flag the single soft signal (forward pace a touch behind peers) and frame it as worth watching, not a fire to fight today.',
+      playerDialogue:
+        "Overall you're in good shape - pricing is competitive and visibility is holding. The one thing I'd flag is your forward pace running slightly behind your peer group. It's worth keeping an eye on, but nothing that needs a big move today.",
+      partnerResponse:
+        "That matches my read - we're comfortable, and I'd noticed the forward book was a little soft. Good to know it's on your radar too.",
+      styleMatch: { ...stylePlus(s, 2), green: 1 },
+      assertiveness: 1,
+      compliance: 'safe',
+      trustChange: 4,
+      optimal: true,
+    },
+    {
+      id: 'cd-open-alarm',
+      label: 'Blow the soft signal up into a crisis',
+      description:
+        "Treats one mildly soft metric as an emergency. Over-reads the data and spooks a partner who can see the wider picture is healthy.",
+      playerDialogue:
+        "We've got a serious problem here - your numbers are sliding and we need to act aggressively today before it gets away from us.",
+      partnerResponse:
+        "Sliding? One soft metric against a healthy quarter isn't a crisis. If you're going to tell me the sky's falling, show me the evidence.",
+      styleMatch: { ...stylePlus(s, -1), yellow: -1 },
+      assertiveness: 2,
+      compliance: 'safe',
+      trustChange: -4,
+    },
+    {
+      id: 'cd-open-blanket',
+      label: 'Prescribe a blanket rate cut on the spot',
+      description:
+        'Reaches for an across-the-board discount for a broadly competitive property - overkill that gives away margin for a signal that needs watching, not cutting.',
+      playerDialogue:
+        "The quickest fix for that soft pace is to drop your rates across the board and pull the demand forward. Shall we set that up?",
+      partnerResponse:
+        "A blanket cut for a property that's otherwise doing fine? That just trains guests to wait for a discount. No.",
+      styleMatch: stylePlus(s, -1),
+      assertiveness: 2,
+      compliance: 'borderline',
+      trustChange: -6,
+    },
+  ];
+
+  const step2: BranchingOption[] = [
+    {
+      id: 'cd-plan-correct',
+      label: 'Offer one targeted, low-risk idea',
+      description:
+        'Propose a single fenced option to firm up the forward book (a targeted rate for the softest window) and offer to monitor - proportionate to a near-miss, not a wholesale change.',
+      playerDialogue:
+        "If you wanted to firm the forward book up, one low-risk option is a targeted rate on just the softest dates - fenced, so it doesn't touch your wider pricing. Otherwise we simply keep watching and I'll flag it early if the pace slips further.",
+      partnerResponse:
+        "A fenced rate on the soft window I can live with. Let's keep it to that and see how the pace responds.",
+      styleMatch: { ...stylePlus(s, 2), blue: s === 'blue' ? 2 : 1 },
+      assertiveness: 1,
+      compliance: 'safe',
+      trustChange: 4,
+      optimal: true,
+    },
+    {
+      id: 'cd-plan-overreach',
+      label: 'Push a full pricing overhaul',
+      description:
+        "Turns a one-window soft spot into a reason to rework the whole rate strategy - far more than the signal warrants.",
+      playerDialogue:
+        "While we're here, let's rebuild your whole rate structure and switch on every discount tool to really move the numbers.",
+      partnerResponse:
+        "That's a lot of change for one soft metric. I'm not overhauling a strategy that's working.",
+      styleMatch: stylePlus(s, -1),
+      assertiveness: 2,
+      compliance: 'safe',
+      trustChange: -4,
+    },
+    {
+      id: 'cd-plan-guarantee',
+      label: 'Promise a ranking reward for acting',
+      description:
+        'Sells the idea with a guaranteed ranking/visibility bump - a compliance breach in every regime, even for a light change.',
+      playerDialogue:
+        "Make this one tweak and I can promise it pushes you up the rankings and pulls the visibility straight back.",
+      partnerResponse:
+        "A guaranteed ranking bump? That kind of promise makes me trust the rest of your read less, not more.",
+      styleMatch: stylePlus(s, -1),
+      assertiveness: 2,
+      compliance: 'risky',
+      trustChange: -8,
+    },
+  ];
+
+  const step3: BranchingOption[] = [
+    {
+      id: 'cd-close-correct',
+      label: 'Close cleanly, agree to monitor',
+      description:
+        'Wrap without manufacturing work: agree to watch the forward pace and reconnect if it moves. Respects a broadly healthy partner and keeps the relationship warm.',
+      playerDialogue:
+        "Let's leave it there - the fenced rate on the soft dates and I'll keep an eye on the forward pace. If it slips further we'll pick it up, otherwise you're in good shape.",
+      partnerResponse:
+        "Sounds sensible. Appreciate you keeping it proportionate - talk soon.",
+      styleMatch: { ...stylePlus(s, 2), green: 1 },
+      assertiveness: 1,
+      compliance: 'safe',
+      trustChange: 4,
+      optimal: true,
+    },
+    {
+      id: 'cd-close-forcefollow',
+      label: 'Lock in heavy follow-up they don’t need',
+      description:
+        'Schedules a run of calls for a property that needs light monitoring - friction out of proportion to the signal.',
+      playerDialogue:
+        "Before you go, let's book weekly calls this month so we stay right on top of that pace.",
+      partnerResponse:
+        "Weekly calls for one soft metric? That's more of both our time than this warrants.",
+      styleMatch: stylePlus(s, -1),
+      assertiveness: 2,
+      compliance: 'safe',
+      trustChange: -3,
+    },
+    {
+      id: 'cd-close-flat',
+      label: 'Drop off flatly',
+      description:
+        'Ends abruptly with no plan to watch the soft area - a missed chance to leave it tidy and the relationship warm.',
+      playerDialogue:
+        "Right, nothing major then. I'll let you get on.",
+      partnerResponse:
+        "Okay... thanks for the call, I suppose.",
+      styleMatch: stylePlus(s, 0),
+      assertiveness: 1,
+      compliance: 'safe',
+      trustChange: -1,
+    },
+  ];
+
+  return [
+    {
+      id: 'open',
+      label: 'Open on the near-miss read',
+      partnerPrompt: `Of course. Honestly, ${meta.healthyNote} overall - though I'll admit the forward book feels a touch soft. What are you seeing?`,
+      options: step1,
+    },
+    {
+      id: 'plan',
+      label: 'Offer a proportionate option',
+      partnerPrompt: 'So - is this something I need to act on, or just keep half an eye on?',
+      options: step2,
+    },
+    {
+      id: 'close',
+      label: 'Close warmly',
+      partnerPrompt: 'Appreciate you keeping it in proportion. Anything else before we wrap?',
+      options: step3,
+    },
+  ];
+}
+
+/**
+ * Builds the "close" near-miss call for whichever lead hotel is acting as
+ * the KAM close card. Stamps the engaged partner's id and the round.
+ * Registered for each KAM close round across the cross-regional ids in
+ * branchingScenarios.ts.
+ */
+export function buildCloseDecoyScenario(
+  partnerId: string,
+  round: number,
+): BranchingConversationTree {
+  const baseId = partnerId.replace(/-(none|narrow|wide|cross-regional)$/, '');
+  const meta = HOTEL_META[baseId] ?? HOTEL_META['royal-crest'];
+  return {
+    conversationShape: 'branching',
+    partnerId,
+    round,
+    openingAm: `Hi ${meta.contact}, thanks for making time. I wanted to run a quick eye over this property's performance - is now still okay?`,
+    steps: closeSteps(meta),
   };
 }

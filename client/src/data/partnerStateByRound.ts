@@ -2,7 +2,9 @@ import type { PartnerMetrics } from '../types';
 import {
   HEALTHY_DECOY_ROUNDS,
   healthyDecoyMetricsFor,
+  closeDecoyMetricsFor,
 } from './scenarios/healthy-decoys';
+import { KAM_CLOSE_BY_ROUND, KAM_DIST_BY_ROUND } from './kamLayout';
 
 /**
  * Scripted per-round partner state baselines.
@@ -865,6 +867,26 @@ for (const [baseId, rounds] of Object.entries(HEALTHY_DECOY_ROUNDS)) {
   for (const round of rounds) {
     entry[round] = { metrics: healthyDecoyMetricsFor(baseId) };
   }
+}
+
+// Cross-Regional (KAM) decoy baselines. Each KAM round shows the priority
+// (its problem-state record, no baseline here), a "close" near-miss card
+// and a "distractor" clean card. Register the two decoys under their
+// `-cross-regional` ids at that round: close = one-soft-flag metrics,
+// distractor = healthy. getPartnerBaseline looks these up directly (the
+// `-(none|narrow|wide)` alias never strips `-cross-regional`), so KAM ids
+// stay isolated from the standard-journey healthy baselines above. A
+// company's own priority round has no entry, so its record still reads as
+// the clear worst.
+for (let round = 1; round <= 20; round++) {
+  const closeId = `${KAM_CLOSE_BY_ROUND[round]}-cross-regional`;
+  (partnerStateByRound[closeId] ??= {})[round] = {
+    metrics: closeDecoyMetricsFor(KAM_CLOSE_BY_ROUND[round]),
+  };
+  const distId = `${KAM_DIST_BY_ROUND[round]}-cross-regional`;
+  (partnerStateByRound[distId] ??= {})[round] = {
+    metrics: healthyDecoyMetricsFor(KAM_DIST_BY_ROUND[round]),
+  };
 }
 
 /**

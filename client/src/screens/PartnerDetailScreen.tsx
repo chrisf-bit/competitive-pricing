@@ -37,6 +37,14 @@ import { PriceBucketStrip } from '../components/PriceBucketStrip';
 import { metricDefinitions } from '../data/metricDefinitions';
 import { useIdleNudge } from '../hooks/useIdleNudge';
 
+/** Learner-facing label for a partner's real parity regime (KAM pill). */
+const REGIME_LABEL: Record<string, string> = {
+  wide: 'Wide Parity',
+  narrow: 'Narrow Parity',
+  none: 'No Parity',
+  'cross-regional': 'Cross Regional',
+};
+
 interface PartnerDetailScreenProps {
   partner: PartnerState;
   currentRound: number;
@@ -144,8 +152,11 @@ export function PartnerDetailScreen({
   // standard journey, and every round of the Cross-Regional / KAM
   // journey (OPC metrics run in all ten of their rounds). Level 1
   // rounds keep the tab locked with the "Coming soon" pill.
-  const opcUnlocked =
-    partner.persona.parityRegime === 'cross-regional' || currentRound >= 11;
+  // OPC unlocks from round 11 in every journey (standard Level 2 and KAM
+  // Level 2 both run rounds 11-20). KAM Level 1 (rounds 1-10) stays locked
+  // - the old `parityRegime === 'cross-regional'` clause wrongly unlocked
+  // it there, so it's dropped.
+  const opcUnlocked = currentRound >= 11;
   const [activeTab, setActiveTab] = useState<'driving' | 'advanced'>('driving');
 
   return (
@@ -208,7 +219,7 @@ export function PartnerDetailScreen({
             </div>
             <div>
               <h2 style={{ margin: 0, fontSize: 20, fontWeight: 800 }}>
-                {partner.persona.propertyName}
+                {partner.persona.companyName ?? partner.persona.propertyName}
               </h2>
               <div
                 style={{
@@ -225,9 +236,49 @@ export function PartnerDetailScreen({
                 <span style={{ color: 'var(--grey-200)' }}>|</span>
                 <MapPin size={12} />
                 {partner.persona.location}
-                <span style={{ color: 'var(--grey-200)' }}>|</span>
-                {partner.persona.roomCount} rooms
+                {!partner.persona.companyName && (
+                  <>
+                    <span style={{ color: 'var(--grey-200)' }}>|</span>
+                    {partner.persona.roomCount} rooms
+                  </>
+                )}
               </div>
+              {partner.persona.companyName && (
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 5,
+                    marginTop: 6,
+                  }}
+                >
+                  {[
+                    partner.persona.parityRegime
+                      ? REGIME_LABEL[partner.persona.parityRegime]
+                      : null,
+                    `${partner.persona.numberOfProperties} properties`,
+                    partner.persona.hqLocation ? `HQ: ${partner.persona.hqLocation}` : null,
+                    partner.persona.partnerType,
+                  ]
+                    .filter(Boolean)
+                    .map((pill) => (
+                      <span
+                        key={pill as string}
+                        style={{
+                          fontSize: 10.5,
+                          fontWeight: 700,
+                          color: 'var(--brand-navy)',
+                          background: 'var(--off-white)',
+                          border: '1px solid var(--grey-200)',
+                          borderRadius: 20,
+                          padding: '2px 9px',
+                        }}
+                      >
+                        {pill}
+                      </span>
+                    ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

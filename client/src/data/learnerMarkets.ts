@@ -40,6 +40,6 @@ export const marketOptions: MarketOption[] = [
   {
     market: { parityRegime: 'cross-regional' as ParityRegime },
     label: 'Cross Regional',
-    available: false,
+    available: true,
   },
 ];
