@@ -115,7 +115,9 @@ function buildDossier(
         metrics.push({ label: k, value: `${v.value}${v.deltaPct !== undefined ? ` (${v.deltaPct > 0 ? '+' : ''}${v.deltaPct}%)` : ''}` });
     }
   }
-  if (m.opcMetrics) {
+  // OPC metrics only surface from Level 2 (round >= 11) onward, mirroring
+  // the sim: the On Platform Competitiveness tab is locked at Level 1.
+  if (m.opcMetrics && round >= 11) {
     for (const [k, v] of Object.entries(m.opcMetrics)) {
       if (v && typeof v === 'object' && 'value' in v)
         metrics.push({ label: `OPC ${k}`, value: `${v.value}${v.peerValue !== undefined ? ` vs ${v.peerValue} peer` : v.deltaPct !== undefined ? ` (${v.deltaPct > 0 ? '+' : ''}${v.deltaPct}%)` : ''}` });

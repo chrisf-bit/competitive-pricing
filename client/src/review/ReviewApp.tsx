@@ -356,7 +356,7 @@ function StyleChip({ label, style }: { label: string; style: string }) {
 }
 
 const S: Record<string, CSSProperties> = {
-  shell: { display: 'flex', height: '100vh', fontFamily: "'Inter', system-ui, sans-serif", color: C.ink, fontSize: 15, lineHeight: 1.6 },
+  shell: { display: 'flex', height: '100vh', overflow: 'hidden', fontFamily: "'Inter', system-ui, sans-serif", color: C.ink, fontSize: 15, lineHeight: 1.6 },
 
   nav: { width: 300, background: C.navyDark, display: 'flex', flexDirection: 'column', flexShrink: 0 },
   navHead: { padding: '16px 18px', borderBottom: '1px solid rgba(255,255,255,0.1)' },
@@ -366,19 +366,22 @@ const S: Record<string, CSSProperties> = {
   navItemActive: { background: C.navy, color: '#fff', fontWeight: 600 },
   navBadge: { background: C.yellow, color: C.navyDark, borderRadius: 10, padding: '1px 8px', fontSize: 11, fontWeight: 700, flexShrink: 0 },
 
-  main: { flex: 1, overflow: 'auto', background: C.offwhite, padding: '28px 32px' },
-  contentWrap: { maxWidth: 1240, margin: '0 auto' },
-  warnBar: { maxWidth: 1240, margin: '0 auto 20px', background: '#fff3cd', color: '#664d03', padding: '12px 16px', borderRadius: 10, fontSize: 14 },
+  main: { flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', background: C.offwhite, padding: '24px 28px' },
+  contentWrap: { flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', width: '100%', maxWidth: 1240, margin: '0 auto' },
+  warnBar: { width: '100%', maxWidth: 1240, margin: '0 auto 16px', flexShrink: 0, background: '#fff3cd', color: '#664d03', padding: '12px 16px', borderRadius: 10, fontSize: 14 },
 
-  flowHead: { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 24, marginBottom: 22, paddingBottom: 20, borderBottom: `1px solid ${C.line}` },
+  flowHead: { flexShrink: 0, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 24, marginBottom: 20, paddingBottom: 18, borderBottom: `1px solid ${C.line}` },
   eyebrow: { fontSize: 12.5, fontWeight: 700, color: C.blue, textTransform: 'uppercase', letterSpacing: '0.05em' },
   h1: { margin: '6px 0 0', fontSize: 28, color: C.navy, lineHeight: 1.15 },
   subline: { color: C.sub, marginTop: 6, fontSize: 15 },
 
-  body: { display: 'flex', gap: 28, alignItems: 'flex-start' },
-  convo: { flex: 1, minWidth: 0, background: '#fff', border: `1px solid ${C.line}`, borderRadius: 14, padding: 28 },
-  sidebar: { width: 360, flexShrink: 0, position: 'sticky', top: 0, alignSelf: 'flex-start', maxHeight: 'calc(100vh - 56px)', overflow: 'auto' },
-  sideCard: { background: '#fff', border: `1px solid ${C.line}`, borderRadius: 14, padding: 22 },
+  // The two panels each scroll their OWN content within the fixed body
+  // height, so there is exactly one scrollbar per panel (each clearly
+  // bound to its column) and no ambiguous outer page scrollbar.
+  body: { flex: 1, minHeight: 0, display: 'flex', gap: 24, overflow: 'hidden' },
+  convo: { flex: 1, minWidth: 0, overflowY: 'auto', background: '#fff', border: `1px solid ${C.line}`, borderRadius: 14, padding: 28 },
+  sidebar: { width: 360, flexShrink: 0, overflowY: 'auto', background: '#fff', border: `1px solid ${C.line}`, borderRadius: 14, padding: 22 },
+  sideCard: { border: 'none', padding: 0 },
 
   sectionTitle: { margin: '0 0 16px', fontSize: 13, color: C.faint, textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 },
 
