@@ -390,35 +390,32 @@ export default function App() {
               );
             })()}
           {state.screen === 'conversation' &&
-            state.conversationInProgress &&
-            state.conversationInProgress.shape !== 'branching' && (
-              <ConversationScreen
-                partner={state.partners.find(
-                  (p) =>
-                    p.persona.id === state.conversationInProgress!.partnerId,
-                )!}
-                currentRound={state.currentRound}
-                conversation={state.conversationInProgress}
-                onChoice={game.onConversationChoice}
-                onEnd={game.onEndConversation}
-                onBack={game.onBackToPortfolio}
-              />
-            )}
-          {state.screen === 'conversation' &&
-            state.conversationInProgress &&
-            state.conversationInProgress.shape === 'branching' && (
-              <BranchingConversationScreen
-                partner={state.partners.find(
-                  (p) =>
-                    p.persona.id === state.conversationInProgress!.partnerId,
-                )!}
-                currentRound={state.currentRound}
-                conversation={state.conversationInProgress}
-                onChoice={game.onConversationChoice}
-                onEnd={game.onEndConversation}
-                onBack={game.onBackToPortfolio}
-              />
-            )}
+            (() => {
+              const conv = state.conversationInProgress;
+              if (!conv) return null;
+              const partner = state.partners.find(
+                (p) => p.persona.id === conv.partnerId,
+              );
+              // Guard the same desync as the partner-detail branch: a
+              // conversation whose partner record isn't in state.partners
+              // renders a way back rather than crashing on the `!` assertion.
+              if (!partner) {
+                return <ConversationMissing onBack={game.onBackToPortfolio} />;
+              }
+              const commonProps = {
+                partner,
+                currentRound: state.currentRound,
+                conversation: conv,
+                onChoice: game.onConversationChoice,
+                onEnd: game.onEndConversation,
+                onBack: game.onBackToPortfolio,
+              };
+              return conv.shape === 'branching' ? (
+                <BranchingConversationScreen {...commonProps} />
+              ) : (
+                <ConversationScreen {...commonProps} />
+              );
+            })()}
           {state.screen === 'conversation-report' && state.lastConversationGrade && (
             <ConversationReportScreen
               grade={state.lastConversationGrade}

@@ -31,7 +31,11 @@ import { kamPortfolioRow } from './kamLayout';
 
 // Priority hotel per round (Level 1 R1-R10, then the same ten revisited
 // through the OPC lens R11-R20). Index 1-20.
-const PRIORITY_BY_ROUND: Record<number, string> = {
+// Exported as the single source of truth for "which base hotel is the
+// right call this round" - correctPartnerPerRound.ts generates its
+// standard-regime maps from this same table so the two genuinely cannot
+// drift (they used to be independent hand-maintained literals).
+export const PRIORITY_BY_ROUND: Record<number, string> = {
   1: 'royal-crest', 2: 'silver-horizon', 3: 'ocean-view', 4: 'riverside',
   5: 'emerald-peak', 6: 'oceanfront', 7: 'palace-grand', 8: 'hidden-valley',
   9: 'loft-living', 10: 'noble-falcon',
