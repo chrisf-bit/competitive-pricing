@@ -92,6 +92,10 @@ export function MetricLabel({
   // place.
   useLayoutEffect(() => {
     if (!open || !buttonRef.current) {
+      // Canonical measure-then-position pattern: a tooltip's viewport
+      // coords can only be computed from the rendered DOM rect, so
+      // setting position state from a layout effect is required here.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCoords(null);
       return;
     }
@@ -123,6 +127,9 @@ export function MetricLabel({
     const top = iconRect.top - measuredHeight - TOOLTIP_GAP;
     const clampedTop = top < VIEWPORT_PADDING ? iconRect.bottom + TOOLTIP_GAP : top;
     if (Math.abs(clampedTop - coords.top) > 0.5) {
+      // Re-clamp once the real tooltip height is measured - same
+      // measure-then-position requirement as the effect above.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setCoords((c) => (c ? { ...c, top: clampedTop } : c));
     }
     // Re-clamping intentionally only re-runs when open/coords change.

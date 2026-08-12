@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { seededShuffle } from '../util/seededShuffle';
 import { ConversationMissing } from '../components/ConversationMissing';
 import { motion } from 'framer-motion';
@@ -109,16 +109,16 @@ export function BranchingConversationScreen({
   // Randomise option order at render time so the optimal pick isn't
   // always first. Seeded on the step's option ids so the layout is
   // stable across a retake / practice replay of the same step.
-  const displayedOptions = useMemo(
-    () =>
-      currentStep
-        ? seededShuffle(
-            currentStep.options,
-            currentStep.options.map((o) => o.id).join('|'),
-          )
-        : [],
-    [currentStep],
-  );
+  // seededShuffle is pure and deterministic on the seed, so this is a
+  // plain derived value - no useMemo (which, sitting after the early
+  // return above, would be a conditional hook). React Compiler memoizes
+  // the component anyway.
+  const displayedOptions = currentStep
+    ? seededShuffle(
+        currentStep.options,
+        currentStep.options.map((o) => o.id).join('|'),
+      )
+    : [];
 
   const handleSelect = (optionId: string) => {
     setSelectedOption(optionId);

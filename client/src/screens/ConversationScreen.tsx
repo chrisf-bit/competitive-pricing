@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { seededShuffle } from '../util/seededShuffle';
 import { ConversationMissing } from '../components/ConversationMissing';
 import { motion } from 'framer-motion';
@@ -111,14 +111,13 @@ export function ConversationScreen({
 
   // Randomise option order at render time so the optimal pick isn't
   // always first. Seeded on the phase's option ids so the layout is
-  // stable across a retake / practice replay.
-  const displayedOptions = useMemo(
-    () =>
-      phase
-        ? seededShuffle(phase.options, phase.options.map((o) => o.id).join('|'))
-        : [],
-    [phase],
-  );
+  // stable across a retake / practice replay. seededShuffle is pure and
+  // deterministic on the seed, so this can be a plain derived value - no
+  // useMemo (which, sitting after the early return above, would be a
+  // conditional hook). React Compiler memoizes the component anyway.
+  const displayedOptions = phase
+    ? seededShuffle(phase.options, phase.options.map((o) => o.id).join('|'))
+    : [];
 
   const handleSelect = (optionId: string) => {
     setSelectedOption(optionId);

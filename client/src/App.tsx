@@ -50,6 +50,11 @@ export default function App() {
       !showTutorial &&
       !showSplash
     ) {
+      // Intentional fire-once-on-mount: the tour must open after the
+      // Portfolio (and its guide-panel target) has rendered, so it can
+      // only be triggered from an effect watching the screen. The one
+      // extra render is harmless and happens once per playthrough.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowTutorial(true);
       game.markTutorialShown();
     }
@@ -66,6 +71,9 @@ export default function App() {
       !showTutorial &&
       !showSplash
     ) {
+      // Intentional fire-once-on-mount, same rationale as the Portfolio
+      // tour above - must open after Partner Detail has rendered.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowTutorial(true);
       game.markPartnerDetailTutorialShown();
     }
