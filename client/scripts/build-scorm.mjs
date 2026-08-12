@@ -21,7 +21,7 @@
  */
 
 import { execSync } from 'node:child_process';
-import { existsSync, rmSync, statSync } from 'node:fs';
+import { existsSync, rmSync, statSync, readdirSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { platform } from 'node:os';
@@ -46,6 +46,20 @@ if (!existsSync(manifestPath)) {
       'everything under public/ to the dist root on build.\n',
   );
   process.exit(1);
+}
+
+// Strip the internal Conversation Review tool from the SCORM package.
+// It builds into dist as a second entry (review.html + assets/review-*)
+// for the Render preview, but must never ship inside the LMS zip - the
+// manifest points only at index.html, so this just removes dead weight
+// and keeps the deliverable to the sim alone.
+log('Stripping review tool from SCORM dist...');
+rmSync(resolve(distDir, 'review.html'), { force: true });
+const assetsDir = resolve(distDir, 'assets');
+if (existsSync(assetsDir)) {
+  for (const name of readdirSync(assetsDir)) {
+    if (/^review-/.test(name)) rmSync(resolve(assetsDir, name), { force: true });
+  }
 }
 
 // Compress-Archive refuses to overwrite without -Force; zip just
