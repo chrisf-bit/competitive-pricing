@@ -1168,7 +1168,7 @@ function emeraldPeakBase(args: {
         style: 'red',
         styleSecondary: 'blue',
         description:
-          "General Manager of a franchise lodge operating under chain brand standards with limited local autonomy. Values brand compliance and franchise standing, and is bound by central rules on rate parity and loyalty pricing - head office keeps the direct site cheaper by policy. Direct, decisive and ROI-focused, but can't authorise anything that breaks internal rules; she'll move on a targeted, compliant solution, not a flat rate drop.",
+          "General Manager of a franchise lodge operating under chain brand standards with limited local autonomy. Values brand compliance and franchise standing, and is bound by central pricing and loyalty rules - head office keeps the direct site cheaper by policy. Direct, decisive and ROI-focused, but can't authorise anything that breaks internal rules; she'll move on a targeted, compliant solution, not a flat rate drop.",
         commercialGoal:
           'Hit revenue and occupancy targets while staying fully compliant with head-office rate policy',
       },

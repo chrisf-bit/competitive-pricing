@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+/* Inter is loaded locally via @fontsource in main.tsx (bundled woff2,
+   no network request) so the SCORM package is fully self-contained. */
 
 *, *::before, *::after {
   box-sizing: border-box;

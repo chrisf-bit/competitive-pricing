@@ -642,7 +642,7 @@ function getPartnerSpecificTips(partner: PartnerState): GuideTip[] {
   if (partner.metrics.rateParity === 'major') {
     tips.push({
       icon: <AlertTriangle size={12} />,
-      title: 'Rate parity alert',
+      title: 'Price competitiveness alert',
       text: 'Major price inconsistency. More discounts may not help.',
     });
   }

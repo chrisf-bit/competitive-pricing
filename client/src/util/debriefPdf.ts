@@ -7,6 +7,7 @@ import type {
 } from '../types';
 import { getPersonaById } from '../data/characters';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
+import { TOTAL_ROUNDS } from '../engine/gameEngine';
 
 // jsPDF + its transitive deps (html2canvas, dompurify) add ~400KB to
 // the bundle. Loading them lazily inside downloadDebriefPdf keeps the
@@ -19,13 +20,13 @@ import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
  * Sections:
  *  - Cover: learner name, persona, regime, completion date, headline
  *    score line.
- *  - Round-by-round results: 10 rows showing the SME-correct partner
- *    for the round, the engaged partner if different, and the stars
- *    earned.
+ *  - Round-by-round results: one row per round (TOTAL_ROUNDS) showing
+ *    the SME-correct partner for the round, the engaged partner if
+ *    different, and the stars earned.
  *  - Well done: persona retroOnWin lines for every >=2-star round +
  *    the aggregate persona-strength coaching line.
- *  - Coaching focus: persona retroOnLoss lines for every 0-star round +
- *    the aggregate persona-trade-off coaching line.
+ *  - Coaching focus: persona retroOnLoss lines for every scrappy
+ *    single-star round + the aggregate persona-trade-off coaching line.
  *
  * Generated client-side via jsPDF - no network call, no backend, no
  * shared CDN. Fits in the self-contained SCORM zip.
@@ -61,8 +62,11 @@ export async function buildDebriefPdf(args: BuildDebriefPdfArgs): Promise<jsPDF>
   // ─── Round-by-round results ───
   y = drawSectionHeader(doc, y, 'Round results');
   y = ensureSpace(doc, y, 8);
-  const totalRounds = 10;
-  for (let round = 1; round <= totalRounds; round++) {
+  // Rounds actually played (roundStars only stores rounds the learner
+  // cleared) - the denominator for the strength / trade-off lines,
+  // matching the on-screen Debrief aggregate block.
+  const roundsPlayed = Object.keys(roundStars).length;
+  for (let round = 1; round <= TOTAL_ROUNDS; round++) {
     const stars = roundStars[round] ?? null;
     const correctPartnerId = regime ? getCorrectPartnerForRound(regime, round) : null;
     const correctPartnerName = correctPartnerId
@@ -98,7 +102,7 @@ export async function buildDebriefPdf(args: BuildDebriefPdfArgs): Promise<jsPDF>
       y = drawBodyLine(
         doc,
         y,
-        `${wellDoneRounds.length} of ${totalRounds} rounds where your ${persona.name} strength carried.`,
+        `${wellDoneRounds.length} of ${roundsPlayed} rounds where your ${persona.name} strength carried.`,
         { bold: true },
       );
       y = drawBodyParagraph(doc, y, persona.powerEffect.retroOnWin);
@@ -120,8 +124,12 @@ export async function buildDebriefPdf(args: BuildDebriefPdfArgs): Promise<jsPDF>
   }
 
   // ─── Coaching focus ───
+  // A scrappy single-star pass is where the persona's trade-off showed
+  // even though the learner got through. A 0-star round can't reach the
+  // debrief (you can't advance past it), so the count keys off s === 1,
+  // mirroring the on-screen Debrief aggregate block.
   const coachingRounds = Object.entries(roundStars)
-    .filter(([, s]) => s === 0)
+    .filter(([, s]) => s === 1)
     .map(([r]) => Number(r))
     .sort((a, b) => a - b);
   if (coachingRounds.length > 0 || persona) {
@@ -132,7 +140,7 @@ export async function buildDebriefPdf(args: BuildDebriefPdfArgs): Promise<jsPDF>
       y = drawBodyLine(
         doc,
         y,
-        `${coachingRounds.length} of ${totalRounds} rounds where the ${persona.name} trade-off slowed you down.`,
+        `${coachingRounds.length} of ${roundsPlayed} rounds where the ${persona.name} trade-off slowed you down.`,
         { bold: true },
       );
       y = drawBodyParagraph(doc, y, persona.powerEffect.retroOnLoss);
@@ -140,7 +148,7 @@ export async function buildDebriefPdf(args: BuildDebriefPdfArgs): Promise<jsPDF>
       y = drawBodyParagraph(
         doc,
         y,
-        `No round dropped to 0 stars this run. Keep playing to the ${persona.name} strengths and watch for the moments the trade-off bites.`,
+        `No round came down to a scrappy single-star pass this run. Keep playing to the ${persona.name} strengths and watch for the moments the trade-off bites.`,
       );
     }
     for (const round of coachingRounds) {
