@@ -218,7 +218,11 @@ export function gradeRound(input: GradingInput): GradingResult {
  *   3. No active style mismatch (no single pick <= -2 on the
  *      partner's primary style).
  *
- * Above the floor: 2 stars if styleSum >= 5, 3 stars if styleSum >= 6.
+ * Above the floor, tiers key off the AVERAGE style match per step
+ * (styleSum / step count), so call length doesn't change the bar:
+ * 2 stars at avg >= 1.0, 3 stars at avg >= 4/3 (~1.33). The 1.33 bar
+ * matches the weakest SME-optimal path, so an optimal call always
+ * earns 3 stars on every round.
  *
  * `diagnosisCorrect` and `pitchCorrect` on the result are filled with
  * a heuristic until SME content tags per-step "optimal" picks
@@ -287,12 +291,21 @@ export function gradeBranchingRound(input: {
     failureReason = 'style-mismatch';
   }
 
+  // Above-floor tiers key off the AVERAGE style match per step, not the
+  // raw sum. Branching scenarios run 4-6 steps, so a summed threshold
+  // made 3 stars easier the longer the call (more steps to accumulate
+  // points). Averaging holds every round to the same per-step quality
+  // bar regardless of length. Integer-safe form of avg >= 4/3 and
+  // avg >= 1 (styleSum / styleCount): 3 stars at avg >= 1.33, 2 at >= 1.0.
+  // The 1.33 bar is set to the weakest SME-optimal path (an 8-over-6-step
+  // scenario), so every scenario's optimal path still earns 3 stars.
+  const styleCount = styleScores.length;
   let stars: 0 | 1 | 2 | 3;
   if (failureReason !== null) {
     stars = 0;
-  } else if (styleSum >= 6) {
+  } else if (styleCount > 0 && styleSum * 3 >= styleCount * 4) {
     stars = 3;
-  } else if (styleSum >= 5) {
+  } else if (styleCount > 0 && styleSum >= styleCount) {
     stars = 2;
   } else {
     stars = 1;
