@@ -3228,8 +3228,18 @@ npm install
 npm run dev
 ```
 
-Hosted at the URL on Render configured via `render.yaml` (auto-deploy
-from `main` branch).
+Hosted on Render as the static site **competitive-pricing** at
+https://competitive-pricing.onrender.com. **Render builds and deploys
+from the `release-2-partner-detail` branch, NOT `main`** (confirmed in
+the Render dashboard 2026-08-12 - the service's Build > Branch is set to
+`release-2-partner-detail`). So pushing to `release-2-partner-detail` is
+what ships to the live preview; do not merge to `main` to deploy. `main`
+is far behind (191 commits as of 2026-08-12) and is not the deploy
+source. The `render.yaml` in the repo does not pin a branch - the branch
+is set in the dashboard. Deploys may be Manual (the dashboard showed a
+"Manual Deploy" control): if auto-deploy on commit isn't enabled, a push
+lands on the branch but the site only updates when someone clicks
+Manual Deploy > Deploy latest commit in the Render dashboard.
 
 ## Roadmap to SCORM cutover (outstanding items, 2026-08-11)
 
