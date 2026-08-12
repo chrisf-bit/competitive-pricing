@@ -3220,6 +3220,118 @@ Health averages only each partner's final trust. The A/B/C/D letter grade
 is unaffected (it reads `roundStars`). Fix if the outcomes grid matters:
 key engagement history by `${partnerId}-${round}`.
 
+## Post-2026-08-12 session (whole-sim audit, fixes, Conversation Review tool)
+
+A full "what could go wrong" audit of the sim followed by fixes, a
+live browser playthrough, and a new internal review tool. All committed
+and pushed to `release-2-partner-detail`.
+
+### Deploy branch correction (important)
+
+**Render deploys the live preview from `release-2-partner-detail`, NOT
+`main`** (confirmed in the Render dashboard 2026-08-12; `main` is ~191
+commits behind and is not the deploy source). Pushing to the branch is
+what ships. Deploys may be Manual (a "Manual Deploy" control in the
+dashboard) - a push lands on the branch but the site only updates on
+Deploy latest commit if auto-deploy is off. See the note under "How to
+run".
+
+### Audit fixes shipped
+
+- **SCORM self-containment: Inter is now bundled** via `@fontsource/inter`
+  (weights 400-900, imported in `main.tsx` and `review/main.tsx`). The
+  old `@import url(fonts.googleapis.com...)` in `index.css` was a runtime
+  network call that breaks the no-network SCORM guarantee. Verified: zero
+  `fonts.googleapis` in dist, woff2 emitted. Don't reintroduce the CDN
+  font import.
+- **Debrief PDF** (`util/debriefPdf.ts`): was hard-coding `totalRounds =
+  10` (dropped rounds 11-20 and printed "12 of 10"); now imports
+  `TOTAL_ROUNDS` and uses rounds-played denominators. Coaching-focus list
+  filtered on `s === 0` (never stored, always empty); now `s === 1`
+  (scrappy passes), matching the on-screen Debrief.
+- **Branching star tiers now average style per step, not sum**
+  (`engine/grading.ts`, `gradeBranchingRound`). Summed thresholds made 3
+  stars easier the longer the call (4-6 steps). Now: 2 stars at avg style
+  >= 1.0, 3 stars at avg >= 4/3 (integer-safe `styleSum*3 >= count*4` /
+  `styleSum >= count`). The 4/3 bar is set to the weakest SME-optimal path
+  (8-over-6-step) so every one of the 80 priority optimal paths still
+  earns 3 stars (verified against the real grader); a single off-optimal
+  step on a long call now correctly costs the third star. The 3-phase
+  grader (legacy/dead content, always 3 picks) is unchanged. This
+  re-tunes SME-scored content at the margin - flag to SME that "3 stars
+  on longer rounds now needs consistent play."
+- **`correctPartnerPerRound` is now generated** from the shared
+  `PRIORITY_BY_ROUND` table (exported from `portfolioByRound.ts`) suffixed
+  by regime, so it genuinely can't drift from the portfolio (they were
+  independent hand-maintained literals despite the old comment claiming
+  otherwise). KAM entries come from `kamLayout`. Verified byte-identical
+  to the old literals across all 80 combos.
+- **Conversation-branch crash guards**: `App.tsx` merged the two
+  conversation render branches into one guarded IIFE that falls back to
+  `ConversationMissing` instead of a `state.partners.find(...)!` that
+  could white-screen on a desync.
+- **All 8 pre-existing ESLint errors fixed** (the build never ran eslint,
+  so they'd accrued). The real one: both conversation screens called
+  `useMemo` after the `if (!tree) return <ConversationMissing/>` early
+  return (conditional hook, `rules-of-hooks`, can crash React on the
+  guard flipping). `seededShuffle` is pure/deterministic, so the memo was
+  only an optimization - replaced with a plain derived value (React
+  Compiler memoizes the component anyway). The 4 `set-state-in-effect`
+  errors (App.tsx tutorial fire-once, MetricLabel tooltip DOM
+  measurement) are intentional, correct patterns - suppressed with
+  justified `eslint-disable-next-line`, not refactored.
+
+### Verified live
+
+`tsc`, `eslint`, and `vite build` all clean. A headless-Chromium
+playthrough drove the full loop (splash -> onboarding -> DevNav to
+Portfolio -> Partner Detail -> Pricing Pathway gate -> branching
+conversation on the optimal path -> **3-star "Optimal call" report** ->
+Continue advances R1 to R2) plus a DevNav sweep of every clearance
+activity + Debrief - zero console errors anywhere. An esbuild smoke
+harness confirmed all 80 (regime x round) combos are winnable with the
+priority present and its optimal path clearing the floor. The one gap
+that can't be tested locally is the SCORM package in a real LMS
+(suspend_data / lesson_status / score.raw) - still item 3 on the cutover
+blockers.
+
+### Conversation Review tool (new subsystem)
+
+A separate, internal, reviewer-facing page for SME/stakeholder review of
+the conversation content - **not part of the SCORM deliverable**.
+
+- **Second Vite entry**: `client/review.html` + `src/review/`
+  (`main.tsx`, `ReviewApp.tsx`, `reviewData.ts`, `comments.ts`,
+  `config.ts`). `vite.config.ts` builds both `index.html` and
+  `review.html`; `scripts/build-scorm.mjs` strips `review.*` from the LMS
+  zip before zipping (verified no `review.*` in `rate-right.zip`).
+  Reachable at `/review.html` on the Render preview.
+- **What it shows**: `reviewData.ts::buildFlows()` enumerates all 60
+  conversation flows straight from the live data - Standard L1 (10 rounds
+  x 3 regimes = 30), Standard L2 (regime-neutral, deduped by tree
+  signature = 10), Cross-Regional/KAM (20). Each flow renders a partner
+  **dossier** (driving metrics, price bucket, discounts, profile,
+  commercial goal, the 4 persona lenses, prescribed Pricing Pathway) plus
+  the conversation steps with `optimal` + `compliance` tags shown. **OPC
+  metrics are gated to Level 2 (round >= 11)** in `buildDossier` to mirror
+  the sim's locked OPC tab at L1.
+- **Comments**: every line has a comment affordance anchored to a stable
+  id (`partnerId|round|stepId|optionId|field`); the original line text
+  rides along so reviewers never retype copy. Comments POST to a **Google
+  Apps Script web app** that pools them into one Sheet the client owns
+  (`client/review-apps-script/Code.gs` + `SETUP.md`). The endpoint
+  resolves from `?endpoint=` param > localStorage > `config.ts`
+  `REVIEW_ENDPOINT` (baked in). The Apps Script writes to a tab named
+  **`comments`** (not Sheet1) and its deployment must be "Who has access:
+  Anyone" for anonymous reviewer posting. POST uses a plain-text body (no
+  custom Content-Type) to skip the CORS preflight Apps Script can't
+  answer; `doPost` runs and appends even though the browser can't always
+  read the response.
+- **Layout**: two-panel - the conversation is the main reading column and
+  the partner data is a sidebar; the header is fixed and each panel scrolls
+  its own content (no ambiguous outer page scrollbar). Uses named-import
+  `CSSProperties`/`ReactNode` (not `React.*`), no left-border accent rails.
+
 ## How to run
 
 ```
