@@ -397,64 +397,6 @@ export function GuidePanel({
           </div>
         )}
 
-        {/* Round progress */}
-        <div
-          style={{
-            padding: '14px 18px',
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-            marginTop: 'auto',
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 7,
-              marginBottom: 10,
-            }}
-          >
-            <IconBox bg="rgba(255,255,255,0.06)" size={22}>
-              <BarChart3 size={11} style={{ color: 'rgba(255,255,255,0.4)' }} />
-            </IconBox>
-            <span style={{
-              fontSize: 10,
-              fontWeight: 800,
-              color: 'rgba(255,255,255,0.35)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-            }}>
-              Progress
-            </span>
-          </div>
-          <div style={{ display: 'flex', gap: 3, marginBottom: 8 }}>
-            {Array.from({ length: 10 }, (_, i) => i + 1).map((r) => (
-              <div
-                key={r}
-                style={{
-                  flex: 1,
-                  height: 6,
-                  borderRadius: 3,
-                  background:
-                    r < currentRound
-                      ? 'var(--success)'
-                      : r === currentRound
-                        ? 'var(--brand-yellow)'
-                        : 'rgba(255,255,255,0.1)',
-                  transition: 'background 0.3s ease',
-                }}
-              />
-            ))}
-          </div>
-          <div
-            style={{
-              fontSize: 11,
-              color: 'rgba(255,255,255,0.4)',
-              fontWeight: 600,
-            }}
-          >
-            Round {currentRound}/10
-          </div>
-        </div>
       </div>
     </div>
   );
