@@ -9,7 +9,9 @@ import type {
   RPDLevel,
   TrendDirection,
   LastConversationGrade,
+  RoundAttemptStats,
 } from '../types';
+import type { GradingResult } from './grading';
 import { initialPartners } from '../data/partners';
 import { getMarketContext, generateRoundSummary } from '../data/market';
 import { getConversationTree } from '../data/conversations';
@@ -141,6 +143,7 @@ export function createInitialState(overrides?: {
     roundSummaries: [],
     roundStars: overrides?.roundStars ?? {},
     lastConversationGrade: null,
+    roundAttempts: {},
     isPracticeMode: false,
     conversationInProgress: null,
     gameComplete: false,
@@ -194,6 +197,7 @@ export function resetForPlayAgain(state: GameState): GameState {
     ),
     roundSummaries: [],
     roundStars: {},
+    roundAttempts: {},
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
     conversationInProgress: null,
@@ -475,6 +479,20 @@ export function processConversationChoice(
       };
     }
 
+    // Record the attempt for the Debrief's diagnosis/pitch/focus
+    // readout. Main-run only (practice replays shouldn't rewrite the
+    // development history) and right-partner only (see recordRoundAttempt).
+    // Legacy 3-phase trees carry no issueTreePath, so issueId is null.
+    const newRoundAttempts = state.isPracticeMode
+      ? state.roundAttempts
+      : recordRoundAttempt(
+          state.roundAttempts,
+          state.currentRound,
+          conv.partnerId,
+          null,
+          result,
+        );
+
     // Stay on the conversation screen so the learner can read the
     // final partner response. The conversation-complete UI button there
     // calls onEndConversation, which routes to the report screen via
@@ -485,6 +503,7 @@ export function processConversationChoice(
       actionsThisRound: newActionsThisRound,
       engagedPartnerIds: newEngagedPartnerIds,
       roundStars: newRoundStars,
+      roundAttempts: newRoundAttempts,
       lastConversationGrade: grade,
       conversationInProgress: {
         ...conv,
@@ -620,12 +639,26 @@ function processBranchingChoice(
       };
     }
 
+    // Record the attempt for the Debrief's diagnosis/pitch/focus
+    // readout. Main-run + right-partner only (see recordRoundAttempt).
+    // Branching trees carry the issue slug on their issueTreePath.
+    const newRoundAttempts = state.isPracticeMode
+      ? state.roundAttempts
+      : recordRoundAttempt(
+          state.roundAttempts,
+          state.currentRound,
+          conv.partnerId,
+          tree.issueTreePath?.issueId ?? null,
+          result,
+        );
+
     return {
       ...state,
       partners: newPartners,
       actionsThisRound: newActionsThisRound,
       engagedPartnerIds: newEngagedPartnerIds,
       roundStars: newRoundStars,
+      roundAttempts: newRoundAttempts,
       lastConversationGrade: grade,
       conversationInProgress: {
         ...conv,
@@ -1006,6 +1039,39 @@ export function calculateScore(state: GameState): ScoreBreakdown {
 // ── Helpers ──
 function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value));
+}
+
+/**
+ * Fold one graded attempt into the per-round attempt stats. Records
+ * only right-partner attempts (diagnosis/pitch correctness against a
+ * decoy's tree is noise) and never lowers a first-correct attempt
+ * number once set. Callers gate on `!isPracticeMode` so only main-run
+ * attempts count toward the development readout.
+ */
+function recordRoundAttempt(
+  roundAttempts: Record<number, RoundAttemptStats>,
+  round: number,
+  partnerId: string,
+  issueId: string | null,
+  result: GradingResult,
+): Record<number, RoundAttemptStats> {
+  if (!result.rightPartner) return roundAttempts;
+  const prev = roundAttempts[round];
+  const attemptNo = (prev?.totalAttempts ?? 0) + 1;
+  return {
+    ...roundAttempts,
+    [round]: {
+      partnerId,
+      issueId: prev?.issueId ?? issueId,
+      totalAttempts: attemptNo,
+      diagnosisFirstCorrectAttempt:
+        prev?.diagnosisFirstCorrectAttempt ??
+        (result.diagnosisCorrect ? attemptNo : null),
+      pitchFirstCorrectAttempt:
+        prev?.pitchFirstCorrectAttempt ??
+        (result.pitchCorrect ? attemptNo : null),
+    },
+  };
 }
 
 function applyMetricEffects(

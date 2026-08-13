@@ -17,6 +17,7 @@ import {
   Tag,
   Sparkles,
   Route,
+  Unlock,
 } from 'lucide-react';
 import { useState } from 'react';
 import type { GameScreen, PartnerState } from '../types';
@@ -42,6 +43,13 @@ interface GuideStep {
    * pulse in useIdleNudge / IdleNudgeProvider.
    */
   target?: string;
+  /**
+   * Optional call-to-action button rendered beneath the step text
+   * (e.g. the post-sim "Toolkit" unlock on the Debrief). `href` opens
+   * in a new tab when set; left undefined while the destination is
+   * still being finalised, in which case the button is a no-op.
+   */
+  cta?: { label: string; href?: string };
 }
 
 interface GuideTip {
@@ -208,7 +216,7 @@ export function GuidePanel({
                 data-guide-step-for={step.target}
                 style={{
                   display: 'flex',
-                  alignItems: 'center',
+                  flexDirection: 'column',
                   gap: 10,
                   padding: '8px 10px',
                   borderRadius: 8,
@@ -223,54 +231,87 @@ export function GuidePanel({
                   transition: 'all 0.2s ease',
                 }}
               >
-                <IconBox
-                  bg={
-                    step.active
-                      ? 'rgba(0,159,227,0.25)'
-                      : step.done
-                        ? 'rgba(0,138,14,0.2)'
-                        : 'rgba(255,255,255,0.06)'
-                  }
-                  size={26}
-                >
-                  <div style={{
-                    color: step.active
-                      ? 'var(--brand-blue-light)'
-                      : step.done
-                        ? 'var(--success)'
-                        : 'rgba(255,255,255,0.65)',
-                  }}>
-                    {step.icon}
-                  </div>
-                </IconBox>
-                <span
-                  style={{
-                    flex: 1,
-                    fontSize: 12,
-                    lineHeight: 1.4,
-                    fontWeight: step.active ? 600 : step.done ? 500 : 500,
-                    color: step.active
-                      ? 'var(--white)'
-                      : step.done
-                        ? 'rgba(255,255,255,0.85)'
-                        : 'rgba(255,255,255,0.92)',
-                  }}
-                >
-                  {step.text}
-                </span>
-                {step.done && (
-                  <Check
-                    size={14}
-                    strokeWidth={3.5}
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <IconBox
+                    bg={
+                      step.active
+                        ? 'rgba(0,159,227,0.25)'
+                        : step.done
+                          ? 'rgba(0,138,14,0.2)'
+                          : 'rgba(255,255,255,0.06)'
+                    }
+                    size={26}
+                  >
+                    <div style={{
+                      color: step.active
+                        ? 'var(--brand-blue-light)'
+                        : step.done
+                          ? 'var(--success)'
+                          : 'rgba(255,255,255,0.65)',
+                    }}>
+                      {step.icon}
+                    </div>
+                  </IconBox>
+                  <span
                     style={{
-                      // --success (#008a0e) reads too muddy on the navy
-                      // panel - using a brighter tone so the tick pops
-                      // against the dark background.
-                      color: '#3ee27a',
-                      flexShrink: 0,
-                      filter: 'drop-shadow(0 0 6px rgba(62, 226, 122, 0.4))',
+                      flex: 1,
+                      fontSize: 12,
+                      lineHeight: 1.4,
+                      fontWeight: step.active ? 600 : step.done ? 500 : 500,
+                      color: step.active
+                        ? 'var(--white)'
+                        : step.done
+                          ? 'rgba(255,255,255,0.85)'
+                          : 'rgba(255,255,255,0.92)',
                     }}
-                  />
+                  >
+                    {step.text}
+                  </span>
+                  {step.done && (
+                    <Check
+                      size={14}
+                      strokeWidth={3.5}
+                      style={{
+                        // --success (#008a0e) reads too muddy on the navy
+                        // panel - using a brighter tone so the tick pops
+                        // against the dark background.
+                        color: '#3ee27a',
+                        flexShrink: 0,
+                        filter: 'drop-shadow(0 0 6px rgba(62, 226, 122, 0.4))',
+                      }}
+                    />
+                  )}
+                </div>
+                {step.cta && (
+                  <a
+                    href={step.cta.href ?? undefined}
+                    target={step.cta.href ? '_blank' : undefined}
+                    rel={step.cta.href ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => {
+                      // Destination TBC - swallow the click until an href
+                      // is wired so the button doesn't jump to top-of-page.
+                      if (!step.cta?.href) e.preventDefault();
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      gap: 8,
+                      textDecoration: 'none',
+                      padding: '10px 14px',
+                      borderRadius: 8,
+                      background:
+                        'linear-gradient(135deg, var(--brand-yellow) 0%, var(--brand-yellow-light) 100%)',
+                      color: 'var(--brand-navy-dark)',
+                      fontSize: 13,
+                      fontWeight: 800,
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 10px rgba(254,186,2,0.3)',
+                    }}
+                  >
+                    <Unlock size={14} />
+                    {step.cta.label}
+                  </a>
                 )}
               </div>
             ))}
@@ -615,6 +656,13 @@ function getGuideContent(
             icon: <Target size={13} />,
             text: 'Consider what to change',
             active: true,
+          },
+          {
+            icon: <Unlock size={13} />,
+            text: 'Access your toolkit',
+            active: true,
+            // href to be provided later - the button is a no-op until then.
+            cta: { label: 'Toolkit' },
           },
         ],
         tips: [

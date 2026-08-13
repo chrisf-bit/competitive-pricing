@@ -702,6 +702,39 @@ export interface LastConversationGrade {
     | null;
 }
 
+/**
+ * Per-round record of how many attempts the learner needed to clear
+ * each floor gate. Because a round can only be advanced past once the
+ * Diagnosis AND Pitch are both correct, a completed round's *final*
+ * grade is always all-correct - so the development signal lives in how
+ * many run-throughs it took to get there. `diagnosisFirstCorrectAttempt`
+ * / `pitchFirstCorrectAttempt` hold the 1-indexed attempt number on
+ * which that gate first came right (1 = nailed first time). The grader
+ * computes both `diagnosisCorrect` and `pitchCorrect` on every attempt
+ * independently, so the two counters stay independent even though a
+ * retake replays the whole call.
+ *
+ * Only main-run attempts on the round's *correct* partner are recorded
+ * (a wrong-partner call grades diagnosis/pitch against a decoy's tree,
+ * which is noise). Practice Mode replays don't write here.
+ */
+export interface RoundAttemptStats {
+  /** Partner engaged for this round (the round's correct partner). */
+  partnerId: string;
+  /**
+   * Issue slug from the scenario's issueTreePath (e.g.
+   * 'brand-com-erpd-not-competitive'), resolved to a display label on
+   * the Debrief. Null for legacy 3-phase trees that carry no path.
+   */
+  issueId: string | null;
+  /** Total graded main-run attempts at this round. */
+  totalAttempts: number;
+  /** 1-indexed attempt the Diagnosis first came right, or null if never. */
+  diagnosisFirstCorrectAttempt: number | null;
+  /** 1-indexed attempt the Pitch first came right, or null if never. */
+  pitchFirstCorrectAttempt: number | null;
+}
+
 export interface GameState {
   screen: GameScreen;
   /** The current level in the journey. Starts at 0, advances to 1 on clearance. */
@@ -802,6 +835,14 @@ export interface GameState {
    * conversation-report screen, cleared when the learner continues.
    */
   lastConversationGrade: LastConversationGrade | null;
+  /**
+   * Per-round attempt breakdown, keyed by round number. Feeds the
+   * Debrief's "what you diagnosed / pitched well vs where to focus"
+   * summary. In-memory for the session (not persisted); a debrief is
+   * reached at the end of a run, so cross-session gaps degrade
+   * gracefully to "no attempt data" for those rounds.
+   */
+  roundAttempts: Record<number, RoundAttemptStats>;
   /**
    * True when the learner is replaying a single round from the Debrief
    * screen's Practice Mode (after completing the sim once). Affects the

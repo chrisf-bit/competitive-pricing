@@ -16,11 +16,14 @@ interface HeaderProps {
 // with engine/gameEngine.ts.
 const TOTAL_ROUNDS = 20;
 
-// `screen` kept on the prop interface even though Header no longer
-// branches on it - keeps the App.tsx callsite stable and gives us a
-// hook if we ever need to surface screen-specific affordances in the
-// header again (e.g. a back button on the partner-detail screen).
-export function Header({ currentRound, onTutorial }: HeaderProps) {
+// Screens where a "Round X of 20" tracker is meaningless: the Debrief
+// is the final wrap and Round Select is a hub for picking a round, not
+// an in-progress round. On those we keep the header bar (logo + help)
+// but drop the round dots + counter.
+const HIDE_ROUND_TRACKER: GameScreen[] = ['debrief', 'round-select'];
+
+export function Header({ currentRound, screen, onTutorial }: HeaderProps) {
+  const showRoundTracker = !HIDE_ROUND_TRACKER.includes(screen);
   return (
     <header
       style={{
@@ -62,6 +65,7 @@ export function Header({ currentRound, onTutorial }: HeaderProps) {
       </div>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, fontSize: 13 }}>
+        {showRoundTracker && (
         <div data-tutorial="round-tracker" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <div style={{ display: 'flex', gap: 3, alignItems: 'center' }}>
             {Array.from({ length: TOTAL_ROUNDS }, (_, i) => i + 1).map((r) => (
@@ -95,6 +99,7 @@ export function Header({ currentRound, onTutorial }: HeaderProps) {
             Round {currentRound} of {TOTAL_ROUNDS}
           </span>
         </div>
+        )}
 
         {onTutorial && (
           <button

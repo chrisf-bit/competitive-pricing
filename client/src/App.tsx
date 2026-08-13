@@ -458,6 +458,7 @@ export default function App() {
               partners={state.partners}
               engagedPartnerIds={state.engagedPartnerIds}
               roundStars={state.roundStars}
+              roundAttempts={state.roundAttempts}
               regime={state.learnerProfile.market?.parityRegime ?? null}
               personaId={state.learnerProfile.archetype?.id ?? null}
               learnerProfile={state.learnerProfile}
