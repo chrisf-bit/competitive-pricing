@@ -23,7 +23,6 @@ import type {
   RoundAttemptStats,
 } from '../types';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
-import { issues } from '../data/issueTree';
 import { TOTAL_ROUNDS } from '../engine/gameEngine';
 import { getPersonaById } from '../data/characters';
 import { reportLessonStatus } from '../util/persistence';
@@ -420,19 +419,6 @@ const STYLE_NAMES: Record<string, string> = {
   blue: 'Thinker',
 };
 
-// Short chip label for a round's pricing issue - the full labels carry
-// an "eRPD not competitive" suffix that's too long for a chip.
-const SHORT_ISSUE: Record<string, string> = {
-  'brand-com-erpd-not-competitive': 'Brand.com',
-  'key-ota-erpd-not-competitive': 'Key OTA',
-};
-function shortIssue(id: string | null): string {
-  if (!id) return 'This round';
-  if (SHORT_ISSUE[id]) return SHORT_ISSUE[id];
-  const full = issues.find((i) => i.id === id)?.label;
-  return full ? full.replace(/ eRPD not competitive$/i, '') : 'This round';
-}
-
 const styleOf = (v: RoundView): string => v.partner?.persona.style ?? 'blue';
 const hotelOf = (v: RoundView): string => {
   const p = v.partner?.persona;
@@ -480,7 +466,7 @@ function wellDoneLine(v: RoundView): string {
     ],
   };
   const pool = byStyle[styleOf(v)] ?? byStyle.blue;
-  return `${pick(pool, v.round)} on the ${shortIssue(v.stats.issueId)} gap.`;
+  return `${pick(pool, v.round)}.`;
 }
 
 // Template-generated "how to lift it" line for a round to build on.
@@ -490,12 +476,11 @@ function howToLiftLine(v: RoundView): string {
   const diag = v.stats.diagnosisFirstCorrectAttempt ?? 1;
   const pitch = v.stats.pitchFirstCorrectAttempt ?? 1;
   const style = styleOf(v);
-  const issue = shortIssue(v.stats.issueId);
   if (diag > 1 && pitch > 1) {
     return pick(
       [
-        `both the read on the ${issue} gap and the close needed a few passes - work the Pricing Pathway, then lead into the pitch with the outcome.`,
-        `the ${issue} read and the close each took a couple of goes - tighten the diagnosis first, then open the pitch on the outcome.`,
+        `both the diagnosis and the close needed a few passes - work the Pricing Pathway, then lead into the pitch with the outcome.`,
+        `the read and the close each took a couple of goes - tighten the diagnosis first, then open the pitch on the outcome.`,
       ],
       v.round,
     );
@@ -503,8 +488,8 @@ function howToLiftLine(v: RoundView): string {
   if (diag > 1) {
     return pick(
       [
-        `the read on the ${issue} gap took a few passes - work the Pricing Pathway to name it sooner.`,
-        `it took a couple of goes to land the ${issue} diagnosis - lean on the Pricing Pathway to get there faster.`,
+        `the read took a few passes - work the Pricing Pathway to name it sooner.`,
+        `it took a couple of goes to land the diagnosis - lean on the Pricing Pathway to get there faster.`,
       ],
       v.round,
     );
@@ -579,8 +564,6 @@ function SkillSummary({ rounds }: { rounds: RoundView[] }) {
           count={diagFirst.length}
           denom={total}
           label="Diagnosed right first time"
-          chips={diagFirst}
-          tone="good"
         />
         <SkillTile
           iconBg="var(--success-bg)"
@@ -588,16 +571,12 @@ function SkillSummary({ rounds }: { rounds: RoundView[] }) {
           count={pitchFirst.length}
           denom={total}
           label="Pitched right first time"
-          chips={pitchFirst}
-          tone="good"
         />
         <SkillTile
           iconBg="var(--warning-bg)"
           icon={<Target size={19} style={{ color: 'var(--warning)' }} />}
           count={build.length}
           label="Rounds to build on"
-          chips={build}
-          tone="warn"
         />
       </div>
     </div>
@@ -610,19 +589,13 @@ function SkillTile({
   count,
   denom,
   label,
-  chips,
-  tone,
 }: {
   iconBg: string;
   icon: ReactNode;
   count: number;
   denom?: number;
   label: string;
-  chips: RoundView[];
-  tone: 'good' | 'warn';
 }) {
-  const chipBg = tone === 'good' ? 'var(--success-bg)' : 'var(--warning-bg)';
-  const chipColor = tone === 'good' ? 'var(--success)' : 'var(--warning)';
   return (
     <div
       style={{
@@ -630,16 +603,16 @@ function SkillTile({
         border: '1px solid var(--grey-100)',
         borderRadius: 'var(--radius-md)',
         boxShadow: 'var(--shadow-sm)',
-        padding: '16px 18px',
+        padding: '18px 20px',
       }}
     >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 12 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <IconSquare bg={iconBg}>{icon}</IconSquare>
         <div>
-          <div style={{ fontSize: 26, fontWeight: 800, color: 'var(--brand-navy)', lineHeight: 1 }}>
+          <div style={{ fontSize: 28, fontWeight: 800, color: 'var(--brand-navy)', lineHeight: 1 }}>
             {count}
             {denom != null && (
-              <span style={{ fontSize: 15, fontWeight: 700, color: 'var(--grey-400)' }}>
+              <span style={{ fontSize: 16, fontWeight: 700, color: 'var(--grey-400)' }}>
                 {' / '}
                 {denom}
               </span>
@@ -650,29 +623,6 @@ function SkillTile({
           </div>
         </div>
       </div>
-      {chips.length > 0 && (
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-          {chips.map((r) => (
-            <span
-              key={r.round}
-              style={{
-                fontSize: 11,
-                fontWeight: 700,
-                padding: '4px 9px',
-                borderRadius: 'var(--radius-pill)',
-                background: chipBg,
-                color: chipColor,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 5,
-              }}
-            >
-              {shortIssue(r.stats.issueId)}
-              <span style={{ opacity: 0.7, fontWeight: 800 }}>R{r.round}</span>
-            </span>
-          ))}
-        </div>
-      )}
     </div>
   );
 }
