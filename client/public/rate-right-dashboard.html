@@ -1,4 +1,4 @@
-<title>Rate Right - Full xAPI Set Dashboard (comparison)</title>
+<title>Rate Right - xAPI Reporting Dashboard (mockup)</title>
 <style>
   :root {
     --bg: #eef2f7; --surface: #ffffff; --surface-2: #f6f9fc; --ink: #0f1e33;
@@ -111,10 +111,11 @@
   /* extra badge on full-set-only cards */
   .exbadge { display: none; position: absolute; top: -9px; left: 14px; z-index: 3; font-size: 9.5px; font-weight: 800; letter-spacing: .4px; text-transform: uppercase; color: #fff; background: var(--extra); padding: 3px 8px; border-radius: 999px; box-shadow: 0 2px 6px rgba(181,98,10,.35); }
   .card.extra .exbadge { display: inline-block; }
-  /* highlight mode: dim the shared tiles, ring the extra ones */
-  body.hl .card:not(.extra) { opacity: .4; }
-  body.hl .card.extra { outline: 2px solid var(--extra-ring); outline-offset: 2px; }
-  body.hl .section-head:not(.extra-head) { opacity: .4; }
+  /* lean mode: grey out the full-set-only panels so it's clear what the
+     lean 8-type set produces and what the full 16-type set adds on top */
+  body.lean .card.extra { opacity: .34; filter: grayscale(.55); pointer-events: none; }
+  body.lean .card.extra .exbadge { background: var(--ink-faint); box-shadow: none; }
+  body.lean .section-head.extra-head { opacity: .4; }
 
   .kpi { display: flex; flex-direction: column; gap: 5px; padding: 15px 16px; }
   .kpi .k-label { font-size: 11.5px; color: var(--ink-muted); font-weight: 600; }
@@ -245,19 +246,22 @@
       </div>
     </div>
     <div class="spacer"></div>
-    <span class="setpill"><span class="dot"></span>Full xAPI set &middot; all 16 types</span>
+    <span class="setpill" id="setpill"><span class="dot"></span><span id="setLabel">Full set &middot; 16 types</span></span>
+    <div class="seg" role="group" aria-label="Data set">
+      <button aria-pressed="false" data-set="lean">Lean set</button>
+      <button aria-pressed="true" data-set="full">Full set</button>
+    </div>
     <div class="seg" role="group" aria-label="Dashboard view">
       <button aria-pressed="true" data-view="manager">Manager</button>
       <button aria-pressed="false" data-view="ld">L&amp;D</button>
     </div>
-    <label class="toggle"><input type="checkbox" id="hlToggle" checked><span class="sw"></span>Highlight full-set-only</label>
     <button class="icon-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme">&#9788;</button>
   </div>
 </div>
 
 <main>
   <div class="callout">
-    <div><b>This is the full-set version.</b> The <span class="k">amber-badged</span> tiles are the ones the lean set could <b>not</b> produce - flip <b>Highlight full-set-only</b> (top right) to see exactly what the extra seven statement types add. Everything else is identical to the lean dashboard.</div>
+    <div><b>One dashboard, two data sets.</b> Switch <b>Lean set / Full set</b> (top right). The <span class="k">amber-badged</span> panels need the extra seven statement types - in <b>Lean set</b> they grey out, so you can see exactly what the lean 8-type set gives you and what the full 16-type set adds on top. Everything not badged is identical either way.</div>
   </div>
 
   <!-- KPI ROW -->
@@ -422,7 +426,7 @@
   <div class="ledger">
     <div class="card">
       <h3>The data behind this view - all 16 statement types</h3>
-      <p class="sub">The core seven draw the same tiles as the lean dashboard. The extra seven each power one drill-down tile above (badged amber). Compare with the lean version: the top of the dashboard is unchanged - the difference is entirely the "Decision drill-down" band and a couple of extra tiles.</p>
+      <p class="sub">The core seven draw every un-badged tile - the entire top of the dashboard. The extra seven each power one amber-badged drill-down panel. Toggle to <b>Lean set</b> and the amber panels grey out: what remains is the complete lean dashboard, and the difference is entirely the "Decision drill-down" band plus a couple of extra tiles.</p>
       <div class="lg">
         <div>
           <h4>Core seven - same as the lean dashboard</h4>
@@ -680,10 +684,15 @@
   sel.addEventListener("change",function(){ renderReplay(sel.value); });
   renderReplay(sel.value);
 
-  /* Highlight toggle */
-  var hl=document.getElementById("hlToggle");
-  function applyHl(){ document.body.classList.toggle("hl", hl.checked); }
-  hl.addEventListener("change",applyHl); applyHl();
+  /* Data-set toggle (Lean / Full) - Lean greys out the full-set-only panels */
+  var setBtns=document.querySelectorAll(".seg [data-set]");
+  var setLabel=document.getElementById("setLabel");
+  setBtns.forEach(function(b){ b.addEventListener("click",function(){
+    setBtns.forEach(function(x){ x.setAttribute("aria-pressed",x===b?"true":"false"); });
+    var lean=b.getAttribute("data-set")==="lean";
+    document.body.classList.toggle("lean",lean);
+    setLabel.textContent=lean?"Lean set · 8 types":"Full set · 16 types";
+  }); });
 
   /* View toggle */
   var vb=document.querySelectorAll(".seg [data-view]");
