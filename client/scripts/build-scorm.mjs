@@ -48,13 +48,17 @@ if (!existsSync(manifestPath)) {
   process.exit(1);
 }
 
-// Strip the internal Conversation Review tool from the SCORM package.
-// It builds into dist as a second entry (review.html + assets/review-*)
-// for the Render preview, but must never ship inside the LMS zip - the
-// manifest points only at index.html, so this just removes dead weight
-// and keeps the deliverable to the sim alone.
-log('Stripping review tool from SCORM dist...');
+// Strip the internal Conversation Review tool + the reporting-dashboard
+// mockups from the SCORM package. They build into dist for the Render
+// preview (review.html, assets/review-*, and the standalone
+// rate-right-dashboard-*.html reviewer/stakeholder collateral) but must
+// never ship inside the LMS zip - the manifest points only at
+// index.html, so this just removes dead weight and keeps the deliverable
+// to the sim alone.
+log('Stripping review tool + dashboard mockups from SCORM dist...');
 rmSync(resolve(distDir, 'review.html'), { force: true });
+rmSync(resolve(distDir, 'rate-right-dashboard-lean.html'), { force: true });
+rmSync(resolve(distDir, 'rate-right-dashboard-full.html'), { force: true });
 const assetsDir = resolve(distDir, 'assets');
 if (existsSync(assetsDir)) {
   for (const name of readdirSync(assetsDir)) {
