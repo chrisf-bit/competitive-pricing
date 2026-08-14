@@ -210,6 +210,8 @@ function FlowView({ flow, byAnchor, onAdd }: {
         <aside style={S.sidebar}>
           <div style={S.sideCard}>
             <h2 style={S.sectionTitle}>Partner data</h2>
+            <SectionComment flow={flow} field="partner-data" label="partner data"
+              byAnchor={byAnchor} onAdd={onAdd} />
             {d.isKam && (
               <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 12 }}>
                 {d.kamPills.map((p) => <span key={p} style={S.pill}>{p}</span>)}
@@ -310,10 +312,8 @@ function Commentable({ flow, stepId, optionId, field, label, text, variant, byAn
   compact?: boolean;
 }) {
   const [open, setOpen] = useState(false);
-  const [draft, setDraft] = useState('');
   const anchor = anchorFor(flow, stepId, optionId, field);
   const thread = byAnchor.get(anchor) ?? [];
-  const submit = () => { if (draft.trim()) { onAdd(flow, stepId, optionId, field, text, draft.trim()); setDraft(''); setOpen(true); } };
   const bodyStyle: CSSProperties =
     variant === 'partner' ? S.saidPartner : variant === 'learner' ? S.saidLearner : S.saidPlain;
   return (
@@ -326,19 +326,58 @@ function Commentable({ flow, stepId, optionId, field, label, text, variant, byAn
       </div>
       <div style={bodyStyle}>{text}</div>
       {open && (
-        <div style={S.thread}>
-          {thread.map((c, i) => (
-            <div key={i} style={S.threadItem}>
-              <div style={S.threadWho}>{c.reviewer}</div>
-              <div style={S.threadText}>{c.comment}</div>
-            </div>
-          ))}
-          <div style={{ display: 'flex', gap: 8, marginTop: thread.length ? 10 : 0 }}>
-            <input style={{ ...S.input, margin: 0, flex: 1 }} placeholder="Suggest an amend..." value={draft}
-              onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') submit(); }} autoFocus />
-            <button style={S.primaryBtn} onClick={submit} disabled={!draft.trim()}>Add</button>
-          </div>
+        <CommentThread thread={thread} onSubmit={(t) => onAdd(flow, stepId, optionId, field, text, t)} />
+      )}
+    </div>
+  );
+}
+
+// Shared comment thread (list of reviewer notes + an input to add one).
+// Rendered on a distinct warm background so reviewer comments are clearly
+// differentiated from the blue partner/learner dialogue content.
+function CommentThread({ thread, onSubmit }: {
+  thread: ReviewComment[];
+  onSubmit: (text: string) => void;
+}) {
+  const [draft, setDraft] = useState('');
+  const submit = () => { if (draft.trim()) { onSubmit(draft.trim()); setDraft(''); } };
+  return (
+    <div style={S.thread}>
+      {thread.map((c, i) => (
+        <div key={i} style={S.threadItem}>
+          <div style={S.threadWho}>{c.reviewer}</div>
+          <div style={S.threadText}>{c.comment}</div>
         </div>
+      ))}
+      <div style={{ display: 'flex', gap: 8, marginTop: thread.length ? 10 : 0 }}>
+        <input style={{ ...S.input, margin: 0, flex: 1 }} placeholder="Suggest an amend..." value={draft}
+          onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') submit(); }} autoFocus />
+        <button style={S.primaryBtn} onClick={submit} disabled={!draft.trim()}>Add</button>
+      </div>
+    </div>
+  );
+}
+
+// Section-level comment control (e.g. a note on the whole Partner data
+// block), anchored to a single field so it threads like any line comment.
+function SectionComment({ flow, field, label, byAnchor, onAdd }: {
+  flow: Flow; field: string; label: string;
+  byAnchor: Map<string, ReviewComment[]>;
+  onAdd: (f: Flow, stepId: string, optionId: string, field: string, orig: string, text: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const anchor = anchorFor(flow, 'dossier', '', field);
+  const thread = byAnchor.get(anchor) ?? [];
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <button
+        style={{ ...S.commentBtn, ...(thread.length ? S.commentBtnActive : {}), width: '100%', display: 'flex', justifyContent: 'center' }}
+        onClick={() => setOpen((v) => !v)}
+      >
+        {thread.length ? `${thread.length} note${thread.length > 1 ? 's' : ''} on ${label}` : `+ comment on ${label}`}
+      </button>
+      {open && (
+        <CommentThread thread={thread} onSubmit={(t) => onAdd(flow, 'dossier', '', field, '', t)} />
       )}
     </div>
   );
@@ -404,9 +443,9 @@ const S: Record<string, CSSProperties> = {
 
   commentBtn: { background: '#fff', border: `1px solid ${C.line}`, borderRadius: 7, padding: '4px 10px', fontSize: 12, color: C.sub, cursor: 'pointer', whiteSpace: 'nowrap', fontFamily: 'inherit', fontWeight: 600 },
   commentBtnActive: { background: C.yellow, borderColor: C.yellow, color: C.navyDark },
-  thread: { marginTop: 10, background: C.offwhite, borderRadius: 10, padding: 14 },
-  threadItem: { padding: '6px 0', borderBottom: `1px solid ${C.line}` },
-  threadWho: { fontSize: 11.5, color: C.faint, fontWeight: 700 },
+  thread: { marginTop: 10, background: '#fff6e0', border: '1px solid #f3e2ab', borderRadius: 10, padding: 14 },
+  threadItem: { background: '#fff', border: '1px solid #f0e2b8', borderRadius: 8, padding: '8px 11px', marginBottom: 8 },
+  threadWho: { fontSize: 11.5, color: '#b0740a', fontWeight: 700 },
   threadText: { fontSize: 14.5, color: C.ink, marginTop: 2 },
 
   // sidebar bits
