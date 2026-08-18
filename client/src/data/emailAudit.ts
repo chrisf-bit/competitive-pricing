@@ -119,9 +119,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          "Right call. Proactively using cross-channel and third-party OTA data to ask for rate alignment is exactly what Wide Parity permits - it's the AM's right to surface the gap factually.",
+          "Right call. Proactively using cross-channel and third-party OTA data to ask for rate alignment is permitted in Wide Parity markets - it's OK for the AM to surface the gap factually.",
         incorrect:
-          "Actually this one is safe. Proactively using cross-channel and third-party OTA data to ask for rate alignment is exactly what Wide Parity permits - it's the AM's right to surface the gap factually.",
+          "Actually this one is safe. Proactively using cross-channel and third-party OTA data to ask for rate alignment is permitted in Wide Parity markets - it's OK for the AM to surface the gap factually.",
       },
       source: 'Legal Compliance | Wide Parity Markets | Do (verbatim)',
     },
@@ -143,9 +143,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: true,
       rationale: {
         correct:
-          'Right call. Requesting equal rates, conditions, and availability across third parties and Brand.com is the full Wide-Parity ask - the regime mandate in one sentence.',
+          'Right call. Requesting equal rates, conditions, and availability across third parties and Brand.com is permitted in a Wide-Parity regime.',
         incorrect:
-          'Actually this one is safe. Requesting equal rates, conditions, and availability across third parties and Brand.com is the full Wide-Parity ask - the regime mandate in one sentence.',
+          'Actually this one is safe. Requesting equal rates, conditions, and availability across third parties and Brand.com is permitted in a Wide-Parity regime.',
       },
       source: 'Legal Compliance | Wide Parity Markets | Do (verbatim)',
     },
@@ -266,9 +266,9 @@ const narrowParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          "Right call. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - sits well outside Narrow Parity's mandate. The regime only covers Brand.com alignment.",
+          "Right call. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - is not permitted in Narrow Parity markets. The regime only allows requesting Brand.com alignment.",
         incorrect:
-          "This one is unsafe. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - sits well outside Narrow Parity's mandate. The regime only covers Brand.com alignment.",
+          "This one is unsafe. Asking the partner to adjust pricing on other third-party channels - or demanding parity with other OTAs - is not permitted in Narrow Parity markets. The regime only allows requesting Brand.com alignment.",
       },
       source: "Legal Compliance | Narrow Parity Markets | Don't",
     },
@@ -320,9 +320,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          "Right call. Even in a reactive raise, this phrasing presumes a strategy and pressures the partner to justify their intent. The neutral way to raise it is: 'We note that your prices differ across channels. Could you help us understand your current pricing approach? As always, you remain free to determine your pricing strategy, and the point of this conversation is just to better explain how pricing decisions may affect performance on Booking.com.'",
+          "Right call. You shouldn't raise cross-channel price discrepancies proactively. Even in a reactive raise, this phrasing presumes a strategy and pressures the partner to justify their intent. Reactive neutral phrasing could be: 'You explain that your prices are often lower on another channel, is that part of your pricing strategy? You are completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com.'",
         incorrect:
-          "Actually this one is unsafe. It presumes a strategy and pressures the partner to justify their intent, which is off-side even in a reactive raise. The neutral phrasing is: 'We note that your prices differ across channels. Could you help us understand your current pricing approach? As always, you remain free to determine your pricing strategy, and the point of this conversation is just to better explain how pricing decisions may affect performance on Booking.com.'",
+          "Actually this one is unsafe. You shouldn't raise cross-channel price discrepancies proactively. The statement also presumes a strategy and pressures the partner to justify their intent, which is off-side even in a reactive raise. Reactive neutral phrasing could be: 'You explain that your prices are often lower on another channel, is that part of your pricing strategy? You are completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com.'",
       },
       source: "Legal Compliance | No Parity Markets | Don't (SME refinement)",
     },
@@ -344,9 +344,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          "Right call. In a No Parity market we don't use the word 'parity' at all, and we never require a partner to match prices from other channels or threaten penalties like reduced visibility based on external prices. The most we can ask for is the 'best price' they're willing to make available on Booking.com to stay competitive on-platform.",
+          "Right call. In a No Parity market we don't use the word 'parity' at all, and we never require a partner to match prices from other channels or threaten penalties like reduced visibility based on external prices. We can ask for the 'best price' they're willing to make available on Booking.com to stay competitive on-platform.",
         incorrect:
-          "This one is unsafe. In a No Parity market we don't use the word 'parity' at all, and we never require a partner to match prices from other channels or threaten penalties like reduced visibility based on external prices. The most we can ask for is the 'best price' they're willing to make available on Booking.com to stay competitive on-platform.",
+          "This one is unsafe. In a No Parity market we don't use the word 'parity' at all, and we never require a partner to match prices from other channels or threaten penalties like reduced visibility based on external prices. We can ask for the 'best price' they're willing to make available on Booking.com to stay competitive on-platform.",
       },
       source: "Legal Compliance | No Parity Markets | Don't",
     },
@@ -356,9 +356,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          "Right call. We must never suggest that uncompetitive external prices will directly lead to punishment, de-ranking, or loss of visibility - that's a hard No Parity break.",
+          "Right call. We must never suggest that uncompetitive external prices will lead to punishment, de-ranking, or loss of visibility - that's never the case in a No Parity market.",
         incorrect:
-          "This one is unsafe. We must never suggest that uncompetitive external prices will directly lead to punishment, de-ranking, or loss of visibility - that's a hard No Parity break.",
+          "This one is unsafe. We must never suggest that uncompetitive external prices will lead to punishment, de-ranking, or loss of visibility - that's never the case in a No Parity market.",
       },
       source: "Legal Compliance | No Parity Markets | Don't (verbatim)",
     },

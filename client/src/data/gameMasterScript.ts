@@ -97,9 +97,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          'Yep. Public RPD covers non-logged-in travelers, Loyal covers logged-in Genius members. We blend the two by share of searches.',
+          'Yep. eRPD is an internal metric we use. Public RPD covers non-logged-in travelers, Loyal covers logged-in Genius members. We blend the two by share of searches.',
         incorrect:
-          "It's Public RPD and Loyal RPD. Public is non-logged-in travelers, Loyal is Genius members - we blend them by share of searches into one number.",
+          "eRPD is an internal metric we use. It's Public RPD and Loyal RPD. Public is non-logged-in travelers, Loyal is Genius members - we blend them by share of searches into one number.",
       },
     },
   },
@@ -139,9 +139,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Right. Roughly 2 to 3 percent ABRN uplift for every 1 percent improvement in RPD. Sounds small, but it compounds fast across a portfolio - that's why price competitiveness is the lever we lean on.",
+          "Right. Roughly 2 to 3 percent ABRN uplift for every 1 percent improvement in RPD. Sounds small, but it compounds fast across a portfolio - that's why price competitiveness is key.",
         incorrect:
-          "It's about 2 to 3 percent ABRN uplift per 1 percent improvement in RPD. Doesn't sound huge on paper, but it compounds fast across a portfolio - that's why we treat price competitiveness as the primary lever.",
+          "It's about 2 to 3 percent ABRN uplift per 1 percent improvement in RPD. Doesn't sound huge on paper, but it compounds fast across a portfolio - that's why price competitiveness is key.",
       },
     },
   },
@@ -193,7 +193,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A8',
       prompt:
-        "You're working a No Parity market. Which framing is neutral and safe to raise in every call?",
+        "You're working a No Parity market. Which framing can you bring up proactively with a partner?",
       options: [
         {
           text: "How the partner's pricing compares against similar properties on Booking.com",
@@ -208,9 +208,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Right. On-Platform Competitiveness is regime-neutral because it's about how travelers experience Booking.com, not the partner's external strategy. You can lead with it in Wide, Narrow, and No Parity alike. Cross-platform framing carries regime-specific rules - in No Parity you can only raise it reactively if the partner brings it up first. And here's the bonus: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
+          "Right. On-Platform Competitiveness works for all parity regimes because it's about how travelers experience Booking.com, not the partner's external strategy. You can lead with it in Wide, Narrow, and No Parity alike. Cross-platform framing carries regime-specific rules - in No Parity you can only raise it reactively if the partner brings it up first. And here's the bonus: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
         incorrect:
-          "It's the on-platform comparison. OPC is regime-neutral because it's about how travelers experience Booking.com, not the partner's external strategy - so it's safe in Wide, Narrow, and No Parity alike. Cross-platform framing needs the regime rules applied. And the payoff: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
+          "It's the on-platform comparison. OPC works for all parity regimes because it's about how travelers experience Booking.com, not the partner's external strategy - so it's safe in Wide, Narrow, and No Parity alike. Cross-platform framing needs the regime rules applied. And the payoff: fixing OPC often improves the partner's cross-platform position too, because the same base rate and discount stack usually show up across channels.",
       },
     },
   },
@@ -359,9 +359,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "That's it. 'Visibility debt' is the term. Uncompetitive pricing over time means they get shown less, ranking weakens, and pulling it back later usually needs heavy last-minute discounts or serious investment. Cheaper to keep price competitive in the first place.",
+          "That's it. 'Visibility debt' is the term. Uncompetitive pricing over time compared to peers on the platform means they get shown less, ranking weakens, and pulling it back later usually needs heavy last-minute discounts or serious investment.",
         incorrect:
-          "It's called 'visibility debt'. Consistent uncompetitive pricing means the platform shows them less, ranking weakens, and recovery later takes heavy last-minute discounts or significant investment. Much cheaper to prevent than repair.",
+          "It's called 'visibility debt'. Consistent uncompetitive pricing compared to peers on the platform means the platform shows them less, ranking weakens, and recovery later takes heavy last-minute discounts or significant investment.",
       },
     },
   },

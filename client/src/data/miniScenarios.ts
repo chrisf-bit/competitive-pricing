@@ -354,7 +354,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: '"If the base price is inflated first, the discount stops feeling genuine, so travelers and algorithms see less real value and the product becomes less effective."',
+            text: '"If the base price is inflated first, the discount stops being genuine, so travelers and algorithms see less real value and the product becomes less effective."',
           },
         ],
         correctOptionId: 'C',
