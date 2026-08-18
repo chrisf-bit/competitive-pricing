@@ -5,6 +5,7 @@ import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
 import { DevNav } from './components/DevNav';
+import { FeedbackButton } from './components/FeedbackButton';
 import { ClearanceShell } from './components/ClearanceShell';
 import { ConversationMissing } from './components/ConversationMissing';
 import { SplashScreen } from './screens/SplashScreen';
@@ -487,6 +488,19 @@ export default function App() {
         onRestart={() => {
           game.onRestart();
           setShowSplash(true);
+        }}
+      />
+
+      <FeedbackButton
+        context={{
+          screen: state.screen,
+          currentRound: state.currentRound,
+          partnerName:
+            selectedPartner?.persona.companyName ??
+            selectedPartner?.persona.propertyName ??
+            null,
+          regime: state.learnerProfile.market?.parityRegime ?? null,
+          playerName: state.learnerProfile.playerName ?? null,
         }}
       />
     </div>
