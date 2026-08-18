@@ -155,10 +155,11 @@ export function PortfolioScreen({
           flex: 1,
           display: 'grid',
           gridTemplateColumns: 'repeat(3, 1fr)',
-          gridTemplateRows: '1fr 1fr',
+          gridAutoRows: 'auto',
+          alignContent: 'start',
           gap: 10,
           minHeight: 0,
-          overflow: 'hidden',
+          overflowY: 'auto',
         }}
       >
         {partners.map((partner, i) => {
