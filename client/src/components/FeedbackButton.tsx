@@ -87,7 +87,7 @@ const ENDPOINT_KEY = 'rateRight:feedbackEndpoint';
  * drop and fall back to the local buffer only.
  */
 const FEEDBACK_ENDPOINT =
-  'https://script.google.com/macros/s/AKfycbweKiGgOu9e5fT3Rgd0EhWfK0kIqUFC1J04KsCpFoTmTXKQyiPwAuuHfXJY0sMx5ia_Ow/exec';
+  'https://script.google.com/macros/s/AKfycbwDkZmcoC7cQMZswCvxdgfWmt3DbPB9qPytJJPLYot1BJRKNbQySZl11R4GyM5DzMiatQ/exec';
 
 function resolveEndpoint(): string {
   try {
