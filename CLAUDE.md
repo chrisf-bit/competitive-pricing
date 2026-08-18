@@ -3597,9 +3597,11 @@ star rating - Chris's call) and a Send button.
   feedback is the simplest first statement to prove that pipeline. The
   Sheet is the works-now channel in the meantime; `cmi.comments` is a
   third option if a tenant blocks the Sheet POST.
-- **Currently ungated** so it can be demoed. Unlike DevNav it's a
-  genuine feature meant to ship - open decision on whether to leave it
-  always-on or gate behind `?dev=1`.
+- **Confirmed a full/live production feature (Chris, 2026-08-18):**
+  always-on for every learner, ships in the production package. NOT
+  dev-gated - unlike DevNav, do not hide it behind `?dev=1` or remove
+  it before the SCORM ship. It stays on the Debrief and every other
+  non-splash screen.
 
 ### Portfolio card CTA clip fix
 
