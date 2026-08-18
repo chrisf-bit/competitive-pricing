@@ -76,6 +76,60 @@ interface FeedbackEntry extends FeedbackContext {
 }
 
 const BUFFER_KEY = 'rateRight:feedback:preview';
+const ENDPOINT_KEY = 'rateRight:feedbackEndpoint';
+
+/**
+ * Google Apps Script Web App URL that appends each submission to a Sheet.
+ * Confirmed to work from within a Booking SCORM package (their LMS allows
+ * the outbound call). Resolved at submit time as:
+ *   ?feedbackEndpoint=<url>  >  localStorage[ENDPOINT_KEY]  >  this constant
+ * so the URL can be set without a rebuild. Leave '' to disable the Sheet
+ * drop and fall back to the local buffer only.
+ */
+const FEEDBACK_ENDPOINT =
+  'https://script.google.com/macros/s/AKfycbweKiGgOu9e5fT3Rgd0EhWfK0kIqUFC1J04KsCpFoTmTXKQyiPwAuuHfXJY0sMx5ia_Ow/exec';
+
+function resolveEndpoint(): string {
+  try {
+    const fromQuery = new URLSearchParams(window.location.search).get('feedbackEndpoint');
+    if (fromQuery) return fromQuery;
+    const fromStore = window.localStorage.getItem(ENDPOINT_KEY);
+    if (fromStore) return fromStore;
+  } catch {
+    // location / localStorage unavailable - fall through to the constant.
+  }
+  return FEEDBACK_ENDPOINT;
+}
+
+/**
+ * Fire-and-forget POST to the Sheet. Non-blocking (never delays the
+ * "Thanks" confirmation) and errors are swallowed - if a given LMS ever
+ * blocks the call, feedback still lives in the local buffer and nothing
+ * breaks. Sent as a plain-text body (no custom Content-Type) so the
+ * browser skips the CORS preflight Apps Script can't answer.
+ */
+function sendToSheet(entry: FeedbackEntry) {
+  const endpoint = resolveEndpoint();
+  if (!endpoint) return;
+  try {
+    void fetch(endpoint, {
+      method: 'POST',
+      body: JSON.stringify({
+        learner: entry.playerName ?? '',
+        screen: entry.screen,
+        round: entry.currentRound,
+        partner: entry.partnerName ?? '',
+        regime: entry.regime ?? '',
+        comment: entry.comment,
+      }),
+      keepalive: true,
+    }).catch(() => {
+      // Network blocked / offline - non-fatal, the local buffer has it.
+    });
+  } catch {
+    // fetch unavailable - non-fatal.
+  }
+}
 
 function persistLocally(entry: FeedbackEntry) {
   try {
@@ -86,9 +140,10 @@ function persistLocally(entry: FeedbackEntry) {
   } catch {
     // localStorage unavailable (private mode etc.) - non-fatal for a preview.
   }
-  // Visible in the console so the captured payload can be inspected while
-  // the real xAPI / cmi.comments dispatch is still to come.
+  // Visible in the console so the captured payload can be inspected.
   console.info('[feedback captured]', entry);
+  // Drop into the Google Sheet if an endpoint is configured.
+  sendToSheet(entry);
 }
 
 export function FeedbackButton({ context }: FeedbackButtonProps) {

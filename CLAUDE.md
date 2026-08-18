@@ -2367,6 +2367,30 @@ data file (`data/issueTreeReveal.ts`) now uses `\n\n` and
 `**bold**` markers in the intro phase's `body`; the phase's
 `narration` field is set to `''`.
 
+**SUPERSEDED (2026-08-18) - the reveal was rebuilt and `renderRichBody`
+is gone.** `IssueTreeRevealScreen.tsx` is now a click-to-reveal over
+the SME winding-road infographic
+([PathwayInfographic.tsx](client/src/components/PathwayInfographic.tsx)),
+and its reveal panel renders **only each step's question (`headline`),
+`subLabel` and `goal`** - sourced from `pathwayNodes`. Critically:
+- **`body` and `narration` on every step are now DEAD DATA** - the
+  Hotel Atlante worked-example paragraphs and Alex's coaching lines
+  exist in `data/issueTreeReveal.ts` but render **nowhere** on this
+  screen.
+- **The Overview intro (`intro` phase) is not rendered here at all** -
+  it has no `stepNumber`, so it's filtered out of `pathwayNodes`. The
+  only intro framing the learner sees is the ClearanceShell
+  title/subtitle ("Walking the Pricing Pathway" + its subtitle in
+  `data/clearanceActivities.ts`). `renderRichBody` no longer exists.
+- **Consequence for legal / copy extracts:** the learner-facing copy
+  on this screen is the ClearanceShell title + subtitle, the
+  interaction prompt, and per step only `question (subLabel)` + `goal`.
+  Do NOT include the `body`/`narration` fields when extracting what
+  learners actually see. (This bit us once - an extract for legal
+  pulled the unrendered body/narration.) If the worked example is ever
+  meant to show again, it needs wiring back into the reveal panel
+  first; until then treat those fields as inert.
+
 ### New feedback rule: no left-border "handle" accents
 
 Saved as `feedback_no_left_border_handles.md` in the memory
@@ -3523,6 +3547,85 @@ to resolve before final delivery.
   These are dead data on disk today. Decide whether to leave them
   for future-round reuse or strip them out of the SCORM bundle
   for size / clarity.
+
+## Post-2026-08-17 session (legal clearance edits + learner feedback button)
+
+Copy revisions from a legal review of clearance, plus a new per-screen
+learner feedback affordance and a Portfolio card layout fix. All on
+`release-2-partner-detail`.
+
+### Learner feedback button (new component, delivery stubbed)
+
+[FeedbackButton.tsx](client/src/components/FeedbackButton.tsx) - a
+persistent floating "Feedback" pill (bottom-left, so it clears the
+bottom-right DevNav bolt), rendered globally from `App.tsx` on every
+non-splash screen. Opens a small panel with a **comment box only** (no
+star rating - Chris's call) and a Send button.
+
+- **The point is auto-tagged context.** On submit it captures WHERE the
+  learner was - screen (friendly label), round (only on
+  portfolio/partner-detail/conversation/report), partner
+  (`companyName ?? propertyName`), regime, learner name - and shows it
+  as chips so the learner never describes their location. Feedback is
+  added **on the screen they're in**, not batched at the end of the run.
+- **Delivery: Google Sheet drop via Apps Script (wired 2026-08-18).**
+  `persistLocally` still appends to a `localStorage` buffer
+  (`rateRight:feedback:preview`) and `console.info`s the payload, AND
+  fires a **fire-and-forget POST** to a Google Apps Script Web App
+  (`sendToSheet`) that appends one row per submission to a Sheet the
+  client owns. Backend lives at `client/feedback-apps-script/`
+  (`Code.gs` + `SETUP.md`), mirroring the Conversation Review tool's
+  `client/review-apps-script/`. The endpoint resolves as
+  `?feedbackEndpoint=<url>` > `localStorage['rateRight:feedbackEndpoint']`
+  > the baked `FEEDBACK_ENDPOINT` constant in `FeedbackButton.tsx`
+  (empty '' disables the Sheet drop and falls back to the local buffer
+  only). POST is a plain-text body (no custom Content-Type) to skip the
+  CORS preflight Apps Script can't answer; the response is opaque, the
+  row still appends.
+- **This is a deliberate network call, and it's OK here.** The general
+  no-network SCORM rule still holds for assets/fonts, BUT Chris has
+  **shipped this exact Apps-Script-POST pattern inside a Booking SCORM
+  package before and it worked** - their LMS tenant allows the outbound
+  call. So the Sheet drop runs from the live package, not just the
+  Render preview. It is **fire-and-forget with errors swallowed** and a
+  `localStorage` backstop, so if any LMS ever *does* block it, feedback
+  isn't lost and nothing breaks. Don't rip out the `fetch` "to restore
+  self-containment" - it's an intentional, precedent-backed exception.
+- **xAPI is still the better long-term destination** (structured
+  extensions, joins the reporting pipeline, no 4096-char/overwrite
+  problem) and remains the plan once the xAPI emission workstream lands;
+  feedback is the simplest first statement to prove that pipeline. The
+  Sheet is the works-now channel in the meantime; `cmi.comments` is a
+  third option if a tenant blocks the Sheet POST.
+- **Currently ungated** so it can be demoed. Unlike DevNav it's a
+  genuine feature meant to ship - open decision on whether to leave it
+  always-on or gate behind `?dev=1`.
+
+### Portfolio card CTA clip fix
+
+The Portfolio card grid reserved two rows (`gridTemplateRows: '1fr
+1fr'`) for three cards, squeezing them into a half-height top row; once
+the cards gained the Partner Value / metrics content the "Review
+partner" CTA footer overflowed and was clipped by the card's
+`overflow: hidden` (the grey band below the cards was the unused second
+row). Fixed in
+[PortfolioScreen.tsx](client/src/screens/PortfolioScreen.tsx): the card
+row is now `gridAutoRows: 'auto'` + `alignContent: 'start'` +
+`overflowY: 'auto'` (sizes to content, top-aligned, scrolls rather than
+clips). Don't restore the 2-row grid for the 3-card portfolio.
+
+### Legal clearance copy edits
+
+Copy-only, in `data/gameMasterScript.ts`, `data/emailAudit.ts`,
+`data/miniScenarios.ts`. Day one with Alex: flag eRPD as an internal
+metric in Q3 (both feedback branches), soften Q5's "lever" phrasing to
+"key", reframe Q8 as "bring up proactively" / "works for all parity
+regimes", add "compared to peers on the platform" + trim the tails in
+Q14. Call Audit: tighten the No Parity p1 (add "You shouldn't raise
+cross-channel price discrepancies proactively" + the reactive-neutral
+example), the No Parity p3/p4 and Narrow/Wide p1/p3/p5 rationales
+(regime-scoped "permitted in X markets" phrasing). Warm Up: Grandview
+Inn correct answer now "the discount stops being genuine".
 
 ## Things to avoid
 
