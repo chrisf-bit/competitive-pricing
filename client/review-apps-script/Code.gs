@@ -43,6 +43,30 @@ function setup() {
   return 'ok';
 }
 
+/**
+ * Run once from the editor (optional) to make pre-existing comments
+ * editable/deletable. Fills any empty commentId cell with a generated
+ * id so its author can amend or delete it. Safe to re-run - it skips
+ * rows that already have an id.
+ */
+function backfillIds() {
+  var sh = sheet_();
+  ensureHeader_(sh);
+  var last = sh.getLastRow();
+  if (last < 2) return 'nothing to backfill';
+  var range = sh.getRange(2, COL_COMMENT_ID, last - 1, 1);
+  var ids = range.getValues();
+  var filled = 0;
+  for (var i = 0; i < ids.length; i++) {
+    if (!String(ids[i][0])) {
+      ids[i][0] = Utilities.getUuid();
+      filled++;
+    }
+  }
+  range.setValues(ids);
+  return 'backfilled ' + filled;
+}
+
 function sheet_() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sh = ss.getSheetByName(SHEET_NAME);
