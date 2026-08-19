@@ -1,4 +1,12 @@
-import { useEffect, useMemo, useState, type CSSProperties, type ReactNode } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react';
 import {
   buildFlows,
   anchorFor,
@@ -8,11 +16,27 @@ import {
 import {
   fetchComments,
   postComment,
+  editComment,
+  deleteComment,
+  newCommentId,
   getReviewerName,
   setReviewerName,
   hasEndpoint,
   type ReviewComment,
 } from './comments';
+
+/** Edit/delete handlers + the current reviewer, shared with every
+ *  CommentThread without threading props through the whole tree. */
+interface CommentActions {
+  reviewer: string;
+  onEdit: (commentId: string, text: string) => void;
+  onDelete: (commentId: string) => void;
+}
+const CommentActionsContext = createContext<CommentActions>({
+  reviewer: '',
+  onEdit: () => {},
+  onDelete: () => {},
+});
 
 const C = {
   navy: '#003580',
@@ -66,17 +90,28 @@ export default function ReviewApp() {
     originalText: string, text: string,
   ) => {
     const anchor = anchorFor(f, stepId, optionId, field);
+    const commentId = newCommentId();
     const optimistic: ReviewComment = {
       timestamp: new Date().toISOString(), reviewer, journey: f.journeyLabel,
       partner: f.dossier.displayName, round: f.round, regimes: f.regimes.join('/'),
-      stepId, optionId, field, originalText, comment: text, anchor,
+      stepId, optionId, field, originalText, comment: text, anchor, commentId,
     };
     setComments((cs) => [...cs, optimistic]);
     await postComment({
-      reviewer, journey: f.journeyLabel, partner: f.dossier.displayName,
+      commentId, reviewer, journey: f.journeyLabel, partner: f.dossier.displayName,
       round: f.round, regimes: f.regimes.join('/'), stepId, optionId, field,
       originalText, comment: text, anchor,
     });
+  };
+
+  const editCommentText = async (commentId: string, text: string) => {
+    setComments((cs) => cs.map((c) => (c.commentId === commentId ? { ...c, comment: text } : c)));
+    await editComment(commentId, reviewer, text);
+  };
+
+  const removeComment = async (commentId: string) => {
+    setComments((cs) => cs.filter((c) => c.commentId !== commentId));
+    await deleteComment(commentId, reviewer);
   };
 
   if (!reviewer) {
@@ -122,6 +157,7 @@ export default function ReviewApp() {
         (byAnchor.get(anchorFor(f, s.id, o.id, 'response'))?.length ?? 0), 0), 0);
 
   return (
+    <CommentActionsContext.Provider value={{ reviewer, onEdit: editCommentText, onDelete: removeComment }}>
     <div style={S.shell}>
       <aside style={S.nav}>
         <div style={S.navHead}>
@@ -157,6 +193,7 @@ export default function ReviewApp() {
         {flow && <FlowView flow={flow} byAnchor={byAnchor} onAdd={addComment} />}
       </main>
     </div>
+    </CommentActionsContext.Provider>
   );
 }
 
@@ -344,16 +381,54 @@ function CommentThread({ thread, onSubmit }: {
   return (
     <div style={S.thread}>
       {thread.map((c, i) => (
-        <div key={i} style={S.threadItem}>
-          <div style={S.threadWho}>{c.reviewer}</div>
-          <div style={S.threadText}>{c.comment}</div>
-        </div>
+        <ThreadItem key={c.commentId || i} comment={c} />
       ))}
       <div style={{ display: 'flex', gap: 8, marginTop: thread.length ? 10 : 0 }}>
         <input style={{ ...S.input, margin: 0, flex: 1 }} placeholder="Suggest an amend..." value={draft}
           onChange={(e) => setDraft(e.target.value)} onKeyDown={(e) => { if (e.key === 'Enter') submit(); }} autoFocus />
         <button style={S.primaryBtn} onClick={submit} disabled={!draft.trim()}>Add</button>
       </div>
+    </div>
+  );
+}
+
+// One comment in a thread. Shows Edit / Delete only on the current
+// reviewer's own comments (soft ownership, matched by name). Edit swaps
+// the text for an inline input; Delete removes the comment (hard delete).
+function ThreadItem({ comment }: { comment: ReviewComment }) {
+  const { reviewer, onEdit, onDelete } = useContext(CommentActionsContext);
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft] = useState(comment.comment);
+  const owned = !!comment.commentId && comment.reviewer === reviewer;
+
+  const save = () => {
+    const t = draft.trim();
+    if (t && t !== comment.comment) onEdit(comment.commentId, t);
+    setEditing(false);
+  };
+
+  return (
+    <div style={S.threadItem}>
+      <div style={S.threadWho}>
+        <span>{comment.reviewer}</span>
+        {owned && !editing && (
+          <span style={S.threadActions}>
+            <button style={S.threadActionBtn} onClick={() => { setDraft(comment.comment); setEditing(true); }}>Edit</button>
+            <button style={{ ...S.threadActionBtn, color: C.red }} onClick={() => onDelete(comment.commentId)}>Delete</button>
+          </span>
+        )}
+      </div>
+      {editing ? (
+        <div style={{ display: 'flex', gap: 8, marginTop: 4 }}>
+          <input style={{ ...S.input, margin: 0, flex: 1 }} value={draft} autoFocus
+            onChange={(e) => setDraft(e.target.value)}
+            onKeyDown={(e) => { if (e.key === 'Enter') save(); if (e.key === 'Escape') setEditing(false); }} />
+          <button style={S.primaryBtn} onClick={save} disabled={!draft.trim()}>Save</button>
+          <button style={S.ghostBtn} onClick={() => setEditing(false)}>Cancel</button>
+        </div>
+      ) : (
+        <div style={S.threadText}>{comment.comment}</div>
+      )}
     </div>
   );
 }
@@ -445,7 +520,9 @@ const S: Record<string, CSSProperties> = {
   commentBtnActive: { background: C.yellow, borderColor: C.yellow, color: C.navyDark },
   thread: { marginTop: 10, background: '#fff6e0', border: '1px solid #f3e2ab', borderRadius: 10, padding: 14 },
   threadItem: { background: '#fff', border: '1px solid #f0e2b8', borderRadius: 8, padding: '8px 11px', marginBottom: 8 },
-  threadWho: { fontSize: 11.5, color: '#b0740a', fontWeight: 700 },
+  threadWho: { fontSize: 11.5, color: '#b0740a', fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
+  threadActions: { display: 'flex', gap: 4 },
+  threadActionBtn: { background: 'transparent', border: 'none', padding: '0 2px', fontSize: 11.5, fontWeight: 700, color: C.navy, cursor: 'pointer', fontFamily: 'inherit' },
   threadText: { fontSize: 14.5, color: C.ink, marginTop: 2 },
 
   // sidebar bits
@@ -466,4 +543,5 @@ const S: Record<string, CSSProperties> = {
   nameCard: { background: '#fff', borderRadius: 14, padding: 32, width: 420, boxShadow: '0 6px 24px rgba(0,20,60,0.14)' },
   input: { width: '100%', padding: '11px 13px', borderRadius: 9, border: `1px solid ${C.line}`, fontSize: 15, margin: '14px 0', fontFamily: 'inherit' },
   primaryBtn: { background: C.yellow, color: C.navyDark, border: 'none', borderRadius: 9, padding: '11px 18px', fontSize: 14.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' },
+  ghostBtn: { background: 'transparent', color: C.sub, border: `1px solid ${C.line}`, borderRadius: 9, padding: '11px 14px', fontSize: 14.5, fontWeight: 700, cursor: 'pointer', fontFamily: 'inherit' },
 };
