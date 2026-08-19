@@ -9,7 +9,7 @@
  * It can also be supplied per-reviewer via `?endpoint=<url>` on the review
  * link, which takes precedence and is remembered in that browser.
  */
-export const REVIEW_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyJ6Ndl4oKz1fmv2_HFGkC-T0dQR5GuwymG9-s04MacHHm3VAOBmH2BWMMvCRyZ5v1Z/exec';
+export const REVIEW_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzN3ctRP4OwGRboeWm7AtYan9-P_xu1simow0dV3N7ZTOKValwjnXa9T7N151XCJzPz/exec';
 
 /** Resolve the active endpoint: URL param > localStorage > baked-in config. */
 export function resolveEndpoint(): string {
