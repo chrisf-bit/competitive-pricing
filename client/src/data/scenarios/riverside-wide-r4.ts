@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: surface that his rates run higher than the Key OTA on family occupancy and that Genius isn't performing, then ask an open question about his goals before recommending anything.",
     playerDialogue:
-      "I've been looking at your competitiveness with us, and your rates are running higher than Expedia's - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
+      "I've been looking at your competitiveness with us, and your rates are running higher than the Key OTA's - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
     partnerResponse:
       "Let me share our strategy. We deliberately cap our Booking.com volume at 30% to protect our own website - so if Genius isn't pulling numbers, that's by design. The family rates, though, aren't intentional. I'd happily give you the same rates as the other OTAs. How much am I leaving on the table on the family segment?",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "The Slippery Road trap: oversimplify to 'bring your ADR down.' It presumes the fix, ignores that the family gap is a setup issue, and is exactly what a boutique protecting its positioning refuses.",
     playerDialogue:
-      "Your rates are higher than Expedia's - the simplest fix is to bring your overall ADR down here so you're competitive again.",
+      "Your rates are higher than the Key OTA's - the simplest fix is to bring your overall ADR down here so you're competitive again.",
     partnerResponse:
       "Dropping my ADR across the board is exactly what I won't do - I run a boutique, not a discount channel.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -107,12 +107,12 @@ const step2Options: BranchingOption[] = [
     trustChange: -5,
   },
   {
-    id: 'rb-r4-wide-step2-pull-expedia',
-    label: 'Tell him to pull family rates from Expedia',
+    id: 'rb-r4-wide-step2-pull-keyota',
+    label: 'Tell him to pull family rates from the Key OTA',
     description:
-      "Name Expedia and tell him to withhold his family rates from them and give them only to Booking.com. Directing his channel mix oversteps even in a Wide market.",
+      "Name the Key OTA and tell him to withhold his family rates from them and give them only to Booking.com. Directing his channel mix oversteps even in a Wide market.",
     playerDialogue:
-      "Honestly, Expedia is undercutting you on families - you should pull your family rates from them and give them only to us.",
+      "Honestly, the Key OTA is undercutting you on families - you should pull your family rates from them and give them only to us.",
     partnerResponse:
       "You don't get to tell me which channels I work with.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

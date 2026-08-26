@@ -971,7 +971,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
         <BigMetric
           label={metricDefinitions.competitor.label}
           helpText={metricDefinitions.competitor.helpText}
-          value={m.competitor === 'brand' ? 'Brand.com' : 'Expedia'}
+          value={m.competitor === 'brand' ? 'Brand.com' : 'Key OTA'}
         />
       </div>
 

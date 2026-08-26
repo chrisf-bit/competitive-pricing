@@ -1,19 +1,14 @@
 import type { MarketContext, ParityRegime, RoundSummaryItem } from '../types';
 
 /**
- * Round-by-round market context, indexed by parity regime so the
- * banner references the region the learner's portfolio actually
- * lives in. Each regime is a country grouping:
- *   - No Parity: Spain (Marbella, Madrid, Valencia, Mallorca, Barcelona)
- *   - Narrow: UK (Cornwall, London, Bath, Brighton, Edinburgh, Cotswolds)
- *   - Wide: USA (Miami Beach, New York, Boston, Newport Beach)
- *
- * Prior to this rewrite the market update was a single global copy
- * per round and referenced parked-partner cities (Kos, Mumbai,
- * Kyoto) that no longer appear on any active portfolio - so a
- * No-Parity learner would read about Japan while their whole
- * portfolio sat in Spain. Cross-Regional falls back to Wide until
- * its own copy lands.
+ * Round-by-round market context, indexed by parity regime. The copy
+ * is geography-neutral: partner properties now use fictional
+ * locations (see partners.ts) so no real country is tied to a parity
+ * regime, and a learner's portfolio spans several fictional countries
+ * rather than one real market. The three regime blocks therefore
+ * carry the same neutral seasonal / competitive framing. Kept
+ * per-regime so regime-specific copy can be reintroduced later if
+ * needed. Cross-Regional falls back to Wide via getMarketContext.
  */
 const marketContextByRegime: Record<
   ParityRegime,
@@ -23,69 +18,69 @@ const marketContextByRegime: Record<
     1: {
       demand: 'flat',
       competitorPricing:
-        'Spanish coastal and city competitors are actively using discount tools. Mobile Rate adoption is above 70% for comparable properties.',
+        'Coastal and city competitors are actively using discount tools. Mobile Rate adoption is above 70% for comparable properties.',
       seasonalNote:
         'Shoulder season approaching. Properties that secure advance bookings now will have a significant advantage into the summer.',
     },
     2: {
       demand: 'up',
       competitorPricing:
-        'Costa del Sol competitors have entered with aggressive pricing. Madrid and Barcelona hotels are holding steady. Valencia and Mallorca demand is climbing week on week.',
+        'Competitors have entered with aggressive summer pricing. Established city hotels are holding steady while coastal and resort demand climbs week on week.',
       seasonalNote:
-        'Advance bookings for peak Spanish summer are accelerating. Properties with Early Booker Deals are capturing disproportionate share.',
+        'Advance bookings for peak summer are accelerating. Properties with Early Booker Deals are capturing disproportionate share.',
     },
     3: {
       demand: 'up',
       competitorPricing:
-        'Spanish market pricing competition has intensified. Properties that invested in on-platform tools early are pulling ahead. Latecomers are losing ground.',
+        'Market pricing competition has intensified. Properties that invested in on-platform tools early are pulling ahead. Latecomers are losing ground.',
       seasonalNote:
-        'Peak Spanish summer is imminent. Pricing decisions made now will determine high-season performance.',
+        'Peak summer is imminent. Pricing decisions made now will determine high-season performance.',
     },
   },
   narrow: {
     1: {
       demand: 'flat',
       competitorPricing:
-        'UK regional and city competitors are actively using discount tools. Mobile Rate adoption is above 70% for comparable properties.',
+        'Regional and city competitors are actively using discount tools. Mobile Rate adoption is above 70% for comparable properties.',
       seasonalNote:
         'Shoulder season approaching. Properties that secure advance bookings now will have a significant advantage into the summer.',
     },
     2: {
       demand: 'up',
       competitorPricing:
-        'Cotswolds and Cornwall competitors have entered with aggressive summer pricing. London and Edinburgh city hotels are holding steady. Bath and Brighton demand is climbing.',
+        'Competitors have entered with aggressive summer pricing. Established city hotels are holding steady while coastal and resort demand climbs week on week.',
       seasonalNote:
-        'Advance bookings for peak UK summer are accelerating. Properties with Early Booker Deals are capturing disproportionate share.',
+        'Advance bookings for peak summer are accelerating. Properties with Early Booker Deals are capturing disproportionate share.',
     },
     3: {
       demand: 'up',
       competitorPricing:
-        'UK market pricing competition has intensified. Properties that invested in on-platform tools early are pulling ahead. Latecomers are losing ground.',
+        'Market pricing competition has intensified. Properties that invested in on-platform tools early are pulling ahead. Latecomers are losing ground.',
       seasonalNote:
-        'Peak UK summer is imminent. Pricing decisions made now will determine high-season performance.',
+        'Peak summer is imminent. Pricing decisions made now will determine high-season performance.',
     },
   },
   wide: {
     1: {
       demand: 'flat',
       competitorPricing:
-        'US coastal and city competitors are actively using discount tools. Mobile Rate adoption is above 70% for comparable properties.',
+        'Coastal and city competitors are actively using discount tools. Mobile Rate adoption is above 70% for comparable properties.',
       seasonalNote:
         'Shoulder season approaching. Properties that secure advance bookings now will have a significant advantage into the summer.',
     },
     2: {
       demand: 'up',
       competitorPricing:
-        'Miami Beach and Newport Beach competitors have entered with aggressive summer pricing. New York and Boston city hotels are holding steady. West Coast demand is climbing.',
+        'Competitors have entered with aggressive summer pricing. Established city hotels are holding steady while coastal and resort demand climbs week on week.',
       seasonalNote:
-        'Advance bookings for peak US summer are accelerating. Properties with Early Booker Deals are capturing disproportionate share.',
+        'Advance bookings for peak summer are accelerating. Properties with Early Booker Deals are capturing disproportionate share.',
     },
     3: {
       demand: 'up',
       competitorPricing:
-        'US market pricing competition has intensified. Properties that invested in on-platform tools early are pulling ahead. Latecomers are losing ground.',
+        'Market pricing competition has intensified. Properties that invested in on-platform tools early are pulling ahead. Latecomers are losing ground.',
       seasonalNote:
-        'Peak US summer is imminent. Pricing decisions made now will determine high-season performance.',
+        'Peak summer is imminent. Pricing decisions made now will determine high-season performance.',
     },
   },
   // Cross-Regional isn't authored yet; falls back to Wide via the
@@ -193,7 +188,7 @@ function getNeglectedDetail(partnerId: string, round: number): string {
     hannah: {
       1: 'Hannah has not made any pricing changes. Her visibility continues to decline slowly.',
       2: 'Hannah mentioned feeling unsupported during a recent industry event. Her metrics remain flat.',
-      3: 'Hannah is losing confidence in the platform. Competitors in the Cotswolds are gaining ground.',
+      3: 'Hannah is losing confidence in the platform. Competitors in her market are gaining ground.',
     },
     carlos: {
       1: 'Carlos has been distracted by other projects. His Country Rate remains misconfigured and metrics are slipping.',

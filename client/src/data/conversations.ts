@@ -335,9 +335,9 @@ const stavrosR1: ConversationTree = {
           {
             id: 'stavros-r1-diag-discount-volume',
             label: 'Blame the discount stack',
-            description: "Argue Expedia is out-discounting him and he needs more products active.",
+            description: "Argue the Key OTA is out-discounting him and he needs more products active.",
             playerDialogue:
-              "Your visibility is down and you're losing the price comparison on most searches. The story I'd tell is your discount stack isn't doing enough work - Expedia partners on Kos have more products active than you do. That's where the visibility gap is opening up.",
+              "Your visibility is down and you're losing the price comparison on most searches. The story I'd tell is your discount stack isn't doing enough work - partners on the Key OTA have more products active than you do. That's where the visibility gap is opening up.",
             styleMatch: { red: 1, blue: 0, yellow: 1, green: -1 },
             assertiveness: 2,
             compliance: 'safe',
@@ -370,7 +370,7 @@ const stavrosR1: ConversationTree = {
           optionId: 'stavros-r1-diag-discount-volume',
           responses: [
             { trustThreshold: 'low', text: "More discounts? I'm already discounting. If that was the answer I'd have solved it months ago.", emotion: 'negative' },
-            { trustThreshold: 'medium', text: "I'm not convinced. Expedia comparisons are useful but I want to know what's actually broken on my side. Anything else?", emotion: 'cautious' },
+            { trustThreshold: 'medium', text: "I'm not convinced. Key OTA comparisons are useful but I want to know what's actually broken on my side. Anything else?", emotion: 'cautious' },
             { trustThreshold: 'high', text: "Maybe - but my gut says it's something more specific than just product count. What else have you got?", emotion: 'neutral' },
           ],
           metricEffects: {},

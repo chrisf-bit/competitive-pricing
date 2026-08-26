@@ -10,7 +10,7 @@ import type { IssueTreePath } from '../../types';
  * margin logic, and ROI across channels. He's frustrated: his static B2B
  * / wholesale rates are leaking into the public B2C space (surfacing via
  * Partner Offer / metasearch), and he blames Booking.com for amplifying
- * it. Competitors (Expedia) are pointing out the price gaps to pile on.
+ * it. Competitors (a Key OTA) are pointing out the price gaps to pile on.
  *
  * This is a SEVERE Key OTA competitiveness gap: eRPD 31.7% / Bucket 7,
  * with a massive +30.75 MoM spike, Public RPD 35.4%, Loyal RPD 29.9%,

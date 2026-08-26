@@ -481,7 +481,7 @@ function KpiTable({
                       color: row.competitor === 'brand' ? 'var(--brand-blue)' : 'var(--style-yellow)',
                     }}
                   >
-                    {row.competitor === 'brand' ? 'Brand.com' : 'Expedia'}
+                    {row.competitor === 'brand' ? 'Brand.com' : 'Key OTA'}
                   </span>
                 </Td>
               </tr>

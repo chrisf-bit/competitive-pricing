@@ -274,7 +274,7 @@ const step5Options: BranchingOption[] = [
     trustChange: -7,
   },
   {
-    id: 'ob-r6-wide-step5-drop-expedia',
+    id: 'ob-r6-wide-step5-drop-keyota',
     label: 'Tell her to pull rates from her other OTAs',
     description:
       "Direct her to stop feeding the other OTAs and give the good rates only to Booking.com. Instructing an owner on her external channel mix oversteps even in a Wide market.",

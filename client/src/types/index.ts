@@ -281,7 +281,7 @@ export interface PartnerMetrics {
    */
   activeScenarioNames?: string[];
   /** Top competitor for this partner. */
-  competitor: 'brand' | 'expedia';
+  competitor: 'brand' | 'keyota';
   /**
    * Six secondary metric cards shown below the eRPD Price Bucket
    * strip on the Driving Metrics tab (PDF page 1). Optional - cards
@@ -376,7 +376,7 @@ export interface PartnerPersona {
   /**
    * Partner company name shown for the game in the KAM journey ("Partner
    * Name for the Game", roster Column I) - e.g. Royal Crest Hotel ->
-   * "Northumbrian Quays Hotel Management". Replaces propertyName in KAM
+   * "Alden Harbour Hotel Management". Replaces propertyName in KAM
    * display. Presence of this field is the signal to render KAM chrome.
    */
   companyName?: string;

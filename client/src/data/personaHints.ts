@@ -155,15 +155,15 @@ const silverHorizonR2Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'objection-navigator': {
     oneLiner:
-      'Expect "Expedia cuts margin, I give everyone the same rate - you burn margin too." Don\'t price-war: refuse the race to the bottom and pivot to unsold rooms and the family/international upside.',
+      'Expect "The Key OTA cuts margin, I give everyone the same rate - you burn margin too." Don\'t price-war: refuse the race to the bottom and pivot to unsold rooms and the family/international upside.',
   },
   storyteller: {
     oneLiner:
-      'Winning the traffic, losing the value: page views +71% and conversion +28% vs peer, but a sharp Key OTA spike is bleeding the high-value International and Family segments to Expedia.',
+      'Winning the traffic, losing the value: page views +71% and conversion +28% vs peer, but a sharp Key OTA spike is bleeding the high-value International and Family segments to the Key OTA.',
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: eRPD jumped +4.71 in a month and ABRN is -32% YoY despite +119% room nights vs peer - the International and Family 2+1/2+2 scenarios flag exactly where Expedia undercuts.',
+      'Anomaly: eRPD jumped +4.71 in a month and ABRN is -32% YoY despite +119% room nights vs peer - the International and Family 2+1/2+2 scenarios flag exactly where the Key OTA undercuts.',
   },
 };
 
@@ -337,7 +337,7 @@ const loftLivingR9Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'objection-navigator': {
     oneLiner:
-      'Expect the Wholesaler Leak ("Partner Offer is undercutting me") plus Competitive Aggression from Expedia; clarify Booking.com isn\'t the source, avoid a price war, and offer a fenced mobile fix.',
+      'Expect the Wholesaler Leak ("Partner Offer is undercutting me") plus Competitive Aggression from the Key OTA; clarify Booking.com isn\'t the source, avoid a price war, and offer a fenced mobile fix.',
   },
   storyteller: {
     oneLiner:

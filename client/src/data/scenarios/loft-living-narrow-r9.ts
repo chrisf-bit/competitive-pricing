@@ -10,7 +10,7 @@ import { loftLivingR9IssueTreePath } from './loft-living-base';
  *
  * Source: SME "Round 9" doc, Conversation 2 (Narrow Parity). In a Narrow
  * market the AM cannot ask for parity against other OTAs or wholesalers,
- * and cannot ask him to change or raise his rates on Expedia; the
+ * and cannot ask him to change or raise his rates on the Key OTA; the
  * compliant ask is to align his Booking.com rate with his own Brand.com.
  * The learner reframes the leak as a leakage tax, works the visibility-vs-
  * direct logic, proposes a measured temporary-alignment test, and closes
@@ -32,7 +32,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "Your conversion has dropped by 68% recently, and your future room nights are down 46% - both against your peer group. How does that impact your revenue objectives for the current quarter?",
     partnerResponse:
-      "It's a major hit, obviously. But I'm facing a lot of noise. Expedia keeps pointing out price gaps, and then I see Booking.com undercutting me too. It feels like a race to the bottom.",
+      "It's a major hit, obviously. But I'm facing a lot of noise. The Key OTA keeps pointing out price gaps, and then I see Booking.com undercutting me too. It feels like a race to the bottom.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -111,13 +111,13 @@ const step2Options: BranchingOption[] = [
   },
   {
     id: 'll-r9-narrow-step2-blame',
-    label: 'Tell him to go fight it out with Expedia',
+    label: 'Tell him to go fight it out with the Key OTA',
     description:
       "Sends him off to battle the competitor instead of reframing the leak - it takes the price-war bait the SME warns against and abandons the diagnosis.",
     playerDialogue:
-      "If Expedia's the one poking at your price gaps, honestly you should just go match them and shut them up.",
+      "If the Key OTA's the one poking at your price gaps, honestly you should just go match them and shut them up.",
     partnerResponse:
-      "So your advice is to chase Expedia down on price? That's the race I'm trying to get out of.",
+      "So your advice is to chase the Key OTA down on price? That's the race I'm trying to get out of.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
     assertiveness: 2,
     compliance: 'borderline',
@@ -129,7 +129,7 @@ const step2: BranchingStep = {
   id: 'leakage-tax',
   label: 'Reframe the leak; probe the setup',
   partnerPrompt:
-    "It's a major hit, obviously. But I'm facing a lot of noise. Expedia keeps pointing out price gaps, and then I see Booking.com undercutting me too. It feels like a race to the bottom.",
+    "It's a major hit, obviously. But I'm facing a lot of noise. The Key OTA keeps pointing out price gaps, and then I see Booking.com undercutting me too. It feels like a race to the bottom.",
   options: step2Options,
 };
 
@@ -252,9 +252,9 @@ const step5Options: BranchingOption[] = [
     id: 'll-r9-narrow-step5-correct',
     label: 'Offer a measured two-week trial; clarify Partner Offer and the limit',
     description:
-      "SME-prescribed handle: track total reservation volume and search impressions over a two-week trial so he sees the full picture. Clarify Partner Offer ensures travelers get the best price and isn't a punishment - and note you can't ask him to change or raise his rates on Expedia or other OTAs, only support his growth.",
+      "SME-prescribed handle: track total reservation volume and search impressions over a two-week trial so he sees the full picture. Clarify Partner Offer ensures travelers get the best price and isn't a punishment - and note you can't ask him to change or raise his rates on the Key OTA or other OTAs, only support his growth.",
     playerDialogue:
-      "That makes sense. We can track your total reservation volume and search impressions over a two-week trial, so you see the whole picture, not just commission. And on Partner Offer - it's there to make sure travelers get the best price on Booking.com, not to punish you, and those rates come from your wholesale agreements. We can't ask you to change or raise your rates on Expedia or the other OTAs - we just want to support your growth here.",
+      "That makes sense. We can track your total reservation volume and search impressions over a two-week trial, so you see the whole picture, not just commission. And on Partner Offer - it's there to make sure travelers get the best price on Booking.com, not to punish you, and those rates come from your wholesale agreements. We can't ask you to change or raise your rates on the Key OTA or the other OTAs - we just want to support your growth here.",
     partnerResponse:
       "At the moment I'm not willing to make any adjustment to my current strategy. I'll give this some thought and let you know next time we meet.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -267,11 +267,11 @@ const step5Options: BranchingOption[] = [
     id: 'll-r9-narrow-step5-raise-ota',
     label: 'Ask him to lift his rates on the other OTAs',
     description:
-      "In a Narrow market you cannot ask him to change or raise his rates on Expedia or other OTAs. Telling him to lift his other-OTA pricing to close the gap is a compliance breach.",
+      "In a Narrow market you cannot ask him to change or raise his rates on the Key OTA or other OTAs. Telling him to lift his other-OTA pricing to close the gap is a compliance breach.",
     playerDialogue:
-      "The cleanest fix is to just raise your rates on Expedia and the other OTAs so there's no cheaper option out there undercutting you.",
+      "The cleanest fix is to just raise your rates on the Key OTA and the other OTAs so there's no cheaper option out there undercutting you.",
     partnerResponse:
-      "You're telling me how to price on Expedia now? That's not yours to ask.",
+      "You're telling me how to price on the Key OTA now? That's not yours to ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
     compliance: 'risky',

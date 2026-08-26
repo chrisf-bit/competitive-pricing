@@ -105,14 +105,14 @@ const step2Options: BranchingOption[] = [
     trustChange: -5,
   },
   {
-    id: 'rb-r4-narrow-step2-beat-expedia',
-    label: 'Tell him to undercut Expedia on families',
+    id: 'rb-r4-narrow-step2-beat-keyota',
+    label: 'Tell him to undercut the Key OTA on families',
     description:
-      "Point at Expedia and tell him to make sure he isn't pricier than them on families. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
+      "Point at the Key OTA and tell him to make sure he isn't pricier than them on families. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "You're cheaper on Expedia for families - just make sure your family rates here aren't higher than Expedia's and you'll win them back.",
+      "You're cheaper on the Key OTA for families - just make sure your family rates here aren't higher than the Key OTA's and you'll win them back.",
     partnerResponse:
-      "You can't ask me to price against Expedia here - that's not how this market works.",
+      "You can't ask me to price against the Key OTA here - that's not how this market works.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 3,
     compliance: 'risky',

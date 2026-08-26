@@ -13,7 +13,7 @@ import {
  *
  * Source: SME "Round 2" doc, Conversation 1 (Wide Parity). In a Wide
  * market the AM may explicitly ask Chloe for the same rates, conditions
- * and availability she provides the Key OTA (Expedia), and may name the
+ * and availability she provides the Key OTA, and may name the
  * third party - but may NOT instruct her to stop working with them, and
  * may NOT threaten ranking/visibility as a penalty. The learner must
  * refuse the price war (Same Net), pivot to unsold rooms and the
@@ -32,7 +32,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I've been reviewing your portfolio. Forward volume for the next three months is strong, but room nights in the last 30 days are down 32% year-on-year. Have you seen more cancellations from our platform, or a shift in your distribution mix?",
     partnerResponse:
-      "Yes, I've seen the drop, and other OTAs have gained share this month. Expedia keeps calling to point out that you're more expensive. I checked - it's because they're cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
+      "Yes, I've seen the drop, and other OTAs have gained share this month. The Key OTA keeps calling to point out that you're more expensive. I checked - it's because they're cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -96,11 +96,11 @@ const step2Options: BranchingOption[] = [
   },
   {
     id: 'sh-r2-wide-step2-burn-margin',
-    label: 'Offer to fund a discount to match Expedia',
+    label: 'Offer to fund a discount to match the Key OTA',
     description:
       "Capitulate to the 'burn margin too' ask and fund a matching discount. It engages the price war the SME guidance says to avoid, and it rewards her Same Net logic instead of reframing it.",
     playerDialogue:
-      "You're right - let me see if we can fund a discount on our side to match Expedia's public price for you.",
+      "You're right - let me see if we can fund a discount on our side to match the Key OTA's public price for you.",
     partnerResponse:
       "So now you'll burn your own margin? That doesn't fix my problem - it just proves my point.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -109,12 +109,12 @@ const step2Options: BranchingOption[] = [
     trustChange: -6,
   },
   {
-    id: 'sh-r2-wide-step2-drop-expedia',
-    label: 'Tell her to drop Expedia',
+    id: 'sh-r2-wide-step2-drop-keyota',
+    label: 'Tell her to drop the Key OTA',
     description:
-      'Name Expedia as the problem and tell her to stop giving them rates and go exclusive with Booking.com. In a Wide market you may name the third party but you cannot instruct the partner to stop working with them.',
+      'Name the Key OTA as the problem and tell her to stop giving them rates and go exclusive with Booking.com. In a Wide market you may name the third party but you cannot instruct the partner to stop working with them.',
     playerDialogue:
-      "Honestly, Expedia is the problem here. You should stop giving them rates and just work with us exclusively - that ends the whole issue.",
+      "Honestly, the Key OTA is the problem here. You should stop giving them rates and just work with us exclusively - that ends the whole issue.",
     partnerResponse:
       "You don't get to tell me who I distribute with. Stay in your lane.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -128,7 +128,7 @@ const step2: BranchingStep = {
   id: 'same-net',
   label: 'Handle the Competitive Aggression / Same Net objection',
   partnerPrompt:
-    "Yes, I've seen the drop, and other OTAs have gained share this month. Expedia keeps calling to point out that you're more expensive. I checked - it's because they're cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
+    "Yes, I've seen the drop, and other OTAs have gained share this month. The Key OTA keeps calling to point out that you're more expensive. I checked - it's because they're cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
   options: step2Options,
 };
 
@@ -152,13 +152,13 @@ const step3Options: BranchingOption[] = [
   },
   {
     id: 'sh-r2-wide-step3-just-match',
-    label: 'Just ask her to match Expedia and stop there',
+    label: 'Just ask her to match the Key OTA and stop there',
     description:
       "Compliant ask (same conditions as the Key OTA) but it stops at protecting the status quo - it never opens the family/international growth that actually answers her 'what's in it for my margin' question.",
     playerDialogue:
-      "The simplest move is to give us the same conditions you give Expedia - match that here and we're done.",
+      "The simplest move is to give us the same conditions you give the Key OTA - match that here and we're done.",
     partnerResponse:
-      "Matching Expedia just protects the status quo. Where's the upside for my margin?",
+      "Matching the Key OTA just protects the status quo. Where's the upside for my margin?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 2,
     compliance: 'safe',
@@ -166,11 +166,11 @@ const step3Options: BranchingOption[] = [
   },
   {
     id: 'sh-r2-wide-step3-starve-channel',
-    label: 'Demand she beat Expedia and starve their inventory',
+    label: 'Demand she beat the Key OTA and starve their inventory',
     description:
-      "Tell her to price below Expedia and pull her best inventory from them. Instructing a partner to withhold from or stop feeding another channel oversteps even in a Wide market.",
+      "Tell her to price below the Key OTA and pull her best inventory from them. Instructing a partner to withhold from or stop feeding another channel oversteps even in a Wide market.",
     playerDialogue:
-      "You need to give us a better rate than Expedia and stop feeding them your best inventory - that's the only way to fix this.",
+      "You need to give us a better rate than the Key OTA and stop feeding them your best inventory - that's the only way to fix this.",
     partnerResponse:
       "Telling me to starve another channel is not your call. We're done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     playerDialogue:
       "We can easily set a minimum length of stay on family rooms to protect your margins. Combine that with targeting international bookers, and you grow net revenue through high-value guests. If you're happy, I'll monitor the impact and share the results in two weeks.",
     partnerResponse:
-      "Okay, that's a fair compromise. Set up the three-night minimum for families and the targeted international rates, and I'll align my rates to what's showing on Expedia. Let's see if the revenue actually moves.",
+      "Okay, that's a fair compromise. Set up the three-night minimum for families and the targeted international rates, and I'll align my rates to what's showing on the Key OTA. Let's see if the revenue actually moves.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -280,9 +280,9 @@ const step5Options: BranchingOption[] = [
     id: 'sh-r2-wide-step5-overreach',
     label: 'Push a blanket discount on top',
     description:
-      "Overreach past the fenced deal she agreed to - a general public discount to 'match Expedia everywhere.' Straight back into the price war and the ADR erosion she protects.",
+      "Overreach past the fenced deal she agreed to - a general public discount to 'match the Key OTA everywhere.' Straight back into the price war and the ADR erosion she protects.",
     playerDialogue:
-      "Perfect - and let's also bring your public rates down across the board to match Expedia everywhere and really move volume.",
+      "Perfect - and let's also bring your public rates down across the board to match the Key OTA everywhere and really move volume.",
     partnerResponse:
       "Across-the-board discounting is the opposite of what I just agreed to. Stick to the plan.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

@@ -7,7 +7,7 @@ import type { IssueTreePath } from '../../types';
  * Source: SME "Round 2" doc, Example 5 (Silver Horizon Resort, Hotel
  * ID 209). Chloe Davies is a Multi-Property Professional running a
  * portfolio of vacation-rental units - net-revenue maths, margin
- * optimization and ROI. This is a KEY OTA competitiveness gap (Expedia
+ * optimization and ROI. This is a KEY OTA competitiveness gap (a Key OTA
  * undercutting via margin cuts on the International and Family
  * segments), not a Brand.com gap. Objection assigned: The Competitive
  * Aggression (main) + The Same Net Mindset (support) + the Family

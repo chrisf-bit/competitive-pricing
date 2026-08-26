@@ -107,7 +107,7 @@ function buildDossier(
     { label: 'RPD Loyal', value: pct(m.rpdLoyal) },
     { label: 'Lose Price', value: `${m.losePricePublic}%` },
     { label: 'Scenarios', value: String(m.activeScenarios) },
-    { label: 'Competitor', value: m.competitor === 'brand' ? 'Brand.com' : 'Expedia' },
+    { label: 'Competitor', value: m.competitor === 'brand' ? 'Brand.com' : 'Key OTA' },
   ];
   if (m.secondaryMetrics) {
     for (const [k, v] of Object.entries(m.secondaryMetrics)) {

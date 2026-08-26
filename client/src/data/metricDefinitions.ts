@@ -52,7 +52,7 @@ export const metricDefinitions = {
   competitor: {
     label: 'Competitor',
     helpText:
-      "The platform driving the biggest share of this partner's price-comparison losses - either Brand.com (the partner's own direct site) or Expedia / a Key OTA.",
+      "The platform driving the biggest share of this partner's price-comparison losses - either Brand.com (the partner's own direct site) or a Key OTA.",
   },
 
   // ── eRPD Price Bucket ──

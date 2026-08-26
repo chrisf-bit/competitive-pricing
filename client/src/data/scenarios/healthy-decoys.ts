@@ -115,7 +115,7 @@ function healthyMetrics(i: number): PartnerMetrics {
     losePricePublic: H_LOSE[i],
     activeScenarios: 2 + (i % 2),
     activeScenarioNames: i % 2 === 0 ? ['Brand.com', 'App'] : ['Key OTA', 'Mobile'],
-    competitor: i % 3 === 0 ? 'expedia' : 'brand',
+    competitor: i % 3 === 0 ? 'keyota' : 'brand',
     secondaryMetrics: {
       last30dAbrn: { value: 700 + i * 35, deltaPct: 3 + (i % 3) },
       last30dRoomNights: { value: 420 + i * 22, deltaPct: 4 + (i % 2) },

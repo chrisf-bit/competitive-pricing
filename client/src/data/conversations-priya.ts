@@ -203,7 +203,7 @@ export const priyaR1: ConversationTree = {
           ],
           metricEffects: { experiencedRPD: 6, visibility: 4, conversion: 3 },
           trustChange: 5,
-          nextPhasePrompt: "Fine. But my other properties on Expedia are delivering better numbers with less effort. Why should I invest more time into this platform specifically?",
+          nextPhasePrompt: "Fine. But my other properties on the Key OTA are delivering better numbers with less effort. Why should I invest more time into this platform specifically?",
         },
         {
           optionId: 'priya-r1-rec-parity',

@@ -368,8 +368,8 @@ function nobleFalconBase(args: {
 // to the base id ('marina', 'carlos', etc.) for conversation tree,
 // per-round baseline, and persona-hint lookups via the suffix-strip
 // fallback in conversations.ts / partnerStateByRound.ts /
-// personaHints.ts. Country groupings: Spain for No Parity, UK for
-// Narrow, US for Wide - matches the priority partner per regime.
+// personaHints.ts. Locations are fictional and regime-neutral -
+// they do not signal a parity regime.
 
 function marinaBase(args: {
   id: string;
@@ -541,7 +541,7 @@ function ravenInnBase(args: {
       losePricePublic: 35,
       activeScenarios: 3,
       activeScenarioNames: ['International', 'Family 2+1', 'Family 2+2'],
-      competitor: 'expedia',
+      competitor: 'keyota',
       secondaryMetrics: {
         last30dAbrn: { value: 785, deltaPct: 6 },
         last30dRoomNights: { value: 540, deltaPct: 4 },
@@ -694,7 +694,7 @@ function royalCrestBase(args: {
         name: args.contactName,
         propertyName: 'Royal Crest Hotel',
         propertyType: 'Hotel',
-        roomCount: 120,
+        roomCount: 101,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -788,7 +788,7 @@ function royalCrestBase(args: {
  * differ. The contact name stays 'Chloe Davies' across regimes.
  *
  * Data: SME "Round 2" doc data set - a KEY OTA competitiveness gap
- * (Expedia undercutting via margin cuts on International + Family
+ * (a Key OTA undercutting via margin cuts on International + Family
  * segments). eRPD 1.9% (Bucket 3) but a sharp +4.71 MoM spike, Lose
  * Price 42%, Public RPD 3.9% / Loyal RPD -3.0%. Strong platform demand
  * (room nights +119% vs peer, forward pace +81%) but ABRN -32% YoY and
@@ -810,7 +810,7 @@ function silverHorizonBase(args: {
         name: args.contactName,
         propertyName: 'Silver Horizon Resort',
         propertyType: 'Vacation Rental',
-        roomCount: 64,
+        roomCount: 61,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -818,7 +818,7 @@ function silverHorizonBase(args: {
         style: 'blue',
         styleSecondary: 'red',
         description:
-          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimization and strict ROI when balancing channels. Fields aggressive competitor calls (Expedia) and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
+          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimization and strict ROI when balancing channels. Fields aggressive Key OTA competitor calls and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
         commercialGoal:
           'Maximize net revenue and margin across the portfolio while balancing a mix of distribution channels',
       },
@@ -834,7 +834,7 @@ function silverHorizonBase(args: {
         losePricePublic: 42,
         activeScenarios: 3,
         activeScenarioNames: ['International', 'Family 2+1', 'Family 2+2'],
-        competitor: 'expedia',
+        competitor: 'keyota',
         secondaryMetrics: {
           last30dAbrn: { value: 389, deltaPct: -32 },
           last30dRoomNights: { value: 333, deltaPct: 119 },
@@ -930,7 +930,7 @@ function oceanViewBase(args: {
         name: args.contactName,
         propertyName: 'Ocean View Resort',
         propertyType: 'Resort',
-        roomCount: 110,
+        roomCount: 90,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1048,7 +1048,7 @@ function riversideBase(args: {
         name: args.contactName,
         propertyName: 'Riverside Boutique Hotel',
         propertyType: 'Boutique Hotel',
-        roomCount: 42,
+        roomCount: 49,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1072,7 +1072,7 @@ function riversideBase(args: {
         losePricePublic: 47,
         activeScenarios: 3,
         activeScenarioNames: ['App', 'Family 2+1', 'Family 2+2'],
-        competitor: 'expedia',
+        competitor: 'keyota',
         secondaryMetrics: {
           last30dAbrn: { value: 271, deltaPct: -59 },
           last30dRoomNights: { value: 300, deltaPct: 40 },
@@ -1160,7 +1160,7 @@ function emeraldPeakBase(args: {
         name: args.contactName,
         propertyName: 'Emerald Peak Lodge',
         propertyType: 'Lodge',
-        roomCount: 88,
+        roomCount: 185,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1274,7 +1274,7 @@ function oceanfrontBase(args: {
         name: args.contactName,
         propertyName: 'Oceanfront Bliss Lodge',
         propertyType: 'Lodge',
-        roomCount: 58,
+        roomCount: 309,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1371,7 +1371,7 @@ function palaceGrandBase(args: {
         name: args.contactName,
         propertyName: 'Palace Grand Resort',
         propertyType: 'Resort',
-        roomCount: 184,
+        roomCount: 70,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1397,7 +1397,7 @@ function palaceGrandBase(args: {
         losePricePublic: 60,
         activeScenarios: 3,
         activeScenarioNames: ['Mdot', 'Family 2+1', 'Family 2+2'],
-        competitor: 'expedia',
+        competitor: 'keyota',
         secondaryMetrics: {
           last30dAbrn: { value: 267, deltaPct: -46 },
           last30dRoomNights: { value: 349, deltaPct: 49 },
@@ -1473,7 +1473,7 @@ function hiddenValleyBase(args: {
         name: args.contactName,
         propertyName: 'The Hidden Valley Resort',
         propertyType: 'Resort',
-        roomCount: 96,
+        roomCount: 77,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1576,7 +1576,7 @@ function loftLivingBase(args: {
         name: args.contactName,
         propertyName: 'Loft Living Inn',
         propertyType: 'Vacation Rental',
-        roomCount: 46,
+        roomCount: 190,
         location: args.location,
         parityRegime: args.parityRegime,
         avatar: initialsFromName(args.contactName),
@@ -1602,7 +1602,7 @@ function loftLivingBase(args: {
         losePricePublic: 97,
         activeScenarios: 3,
         activeScenarioNames: ['Wholesaler', 'App', 'Brand Scenario'],
-        competitor: 'expedia',
+        competitor: 'keyota',
         secondaryMetrics: {
           last30dAbrn: { value: 170, deltaPct: -28 },
           last30dRoomNights: { value: 88, deltaPct: -44 },
@@ -1699,7 +1699,7 @@ export const initialPartners: PartnerState[] = [
   ...loftLivingBase({
     id: 'loft-living-wide',
     parityRegime: 'wide',
-    location: 'Austin, USA',
+    location: 'Kurokawa-Shi, State of Shinano',
     contactName: 'Lucas Silva',
     propertyImage:
       'photo-1502672260266',
@@ -1707,7 +1707,7 @@ export const initialPartners: PartnerState[] = [
   ...loftLivingBase({
     id: 'loft-living-narrow',
     parityRegime: 'narrow',
-    location: 'Manchester, UK',
+    location: 'Kurokawa-Shi, State of Shinano',
     contactName: 'Lucas Silva',
     propertyImage:
       'photo-1560448204',
@@ -1715,7 +1715,7 @@ export const initialPartners: PartnerState[] = [
   ...loftLivingBase({
     id: 'loft-living-none',
     parityRegime: 'none',
-    location: 'Seville, Spain',
+    location: 'Kurokawa-Shi, State of Shinano',
     contactName: 'Lucas Silva',
     propertyImage:
       'photo-1522708323590',
@@ -1730,7 +1730,7 @@ export const initialPartners: PartnerState[] = [
   ...hiddenValleyBase({
     id: 'hidden-valley-wide',
     parityRegime: 'wide',
-    location: 'Aspen, USA',
+    location: 'Altenstrad, Federal Republic of Eldon',
     contactName: 'Claire Thornton',
     propertyImage:
       'photo-1596436889106',
@@ -1738,7 +1738,7 @@ export const initialPartners: PartnerState[] = [
   ...hiddenValleyBase({
     id: 'hidden-valley-narrow',
     parityRegime: 'narrow',
-    location: 'Lake District, UK',
+    location: 'Altenstrad, Federal Republic of Eldon',
     contactName: 'Claire Thornton',
     propertyImage:
       'photo-1610641818989',
@@ -1746,7 +1746,7 @@ export const initialPartners: PartnerState[] = [
   ...hiddenValleyBase({
     id: 'hidden-valley-none',
     parityRegime: 'none',
-    location: 'Sierra Nevada, Spain',
+    location: 'Altenstrad, Federal Republic of Eldon',
     contactName: 'Claire Thornton',
     propertyImage:
       'photo-1571896349842',
@@ -1762,7 +1762,7 @@ export const initialPartners: PartnerState[] = [
   ...palaceGrandBase({
     id: 'palace-grand-wide',
     parityRegime: 'wide',
-    location: 'Orlando, USA',
+    location: 'Mont Bellerive, Grand Duchy of Valence',
     contactName: 'Ethan Nkosi',
     propertyImage:
       'photo-1571003123894',
@@ -1770,7 +1770,7 @@ export const initialPartners: PartnerState[] = [
   ...palaceGrandBase({
     id: 'palace-grand-narrow',
     parityRegime: 'narrow',
-    location: 'London, UK',
+    location: 'Mont Bellerive, Grand Duchy of Valence',
     contactName: 'Ethan Nkosi',
     propertyImage:
       'photo-1566073771259',
@@ -1778,7 +1778,7 @@ export const initialPartners: PartnerState[] = [
   ...palaceGrandBase({
     id: 'palace-grand-none',
     parityRegime: 'none',
-    location: 'Marbella, Spain',
+    location: 'Mont Bellerive, Grand Duchy of Valence',
     contactName: 'Ethan Nkosi',
     propertyImage:
       'photo-1582719508461',
@@ -1793,7 +1793,7 @@ export const initialPartners: PartnerState[] = [
   ...oceanfrontBase({
     id: 'oceanfront-wide',
     parityRegime: 'wide',
-    location: 'San Diego, USA',
+    location: 'Nusa Merah, Republic of Nusantara',
     contactName: 'Priya Singh',
     propertyImage:
       'photo-1520250497591',
@@ -1801,7 +1801,7 @@ export const initialPartners: PartnerState[] = [
   ...oceanfrontBase({
     id: 'oceanfront-narrow',
     parityRegime: 'narrow',
-    location: 'Cornwall, UK',
+    location: 'Nusa Merah, Republic of Nusantara',
     contactName: 'Priya Singh',
     propertyImage:
       'photo-1533105079780',
@@ -1809,7 +1809,7 @@ export const initialPartners: PartnerState[] = [
   ...oceanfrontBase({
     id: 'oceanfront-none',
     parityRegime: 'none',
-    location: 'Málaga, Spain',
+    location: 'Nusa Merah, Republic of Nusantara',
     contactName: 'Priya Singh',
     propertyImage:
       'photo-1499793983690',
@@ -1823,7 +1823,7 @@ export const initialPartners: PartnerState[] = [
   ...emeraldPeakBase({
     id: 'emerald-peak-wide',
     parityRegime: 'wide',
-    location: 'Aspen, USA',
+    location: 'Arnesund, Kingdom of Norland',
     contactName: 'Sophia Chen',
     propertyImage:
       'photo-1566073771259',
@@ -1831,7 +1831,7 @@ export const initialPartners: PartnerState[] = [
   ...emeraldPeakBase({
     id: 'emerald-peak-narrow',
     parityRegime: 'narrow',
-    location: 'Lake District, UK',
+    location: 'Arnesund, Kingdom of Norland',
     contactName: 'Sophia Chen',
     propertyImage:
       'photo-1551882547',
@@ -1839,7 +1839,7 @@ export const initialPartners: PartnerState[] = [
   ...emeraldPeakBase({
     id: 'emerald-peak-none',
     parityRegime: 'none',
-    location: 'Sierra Nevada, Spain',
+    location: 'Arnesund, Kingdom of Norland',
     contactName: 'Sophia Chen',
     propertyImage:
       'photo-1512917774080',
@@ -1853,7 +1853,7 @@ export const initialPartners: PartnerState[] = [
   ...riversideBase({
     id: 'riverside-wide',
     parityRegime: 'wide',
-    location: 'Charleston, USA',
+    location: 'Clayton-on-Mersey, Federal State of Kenshire',
     contactName: 'Anton Müller',
     propertyImage:
       'photo-1582719508461',
@@ -1861,7 +1861,7 @@ export const initialPartners: PartnerState[] = [
   ...riversideBase({
     id: 'riverside-narrow',
     parityRegime: 'narrow',
-    location: 'Bath, UK',
+    location: 'Clayton-on-Mersey, Federal State of Kenshire',
     contactName: 'Anton Müller',
     propertyImage:
       'photo-1571896349842',
@@ -1869,7 +1869,7 @@ export const initialPartners: PartnerState[] = [
   ...riversideBase({
     id: 'riverside-none',
     parityRegime: 'none',
-    location: 'Seville, Spain',
+    location: 'Clayton-on-Mersey, Federal State of Kenshire',
     contactName: 'Anton Müller',
     propertyImage:
       'photo-1602002418082',
@@ -1884,7 +1884,7 @@ export const initialPartners: PartnerState[] = [
   ...oceanViewBase({
     id: 'ocean-view-wide',
     parityRegime: 'wide',
-    location: 'San Diego, USA',
+    location: 'San Carlos Port, United States of Marisot',
     contactName: 'Camila Ross',
     propertyImage:
       'photo-1520250497591',
@@ -1892,7 +1892,7 @@ export const initialPartners: PartnerState[] = [
   ...oceanViewBase({
     id: 'ocean-view-narrow',
     parityRegime: 'narrow',
-    location: 'Brighton, UK',
+    location: 'San Carlos Port, United States of Marisot',
     contactName: 'Camila Ross',
     propertyImage:
       'photo-1502920917128',
@@ -1900,21 +1900,21 @@ export const initialPartners: PartnerState[] = [
   ...oceanViewBase({
     id: 'ocean-view-none',
     parityRegime: 'none',
-    location: 'Alicante, Spain',
+    location: 'San Carlos Port, United States of Marisot',
     contactName: 'Camila Ross',
     propertyImage:
       'photo-1533105079780',
   }),
 
   // ── Silver Horizon Resort (SME Round 2 priority, all three regimes) ──
-  // Key OTA Competitiveness Gap - Expedia undercutting via margin cuts
+  // Key OTA Competitiveness Gap - Key OTA undercutting via margin cuts
   // on the International and Family segments. Strong platform demand but
   // ABRN -32% YoY. Objection: Competitive Aggression + Same Net Mindset
   // + Family Ready. Retires Velvet Sky as the R2 priority.
   ...silverHorizonBase({
     id: 'silver-horizon-wide',
     parityRegime: 'wide',
-    location: 'Orlando, USA',
+    location: 'Santa Delmar, Republic of Valora',
     contactName: 'Chloe Davies',
     propertyImage:
       'photo-1512917774080',
@@ -1922,7 +1922,7 @@ export const initialPartners: PartnerState[] = [
   ...silverHorizonBase({
     id: 'silver-horizon-narrow',
     parityRegime: 'narrow',
-    location: 'Lake District, UK',
+    location: 'Santa Delmar, Republic of Valora',
     contactName: 'Chloe Davies',
     propertyImage:
       'photo-1499793983690',
@@ -1930,7 +1930,7 @@ export const initialPartners: PartnerState[] = [
   ...silverHorizonBase({
     id: 'silver-horizon-none',
     parityRegime: 'none',
-    location: 'Costa Brava, Spain',
+    location: 'Santa Delmar, Republic of Valora',
     contactName: 'Chloe Davies',
     propertyImage:
       'photo-1540541338287',
@@ -1945,7 +1945,7 @@ export const initialPartners: PartnerState[] = [
   ...royalCrestBase({
     id: 'royal-crest-wide',
     parityRegime: 'wide',
-    location: 'Miami Beach, USA',
+    location: 'West Haven, Republic of Alden',
     contactName: "Liam O'Connell",
     propertyImage:
       'photo-1566073771259',
@@ -1953,7 +1953,7 @@ export const initialPartners: PartnerState[] = [
   ...royalCrestBase({
     id: 'royal-crest-narrow',
     parityRegime: 'narrow',
-    location: 'Cotswolds, UK',
+    location: 'West Haven, Republic of Alden',
     contactName: "Liam O'Connell",
     propertyImage:
       'photo-1551882547',
@@ -1961,84 +1961,82 @@ export const initialPartners: PartnerState[] = [
   ...royalCrestBase({
     id: 'royal-crest-none',
     parityRegime: 'none',
-    location: 'Costa del Sol, Spain',
+    location: 'West Haven, Republic of Alden',
     contactName: "Liam O'Connell",
     propertyImage:
       'photo-1520250497591',
   }),
 
-  // ── Crystal Water Resort (Wide Parity / Miami) ──
+  // ── Crystal Water Resort (Wide Parity) ──
   // SME-approved R1 priority - Brand.com Competitiveness Gap caused
   // by Sarah's promotional rate on her direct brand site undercutting
   // Booking.com. Same hotel brand + contact (Sarah Bennett) shows up
   // in all three regime variants - only location, parityRegime, the
   // property image, and the partner id differ. Data sourced from SME
-  // spreadsheet row 9. Country groupings (Spain / UK / US for No /
-  // Narrow / Wide) match the rest of the regime's portfolio so the
-  // tester reads a single market per regime.
+  // spreadsheet row 9. Location is fictional and regime-neutral (it
+  // does not signal a parity regime).
   ...crystalWaterBase({
     id: 'crystal-water-wide',
     parityRegime: 'wide',
-    location: 'Miami Beach, USA',
+    location: 'Valdecosta, Republic of Marenza',
     contactName: 'Sarah Mitchell',
     propertyImage:
       'photo-1582719508461',
   }),
 
-  // ── Crystal Water Resort (Narrow Parity / Cornwall) ──
+  // ── Crystal Water Resort (Narrow Parity) ──
   ...crystalWaterBase({
     id: 'crystal-water-narrow',
     parityRegime: 'narrow',
-    location: 'Cornwall, UK',
+    location: 'Valdecosta, Republic of Marenza',
     contactName: 'Sarah Bennett',
     propertyImage:
       'photo-1571896349842',
   }),
 
-  // ── Crystal Water Resort (No Parity / Marbella) ──
+  // ── Crystal Water Resort (No Parity) ──
   // The No-Parity R1 priority partner today.
   ...crystalWaterBase({
     id: 'crystal-water-none',
     parityRegime: 'none',
-    location: 'Marbella, Spain',
+    location: 'Valdecosta, Republic of Marenza',
     contactName: 'Sarah Beltrán',
     propertyImage:
       'photo-1602002418082',
   }),
 
-  // ── Velvet Sky Boutique Hotel (Wide Parity / New York) ──
+  // ── Velvet Sky Boutique Hotel (Wide Parity) ──
   // SME-approved R2 priority - Brand.com Competitiveness Gap caused
   // by John's aggressive public discounting on his direct brand
   // site. Same hotel brand + contact (John Whitford) across all
   // three regime variants - only location, parityRegime, the
   // property image, and the partner id differ. Data sourced from
-  // SME spreadsheet row 34. Country groupings match the rest of
-  // the regime's portfolio (Spain / UK / US for No / Narrow / Wide).
+  // SME spreadsheet row 34. Location is fictional and regime-neutral.
   ...velvetSkyBase({
     id: 'velvet-sky-wide',
     parityRegime: 'wide',
-    location: 'New York, USA',
+    location: 'Highmoor, Kingdom of Estland',
     contactName: 'John Whitfield',
     propertyImage:
       'photo-1566073771259',
   }),
 
-  // ── Velvet Sky Boutique Hotel (Narrow Parity / Edinburgh) ──
+  // ── Velvet Sky Boutique Hotel (Narrow Parity) ──
   ...velvetSkyBase({
     id: 'velvet-sky-narrow',
     parityRegime: 'narrow',
-    location: 'Edinburgh, UK',
+    location: 'Highmoor, Kingdom of Estland',
     contactName: 'John Whitford',
     propertyImage:
       'photo-1568084680786',
   }),
 
-  // ── Velvet Sky Boutique Hotel (No Parity / Madrid) ──
+  // ── Velvet Sky Boutique Hotel (No Parity) ──
   // The No-Parity R2 priority partner today.
   ...velvetSkyBase({
     id: 'velvet-sky-none',
     parityRegime: 'none',
-    location: 'Madrid, Spain',
+    location: 'Highmoor, Kingdom of Estland',
     contactName: 'John Vela',
     propertyImage:
       'photo-1570214476695',
@@ -2048,22 +2046,22 @@ export const initialPartners: PartnerState[] = [
   // Healthy Key OTA gap profile (Bucket 3, Lose Price 35%). Data
   // mapped from SME spreadsheet Key OTA sheet row 14 (White Cliffs
   // Hotel) with a made-up partner name. Reads as not the priority
-  // vs Velvet Sky Boutique Hotel at R2. Country grouped per regime:
-  // Spain (No) / UK (Narrow) / US (Wide). Narrow + Wide variants
+  // vs Velvet Sky Boutique Hotel at R2. Locations are fictional and
+  // regime-neutral. Narrow + Wide variants
   // alias back to the base `raven-inn` for conversation + baseline
   // lookups via the regime-suffix fallback.
-  ...ravenInnBase({ id: 'raven-inn', parityRegime: 'none', location: 'Valencia, Spain', contactName: 'Emily Castro' }),
-  ...ravenInnBase({ id: 'raven-inn-narrow', parityRegime: 'narrow', location: 'Bath, UK', contactName: 'Emily Carter' }),
-  ...ravenInnBase({ id: 'raven-inn-wide', parityRegime: 'wide', location: 'Boston, USA', contactName: 'Emily Carter' }),
+  ...ravenInnBase({ id: 'raven-inn', parityRegime: 'none', location: 'Thornwick, Duchy of Brammark', contactName: 'Emily Castro' }),
+  ...ravenInnBase({ id: 'raven-inn-narrow', parityRegime: 'narrow', location: 'Thornwick, Duchy of Brammark', contactName: 'Emily Carter' }),
+  ...ravenInnBase({ id: 'raven-inn-wide', parityRegime: 'wide', location: 'Thornwick, Duchy of Brammark', contactName: 'Emily Carter' }),
 
   // ── Driftwood Bay Resort - R2 distractor across all three regimes ──
   // Moderate Brand gap profile (Bucket 4, eRPD 3.4%). Data mapped
   // from SME spreadsheet mix sheet row 43 (The Oasis Palms Resort)
   // with a made-up partner name. Reads as not the priority vs
-  // Velvet Sky Boutique Hotel at R2. Country grouped per regime.
-  ...driftwoodBayBase({ id: 'driftwood-bay', parityRegime: 'none', location: 'Mallorca, Spain', contactName: 'Daniel Cruz' }),
-  ...driftwoodBayBase({ id: 'driftwood-bay-narrow', parityRegime: 'narrow', location: 'Brighton, UK', contactName: 'Daniel Crawford' }),
-  ...driftwoodBayBase({ id: 'driftwood-bay-wide', parityRegime: 'wide', location: 'Newport Beach, USA', contactName: 'Daniel Cruz' }),
+  // Velvet Sky Boutique Hotel at R2. Locations are fictional and regime-neutral.
+  ...driftwoodBayBase({ id: 'driftwood-bay', parityRegime: 'none', location: 'Coralport, Republic of Sarabaya', contactName: 'Daniel Cruz' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay-narrow', parityRegime: 'narrow', location: 'Coralport, Republic of Sarabaya', contactName: 'Daniel Crawford' }),
+  ...driftwoodBayBase({ id: 'driftwood-bay-wide', parityRegime: 'wide', location: 'Coralport, Republic of Sarabaya', contactName: 'Daniel Cruz' }),
 
   // ── Marina - Boutique City Hotel (Blue/Thinker) ──
   // Three regime variants. The conversations / persona hints / per-
@@ -2072,9 +2070,9 @@ export const initialPartners: PartnerState[] = [
   // suffix alias fallback in getConversationTree / getPartnerBaseline
   // / getPersonaHint. Contact + property name stay constant; only
   // location, parityRegime, and id differ across variants.
-  ...marinaBase({ id: 'marina', parityRegime: 'none', location: 'Madrid, Spain', contactName: 'Marina Alvarez' }),
-  ...marinaBase({ id: 'marina-narrow', parityRegime: 'narrow', location: 'London, UK', contactName: 'Marina Ashworth' }),
-  ...marinaBase({ id: 'marina-wide', parityRegime: 'wide', location: 'New York, USA', contactName: 'Marina Brown' }),
+  ...marinaBase({ id: 'marina', parityRegime: 'none', location: 'Solenne, Republic of Casteaux', contactName: 'Marina Alvarez' }),
+  ...marinaBase({ id: 'marina-narrow', parityRegime: 'narrow', location: 'Solenne, Republic of Casteaux', contactName: 'Marina Ashworth' }),
+  ...marinaBase({ id: 'marina-wide', parityRegime: 'wide', location: 'Solenne, Republic of Casteaux', contactName: 'Marina Brown' }),
 
   // ── The Noble Falcon Inn (SME Round 10 priority, all three regimes) ──
   // The final Level 1 round and Noble Falcon's true home (Sheet 7 places
@@ -2086,7 +2084,7 @@ export const initialPartners: PartnerState[] = [
   ...nobleFalconBase({
     id: 'noble-falcon-wide',
     parityRegime: 'wide',
-    location: 'New York, USA',
+    location: 'Port Al-Qasira, Emirate of Qasira',
     contactName: 'Adam Cole',
     propertyImage:
       'photo-1542314831',
@@ -2094,7 +2092,7 @@ export const initialPartners: PartnerState[] = [
   ...nobleFalconBase({
     id: 'noble-falcon-narrow',
     parityRegime: 'narrow',
-    location: 'London, UK',
+    location: 'Port Al-Qasira, Emirate of Qasira',
     contactName: 'Adam Cole',
     propertyImage:
       'photo-1455587734955',
@@ -2102,7 +2100,7 @@ export const initialPartners: PartnerState[] = [
   ...nobleFalconBase({
     id: 'noble-falcon-none',
     parityRegime: 'none',
-    location: 'Seville, Spain',
+    location: 'Port Al-Qasira, Emirate of Qasira',
     contactName: 'Adam Cole',
     propertyImage:
       'photo-1551918120',
@@ -2110,11 +2108,11 @@ export const initialPartners: PartnerState[] = [
 
   // ── Carlos - City Apartment Complex - distractor across all regimes ──
   // Surface-healthy KPIs at R1 with a misconfigured Country Rate
-  // hiding in the discount list (the R3 trap). Country grouped per
-  // regime; Narrow + Wide alias back to `carlos` for trees/baselines.
-  ...carlosBase({ id: 'carlos', parityRegime: 'none', location: 'Barcelona, Spain', contactName: 'Carlos Rivera' }),
-  ...carlosBase({ id: 'carlos-narrow', parityRegime: 'narrow', location: 'Manchester, UK', contactName: 'Carlos Reeves' }),
-  ...carlosBase({ id: 'carlos-wide', parityRegime: 'wide', location: 'Los Angeles, USA', contactName: 'Carlos Rivera' }),
+  // hiding in the discount list (the R3 trap). Locations are fictional
+  // and regime-neutral; Narrow + Wide alias back to `carlos` for trees/baselines.
+  ...carlosBase({ id: 'carlos', parityRegime: 'none', location: 'Puerto Vialta, Republic of Andira', contactName: 'Carlos Rivera' }),
+  ...carlosBase({ id: 'carlos-narrow', parityRegime: 'narrow', location: 'Puerto Vialta, Republic of Andira', contactName: 'Carlos Reeves' }),
+  ...carlosBase({ id: 'carlos-wide', parityRegime: 'wide', location: 'Puerto Vialta, Republic of Andira', contactName: 'Carlos Rivera' }),
 
   // ── Cross-Regional (KAM) partner companies ──────────────────────────
   // The ten lead hotels reframed as their parent partner companies for
@@ -2126,44 +2124,44 @@ export const initialPartners: PartnerState[] = [
   // roster (same SCORM debt as the rest - swap to bundled WebP before
   // the final package).
   ...withKamPills(
-    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: "Liam O'Connell", propertyImage: 'photo-1566073771259' }),
-    { companyName: 'Northumbrian Quays Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'London', numberOfProperties: 26 },
+    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'West Haven, Republic of Alden', contactName: "Liam O'Connell", propertyImage: 'photo-1566073771259' }),
+    { companyName: 'Alden Harbour Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'Republic of Alden', numberOfProperties: 26 },
   ),
   ...withKamPills(
-    silverHorizonBase({ id: 'silver-horizon-cross-regional', parityRegime: 'wide', location: 'Costa Brava, Spain', contactName: 'Chloe Davies', propertyImage: 'photo-1512917774080' }),
-    { companyName: 'Hawkesbury Hotel Investments', partnerType: 'Ownership Group', hqLocation: 'Spain', numberOfProperties: 66 },
+    silverHorizonBase({ id: 'silver-horizon-cross-regional', parityRegime: 'wide', location: 'Santa Delmar, Republic of Valora', contactName: 'Chloe Davies', propertyImage: 'photo-1512917774080' }),
+    { companyName: 'Valora Bay Hotel Investments', partnerType: 'Ownership Group', hqLocation: 'Republic of Valora', numberOfProperties: 66 },
   ),
   ...withKamPills(
-    oceanViewBase({ id: 'ocean-view-cross-regional', parityRegime: 'narrow', location: 'Athens, Greece', contactName: 'Camila Ross', propertyImage: 'photo-1520250497591' }),
-    { companyName: 'Attica Harbour Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'Athens', numberOfProperties: 180 },
+    oceanViewBase({ id: 'ocean-view-cross-regional', parityRegime: 'narrow', location: 'San Carlos Port, United States of Marisot', contactName: 'Camila Ross', propertyImage: 'photo-1520250497591' }),
+    { companyName: 'Marisot Harbour Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'United States of Marisot', numberOfProperties: 180 },
   ),
   ...withKamPills(
-    riversideBase({ id: 'riverside-cross-regional', parityRegime: 'none', location: 'Singapore', contactName: 'Anton Müller', propertyImage: 'photo-1582719508461' }),
-    { companyName: 'Golf + Leisure Clubs & Rental', partnerType: 'Hotel Management Company', hqLocation: 'Singapore', numberOfProperties: 54 },
+    riversideBase({ id: 'riverside-cross-regional', parityRegime: 'none', location: 'Clayton-on-Mersey, Federal State of Kenshire', contactName: 'Anton Müller', propertyImage: 'photo-1582719508461' }),
+    { companyName: 'Kenshire Golf & Leisure Group', partnerType: 'Hotel Management Company', hqLocation: 'Federal State of Kenshire', numberOfProperties: 54 },
   ),
   ...withKamPills(
-    emeraldPeakBase({ id: 'emerald-peak-cross-regional', parityRegime: 'narrow', location: 'Delhi, India', contactName: 'Sophia Chen', propertyImage: 'photo-1499793983690' }),
-    { companyName: 'Aravalli Hotels', partnerType: 'Managed Chain', hqLocation: 'Delhi', numberOfProperties: 1850 },
+    emeraldPeakBase({ id: 'emerald-peak-cross-regional', parityRegime: 'narrow', location: 'Arnesund, Kingdom of Norland', contactName: 'Sophia Chen', propertyImage: 'photo-1499793983690' }),
+    { companyName: 'Norland Highland Hotels', partnerType: 'Managed Chain', hqLocation: 'Kingdom of Norland', numberOfProperties: 1850 },
   ),
   ...withKamPills(
-    oceanfrontBase({ id: 'oceanfront-cross-regional', parityRegime: 'wide', location: 'Amsterdam, Netherlands', contactName: 'Priya Singh', propertyImage: 'photo-1540541338287' }),
-    { companyName: 'Marlow & Keene Hotels', partnerType: 'Managed Chain', hqLocation: 'Amsterdam', numberOfProperties: 997 },
+    oceanfrontBase({ id: 'oceanfront-cross-regional', parityRegime: 'wide', location: 'Nusa Merah, Republic of Nusantara', contactName: 'Priya Singh', propertyImage: 'photo-1540541338287' }),
+    { companyName: 'Nusantara Coast Hotels', partnerType: 'Managed Chain', hqLocation: 'Republic of Nusantara', numberOfProperties: 997 },
   ),
   ...withKamPills(
-    palaceGrandBase({ id: 'palace-grand-cross-regional', parityRegime: 'none', location: 'New York, USA', contactName: 'Ethan Nkosi', propertyImage: 'photo-1571003123894' }),
-    { companyName: 'Thames Hospitality Group', partnerType: 'Managed Chain', hqLocation: 'New York', numberOfProperties: 22 },
+    palaceGrandBase({ id: 'palace-grand-cross-regional', parityRegime: 'none', location: 'Mont Bellerive, Grand Duchy of Valence', contactName: 'Ethan Nkosi', propertyImage: 'photo-1571003123894' }),
+    { companyName: 'Bellerive Hospitality Group', partnerType: 'Managed Chain', hqLocation: 'Grand Duchy of Valence', numberOfProperties: 22 },
   ),
   ...withKamPills(
-    hiddenValleyBase({ id: 'hidden-valley-cross-regional', parityRegime: 'narrow', location: 'Rio de Janeiro, Brazil', contactName: 'Claire Thornton', propertyImage: 'photo-1596436889106' }),
-    { companyName: 'Valle do Paraiba Managed Hotels', partnerType: 'Managed Chain', hqLocation: 'Rio de Janeiro', numberOfProperties: 47 },
+    hiddenValleyBase({ id: 'hidden-valley-cross-regional', parityRegime: 'narrow', location: 'Altenstrad, Federal Republic of Eldon', contactName: 'Claire Thornton', propertyImage: 'photo-1596436889106' }),
+    { companyName: 'Eldon Valley Managed Hotels', partnerType: 'Managed Chain', hqLocation: 'Federal Republic of Eldon', numberOfProperties: 47 },
   ),
   ...withKamPills(
-    loftLivingBase({ id: 'loft-living-cross-regional', parityRegime: 'wide', location: 'London, UK', contactName: 'Lucas Silva', propertyImage: 'photo-1502672260266' }),
-    { companyName: 'Midtown River Ownership Group', partnerType: 'Ownership Group', hqLocation: 'London', numberOfProperties: 819 },
+    loftLivingBase({ id: 'loft-living-cross-regional', parityRegime: 'wide', location: 'Kurokawa-Shi, State of Shinano', contactName: 'Lucas Silva', propertyImage: 'photo-1502672260266' }),
+    { companyName: 'Shinano River Ownership Group', partnerType: 'Ownership Group', hqLocation: 'State of Shinano', numberOfProperties: 819 },
   ),
   ...withKamPills(
-    nobleFalconBase({ id: 'noble-falcon-cross-regional', parityRegime: 'none', location: 'Mexico City, Mexico', contactName: 'Adam Cole', propertyImage: 'photo-1542314831' }),
-    { companyName: 'Cuajimalpa Highlands Hospitality Group', partnerType: 'Ownership Group', hqLocation: 'Mexico', numberOfProperties: 25 },
+    nobleFalconBase({ id: 'noble-falcon-cross-regional', parityRegime: 'none', location: 'Port Al-Qasira, Emirate of Qasira', contactName: 'Adam Cole', propertyImage: 'photo-1542314831' }),
+    { companyName: 'Qasira Highlands Hospitality Group', partnerType: 'Ownership Group', hqLocation: 'Emirate of Qasira', numberOfProperties: 25 },
   ),
 
 ];
@@ -2191,7 +2189,7 @@ export const pendingPartners: PartnerState[] = [
       propertyName: 'Marston House',
       propertyType: 'Boutique Hotel',
       roomCount: 60,
-      location: 'York, England',
+      location: 'Ashcombe, Kingdom of Wessmark',
       parityRegime: 'none',
       avatar: 'JM',
       propertyImage:
@@ -2211,7 +2209,7 @@ export const pendingPartners: PartnerState[] = [
       activeScenarios: 2,
       competitor: 'brand',
       // Claude-authored Partner Value (2025 ABRN). Small-to-medium
-      // boutique in York; sized to sit below Crystal Water's 6061
+      // small-to-medium boutique; sized to sit below Crystal Water's 6061
       // if John ever comes back to the R1 slot.
       partnerValueAbrn: 3800,
       experiencedRPD: 42,
@@ -2253,7 +2251,7 @@ export const pendingPartners: PartnerState[] = [
       propertyName: 'Aegean Grand Resort & Spa',
       propertyType: 'Large Resort Hotel',
       roomCount: 180,
-      location: 'Kos, Greece',
+      location: 'Kalithnos, Republic of Aegora',
       parityRegime: 'none',
       avatar: 'SP',
       propertyImage:
@@ -2271,7 +2269,7 @@ export const pendingPartners: PartnerState[] = [
       rpdLoyal: 14.2,
       losePricePublic: 96,
       activeScenarios: 3,
-      competitor: 'expedia',
+      competitor: 'keyota',
       // Claude-authored Partner Value (2025 ABRN). Large 180-room
       // Greek resort with high volume; sized above Noble Falcon's
       // 13957 to reflect the higher room count.
@@ -2305,7 +2303,7 @@ export const pendingPartners: PartnerState[] = [
       propertyName: 'Meadow Lane Guesthouse',
       propertyType: 'Country Guesthouse',
       roomCount: 8,
-      location: 'Cotswolds, England',
+      location: 'Elderfield, Duchy of Harlen',
       parityRegime: 'narrow',
       avatar: 'HW',
       propertyImage: 'photo-1510414842594',
@@ -2356,7 +2354,7 @@ export const pendingPartners: PartnerState[] = [
       propertyName: 'The Grand Residency',
       propertyType: 'Budget Hotel Chain',
       roomCount: 120,
-      location: 'Mumbai, India',
+      location: 'Chandrapur, Republic of Bharati',
       parityRegime: 'wide',
       avatar: 'PS',
       propertyImage: 'photo-1455587734955',
@@ -2373,7 +2371,7 @@ export const pendingPartners: PartnerState[] = [
       rpdLoyal: 10.2,
       losePricePublic: 88,
       activeScenarios: 2,
-      competitor: 'expedia',
+      competitor: 'keyota',
       // Claude-authored Partner Value (2025 ABRN). Budget chain
       // property with strong volume; sized around the larger end
       // of the distractor pool.
@@ -2407,7 +2405,7 @@ export const pendingPartners: PartnerState[] = [
       propertyName: 'Ryokan Komorebi',
       propertyType: 'Luxury Ryokan',
       roomCount: 12,
-      location: 'Kyoto, Japan',
+      location: 'Hoshimura, State of Yamato',
       parityRegime: 'narrow',
       avatar: 'YT',
       propertyImage: 'photo-1542640244',
@@ -2424,7 +2422,7 @@ export const pendingPartners: PartnerState[] = [
       rpdLoyal: 4.5,
       losePricePublic: 64,
       activeScenarios: 1,
-      competitor: 'expedia',
+      competitor: 'keyota',
       // Claude-authored Partner Value (2025 ABRN). Small luxury
       // ryokan with low room count and premium positioning; sized
       // low to reflect boutique scale rather than mass volume.

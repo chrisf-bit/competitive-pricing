@@ -10,7 +10,7 @@
  * Sourced from KPI spec shared by Chris on 2026-05-08.
  */
 
-export type CompetitorTag = 'brand' | 'expedia';
+export type CompetitorTag = 'brand' | 'keyota';
 
 export interface SamplePartnerRow {
   id: string;
@@ -80,7 +80,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     rpdLoyal: 0.6,
     losePricePublic: 93,
     activeScenarios: 3,
-    competitor: 'expedia',
+    competitor: 'keyota',
     scenarios: {
       family21: false,
       mdot: true,
@@ -126,7 +126,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     rpdLoyal: 14.7,
     losePricePublic: 100,
     activeScenarios: 1,
-    competitor: 'expedia',
+    competitor: 'keyota',
     scenarios: {
       family21: false,
       mdot: false,
@@ -172,7 +172,7 @@ export const samplePartnerData: SamplePartnerRow[] = [
     rpdLoyal: 13.0,
     losePricePublic: 84,
     activeScenarios: 1,
-    competitor: 'expedia',
+    competitor: 'keyota',
     scenarios: {
       family21: false,
       mdot: true,

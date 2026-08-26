@@ -13,7 +13,7 @@ import {
  *
  * Source: SME "Round 2" doc, Conversation 2 (Narrow Parity). In a
  * Narrow market the AM may NOT ask Chloe to price against other OTAs
- * (Expedia); the only compliant alignment ask is with her Brand.com /
+ * (a Key OTA); the only compliant alignment ask is with her Brand.com /
  * direct website. Family availability is framed as a billboard that
  * feeds her direct channel; international demand is captured via
  * Country Rates. The risky distractors break the other-OTA ban.
@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I've been reviewing your portfolio. Forward volume for the next three months is strong, but room nights in the last 30 days are down 32% year-on-year. Have you thought about what's behind it, and how that trend hits your revenue goals for the quarter?",
     partnerResponse:
-      "Honestly, I'm focused on our direct channel right now. Expedia is just cutting margins to look more competitive, but I give everyone the same rates. If Booking is more expensive, that's because you won't lower your commission.",
+      "Honestly, I'm focused on our direct channel right now. The Key OTA is just cutting margins to look more competitive, but I give everyone the same rates. If Booking is more expensive, that's because you won't lower your commission.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -107,14 +107,14 @@ const step2Options: BranchingOption[] = [
     trustChange: -6,
   },
   {
-    id: 'sh-r2-narrow-step2-beat-expedia',
-    label: 'Ask her to price below Expedia here',
+    id: 'sh-r2-narrow-step2-beat-keyota',
+    label: 'Ask her to price below the Key OTA here',
     description:
-      "Ask her to make sure Booking.com isn't higher than Expedia. In a Narrow market you cannot ask a partner to price against other OTAs - only to align with their Brand.com.",
+      "Ask her to make sure Booking.com isn't higher than the Key OTA. In a Narrow market you cannot ask a partner to price against other OTAs - only to align with their Brand.com.",
     playerDialogue:
-      "The fix is simple: make sure your price here isn't higher than Expedia's - match them on our platform and the gap closes.",
+      "The fix is simple: make sure your price here isn't higher than the Key OTA's - match them on our platform and the gap closes.",
     partnerResponse:
-      "You can't ask me to price against Expedia here. That's not how this market works.",
+      "You can't ask me to price against the Key OTA here. That's not how this market works.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
     compliance: 'risky',
@@ -126,7 +126,7 @@ const step2: BranchingStep = {
   id: 'same-net',
   label: 'Handle Same Net; align with Brand.com',
   partnerPrompt:
-    "Honestly, I'm focused on our direct channel right now. Expedia is just cutting margins to look more competitive, but I give everyone the same rates. If Booking is more expensive, that's because you won't lower your commission.",
+    "Honestly, I'm focused on our direct channel right now. The Key OTA is just cutting margins to look more competitive, but I give everyone the same rates. If Booking is more expensive, that's because you won't lower your commission.",
   options: step2Options,
 };
 
@@ -163,14 +163,14 @@ const step3Options: BranchingOption[] = [
     trustChange: -5,
   },
   {
-    id: 'sh-r2-narrow-step3-match-expedia-pull',
-    label: 'Point at Expedia and tell her to pull inventory',
+    id: 'sh-r2-narrow-step3-match-keyota-pull',
+    label: 'Point at the Key OTA and tell her to pull inventory',
     description:
-      "Tell her the family rooms are cheaper on Expedia, to match that here and pull them from Expedia. Pricing against another OTA and directing her channel mix are both off-limits in a Narrow market.",
+      "Tell her the family rooms are cheaper on the Key OTA, to match that here and pull them from the Key OTA. Pricing against another OTA and directing her channel mix are both off-limits in a Narrow market.",
     playerDialogue:
-      "Your family rooms are cheaper on Expedia - match that here and pull them from Expedia so we get the segment.",
+      "Your family rooms are cheaper on the Key OTA - match that here and pull them from the Key OTA so we get the segment.",
     partnerResponse:
-      "Pricing against Expedia and telling me to pull inventory is off the table in this market.",
+      "Pricing against the Key OTA and telling me to pull inventory is off the table in this market.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
     compliance: 'risky',
@@ -275,14 +275,14 @@ const step5Options: BranchingOption[] = [
     trustChange: -4,
   },
   {
-    id: 'sh-r2-narrow-step5-beat-expedia',
-    label: 'Add "be cheaper than Expedia" and a blanket drop',
+    id: 'sh-r2-narrow-step5-beat-keyota',
+    label: 'Add "be cheaper than the Key OTA" and a blanket drop',
     description:
-      "Overreach - price against Expedia for international and drop public rates to guarantee it. Other-OTA pricing and blanket discounting are both off the table in a Narrow market.",
+      "Overreach - price against the Key OTA for international and drop public rates to guarantee it. Other-OTA pricing and blanket discounting are both off the table in a Narrow market.",
     playerDialogue:
-      "And let's make sure you're cheaper than Expedia for international travelers - drop your public rates to guarantee it.",
+      "And let's make sure you're cheaper than the Key OTA for international travelers - drop your public rates to guarantee it.",
     partnerResponse:
-      "Pricing against Expedia and blanket discounting - neither is on the table. Let's stick to my direct alignment.",
+      "Pricing against the Key OTA and blanket discounting - neither is on the table. Let's stick to my direct alignment.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 3,
     compliance: 'risky',

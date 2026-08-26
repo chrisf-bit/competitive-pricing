@@ -164,7 +164,7 @@ function carlosL2DecoyMetrics(): PartnerMetrics {
     losePricePublic: 33,
     activeScenarios: 2,
     activeScenarioNames: ['Brand.com', 'Country'],
-    competitor: 'expedia',
+    competitor: 'keyota',
     secondaryMetrics: {
       last30dAbrn: { value: 640, deltaPct: 3 },
       last30dRoomNights: { value: 410, deltaPct: 3 },
