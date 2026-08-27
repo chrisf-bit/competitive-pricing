@@ -1,4 +1,4 @@
-import { BarChart3, HelpCircle } from 'lucide-react';
+import { BarChart3, HelpCircle, LayoutGrid } from 'lucide-react';
 import type { GameScreen } from '../types';
 
 interface HeaderProps {
@@ -6,6 +6,8 @@ interface HeaderProps {
   screen: GameScreen;
   /** Optional callback to re-open the partner-sim tutorial. */
   onTutorial?: () => void;
+  /** Optional callback to leave the current round and return to the hub. */
+  onRoundSelect?: () => void;
 }
 
 // Capped at the contiguous max of SME-approved priority content.
@@ -22,7 +24,7 @@ const TOTAL_ROUNDS = 20;
 // but drop the round dots + counter.
 const HIDE_ROUND_TRACKER: GameScreen[] = ['debrief', 'round-select'];
 
-export function Header({ currentRound, screen, onTutorial }: HeaderProps) {
+export function Header({ currentRound, screen, onTutorial, onRoundSelect }: HeaderProps) {
   const showRoundTracker = !HIDE_ROUND_TRACKER.includes(screen);
   return (
     <header
@@ -99,6 +101,39 @@ export function Header({ currentRound, screen, onTutorial }: HeaderProps) {
             Round {currentRound} of {TOTAL_ROUNDS}
           </span>
         </div>
+        )}
+
+        {onRoundSelect && showRoundTracker && (
+          <button
+            onClick={onRoundSelect}
+            aria-label="Return to Round Select"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 6,
+              height: 32,
+              padding: '0 12px',
+              borderRadius: 8,
+              background: 'rgba(255,255,255,0.06)',
+              border: '1px solid rgba(255,255,255,0.10)',
+              color: 'rgba(255,255,255,0.75)',
+              fontSize: 12.5,
+              fontWeight: 600,
+              cursor: 'pointer',
+              transition: 'background 0.12s ease, color 0.12s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.12)';
+              e.currentTarget.style.color = 'var(--white)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255,255,255,0.06)';
+              e.currentTarget.style.color = 'rgba(255,255,255,0.75)';
+            }}
+          >
+            <LayoutGrid size={15} />
+            Round Select
+          </button>
         )}
 
         {onTutorial && (

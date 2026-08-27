@@ -675,11 +675,38 @@ function ActivityCard({
                         lineHeight: 1.45,
                       }}
                     >
-                      You marked this incorrectly. Hit Retry to have another go.
+                      {canRetry
+                        ? 'You marked this incorrectly. Use the Retry button below to redo the questions you missed.'
+                        : 'You marked this incorrectly, though you passed this activity overall.'}
                     </div>
                   </div>
                 );
               })}
+              {canRetry && (
+                <button
+                  onClick={onRetry}
+                  style={{
+                    marginTop: 12,
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    padding: '11px 14px',
+                    background: 'var(--brand-yellow)',
+                    color: 'var(--brand-navy)',
+                    border: 'none',
+                    borderRadius: 8,
+                    fontSize: 13.5,
+                    fontWeight: 800,
+                    cursor: 'pointer',
+                    boxShadow: '0 4px 12px rgba(254, 186, 2, 0.25)',
+                  }}
+                >
+                  <RotateCcw size={14} />
+                  Retry {activity.label}
+                </button>
+              )}
             </div>
           </motion.div>
         )}

@@ -136,6 +136,7 @@ export default function App() {
           currentRound={state.currentRound}
           screen={state.screen}
           onTutorial={() => setShowTutorial(true)}
+          onRoundSelect={() => game.goToScreen('round-select')}
         />
       )}
 
