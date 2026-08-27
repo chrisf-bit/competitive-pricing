@@ -319,6 +319,7 @@ export default function App() {
             <RoundSelectScreen
               roundStars={state.roundStars}
               onEnterRound={game.onEnterRound}
+              onViewDebrief={game.onViewDebrief}
             />
           )}
           {state.screen === 'portfolio' && (

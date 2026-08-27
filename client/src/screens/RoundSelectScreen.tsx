@@ -6,6 +6,7 @@ import {
   RotateCcw,
   Check,
   ChevronRight,
+  Award,
 } from 'lucide-react';
 import roundSelectBackdrop from '../assets/round-select-backdrop.webp';
 
@@ -29,6 +30,8 @@ const LEVEL_2_ROUNDS = Array.from({ length: 10 }, (_, i) => i + 11);
 interface RoundSelectScreenProps {
   roundStars: Record<number, 0 | 1 | 2 | 3>;
   onEnterRound: (round: number) => void;
+  /** Open the Debrief. Shown once every round has been cleared. */
+  onViewDebrief?: () => void;
 }
 
 /**
@@ -41,6 +44,7 @@ interface RoundSelectScreenProps {
 export function RoundSelectScreen({
   roundStars,
   onEnterRound,
+  onViewDebrief,
 }: RoundSelectScreenProps) {
   // "Current" is the first playable round the learner hasn't cleared
   // yet. Derived from roundStars rather than the engine's currentRound
@@ -54,6 +58,11 @@ export function RoundSelectScreen({
     (AVAILABLE_ROUNDS as readonly number[]).find(
       (r) => (roundStars[r] ?? 0) < 1,
     ) ?? null;
+
+  // Every playable round cleared -> the learner can open their debrief.
+  const journeyComplete = (AVAILABLE_ROUNDS as readonly number[]).every(
+    (r) => (roundStars[r] ?? 0) >= 1,
+  );
 
   return (
     <div
@@ -154,6 +163,31 @@ export function RoundSelectScreen({
             unlock the Level 2 series featuring OPC metrics.
           </p>
         </motion.div>
+
+        {journeyComplete && onViewDebrief && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: -12 }}>
+            <button
+              onClick={onViewDebrief}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+                padding: '11px 22px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--brand-yellow)',
+                color: 'var(--brand-navy)',
+                border: 'none',
+                fontSize: 14,
+                fontWeight: 700,
+                cursor: 'pointer',
+                boxShadow: '0 6px 18px rgba(254,186,2,0.25)',
+              }}
+            >
+              <Award size={16} />
+              View your debrief
+            </button>
+          </div>
+        )}
 
         <LevelBlock
           label="Level 1"

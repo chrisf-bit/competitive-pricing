@@ -85,6 +85,15 @@ export function useGame() {
     setState((s) => ({ ...s, screen }));
   }, []);
 
+  /**
+   * Open the Debrief from Round Select. The Debrief only renders when
+   * gameComplete is true (score is gated on it), so set the flag as we
+   * route there. Non-destructive - roundStars and progress are untouched.
+   */
+  const onViewDebrief = useCallback(() => {
+    setState((s) => ({ ...s, screen: 'debrief', gameComplete: true }));
+  }, []);
+
   const onSelectPartner = useCallback((partnerId: string) => {
     setState((s) => selectPartner(s, partnerId));
   }, []);
@@ -104,16 +113,16 @@ export function useGame() {
   /**
    * Acknowledge the conversation report and continue. In normal play
    * this advances to the next round (or debrief at game end). In
-   * Practice Mode it routes straight back to the debrief so the
-   * learner can pick another round to chase a higher star score.
+   * Practice Mode it routes back to Round Select (the hub) so replaying
+   * a completed round doesn't dump the learner on the Debrief; from the
+   * hub they can pick another round or open their debrief.
    */
   const onContinueAfterReport = useCallback(() => {
     setState((s) => {
       if (s.isPracticeMode) {
         return {
           ...s,
-          screen: 'debrief',
-          gameComplete: true,
+          screen: 'round-select',
           isPracticeMode: false,
           lastConversationGrade: null,
           conversationInProgress: null,
@@ -437,6 +446,7 @@ export function useGame() {
     onRetakeAfterReport,
     onStartPracticeRound,
     onEnterRound,
+    onViewDebrief,
     onBackToPortfolio,
     onRestart,
     onPlayAgain,
