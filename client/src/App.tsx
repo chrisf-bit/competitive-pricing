@@ -431,6 +431,10 @@ export default function App() {
               grade={state.lastConversationGrade}
               partners={state.partners}
               personaId={state.learnerProfile.archetype?.id ?? null}
+              bestStars={
+                state.roundStars[state.lastConversationGrade.round] ??
+                state.lastConversationGrade.stars
+              }
               onContinue={game.onContinueAfterReport}
               onRetake={game.onRetakeAfterReport}
             />

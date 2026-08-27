@@ -196,8 +196,10 @@ export function resetForPlayAgain(state: GameState): GameState {
       1,
     ),
     roundSummaries: [],
-    roundStars: {},
-    roundAttempts: {},
+    // Play Again preserves the learner's best round stars (and attempt
+    // counts) - a replay can only raise a score, never wipe it. Only a
+    // true reset (Splash "Reset progress" / DevNav) clears the star
+    // history via onRestart.
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
     conversationInProgress: null,

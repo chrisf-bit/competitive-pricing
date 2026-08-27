@@ -21,6 +21,13 @@ interface ConversationReportScreenProps {
    * gating work in task 4.
    */
   onRetake: () => void;
+  /**
+   * Best star rating already stored for this round (>= this attempt's
+   * stars). Drives the "your best is kept" note and keeps Continue
+   * available when the round is already passed, even if this replay
+   * attempt scored lower - a replay never lowers the achieved level.
+   */
+  bestStars: number;
 }
 
 const STYLE_STRONG_THRESHOLD = 5;
@@ -32,6 +39,7 @@ export function ConversationReportScreen({
   personaId,
   onContinue,
   onRetake,
+  bestStars,
 }: ConversationReportScreenProps) {
   const partner = partners.find((p) => p.persona.id === grade.partnerId);
   const persona = getPersonaById(personaId);
@@ -51,6 +59,9 @@ export function ConversationReportScreen({
   // portfolio data on retake.
 
   const passed = grade.stars > 0;
+  // The round counts as passed if any attempt (this one or an earlier
+  // best) cleared it. Keeps Continue available on a lower-scoring replay.
+  const roundPassed = bestStars >= 1 || passed;
   const headline = headlineFor(grade);
   const subline = sublineFor(grade);
 
@@ -205,9 +216,29 @@ export function ConversationReportScreen({
         {/* Persona retro - shown on wins and losses, hidden on 1-star passes */}
         {persona && personaRetro && <PersonaRetro persona={persona} text={personaRetro} />}
 
+        {bestStars > grade.stars && (
+          <div
+            style={{
+              marginTop: 8,
+              padding: '10px 14px',
+              background: 'rgba(254,186,2,0.10)',
+              border: '1px solid rgba(254,186,2,0.30)',
+              borderRadius: 8,
+              fontSize: 12.5,
+              color: 'var(--white)',
+              lineHeight: 1.45,
+            }}
+          >
+            This attempt earned {grade.stars}{' '}
+            {grade.stars === 1 ? 'star' : 'stars'}. Your best of {bestStars} for
+            this round is kept - a replay only ever raises your rating, never
+            lowers it.
+          </div>
+        )}
+
         {/* CTA */}
         <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
-          {passed ? (
+          {roundPassed && (
             <button
               onClick={onContinue}
               style={primaryButtonStyle()}
@@ -221,16 +252,27 @@ export function ConversationReportScreen({
               Continue
               <ChevronRight size={18} />
             </button>
-          ) : (
+          )}
+          {grade.stars === 0 && (
             <button
               onClick={onRetake}
-              style={primaryButtonStyle()}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'var(--brand-yellow-light)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'var(--brand-yellow)';
-              }}
+              style={
+                roundPassed
+                  ? {
+                      background: 'transparent',
+                      color: 'var(--white)',
+                      border: '1.5px solid rgba(255,255,255,0.25)',
+                      padding: '12px 24px',
+                      borderRadius: 'var(--radius-sm)',
+                      fontSize: 15,
+                      fontWeight: 700,
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      cursor: 'pointer',
+                    }
+                  : primaryButtonStyle()
+              }
             >
               <RotateCcw size={16} />
               Retake round
