@@ -101,7 +101,7 @@ export const issueTreePhases: IssueTreePhase[] = [
     icon: Eye,
     headline: 'What am I seeing?',
     subLabel: 'The Trigger',
-    goal: 'Identifying market and partner conditions and key pricing contributors.',
+    goal: 'Identifying market and partner conditions and key pricing opportunities or problems.',
     body:
       "The starting point. Something on Hotel Atlante has shifted - the eRPD has slipped for three weeks. Before doing anything else, you notice the signal and ask what conditions are driving it.",
     narration:

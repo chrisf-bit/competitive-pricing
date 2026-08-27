@@ -127,16 +127,6 @@ export function EmailAuditScreen({
           <div style={{ fontSize: 13.5, fontWeight: 700, lineHeight: 1.25 }}>
             {emailAudit.setupHeadline}
           </div>
-          <div
-            style={{
-              fontSize: 11.5,
-              color: 'rgba(255,255,255,0.6)',
-              lineHeight: 1.35,
-              marginTop: 2,
-            }}
-          >
-            Click each highlighted phrase to judge whether Sam was safe to say it.
-          </div>
         </div>
         <div
           style={{

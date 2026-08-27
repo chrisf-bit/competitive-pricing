@@ -398,7 +398,7 @@ export function PortfolioScreen({
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
                   {partner.discounts.filter((d) => d.status === 'active').length}/
-                  {partner.discounts.length} discounts
+                  {partner.discounts.length} pricing products active
                 </div>
               </div>
 

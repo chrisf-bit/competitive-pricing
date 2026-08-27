@@ -389,7 +389,7 @@ export function PartnerDetailScreen({
           >
             <SectionHeader
               icon={<Tag size={16} style={{ color: 'var(--white)' }} />}
-              label="Discount Products"
+              label="Products"
             />
             <DiscountProductsGrid discounts={partner.discounts} />
             <p
@@ -401,9 +401,9 @@ export function PartnerDetailScreen({
                 lineHeight: 1.45,
               }}
             >
-              Note: this is a non-exhaustive list. The products shown
-              are commonly used to drive pricing performance and are
-              part of this learning solution.
+              Note: the products shown are a selection of the commonly
+              used products to drive pricing performance and are part of
+              this learning solution.
             </p>
           </div>
 
@@ -917,8 +917,11 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           marginTop: -4,
         }}
       >
-        <Info size={12} style={{ color: 'var(--grey-400)', flexShrink: 0 }} />
-        <span>Hover any (i) icon for the metric definition.</span>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }}>
+          Hover any{' '}
+          <Info size={12} style={{ color: 'var(--grey-400)', flexShrink: 0 }} />
+          {' '}for the metric definition.
+        </span>
       </div>
 
       {/* Existing six-KPI row, kept verbatim but with inline help via
@@ -1057,10 +1060,10 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
           marginTop: -4,
         }}
       >
-        <Info size={12} style={{ color: 'var(--grey-400)', flexShrink: 0 }} />
-        <span>
-          On-platform competitiveness metrics. Hover any (i) icon for the
-          definition.
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4, flexWrap: 'wrap' }}>
+          On-platform competitiveness metrics. Hover any{' '}
+          <Info size={12} style={{ color: 'var(--grey-400)', flexShrink: 0 }} />
+          {' '}for the definition.
         </span>
       </div>
 
@@ -1492,7 +1495,7 @@ function ProfileMetaFields({
         <ProfileMetaRow
           icon={<CalendarClock size={14} style={{ color: 'var(--brand-navy)' }} />}
           metricKey="lastPricingContact"
-          value={formatDaysAgoAsDate(lastPricingContactDaysAgo)}
+          value={`${lastPricingContactDaysAgo} days ago`}
         />
       )}
       {pricingCoverageQTD !== undefined && (
@@ -1504,22 +1507,6 @@ function ProfileMetaFields({
       )}
     </div>
   );
-}
-
-/**
- * Resolve a "days ago" offset to a YYYY-MM-DD date string using the
- * current date. Anchored to local time at midnight so the value is
- * deterministic within a calendar day and only shifts across day
- * boundaries. Negative offsets clamp to today.
- */
-function formatDaysAgoAsDate(daysAgo: number): string {
-  const days = Math.max(0, Math.floor(daysAgo));
-  const now = new Date();
-  const target = new Date(now.getFullYear(), now.getMonth(), now.getDate() - days);
-  const yyyy = target.getFullYear();
-  const mm = String(target.getMonth() + 1).padStart(2, '0');
-  const dd = String(target.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
 }
 
 function ProfileMetaRow({

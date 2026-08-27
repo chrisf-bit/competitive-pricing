@@ -352,7 +352,7 @@ const noParityScenario: EmailAuditScenario = {
     },
     {
       id: 'p4',
-      text: "if your prices stay high on Booking.com than on your direct site, we'll need to lower your visibility in our results",
+      text: "if your prices stay higher on Booking.com than on your direct site, we'll need to lower your visibility in our results",
       isSafe: false,
       rationale: {
         correct:

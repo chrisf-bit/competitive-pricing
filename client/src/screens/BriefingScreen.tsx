@@ -92,10 +92,10 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             </p>
             <p style={{ margin: 0 }}>
               You'll take ownership of a portfolio of partner accounts that need your
-              judgement. In each round, one partner will need your attention most. Read the
-              signals. Decide what matters. Choose your partner actions. Have the
+              support. In each round, one partner will need your attention most. Read the
+              signals. Decide what matters. Choose the actions you will advise. Have the
               conversation. Pay attention to how each partner responds, not every situation
-              is the same, and not every partner sees the issue in the same way.
+              is the same, and not every partner has the same need.
             </p>
             <p style={{ margin: 0 }}>
               You'll work through 10 rounds of increasing complexity. Complete all 10 and

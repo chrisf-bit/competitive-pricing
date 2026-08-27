@@ -105,7 +105,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: 'This is a signal that the partner could be more competitive on Booking.com and the cause needs to be understood.',
+            text: 'This is a signal that the partner could become more competitive on Booking.com and the cause needs to be understood.',
           },
           {
             id: 'C',
@@ -119,7 +119,7 @@ export const miniScenarios: MiniScenario[] = [
       {
         id: 'diagnose',
         label: 'Diagnose',
-        prompt: 'What is the best first response to the partner?',
+        prompt: 'What is the best way to open with the partner?',
         options: [
           {
             id: 'A',
@@ -153,7 +153,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: '"Whenever we see a partner more competitive on their direct site we should push back on that gap and require them to bring their Booking.com prices in line, especially in markets where they are formally required to do so."',
+            text: '"You are more competitive on your direct site, so we need you to bring your Booking.com prices in line here, especially in markets where you are formally required to do so."',
           },
         ],
         correctOptionId: 'A',
@@ -480,7 +480,7 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: '"Your setup may be making you look uncompetitive in family searches. Let\'s fix the child and occupancy configuration first so families can find and book the rooms you already want to sell."',
+            text: '"Your setup may be making you look uncompetitive in family searches. Let\'s fix the child and occupancy configuration first so families can find and book the rooms you want to sell."',
           },
           {
             id: 'B',
@@ -504,7 +504,7 @@ export const miniScenarios: MiniScenario[] = [
         options: [
           {
             id: 'A',
-            text: 'Guide the partner to correct child policies, occupancy and capacity settings, and derived children pricing, and review cots if relevant.',
+            text: 'Guide the partner to correct child policies, occupancy and capacity settings, and derived children pricing, then review cots if relevant.',
           },
           {
             id: 'B',
