@@ -243,18 +243,18 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A10',
       prompt:
-        "A partner's eRPD has been uncompetitive for two quarters. Which OPC metric is most likely to have suffered as a direct consequence?",
+        "A partner's Search Price versus peer has been uncompetitive for two quarters. Which OPC metric is most likely to have suffered as a direct consequence?",
       options: [
         { text: 'Visibility Share', isCorrect: true },
-        { text: 'Search Price', isCorrect: false },
+        { text: 'Click Through Rate', isCorrect: false },
         { text: 'Search Month Distribution', isCorrect: false },
         { text: 'Sell Through Rate', isCorrect: false },
       ],
       followUp: {
         correct:
-          'Right. Uncompetitive eRPD pushes the property down in ranking, so it appears in fewer destination searches. Visibility Share is the direct downstream signal. Sell Through Rate would also slip as a consequence, but that\'s second-order (visibility hurts conversion hurts throughput); the direct hit is Visibility Share. Search Month Distribution is seasonality and moves independently of pricing.',
+          'Yes, because pricing on our platform, such as Search Price versus peer, is one of the determining factors in ranking - so an uncompetitive Search Price versus peer pushes the property down and Visibility Share is the direct downstream signal.',
         incorrect:
-          "It's Visibility Share. Uncompetitive eRPD pushes the property down in ranking, so it appears in fewer destination searches. Sell Through Rate would fall too as a knock-on (via visibility hurting conversion), but that's second-order; the direct hit is Visibility Share.",
+          "It's Visibility Share. The connection here is between what is shown on the front end (Search Price versus peer) and the OPC metrics to be analyzed internally: Visibility Share is impacted when a partner's Search Price versus peer is not competitive.",
       },
     },
   },
@@ -263,7 +263,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A11',
       prompt:
-        "A partner's Sell Through Rate has fallen and Unsold Rooms have climbed. Their Search Price versus peer is trending up (worsening). What's the most likely connection?",
+        "A partner's Sell Through Rate versus peer has fallen behind and Unsold Rooms have climbed. What's the most likely connection?",
       options: [
         {
           text: 'Uncompetitive pricing has reduced visibility and conversion, so less inventory clears',
@@ -273,17 +273,20 @@ export const gmScript: GMBeat[] = [
           text: 'The metrics are unrelated; supply and pricing move independently',
           isCorrect: false,
         },
-        { text: 'Sell Through Rate directly determines Search Price versus peer', isCorrect: false },
         {
-          text: 'Higher Search Price versus peer forces the partner to hold back inventory',
+          text: "The falling Sell Through Rate is what pushes the partner's prices higher, not the other way around",
+          isCorrect: false,
+        },
+        {
+          text: 'The unsold rooms are a supply choice by the partner, unrelated to their on-platform competitiveness',
           isCorrect: false,
         },
       ],
       followUp: {
         correct:
-          'Yep. A rising Search Price versus peer (worsening competitiveness) reduces the property\'s ranking and conversion. Fewer travelers see it, fewer of those who see it convert, so more inventory sits unsold at the end of the period. Sell Through Rate falls, Unsold Rooms rises. Both are supply-side symptoms of an upstream pricing problem.',
+          "The on-platform competitiveness of this partner has suffered, causing fewer travelers to see it and fewer of those who see it to convert, so more inventory sits unsold at the end of the period.",
         incorrect:
-          "The connection runs from Search Price versus peer to Visibility Share to conversion to inventory. A rising Search Price versus peer hurts ranking, so fewer travelers see the property; fewer of those convert; so more rooms sit unsold. Sell Through Rate and Unsold Rooms are downstream symptoms of the pricing problem, not independent of it.",
+          'The connection is between the Sell Through Rate versus peer and the visibility and conversion decrease suffered by that partner on our platform.',
       },
     },
   },
