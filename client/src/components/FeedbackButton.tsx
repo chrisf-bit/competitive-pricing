@@ -77,6 +77,29 @@ interface FeedbackEntry extends FeedbackContext {
 
 const BUFFER_KEY = 'rateRight:feedback:preview';
 const ENDPOINT_KEY = 'rateRight:feedbackEndpoint';
+const REVIEWER_KEY = 'rateRight:feedbackReviewer';
+
+/**
+ * The reviewer's name/email, remembered in this browser so it's asked
+ * once and then attributes every submission. Pre-SCORM the sim's
+ * playerName is the "Name_Var" default, which can't be traced back to a
+ * person - this fills that gap. It rides in the existing `learner`
+ * column, so no Apps Script change is needed.
+ */
+function getFeedbackReviewer(): string {
+  try {
+    return window.localStorage.getItem(REVIEWER_KEY) || '';
+  } catch {
+    return '';
+  }
+}
+function setFeedbackReviewer(value: string): void {
+  try {
+    window.localStorage.setItem(REVIEWER_KEY, value);
+  } catch {
+    /* localStorage unavailable - non-fatal. */
+  }
+}
 
 /**
  * Google Apps Script Web App URL that appends each submission to a Sheet.
@@ -149,6 +172,7 @@ function persistLocally(entry: FeedbackEntry) {
 export function FeedbackButton({ context }: FeedbackButtonProps) {
   const [open, setOpen] = useState(false);
   const [comment, setComment] = useState('');
+  const [identity, setIdentity] = useState(getFeedbackReviewer());
   const [submitted, setSubmitted] = useState(false);
 
   const screenLabel = SCREEN_LABELS[context.screen] ?? context.screen;
@@ -172,8 +196,14 @@ export function FeedbackButton({ context }: FeedbackButtonProps) {
   }
 
   function submit() {
+    const who = identity.trim();
+    if (who) setFeedbackReviewer(who);
     persistLocally({
       ...context,
+      // Attribute the submission to the reviewer's name/email (stored in
+      // the existing `learner` column), falling back to the sim's
+      // playerName when nothing is entered.
+      playerName: who || context.playerName,
       comment: comment.trim(),
       submittedAt: new Date().toISOString(),
     });
@@ -181,7 +211,7 @@ export function FeedbackButton({ context }: FeedbackButtonProps) {
     window.setTimeout(close, 1400);
   }
 
-  const canSubmit = comment.trim().length > 0;
+  const canSubmit = comment.trim().length > 0 && identity.trim().length > 0;
 
   return (
     <div
@@ -311,6 +341,33 @@ export function FeedbackButton({ context }: FeedbackButtonProps) {
                   ))}
                 </div>
 
+                <div
+                  style={{
+                    fontSize: 12.5,
+                    fontWeight: 600,
+                    color: 'rgba(255,255,255,0.7)',
+                    marginBottom: 8,
+                  }}
+                >
+                  Your name or email
+                </div>
+                <input
+                  value={identity}
+                  onChange={(e) => setIdentity(e.target.value)}
+                  placeholder="So we can follow up on your feedback"
+                  style={{
+                    width: '100%',
+                    background: 'rgba(255,255,255,0.06)',
+                    color: 'var(--white)',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    borderRadius: 10,
+                    padding: '9px 11px',
+                    fontSize: 13,
+                    fontFamily: 'var(--font)',
+                    boxSizing: 'border-box',
+                    marginBottom: 12,
+                  }}
+                />
                 <div
                   style={{
                     fontSize: 12.5,
