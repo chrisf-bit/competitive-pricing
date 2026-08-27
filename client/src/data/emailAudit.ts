@@ -358,7 +358,7 @@ const noParityScenario: EmailAuditScenario = {
         correct:
           "Right call. We must never suggest that uncompetitive external prices will lead to punishment, de-ranking, or loss of visibility - that's never the case in a No Parity market.",
         incorrect:
-          "This one is unsafe. We must never suggest that uncompetitive external prices will lead to punishment, de-ranking, or loss of visibility - that's never the case in a No Parity market.",
+          "This one is unsafe. We must never suggest that uncompetitive external prices will directly lead to punishment, de-ranking, or loss of visibility - that's never the case in a No Parity market.",
       },
       source: "Legal Compliance | No Parity Markets | Don't (verbatim)",
     },

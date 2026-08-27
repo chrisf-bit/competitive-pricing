@@ -263,7 +263,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A11',
       prompt:
-        "A partner's Sell Through Rate has fallen and Unsold Rooms have climbed. Their eRPD is trending up (worsening). What's the most likely connection?",
+        "A partner's Sell Through Rate has fallen and Unsold Rooms have climbed. Their Search Price versus peer is trending up (worsening). What's the most likely connection?",
       options: [
         {
           text: 'Uncompetitive pricing has reduced visibility and conversion, so less inventory clears',
@@ -273,17 +273,17 @@ export const gmScript: GMBeat[] = [
           text: 'The metrics are unrelated; supply and pricing move independently',
           isCorrect: false,
         },
-        { text: 'Sell Through Rate directly determines eRPD', isCorrect: false },
+        { text: 'Sell Through Rate directly determines Search Price versus peer', isCorrect: false },
         {
-          text: 'Higher eRPD forces the partner to hold back inventory',
+          text: 'Higher Search Price versus peer forces the partner to hold back inventory',
           isCorrect: false,
         },
       ],
       followUp: {
         correct:
-          'Yep. Rising eRPD (worsening competitiveness) reduces the property\'s ranking and conversion. Fewer travelers see it, fewer of those who see it convert, so more inventory sits unsold at the end of the period. Sell Through Rate falls, Unsold Rooms rises. Both are supply-side symptoms of an upstream pricing problem.',
+          'Yep. A rising Search Price versus peer (worsening competitiveness) reduces the property\'s ranking and conversion. Fewer travelers see it, fewer of those who see it convert, so more inventory sits unsold at the end of the period. Sell Through Rate falls, Unsold Rooms rises. Both are supply-side symptoms of an upstream pricing problem.',
         incorrect:
-          "The connection runs from eRPD to Visibility Share to conversion to inventory. Rising eRPD hurts ranking, so fewer travelers see the property; fewer of those convert; so more rooms sit unsold. Sell Through Rate and Unsold Rooms are downstream symptoms of the pricing problem, not independent of it.",
+          "The connection runs from Search Price versus peer to Visibility Share to conversion to inventory. A rising Search Price versus peer hurts ranking, so fewer travelers see the property; fewer of those convert; so more rooms sit unsold. Sell Through Rate and Unsold Rooms are downstream symptoms of the pricing problem, not independent of it.",
       },
     },
   },

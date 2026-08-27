@@ -337,7 +337,7 @@ export const miniScenarios: MiniScenario[] = [
         ],
         correctOptionId: 'A',
         correctCoaching:
-          'A public rate that climbs the moment Genius activates is the classic offset pattern - the member price is nominally discounted but the traveler sees no real saving.',
+          'A public rate that climbs the moment Genius activates is the classic offset pattern - the member price is nominally discounted but the traveler sees no real savings.',
       },
       {
         id: 'diagnose',
