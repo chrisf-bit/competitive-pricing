@@ -107,6 +107,7 @@ export function Header({ currentRound, screen, onTutorial, onRoundSelect }: Head
           <button
             onClick={onRoundSelect}
             aria-label="Return to Round Select"
+            data-tutorial="header-round-select"
             style={{
               display: 'flex',
               alignItems: 'center',

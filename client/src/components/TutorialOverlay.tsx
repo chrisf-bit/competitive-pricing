@@ -18,6 +18,7 @@ import {
   Layers,
   Gauge,
   PlayCircle,
+  LayoutGrid,
 } from 'lucide-react';
 
 interface TutorialOverlayProps {
@@ -107,6 +108,14 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
         </span>
       </div>
     ),
+  },
+  {
+    target: 'header-round-select',
+    title: 'Jump back any time',
+    description:
+      'Round Select takes you back to the hub from any round - to pick a different round, replay a cleared one to raise your stars, or open your debrief. You never get stuck in a round.',
+    icon: <LayoutGrid size={18} style={{ color: 'var(--brand-yellow)' }} />,
+    position: 'bottom',
   },
   {
     target: 'market-bar',
