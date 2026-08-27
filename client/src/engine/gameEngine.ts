@@ -134,6 +134,7 @@ export function createInitialState(overrides?: {
     actionsThisRound: [],
     previouslyEngagedThisRound: [],
     engagedPartnerIds: [],
+    wrongPartnerRounds: [],
     selectedPartnerId: null,
     partners,
     marketContext: getMarketContext(
@@ -189,6 +190,7 @@ export function resetForPlayAgain(state: GameState): GameState {
     actionsThisRound: [],
     previouslyEngagedThisRound: [],
     engagedPartnerIds: [],
+    wrongPartnerRounds: [],
     selectedPartnerId: null,
     partners,
     marketContext: getMarketContext(
@@ -495,6 +497,16 @@ export function processConversationChoice(
           result,
         );
 
+    // Durable record of rounds where the learner picked a partner who
+    // wasn't the priority. Survives the retake (they still made the
+    // mistake) so the Debrief can coach on reading the data signals.
+    const newWrongPartnerRounds =
+      !state.isPracticeMode &&
+      !result.rightPartner &&
+      !state.wrongPartnerRounds.includes(state.currentRound)
+        ? [...state.wrongPartnerRounds, state.currentRound]
+        : state.wrongPartnerRounds;
+
     // Stay on the conversation screen so the learner can read the
     // final partner response. The conversation-complete UI button there
     // calls onEndConversation, which routes to the report screen via
@@ -506,6 +518,7 @@ export function processConversationChoice(
       engagedPartnerIds: newEngagedPartnerIds,
       roundStars: newRoundStars,
       roundAttempts: newRoundAttempts,
+      wrongPartnerRounds: newWrongPartnerRounds,
       lastConversationGrade: grade,
       conversationInProgress: {
         ...conv,
@@ -654,6 +667,16 @@ function processBranchingChoice(
           result,
         );
 
+    // Durable record of rounds where the learner picked a partner who
+    // wasn't the priority. Survives the retake (they still made the
+    // mistake) so the Debrief can coach on reading the data signals.
+    const newWrongPartnerRounds =
+      !state.isPracticeMode &&
+      !result.rightPartner &&
+      !state.wrongPartnerRounds.includes(state.currentRound)
+        ? [...state.wrongPartnerRounds, state.currentRound]
+        : state.wrongPartnerRounds;
+
     return {
       ...state,
       partners: newPartners,
@@ -661,6 +684,7 @@ function processBranchingChoice(
       engagedPartnerIds: newEngagedPartnerIds,
       roundStars: newRoundStars,
       roundAttempts: newRoundAttempts,
+      wrongPartnerRounds: newWrongPartnerRounds,
       lastConversationGrade: grade,
       conversationInProgress: {
         ...conv,
@@ -1035,6 +1059,7 @@ export function calculateScore(state: GameState): ScoreBreakdown {
     highlights,
     improvements,
     styleInsights,
+    wrongPartnerRoundCount: state.wrongPartnerRounds.length,
   };
 }
 

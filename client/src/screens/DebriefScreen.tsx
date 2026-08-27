@@ -237,7 +237,12 @@ export function DebriefScreen({
         {/* Standout rounds - the qualitative per-round read (wins + the
             rounds to build on), replacing the old Partner Outcomes +
             Communication Style Insights blocks. */}
-        {roundViews.length > 0 && <StandoutRounds rounds={roundViews} />}
+        {roundViews.length > 0 && (
+          <StandoutRounds
+            rounds={roundViews}
+            wrongPartnerRoundCount={score.wrongPartnerRoundCount}
+          />
+        )}
 
         {/* Practice Mode - round-select grid. Hidden entirely on a
             perfect run (all attempted rounds already at 3 stars) -
@@ -628,7 +633,13 @@ function SkillTile({
 }
 
 // ── Standout rounds (wins + rounds to build on) ──────────────────
-function StandoutRounds({ rounds }: { rounds: RoundView[] }) {
+function StandoutRounds({
+  rounds,
+  wrongPartnerRoundCount,
+}: {
+  rounds: RoundView[];
+  wrongPartnerRoundCount: number;
+}) {
   const excelled = rounds.filter((r) => r.stars === 3).slice(0, 3);
   const build = rounds
     .filter((r) => r.stars < 3)
@@ -658,6 +669,33 @@ function StandoutRounds({ rounds }: { rounds: RoundView[] }) {
           emptyText="Clean run - no rounds to revisit."
         />
       </div>
+      {wrongPartnerRoundCount > 0 && (
+        <div
+          style={{
+            marginTop: 16,
+            padding: '14px 16px',
+            background: 'var(--warning-bg)',
+            border: '1px solid var(--warning)',
+            borderRadius: 10,
+            display: 'flex',
+            gap: 10,
+            alignItems: 'flex-start',
+          }}
+        >
+          <Search
+            size={16}
+            style={{ color: 'var(--warning)', flexShrink: 0, marginTop: 2 }}
+          />
+          <div style={{ fontSize: 13, color: 'var(--brand-navy)', lineHeight: 1.5 }}>
+            <strong>Recognising the signals.</strong> You spent{' '}
+            {wrongPartnerRoundCount}{' '}
+            {wrongPartnerRoundCount === 1 ? 'round' : 'rounds'} on a partner who
+            wasn't the one most in need. Before you commit each round, compare
+            eRPD, Lose Price and Partner Value across the cards to spot who is
+            struggling most.
+          </div>
+        </div>
+      )}
     </div>
   );
 }

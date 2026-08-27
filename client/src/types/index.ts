@@ -818,6 +818,13 @@ export interface GameState {
    * everyone" even on a perfect 9/9 run.
    */
   engagedPartnerIds: string[];
+  /**
+   * Distinct main-run rounds where the learner engaged a partner who
+   * wasn't the round's priority. Persists through retake (the mistake
+   * still happened) so the Debrief can coach on reading the data
+   * signals. Reset on Play Again / restart; untouched by practice.
+   */
+  wrongPartnerRounds: number[];
   selectedPartnerId: string | null;
   partners: PartnerState[];
   marketContext: MarketContext;
@@ -890,4 +897,6 @@ export interface ScoreBreakdown {
   highlights: string[];
   improvements: string[];
   styleInsights: string[];
+  /** Count of distinct rounds where a non-priority partner was engaged. */
+  wrongPartnerRoundCount: number;
 }
