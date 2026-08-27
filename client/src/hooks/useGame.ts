@@ -41,6 +41,8 @@ export function useGame() {
         level0Cleared: persisted.level0Cleared,
         level0ClearedForRegime: persisted.level0ClearedForRegime,
         roundStars: persisted.roundStars,
+        tutorialShown: persisted.tutorialShown,
+        partnerDetailTutorialShown: persisted.partnerDetailTutorialShown,
       });
     }
     // Fresh boot - if the LMS provided a student name, seed the

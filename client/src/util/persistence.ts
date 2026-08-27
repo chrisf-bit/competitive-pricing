@@ -56,6 +56,14 @@ export interface PersistedState {
    * load (clearance and profile are kept).
    */
   roundsResetToken?: string;
+  /**
+   * Whether the learner has already seen the Portfolio and Partner
+   * Detail tours. Persisted so the tutorial fires once ever, not once
+   * per session. Optional for backwards compatibility - older payloads
+   * parse as undefined, the tours fire one more time, then stick.
+   */
+  tutorialShown?: boolean;
+  partnerDetailTutorialShown?: boolean;
 }
 
 function parsePayload(raw: string | null): PersistedState | null {
@@ -74,6 +82,8 @@ function parsePayload(raw: string | null): PersistedState | null {
       level0ClearedForRegime: parsed.level0ClearedForRegime ?? null,
       roundStars: roundsCurrent ? parsed.roundStars ?? {} : {},
       roundsResetToken: ROUNDS_RESET_TOKEN,
+      tutorialShown: parsed.tutorialShown ?? false,
+      partnerDetailTutorialShown: parsed.partnerDetailTutorialShown ?? false,
     };
   } catch {
     return null;
@@ -101,6 +111,8 @@ export function savePersistedState(state: GameState): void {
     level0ClearedForRegime: state.level0Progress.clearedForRegime,
     roundStars: state.roundStars,
     roundsResetToken: ROUNDS_RESET_TOKEN,
+    tutorialShown: state.tutorialShown,
+    partnerDetailTutorialShown: state.partnerDetailTutorialShown,
   };
   const serialised = JSON.stringify(payload);
   const scorm = getScormAdapter();

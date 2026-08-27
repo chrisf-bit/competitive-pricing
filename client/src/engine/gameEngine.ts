@@ -90,6 +90,8 @@ export function createInitialState(overrides?: {
    */
   level0ClearedForRegime?: ParityRegime | null;
   roundStars?: GameState['roundStars'];
+  tutorialShown?: boolean;
+  partnerDetailTutorialShown?: boolean;
 }): GameState {
   const partners = initialPartners.map((p) => {
     // Apply the Round 1 baseline so the partner data the learner sees
@@ -126,8 +128,8 @@ export function createInitialState(overrides?: {
     currentDiagnosis: null,
     level0ReturnTo: null,
     level0RetryItemIds: null,
-    tutorialShown: false,
-    partnerDetailTutorialShown: false,
+    tutorialShown: overrides?.tutorialShown ?? false,
+    partnerDetailTutorialShown: overrides?.partnerDetailTutorialShown ?? false,
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
     currentRound: 1,
