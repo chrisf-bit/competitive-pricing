@@ -93,9 +93,11 @@ export const characterAvatars: CharacterAvatar[] = [
   // Masc-presenting cluster
   { id: 'avatar-felix', label: 'Felix', dataUri: felixImg, bgColor: '#fef3c7' },
   { id: 'avatar-noah', label: 'Noah', dataUri: noahImg, bgColor: '#bae6fd' },
-  // Marcus sits high in his 2:3 canvas, so a centred square crop clips
-  // his hair - anchor the crop to the top to keep his full head in frame.
-  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg, bgColor: '#93c5fd', objectPosition: 'center top' },
+  // Marcus sits slightly high in his 2:3 canvas, so a dead-centre square
+  // crop clips his hair. Nudge the crop just above centre (35%) to clear
+  // the hair while keeping his face aligned with the other avatars -
+  // 'center top' (0%) over-corrected and dropped his whole head.
+  { id: 'avatar-marcus', label: 'Marcus', dataUri: marcusImg, bgColor: '#93c5fd', objectPosition: 'center 35%' },
   { id: 'avatar-raj', label: 'Raj', dataUri: rajImg, bgColor: '#fcd34d' },
 ];
 
