@@ -427,7 +427,7 @@ function getGuideContent(
       return {
         screenLabel: 'Portfolio Dashboard',
         objective:
-          'One partner needs your attention more than the others. Compare the card metrics to shortlist, then open your top candidate to confirm before you commit.',
+          'One partner needs your attention more than the others. Compare each partner card data to prioritize which partner you will handle first.',
         steps: [
           {
             icon: <Eye size={13} />,
