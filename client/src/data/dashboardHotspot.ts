@@ -245,7 +245,7 @@ export const dataInsightsChallenges: DataInsightsChallenge[] = [
   {
     id: 'improving',
     prompt:
-      "Which partner's pricing is actually improving (eRPD trending DOWN)?",
+      "Which partner's pricing is actually improving?",
     correctHotelId: 'uphill-hotel',
     options: [
       { hotelId: 'hotel-valle', label: 'Hotel Valle' },
