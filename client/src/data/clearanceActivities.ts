@@ -36,7 +36,7 @@ export const clearanceActivities: ClearanceActivityRef[] = [
     screen: 'l0-character-build',
     title: 'Build your character',
     subtitle:
-      "Pick the avatar you identify with, then choose the super power you think will help you most in the game. It's a gameplay feature only: it shapes the pre-call tips and coaching cues the sim gives you, focused on the strength you choose. It has no meaning outside the game and doesn't change how you're scored, so every super power has an equal path to success.",
+      "Pick the avatar you identify with, then choose the super power you think will help you most in the game. Each super power shapes the tips and coaching cues you see in the game. It doesn't change how you're scored, so every super power provides an equal chance of success.",
   },
   {
     id: 'gm-chat',

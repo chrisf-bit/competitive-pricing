@@ -508,8 +508,8 @@ function PersonaCard({
       <div
         style={{
           display: 'flex',
-          alignItems: 'flex-start',
-          gap: 8,
+          flexDirection: 'column',
+          gap: 5,
           padding: '10px 12px',
           borderRadius: 8,
           background: `${accentColor}12`,
@@ -523,8 +523,6 @@ function PersonaCard({
             color: accentColor,
             textTransform: 'uppercase',
             letterSpacing: '0.12em',
-            flexShrink: 0,
-            paddingTop: 1,
           }}
         >
           In game
