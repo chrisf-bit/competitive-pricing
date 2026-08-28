@@ -131,7 +131,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A5',
       prompt:
-        'Roughly how much ABRN growth do we get for every 1% improvement in RPD?',
+        'Roughly how much room night growth do we get for every 1% improvement in RPD?',
       options: [
         { text: 'About 0.5%', isCorrect: false },
         { text: 'About 2 to 3%', isCorrect: true },
@@ -139,9 +139,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Right. Roughly 2 to 3 percent ABRN uplift for every 1 percent improvement in RPD. Sounds small, but it compounds fast across a portfolio - that's why price competitiveness is key.",
+          "Right. Roughly 2 to 3 percent room night uplift for every 1 percent improvement in RPD. Sounds small, but it compounds fast across a portfolio - that's why price competitiveness is key.",
         incorrect:
-          "It's about 2 to 3 percent ABRN uplift per 1 percent improvement in RPD. Doesn't sound huge on paper, but it compounds fast across a portfolio - that's why price competitiveness is key.",
+          "It's about 2 to 3 percent room night uplift per 1 percent improvement in RPD. Doesn't sound huge on paper, but it compounds fast across a portfolio - that's why price competitiveness is key.",
       },
     },
   },
