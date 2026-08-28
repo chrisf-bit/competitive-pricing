@@ -308,11 +308,13 @@ export function PortfolioScreen({
                   background: 'var(--off-white)',
                   borderTop: '1px solid var(--grey-100)',
                   display: 'flex',
-                  alignItems: 'center',
+                  // Bottom-align so the Experienced RPD, Partner Value and
+                  // the mini-metric values all sit on one baseline.
+                  alignItems: 'flex-end',
                   justifyContent: 'space-between',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14 }}>
+                <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14 }}>
                   <div data-tutorial={i === 0 ? 'rpd-number' : undefined}>
                     <div
                       style={{
@@ -453,7 +455,11 @@ function MiniMetric({
         ? 'var(--warning)'
         : 'var(--grey-700)';
   return (
-    <div style={{ textAlign: 'center' }}>
+    // Flex column with the value bottom-anchored so values line up
+    // across the row even when some labels wrap to two lines ("Partner
+    // Value", "Lose Price") and others don't ("RPD Pub", "Scenarios").
+    // The parent flex rows stretch each MiniMetric to equal height.
+    <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div
         style={{
           fontSize: 8,
@@ -466,7 +472,7 @@ function MiniMetric({
       >
         {label}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'center', marginTop: 'auto' }}>
         <span style={{ fontSize: 14, fontWeight: 800, color: valueColor }}>
           {valueText}
         </span>

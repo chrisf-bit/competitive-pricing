@@ -872,6 +872,18 @@ function PartnerDetailTabBar({
         locked={!opcUnlocked}
         onClick={() => onSelect('advanced')}
       />
+      {/* Info (i) beside the OPC tab explaining when it unlocks. Sits
+          OUTSIDE the TabPill button: a disabled button swallows hover
+          events, so an in-button tooltip wouldn't fire while the tab is
+          locked - which is exactly when the learner needs the reason. */}
+      <span style={{ display: 'inline-flex', alignItems: 'center' }}>
+        <MetricLabel
+          label=""
+          helpText="These metrics unlock in Level 2 (rounds 11-20)."
+          align="top-center"
+          iconSize={13}
+        />
+      </span>
     </div>
   );
 }
