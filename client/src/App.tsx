@@ -363,8 +363,6 @@ export default function App() {
                 ...state.previouslyEngagedThisRound,
               ]}
               marketContext={state.marketContext}
-              personaId={state.learnerProfile.archetype?.id ?? null}
-              currentRound={state.currentRound}
               onSelectPartner={game.onSelectPartner}
               onReturnToRoundSelect={() => game.goToScreen('round-select')}
             />
