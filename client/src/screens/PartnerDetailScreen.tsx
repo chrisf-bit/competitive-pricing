@@ -770,6 +770,12 @@ function BigMetric({
           : 'var(--off-white)',
         borderRadius: 'var(--radius-md)',
         border: highlight ? '1.5px solid rgba(0,53,128,0.15)' : '1.5px solid transparent',
+        // Flex column + bottom-anchored value so the numbers line up
+        // across the row even when some labels wrap to two lines and
+        // others don't. Grid stretches every card to the row height.
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
       }}
     >
       <div style={{ marginBottom: 4, display: 'flex', justifyContent: 'center' }}>
@@ -795,6 +801,7 @@ function BigMetric({
           alignItems: 'baseline',
           justifyContent: 'center',
           gap: 6,
+          marginTop: 'auto',
         }}
       >
         <span
@@ -1248,6 +1255,9 @@ function SecondaryMetricCard({
           borderRadius: 'var(--radius-md)',
           border: '1.5px dashed var(--grey-200)',
           opacity: 0.7,
+          display: 'flex',
+          flexDirection: 'column',
+          height: '100%',
         }}
       >
         <SecondaryMetricLabel label={def.label} helpText={def.helpText} comparator={comparator} />
@@ -1256,7 +1266,7 @@ function SecondaryMetricCard({
             fontSize: 11,
             fontWeight: 700,
             color: 'var(--grey-400)',
-            marginTop: 6,
+            marginTop: 'auto',
             fontStyle: 'italic',
           }}
         >
@@ -1289,6 +1299,11 @@ function SecondaryMetricCard({
         background: 'var(--off-white)',
         borderRadius: 'var(--radius-md)',
         border: '1.5px solid transparent',
+        // Bottom-anchor the value so numbers align across the row
+        // regardless of how many lines each label wraps to.
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
       }}
     >
       <SecondaryMetricLabel label={def.label} helpText={def.helpText} comparator={comparator} />
@@ -1298,7 +1313,7 @@ function SecondaryMetricCard({
           fontWeight: 900,
           color: 'var(--brand-navy)',
           lineHeight: 1.1,
-          marginTop: 4,
+          marginTop: 'auto',
           letterSpacing: '-0.02em',
         }}
       >
