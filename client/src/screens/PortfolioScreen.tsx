@@ -365,8 +365,11 @@ export function PortfolioScreen({
                   </div>
                 </div>
 
-                {/* KPI mini-row - intentionally neutral; learners read and decide */}
-                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 10 }}>
+                {/* KPI mini-row - intentionally neutral; learners read and decide.
+                    alignItems flex-end bottom-aligns each cell so the values line
+                    up even though "Scenarios" is a one-line label and the others
+                    ("RPD Loyal", "Lose Price") wrap to two. */}
+                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
                   <MiniMetric
                     label="RPD Pub"
                     valueText={`${partner.metrics.rpdPublic.toFixed(1)}%`}
@@ -455,11 +458,10 @@ function MiniMetric({
         ? 'var(--warning)'
         : 'var(--grey-700)';
   return (
-    // Flex column with the value bottom-anchored so values line up
-    // across the row even when some labels wrap to two lines ("Partner
-    // Value", "Lose Price") and others don't ("RPD Pub", "Scenarios").
-    // The parent flex rows stretch each MiniMetric to equal height.
-    <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', height: '100%' }}>
+    // The value is the last element, so the parent rows bottom-align
+    // each cell (alignItems: flex-end) to line the numbers up across
+    // the row regardless of how many lines each label wraps to.
+    <div style={{ textAlign: 'center' }}>
       <div
         style={{
           fontSize: 8,
@@ -472,7 +474,7 @@ function MiniMetric({
       >
         {label}
       </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'center', marginTop: 'auto' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'center' }}>
         <span style={{ fontSize: 14, fontWeight: 800, color: valueColor }}>
           {valueText}
         </span>
