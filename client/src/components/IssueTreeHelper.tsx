@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight, RotateCcw, Sparkles, Target } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, RotateCcw, Sparkles, Target, ArrowLeftRight } from 'lucide-react';
 import type { IssueTreeHelperState, IssueTreePath } from '../types';
 import {
   triggers,
@@ -63,6 +63,11 @@ interface IssueTreeHelperProps {
   /** Called on every pick / step navigation so the parent can persist. */
   onUpdate: (next: IssueTreeHelperState) => void;
   onClose: () => void;
+  /** Which edge the drawer docks to. Lets the learner move it off
+   *  content on screens where the default side overlaps text. */
+  side: 'left' | 'right';
+  /** Flip the drawer to the other edge. */
+  onToggleDock: () => void;
 }
 
 const STEP_COUNT = 6;
@@ -84,8 +89,15 @@ export function IssueTreeHelper({
   helperState,
   onUpdate,
   onClose,
+  side,
+  onToggleDock,
 }: IssueTreeHelperProps) {
   const { path, stepIndex } = helperState;
+  const isLeft = side === 'left';
+  // Slide in from the docked edge; mirror the drop shadow's horizontal
+  // offset so it always reads as sitting against that edge.
+  const offX = isLeft ? -28 : 28;
+  const shadowX = isLeft ? '12px' : '-12px';
 
   const filteredIssues = issues.filter((i) =>
     path.trigger ? i.validTriggers.includes(path.trigger) : true,
@@ -141,21 +153,22 @@ export function IssueTreeHelper({
       // its bottom edge. Content is compact so even the tallest step
       // (four options) fits without a fixed height. Framer-motion
       // handles the x slide entrance / exit.
-      initial={{ opacity: 0, x: 28 }}
+      initial={{ opacity: 0, x: offX }}
       animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 28 }}
+      exit={{ opacity: 0, x: offX }}
       transition={{ duration: 0.24, ease: [0.32, 0.72, 0.32, 1] }}
       style={{
         position: 'fixed',
         top: 80,
-        right: 16,
+        left: isLeft ? 16 : undefined,
+        right: isLeft ? undefined : 16,
         width: 'min(440px, 94vw)',
         // Height fits the content (no fixed cap, no inner scroll). The
         // slightly wider panel keeps descriptions to fewer lines so
         // readable body text still fits without a fixed height.
         height: 'auto',
         background: 'var(--white)',
-        boxShadow: '-12px 16px 40px rgba(0,15,40,0.22)',
+        boxShadow: `${shadowX} 16px 40px rgba(0,15,40,0.22)`,
         border: '1px solid var(--grey-100)',
         borderRadius: 'var(--radius-lg)',
         zIndex: 100,
@@ -212,24 +225,43 @@ export function IssueTreeHelper({
             </div>
           </div>
         </div>
-        <button
-          onClick={onClose}
-          title="Close (your picks are saved)"
-          style={{
-            background: 'rgba(255,255,255,0.12)',
-            border: 'none',
-            borderRadius: 8,
-            padding: 8,
-            color: 'var(--white)',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexShrink: 0,
-          }}
-        >
-          <X size={15} />
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexShrink: 0 }}>
+          <button
+            onClick={onToggleDock}
+            title={`Move to the ${isLeft ? 'right' : 'left'} side`}
+            aria-label={`Move The Pricing Pathway to the ${isLeft ? 'right' : 'left'} side`}
+            style={{
+              background: 'rgba(255,255,255,0.12)',
+              border: 'none',
+              borderRadius: 8,
+              padding: 8,
+              color: 'var(--white)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <ArrowLeftRight size={15} />
+          </button>
+          <button
+            onClick={onClose}
+            title="Close (your picks are saved)"
+            style={{
+              background: 'rgba(255,255,255,0.12)',
+              border: 'none',
+              borderRadius: 8,
+              padding: 8,
+              color: 'var(--white)',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <X size={15} />
+          </button>
+        </div>
       </div>
 
       {/* Mini Pricing Pathway - the same winding road taught in

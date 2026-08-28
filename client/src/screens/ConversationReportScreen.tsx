@@ -429,10 +429,7 @@ function PersonaRetro({
       style={{
         width: '100%',
         background: 'rgba(255,255,255,0.06)',
-        borderLeft: `3px solid var(--style-${persona.accent}-bright)`,
-        borderTop: '1px solid rgba(255,255,255,0.10)',
-        borderRight: '1px solid rgba(255,255,255,0.10)',
-        borderBottom: '1px solid rgba(255,255,255,0.10)',
+        border: '1px solid rgba(255,255,255,0.10)',
         borderRadius: 10,
         padding: '12px 18px',
         display: 'flex',
@@ -446,10 +443,9 @@ function PersonaRetro({
       <Icon
         size={16}
         style={{
-          color: 'var(--white)',
+          color: `var(--style-${persona.accent}-bright)`,
           marginTop: 2,
           flexShrink: 0,
-          opacity: 0.85,
         }}
       />
       <span>{text}</span>

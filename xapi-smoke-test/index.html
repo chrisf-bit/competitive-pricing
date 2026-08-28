@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rate Right - xAPI Statement Smoke Test</title>
+<style>
+  body { font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+    margin: 0; padding: 24px; background: #0b1b3a; color: #eef2fc; line-height: 1.5; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #9db0d6; margin: 0 0 20px; font-size: 14px; }
+  .verdict { font-size: 16px; font-weight: 700; padding: 12px 16px; border-radius: 8px;
+    margin: 0 0 16px; background: #16305e; }
+  .verdict.ok { background: #14532d; }
+  .verdict.bad { background: #5b1a1a; }
+  .row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: flex-end; }
+  button { font-size: 14px; padding: 10px 16px; border-radius: 8px; border: 0;
+    background: #ffca41; color: #06132e; font-weight: 700; cursor: pointer; }
+  button.secondary { background: #2f4a7e; color: #eef2fc; }
+  label { display: block; font-size: 11.5px; color: #9db0d6; margin-bottom: 3px; }
+  input { font-size: 12.5px; padding: 8px 10px; border-radius: 6px; border: 1px solid #23407a;
+    background: #050f24; color: #eef2fc; font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .manual { background: #0f2247; border: 1px solid #23407a; border-radius: 8px;
+    padding: 14px; margin: 0 0 16px; display: none; }
+  .manual.show { display: block; }
+  .manual .row { margin-bottom: 10px; }
+  #log { background: #050f24; border: 1px solid #23407a; border-radius: 8px;
+    padding: 14px; font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12.5px; white-space: pre-wrap; word-break: break-word;
+    max-height: 56vh; overflow: auto; }
+  .ok-line { color: #7ee2a8; }
+  .bad-line { color: #ff9a9a; }
+  .dim { color: #8ea3cc; }
+  code { background: #16305e; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>Rate Right - xAPI Statement Smoke Test</h1>
+  <p class="sub">Posts five representative xAPI statements to the launching LRS,
+    then commits. Watch the log to confirm each returns <code>200</code> and the
+    LRS echoes a statement id. Re-run to prove replay <em>appends</em> new
+    statements rather than overwriting.</p>
+
+  <div id="verdict" class="verdict">Locating launch parameters...</div>
+
+  <div id="manual" class="manual">
+    <p class="sub" style="margin:0 0 12px">No launch parameters found (opened
+      directly, not launched from an LMS). Paste an LRS endpoint + Basic auth to
+      test anyway - e.g. from a SCORM Cloud or Docebo LRS activity provider.</p>
+    <div class="row">
+      <div style="flex:1 1 340px">
+        <label>LRS endpoint (must end with <code>/</code>)</label>
+        <input id="m-endpoint" style="width:100%" placeholder="https://cloud.scorm.com/lrs/XXXX/" />
+      </div>
+    </div>
+    <div class="row">
+      <div style="flex:1 1 260px">
+        <label>Auth header (e.g. <code>Basic a2V5OnNlY3JldA==</code>)</label>
+        <input id="m-auth" style="width:100%" placeholder="Basic ..." />
+      </div>
+      <div style="flex:1 1 200px">
+        <label>Learner email (for the actor)</label>
+        <input id="m-email" style="width:100%" placeholder="tester@rapid-learn.co.uk" />
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <button onclick="runTest()">Send statements</button>
+    <button class="secondary" onclick="sendMinimal()">Send 1 minimal statement</button>
+    <button class="secondary" onclick="queryCount()">Count statements in LRS</button>
+  </div>
+
+  <div id="log"></div>
+
+<script>
+"use strict";
+
+// Docebo's LRS supports xAPI up to 1.0.2 (0.9 - 1.0.2). SCORM Cloud and
+// newer LRSs accept 1.0.3 too, so 1.0.2 is the safe common denominator.
+var XAPI_VERSION = "1.0.2";
+var NS = "https://booking.com/xapi/rate-right";      // object-id namespace
+var EXT = "https://booking.com/xapi/ext";            // extension-key namespace
+var ADL = "http://adlnet.gov/expapi/verbs";
+var CMII = "http://adlnet.gov/expapi/activities/cmi.interaction";
+
+var logEl = document.getElementById("log");
+function log(msg, cls) {
+  var line = document.createElement("div");
+  if (cls) line.className = cls;
+  line.textContent = msg;
+  logEl.appendChild(line);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+function setVerdict(text, cls) {
+  var v = document.getElementById("verdict");
+  v.textContent = text;
+  v.className = "verdict " + (cls || "");
+}
+
+function uuid() {
+  try { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {}
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0, v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+function iso() { return new Date().toISOString(); }
+
+/* ------------------------------------------------------------------ */
+/* Launch-parameter discovery                                          */
+/* xAPI launch (Rustici / cmi5-style) puts endpoint, auth, actor,      */
+/* registration and activity_id on the content URL's query string.     */
+/* ------------------------------------------------------------------ */
+// Docebo passes the actor with mbox/name as ARRAYS
+// ({"mbox":["mailto:x"],"name":["X"]}), which is not a conformant Agent
+// (mbox/name must be single strings). Collapse arrays to their first
+// element and stamp objectType so strict LRSes accept it.
+function normalizeActor(a) {
+  if (!a || typeof a !== "object") return a;
+  ["mbox", "name", "openid"].forEach(function (k) {
+    if (Array.isArray(a[k])) a[k] = a[k][0];
+  });
+  if (Array.isArray(a.account)) a.account = a.account[0];
+  if (!a.objectType) a.objectType = "Agent";
+  return a;
+}
+
+function getLaunch() {
+  var q = new URLSearchParams(window.location.search);
+  var launch = {
+    endpoint: q.get("endpoint") || "",
+    auth: q.get("auth") || "",
+    registration: q.get("registration") || "",
+    activityId: q.get("activity_id") || (NS + "/smoke-test"),
+    actor: null,
+  };
+  var rawActor = q.get("actor");
+  if (rawActor) {
+    try { launch.actor = normalizeActor(JSON.parse(rawActor)); } catch (e) {
+      log("Could not parse actor param: " + e, "bad-line");
+    }
+  }
+  if (launch.endpoint && launch.endpoint.slice(-1) !== "/") launch.endpoint += "/";
+  return launch;
+}
+
+// Merge in anything typed into the manual panel (used when opened directly).
+function resolveConfig() {
+  var l = getLaunch();
+  var mEndpoint = document.getElementById("m-endpoint").value.trim();
+  var mAuth = document.getElementById("m-auth").value.trim();
+  var mEmail = document.getElementById("m-email").value.trim();
+  if (!l.endpoint && mEndpoint) {
+    l.endpoint = mEndpoint.slice(-1) === "/" ? mEndpoint : mEndpoint + "/";
+  }
+  if (!l.auth && mAuth) l.auth = mAuth;
+  if (!l.actor) {
+    l.actor = { objectType: "Agent", name: mEmail || "Smoke Tester",
+      mbox: "mailto:" + (mEmail || "smoke-tester@rapid-learn.co.uk") };
+  }
+  if (!l.registration) l.registration = uuid();
+  return l;
+}
+
+function headers(auth) {
+  return {
+    "Content-Type": "application/json",
+    "Authorization": auth,
+    "X-Experience-API-Version": XAPI_VERSION,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/* Statement builders - the planned Rate Right taxonomy                */
+/* verbs from the ADL vocab; object ids under the Booking namespace;   */
+/* extensions carry level, item-code, objection code and the           */
+/* normalized 0-100 score alongside result.score (stars, 0-3).         */
+/* ------------------------------------------------------------------ */
+function verb(id, word) { var v = { id: id, display: {} }; v.display["en-US"] = word; return v; }
+
+function interaction(idPath, name) {
+  var o = { id: NS + idPath, definition: { type: CMII, name: {} } };
+  o.definition.name["en-US"] = name;
+  return o;
+}
+
+function ext(obj) {
+  var e = {};
+  for (var k in obj) if (obj.hasOwnProperty(k)) e[EXT + "/" + k] = obj[k];
+  return e;
+}
+
+function buildStatements(cfg) {
+  var reg = cfg.registration;
+  function ctx(extras) {
+    return { registration: reg, extensions: ext(extras) };
+  }
+  return [
+    // 1. Session start.
+    {
+      id: uuid(), timestamp: iso(), actor: cfg.actor,
+      verb: verb(ADL + "/initialized", "initialized"),
+      object: { id: cfg.activityId, definition: { type: "http://adlnet.gov/expapi/activities/course",
+        name: { "en-US": "Rate Right" } } },
+      context: ctx({ level: "L0" }),
+    },
+    // 2. Clearance passed (headline gate + score.raw carries clearance %).
+    {
+      id: uuid(), timestamp: iso(), actor: cfg.actor,
+      verb: verb(ADL + "/passed", "passed"),
+      object: interaction("/clearance", "Clearance"),
+      result: { success: true, completion: true,
+        score: { raw: 86, min: 0, max: 100, scaled: 0.86 } },
+      context: ctx({ level: "L0", "item-code": "L0.3", "normalized-score": 86 }),
+    },
+    // 3. A scored decision - L1 R3 partner selection (stars 0-3 + normalized).
+    {
+      id: uuid(), timestamp: iso(), actor: cfg.actor,
+      verb: verb(ADL + "/answered", "answered"),
+      object: interaction("/l1/r3/partner-selection", "L1 R3 - partner selection"),
+      result: { success: true, response: "royal-crest",
+        score: { raw: 3, min: 0, max: 3, scaled: 1 } },
+      context: ctx({ level: "L1", "item-code": "L1.4", round: 3, "normalized-score": 100 }),
+    },
+    // 4. An objection response - carries the stable OBJ_N code, not a name.
+    {
+      id: uuid(), timestamp: iso(), actor: cfg.actor,
+      verb: verb(ADL + "/answered", "answered"),
+      object: interaction("/l2/r15/objection", "L2 R15 - objection response"),
+      result: { success: true, response: "acknowledge-and-reframe",
+        score: { raw: 2, min: 0, max: 3, scaled: 0.67 } },
+      context: ctx({ level: "L2", "item-code": "L2.3", round: 15,
+        "objection-type": "OBJ_14", "capability-code": "objection-handling",
+        "normalized-score": 67 }),
+    },
+    // 5. Completion milestone.
+    {
+      id: uuid(), timestamp: iso(), actor: cfg.actor,
+      verb: verb(ADL + "/completed", "completed"),
+      object: { id: cfg.activityId, definition: { type: "http://adlnet.gov/expapi/activities/course",
+        name: { "en-US": "Rate Right" } } },
+      result: { completion: true, success: true,
+        score: { raw: 51, min: 0, max: 60, scaled: 0.85 } },
+      context: ctx({ level: "L2", "normalized-score": 85 }),
+    },
+  ];
+}
+
+/* ------------------------------------------------------------------ */
+/* The test                                                            */
+/* ------------------------------------------------------------------ */
+var runCount = 0;
+
+function runTest() {
+  var cfg = resolveConfig();
+  if (!cfg.endpoint || !cfg.auth) {
+    document.getElementById("manual").classList.add("show");
+    setVerdict("No LRS endpoint/auth. Fill the fields above, then Send statements.", "bad");
+    return;
+  }
+
+  logEl.innerHTML = "";
+  runCount++;
+  setVerdict("Posting statements (run #" + runCount + ")...", "");
+  log("endpoint     " + cfg.endpoint, "dim");
+  log("registration " + cfg.registration, "dim");
+  log("actor        " + JSON.stringify(cfg.actor), "dim");
+
+  var statements = buildStatements(cfg);
+  statements.forEach(function (s, i) {
+    log("stmt " + i + "  " + s.verb.display["en-US"] + "  id=" + s.id +
+      "  obj=" + s.object.id.replace(NS, "") , "dim");
+  });
+
+  // Post the whole batch in one request to {endpoint}statements.
+  fetch(cfg.endpoint + "statements", {
+    method: "POST",
+    headers: headers(cfg.auth),
+    body: JSON.stringify(statements),
+  }).then(function (res) {
+    return res.text().then(function (text) { return { status: res.status, text: text }; });
+  }).then(function (r) {
+    if (r.status >= 200 && r.status < 300) {
+      var ids = [];
+      try { ids = JSON.parse(r.text); } catch (e) { /* some LRS return empty */ }
+      log("POST statements -> " + r.status, "ok-line");
+      if (ids.length) {
+        log("LRS stored " + ids.length + " statement id(s):", "ok-line");
+        ids.forEach(function (id) { log("  " + id, "ok-line"); });
+      } else {
+        log("LRS accepted the batch (no id array returned).", "ok-line");
+      }
+      setVerdict("PASS - " + statements.length + " statements accepted by the LRS " +
+        "(run #" + runCount + "). Re-run and Count to confirm the total grows.", "ok");
+    } else {
+      log("POST statements -> " + r.status, "bad-line");
+      log(r.text || "(no body)", "bad-line");
+      setVerdict("FAIL - LRS rejected the batch with HTTP " + r.status +
+        ". See the body below.", "bad");
+    }
+  }).catch(function (err) {
+    log("Network / CORS error: " + err, "bad-line");
+    setVerdict("FAIL - could not reach the LRS. Likely CORS (the LRS must allow " +
+      "this origin) or a bad endpoint/auth. See the log.", "bad");
+  });
+}
+
+/* Post the simplest valid statement (actor + verb + object only). If this
+   passes but the full batch fails, the problem is in a specific statement's
+   content, not the endpoint / auth / version. */
+function sendMinimal() {
+  var cfg = resolveConfig();
+  if (!cfg.endpoint || !cfg.auth) {
+    document.getElementById("manual").classList.add("show");
+    setVerdict("Fill the LRS fields first.", "bad");
+    return;
+  }
+  logEl.innerHTML = "";
+  var stmt = {
+    id: uuid(), timestamp: iso(), actor: cfg.actor,
+    verb: verb(ADL + "/experienced", "experienced"),
+    object: { id: NS + "/smoke-test", definition: { name: { "en-US": "Rate Right smoke test" } } },
+  };
+  log("Posting one minimal statement id=" + stmt.id + " (xAPI " + XAPI_VERSION + ")...", "dim");
+  fetch(cfg.endpoint + "statements", {
+    method: "POST", headers: headers(cfg.auth), body: JSON.stringify(stmt),
+  }).then(function (res) {
+    return res.text().then(function (t) { return { status: res.status, text: t }; });
+  }).then(function (r) {
+    if (r.status >= 200 && r.status < 300) {
+      log("POST minimal -> " + r.status, "ok-line");
+      setVerdict("PASS - minimal statement accepted. Endpoint, auth and version are good.", "ok");
+    } else {
+      log("POST minimal -> " + r.status, "bad-line");
+      log(r.text || "(no body)", "bad-line");
+      setVerdict("FAIL - even a minimal statement was rejected (HTTP " + r.status + "). " +
+        "This is endpoint / auth / version, not statement content.", "bad");
+    }
+  }).catch(function (err) {
+    log("Network / CORS error: " + err, "bad-line");
+    setVerdict("FAIL - could not reach the LRS (CORS / endpoint).", "bad");
+  });
+}
+
+/* Read back how many statements this registration has, to prove append. */
+function queryCount() {
+  var cfg = resolveConfig();
+  if (!cfg.endpoint || !cfg.auth) {
+    document.getElementById("manual").classList.add("show");
+    setVerdict("Fill the LRS fields first.", "bad");
+    return;
+  }
+  var url = cfg.endpoint + "statements?registration=" + encodeURIComponent(cfg.registration) + "&limit=200";
+  fetch(url, { method: "GET", headers: headers(cfg.auth) })
+    .then(function (res) { return res.text().then(function (t) { return { status: res.status, text: t }; }); })
+    .then(function (r) {
+      if (r.status !== 200) {
+        log("GET statements -> " + r.status + "  " + r.text, "bad-line");
+        return;
+      }
+      var n = 0;
+      try { var j = JSON.parse(r.text); n = (j && j.statements) ? j.statements.length : 0; } catch (e) {
+        log("GET statements -> 200 but body was not JSON: " + r.text, "bad-line");
+        return;
+      }
+      log("GET statements (this registration) -> 200, count = " + n, "ok-line");
+    })
+    .catch(function (err) { log("Count failed: " + err, "bad-line"); });
+}
+
+/* On load: detect launch params, prime the UI. */
+window.addEventListener("load", function () {
+  var l = getLaunch();
+  if (l.endpoint && l.auth) {
+    setVerdict("Launch parameters found. Click Send statements.", "");
+    log("Launched from an LMS - endpoint and auth supplied.", "ok-line");
+  } else {
+    document.getElementById("manual").classList.add("show");
+    setVerdict("Opened directly - no launch parameters. Paste an LRS endpoint + auth above.", "");
+  }
+});
+</script>
+</body>
+</html>

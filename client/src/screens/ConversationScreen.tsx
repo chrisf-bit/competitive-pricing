@@ -373,8 +373,6 @@ export function ConversationScreen({
                 lineHeight: 1.6,
                 color: 'var(--grey-700)',
                 fontWeight: 500,
-                borderLeft: `3px solid ${partnerColor}`,
-                paddingLeft: 16,
               }}
             >
               &ldquo;

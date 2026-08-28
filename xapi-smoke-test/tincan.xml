@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tin Can / xAPI launch manifest. An LMS that supports Tin Can packages
+  (Docebo, SCORM Cloud, etc.) reads this on upload, then launches
+  launch.html?... appending the xAPI launch params the content needs:
+  endpoint, auth, actor, registration, activity_id.
+
+  The <launch> element points at index.html - the smoke-test harness that
+  parses those params and POSTs statements to the LRS.
+-->
+<tincan xmlns="http://projecttincan.com/tincan.xsd">
+  <activities>
+    <activity id="https://booking.com/xapi/rate-right/smoke-test" type="http://adlnet.gov/expapi/activities/course">
+      <name>Rate Right - xAPI Statement Smoke Test</name>
+      <description lang="en-US">Posts representative xAPI statements to the LRS and confirms replay appends rather than overwrites.</description>
+      <launch lang="en-US">index.html</launch>
+    </activity>
+  </activities>
+</tincan>

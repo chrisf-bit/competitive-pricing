@@ -138,6 +138,31 @@ export function PartnerDetailScreen({
   // GameState so closing and reopening resumes them.
   const [helperOpen, setHelperOpen] = useState(false);
 
+  // Which edge the Pathway drawer + launcher tab dock to. The drawer is
+  // an overlay, so on screens where the docked side sits over content the
+  // learner needs, they flip it to the clear side. Persisted to
+  // localStorage (a plain UI preference, not game state) so the choice
+  // sticks across visits. Not a network call - localStorage is allowed.
+  const [dockSide, setDockSide] = useState<'left' | 'right'>(() => {
+    try {
+      return localStorage.getItem('rateRight:pathwayDock') === 'left'
+        ? 'left'
+        : 'right';
+    } catch {
+      return 'right';
+    }
+  });
+  const toggleDock = () =>
+    setDockSide((s) => {
+      const next = s === 'right' ? 'left' : 'right';
+      try {
+        localStorage.setItem('rateRight:pathwayDock', next);
+      } catch {
+        /* ignore - private mode / quota */
+      }
+      return next;
+    });
+
   // Idle-nudge target picks the primary next action for the learner's
   // current gate state: Round 1 with an unopened Helper needs the
   // yellow tree tab; everything else (Helper opened, or R2+) is
@@ -618,6 +643,7 @@ export function PartnerDetailScreen({
         {!helperOpen && (
           <HelperLauncherTab
             key="launcher"
+            side={dockSide}
             onOpen={() => {
               setHelperOpen(true);
               onMarkIssueTreeHelperOpened();
@@ -626,7 +652,13 @@ export function PartnerDetailScreen({
         )}
         {helperOpen && (
           <IssueTreeHelper
-            key="helper-drawer"
+            // Key includes the dock side so flipping edges runs a clean
+            // slide-out / slide-in via AnimatePresence rather than an
+            // instant re-anchor. Picks are held in GameState, so the
+            // remount loses nothing.
+            key={`helper-drawer-${dockSide}`}
+            side={dockSide}
+            onToggleDock={toggleDock}
             partnerName={partner.persona.name}
             partnerFirstName={partner.persona.name.split(' ')[0]}
             suggestedPath={
@@ -670,7 +702,6 @@ function PersonaLensChip({
       style={{
         background: 'var(--white)',
         border: '1.5px solid var(--grey-100)',
-        borderLeft: `4px solid ${accent}`,
         borderRadius: 'var(--radius-md)',
         padding: '9px 12px',
         boxShadow: 'var(--shadow-sm)',
@@ -1544,27 +1575,36 @@ function ProfileMetaRow({
 
 function HelperLauncherTab({
   onOpen,
+  side,
 }: {
   onOpen: () => void;
+  side: 'left' | 'right';
 }) {
+  const isLeft = side === 'left';
+  // Slide the tab in from whichever edge it docks to, and mirror the
+  // glow shadow's horizontal offset so it always reads as sitting on
+  // that edge. Rounded corners face inward (toward the screen centre).
+  const offX = isLeft ? -12 : 12;
+  const shadowX = isLeft ? '6px' : '-6px';
+  const hoverPad = isLeft ? 'paddingLeft' : 'paddingRight';
   return (
     <motion.button
       data-tutorial="partner-detail-tree-tab"
       onClick={onOpen}
       aria-label="Open The Pricing Pathway"
       title="The Pricing Pathway"
-      initial={{ opacity: 0, x: 12, y: '-50%' }}
+      initial={{ opacity: 0, x: offX, y: '-50%' }}
       animate={{
         opacity: 1,
         x: 0,
         y: '-50%',
         boxShadow: [
-          '-6px 8px 18px rgba(254,186,2,0.40)',
-          '-6px 8px 34px rgba(254,186,2,0.75)',
-          '-6px 8px 18px rgba(254,186,2,0.40)',
+          `${shadowX} 8px 18px rgba(254,186,2,0.40)`,
+          `${shadowX} 8px 34px rgba(254,186,2,0.75)`,
+          `${shadowX} 8px 18px rgba(254,186,2,0.40)`,
         ],
       }}
-      exit={{ opacity: 0, x: 12, y: '-50%' }}
+      exit={{ opacity: 0, x: offX, y: '-50%' }}
       transition={{
         opacity: { duration: 0.18, ease: 'easeOut' },
         x: { duration: 0.18, ease: 'easeOut' },
@@ -1573,13 +1613,16 @@ function HelperLauncherTab({
       style={{
         position: 'fixed',
         top: '50%',
-        right: 0,
+        left: isLeft ? 0 : undefined,
+        right: isLeft ? undefined : 0,
         background:
           'linear-gradient(135deg, var(--brand-yellow) 0%, #ffc933 100%)',
         color: 'var(--brand-navy-dark)',
         border: 'none',
-        borderTopLeftRadius: 'var(--radius-lg)',
-        borderBottomLeftRadius: 'var(--radius-lg)',
+        borderTopLeftRadius: isLeft ? 0 : 'var(--radius-lg)',
+        borderBottomLeftRadius: isLeft ? 0 : 'var(--radius-lg)',
+        borderTopRightRadius: isLeft ? 'var(--radius-lg)' : 0,
+        borderBottomRightRadius: isLeft ? 'var(--radius-lg)' : 0,
         padding: '24px 20px 22px',
         display: 'flex',
         flexDirection: 'column',
@@ -1590,10 +1633,10 @@ function HelperLauncherTab({
         zIndex: 95,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.paddingRight = '26px';
+        e.currentTarget.style[hoverPad] = '26px';
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.paddingRight = '20px';
+        e.currentTarget.style[hoverPad] = '20px';
       }}
     >
       <PathwayGlyph size={38} color="var(--brand-navy-dark)" strokeWidth={2.6} />

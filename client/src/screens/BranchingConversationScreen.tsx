@@ -377,8 +377,6 @@ export function BranchingConversationScreen({
                     lineHeight: 1.6,
                     color: 'var(--grey-700)',
                     fontWeight: 500,
-                    borderLeft: '3px solid var(--brand-yellow)',
-                    paddingLeft: 16,
                   }}
                 >
                   &ldquo;{tree.openingAm}&rdquo;
@@ -415,8 +413,6 @@ export function BranchingConversationScreen({
                 lineHeight: 1.6,
                 color: 'var(--grey-700)',
                 fontWeight: 500,
-                borderLeft: `3px solid ${partnerColor}`,
-                paddingLeft: 16,
               }}
             >
               &ldquo;
