@@ -103,7 +103,7 @@ export function CharacterBuildScreen({
             gridTemplateColumns: 'repeat(8, 1fr)',
             gap: 10,
             width: '100%',
-            maxWidth: 900,
+            maxWidth: 720,
             margin: '0 auto 12px',
             opacity: imagesReady ? 1 : 0,
             transition: 'opacity 0.3s ease',
@@ -353,7 +353,7 @@ function PersonaCard({
       style={{
         position: 'relative',
         textAlign: 'left',
-        padding: '14px 16px',
+        padding: '11px 14px',
         background: isSelected ? 'rgba(254, 186, 2, 0.10)' : 'rgba(255,255,255,0.05)',
         border: isSelected
           ? '2px solid var(--brand-yellow)'
@@ -364,7 +364,7 @@ function PersonaCard({
         transition: 'background 0.18s ease, border-color 0.18s ease',
         display: 'flex',
         flexDirection: 'column',
-        gap: 10,
+        gap: 7,
         boxShadow: isSelected ? '0 6px 18px rgba(254, 186, 2, 0.18)' : 'none',
       }}
       onMouseEnter={(e) => {
@@ -450,7 +450,7 @@ function PersonaCard({
         style={{
           fontSize: 13,
           color: 'rgba(255,255,255,0.85)',
-          lineHeight: 1.5,
+          lineHeight: 1.4,
           fontStyle: 'italic',
         }}
       >
@@ -470,7 +470,7 @@ function PersonaCard({
             color: 'rgba(255,255,255,0.5)',
             textTransform: 'uppercase',
             letterSpacing: '0.10em',
-            marginBottom: 6,
+            marginBottom: 4,
           }}
         >
           Wins by
@@ -481,9 +481,9 @@ function PersonaCard({
               key={i}
               style={{
                 fontSize: 12,
-                lineHeight: 1.4,
+                lineHeight: 1.35,
                 color: 'rgba(255,255,255,0.78)',
-                marginBottom: 3,
+                marginBottom: 2,
                 paddingLeft: 12,
                 position: 'relative',
               }}
@@ -513,8 +513,8 @@ function PersonaCard({
         style={{
           display: 'flex',
           flexDirection: 'column',
-          gap: 5,
-          padding: '10px 12px',
+          gap: 3,
+          padding: '8px 10px',
           borderRadius: 8,
           background: `${accentColor}12`,
           border: `1px solid ${accentColor}35`,
