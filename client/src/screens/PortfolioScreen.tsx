@@ -495,7 +495,8 @@ function PersonaTipChip({
         gap: 8,
         padding: '6px 10px',
         background: 'var(--off-white)',
-        border: '1px solid var(--grey-100)',
+        // Full coloured border in the persona accent (not a left-rail).
+        border: `1.5px solid ${accent}`,
         borderRadius: 'var(--radius-sm)',
       }}
     >

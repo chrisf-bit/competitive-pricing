@@ -701,7 +701,9 @@ function PersonaLensChip({
     <div
       style={{
         background: 'var(--white)',
-        border: '1.5px solid var(--grey-100)',
+        // Full coloured border in the persona accent (green/yellow/red/
+        // blue per persona) - a full box border, not a left-rail handle.
+        border: `1.5px solid ${accent}`,
         borderRadius: 'var(--radius-md)',
         padding: '9px 12px',
         boxShadow: 'var(--shadow-sm)',
