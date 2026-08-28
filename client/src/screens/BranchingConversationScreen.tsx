@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   ArrowLeft,
   PhoneCall,
+  AlertTriangle,
 } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getBranchingScenario } from '../data/branchingScenarios';
@@ -94,6 +95,23 @@ export function BranchingConversationScreen({
 
   const isComplete = conversation.choices.length >= tree.steps.length;
   const currentStep = tree.steps[conversation.phaseIndex];
+
+  // The option the learner just picked (choices[i] answers steps[i]), so
+  // we can flag a wrong step in real-time. "Wrong" = a compliance breach
+  // (borderline/risky) OR a style pick that lands badly (styleMatch <= -1).
+  // A merely non-optimal-but-safe-and-neutral pick is NOT flagged - that
+  // would over-warn and turn the call into avoid-the-icon guesswork.
+  const lastChoiceIdx = conversation.choices.length - 1;
+  const lastPickedOption =
+    lastChoiceIdx >= 0
+      ? tree.steps[lastChoiceIdx]?.options.find(
+          (o) => o.id === conversation.choices[lastChoiceIdx],
+        )
+      : undefined;
+  const lastPickComplianceOff =
+    !!lastPickedOption && lastPickedOption.compliance !== 'safe';
+  const lastPickStyleOff = (conversation.styleMatchScore ?? 0) <= -1;
+  const lastPickWasWrong = lastPickComplianceOff || lastPickStyleOff;
 
   // Resolve the partner's prompt for the current step. The previous
   // step's picked option may override the default via `nextPrompt`.
@@ -425,7 +443,20 @@ export function BranchingConversationScreen({
             {conversation.styleMatchScore !== null &&
               (() => {
                 const reaction = getReactionLabel(conversation.styleMatchScore);
-                if (!reaction) return null;
+                // Nothing to show for a clean, style-neutral pick.
+                if (!reaction && !lastPickComplianceOff) return null;
+                // A compliance breach overrides a positive/neutral style
+                // reaction so we never show a green "responded well" on a
+                // line that wasn't actually compliant.
+                const overrideWarn =
+                  lastPickComplianceOff &&
+                  (!reaction || reaction.color === 'var(--success)');
+                const color = overrideWarn ? 'var(--warning)' : reaction!.color;
+                const bg = overrideWarn ? 'var(--warning-bg)' : reaction!.bg;
+                const text =
+                  reaction && !overrideWarn
+                    ? reaction.text
+                    : "That step wasn't quite right";
                 return (
                   <div
                     style={{
@@ -436,21 +467,27 @@ export function BranchingConversationScreen({
                       gap: 6,
                       padding: '5px 12px',
                       borderRadius: 'var(--radius-pill)',
-                      background: reaction.bg,
-                      color: reaction.color,
+                      background: bg,
+                      color,
                       fontSize: 11,
                       fontWeight: 700,
                     }}
                   >
-                    <div
-                      style={{
-                        width: 6,
-                        height: 6,
-                        borderRadius: '50%',
-                        background: reaction.color,
-                      }}
-                    />
-                    {reaction.text}
+                    {lastPickWasWrong ? (
+                      // Subtle real-time cue that this pick was off (a
+                      // compliance breach or a poor style fit).
+                      <AlertTriangle size={12} strokeWidth={2.5} />
+                    ) : (
+                      <div
+                        style={{
+                          width: 6,
+                          height: 6,
+                          borderRadius: '50%',
+                          background: color,
+                        }}
+                      />
+                    )}
+                    {text}
                   </div>
                 );
               })()}
