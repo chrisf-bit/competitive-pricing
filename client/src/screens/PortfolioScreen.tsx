@@ -308,14 +308,18 @@ export function PortfolioScreen({
                   background: 'var(--off-white)',
                   borderTop: '1px solid var(--grey-100)',
                   display: 'flex',
-                  // Bottom-align so the Experienced RPD, Partner Value and
-                  // the mini-metric values all sit on one baseline.
-                  alignItems: 'flex-end',
+                  // Stretch cells so every label pins to the top and every
+                  // value to the bottom (space-between below), giving one
+                  // top line of titles and one baseline of values.
+                  alignItems: 'stretch',
                   justifyContent: 'space-between',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'flex-end', gap: 14 }}>
-                  <div data-tutorial={i === 0 ? 'rpd-number' : undefined}>
+                <div style={{ display: 'flex', alignItems: 'stretch', gap: 14 }}>
+                  <div
+                    data-tutorial={i === 0 ? 'rpd-number' : undefined}
+                    style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+                  >
                     <div
                       style={{
                         fontSize: 9,
@@ -353,7 +357,10 @@ export function PortfolioScreen({
                     </div>
                   </div>
 
-                  <div data-tutorial={i === 0 ? 'partner-value' : undefined}>
+                  <div
+                    data-tutorial={i === 0 ? 'partner-value' : undefined}
+                    style={{ display: 'flex' }}
+                  >
                     <MiniMetric
                       label="Partner Value"
                       valueText={
@@ -366,10 +373,11 @@ export function PortfolioScreen({
                 </div>
 
                 {/* KPI mini-row - intentionally neutral; learners read and decide.
-                    alignItems flex-end bottom-aligns each cell so the values line
-                    up even though "Scenarios" is a one-line label and the others
-                    ("RPD Loyal", "Lose Price") wrap to two. */}
-                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 10, alignItems: 'flex-end' }}>
+                    Cells stretch (alignItems stretch) and each MiniMetric pins its
+                    label to the top and value to the bottom, so titles top-align and
+                    values baseline-align even though "Scenarios" is a one-line label
+                    and the others ("RPD Loyal", "Lose Price") wrap to two. */}
+                <div data-tutorial={i === 0 ? 'mini-metrics' : undefined} style={{ display: 'flex', gap: 10, alignItems: 'stretch' }}>
                   <MiniMetric
                     label="RPD Pub"
                     valueText={`${partner.metrics.rpdPublic.toFixed(1)}%`}
@@ -458,10 +466,20 @@ function MiniMetric({
         ? 'var(--warning)'
         : 'var(--grey-700)';
   return (
-    // The value is the last element, so the parent rows bottom-align
-    // each cell (alignItems: flex-end) to line the numbers up across
-    // the row regardless of how many lines each label wraps to.
-    <div style={{ textAlign: 'center' }}>
+    // Column with the label pinned to the top and the value to the
+    // bottom. The parent rows stretch each cell to equal height, so
+    // titles top-align and values baseline-align across the row even
+    // when some labels wrap to two lines and others don't. No explicit
+    // height - the flex stretch supplies a definite one for
+    // space-between to distribute against.
+    <div
+      style={{
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+      }}
+    >
       <div
         style={{
           fontSize: 8,
