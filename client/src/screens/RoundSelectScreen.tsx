@@ -19,6 +19,20 @@ import roundSelectBackdrop from '../assets/round-select-backdrop.webp';
 const AVAILABLE_ROUNDS = Array.from({ length: 20 }, (_, i) => i + 1);
 
 /**
+ * Review convenience: in a dev build (`npm run dev`) or with `?dev=1` on
+ * the URL, unlock every round tile so a reviewer can open any round
+ * without completing the ones before it. Clicking a not-yet-reached
+ * round routes through startPracticeRound (a clean baseline for that
+ * round), so it is safe to enter any round directly. Gated to dev
+ * exactly like DevNav - never unlocks for real learners, and must be
+ * removed / re-gated alongside DevNav before the SCORM ship.
+ */
+const DEV_UNLOCK_ALL_ROUNDS =
+  import.meta.env.DEV ||
+  (typeof window !== 'undefined' &&
+    new URLSearchParams(window.location.search).has('dev'));
+
+/**
  * Level 1 = partner-portfolio content (rounds 1-10). Level 2 = OPC
  * rounds (11-20): the same lead partners revisited through the
  * On-Platform Competitiveness lens. Tiles beyond AVAILABLE_ROUNDS
@@ -290,7 +304,14 @@ function LevelBlock({
           const isPlayable =
             (AVAILABLE_ROUNDS as readonly number[]).includes(round) &&
             (isCurrent || isCompleted);
-          const isLocked = !isPlayable;
+          // In dev/review mode every in-range round is openable, so a
+          // reviewer can jump straight to any round.
+          const isLocked =
+            !isPlayable &&
+            !(
+              DEV_UNLOCK_ALL_ROUNDS &&
+              (AVAILABLE_ROUNDS as readonly number[]).includes(round)
+            );
           return (
             <RoundTile
               key={round}
@@ -482,6 +503,13 @@ function RoundTile({
           <>
             <Check size={11} />
             Full stars earned
+          </>
+        ) : !isLocked ? (
+          // Dev/review-only: an unlocked round the learner hasn't reached.
+          <>
+            <Play size={11} fill="currentColor" />
+            Review round
+            <ChevronRight size={11} style={{ marginLeft: 'auto' }} />
           </>
         ) : null}
       </div>
