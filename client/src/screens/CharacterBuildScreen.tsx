@@ -103,7 +103,7 @@ export function CharacterBuildScreen({
             gridTemplateColumns: 'repeat(8, 1fr)',
             gap: 10,
             width: '100%',
-            maxWidth: 720,
+            maxWidth: 1080,
             margin: '0 auto 12px',
             opacity: imagesReady ? 1 : 0,
             transition: 'opacity 0.3s ease',
@@ -267,10 +267,12 @@ function AvatarTile({
       onClick={onClick}
       style={{
         position: 'relative',
-        // Match the source artwork ratio (1024x1536 = 2:3) so each
-        // illustration fills the tile without crop, scale or position
-        // workarounds.
-        aspectRatio: '2 / 3',
+        // Square tiles: shorter than the 2:3 source canvas (so the row
+        // takes less vertical space and the Continue button stays in
+        // view) while keeping the character large. The artwork is
+        // square-framed, so objectFit: cover crops only the empty
+        // top/bottom margin of the 1024x1536 canvas, not the character.
+        aspectRatio: '1 / 1',
         background: avatar.bgColor,
         border: isSelected
           ? '2.5px solid var(--brand-yellow)'
