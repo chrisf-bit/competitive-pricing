@@ -127,7 +127,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'B',
-            text: '"You are free to choose your pricing and distribution strategy. I would like to understand whether these differences are intentional, unintentional, or a mix so we can review the impact on your performance on Booking.com."',
+            text: '"You are free to choose your pricing and distribution strategy. Could you help me understand your current pricing approach?"',
           },
           {
             id: 'C',
