@@ -8,12 +8,18 @@ import type { PartnerState, MarketContext } from '../types';
 import { RelationshipBadge } from '../components/MetricBadge';
 import { useIdleNudge } from '../hooks/useIdleNudge';
 import { resolvePropertyImage } from '../data/propertyImages';
+import { getPersonaTipChip } from '../data/personaHints';
+import { getPersonaById, type SuperPowerPersona } from '../data/characters';
 
 interface PortfolioScreenProps {
   partners: PartnerState[];
   actionsThisRound: string[];
   marketContext: MarketContext;
   onSelectPartner: (id: string) => void;
+  /** Learner's chosen super-power persona id, for the per-card tip chip. */
+  personaId: string | null;
+  /** Current round, to resolve the right persona hint per partner. */
+  currentRound: number;
   /** Escape hatch if the round resolves to no partner cards (out-of-range
    *  round / desync) - guarantees the learner is never stuck on an empty
    *  portfolio. */
@@ -25,8 +31,11 @@ export function PortfolioScreen({
   actionsThisRound,
   marketContext,
   onSelectPartner,
+  personaId,
+  currentRound,
   onReturnToRoundSelect,
 }: PortfolioScreenProps) {
+  const persona = getPersonaById(personaId);
   // If the learner idles on Portfolio, pulse the first partner card
   // to draw the eye back to the primary decision. Enabled unconditionally
   // here - anywhere the screen renders the nudge is desirable.
@@ -300,6 +309,21 @@ export function PortfolioScreen({
                 </div>
               </div>
 
+              {/* Super-power tip chip - the persona's one-line lens on
+                  this partner. Shows an authored hint on the priority
+                  partner and a generic "read the data" prompt on
+                  decoys, so every card carries the cue. */}
+              {(() => {
+                if (!persona) return null;
+                const hint = getPersonaTipChip(
+                  partner.persona.id,
+                  currentRound,
+                  personaId,
+                );
+                if (!hint) return null;
+                return <PersonaTipChip persona={persona} oneLiner={hint.oneLiner} />;
+              })()}
+
               {/* Big RPD number */}
               <div
                 data-tutorial={i === 0 ? 'rpd-section' : undefined}
@@ -446,6 +470,57 @@ export function PortfolioScreen({
       </div>
       )}
 
+    </div>
+  );
+}
+
+// Compact per-card persona lens: tinted icon badge + the persona's
+// one-liner on this partner. Colour lives in the icon badge and the
+// bold label, never a left-border rail.
+function PersonaTipChip({
+  persona,
+  oneLiner,
+}: {
+  persona: SuperPowerPersona;
+  oneLiner: string;
+}) {
+  const Icon = persona.icon;
+  const accent = `var(--style-${persona.accent})`;
+  return (
+    <div
+      style={{
+        margin: '0 16px 8px',
+        display: 'flex',
+        alignItems: 'flex-start',
+        gap: 8,
+        padding: '6px 10px',
+        background: 'var(--off-white)',
+        border: '1px solid var(--grey-100)',
+        borderRadius: 'var(--radius-sm)',
+      }}
+    >
+      <div
+        style={{
+          width: 20,
+          height: 20,
+          borderRadius: 6,
+          background: `${accent}1a`,
+          color: accent,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+          marginTop: 1,
+        }}
+      >
+        <Icon size={12} strokeWidth={2.2} />
+      </div>
+      <div style={{ fontSize: 11, color: 'var(--grey-700)', lineHeight: 1.4 }}>
+        <span style={{ fontWeight: 800, color: accent }}>
+          {persona.powerEffect.unlockedChip}:
+        </span>{' '}
+        {oneLiner}
+      </div>
     </div>
   );
 }

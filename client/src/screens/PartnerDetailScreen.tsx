@@ -28,7 +28,7 @@ import {
   DiscountBadge,
 } from '../components/MetricBadge';
 import { getPersonaById, type SuperPowerPersona } from '../data/characters';
-import { getPersonaHint } from '../data/personaHints';
+import { getPersonaTipChip } from '../data/personaHints';
 import { IssueTreeHelper } from '../components/IssueTreeHelper';
 import { PathwayGlyph } from '../components/PathwayGlyph';
 import { getBranchingScenario } from '../data/branchingScenarios';
@@ -130,7 +130,7 @@ export function PartnerDetailScreen({
 
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
-  const hint = getPersonaHint(partner.persona.id, currentRound, personaId);
+  const hint = getPersonaTipChip(partner.persona.id, currentRound, personaId);
 
   // Issue Tree Helper - opens the guided diagnostic wizard for this
   // partner. Teach-mode only; no scoring or impact on grading. Drawer

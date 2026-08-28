@@ -703,18 +703,79 @@ export const personaHints: PersonaHintsByRound = {
   'noble-falcon-none': { 10: nobleFalconR10Hints, 20: nobleFalconR20Hints },
 };
 
+/**
+ * Strict lookup: the SME/Claude-authored hint for this partner-round-
+ * persona, or null if none exists. Used by the internal review tool so
+ * reviewers only ever see authored content. App screens use
+ * getPersonaTipChip (below), which adds a generic fallback.
+ */
 export function getPersonaHint(
   partnerId: string,
   round: number,
   personaId: string | null,
 ): PersonaHint | null {
   if (!personaId) return null;
-  const direct = personaHints[partnerId]?.[round]?.[personaId as PersonaId];
+  const pid = personaId as PersonaId;
+  const direct = personaHints[partnerId]?.[round]?.[pid];
   if (direct) return direct;
-  // Per-regime distractor variants (marina-narrow, carlos-wide, etc.)
-  // alias back to their base partner's hints so we don't duplicate
-  // per-regime hint content for each country variant.
-  const baseId = partnerId.replace(/-(none|narrow|wide)$/, '');
+  // Alias the regime / journey suffix back to a shared block: standard
+  // distractor variants (marina-narrow, ...) key off a bare base id,
+  // while priority partners key off the -none variant; KAM
+  // (-cross-regional) has no hint of its own and reuses the standard
+  // block (content is regime-identical). Try both conventions.
+  const baseId = partnerId.replace(/-(none|narrow|wide|cross-regional)$/, '');
   if (baseId === partnerId) return null;
-  return personaHints[baseId]?.[round]?.[personaId as PersonaId] ?? null;
+  return (
+    personaHints[baseId]?.[round]?.[pid] ??
+    personaHints[`${baseId}-none`]?.[round]?.[pid] ??
+    null
+  );
+}
+
+/**
+ * Generic, persona-flavoured "read the data" prompt used when a partner-
+ * round has no authored hint (a healthy decoy, or a KAM partner off its
+ * priority round). Deliberately a neutral prompt, NOT a "this one's
+ * healthy" verdict - the latter would tell the learner which partner is
+ * the priority without reading the data.
+ *
+ * NOTE (SME): generic decoy copy, review before launch. Design tension:
+ * a specific authored chip vs this generic one still contrasts, so an
+ * attentive learner may infer the priority from specificity alone.
+ */
+const genericHealthyHints: Partial<Record<PersonaId, PersonaHint>> = {
+  'conversation-architect': {
+    oneLiner:
+      'Plan your open around the data - lead with whatever metric stands out most, if anything does.',
+  },
+  'objection-navigator': {
+    oneLiner:
+      'Read the data for where this partner might push back before you pick up the phone.',
+  },
+  storyteller: {
+    oneLiner:
+      'Read the metrics as one story - what do eRPD, Lose Price and the Public/Loyal gap add up to?',
+  },
+  'data-detective': {
+    oneLiner:
+      'Hunt for the anomaly: weigh eRPD, Lose Price and the Public/Loyal gap against healthy ranges.',
+  },
+};
+
+/**
+ * App-facing lookup for the persona tip chip: an authored hint when one
+ * exists, otherwise the generic prompt, so every partner card and
+ * detail shows a chip. Returns null only when no persona is picked.
+ */
+export function getPersonaTipChip(
+  partnerId: string,
+  round: number,
+  personaId: string | null,
+): PersonaHint | null {
+  if (!personaId) return null;
+  return (
+    getPersonaHint(partnerId, round, personaId) ??
+    genericHealthyHints[personaId as PersonaId] ??
+    null
+  );
 }
