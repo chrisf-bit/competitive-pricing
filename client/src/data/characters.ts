@@ -169,7 +169,7 @@ export const superPowerPersonas: SuperPowerPersona[] = [
         'Next playthrough, push past the rapport when the numbers ask for it.',
     },
     inGameImpact:
-      'On each partner, a one-line coaching chip tells you how to approach the conversation.',
+      'On each partner, a one-line coaching banner tells you how to approach the conversation.',
   },
   {
     id: 'objection-navigator',
@@ -194,7 +194,7 @@ export const superPowerPersonas: SuperPowerPersona[] = [
         'Next playthrough, slow down for one more diagnostic question before pitching.',
     },
     inGameImpact:
-      'On each partner, a one-line chip flags the pushback most likely to derail the call.',
+      'On each partner, a one-line banner flags the pushback most likely to derail the call.',
   },
   {
     id: 'storyteller',
@@ -219,7 +219,7 @@ export const superPowerPersonas: SuperPowerPersona[] = [
         'Next playthrough, leave the supporting detail in when it changes the story.',
     },
     inGameImpact:
-      'On each partner, a one-line chip retells the numbers as the story they add up to.',
+      'On each partner, a one-line banner retells the numbers as the story they add up to.',
   },
   {
     id: 'data-detective',
@@ -244,7 +244,7 @@ export const superPowerPersonas: SuperPowerPersona[] = [
         'Next playthrough, look up from the dashboard for the partner\'s style signals.',
     },
     inGameImpact:
-      'On each partner, a one-line chip calls out the biggest metric anomaly hiding in the data.',
+      'On each partner, a one-line banner calls out the biggest metric anomaly hiding in the data.',
   },
 ];
 
