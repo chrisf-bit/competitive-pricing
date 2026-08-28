@@ -86,21 +86,25 @@ export function CharacterBuildScreen({
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          padding: '24px 32px 20px',
-          maxWidth: 1180,
+          padding: '16px 32px 16px',
+          maxWidth: 1320,
           width: '100%',
           margin: '0 auto',
         }}
       >
-        {/* Avatars */}
+        {/* Avatars. The grid is capped narrower than the content column
+            so the 2:3 tiles stay short (they're the tallest thing on the
+            screen at full width) - keeps the Continue button in view
+            without cropping the illustrations. */}
         <SectionHeading label="Choose your avatar" complete={!!selectedAvatarId} />
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(8, 1fr)',
-            gap: 12,
+            gap: 10,
             width: '100%',
-            marginBottom: 18,
+            maxWidth: 900,
+            margin: '0 auto 12px',
             opacity: imagesReady ? 1 : 0,
             transition: 'opacity 0.3s ease',
           }}
