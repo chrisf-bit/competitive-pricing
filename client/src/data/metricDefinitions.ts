@@ -27,7 +27,7 @@ export const metricDefinitions = {
   erpd: {
     label: 'eRPD',
     helpText:
-      "Experienced RPD - the relative price difference between what travelers see on Booking.com and what they'd pay on a key OTA or Brand.com. Higher % = partner is more expensive on our platform.",
+      "Experienced RPD - the relative price difference between what travelers see on Booking.com and what they'd pay on Key OTA or Brand.com. Higher % = partner is more expensive on our platform.",
   },
   rpdPublic: {
     label: 'RPD Public',
