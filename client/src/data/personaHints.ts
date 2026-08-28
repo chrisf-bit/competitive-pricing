@@ -1,3 +1,5 @@
+import type { CommunicationStyle } from '../types';
+
 /**
  * Persona-driven pre-call hints surfaced on the Partner Detail screen.
  *
@@ -763,19 +765,66 @@ const genericHealthyHints: Partial<Record<PersonaId, PersonaHint>> = {
 };
 
 /**
- * App-facing lookup for the persona tip chip: an authored hint when one
- * exists, otherwise the generic prompt, so every partner card and
- * detail shows a chip. Returns null only when no persona is picked.
+ * Persona x partner-communication-style approach lines, used for the
+ * decoy / non-authored case. Specific to the partner (name + style)
+ * and genuinely useful (how to pitch to this personality) WITHOUT
+ * revealing whether they're the round's priority - it's approach
+ * advice, not a data verdict. The round's optimum partner keeps its
+ * authored line (authored wins in getPersonaTipChip); every other
+ * partner reads through here, so each decoy differs by name + style.
+ */
+const styleTipByPersona: Record<
+  PersonaId,
+  Record<CommunicationStyle, (name: string) => string>
+> = {
+  'conversation-architect': {
+    red: (n) => `${n} is direct and results-first - open with the headline and a clear ask, skip the warm-up.`,
+    yellow: (n) => `${n} is expressive and relationship-led - open warm, keep it a conversation, then steer to the point.`,
+    green: (n) => `${n} is steady and consensus-minded - open gently and acknowledge what's working before any change.`,
+    blue: (n) => `${n} is analytical - open with the data and a logical case, not rapport.`,
+  },
+  'objection-navigator': {
+    red: (n) => `${n} pushes back hard - expect a challenge on any ask; stay collaborative and evidence-led.`,
+    yellow: (n) => `${n} deflects with optimism - expect "it's all fine"; anchor back to the specifics.`,
+    green: (n) => `${n} is cautious about change - expect hesitation on anything new; reassure and go step by step.`,
+    blue: (n) => `${n} probes the detail - expect "prove it"; have your numbers tight before you call.`,
+  },
+  storyteller: {
+    red: (n) => `${n} responds to outcomes - frame the story around results and the bottom line.`,
+    yellow: (n) => `${n} responds to vision - frame the story around opportunity and momentum.`,
+    green: (n) => `${n} responds to reassurance - frame the story around stability and low-risk wins.`,
+    blue: (n) => `${n} responds to evidence - let the numbers carry the story, kept tight.`,
+  },
+  'data-detective': {
+    red: (n) => `${n} wants the punchline - lead with the single number that matters most.`,
+    yellow: (n) => `${n} skims the detail - pick one vivid data point rather than the full picture.`,
+    green: (n) => `${n} trusts people over charts - use the data gently as support, not pressure.`,
+    blue: (n) => `${n} lives in the data - bring the full picture; they'll spot any gap you miss.`,
+  },
+};
+
+/**
+ * App-facing lookup for the persona tip chip. Priority order:
+ *   1. the SME/Claude-authored hint for this partner-round (the round's
+ *      optimum partner has one),
+ *   2. a style + name line built from the partner's communication style
+ *      (decoys / KAM off their priority round), when `partner` is passed,
+ *   3. a last-resort generic prompt (when no partner detail is supplied).
+ * Returns null only when no persona is picked.
  */
 export function getPersonaTipChip(
   partnerId: string,
   round: number,
   personaId: string | null,
+  partner?: { firstName: string; style: CommunicationStyle },
 ): PersonaHint | null {
   if (!personaId) return null;
-  return (
-    getPersonaHint(partnerId, round, personaId) ??
-    genericHealthyHints[personaId as PersonaId] ??
-    null
-  );
+  const authored = getPersonaHint(partnerId, round, personaId);
+  if (authored) return authored;
+  const pid = personaId as PersonaId;
+  if (partner) {
+    const build = styleTipByPersona[pid]?.[partner.style];
+    if (build) return { oneLiner: build(partner.firstName) };
+  }
+  return genericHealthyHints[pid] ?? null;
 }

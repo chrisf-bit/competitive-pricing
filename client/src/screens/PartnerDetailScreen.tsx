@@ -130,7 +130,10 @@ export function PartnerDetailScreen({
 
   // Resolve the learner's persona + the partner-round hint pair, if any.
   const persona = getPersonaById(personaId);
-  const hint = getPersonaTipChip(partner.persona.id, currentRound, personaId);
+  const hint = getPersonaTipChip(partner.persona.id, currentRound, personaId, {
+    firstName: partner.persona.name.split(' ')[0],
+    style: partner.persona.style,
+  });
 
   // Issue Tree Helper - opens the guided diagnostic wizard for this
   // partner. Teach-mode only; no scoring or impact on grading. Drawer
