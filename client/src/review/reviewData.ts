@@ -7,9 +7,10 @@ import type {
 } from '../types';
 import { getBranchingScenario } from '../data/branchingScenarios';
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
+import { getPortfolioForRound } from '../data/portfolioByRound';
 import { initialPartners, pendingPartners } from '../data/partners';
 import { getPersonaHint } from '../data/personaHints';
-import { getPriceBucket } from '../engine/gameEngine';
+import { getPriceBucket, applyRoundBaseline } from '../engine/gameEngine';
 
 const ALL_PARTNERS: PartnerState[] = [...initialPartners, ...pendingPartners];
 const recordFor = (id: string) =>
@@ -59,7 +60,7 @@ export interface Dossier {
 }
 export interface Flow {
   key: string;
-  journey: 'standard' | 'kam';
+  journey: 'standard' | 'kam' | 'decoy';
   journeyLabel: string;
   level: 1 | 2;
   round: number;
@@ -262,6 +263,50 @@ export function buildFlows(): Flow[] {
       basePartner: baseId(pid),
       title: `R${round} - ${rec.persona.companyName ?? rec.persona.propertyName} (${REGIME_LABEL[rec.persona.parityRegime ?? 'none']})`,
       dossier: buildDossier(rec, round, tree),
+      openingAm: tree.openingAm,
+      steps: toFlowSteps(tree),
+    });
+  }
+
+  // Decoy calls: the two non-priority cards a learner sees each round.
+  // They ARE learner-facing (any card can be opened and played), so
+  // legal/commercial must review this dialogue too. Enumerate every
+  // round x regime's non-priority cards, dedupe by dialogue signature so
+  // the shared "nothing pressing" / close-decoy scripts collapse into one
+  // entry each, and show the decoy's HEALTHY round metrics (via
+  // applyRoundBaseline) rather than the hotel's problem-state record.
+  const decoyBySig = new Map<
+    string,
+    { tree: BranchingConversationTree; partnerId: string; round: number }
+  >();
+  for (let round = 1; round <= 20; round++) {
+    for (const regime of ['none', 'narrow', 'wide', 'cross-regional'] as ParityRegime[]) {
+      const priorityId = getCorrectPartnerForRound(regime, round);
+      const ids = getPortfolioForRound(regime, round) ?? [];
+      for (const id of ids) {
+        if (id === priorityId) continue;
+        const tree = getBranchingScenario(id, round);
+        if (!tree) continue;
+        const sig = signature(tree);
+        if (!decoyBySig.has(sig)) decoyBySig.set(sig, { tree, partnerId: id, round });
+      }
+    }
+  }
+  for (const { tree, partnerId, round } of decoyBySig.values()) {
+    const rec = recordFor(partnerId);
+    if (!rec) continue;
+    const healthyRec = applyRoundBaseline(rec, round);
+    flows.push({
+      key: `decoy::${partnerId}::r${round}`,
+      journey: 'decoy',
+      journeyLabel: 'Decoy',
+      level: round <= 10 ? 1 : 2,
+      round,
+      regimes: [],
+      repPartnerId: partnerId,
+      basePartner: baseId(partnerId),
+      title: `R${round} - ${healthyRec.persona.companyName ?? healthyRec.persona.propertyName} (decoy)`,
+      dossier: buildDossier(healthyRec, round, tree),
       openingAm: tree.openingAm,
       steps: toFlowSteps(tree),
     });

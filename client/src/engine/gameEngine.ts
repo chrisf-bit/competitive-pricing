@@ -31,7 +31,7 @@ import { gradeRound, gradeBranchingRound } from './grading';
  * Returns the partner unchanged if no baseline is defined for this
  * round (which is the case for rounds 4-10 today).
  */
-function applyRoundBaseline(
+export function applyRoundBaseline(
   partner: PartnerState,
   round: number,
 ): PartnerState {

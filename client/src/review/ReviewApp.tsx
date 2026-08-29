@@ -147,6 +147,7 @@ export default function ReviewApp() {
     { label: 'Standard - Level 2 / OPC (R11-20)', items: filtered.filter((f) => f.journey === 'standard' && f.level === 2) },
     { label: 'Cross-Regional / KAM - Level 1 (R1-10)', items: filtered.filter((f) => f.journey === 'kam' && f.level === 1) },
     { label: 'Cross-Regional / KAM - Level 2 (R11-20)', items: filtered.filter((f) => f.journey === 'kam' && f.level === 2) },
+    { label: 'Decoy calls (non-priority cards)', items: filtered.filter((f) => f.journey === 'decoy') },
   ];
 
   const threadCount = (f: Flow) =>
