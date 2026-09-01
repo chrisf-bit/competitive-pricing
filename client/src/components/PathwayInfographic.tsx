@@ -192,26 +192,76 @@ export function PathwayInfographic({
         </div>
       </div>
 
-      {/* Revealed step copy - a floating card anchored to the SIDE of the
-          active marker, vertically centred on it. It opens OUTWARD (toward
-          the nearest screen edge) into the empty margin rather than into
-          the crowded centre. Because the markers alternate high/low, a
-          marker's same-height neighbours are two apart, so opening outward
-          keeps the card clear of every numbered icon - it may cross the
-          road ribbon (that's fine) but never sits over or under a pin. The
-          card is on top, so it's never hidden behind an icon either.
-          pointerEvents:none so it never blocks a marker click. */}
+      {/* Revealed step copy - a floating card anchored beside the active
+          marker. It tries each direction around the marker (outward side
+          first, then the empty band below / above, then the inward side)
+          and takes the first that clears every OTHER numbered icon, so the
+          card never sits over or under a pin. It may cross the road ribbon
+          (that's fine) and is on top, so it's never hidden behind an icon
+          either. pointerEvents:none so it never blocks a marker click. */}
       {activeNode && activeC && scale > 0 && (() => {
         const mx = activeC.x * containerW;
         const my = activeC.y * roadH;
         const half = (MARKER_DIA / 2) * scale;
         const gap = 14;
-        // Open toward the nearest edge (left for left-half markers, right
-        // for right-half ones) so the card lands in the clear margin.
-        const openRight = mx >= containerW / 2;
-        const rawLeft = openRight ? mx + half + gap : mx - half - gap - CARD_W;
-        const left = Math.max(6, Math.min(rawLeft, containerW - CARD_W - 6));
-        const centerY = Math.max(46, Math.min(my, roadH - 46));
+        const CARD_H = 118; // estimate, used only for collision testing
+        const MARKER_R = half + 6; // icon radius + a little slack
+
+        const others = pathwayNodes
+          .filter((n) => n.stepNumber !== activeNode.stepNumber && CENTRE[n.stepNumber])
+          .map((n) => ({ x: CENTRE[n.stepNumber].x * containerW, y: CENTRE[n.stepNumber].y * roadH }));
+
+        const clampLeft = (l: number) => Math.max(6, Math.min(l, containerW - CARD_W - 6));
+        // Rect (card) vs circle (icon) overlap test.
+        const hitsIcon = (l: number, t: number) =>
+          others.some((o) => {
+            const nx = Math.max(l, Math.min(o.x, l + CARD_W));
+            const ny = Math.max(t, Math.min(o.y, t + CARD_H));
+            return (o.x - nx) ** 2 + (o.y - ny) ** 2 < MARKER_R ** 2;
+          });
+
+        // Try placements around the marker in preference order and take the
+        // first that clears every OTHER numbered icon. Prefer the outward
+        // side (into the clear margin), then the empty band below / above,
+        // then the inward side. A central marker whose sides are both
+        // blocked (e.g. step 4, hemmed by 2 and 6) drops into open space
+        // below the road. Crossing the road ribbon is fine; covering a pin
+        // is not.
+        const rightHalf = mx >= containerW / 2;
+        const side = (openR: boolean) => ({
+          dir: (openR ? 'right' : 'left') as 'left' | 'right' | 'up' | 'down',
+          left: clampLeft(openR ? mx + half + gap : mx - half - gap - CARD_W),
+          top: my - CARD_H / 2,
+        });
+        const down = {
+          dir: 'down' as const,
+          left: clampLeft(mx - CARD_W / 2),
+          top: my + half + gap,
+        };
+        const up = {
+          dir: 'up' as const,
+          left: clampLeft(mx - CARD_W / 2),
+          top: my - half - gap - CARD_H,
+        };
+        const candidates = rightHalf
+          ? [side(true), down, up, side(false)]
+          : [side(false), down, up, side(true)];
+        const place = candidates.find((c) => !hitsIcon(c.left, c.top)) ?? candidates[0];
+
+        // Tick anchored at the marker relative to the chosen card position.
+        const tickV = Math.max(12, Math.min(my - place.top, CARD_H - 12));
+        const tickH = Math.max(14, Math.min(mx - place.left, CARD_W - 14));
+        const clear = '6px solid transparent';
+        const fill = '6px solid rgba(4,12,32,0.94)';
+        const tickStyle =
+          place.dir === 'left'
+            ? { right: -6, top: tickV, borderTop: clear, borderBottom: clear, borderLeft: fill }
+            : place.dir === 'right'
+              ? { left: -6, top: tickV, borderTop: clear, borderBottom: clear, borderRight: fill }
+              : place.dir === 'up'
+                ? { bottom: -6, left: tickH, borderLeft: clear, borderRight: clear, borderTop: fill }
+                : { top: -6, left: tickH, borderLeft: clear, borderRight: clear, borderBottom: fill };
+
         return (
           <motion.div
             key={activeNode.id}
@@ -220,10 +270,9 @@ export function PathwayInfographic({
             transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{
               position: 'absolute',
-              left,
+              left: place.left,
               width: CARD_W,
-              top: centerY,
-              transform: 'translateY(-50%)',
+              top: place.top,
               background: 'rgba(4,12,32,0.94)',
               border: '1px solid rgba(255,255,255,0.12)',
               borderRadius: 12,
@@ -233,21 +282,8 @@ export function PathwayInfographic({
               zIndex: 5,
             }}
           >
-            {/* Tick pointing sideways at the marker */}
-            <div
-              style={{
-                position: 'absolute',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                width: 0,
-                height: 0,
-                borderTop: '6px solid transparent',
-                borderBottom: '6px solid transparent',
-                ...(openRight
-                  ? { left: -6, borderRight: '6px solid rgba(4,12,32,0.94)' }
-                  : { right: -6, borderLeft: '6px solid rgba(4,12,32,0.94)' }),
-              }}
-            />
+            {/* Tick pointing at the marker */}
+            <div style={{ position: 'absolute', width: 0, height: 0, ...tickStyle }} />
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
               <span
                 style={{
