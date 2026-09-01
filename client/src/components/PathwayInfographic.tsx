@@ -204,7 +204,7 @@ export function PathwayInfographic({
         const my = activeC.y * roadH;
         const half = (MARKER_DIA / 2) * scale;
         const gap = 14;
-        const CARD_H = 118; // estimate, used only for collision testing
+        const CARD_H = 150; // estimate, for collision + viewport-fit testing
         const MARKER_R = half + 6; // icon radius + a little slack
 
         const others = pathwayNodes
@@ -244,9 +244,15 @@ export function PathwayInfographic({
           top: my - half - gap - CARD_H,
         };
         const candidates = rightHalf
-          ? [side(true), down, up, side(false)]
-          : [side(false), down, up, side(true)];
-        const place = candidates.find((c) => !hitsIcon(c.left, c.top)) ?? candidates[0];
+          ? [side(true), up, down, side(false)]
+          : [side(false), up, down, side(true)];
+        // A placement must clear every other icon AND stay inside the
+        // road-stage bounds (so it never drops out of the viewport).
+        const fitsViewport = (t: number) => t >= -6 && t + CARD_H <= roadH + 6;
+        const place =
+          candidates.find((c) => !hitsIcon(c.left, c.top) && fitsViewport(c.top)) ??
+          candidates.find((c) => fitsViewport(c.top)) ??
+          candidates[0];
 
         // Tick anchored at the marker relative to the chosen card position.
         const tickV = Math.max(12, Math.min(my - place.top, CARD_H - 12));
