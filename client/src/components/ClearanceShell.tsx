@@ -66,7 +66,7 @@ function ClearanceIntro({
       style={{
         flexShrink: 0,
         margin: '12px 16px 0',
-        padding: '18px 28px',
+        padding: '14px 28px',
         borderRadius: 12,
         border: '1px solid rgba(255,255,255,0.12)',
         background:
@@ -110,8 +110,8 @@ function ClearanceIntro({
           // Brightened for legibility / a comfortable WCAG AA margin on
           // the translucent card over navy (~10:1).
           color: 'rgba(255,255,255,0.9)',
-          lineHeight: 1.55,
-          maxWidth: 720,
+          lineHeight: 1.5,
+          maxWidth: 1040,
           margin: '0 auto',
         }}
       >

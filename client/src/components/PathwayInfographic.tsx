@@ -84,7 +84,11 @@ export function PathwayInfographic({
 
   return (
     <div style={{ width: '100%', position: 'relative' }}>
-      {/* Road stage - transparent, full-width, on the navy screen. */}
+      {/* Road stage - transparent, full-width, on the navy screen.
+          zIndex 2 keeps the (transparent) road + its numbered marker
+          icons ABOVE the floating step card, so a card that reaches
+          toward a neighbouring marker never hides its icon - the card
+          fills the transparent negative space around the pins. */}
       <div
         ref={wrapRef}
         style={{
@@ -92,6 +96,7 @@ export function PathwayInfographic({
           height: scale ? DESIGN_H * scale : undefined,
           position: 'relative',
           overflow: 'hidden',
+          zIndex: 2,
         }}
       >
         <div
@@ -223,7 +228,7 @@ export function PathwayInfographic({
               padding: '11px 14px',
               boxShadow: '0 10px 30px rgba(0,0,0,0.45)',
               pointerEvents: 'none',
-              zIndex: 5,
+              zIndex: 1,
             }}
           >
             {/* Tick pointing at the marker */}
