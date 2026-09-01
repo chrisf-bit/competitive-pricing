@@ -84,11 +84,7 @@ export function PathwayInfographic({
 
   return (
     <div style={{ width: '100%', position: 'relative' }}>
-      {/* Road stage - transparent, full-width, on the navy screen.
-          zIndex 2 keeps the (transparent) road + its numbered marker
-          icons ABOVE the floating step card, so a card that reaches
-          toward a neighbouring marker never hides its icon - the card
-          fills the transparent negative space around the pins. */}
+      {/* Road stage - transparent, full-width, on the navy screen. */}
       <div
         ref={wrapRef}
         style={{
@@ -96,7 +92,6 @@ export function PathwayInfographic({
           height: scale ? DESIGN_H * scale : undefined,
           position: 'relative',
           overflow: 'hidden',
-          zIndex: 2,
         }}
       >
         <div
@@ -198,21 +193,24 @@ export function PathwayInfographic({
       </div>
 
       {/* Revealed step copy - a floating card anchored to the SIDE of the
-          active marker (never above or below it, so it can't sit on the
-          numbered icon). It opens toward the screen centre so it always
-          stays in view, and is vertically centred on the marker. The road
-          stage's zIndex keeps every numbered pin painted over the card, so
-          a card that reaches a neighbouring marker never hides that pin
-          either. pointerEvents:none so it never blocks a marker click. */}
+          active marker, vertically centred on it. It opens OUTWARD (toward
+          the nearest screen edge) into the empty margin rather than into
+          the crowded centre. Because the markers alternate high/low, a
+          marker's same-height neighbours are two apart, so opening outward
+          keeps the card clear of every numbered icon - it may cross the
+          road ribbon (that's fine) but never sits over or under a pin. The
+          card is on top, so it's never hidden behind an icon either.
+          pointerEvents:none so it never blocks a marker click. */}
       {activeNode && activeC && scale > 0 && (() => {
         const mx = activeC.x * containerW;
         const my = activeC.y * roadH;
         const half = (MARKER_DIA / 2) * scale;
         const gap = 14;
-        // Open toward the screen centre (right for left-half markers, left
-        // for right-half ones) so the card can't run off the edge.
-        const openRight = mx < containerW / 2;
-        const left = openRight ? mx + half + gap : mx - half - gap - CARD_W;
+        // Open toward the nearest edge (left for left-half markers, right
+        // for right-half ones) so the card lands in the clear margin.
+        const openRight = mx >= containerW / 2;
+        const rawLeft = openRight ? mx + half + gap : mx - half - gap - CARD_W;
+        const left = Math.max(6, Math.min(rawLeft, containerW - CARD_W - 6));
         const centerY = Math.max(46, Math.min(my, roadH - 46));
         return (
           <motion.div
@@ -232,7 +230,7 @@ export function PathwayInfographic({
               padding: '11px 14px',
               boxShadow: '0 10px 30px rgba(0,0,0,0.45)',
               pointerEvents: 'none',
-              zIndex: 1,
+              zIndex: 5,
             }}
           >
             {/* Tick pointing sideways at the marker */}
