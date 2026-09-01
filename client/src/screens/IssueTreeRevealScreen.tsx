@@ -38,11 +38,36 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         overflow: 'hidden',
       }}
     >
-      {/* Prompt - directly under the intro paragraph */}
+      {/* Infographic - the revealed step copy floats beside the active
+          marker (inside PathwayInfographic), so no separate copy band. */}
+      <div
+        style={{
+          flex: 1,
+          minHeight: 0,
+          overflowY: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '14px 0 0',
+        }}
+      >
+        {/* Full-width bleed: the v1.2 art spans the screen so it reads
+            as part of it, not a boxed slide. */}
+        <div style={{ width: '100%' }}>
+          <PathwayInfographic
+            activeStep={activeStep}
+            visited={visited}
+            onSelect={handleSelect}
+          />
+        </div>
+      </div>
+
+      {/* Prompt + progress - moved below the graphic (above the footer)
+          so it doesn't stack under the intro copy as text-on-text. */}
       <div
         style={{
           flexShrink: 0,
-          padding: '14px 20px 2px',
+          padding: '8px 20px 0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -67,30 +92,6 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         >
           {visited.size}/{TOTAL}
         </span>
-      </div>
-
-      {/* Infographic - the revealed step copy floats beside the active
-          marker (inside PathwayInfographic), so no separate copy band. */}
-      <div
-        style={{
-          flex: 1,
-          minHeight: 0,
-          overflowY: 'auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '8px 0 0',
-        }}
-      >
-        {/* Full-width bleed: the v1.2 art spans the screen so it reads
-            as part of it, not a boxed slide. */}
-        <div style={{ width: '100%' }}>
-          <PathwayInfographic
-            activeStep={activeStep}
-            visited={visited}
-            onSelect={handleSelect}
-          />
-        </div>
       </div>
 
       {/* Continue */}
