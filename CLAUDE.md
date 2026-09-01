@@ -3629,6 +3629,178 @@ example), the No Parity p3/p4 and Narrow/Wide p1/p3/p5 rationales
 (regime-scoped "permitted in X markets" phrasing). Warm Up: Grandview
 Inn correct answer now "the discount stops being genuine".
 
+## Post-2026-08-28 session (UI polish, conversation content pass, xAPI proven)
+
+Large multi-day batch (2026-08-28 to 2026-09-01) on
+`release-2-partner-detail`. All builds clean; the conversation content
+pass is pushed (commit `1b8e56e`).
+
+### Partner Detail / Portfolio UI
+
+- **Pricing Pathway drawer is dockable left/right.** A `dockSide` state
+  on Partner Detail (persisted to `localStorage['rateRight:pathwayDock']`)
+  drives both the drawer and the launcher tab; a toggle button (`⇄`,
+  `ArrowLeftRight`) in the drawer header flips edges. The drawer is keyed
+  on side so AnimatePresence animates the move. It's an overlay, so it
+  covers the right column (default) or the Simulation Guide (left) - the
+  learner picks whichever is clear; the centre metrics stay visible either
+  way. Still the right-side chatbot drawer, NOT the banned centred modal.
+- **Left-edge accent rails removed everywhere they signalled comm-style /
+  persona colour** (persona lens card, softphone call transcripts in both
+  conversation screens, Conversation Report retro). Colour now reads from
+  the existing tinted dot / icon. Reinforces the no-left-border-handles
+  rule.
+- **Insight chips got a full coloured border** in the persona accent
+  (green/yellow/red/blue) - a full box border, not a rail.
+- **Metric values align across each row.** `BigMetric` +
+  `SecondaryMetricCard` (Partner Detail, grid) use `marginTop:auto`;
+  Portfolio card `MiniMetric` and the two metric groups use `alignItems:
+  flex-end` / stretched flex columns with `space-between`, so titles top-
+  align and values baseline-align regardless of label wrapping.
+- **OPC tab (i) tooltip**: an info icon beside "On Platform
+  Competitiveness" with "These metrics unlock in Level 2 (rounds 11-20)",
+  placed OUTSIDE the disabled tab button so it's hoverable while locked.
+- **`(xx)` clarified (not a bug):** it's the vs-peer / vs-last-year
+  comparator placeholder, shown when a metric has a `value` but no
+  `peerValue`/`deltaPct`. The OPC metrics (Unsold Rooms, Sell Through,
+  Search Price) are currently value-only, so they render "N (xx)"; only
+  Visibility Share carries a `peerValue`. This is the "OPC metric display
+  incomplete" the SME review flagged (the 12 metric/data needs-input
+  items). Fix is either supply the peer figures per SME data, or drop the
+  comparator for value-only OPC metrics - **pending an SME decision**.
+
+### Persona tip chips
+
+- **`getPersonaHint` now strips `-cross-regional`** and aliases to the
+  shared `-none` block (KAM partners were always returning null - a bug).
+- **New `getPersonaTipChip`** (app-facing): authored hint if present, else
+  a **style + name** line built from the partner's communication style
+  (16 templates: 4 personas x red/yellow/green/blue), else a generic
+  prompt. So decoys / KAM / off-priority-round partners now show a
+  specific "how to pitch this personality" chip - non-spoilery (approach
+  advice, not a data verdict). The review tool keeps strict
+  `getPersonaHint` (authored only). Partner Detail uses `getPersonaTipChip`.
+- **Portfolio-card persona chip was added then removed** - its variable
+  height skewed the card metric alignment. Chips stay on Partner Detail
+  only.
+
+### Character Build
+
+- **Super power reframed** - dropped the "day one / who you are" framing
+  (not resonating). Subtitle now: "Pick the avatar you identify with, then
+  choose the super power you think will help you most in the game. Each
+  super power shapes the tips and coaching cues you see in the game. It
+  doesn't change how you're scored, so every super power provides an equal
+  chance of success."
+- **IN GAME strip stacked** (heading above the impact line, was inline).
+- **"chip" -> "banner"** in the four `inGameImpact` strings.
+- **Avatar tiles are now square (1:1), not 2:3 portrait** - shorter row so
+  Continue stays in view, characters stay large via `objectFit: cover`.
+  Marcus uses `objectPosition: 'center 35%'` to avoid clipping his hair.
+  Content column widened to 1320; super-power cards tightened.
+
+### Real-time "wrong step" cue
+
+`BranchingConversationScreen`: after a pick, a subtle `AlertTriangle` in
+the feedback pill when the pick was a compliance breach
+(borderline/risky) OR style `<= -1`. A compliance breach overrides a
+positive style reaction (no green "responded well" on a non-compliant
+line). Keys off the compliance tag, so a **mislabeled-safe distractor
+won't flag until its tag is corrected** (see the needs-input label items).
+
+### Round Select dev unlock
+
+`DEV_UNLOCK_ALL_ROUNDS` (`import.meta.env.DEV || ?dev`) opens every round
+tile so a reviewer can jump straight in (non-current rounds route through
+`startPracticeRound`). Gated exactly like DevNav - remove before SCORM
+ship.
+
+### Review tool now includes decoy conversations
+
+`reviewData.ts::buildFlows()` was priority-only, so the learner-facing
+DECOY calls were unreviewable (they slipped the completed legal/SME pass).
+Now enumerates every round x regime's non-priority cards (incl.
+cross-regional), deduped by dialogue signature, in a new "Decoy calls"
+group; `applyRoundBaseline` is exported from `gameEngine.ts` so the decoy
+dossier shows the healthy round metrics. `portfolioByRound['cross-regional']`
+is populated (the old "returns null for cross-regional" comment is stale).
+
+### Conversation content pass (pushed, commit `1b8e56e`)
+
+Three things across the 43 live scenario files + `healthy-decoys.ts`,
+done via multi-agent workflows (rewrite + adversarial verify per file):
+
+1. **Distractor lengthening.** Every distractor `playerDialogue` rewritten
+   to match its step's optimal length, so the correct answer is no longer
+   always the longest. Flaws (per each option's `description`) and
+   compliance tags preserved. Fixes the "pick the longest" tell.
+2. **~131 SME/legal review comments applied.** Source: `Rate Right
+   Conversation Feedback V2.xlsx` (Irene), 171 comments total. Straight-
+   forward edits (ranking/parity removals, confidential-info asks,
+   safeguard->protect, rephrases) applied and verified; legal-critical
+   removals confirmed gone from dialogue.
+3. **Decoys made compliance-safe. SUPERSEDES the earlier note that decoy
+   calls carry a risky distractor.** The two ranking-reward promises
+   (`hd-confirm-overpromise`, `cd-plan-guarantee`) + two borderline picks
+   (`hd-open-hardsell`, `cd-open-blanket`) in `healthy-decoys.ts` were
+   reworded to safe-but-weak choices. Every decoy option is now
+   `compliance: 'safe'`, so decoy calls contain ZERO compliance content
+   and are off legal's compliance-review list. The priority conversations'
+   risky distractors are UNCHANGED - the compliance lesson lives only
+   there. (Decoy mis-picks still flag via style mismatch, and picking a
+   decoy is already a wrong-partner 0-star.)
+
+**~29 needs-input review items** (compliance-label reassessments, legal
+questions, OPC metric data gaps) are catalogued in
+`docs/conversation-review-needs-input.md` for SME/legal sign-off - NOT yet
+applied. The ~11 compliance-label items matter twice: grading AND the new
+wrong-step cue both key off the tag.
+
+### Small copy edits (pushed earlier in the session)
+
+- eRPD tooltip: dropped the article ("a key OTA" -> "Key OTA"). The
+  Brand.com/Key OTA eRPD split (META/Direct channel + employee-service-
+  centre link) is **deferred** pending SME confirmation of the wording.
+- GM chat: "ABRN growth" -> "room night growth" (question + follow-ups).
+- Data & Insights: dropped the "(eRPD trending DOWN)" hint from the
+  improving-partner question.
+- Warm Up: Diagnose option B rephrased to a shorter neutral ask.
+- Portfolio Guide objective reworded.
+
+### xAPI reporting (proven end to end)
+
+- **`xapi-smoke-test/` Tin Can package** built (+ `xapi-smoke-test.zip`).
+  **Proven end-to-end on the Booking sandbox Docebo**: statements POST
+  200 and replay APPENDS (count grows, not overwrites - the durable per-
+  attempt history SCORM can't give); Docebo's course report derives
+  completion + score from the xAPI `completed` statement. Constraints:
+  Docebo LRS caps at xAPI **1.0.2** (1.0.3 rejected) and passes the actor
+  with array-form `mbox`/`name` - both handled. See
+  [[project-docebo-lrs-xapi-constraints]].
+- **`docs/xapi-schema-v0.3-additions.md`** drafted: a `style-match`
+  extension, Diagnostic Flow (Coach) capture, and a `mode`/`attempt-number`
+  prerequisite - with open decisions for Adriana/L&D (whether to score the
+  Coach; whether style adaptation is an 11th capability dimension).
+
+### Deploy / persistence behaviour (for client questions)
+
+Pushing changes while learners are active does NOT kick them out or lose
+progress. The durable slice (clearance status, round stars, profile)
+persists - `localStorage` on the current Render web preview, SCORM
+`suspend_data` in the LMS later - independent of the code version, so a
+close -> deploy -> relaunch resumes progress (same browser/device on web;
+the LMS record in production). Caveats: a round the learner was mid-
+conversation on isn't checkpointed (they repeat that one round, never the
+whole game); web progress is per-browser/device; a deliberate save-format
+version bump is the only thing that resets saved progress (rare, flagged).
+
+### Uncommitted at session end (local only, not in git)
+
+`docs/xapi-schema-v0.3-additions.md`, `docs/conversation-review-needs-input.md`,
+`xapi-smoke-test/` + zips, `scorm-smoke-test/` + zip, and a stray
+`client/measure.cjs`. All persist on disk but are untracked - commit if
+wanted.
+
 ## Things to avoid
 
 - Don't reintroduce em dashes (saved as a feedback memory).
