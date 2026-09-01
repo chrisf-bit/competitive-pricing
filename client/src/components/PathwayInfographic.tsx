@@ -197,31 +197,35 @@ export function PathwayInfographic({
         </div>
       </div>
 
-      {/* Revealed step copy - a floating card anchored beside the active
-          marker, sitting in the road's own whitespace so it adds no
-          separate band and wastes no vertical height. Placed below
-          top-half markers and above bottom-half ones, clamped on-screen.
-          pointerEvents:none so it never blocks a marker click beneath it. */}
+      {/* Revealed step copy - a floating card anchored to the SIDE of the
+          active marker (never above or below it, so it can't sit on the
+          numbered icon). It opens toward the screen centre so it always
+          stays in view, and is vertically centred on the marker. The road
+          stage's zIndex keeps every numbered pin painted over the card, so
+          a card that reaches a neighbouring marker never hides that pin
+          either. pointerEvents:none so it never blocks a marker click. */}
       {activeNode && activeC && scale > 0 && (() => {
         const mx = activeC.x * containerW;
         const my = activeC.y * roadH;
         const half = (MARKER_DIA / 2) * scale;
-        const below = activeC.y <= 0.5;
-        const left = Math.max(6, Math.min(mx - CARD_W / 2, containerW - CARD_W - 6));
-        const pointerLeft = Math.max(14, Math.min(mx - left, CARD_W - 14));
+        const gap = 14;
+        // Open toward the screen centre (right for left-half markers, left
+        // for right-half ones) so the card can't run off the edge.
+        const openRight = mx < containerW / 2;
+        const left = openRight ? mx + half + gap : mx - half - gap - CARD_W;
+        const centerY = Math.max(46, Math.min(my, roadH - 46));
         return (
           <motion.div
             key={activeNode.id}
-            initial={{ opacity: 0, y: below ? -6 : 6 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{
               position: 'absolute',
               left,
               width: CARD_W,
-              ...(below
-                ? { top: my + half + 12 }
-                : { top: my - half - 12, transform: 'translateY(-100%)' }),
+              top: centerY,
+              transform: 'translateY(-50%)',
               background: 'rgba(4,12,32,0.94)',
               border: '1px solid rgba(255,255,255,0.12)',
               borderRadius: 12,
@@ -231,19 +235,19 @@ export function PathwayInfographic({
               zIndex: 1,
             }}
           >
-            {/* Tick pointing at the marker */}
+            {/* Tick pointing sideways at the marker */}
             <div
               style={{
                 position: 'absolute',
-                left: pointerLeft - 6,
-                ...(below ? { top: -6 } : { bottom: -6 }),
+                top: '50%',
+                transform: 'translateY(-50%)',
                 width: 0,
                 height: 0,
-                borderLeft: '6px solid transparent',
-                borderRight: '6px solid transparent',
-                ...(below
-                  ? { borderBottom: '6px solid rgba(4,12,32,0.94)' }
-                  : { borderTop: '6px solid rgba(4,12,32,0.94)' }),
+                borderTop: '6px solid transparent',
+                borderBottom: '6px solid transparent',
+                ...(openRight
+                  ? { left: -6, borderRight: '6px solid rgba(4,12,32,0.94)' }
+                  : { right: -6, borderLeft: '6px solid rgba(4,12,32,0.94)' }),
               }}
             />
             <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
