@@ -76,8 +76,14 @@ export function PathwayInfographic({
     return () => ro.disconnect();
   }, []);
 
+  const activeNode = pathwayNodes.find((n) => n.stepNumber === activeStep) ?? null;
+  const activeC = activeNode ? CENTRE[activeNode.stepNumber] : null;
+  const containerW = DESIGN_W * scale;
+  const roadH = DESIGN_H * scale;
+  const CARD_W = 300;
+
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', position: 'relative' }}>
       {/* Road stage - transparent, full-width, on the navy screen. */}
       <div
         ref={wrapRef}
@@ -185,79 +191,82 @@ export function PathwayInfographic({
           })}
         </div>
       </div>
-    </div>
-  );
-}
 
-type PathwayNode = (typeof pathwayNodes)[number];
-
-/**
- * The revealed step copy (question, sub-label, goal) for the marker the
- * learner has selected. Rendered by the screen ABOVE the road as a fixed,
- * always-visible panel - it used to sit beneath the road inside the
- * scroll area, where a short (non-fullscreen) viewport pushed it below
- * the fold and learners missed it. Keeping it near the top also reads
- * more naturally than main copy at the bottom of the screen.
- */
-export function PathwayStepPanel({ activeNode }: { activeNode: PathwayNode | null }) {
-  return (
-    <div
-      style={{
-        minHeight: 84,
-        background: 'rgba(4,12,32,0.72)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        borderRadius: 14,
-        padding: '14px 20px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        textAlign: 'center',
-      }}
-    >
-      {activeNode ? (
-        <motion.div
-          key={activeNode.id}
-          initial={{ opacity: 0, y: 6 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.22, ease: 'easeOut' }}
-        >
-          <div
+      {/* Revealed step copy - a floating card anchored beside the active
+          marker, sitting in the road's own whitespace so it adds no
+          separate band and wastes no vertical height. Placed below
+          top-half markers and above bottom-half ones, clamped on-screen.
+          pointerEvents:none so it never blocks a marker click beneath it. */}
+      {activeNode && activeC && scale > 0 && (() => {
+        const mx = activeC.x * containerW;
+        const my = activeC.y * roadH;
+        const half = (MARKER_DIA / 2) * scale;
+        const below = activeC.y <= 0.5;
+        const left = Math.max(6, Math.min(mx - CARD_W / 2, containerW - CARD_W - 6));
+        const pointerLeft = Math.max(14, Math.min(mx - left, CARD_W - 14));
+        return (
+          <motion.div
+            key={activeNode.id}
+            initial={{ opacity: 0, y: below ? -6 : 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
             style={{
-              display: 'flex',
-              alignItems: 'baseline',
-              justifyContent: 'center',
-              gap: 10,
-              flexWrap: 'wrap',
+              position: 'absolute',
+              left,
+              width: CARD_W,
+              ...(below
+                ? { top: my + half + 12 }
+                : { top: my - half - 12, transform: 'translateY(-100%)' }),
+              background: 'rgba(4,12,32,0.94)',
+              border: '1px solid rgba(255,255,255,0.12)',
+              borderRadius: 12,
+              padding: '11px 14px',
+              boxShadow: '0 10px 30px rgba(0,0,0,0.45)',
+              pointerEvents: 'none',
+              zIndex: 5,
             }}
           >
-            <span
+            {/* Tick pointing at the marker */}
+            <div
               style={{
-                fontSize: 19,
-                fontWeight: 800,
-                color: 'var(--brand-navy)',
-                background: 'var(--brand-yellow)',
-                borderRadius: 7,
-                padding: '1px 10px',
+                position: 'absolute',
+                left: pointerLeft - 6,
+                ...(below ? { top: -6 } : { bottom: -6 }),
+                width: 0,
+                height: 0,
+                borderLeft: '6px solid transparent',
+                borderRight: '6px solid transparent',
+                ...(below
+                  ? { borderBottom: '6px solid rgba(4,12,32,0.94)' }
+                  : { borderTop: '6px solid rgba(4,12,32,0.94)' }),
               }}
-            >
-              Step {activeNode.stepNumber}
-            </span>
-            <span style={{ fontSize: 19, fontWeight: 800, color: '#fff', lineHeight: 1.25 }}>
-              {activeNode.title}
-            </span>
-            <span style={{ fontSize: 16, fontWeight: 800, color: 'var(--brand-yellow)' }}>
-              ({activeNode.subLabel})
-            </span>
-          </div>
-          <div style={{ fontSize: 15.5, color: 'rgba(214,222,234,0.96)', lineHeight: 1.5, marginTop: 6 }}>
-            {activeNode.goal}
-          </div>
-        </motion.div>
-      ) : (
-        <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>
-          Select a marker on the road to reveal its step.
-        </div>
-      )}
+            />
+            <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+              <span
+                style={{
+                  fontSize: 15,
+                  fontWeight: 800,
+                  color: 'var(--brand-navy)',
+                  background: 'var(--brand-yellow)',
+                  borderRadius: 6,
+                  padding: '1px 8px',
+                }}
+              >
+                Step {activeNode.stepNumber}
+              </span>
+              <span style={{ fontSize: 15, fontWeight: 800, color: '#fff', lineHeight: 1.2 }}>
+                {activeNode.title}
+              </span>
+              <span style={{ fontSize: 13, fontWeight: 800, color: 'var(--brand-yellow)' }}>
+                ({activeNode.subLabel})
+              </span>
+            </div>
+            <div style={{ fontSize: 13, color: 'rgba(214,222,234,0.96)', lineHeight: 1.45, marginTop: 5 }}>
+              {activeNode.goal}
+            </div>
+          </motion.div>
+        );
+      })()}
     </div>
   );
 }

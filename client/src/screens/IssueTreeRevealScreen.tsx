@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronRight, MousePointerClick } from 'lucide-react';
-import { PathwayInfographic, PathwayStepPanel } from '../components/PathwayInfographic';
+import { PathwayInfographic } from '../components/PathwayInfographic';
 import { pathwayNodes } from '../data/issueTreeReveal';
 
 interface IssueTreeRevealScreenProps {
@@ -26,7 +26,6 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
   }
 
   const allOpened = visited.size >= TOTAL;
-  const activeNode = pathwayNodes.find((n) => n.stepNumber === activeStep) ?? null;
 
   return (
     <div
@@ -43,7 +42,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
       <div
         style={{
           flexShrink: 0,
-          padding: '22px 20px 4px',
+          padding: '14px 20px 2px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -70,14 +69,8 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         </span>
       </div>
 
-      {/* Revealed step copy - fixed near the top so it's always visible
-          (no longer clipped below the fold on short viewports) and reads
-          before the road rather than after it. */}
-      <div style={{ flexShrink: 0, padding: '10px 20px 0' }}>
-        <PathwayStepPanel activeNode={activeNode} />
-      </div>
-
-      {/* Infographic */}
+      {/* Infographic - the revealed step copy floats beside the active
+          marker (inside PathwayInfographic), so no separate copy band. */}
       <div
         style={{
           flex: 1,
