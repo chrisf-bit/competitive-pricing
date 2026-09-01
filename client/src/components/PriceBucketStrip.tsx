@@ -101,7 +101,7 @@ export function PriceBucketStrip({ erpd }: PriceBucketStripProps) {
               boxShadow: '0 2px 6px rgba(0,0,0,0.18)',
             }}
           >
-            Bucket {bucket} · eRPD {erpdLabel}
+            eRPD {erpdLabel}
           </div>
           {/* Tiny tick pointing at the segment below */}
           <div

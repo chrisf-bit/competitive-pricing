@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronRight, MousePointerClick } from 'lucide-react';
-import { PathwayInfographic } from '../components/PathwayInfographic';
+import { PathwayInfographic, PathwayStepPanel } from '../components/PathwayInfographic';
 import { pathwayNodes } from '../data/issueTreeReveal';
 
 interface IssueTreeRevealScreenProps {
@@ -26,6 +26,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
   }
 
   const allOpened = visited.size >= TOTAL;
+  const activeNode = pathwayNodes.find((n) => n.stepNumber === activeStep) ?? null;
 
   return (
     <div
@@ -67,6 +68,13 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         >
           {visited.size}/{TOTAL}
         </span>
+      </div>
+
+      {/* Revealed step copy - fixed near the top so it's always visible
+          (no longer clipped below the fold on short viewports) and reads
+          before the road rather than after it. */}
+      <div style={{ flexShrink: 0, padding: '10px 20px 0' }}>
+        <PathwayStepPanel activeNode={activeNode} />
       </div>
 
       {/* Infographic */}

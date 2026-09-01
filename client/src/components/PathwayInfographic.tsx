@@ -76,10 +76,8 @@ export function PathwayInfographic({
     return () => ro.disconnect();
   }, []);
 
-  const activeNode = pathwayNodes.find((n) => n.stepNumber === activeStep) ?? null;
-
   return (
-    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div style={{ width: '100%' }}>
       {/* Road stage - transparent, full-width, on the navy screen. */}
       <div
         ref={wrapRef}
@@ -187,66 +185,79 @@ export function PathwayInfographic({
           })}
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Revealed step text - fixed panel beneath the road, centred. */}
-      <div
-        style={{
-          minHeight: 92,
-          background: 'rgba(4,12,32,0.72)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: 14,
-          padding: '14px 20px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-        }}
-      >
-        {activeNode ? (
-          <motion.div
-            key={activeNode.id}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
+type PathwayNode = (typeof pathwayNodes)[number];
+
+/**
+ * The revealed step copy (question, sub-label, goal) for the marker the
+ * learner has selected. Rendered by the screen ABOVE the road as a fixed,
+ * always-visible panel - it used to sit beneath the road inside the
+ * scroll area, where a short (non-fullscreen) viewport pushed it below
+ * the fold and learners missed it. Keeping it near the top also reads
+ * more naturally than main copy at the bottom of the screen.
+ */
+export function PathwayStepPanel({ activeNode }: { activeNode: PathwayNode | null }) {
+  return (
+    <div
+      style={{
+        minHeight: 84,
+        background: 'rgba(4,12,32,0.72)',
+        border: '1px solid rgba(255,255,255,0.08)',
+        borderRadius: 14,
+        padding: '14px 20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+      }}
+    >
+      {activeNode ? (
+        <motion.div
+          key={activeNode.id}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.22, ease: 'easeOut' }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'baseline',
+              justifyContent: 'center',
+              gap: 10,
+              flexWrap: 'wrap',
+            }}
           >
-            <div
+            <span
               style={{
-                display: 'flex',
-                alignItems: 'baseline',
-                justifyContent: 'center',
-                gap: 10,
-                flexWrap: 'wrap',
+                fontSize: 19,
+                fontWeight: 800,
+                color: 'var(--brand-navy)',
+                background: 'var(--brand-yellow)',
+                borderRadius: 7,
+                padding: '1px 10px',
               }}
             >
-              <span
-                style={{
-                  fontSize: 19,
-                  fontWeight: 800,
-                  color: 'var(--brand-navy)',
-                  background: 'var(--brand-yellow)',
-                  borderRadius: 7,
-                  padding: '1px 10px',
-                }}
-              >
-                Step {activeNode.stepNumber}
-              </span>
-              <span style={{ fontSize: 19, fontWeight: 800, color: '#fff', lineHeight: 1.25 }}>
-                {activeNode.title}
-              </span>
-              <span style={{ fontSize: 16, fontWeight: 800, color: 'var(--brand-yellow)' }}>
-                ({activeNode.subLabel})
-              </span>
-            </div>
-            <div style={{ fontSize: 15.5, color: 'rgba(214,222,234,0.96)', lineHeight: 1.5, marginTop: 6 }}>
-              {activeNode.goal}
-            </div>
-          </motion.div>
-        ) : (
-          <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>
-            Select a marker on the road to reveal its step.
+              Step {activeNode.stepNumber}
+            </span>
+            <span style={{ fontSize: 19, fontWeight: 800, color: '#fff', lineHeight: 1.25 }}>
+              {activeNode.title}
+            </span>
+            <span style={{ fontSize: 16, fontWeight: 800, color: 'var(--brand-yellow)' }}>
+              ({activeNode.subLabel})
+            </span>
           </div>
-        )}
-      </div>
+          <div style={{ fontSize: 15.5, color: 'rgba(214,222,234,0.96)', lineHeight: 1.5, marginTop: 6 }}>
+            {activeNode.goal}
+          </div>
+        </motion.div>
+      ) : (
+        <div style={{ fontSize: 15, color: 'rgba(255,255,255,0.55)', fontWeight: 600 }}>
+          Select a marker on the road to reveal its step.
+        </div>
+      )}
     </div>
   );
 }

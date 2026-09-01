@@ -747,6 +747,16 @@ function PersonaLensChip({
   );
 }
 
+/**
+ * Format a number to at most one decimal place, dropping any trailing
+ * `.0` and any floating-point noise (e.g. 2.5999999999999996 -> "2.6",
+ * 0.70 -> "0.7", 44 -> "44"). Every displayed metric goes through this
+ * so no card can surface more than one decimal.
+ */
+function to1dp(n: number): string {
+  return (Math.round(n * 10) / 10).toString();
+}
+
 function BigMetric({
   label,
   value,
@@ -994,7 +1004,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           label={metricDefinitions.erpd.label}
           helpText={metricDefinitions.erpd.helpText}
           value={`${m.erpd.toFixed(1)}%`}
-          changeText={`${m.erpdChange < 0 ? '↓' : '↑'}${Math.abs(m.erpdChange).toFixed(2)}`}
+          changeText={`${m.erpdChange < 0 ? '↓' : '↑'}${to1dp(Math.abs(m.erpdChange))}`}
           highlight
         />
         <BigMetric
@@ -1299,13 +1309,13 @@ function SecondaryMetricCard({
   const hasPeer = value.peerValue !== undefined;
   const primary =
     format === 'percent'
-      ? `${!hasPeer && value.value > 0 ? '+' : ''}${value.value}%`
-      : `${value.value.toLocaleString('en-GB')}`;
+      ? `${!hasPeer && value.value > 0 ? '+' : ''}${to1dp(value.value)}%`
+      : `${Math.round(value.value).toLocaleString('en-GB')}`;
   const delta = hasPeer
-    ? `${value.peerValue}${format === 'percent' ? '%' : ''} peer`
+    ? `${to1dp(value.peerValue as number)}${format === 'percent' ? '%' : ''} peer`
     : value.deltaPct === undefined
       ? '(xx)'
-      : `(${value.deltaPct > 0 ? '+' : ''}${value.deltaPct}%)`;
+      : `(${value.deltaPct > 0 ? '+' : ''}${to1dp(value.deltaPct)}%)`;
   const deltaIsPending = !hasPeer && value.deltaPct === undefined;
 
   return (

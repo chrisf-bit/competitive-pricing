@@ -352,7 +352,7 @@ export function PortfolioScreen({
                         }}
                       >
                         {partner.metrics.erpdChange < 0 ? '↓' : '↑'}
-                        {Math.abs(partner.metrics.erpdChange).toFixed(2)}
+                        {(Math.round(Math.abs(partner.metrics.erpdChange) * 10) / 10).toString()}
                       </span>
                     </div>
                   </div>
