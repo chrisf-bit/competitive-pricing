@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public price cut to be the cheapest option - pressure to lower prices a No Parity market doesn't permit, and it presumes the fix.",
     playerDialogue:
-      "Your room nights are down 32% - the quickest fix is to bring your Booking.com price down so you're the cheapest option on the page.",
+      "Your room nights are down 32%, so let's not overthink this - the quickest fix is to bring your Booking.com price down until you're the cheapest option on the page, and the volume should follow pretty fast.",
     partnerResponse:
       "I'm not chasing volume with a price cut. That's not the business I run. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Open by dismissing the drop as market softness. A numbers-first operator reads that as sloppy and disengages.',
     playerDialogue:
-      "We've noticed a small dip, but honestly it's probably just seasonal softness - nothing to worry about.",
+      "We've noticed a small dip in the last 30 days, but honestly I wouldn't read too much into it - it's probably just seasonal softness, and these things tend to even out on their own over the coming weeks, so it's really nothing to worry about.",
     partnerResponse:
       "'Seasonal'? If that's your analysis, this call is a waste of my time.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -100,7 +100,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Tell her to lower her public price across the board to stop losing the comparison. It pressures a general price cut a No Parity market doesn't allow, and it walks straight into her cannibalization worry.",
     playerDialogue:
-      "The fix is to lower your public price here across the board so you stop losing the comparison to cheaper competitors.",
+      "The fix here is pretty direct - lower your public price on our platform across the board so you stop losing the comparison to the cheaper competitors on the page. Once your headline rate comes down for everyone, you'll start winning back the travelers you're losing today, your visibility climbs, and those empty nights fill in. I'd get that blanket reduction in place and let it run.",
     partnerResponse:
       "A blanket discount is exactly what I'm worried about. That's not an answer.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Threaten an automated ranking drop tied to how she prices elsewhere. In a No Parity market you cannot require lower prices or threaten visibility over a partner\'s prices on other channels.',
     playerDialogue:
-      "If your price here stays higher than your own site, our system keeps reading you as uncompetitive and pushing your ranking down - you'll need to lower it to recover.",
+      "Here's the reality - if your price on our platform stays higher than the price on your own site, our system keeps reading you as uncompetitive and it will keep pushing your ranking down the page. The longer that gap sits there, the further you slide and the harder it is to climb back. If you want that visibility to recover, you'll need to lower your price here until it's no higher than your direct site.",
     partnerResponse:
       "Threatening my ranking to force a price cut is not a conversation I'll have. Done.",
     styleMatch: { red: 0, yellow: -2, green: -2, blue: -2 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that action is needed, wrong lever - a general discount across her rooms is the cannibalization she just flagged, and it skips the targeted-segment opportunity entirely.",
     playerDialogue:
-      "Let's just put a small discount across your rooms to get you competitive again and move some of that unsold inventory.",
+      "Let's keep this simple and just put a small discount across all of your rooms - that gets you competitive on the page again and starts moving some of that unsold inventory right away. Once the bookings pick back up and those empty nights are filling, we can always revisit the exact number later.",
     partnerResponse:
       "A general discount is exactly the cannibalization I just told you I'm worried about.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -170,7 +170,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tell her the restriction is short-sighted before understanding it. Condescending to an operator who knows her own risk - it shuts the conversation instead of opening the segment.",
     playerDialogue:
-      "Restricting families is honestly costing you - it's a short-sighted call that's dragging your numbers down.",
+      "Restricting families is honestly costing you more than you realize - it's a pretty short-sighted call, and it's dragging your numbers down every single week you leave it in place. You've got real demand from that segment sitting right there and you're just turning it away at the door.",
     partnerResponse:
       "I don't need you second-guessing how I run my rooms. Done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -197,7 +197,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed value pitch: family bookings grew ~2x faster, stay longer, spend more and review 24% more often - using search visibility to attract that high-spending segment would fill the empty nights.",
     playerDialogue:
-      "I hear you on the risk. But look at the revenue: over the last two years family bookings grew nearly twice as fast as other segments on our platform - they stay longer, spend more, and review 24% more often. Using our search visibility to attract that high-spending segment would likely fill those empty nights.",
+      "I hear you on the risk. But look at the revenue: over the last two years family bookings grew nearly twice as fast as other segments on our platform - they stay longer, spend more, and leave reviews 24% more often. Using our search visibility to attract that high-spending segment would likely fill those empty nights.",
     partnerResponse:
       "If I can restrict it to a minimum of three nights, then yes - that mitigates our operational risk.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right segment, wrong handling - it tells her to open the rooms because the growth outweighs the hassle, ignoring the operational risk she just named, so it earns a no.",
     playerDialogue:
-      "Just open the rooms to families - the growth clearly outweighs the extra hassle.",
+      "Honestly, just open those rooms up to families and let the bookings come - the growth on that segment clearly outweighs whatever extra hassle it creates for you. The numbers on family demand are strong enough that a bit of extra cleaning or the odd cot really shouldn't be the thing holding you back.",
     partnerResponse:
       "You skipped straight past the operational risk. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Wave away cots and linen as a cost she should just absorb. Dismissive of a real operational concern - it ends the conversation instead of de-risking it.",
     playerDialogue:
-      "Cots and linen are just a cost of doing business - if that's stopping you, that's on your operations.",
+      "Cots and linen are just a cost of doing business, the same as it is for every property that takes family bookings - if a bit of extra setup like that is genuinely what's stopping you here, then honestly that's on your operations to sort out, not a reason to keep the segment switched off.",
     partnerResponse:
       "Telling me my operations are the problem ends this call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     playerDialogue:
       "Absolutely - we can set a minimum-night stay on those rooms. And to maximize the impact, we'd pair that with Country Rates targeting international bookers. Are you okay implementing both to lift performance?",
     partnerResponse:
-      "My domestic demand is solid, but I've no real strategy for international - so this could be a zero-marketing-cost way to boost discoverability through your platform. Let's give it a try!",
+      "My domestic demand is solid, but I haven't been paying much attention on strategy for international - so this could be a zero-marketing-cost way to boost discoverability through your platform. Let's give it a try!",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -268,7 +268,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Takes the guardrail but drops the international lever and never agrees how to measure it - a soft close a data-led operator will let evaporate.",
     playerDialogue:
-      "Great, we'll set the minimum-night stay on those rooms and see how it goes.",
+      "Great, we'll go ahead and set the minimum-night stay on those rooms, and then we can just see how that performs over the next few weeks before deciding whether we need to do anything else on top of it.",
     partnerResponse:
       "Just the minimum stay? You mentioned international demand - what's the actual tool, and how do we measure it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -282,7 +282,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach - pressure her to price below her own site so she's the best deal anywhere. Requiring a partner to undercut and be cheapest is exactly what a No Parity market forbids.",
     playerDialogue:
-      "And to be safe, bring your public price here below your own site so you're the best deal anywhere and lock in the volume.",
+      "And to really be safe, bring your public price on our platform down below your own site so you come out as the best deal anywhere a traveler looks and you lock in all that volume for good.",
     partnerResponse:
       "Pricing below my own site to be cheapest everywhere is not something I'll do. Let's keep this to the segments.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

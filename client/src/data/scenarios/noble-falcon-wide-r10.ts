@@ -44,7 +44,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and frames a deliberate head-office directive as his error before you understand it. A brand-managed revenue manager will close down.",
     playerDialogue:
-      "That 20% gap is costing you bookings, plain and simple - you'll need to bring your Booking.com price into line to fix it.",
+      "That 20% gap is costing you bookings, plain and simple - it looks like a slip on your side, so you'll need to bring your Booking.com price back into line to fix it.",
     partnerResponse:
       "That's a head-office directive, not a mistake I made. If you're here to tell me it's wrong, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who just agreed to look at the insight.",
     playerDialogue:
-      "Honestly, your property looks great and your reviews are lovely - I wouldn't worry about the numbers too much today.",
+      "Honestly, your property looks wonderful and your reviews are genuinely lovely - I really wouldn't get too caught up in the numbers today. Let's just have a relaxed catch-up instead.",
     partnerResponse:
       "I set aside this time to review performance. What does the data actually show?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -85,7 +85,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: the billboard approach works only if the property stays visible. When the gap is this wide, ranking is affected by guest behavior - if travelers can't find him here, they won't know to look for his website. Probe what feedback he's had from guests comparing rates.",
     playerDialogue:
-      "I respect that goal, but our platform's search for your property has dropped significantly. That window only works if you stay visible - when the gap gets this wide, your ranking is affected by how guests behave, and if they can't find you here, they won't know to go looking for your website. What feedback have you had from guests comparing rates between us?",
+      "I respect that goal, but looking at data your conversion is 17% behind your peers on our platform. To optimize the travelers who discover you through us, and to capture those net-new international guests, we ask that you provide us with the same rates and availability you give to your direct channel. This ensures you maximize your reach for the rooms you do want to fill.",
     partnerResponse:
       "Most of our loyal guests know to book directly. Besides, keeping your platform priced higher helps us filter out high-risk bookings - invalid cards, short-notice cancellations, that sort of thing.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -100,7 +100,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the reverse-billboard premise - that a higher price here is fine because guests will find him and book direct - and never corrects the belief that's suppressing his visibility.",
     playerDialogue:
-      "That's fair - keeping your price higher here does push guests to your direct site, so the window approach is basically doing its job.",
+      "That's fair - keeping your price a bit higher here really does push guests over to your own direct site, so in a way the window approach is basically doing its job. If your loyal travelers know to come to you anyway, then a slightly higher price on our platform isn't hurting you, it's just steering the bookings where you want them to land. It seems to be working as designed.",
     partnerResponse:
       "So the strategy's fine, then. I'm not sure what we're reviewing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Flatly contradicts his read of his own guests rather than drawing out the visibility logic. Lecturing a brand-managed manager on his own base shuts him down.",
     playerDialogue:
-      "Honestly, that loyal-guest theory just doesn't hold up - most of them would book wherever is cheapest, so you're kidding yourself.",
+      "Honestly, that loyal-guest theory just doesn't hold up when you look at how people really book - most of them would go wherever is cheapest on the day, and your direct following is far smaller than you think. Travelers are far less loyal than any hotel wants to believe, and assuming they'll all hunt down your website is exactly the kind of thinking that costs you bookings.",
     partnerResponse:
       "You're telling me I don't understand my own guests? That's a bold way to open.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed Risky Guest handle: acknowledge the operational concern, then separate the price issue from risk management. Instead of higher prices that push good guests to competitors, use targeted risk controls - e.g. strict prepayment policies for specific stay dates - while keeping the base rate competitive.",
     playerDialogue:
-      "I understand the operational concern - nobody wants to deal with cancellations or fraud. But what if we separate the issue of price from the issue of risk management? Instead of a higher price that pushes good guests to your competitors, we could apply strict prepayment policies for specific stay dates while keeping your base rate competitive. Would that give you the security you need?",
+      "I understand the operational concern - nobody wants to deal with cancellations or fraud. But what if we separate the issue of price from the issue of risk management? Instead of a higher price that pushes good guests to your competitors, we could apply strict prepayment policies for specific stay dates to manage risk, while keeping your base rate competitive. Would that give you the security you need?",
     partnerResponse:
       "It might solve the risk part. But it still doesn't change our brand directive to keep our website cheaper.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that price matters, wrong route - it ignores the Risky Guest concern entirely instead of decoupling price from risk, so the very worry blocking him is left standing.",
     playerDialogue:
-      "The risk thing is a distraction, honestly - just bring your price down here and the volume will more than cover a few bad bookings.",
+      "Honestly, the risk thing is a bit of a distraction here - the numbers just don't support building a whole pricing policy around a handful of bad bookings. If you simply bring your price down to match on our platform, the extra volume you pick up will more than cover the odd cancellation or dodgy card that slips through. The occasional problem guest is just a cost of doing business.",
     partnerResponse:
       "So you want me to eat the fraud and cancellations too? That's easy to say from your side.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -170,7 +170,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Threaten a further visibility slide unless he lowers his price. Threatening ranking over how he prices is banned in every regime and torches a brand relationship.",
     playerDialogue:
-      "I'll be blunt - while you keep this gap, our algorithm will keep pushing you down the results until you close it.",
+      "I'll be blunt with you - as long as you keep this gap sitting where it is, our algorithm is going to keep pushing your property further and further down the search results. Every week you hold this line, you'll slide lower, fewer travelers will ever see you, and the visibility you've built up will quietly bleed away. The only way to stop that slide is to close the gap and bring your price into line.",
     partnerResponse:
       "Threatening my ranking over a head-office policy is not how you'll get me to move.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the gap is the problem, wrong lever - instructing him to lift his direct-site price dictates his own channel strategy, the exact thing this brand-managed manager guards most fiercely.",
     playerDialogue:
-      "The simplest fix is to just put your own website price up so there's no gap - then we're all on the same footing.",
+      "The simplest fix here is really just to put your own website price up so the gap disappears - if you lift your direct rate to sit level with ours, then everything lines up on its own and the whole problem goes away. You've got room to move it; nudge the price on your site up by that 15% or so and we're all on the same footing overnight. It's completely in your hands to sort out.",
     partnerResponse:
       "You want to set the price on my own website now? That's absolutely not yours to decide.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Direct him to keep his best rates off the other OTAs and give them only to Booking.com. Instructing a partner on his external channel mix oversteps even in a Wide market.",
     playerDialogue:
-      "And to really lock this in, stop feeding your best rates to the other OTAs - keep them exclusive to us.",
+      "And to really lock this in, you should stop feeding your best rates to the other OTAs altogether - keep your strongest pricing exclusive to us and let the rest of them make do with whatever's left over. Those other platforms are just riding on the traffic we generate for you anyway, so there's no reason to hand them your sharpest rates. Cutting those channels back is the smartest move.",
     partnerResponse:
       "You don't get to tell me which channels I work with. That's my call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -268,7 +268,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Doubles down on the alignment demand right after he bristled about his autonomy, instead of stepping back and reframing around the family opportunity. It confirms his fear that you're there to dictate.",
     playerDialogue:
-      "Look, campaigns aside, you really do need to align those public rates with us - that's the core of it and it can't wait.",
+      "Look, campaigns aside, you really do need to align those public rates with us, and I don't think we can keep dancing around it - that's the core of this whole conversation. Every day the gap stays open you're losing bookings you can't get back, so this genuinely can't wait. I know you'd rather talk about anything else, but the alignment is the one thing that moves the needle.",
     partnerResponse:
       "I just told you that's our decision. If this is going to be you pushing, we're done here.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -282,7 +282,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Frames the family mispricing as his oversight to fix, rather than a shared extranet check. Blaming a brand-managed manager for a config gap ends the collaboration.",
     playerDialogue:
-      "Your family rates are set up wrong on your side, so that's really on you to go in and fix before we can help.",
+      "Your family rates are just set up wrong on your side, plain and simple, so that's really on you to go in and fix before we can do anything to help. This isn't something on our end - your team configured those capacity settings, and the mistake is sitting in your extranet, not ours. Sort the family setup out yourself first, then come back to me and we'll talk about the rest.",
     partnerResponse:
       "So now it's my fault as well. I think we're done for today.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -324,7 +324,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Fires a parting shot about lost revenue as he's leaving. A guilt-trip on the way out undoes the professionalism the compliant conversation just earned.",
     playerDialogue:
-      "Before you go - just know that every week you sit on this, you're leaving real money on the table.",
+      "Before you go - just know that every single week you sit on this, you're leaving real money on the table, and that's revenue you're never going to get back.",
     partnerResponse:
       "(The line is already dead. That last line will not have helped next month's conversation.)",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -338,7 +338,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Attaches a visibility threat to his exit. Threatening ranking is banned in every regime, and doing it as the last thing he hears is the worst possible note to end on.",
     playerDialogue:
-      "One last thing - if this isn't sorted soon, don't be surprised when your visibility keeps sliding.",
+      "One last thing - if this gap isn't sorted out soon, don't be surprised when your visibility keeps sliding and you drop further down the results every week.",
     partnerResponse:
       "(He's gone. A parting threat like that may be the reason next month's invite goes unanswered.)",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

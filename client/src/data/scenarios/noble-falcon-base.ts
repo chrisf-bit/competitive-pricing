@@ -69,7 +69,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Lead with the data straight away - tell Anton the price comparison is the issue and you need to walk through it.",
     playerDialogue:
-      "Hi Anton. Your price competitiveness has shifted noticeably year-on-year and that's why I called. Can we walk through where the gap is biggest?",
+      "Hi Anton. Your price competitiveness has shifted noticeably year-on-year, and that gap is exactly why I called today. Can we walk straight through where the difference is biggest?",
     partnerResponse:
       "That's a direct opener. We're aware of the gap - it's a consequence of our brand pricing policy, not something we'd plan to change in this call.",
     styleMatch: { red: 2, yellow: -1, green: -1, blue: 1 },
@@ -83,7 +83,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Tell Anton upfront that if rates don't come down he'll lose ranking - escalate the stakes early.",
     playerDialogue:
-      "Hi Anton. If the rates here stay where they are, your search position is going to drop and visibility will fall significantly. That's the conversation today.",
+      "Hi Anton. If the rates here stay where they are, your search position is going to drop and your visibility will fall off significantly. That is the conversation I need to have today.",
     partnerResponse:
       "That sounds like a threat. Our pricing is set centrally and your search position isn't a lever I can pull on this call.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
@@ -143,7 +143,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Tell Anton the platform will lower his ranking if the gap persists - escalate the consequence.",
     playerDialogue:
-      "If you keep prices higher than your direct site, the algorithm will lower your search position. That's not what either of us wants.",
+      "If you keep your prices higher here than on your own direct site, the algorithm is going to lower your search position. That is not the outcome either of us wants here.",
     partnerResponse:
       "I do not respond well to threats. Our policy is what it is - if you want to talk consequences, that's the wrong way in.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
@@ -188,7 +188,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Hold back on segment specifics and offer a broader portfolio-level read first.",
     playerDialogue:
-      "The pattern is broad across segments - I'd rather give you the headline view than zoom into family specifics straight away.",
+      "The pattern here is broad across most of your segments, so I would rather give you the headline portfolio view first than zoom straight into the family specifics.",
     partnerResponse:
       "That's a fairer way to frame it. But a portfolio view is hard for me to act on - I'll need something segment-specific before I can take it to my team.",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 1 },
@@ -202,7 +202,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Push for a specific rate cut on the segment you think is most exposed.",
     playerDialogue:
-      "Domestic guests are who you're losing - we need you to drop rates 15-20% to recover those bookings.",
+      "Domestic guests are exactly the segment you are losing right now, so we really need you to drop your rates by 15-20% across the board to win those bookings back onto the platform.",
     partnerResponse:
       "A 15-20% rate cut is not on the table from a brand-policy point of view. That's a non-starter.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
@@ -246,7 +246,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Soft close: promise a proposal document and pick this up at the next call.",
     playerDialogue:
-      "Let me put together a proposal and we can pick this up next week.",
+      "Let me take all of this away and put together a proper written proposal for you, and then we can pick the whole thing back up together on our call next week at the latest.",
     partnerResponse:
       "Fine - but the window for an in-policy adjustment closes quickly. The sooner you can get something concrete to my team, the better.",
     styleMatch: { red: -1, yellow: -1, green: 1, blue: 0 },
@@ -260,7 +260,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Skip the pilot framing and ask Anton to roll out child rates across the whole portfolio for a quarter.",
     playerDialogue:
-      "Let's go bigger - apply child rates across the whole portfolio for the next quarter and see what shifts.",
+      "Let's go bigger than a small pilot here - apply competitive child rates right across your whole portfolio for the next full quarter, and then we can see together what shifts.",
     partnerResponse:
       "A portfolio-wide change for a quarter is far beyond what I can authorise. That would need brand HQ involvement and a much longer review cycle.",
     styleMatch: { red: 2, yellow: 1, green: -2, blue: -1 },

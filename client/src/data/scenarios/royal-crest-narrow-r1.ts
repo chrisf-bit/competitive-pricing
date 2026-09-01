@@ -52,7 +52,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right instinct, wrong tool - a blanket public rate cut lowers his ADR everywhere, the exact thing his margin-first strategy protects. The SME guidance is explicit: don't ask for a general rate drop.",
     playerDialogue:
-      "The cleanest fix is to bring your overall public rates down a few percent so you're competitive across the board here.",
+      "Honestly, the cleanest fix here is just to bring your overall public rates down by a few percent so you sit competitively across every date and room type we sell. A lower headline rate keeps you in the running on more searches, and the extra bookings should come through without any of the fenced-offer complexity to set up.",
     partnerResponse:
       "Dropping my ADR across the board is the one thing I won't do. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -66,7 +66,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Ask him to price below the other OTAs and hand over the same availability as his direct site. In a Narrow market you may only align with Brand.com - policing other OTAs and demanding equal availability both overstep.',
     playerDialogue:
-      "You also need to make sure your rates here aren't higher than the other big OTAs, and give us the same availability you show on your direct site.",
+      "You also need to make sure your rates on our platform never sit higher than what the other big OTAs are showing, and you should hand us exactly the same availability and room types you keep open on your own direct site. We can't be the channel that ends up with a worse deal than the rest of your distribution.",
     partnerResponse:
       "You don't get to police my other-OTA pricing or my availability. Stay in your lane.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -106,7 +106,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right data, wrong ask - it brushes past his cannibalization worry and pushes an all-segments switch-on instead of the fenced test that would earn his yes.",
     playerDialogue:
-      "The numbers are clear: 10% more competitive is 30% more bookings. Let's switch it on across every segment today and not overthink it.",
+      "The numbers here are clear: getting 10% more competitive on our platform tends to bring in around 30% more bookings and roughly 25% more revenue. There's really no reason to hedge this - let's switch it on across every segment you run today, keep it simple, and watch the volume come through rather than tiptoeing into it one narrow slice at a time.",
     partnerResponse:
       "You just breezed straight past my concern about cannibalization. I'm not flipping a switch on everything.",
     styleMatch: { red: 1, yellow: 0, green: -1, blue: -1 },
@@ -120,7 +120,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Wave away the cannibalization worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
     playerDialogue:
-      "Honestly, cannibalization is a bit of a myth partners tell themselves. Just trust me on this one and turn it on.",
+      "Honestly, cannibalization is a bit of a myth that partners tell themselves to avoid making a move, and I've seen plenty of hotels talk themselves out of real growth because of it. I wouldn't lose sleep over it if I were you. Just trust me on this one, turn it on, and I'm confident you'll be glad you did once the bookings start landing.",
     partnerResponse:
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

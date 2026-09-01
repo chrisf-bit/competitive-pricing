@@ -32,7 +32,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I've been reviewing your portfolio. Forward volume for the next three months is strong, but room nights in the last 30 days are down 32% year-on-year. Have you seen more cancellations from our platform, or a shift in your distribution mix?",
     partnerResponse:
-      "Yes, I've seen the drop, and other OTAs have gained share this month. The Key OTA keeps calling to point out that you're more expensive. I checked - it's because they're cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
+      "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because the Key OTA is cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe: tell her to drop her Booking.com price to be the cheapest option. Presumes the fix and invites the exact race-to-the-bottom an ROI-driven professional refuses.",
     playerDialogue:
-      "Your last-30-day room nights are down 32%. The quickest fix is to bring your Booking.com price down so you're the cheapest option on the page - shall we set that up?",
+      "Your room nights over the last 30 days are down 32%, so let's not overthink the cause. The quickest fix is to bring your Booking.com price down until you're the cheapest option on the search page, and the volume should follow. Shall we set that up now?",
     partnerResponse:
       "Dropping my price to be the cheapest is exactly the race to the bottom I avoid. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Open by dismissing the drop as market softness. A numbers-first partner reads that as sloppy and disengages.',
     playerDialogue:
-      "We've noticed a small dip, but honestly it's probably just seasonal softness in the market - nothing to worry about.",
+      "We've noticed a small dip in the last 30 days, but honestly I wouldn't read too much into it - this is almost certainly just seasonal softness across the market at this time of year. Every property in the area tends to see it, so there's really nothing here to worry about.",
     partnerResponse:
       "If you're going to tell me it's 'just seasonal,' this call is a waste of my time.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -81,7 +81,7 @@ const step1: BranchingStep = {
 const step2Options: BranchingOption[] = [
   {
     id: 'sh-r2-wide-step2-correct',
-    label: 'Refuse the price war; reframe to brand value and unsold demand',
+    label: 'Reframe to brand value and unsold demand',
     description:
       "SME-prescribed handling: acknowledge the frustration but don't match a margin cut. Reframe inconsistent pricing as brand/trust erosion she can control, and steer to the high-value demand she's not capturing.",
     playerDialogue:
@@ -100,7 +100,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Capitulate to the 'burn margin too' ask and fund a matching discount. It engages the price war the SME guidance says to avoid, and it rewards her Same Net logic instead of reframing it.",
     playerDialogue:
-      "You're right - let me see if we can fund a discount on our side to match the Key OTA's public price for you.",
+      "You're right, and I don't want to leave you exposed on price here. Let me see whether we can fund a discount on our side to bring your final price down to match the Key OTA's public rate for you. If they're willing to cut their margin to win the booking, then it's only fair that we help you do the same and keep you level with them on the page.",
     partnerResponse:
       "So now you'll burn your own margin? That doesn't fix my problem - it just proves my point.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Name the Key OTA as the problem and tell her to stop giving them rates and go exclusive with Booking.com. In a Wide market you may name the third party but you cannot instruct the partner to stop working with them.',
     playerDialogue:
-      "Honestly, the Key OTA is the problem here. You should stop giving them rates and just work with us exclusively - that ends the whole issue.",
+      "Honestly, the Key OTA is the real problem here, and as long as you keep feeding them the same rates they'll keep undercutting you and pointing the finger back at us. The cleanest fix is to stop giving them your rates altogether and work with us exclusively instead. Pull your inventory off them, put it all with us, and this whole undercutting issue simply goes away for good.",
     partnerResponse:
       "You don't get to tell me who I distribute with. Stay in your lane.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -128,7 +128,7 @@ const step2: BranchingStep = {
   id: 'same-net',
   label: 'Handle the Competitive Aggression / Same Net objection',
   partnerPrompt:
-    "Yes, I've seen the drop, and other OTAs have gained share this month. The Key OTA keeps calling to point out that you're more expensive. I checked - it's because they're cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
+    "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because the Key OTA is cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
   options: step2Options,
 };
 
@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: explain the lost-checkout dynamic, ask her to provide the same rates and conditions she gives other third-party channels, then pivot to how she's capturing the family and international segments behind the volume drop.",
     playerDialogue:
-      "When we show a higher price, travelers buy from a cheaper competitor on our search page instead of booking with you. To maximize traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels. And how are you capturing the family and international segments that are driving the drop?",
+      "When travelers on our platform see your price is higher, conversion is likely to drop and they book elsewhere on our platform. To maximize traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels. And how are you capturing the family and international segments that are driving the drop?",
     partnerResponse:
       "Families are a headache for vacation rentals. We restrict our double rooms from family searches and don't offer free cots - we prefer to sell those larger units directly, where we control the guest risk. For international bookers we're not running any specific campaigns.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Compliant ask (same conditions as the Key OTA) but it stops at protecting the status quo - it never opens the family/international growth that actually answers her 'what's in it for my margin' question.",
     playerDialogue:
-      "The simplest move is to give us the same conditions you give the Key OTA - match that here and we're done.",
+      "The simplest move here is to give us the exact same rates and conditions you already give the Key OTA, so we're showing the same price they are and you stop losing those checkouts to them. Match that across your rooms and I think we've solved the immediate issue - once the pricing lines up on the page, we're basically done here.",
     partnerResponse:
       "Matching the Key OTA just protects the status quo. Where's the upside for my margin?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -170,7 +170,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tell her to price below the Key OTA and pull her best inventory from them. Instructing a partner to withhold from or stop feeding another channel oversteps even in a Wide market.",
     playerDialogue:
-      "You need to give us a better rate than the Key OTA and stop feeding them your best inventory - that's the only way to fix this.",
+      "The way you actually fix this is to give us a better rate than the Key OTA gets, undercut them on the page, and stop feeding them your best inventory so they can't undercut you back. Hold your strongest rooms and lowest rates for us only, let their allocation dry up, and you'll take that share straight back off them. That's really the only route that works.",
     partnerResponse:
       "Telling me to starve another channel is not your call. We're done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right segment, wrong handling - it tells her to open the rooms and add cots while ignoring the operational-risk concern she just raised, so it earns a no.",
     playerDialogue:
-      "Just open your double rooms to family searches and offer free cots - it'll fill those units and lift your numbers.",
+      "Just open your double rooms up to family searches and add free cots across the board - that's genuinely the fastest way to fill those larger units on the quiet nights and lift your numbers straight away. Turn it on now and you'll see the family bookings start flowing in almost immediately.",
     partnerResponse:
       "You just ignored everything I said about operational risk. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Tell her her segmentation is simply wrong. Condescending to an owner who knows her own operation - the opposite of the ROI framing that would land.",
     playerDialogue:
-      "Restricting families is honestly bad business - you're leaving money on the table and hurting your own reviews.",
+      "Restricting families is honestly just bad business, and I think you already know that - you're leaving a lot of money on the table and quietly hurting your own reviews and ranking every single week. Frankly, any operator running the numbers would have opened these rooms up long ago.",
     partnerResponse:
       "I don't need a lecture on how to run my own business. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -268,7 +268,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Takes the guardrail but drops the international lever and never agrees a measure or follow-up - a soft close a data-led partner will let evaporate.",
     playerDialogue:
-      "Great, I'll set up the three-night minimum on family rooms and we'll see how it goes.",
+      "Great, I'll go ahead and set up the three-night minimum on your family rooms to protect the margins, and then we'll just leave it running and see how it goes over the next while. If the family occupancy picks up the way I expect, we can always look at doing more from there later on.",
     partnerResponse:
       "Just the minimum stay? What about the international demand you mentioned - and how are we measuring this?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -282,7 +282,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the fenced deal she agreed to - a general public discount to 'match the Key OTA everywhere.' Straight back into the price war and the ADR erosion she protects.",
     playerDialogue:
-      "Perfect - and let's also bring your public rates down across the board to match the Key OTA everywhere and really move volume.",
+      "Perfect - and while we're at it, let's also bring your public rates right down across the board so you're matching the Key OTA everywhere they show, not just on the family rooms. Go broad with the discounting and you'll really move serious volume across every segment at once.",
     partnerResponse:
       "Across-the-board discounting is the opposite of what I just agreed to. Stick to the plan.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

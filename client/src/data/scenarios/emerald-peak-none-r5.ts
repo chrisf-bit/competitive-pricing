@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public cut - which a franchise GM can't authorise, and which pressures a lower price a No Parity market doesn't permit.",
     playerDialogue:
-      "Your visibility is down - the quickest fix is to bring your public price here down so you're competitive again.",
+      "Your visibility is down and I don't think we need to overthink it - the quickest fix is to bring your public price on our platform down a good amount so you're competitive again and the searches come back.",
     partnerResponse:
       "I can't authorise a flat rate drop - it breaks head-office policy. That's a non-starter.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for a direct, policy-bound franchise GM.',
     playerDialogue:
-      "Hi Sophia, no big agenda - just wanted to check in and see how you're feeling about the partnership overall.",
+      "Hi Sophia, honestly no big agenda today - I just wanted to check in and see how you're feeling about the partnership overall, whether things are running smoothly on your end and if anything's on your mind.",
     partnerResponse:
       "Let's be efficient - if there's a commercial point, show me the data.",
     styleMatch: { red: -2, yellow: 1, green: 1, blue: -1 },
@@ -81,7 +81,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: ask how you can collaborate around the roadblock, acknowledge she follows internal guidelines and is free to price how she chooses, and explain that her best available price improves ranking and discovery for her whole business.",
     playerDialogue:
-      "How can we collaborate to find a way around that roadblock? I know you have to follow your internal guidelines, and you're completely free to price how you choose. But by making your best price available to us, you improve your ranking and discovery, which benefits your overall business - right now your search placement is being reduced.",
+      "How can we collaborate to find a way around that roadblock? I know you have to follow your internal guidelines, and you're completely free to price how you choose. But by making your best price available to our platform, it could make your property more attractive to travelers and benefit your overall business.",
     partnerResponse:
       "So you're basically saying this visibility drop on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Press her to hand over her lowest price to fix visibility. In a No Parity market you ask for her best available price - you don't require her lowest, and she can't give it anyway.",
     playerDialogue:
-      "The way to fix this is simple: just give us your lowest price and the visibility comes right back.",
+      "The way to fix this is honestly pretty simple, and I don't want to overcomplicate it for you: just give us your single lowest price, the one you'd never normally share, and put it live on our platform. The moment you do that the visibility comes right back and you'll be sitting where you want to be in the results again.",
     partnerResponse:
       "'Give us your lowest' - I literally can't, that's the policy. Were you listening?",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Tell her to fight her own head office and drop the policy. Dictating her internal strategy puts her in an impossible position.",
     playerDialogue:
-      "Honestly, head office is wrong here - you should push back and get that policy dropped.",
+      "Honestly, I think head office has got this completely wrong, and someone needs to say it to them. You should push back hard on this policy - go to your bosses, lay out what it's costing you, and get that direct-cheaper rule dropped once and for all. Until you challenge them on it directly, nothing here is going to change for you.",
     partnerResponse:
       "Telling me to fight my own head office isn't help.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Accepts the billboard framing with only a token nudge - never correcting the belief that a higher price here is harmless.",
     playerDialogue:
-      "That's fair - the exposure does help, so maybe just trim a little at the margin and the click-throughs will follow.",
+      "That's fair enough, honestly - the exposure you get from being listed with us really does help your name travel, so I wouldn't lose sleep over the gap. Maybe just trim a little at the margin whenever it suits you and the click-throughs should follow on their own over time. The wider model you've got here is basically sound, so there's no need to force anything.",
     partnerResponse:
       "So the model's fine, then? What are we actually solving here?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Threaten to drop her ranking further until she fixes her price. Threatening visibility over pricing is banned in every regime.',
     playerDialogue:
-      "If travelers can't find you, our system will keep dropping your ranking further until you fix the price.",
+      "Let me be straight with you about how this works: if travelers genuinely can't find you near the top, our system reads that as a weak listing and it will keep dropping your ranking further, week after week, until you go in and fix the price. That slide won't stop on its own, and the longer the price stays where it is, the harder it gets to climb back up again.",
     partnerResponse:
       "Threatening my ranking over a policy I don't control is not a conversation I'll have.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -208,7 +208,7 @@ const step4Options: BranchingOption[] = [
     description:
       "A general discount is the ADR-wide friction she's trying to avoid, and it wastes the compliant, fenced family route.",
     playerDialogue:
-      "Just run a small general discount here and it'll lift everything at once.",
+      "Honestly, I'd keep this really simple - just run a small general discount across the board here on our platform and let it lift everything at once, rather than fiddling with individual segments. A modest cut applied to all your rates is the cleanest way to move the needle, it's easy to switch on, and the whole listing responds together at the same time.",
     partnerResponse:
       "A general discount is exactly the friction I'm trying to avoid.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -222,7 +222,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Push her to price below her own site so she's the cheapest anywhere. Requiring a partner to be the cheapest is forbidden in a No Parity market - and it directly breaks her head-office policy.",
     playerDialogue:
-      "The real fix is to be the cheapest anywhere - even below your own site - and the visibility comes back.",
+      "The real fix here, if you want the visibility to genuinely come flooding back, is to make sure you're the cheapest option travelers can find anywhere - and yes, that means going below your own direct site, not just level with it. Undercut everyone, including your website, put that price live with us, and you'll shoot straight back up the results where you belong.",
     partnerResponse:
       "Cheaper than our own site would get me fired. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Never answers her question - the traction - and pins no review. A results-driven GM needs the numbers for corporate.",
     playerDialogue:
-      "It'll help a lot - let's just switch the family rate on and see how it goes.",
+      "It'll help a lot, honestly, I'm really confident about that - the family angle is exactly the kind of thing that tends to work well for properties like yours. Let's just get the family rate switched on, keep it nice and simple for now, and then see how it goes over the coming weeks. I think you'll be pleased with the direction it takes.",
     partnerResponse:
       "I asked for the traction - I need the numbers to take back to corporate.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the fenced family rate to a public base cut - the exact ADR-wide, policy-breaking move she can't touch.",
     playerDialogue:
-      "Perfect - and let's also bring your public base down a little while we're at it to really move it.",
+      "Perfect, let's do the family rate - and honestly, while we've got the momentum going, let's also bring your public base price down just a little at the same time to really push the whole thing along. If the family rate is going to lift things, a small trim on the main rate on top of it will accelerate the visibility even faster.",
     partnerResponse:
       "That's the base-rate move I can't touch. Family rate only.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

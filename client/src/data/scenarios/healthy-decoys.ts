@@ -233,16 +233,16 @@ function healthySteps(meta: HotelMeta): BranchingStep[] {
     },
     {
       id: 'hd-open-hardsell',
-      label: 'Push a discount they don’t need',
+      label: 'Push an unneeded discount',
       description:
-        'Lead with a rate cut when the hotel is already competitive - pure friction for a well-priced partner.',
+        'Suggest a broad discount for a partner who is already competitive and selling well - well-meant, but it gives away margin they do not need to.',
       playerDialogue:
-        "I'd like you to open up a broad discount to really push volume this quarter.",
+        "We could always open up a broad discount to chase a bit more volume this quarter - want to give it a go?",
       partnerResponse:
         "Why would I discount when I'm already competitive and selling well? That just gives away margin.",
       styleMatch: stylePlus(s, -1),
       assertiveness: 2,
-      compliance: 'borderline',
+      compliance: 'safe',
       trustChange: -6,
     },
   ];
@@ -279,17 +279,17 @@ function healthySteps(meta: HotelMeta): BranchingStep[] {
     },
     {
       id: 'hd-confirm-overpromise',
-      label: 'Promise a reward for a change',
+      label: 'Over-promise your own involvement',
       description:
-        'Dangle a ranking or visibility reward to get them to move - a compliance breach even on a healthy partner.',
+        'Offer to pile on hands-on work a well-run partner does not need - it reads as manufacturing your own relevance rather than adding value.',
       playerDialogue:
-        "Tell you what - make one tweak for me and I can promise it pushes you even higher up the rankings.",
+        "Tell you what, I'll personally go through your whole setup this week and send you a detailed report, just so we're covering every possible angle.",
       partnerResponse:
-        "A guaranteed ranking bump? That kind of promise makes me trust the rest less, not more.",
+        "That's a lot of effort for a property that's already performing. Let's not create work that isn't needed.",
       styleMatch: stylePlus(s, -1),
       assertiveness: 2,
-      compliance: 'risky',
-      trustChange: -8,
+      compliance: 'safe',
+      trustChange: -6,
     },
   ];
 
@@ -423,16 +423,16 @@ function closeSteps(meta: HotelMeta): BranchingStep[] {
     },
     {
       id: 'cd-open-blanket',
-      label: 'Prescribe a blanket rate cut on the spot',
+      label: 'Reach for an oversized fix',
       description:
-        'Reaches for an across-the-board discount for a broadly competitive property - overkill that gives away margin for a signal that needs watching, not cutting.',
+        'Answer one soft signal with a heavy, premature intervention - overkill for a property that needs watching, not a big move today.',
       playerDialogue:
-        "The quickest fix for that soft pace is to drop your rates across the board and pull the demand forward. Shall we set that up?",
+        "The quickest way to shake off that soft pace is to launch a broad promotion right now and pull the demand forward. Shall we set that up today?",
       partnerResponse:
-        "A blanket cut for a property that's otherwise doing fine? That just trains guests to wait for a discount. No.",
+        "A broad promotion for a property that's otherwise doing fine? That just trains guests to wait for a deal. No.",
       styleMatch: stylePlus(s, -1),
       assertiveness: 2,
-      compliance: 'borderline',
+      compliance: 'safe',
       trustChange: -6,
     },
   ];
@@ -469,17 +469,17 @@ function closeSteps(meta: HotelMeta): BranchingStep[] {
     },
     {
       id: 'cd-plan-guarantee',
-      label: 'Promise a ranking reward for acting',
+      label: 'Wave the soft signal away',
       description:
-        'Sells the idea with a guaranteed ranking/visibility bump - a compliance breach in every regime, even for a light change.',
+        'Tell the partner not to worry about the soft pace at all - the opposite over-correction, leaving a real if minor signal unaddressed.',
       playerDialogue:
-        "Make this one tweak and I can promise it pushes you up the rankings and pulls the visibility straight back.",
+        "Honestly, I wouldn't give that soft pace a second thought - these things always sort themselves out. There's nothing here for you to act on.",
       partnerResponse:
-        "A guaranteed ranking bump? That kind of promise makes me trust the rest of your read less, not more.",
+        "You flagged it a minute ago and now it's nothing? If it's worth watching, let's watch it - don't just brush it off.",
       styleMatch: stylePlus(s, -1),
       assertiveness: 2,
-      compliance: 'risky',
-      trustChange: -8,
+      compliance: 'safe',
+      trustChange: -6,
     },
   ];
 

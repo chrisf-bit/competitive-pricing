@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge conversion is 45% above peer, then surface page views down 53% and the pattern - his property appears uncompetitive 66% of the time versus other channels, specifically on mobile and family searches.",
     playerDialogue:
-      "Let's have a look. Your conversion rate is actually 45% above your peer group, but your page views are down 53%. Over the past month there's been a shift - your property appears uncompetitive around 66% of the time compared with other channels, and it's concentrated specifically in mobile and family searches.",
+      "Let's have a look. Your conversion rate is actually 45% above your peer group, but your page views are down 53%. Over the past month there's been a shift - your property appears uncompetitive around 60% of the time compared with other channels, and it's concentrated specifically in mobile and family searches.",
     partnerResponse:
       "Diego, we apply the same rates across all online channels to keep things simple. If another platform decides to cut its own margin to lower the public price, that's their choice. If Booking.com wants to compete, you should just do the same.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that he's uncompetitive, wrong route - prescribe a blanket cut before diagnosing anything. It presumes the fix and hands an ROI-minded operator nothing to weigh, exactly the move he'll push back on.",
     playerDialogue:
-      "Your page views are down because you're simply too expensive - the fix is to drop your Booking.com rates across the board and the traffic comes back.",
+      "Your page views are down for one simple reason - you're priced too high against everyone else, and the quickest way to turn that around is to drop your Booking.com rates right across the board. Bring them down, undercut the other channels, and the traffic and the bookings will come straight back to you within the month.",
     partnerResponse:
       "You're telling me to cut everything before you've explained a single thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for an operator who opened by asking exactly what the data shows.',
     playerDialogue:
-      "Honestly, I wouldn't read too much into one slower month - these things tend to even out. How's everything else going?",
+      "Honestly, I really wouldn't read too much into one quieter month - in my experience these things tend to even themselves out once the season turns, and a single dip rarely means anything is actually wrong. You've got a strong property with loyal guests, so let's not get bogged down in one number. How's everything else going on your side?",
     partnerResponse:
       "I asked what the data shows. If it's just a slow month, tell me that; if it isn't, show me.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Sounds accommodating, but it concedes the Same Net trap - promising to burn margin whenever a competitor discounts. It rewards the race to the bottom instead of reframing to value, and gives away platform margin for nothing.",
     playerDialogue:
-      "That's fair - I'll take it back to my team and we'll look at matching those competitor promotions so you're always covered on price here.",
+      "That's fair enough, and I don't want you feeling like you're being left behind on price here. Let me take this back to my team and we'll look at matching those competitor promotions for you, so whenever one of them runs a discount we move with it and you stay covered on price on Booking.com. That way you never have to worry about being the more expensive option on our platform again.",
     partnerResponse:
       "Good, that's the kind of partnership I want. So you'll just keep pace with whoever's cheapest?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -115,7 +115,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Threaten a further visibility slide unless he aligns. Threatening ranking over how he prices is banned in every regime, and it torches the collaboration this operator responds to.",
     playerDialogue:
-      "I'll be straight with you - if you keep chasing the discounters instead of aligning with us, our system will keep pushing your property further down the results.",
+      "I'll be straight with you here, because I think you need to hear it plainly - if you keep chasing the discounters instead of aligning your pricing with us, our system is going to read your property as uncompetitive and keep pushing you further and further down the results. The longer you leave it, the harder that visibility is to claw back, so aligning with us is really the only way to protect your position.",
     partnerResponse:
       "Threatening my ranking over how I run my pricing is not how you'll get me on side.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong lever - it turns a setup opportunity into a discount ask, and it walks straight into the operational fear he'll raise next. The win is availability and configuration, not a price cut.",
     playerDialogue:
-      "It's simple, really - just lower your family rates on Booking.com so they're the cheapest option and the family bookings will follow.",
+      "It's simple, really - the families are out there searching, so the fastest way to win them is on price. Just lower your family rates here on Booking.com so you're clearly the cheapest option for a family of four, undercut what they'd pay anywhere else, and those family bookings will start flowing to you almost straight away. Price is the lever that moves this quickest.",
     partnerResponse:
       "Cutting my family prices is the opposite of protecting that inventory. Give me a commercial reason, not a discount.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Direct him to hand over his full family inventory immediately. Dictating his distribution strategy oversteps, and pushing an autonomous operator this hard gets a fast no.",
     playerDialogue:
-      "Frankly, your direct-only family strategy is a mistake - you should open all your family rooms to us right now and stop holding them back.",
+      "Frankly, keeping your family rooms back for direct only is a mistake that's costing you real money every week. You should open every one of your family rooms to us right now, stop holding any of that inventory back, and let us put it in front of the biggest audience there is. Hand it all over to Booking.com and you'll see the difference in your family bookings fast.",
     partnerResponse:
       "You don't get to tell me how to allocate my own inventory. That's my call, not yours.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "The right two actions, but delivered flat - it skips the reassurance an operations manager asked for outright. Correct content, wrong read of the partner: he needs to hear it won't burden his team.",
     playerDialogue:
-      "You'd add family rates and clear the exclusions on your mobile rate. That's the fix.",
+      "Right, so here's what needs to happen. You'd add your family rates onto Booking.com so those rooms are actually bookable here, and you'd go into the mobile rate you've got set with us and clear out all the excluded dates and the two rate plans that are switched off. Do those two things and the gap closes. That's the fix.",
     partnerResponse:
       "That tells me what to change, not whether it lands on my front desk. That's the part I asked about.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: 1 },
@@ -227,7 +227,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame the misconfigured mobile rate as his oversight to sort out. Blaming an operator you're trying to bring on side burns the collaboration and answers none of his operational concern.",
     playerDialogue:
-      "Well, your mobile rate has been misconfigured on your side for months - that's really on you to go in and sort out.",
+      "Well, if we're being honest about it, your mobile rate has been sitting misconfigured on your side for months now - the excluded dates and the switched-off rate plans were all set up wrong at your end. That's on you to go back into the extranet and sort it out, because there's not much I can do from here until you've cleaned it up.",
     partnerResponse:
       "If your pitch is that this is all my fault, you can see why I'd rather just leave it as it is.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -269,7 +269,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right plan, lost momentum - handing an operator a to-do for whenever he gets a chance drops the collaborative, do-it-now energy that just got him to yes, and the exclusions will likely sit untouched.",
     playerDialogue:
-      "Great - I'll have my team email you the steps and you can update the mobile and family settings whenever you get a chance.",
+      "Great - I'll get my team to email over the step-by-step instructions, and you can go in and update the mobile and family settings yourself whenever you next get a spare moment.",
     partnerResponse:
       "Sure, though realistically that'll sit in my inbox for a while - you know how it is.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: 0 },
@@ -283,7 +283,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Direct him to pull the family rooms from the other OTAs and give them only to you. Instructing an operator on his external channel mix oversteps even in a Wide market.",
     playerDialogue:
-      "And to really lock this in, stop giving those family rooms to the other OTAs - keep them exclusive to us.",
+      "And to really lock this in, I'd stop giving those family rooms to the other OTAs altogether - pull them from every other channel and keep that inventory exclusive to Booking.com from now on.",
     partnerResponse:
       "You don't get to decide which channels I work with. That's my call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

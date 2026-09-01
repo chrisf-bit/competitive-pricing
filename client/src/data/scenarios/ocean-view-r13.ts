@@ -44,7 +44,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "The welcome experience you've been building for families and long-stay guests really shows. I've looked at both your history and your forward pace, and there's one area where demand is getting stuck: around 45% of your rooms went unsold last quarter and your forward sell-through is pacing about 18% behind your peer group.",
     partnerResponse:
-      "Oh dear... 45% unsold? That is concerning, Javier. But honestly, I find it confusing. My revenue team double-checked our setup, and overall our rates on your platform are very aggressive - we're consistently priced about 3% cheaper than our competitive set. If we're already cheaper than the competition, why aren't those rooms selling?",
+      "Oh dear... 45% unsold? That is concerning, Javier. But honestly, I find it confusing. My revenue team double-checked our setup, and overall our rates on your platform are very aggressive - we're consistently priced about 3% cheaper than our Peer Group. If we're already cheaper than the competition, why aren't those rooms selling?",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right signal, cold open - leading with '45% unsold' and no acknowledgement of the work she just described lands as a scolding for a relationship-led partner, before she's ready to hear it.",
     playerDialogue:
-      "Let's get into the numbers - 45% of your rooms went unsold last quarter and your pace is well behind peers. We need to talk about why that's happening.",
+      "Let's get straight into the numbers, because that's really what matters here. Around 45% of your rooms went unsold last quarter, and your forward pace is sitting well behind your peer group. That's the reality we're dealing with, and we need to talk through why it's happening and what has gone wrong on your side before we do anything else.",
     partnerResponse:
       "That's a hard number to open with, Javier. We've been working hard on the guest experience - I'd have hoped you'd noticed that too.",
     styleMatch: { red: 1, yellow: -1, green: -2, blue: 0 },
@@ -71,7 +71,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps to a price cut before diagnosing - and she's already priced below her comp set, so it's both premature and factually the wrong lever. The unsold rooms aren't a headline-price problem.",
     playerDialogue:
-      "If the rooms aren't selling, the quickest lever is price - let's bring your rates down a bit further so you undercut the competition even more.",
+      "Honestly, if the rooms simply aren't selling, then the quickest lever you have is price. Let's bring your rates down a bit further so you're undercutting the competition even more clearly than you already are - if you're the cheapest option on every search, the bookings should start flowing back and those empty rooms will fill up a lot faster.",
     partnerResponse:
       "But we're already cheaper than our comp set. How would cutting further even help? That just gives away margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -105,7 +105,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Takes her 'we're already cheaper' at face value and concludes it must be soft demand - abandoning the visibility signal that actually explains the gap.",
     playerDialogue:
-      "You make a fair point - if you're already the cheapest, then it's probably just a slow patch in the market right now rather than anything in your setup.",
+      "You make a fair point, and I don't want to overcomplicate this for you. If you're already the cheapest option out there, then this is most likely just a slow patch in the wider market right now rather than anything in your own setup or configuration. Demand across the whole area has been softer lately, so I'd expect it to pick back up on its own soon enough.",
     partnerResponse:
       "That's a relief, honestly. So we just wait for demand to come back?",
     styleMatch: { red: 0, yellow: 1, green: 0, blue: -2 },
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that her internal read is incomplete, wrong delivery - implying her team got it wrong turns it into an internal-vs-external data fight instead of widening her view to the traveler's.",
     playerDialogue:
-      "I'd take your revenue team's 'we're 3% cheaper' with a pinch of salt - our platform data tells a different story, and ours is the one travelers actually act on.",
+      "Honestly, I'd take your revenue team's 'we're 3% cheaper than our comp set' claim with a fairly large pinch of salt. Our platform data tells a very different story from theirs, and at the end of the day ours is the version that reflects what travelers are actually doing when they come to search. I'd trust our numbers over your team's read on this one.",
     partnerResponse:
       "My team knows our pricing inside out. I'm not going to sit here and let you tell me their numbers are wrong.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Answers her 'is the algorithm burying us?' with a hand-wave about how ranking works - plausible, but it misses the concrete, fixable family-config cause and leaves her nothing to act on.",
     playerDialogue:
-      "It's largely how the ranking works - the algorithm weighs a lot of signals, and yours net out lower than your peers, which is why fewer travelers see you.",
+      "It's largely just how the ranking works behind the scenes. The algorithm weighs up a whole range of different signals when it decides placement, and for whatever reason yours tend to net out a bit lower than your peers do, which is why fewer travelers end up seeing you in their results. It's hard to pin down to any single cause.",
     partnerResponse:
       "So it's the algorithm's fault and there's nothing specific I can do? That's not much to work with.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong fix - jumping to 'add a family discount' treats a broken configuration as a pricing problem, so it gives away margin instead of correcting the setup that's inflating the family price.",
     playerDialogue:
-      "The fix is simple - put a discount on your family rates so families see a lower price and start booking again.",
+      "The fix here is really simple, honestly. Just put a discount on your family rates so that families searching see a noticeably lower price and start booking with you again. If the family price is what's putting them off, then bringing that number straight down is the fastest way to win those bookings back and get the empty rooms filling.",
     partnerResponse:
       "Discount the family rate? I don't want to erode my ADR further - we've only just recovered from the last price test.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -201,7 +201,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that it's a config fix, wrong delivery - walking a nervous partner through occupancy codes and age-bucket settings answers a reassurance question with complexity, feeding her 'operational nightmare' fear.",
     playerDialogue:
-      "You'll just need to remap the occupancy codes, set the child age buckets per rate plan, and re-index the extra-bed logic across each unit - it's all in the extranet configuration.",
+      "You'll just need to go in and remap the occupancy codes, set the child age buckets individually per rate plan, and re-index the extra-bed logic across each of your units. It's all sitting in the extranet configuration under the rate-plan settings, so once you've worked through each property it should flow through.",
     partnerResponse:
       "That already sounds like the operational nightmare I was worried about across all our units.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: 0 },
@@ -215,7 +215,7 @@ const step4Options: BranchingOption[] = [
     description:
       'Reassures her by promising the config fix will push her up the rankings. Promising a ranking reward in exchange for a change is a compliance breach in every regime.',
     playerDialogue:
-      "And the best part - once you fix it, I can promise the algorithm rewards you with a ranking boost, so you'll climb straight back up the results.",
+      "And honestly, the best part is this - once you fix the family configuration, I can promise you the algorithm rewards you with a genuine ranking boost, so you'll climb straight back up the search results almost immediately. Get this sorted and I can more or less guarantee you'll be above your peers again in no time.",
     partnerResponse:
       "A guaranteed ranking boost? That sounds too good to be true, and it makes me trust the rest less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -249,7 +249,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that it matters, wrong tone - piling on urgency ('every day you wait you lose families') pressures a partner who's already on side and cuts against the calm, collaborative register that's working.",
     playerDialogue:
-      "You need to move on this fast - every single day it stays broken, you're losing family bookings you can't get back. We should fix it today.",
+      "You really need to move on this as fast as you possibly can - every single day it stays broken, you're losing family bookings that you simply can't ever get back. We should honestly get this fixed today, right now if we can, because every hour of delay is families booking with someone else instead of you.",
     partnerResponse:
       "There's no need to rush me - I'm already hearing you. Let's keep this constructive.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -263,7 +263,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Undersells the fix as a minor tidy-up - which deflates the value and gives a partner nervous about effort an easy reason to deprioritise it.",
     playerDialogue:
-      "It's honestly a small thing - a little housekeeping in the settings. Fix it whenever you get a spare moment, no rush.",
+      "It's honestly a really small thing when you get down to it - just a little bit of housekeeping tucked away in the settings, nothing that's going to take any real time. Fix it whenever you happen to get a spare moment, there's genuinely no rush on it at all, so just slot it in around everything else.",
     partnerResponse:
       "If it's that minor, I'll probably just add it to the pile and get to it eventually.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -1 },
@@ -297,7 +297,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Lands the fix but sets no follow-up and never connects it to her goals - so a relationship-led partner is left without the shared scoreboard that would keep her invested.",
     playerDialogue:
-      "Great, let's get the configuration corrected and that should sort the family bookings out. I'll leave you to it.",
+      "Great, let's get the configuration corrected and that really should sort those family bookings out for you without much more effort. Once it's done, it's done, and you shouldn't need to think about it again - the families will start coming through and the rooms will fill. I'll leave you to get on with everything else.",
     partnerResponse:
       "Alright... though it'd be nice to actually see whether it worked, and what it meant for us.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the goodwill to reach for a general discount on top of the fix - reintroducing the ADR-dilution fear she just told you she's wary of, and muddying a clean config win.",
     playerDialogue:
-      "Perfect - and while we're at it, let's add an across-the-board discount too, just to really accelerate the bookings back.",
+      "Perfect - and honestly, while we've got the momentum and you're happy to make changes, let's go ahead and add a broad across-the-board discount on top of the fix as well, just to accelerate all those bookings coming back in. Combine the configuration fix with a solid discount everywhere and you'll fill the rooms even faster.",
     partnerResponse:
       "No - that's exactly the ADR dilution I told you I want to avoid. Let's keep it to the fix.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -333,7 +333,7 @@ const steps: BranchingStep[] = [
     id: 'cheaper-why',
     label: "'We're cheaper, why not selling?'",
     partnerPrompt:
-      "Oh dear... 45% unsold? That is concerning, Javier. But honestly, I find it confusing. My revenue team double-checked our setup, and overall our rates on your platform are very aggressive - we're consistently priced about 3% cheaper than our competitive set. If we're already cheaper than the competition, why aren't those rooms selling?",
+      "Oh dear... 45% unsold? That is concerning, Javier. But honestly, I find it confusing. My revenue team double-checked our setup, and overall our rates on your platform are very aggressive - we're consistently priced about 3% cheaper than our Peer Group. If we're already cheaper than the competition, why aren't those rooms selling?",
     options: step2Options,
   },
   {

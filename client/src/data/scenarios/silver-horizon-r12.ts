@@ -56,7 +56,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right metric, wrong opening - going straight to 'you have unsold rooms' skips the credit for her strong demand, so an ROI-minded operator hears criticism before she hears that you understand her business.",
     playerDialogue:
-      "We need to talk about your unsold rooms - around 15% of your inventory isn't selling and your forward pace is behind. That's revenue you're leaving on the table.",
+      "We really need to talk about your unsold rooms - around 15% of your inventory isn't selling right now and your forward pace is running behind where it should be for the quarter. That's a meaningful amount of revenue you're leaving on the table every week, and it's the first thing I want to dig into with you today.",
     partnerResponse:
       "Behind by whose measure? I've got plenty of traffic. If anything's off it's the market, not my setup.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: 0 },
@@ -70,7 +70,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Prescribes a general price cut before diagnosing anything - exactly the move a margin-first operator with owners to answer to will reject on sight.',
     playerDialogue:
-      "Your rooms aren't converting, so the simplest fix is to bring your prices down a few points across the group and get the bookings flowing again.",
+      "Your rooms just aren't converting the way they should, so honestly the simplest fix here is to bring your prices down a few points right across the group and get the bookings flowing again. Trim the rates a little and I think you'll see the volume come back fairly quickly.",
     partnerResponse:
       "Cut my rates across the group? My owners would have my head. That's a non-starter, Diego.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -104,7 +104,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Sympathetic but a trap - promising to chase the external wholesaler leak follows her onto ground neither of you controls and parks the on-platform conversion fix she can act on today.",
     playerDialogue:
-      "Let's get to the bottom of that leak - if you send me the channels where you're seeing the cheaper B2B rates, I'll help you trace where they're coming from.",
+      "Let's get right to the bottom of that leak together - if you can send me the channels where you're seeing those cheaper B2B rates surface, I'll dig in with you and help trace exactly where they're coming from so we can pin down who's dumping your rates.",
     partnerResponse:
       "Now you're talking - if we can find who's dumping my rates, that's the real fix. Let's park the rest.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -1 },
@@ -118,7 +118,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Advises her to pull the wholesalers/OTAs where the cheap rates surface. Dictating a partner\'s external distribution strategy is off-side in every regime.',
     playerDialogue:
-      "Honestly, if those channels keep undercutting you, the cleanest answer is to switch them off and stop selling through them altogether.",
+      "Honestly, if those channels keep undercutting you like this, the cleanest answer is just to switch them off completely and stop selling through them altogether - close the wholesalers and OTAs where the cheap rates keep surfacing, and the leak goes away on its own.",
     partnerResponse:
       "You don't get to tell me which channels to run. My distribution mix is my call, not yours.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right conclusion, no mechanism - telling a numbers-driven operator she's 'just not competitive enough' without showing the search-to-checkout drop-off gives her nothing to test or believe.",
     playerDialogue:
-      "The truth is you're just not competitive enough on price right now, and travelers can feel it. That's why the bookings aren't landing.",
+      "The honest truth is you're just not competitive enough on price right now, and travelers can feel it the moment they compare you. That's really the whole reason the bookings aren't landing the way they should - people are looking, but they're just not choosing you at the price you're at.",
     partnerResponse:
       "'Not competitive enough' is exactly the vague line I'd expect. Show me where, or we're going in circles.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Turns the 6% gap into a requirement to match her peers on price. Requiring a partner to lower prices to match what others charge oversteps in every regime.',
     playerDialogue:
-      "The peer group is pricing 6% below you, so you need to bring your rates down to match them - that's what it takes to compete here.",
+      "The peer group is pricing about 6% below you across the board, so the way I see it you really need to bring your rates down to match them - line up with what they're charging and you'll compete on the same footing. That's genuinely what it takes to win the booking here.",
     partnerResponse:
       "So the answer is just 'match everyone else and race to the bottom'? That's not a strategy, that's a discount demand.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that it matters, wrong register - dramatizing a 6% gap as her business 'bleeding out' reads as pressure to a measured operator and invites her to push back on the exaggeration rather than the point.",
     playerDialogue:
-      "This is bleeding your business dry, Chloe - every day you leave it, you're haemorrhaging bookings you'll never get back. It's urgent.",
+      "This is quietly bleeding your business dry, Chloe - every single day you leave it sitting like this, you're haemorrhaging bookings you are never going to get back, and it compounds. I can't stress it enough, this is genuinely urgent and every week that passes is money walking straight out the door.",
     partnerResponse:
       "Bleeding dry? I've got strong traffic and a healthy group. Let's keep the drama out of it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Folds on the objection - agreeing the gap is small undercuts the whole diagnosis and leaves her no reason to act.",
     playerDialogue:
-      "You might be right that 6% is fairly minor - it may not be the main driver. Perhaps it's worth waiting to see if it sorts itself out.",
+      "You might well be right that 6% is fairly minor, honestly - it may not really be the main driver of what you're seeing, and I don't want to overstate it. Perhaps the sensible thing is to give it a bit more time and wait to see whether it sorts itself out before we change anything on your side.",
     partnerResponse:
       "So it might be nothing. Then I'll leave my rates where they are and keep watching.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -233,7 +233,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed proposal: instead of a rate drop, target where the search gap hurts most. A Getaway Deal campaign carries a badge and a minimum discount and improves her visibility and competitiveness from the start of the traveler's journey - without touching her base rates.",
     playerDialogue:
-      "So let's not touch your base rates. Instead, let's target where that search gap hurts most. Your competitors are using a Getaway Deal campaign to show up more competitively from the very start of the search - it carries a badge and a set minimum discount, so you win back exposure without resetting your rates.",
+      "So let's not touch your base rates. Instead, let's target where that search gap hurts most. Your competitors on our platform are using a Getaway Deal campaign to show up more attractive from the very start of the search - it carries a badge and a set minimum discount, so you win back exposure without resetting your rates.",
     partnerResponse:
       "A Getaway Deal? Okay - how does targeting guests through that campaign fix my sell-through for the next month without messing up my rates? And can I apply it to specific room types? Some are already running high occupancy, and I need real numbers before I take this to my team.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -248,7 +248,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right tool, wrong dose - a deep discount across all room types and dates overshoots the fenced, controlled campaign an ROI-minded operator will sign off, and drags in the high-occupancy rooms she doesn't need to discount.",
     playerDialogue:
-      "Let's run a big promotion across all your rooms and stay dates - the deeper the discount, the faster the rooms move. Go broad and we'll see numbers quickly.",
+      "Let's run a big promotion right across all your rooms and every stay date - the deeper the discount, the faster the rooms are going to move, and you'll get momentum back quickly. Go as broad as you can and don't hold back on the depth; the more aggressive we are, the sooner you'll see the volume come through and the numbers turn around.",
     partnerResponse:
       "Discount everything, including the rooms that are already full? That's giving away margin I don't need to give away.",
     styleMatch: { red: 1, yellow: 0, green: -1, blue: -1 },
@@ -262,7 +262,7 @@ const step5Options: BranchingOption[] = [
     description:
       'Sells the campaign by promising a guaranteed ranking and visibility reward for discounting. Promising ranking rewards in exchange for a price move is a compliance breach in every regime.',
     playerDialogue:
-      "Run the campaign and I can promise it pushes you up the rankings - the discount buys you placement, so it pays for itself in visibility.",
+      "Run the campaign and I can promise you it pushes you straight up the rankings - the discount effectively buys you the placement, so every point you give up comes back to you in higher visibility and better positioning. Honestly it pays for itself, because the ranking lift you get in exchange is guaranteed to more than cover the discount.",
     partnerResponse:
       "A guaranteed ranking bump for discounting? That's the kind of promise that makes me trust your numbers less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -296,7 +296,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Takes the yes but never answers her ask for real numbers - no agreed metric, no review. An operator who needs to defend this to her team and owners will let an unmeasured campaign quietly lapse.",
     playerDialogue:
-      "Great, let's just get the campaign live and we'll see how the rooms move from there.",
+      "Great, let's just get the campaign switched on and live as quickly as we can, and then we'll simply keep an eye on how the rooms start to move from there. No need to overcomplicate it - once it's running we can watch the bookings come through and take it as it goes over the next few weeks.",
     partnerResponse:
       "See how they move measured against what? I told you I need real numbers to take back to my team.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -310,7 +310,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach past the fenced scope she agreed - all rooms, all dates. Reopens the exact margin fight with her owners she just told you to avoid.",
     playerDialogue:
-      "Perfect - and let's not fence it after all, just run it across every room and date so we really maximise the volume.",
+      "Perfect - and honestly, let's not bother fencing it to specific rooms after all; let's just run the whole thing across every room type and every date so we really maximise the volume while we've got the momentum. The wider we cast it, the more inventory moves, so let's open it right up rather than hold any rooms back.",
     partnerResponse:
       "No - I said specific rooms for a reason. Widen it to everything and my owners are back on my case.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

@@ -50,7 +50,7 @@ export const royalCrestOpeningAm =
 // Liam's reply after the OPTIMAL Step 1 probe - it becomes Step 2's
 // partnerPrompt in every regime file.
 export const liam30PercentCap =
-  "Let's get right to the point. Profitability is my priority and I heavily safeguard our direct channel - it generates our main margins. I keep a strict policy that no OTA captures more than 30% of our business, otherwise we risk losing control of our brand.";
+  "Let's get right to the point. Profitability is my priority and I heavily protect our direct channel - it generates our main margins. I keep a strict policy that no OTA captures more than 30% of our business, otherwise we risk losing control of our brand.";
 
 // Liam's reply after the OPTIMAL Step 3 evidence line - it is the
 // OPTIMAL Step 3 partnerResponse AND Step 4's partnerPrompt.
@@ -66,7 +66,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed opener: lead with the specific data anomaly (traffic up, forward room nights down) and ask an open question about his pricing strategy before recommending anything.",
     playerDialogue:
-      'I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Can you walk me through the strategic considerations behind your current pricing approach?',
+      "You're completely free to choose your own pricing and distribution strategy, of course. I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Can you walk me through the strategic considerations behind your current pricing approach?",
     partnerResponse: liam30PercentCap,
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
@@ -80,7 +80,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and presume the answer - tell him to bring his public price down to close the gap. Plausible on the surface (it names the data) but it prescribes before understanding his strategy, which a driver like Liam reads as being sold to.",
     playerDialogue:
-      "Your page views are strong but your conversion here is weak, so let's just bring your public price down a little to close the gap. Can we get that set up today?",
+      "Your page views are strong but your conversion here is weak, so my recommendation is to be more competitively priced versus your peers on Booking.com, essentially closing the price gap. I can walk you through the exact number and we can get it set up on the system today.",
     partnerResponse:
       "You're telling me to drop my price before you understand a thing about my business. That's not how I operate.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -94,7 +94,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, agenda-free check-in with no data. The wrong register for a time-pressured, profit-first property manager who wants a commercial point.',
     playerDialogue:
-      "Hi Liam, no agenda today - I just wanted to see how you're feeling about the partnership and whether you're happy with how things are going overall.",
+      "Hi Liam, no agenda today - I just wanted to check in and see how you're feeling about the partnership, whether the team's been looking after you well, and if there's anything on your mind about how things are going for you overall this year.",
     partnerResponse:
       "I'm a busy man. If there's a commercial point, make it - otherwise I'll jump off.",
     styleMatch: { red: -2, yellow: 1, green: 1, blue: -1 },
@@ -135,7 +135,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Accept the win but don't pin the segment, the metric, or a review date. A soft close that a data-led partner will let evaporate.",
     playerDialogue:
-      "Great, I'll get that set up on our side and let you know how it goes.",
+      "Great, that all sounds positive. I'll take it from here, get everything set up on our side, and keep an eye on how it performs. Once there's something worth sharing I'll circle back to you.",
     partnerResponse:
       "Set what up, exactly? If we don't agree on the segment and what we're measuring, this goes nowhere.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -149,7 +149,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Push beyond the controlled experiment he just agreed to - a blanket public rate drop and every discount switched on. Blows up the exact ADR discipline he protects.",
     playerDialogue:
-      "Perfect - and while we're at it, let's bring your public rates down across the board and switch on every discount to really move the needle.",
+      "Perfect - and honestly, while we're at it, let's not stop at one segment. Let's bring your public rates down right across the board and switch on every discount you've got so we really move the needle here.",
     partnerResponse:
       "That is exactly the across-the-board move I told you I won't make. Stick to the test, or we're done.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

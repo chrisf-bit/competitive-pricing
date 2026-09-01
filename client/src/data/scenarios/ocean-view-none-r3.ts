@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: credit her strong on-page conversion (+39% vs peer), note that page views and future bookings are trending down and her prices read as consistently higher here, then ask - neutrally - about her strategy.",
     playerDialogue:
-      "On your performance with us: it's very positive that once a traveler lands on your page, your conversion is 39% higher than your competitors. But both your page views and your future bookings are trending down, and we can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
+      "On your performance with us: it's very positive that once a traveler lands on your page, your conversion is 39% higher than your peers on our platform. But both your page views and your future bookings are trending down, and we can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
     partnerResponse:
       "It's about channel costs. We intentionally keep our website prices lower to stimulate travelers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps to a public price cut without understanding her channel strategy - and pressuring a lower price is off-limits in a No Parity market.",
     playerDialogue:
-      "Your bookings are down - the quickest fix is to drop your public price here so you're competitive again.",
+      "Your future bookings are clearly down, and honestly the quickest fix here is straightforward - you should drop your public price on our platform so you're properly competitive again. Once your rate here comes down and undercuts what's out there, the volume comes straight back and you'll climb the results fast.",
     partnerResponse:
       "You're prescribing a price cut before you understand our channel strategy at all.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - no numbers, no diagnosis. The wrong register for an evidence-led operator.',
     playerDialogue:
-      "That's a shame to hear - I'm sure things will pick up. How's the team otherwise?",
+      "That's honestly a bit of a shame to hear, and I really do feel for you - these things tend to move in cycles and I'm sure it'll all pick up again before too long. You've built something lovely there and travelers always come back around eventually. Anyway, enough about the numbers - how's the wider team getting on otherwise?",
     partnerResponse:
       "No data behind that? Then what are we solving today?",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -84,7 +84,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: travelers don't open a new window to find her direct site - they pick a better-value alternative on the same page. Her strategy is hers, but her best price protects those bookings. Then ask for her biggest concern.",
     playerDialogue:
-      "Thank you for sharing. But when your prices aren't competitive here, travelers don't open a new window to find your direct site - they gravitate to better-value alternatives on the same search page. Your pricing strategy is entirely up to you, but offering your best price ensures you don't lose those bookings. What's your biggest concern?",
+      "Thank you for sharing. But when your prices aren't competitive here, travelers don't open a new window to find your direct site - they gravitate to better-value alternatives on the same search page. Your pricing strategy is entirely up to you, but providing the best price you can make available to us improves your discovery and fill empty rooms. What's your biggest concern?",
     partnerResponse:
       "My main concern is that if I offer my lowest public price on Booking.com, I'm giving up my unique commercial advantage.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -99,7 +99,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the flawed premise that the exposure alone does the job, offering only a token nudge - never correcting the belief driving the problem.",
     playerDialogue:
-      "You're right that the exposure helps - maybe a small discount at the margin would nudge a few more over.",
+      "You're right, and I think there's real truth in what you're saying - the exposure your listing gets here genuinely does a lot of the heavy lifting, and travelers really do notice your name because of it. So I wouldn't want to change much at all. Maybe a small discount right at the margin would nudge a few more of them over, but the wider approach is clearly working for you.",
     partnerResponse:
       "So the markup's fine, then? What are we actually fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -113,7 +113,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator.",
     playerDialogue:
-      "The 'they'll book direct' idea is honestly a myth - travelers just book whatever's cheapest in front of them.",
+      "I'll be honest with you - this whole 'they'll go and book direct' idea is really just a myth that a lot of operators cling to, and the sooner you let go of it the better. Travelers simply aren't that loyal or that motivated; they just book whatever happens to be the cheapest thing sitting in front of them and they don't think twice about it.",
     partnerResponse:
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -140,7 +140,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: because the platform is a search engine, if she loses most of her traffic the billboard doesn't work at all - it hurts both channels. Her best available price improves ranking and leverages visibility at zero upfront cost.",
     playerDialogue:
-      "That's a valid concern. But because our platform is a search engine, if you're losing most of your potential traffic, that 'billboard' effect doesn't work at all - it hurts both channels. By making your best competitive price available to us, you improve your search ranking and leverage our visibility at zero upfront cost to fill empty rooms.",
+      "That's a valid concern. But because our platform acts as a search engine, if you're losing most of your potential traffic, that 'billboard' effect doesn't work at all - it hurts both channels. By providing the best price you can make available to us, you are more attractive to travelers and can better leverage traffic on our platform to fill empty rooms.",
     partnerResponse:
       "How about a limited-time promotion or a mobile rate for a couple of months, to see if that works first?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -155,7 +155,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Falls back on a blanket discount across her rooms - the ADR erosion she's protecting, and pressure to lower prices a No Parity market doesn't permit.",
     playerDialogue:
-      "Simplest is to put a general discount across your rooms here and you'll climb back up the results.",
+      "Honestly the simplest thing you can do here is just put a general discount right across all of your rooms on our platform, and you'll climb straight back up the results where travelers can see you again. Once your rates come down and sit below what's out there, the bookings follow quickly - a broad cut across the board is the fastest way to get your volume back.",
     partnerResponse:
       "A blanket discount is me giving up my whole advantage - that's my exact worry.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -169,7 +169,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Threaten an automated ranking penalty tied to how she prices her own site. In a No Parity market you cannot require lower prices or threaten visibility over external prices.',
     playerDialogue:
-      "If your price here stays above your own site, our system keeps burying you - you'll have to lower it to recover.",
+      "I have to be straight with you about how this works - as long as your price on our platform stays higher than the rate on your own website, our system is going to keep pushing you further and further down the results and burying your listing. The only way to climb back out of that hole and recover your visibility is to lower your price here until it's the better deal.",
     partnerResponse:
       "Threatening my ranking to force a cut is not a conversation I'll have.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -196,9 +196,9 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the Segmented Pricing pushback: acknowledge the targeted promotion feels safer and name the shared goal, but the best price is the most powerful action to recover visibility - and if it underdelivers, you'll investigate alternatives together.",
     playerDialogue:
-      "I understand a targeted promotion feels like the safer move, and I think we share the same goal. To genuinely recover your visibility, offering your best price is the most powerful action. If it doesn't generate the revenue you need, we can absolutely investigate the alternatives together.",
+      "I understand a targeted promotion feels like the safer move. To genuinely recover your visibility, offering the best price you can make available to us ensures you don't lose these bookings to your local competitors on our platform. If it doesn't generate the revenue you need, we can absolutely investigate the alternatives together.",
     partnerResponse:
-      "You've given me a lot of data to think about. A big drop in page views means we're losing guests right at the start. Let's do this: I'll commit to a three-week trial offering our best competitive base rate here, and we'll review the traffic data to make sure the total portfolio improves.",
+      "You've given me a new perspective to think about. A big drop in page views means we're losing guests right at the start. Let's do this: I'll commit to a three-week trial offering our best base rate here, and we'll review the traffic data to make sure the total portfolio improves.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -211,7 +211,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Capitulates to a mobile rate only, abandoning the best-price action the SME identifies as the primary lever for visibility - it hands her the weaker plan.",
     playerDialogue:
-      "Sure, let's just run the mobile rate for now and skip the base price.",
+      "Sure, that sounds completely fine to me - let's just go ahead and run the limited mobile rate for now and we can set the whole best-price idea to one side for the time being. There's really no need to push on the base price today, so let's keep it simple and see how the mobile rate does on its own first.",
     partnerResponse:
       "If even you don't back the best price, why did you raise it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -225,7 +225,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Pressure her to price below her own site so she's the best deal anywhere. Requiring a partner to undercut and be cheapest is exactly what a No Parity market forbids.",
     playerDialogue:
-      "To really win, make your Booking.com price the lowest anywhere - below your own site - and you'll lock in the volume.",
+      "If you genuinely want to win this, the move is to make your price on Booking.com the lowest one available anywhere at all - set it below the rate on your own website so nobody can find a better deal - and once you're the cheapest option in the market you'll lock in all of that volume for yourself.",
     partnerResponse:
       "Pricing below my own site to be cheapest everywhere is off the table.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -252,7 +252,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: confirm the three-week best-price trial, agree you'll review the traffic and revenue, and book the follow-up so it lands.",
     playerDialogue:
-      "Great, Camila - let's do exactly that. We'll agree what we're reviewing, and I'm sending a calendar invite for our follow-up to share the results in three weeks.",
+      "Great, Camila - let's do exactly that. We'll agree what we're reviewing now, and I'm sending a calendar invite for our follow-up to share the results in three weeks.",
     partnerResponse:
       "Perfect. Let's review the traffic and revenue together in three weeks.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -267,7 +267,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Takes the win but pins no metric and no review date - a plan an evidence-led operator will let drift.",
     playerDialogue:
-      "Great, I'll get it set up and check in at some point to see how it's going.",
+      "Great, I'll get the whole thing set up on my end, and I'll be sure to check in with you at some point down the line to see how it's all going and whether it's helping.",
     partnerResponse:
       "'At some point'? Give me the review date and what we're measuring, or this drifts.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -281,7 +281,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the trial - pressure her to also undercut her own site so she's cheapest anywhere. Requiring her to be the cheapest is off-limits in a No Parity market.",
     playerDialogue:
-      "Perfect - and to be safe, let's make sure your price here is the lowest anywhere, below your own site, so you lock in the volume.",
+      "Perfect - and just to be safe, let's also make sure your price here is the lowest one anywhere, sitting below your own website, so you completely lock in all of the volume.",
     partnerResponse:
       "Being cheapest everywhere, below my own site, is not something I'll do. Let's keep to the trial.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -295,7 +295,7 @@ const step5: BranchingStep = {
   id: 'close',
   label: 'Lock the trial and close',
   partnerPrompt:
-    "You've given me a lot of data to think about. A big drop in page views means we're losing guests right at the start. Let's do this: I'll commit to a three-week trial offering our best competitive base rate here, and we'll review the traffic data to make sure the total portfolio improves.",
+    "You've given me a new perspective to think about. A big drop in page views means we're losing guests right at the start. Let's do this: I'll commit to a three-week trial offering our best base rate here, and we'll review the traffic data to make sure the total portfolio improves.",
   options: step5Options,
 };
 

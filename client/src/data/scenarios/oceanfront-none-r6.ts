@@ -27,7 +27,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: the property is highly appealing, but page views have fallen 89%; travelers gravitate to the best relative value on the results page, and right now she isn't as competitive as her peer group most of the time.",
     playerDialogue:
-      "The property itself is highly appealing, but your page views have fallen 89%. When we look at how guests search, travelers gravitate toward the options that offer the best relative value on the results page - and right now, most of the time, your property isn't as competitive as your peer group.",
+      "The property itself is highly appealing, but your page views have fallen 89%. When we look at how guests search, travelers gravitate toward the options that offer the best relative value on the results page - and right now, most of the time, your property isn't as competitive as your peer group on our site.",
     partnerResponse:
       "Ah, I see what you're pointing out. We want to protect our loyalty members, so we offer exclusive discounts on our own site on purpose. The thinking is: if we open those same prices to everyone on third-party channels, it takes away the incentive to book directly.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -42,7 +42,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and press her to lower her public price. It presumes the fix, and pressuring a lower price isn't permitted in a No Parity market.",
     playerDialogue:
-      "The quickest way to turn this around is to bring your public price here down so you're competitive again.",
+      "The quickest way to turn this around is to bring your public price here down. If you lower what you're charging on our platform so you're clearly cheaper than the properties around you, the visibility comes straight back and the bookings follow - so let's get that price down first and worry about the rest afterward.",
     partnerResponse:
       "You're telling me to cut my price before you've explained the actual problem. Slow down.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -56,7 +56,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - she came with data and asked for insight; brushing it off reads as unserious.',
     playerDialogue:
-      "I wouldn't worry too much - these things tend to even out over a quarter.",
+      "I really wouldn't worry too much about any of this. In my experience these things tend to move around a lot from one quarter to the next, and they usually even out on their own once the season settles. I'd give it a little more time before we read too much into a single dip like this - it'll come back.",
     partnerResponse:
       "I came to you with the data and asked for insight. 'It'll even out' isn't that.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -83,9 +83,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: acknowledge the loyalty concern as common, then ask - to understand her perspective - what occupancy looks like and how much she spends on marketing and new-guest acquisition.",
     playerDialogue:
-      "That's a very common concern. To understand your perspective better - what does your occupancy look like at the moment, and how much do you currently spend on marketing and new-guest acquisition for the property?",
+      "That's a very common concern. To understand your perspective better - what does your occupancy look like at the moment?",
     partnerResponse:
-      "Honestly, I'm seeing the same trend from other channels too, and acquisition costs are quite high right now - especially reaching international travelers through paid ads. Occupancy is definitely an issue at the moment.",
+      "Occupancy is definitely an issue at the moment. I see the same trend also from other channels and acquisition costs are quite high right now, especially when trying to reach international travelers through paid ads.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -98,7 +98,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that action is needed, wrong move - it jumps to a discount without understanding her occupancy or costs, so the recommendation isn't grounded in her economics.",
     playerDialogue:
-      "The answer's clear - just open your loyalty discount to everyone here and the volume comes back.",
+      "The answer's clear enough - just take the loyalty discount you keep for your own site and open it up to everyone here on our platform, and the volume comes straight back on its own once that rate reaches all our traffic.",
     partnerResponse:
       "You didn't ask a single question about my business before telling me to give my discount away.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -112,7 +112,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Wave away her loyalty-member discounts as pointless. Dismissive of a deliberate strategy she just explained - it shuts the collaboration down.",
     playerDialogue:
-      "Honestly, protecting loyalty members with cheaper direct rates is a waste - it's just costing you bookings.",
+      "Honestly, protecting your loyalty members with cheaper rates on your own site is a waste of effort - all it's really doing is holding back the traffic we could be sending you and quietly costing you the bookings you're trying to protect.",
     partnerResponse:
       "My loyalty base isn't a waste - it's the backbone of my business. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -154,7 +154,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Press her to hand over her lowest price. In a No Parity market you ask for her best available price - you don't require her lowest.",
     playerDialogue:
-      "What we need is your lowest price on our platform - give us that and the visibility comes right back.",
+      "What we really need from you is your lowest price on our platform - not your best available one, your actual floor. Give us the lowest number you'd ever go to anywhere and put it here, and the visibility you've lost comes right back the moment you do it.",
     partnerResponse:
       "'Your lowest price' isn't a request, it's a demand. My pricing is my call.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -168,7 +168,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Threaten a continued visibility drop until she improves her price. Threatening ranking over her pricing is banned in every regime.',
     playerDialogue:
-      "If you stay less competitive than your peers, our system keeps ranking you below them until you bring the price down.",
+      "If you stay less competitive than the properties around you, our system will keep ranking you below them, search after search, and that visibility will keep sliding until you bring your price down to where it needs to be - the ranking only recovers once you fix the price.",
     partnerResponse:
       "Threatening my ranking to force a price cut is not a conversation I'll have.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -182,7 +182,7 @@ const step3: BranchingStep = {
   id: 'best-price',
   label: 'Make the best-price case',
   partnerPrompt:
-    "Honestly, I'm seeing the same trend from other channels too, and acquisition costs are quite high right now - especially reaching international travelers through paid ads. Occupancy is definitely an issue at the moment.",
+    "Occupancy is definitely an issue at the moment. I see the same trend also from other channels and acquisition costs are quite high right now, especially when trying to reach international travelers through paid ads.",
   options: step3Options,
 };
 
@@ -210,7 +210,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Agrees it'll help but gives an ROI-driven owner nothing quantitative to take back - she needs the figures to move.",
     playerDialogue:
-      "Trust me, being more competitive will make a real difference - you'll see the bookings pick up.",
+      "Trust me on this one - being more competitive here really will make a genuine difference to how you perform, and once you get that price into a better position you'll start to see the bookings picking up steadily. It's the kind of thing that just works once you commit to it, so I'd back it wholeheartedly.",
     partnerResponse:
       "'Trust me' won't get this past my team. Give me numbers I can present.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -224,7 +224,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame her caution as stubbornness. Accusatory - it burns the collaborative tone she's been giving you.",
     playerDialogue:
-      "Frankly, you're being stubborn, and it's costing you the guests you say you want.",
+      "Frankly, I think you're being a bit stubborn about all of this, and the longer you dig in and refuse to move on the price, the more it ends up costing you the very guests you keep telling me you want. At some point you have to admit the caution is working against you here, not for you.",
     partnerResponse:
       "Calling me stubborn when I'm trying to work with you is a poor move.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -251,7 +251,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: updating her base prices to be fully competitive is the most direct way to revive visibility; propose a follow-up in a few weeks to review the traffic once she's discussed it with her team.",
     playerDialogue:
-      "Updating your base prices to be fully competitive here is the most direct way to revive that visibility. Would you be open to a follow-up in a few weeks to review the traffic outcomes, once you've discussed it with your team?",
+      "Updating your base prices to be competitive here is the most direct way to revive that visibility. Would you be open to a follow-up in a few weeks to review the traffic outcomes, once you've discussed it with your team?",
     partnerResponse:
       "Absolutely, Zara! I'll present these insights to the group today and suggest we adjust the rates to remain competitive. Let's connect in two weeks to look at the data together.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -266,7 +266,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Fall back on a blanket cut across all rates - the ADR-eroding move an ROI-driven owner will resist, and there's nothing clean to measure.",
     playerDialogue:
-      "Best next step is simple - cut all your rates by 10% right now and the visibility comes straight back.",
+      "The best next step here is simple - just cut every one of your rates across the board by 10% right now, tonight if you can, and the visibility you've lost comes straight back the moment those new numbers go live on our platform.",
     partnerResponse:
       "A blanket cut across everything torches my ADR. That's not the next step.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -280,7 +280,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Push her to price below her own site so she's the cheapest anywhere. Requiring a partner to be the cheapest is forbidden in a No Parity market.",
     playerDialogue:
-      "And to really win, make sure your price here is the lowest anywhere - even below your own site.",
+      "And if you really want to win this, make sure the price you show here on our platform is the lowest one you have anywhere at all - set it deliberately below what you charge on your own website, so no other channel can undercut you on the way to a booking.",
     partnerResponse:
       "Pricing below my own site to be cheapest everywhere is off the table.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

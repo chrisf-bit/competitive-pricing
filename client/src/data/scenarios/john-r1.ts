@@ -88,7 +88,7 @@ export const johnR1: BranchingConversationTree = {
           description:
             "Open by suggesting he turn on a new discount program.",
           playerDialogue:
-            "I had a look at your account and I think you should turn on the Genius weekend boost - it'll get you more bookings.",
+            "I had a look at your account and I think you should turn on the Genius weekend boost. It'll get you more bookings and it's the quickest win I can see on here.",
           partnerResponse:
             "Right, this is exactly what I was hoping to avoid. I don't want another discount conversation. I'm trying to protect my margin, not erode it.",
           styleMatch: { red: -2, yellow: -2, green: -2, blue: -2 },
@@ -126,7 +126,7 @@ export const johnR1: BranchingConversationTree = {
           label: 'Congratulate the volume growth',
           description: 'Stay positive about the partner\'s strategy.',
           playerDialogue:
-            "That's great news on the volume. Direct growth is exactly what we love to see for our partners.",
+            "That's great news on the volume. Direct growth is exactly what we love to see for our partners, and it sounds like those campaigns are really paying off for you.",
           partnerResponse:
             "Thanks. Yeah, I'm pleased with the trajectory. Was there anything else you wanted to cover?",
           styleMatch: { red: -1, yellow: 1, green: 2, blue: -1 },
@@ -139,7 +139,7 @@ export const johnR1: BranchingConversationTree = {
           label: 'Warn him about losing visibility',
           description: 'Push the consequence of de-prioritizing Booking.com.',
           playerDialogue:
-            "If you keep deprioritising us, your ranking will drop and you'll lose visibility. That'll hurt both of us.",
+            "If you keep deprioritising us, your ranking will slip and you'll lose visibility. Fewer people see you, fewer book, and that ends up hurting both of us.",
           partnerResponse:
             "That sounds like a threat. I'm free to choose my channel mix - that's my call to make.",
           styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
@@ -178,7 +178,7 @@ export const johnR1: BranchingConversationTree = {
           description:
             'Tell him his Booking.com share has dropped below where it should be.',
           playerDialogue:
-            "Your share of bookings via Booking.com is now below 30% - we need to get that back up to where it was last year.",
+            "Your share of bookings through Booking.com has now dropped below 30%, and that's well down from where it sat last year. We need to get that number climbing back towards where it was, because the trend is heading the wrong way for us.",
           partnerResponse:
             "I've got a rule about that - I don't let any OTA go above 30% of my business. So 'lower' is exactly where I want it.",
           styleMatch: { red: -1, yellow: -2, green: -2, blue: 0 },
@@ -229,7 +229,7 @@ export const johnR1: BranchingConversationTree = {
           label: 'Insist commission is the cost of business',
           description: "Tell him 18% is reasonable given what Booking.com offers.",
           playerDialogue:
-            "Eighteen per cent is fair for the global reach we give you. Most of our partners see it that way.",
+            "Eighteen per cent is fair for the global reach we give you. Think about how many guests around the world get put in front of you every day because you're on our platform - that visibility is worth a lot. Most of our partners look at it that way, and the reach earns it back.",
           partnerResponse:
             "Maybe so, but the maths still doesn't work for me at scale. I want to keep building my direct channel.",
           styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -243,7 +243,7 @@ export const johnR1: BranchingConversationTree = {
           description:
             'Propose comparing direct vs OTA economics on a specific segment.',
           playerDialogue:
-            "Would you be open to testing the maths on one segment, say international guests? That's a group where the billboard effect is strongest and where direct rarely competes.",
+            "Would you be open to testing the maths on one segment, say your international guests? That's a group where the billboard effect tends to be strongest and where your direct site rarely competes, so it's a clean place to see the numbers land.",
           partnerResponse:
             "Maybe. International is interesting actually - direct is mostly domestic right now. I'd want to see how the numbers look before committing.",
           styleMatch: { red: 0, yellow: 1, green: 1, blue: 1 },
@@ -281,7 +281,7 @@ export const johnR1: BranchingConversationTree = {
           label: 'Push for full year-round alignment',
           description: 'Ask him to match Booking.com to brand.com all year.',
           playerDialogue:
-            "What we really need is for you to match your Booking.com rate to your direct rate across the board. That's the only way to fix the revenue gap.",
+            "What we really need is for you to match your Booking.com rate to your direct rate right across the board, every month of the year, not just the quiet ones. Bring the two into line and hold them there. That's really the only way we close this revenue gap, and until then we'll keep seeing the same shortfall.",
           partnerResponse:
             "That's not happening. My direct channel needs a price advantage - that's the whole point of it.",
           styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },
@@ -294,7 +294,7 @@ export const johnR1: BranchingConversationTree = {
           label: 'Leave him with the analysis to think about',
           description: "Don't push for action; let him sit with the data.",
           playerDialogue:
-            "Take some time with the numbers. Let me know if you want me to send across the slow-month view and we can pick this up next time.",
+            "Take some time to sit with the numbers - there's no rush on any of this. If you'd like, I can send across the slow-month view so you've got it in front of you, and you can have a proper look through it in your own time. Whenever you're ready, just let me know and we can pick the whole thing back up next time we speak.",
           partnerResponse:
             "Appreciate that. I'll take a look and come back to you.",
           styleMatch: { red: -1, yellow: 0, green: 2, blue: 1 },

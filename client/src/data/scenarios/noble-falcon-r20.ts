@@ -61,7 +61,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Reaches for the price lever before diagnosing - and he's already 15% below peers, so 'go cheaper' is both the wrong lever and easy for a data-led manager to see through.",
     playerDialogue:
-      "Your conversion's low, so let's get you more competitive still - bring your rate down a little further and the bookings should follow.",
+      "Your conversion's on the low side, so the simplest move here is to get you more competitive still - bring your headline rate down a notch, maybe test a small reduction across your main room types, and I'd expect the bookings to start following once you're clearly the cheapest option travelers see.",
     partnerResponse:
       "We're already 15% below our peers, Mark. If price were the issue, we'd be converting - so cutting further makes no sense to me.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -75,7 +75,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm but empty - opening with 'everything looks great, keep it up' on his biggest month of the year wastes the opportunity and gives a results-minded manager nothing to work with.",
     playerDialogue:
-      "Honestly, Adam, things are looking really solid on your end - I just wanted to check in and say keep doing what you're doing.",
+      "Honestly, Adam, from where I'm sitting things are looking really solid on your end - the numbers are steady, the property's ticking along nicely, and I didn't want to overcomplicate a good month. I mostly just wanted to check in, say it's great to reconnect, and tell you to keep doing exactly what you're doing.",
     partnerResponse:
       "I appreciate it, but our pickup is slow for a peak month. I'd rather use this time to find out why than hear it's all fine.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -1 },
@@ -109,7 +109,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that it's segment-level, wrong delivery - describing 'a gap in certain segments' without the concrete family search he can reproduce himself denies a data-led manager the proof that makes it land.",
     playerDialogue:
-      "When you look below the headline, there's a competitiveness gap hiding in some of your traveler segments - it doesn't show up in the average, but it's there.",
+      "When you look below the headline, there's a competitiveness gap hiding in some of your traveler segments - it's the kind of thing that never shows up in the blended average, so on paper everything reads fine, but underneath, certain guest types are seeing a very different price to the one you think you're offering. It's definitely there once you go segment by segment.",
     partnerResponse:
       "Which segments, and how would I even see it? 'It's there' isn't something I can act on.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -123,7 +123,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Jumps to blaming his channel-manager setup before diagnosing - it presumes the cause, and a manager proud of his consistent mapping will defend rather than explore.",
     playerDialogue:
-      "This will be your channel manager pushing bad rates across - those integrations are always the culprit when the numbers look off like this.",
+      "This will almost certainly be your channel manager pushing bad rates across - in my experience those integrations are nearly always the culprit when the numbers look off in exactly this way. The mapping drifts, a rule gets applied wrong somewhere in the sync, and suddenly the rates travelers see aren't the ones you set. I'd start by pulling apart that connection first.",
     partnerResponse:
       "Our channel manager maps everything consistently. I'd want evidence before we pin it on that.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right cause, wrong delivery - walking a partner who's clearly receptive through occupancy codes and age-bucket mapping buries a simple, welcome insight in complexity he didn't ask for.",
     playerDialogue:
-      "It's down to your occupancy derivation logic - the age-bucket boundaries aren't mapping to the child-rate tiers, so the pax-split defaults to an adult headcount on the room-yield calc.",
+      "It's down to your occupancy derivation logic - the age-bucket boundaries aren't mapping cleanly onto the child-rate tiers, so the pax-split defaults to an adult headcount on the room-yield calculation, the occupancy ceiling trips, and it cascades the request into a two-room derivation.",
     partnerResponse:
       "You've lost me. Can you just tell me plainly what's wrong and what I fix?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: 0 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong fix - adding a family discount to offset a broken configuration gives away margin to paper over a setup error, instead of correcting the config that's inflating the family price.",
     playerDialogue:
-      "The quickest patch is to layer a family discount on top, so the price families see drops back down and they start booking again.",
+      "The quickest patch here is to layer a family discount on top of your existing rates, so the price families actually see drops back down to something attractive and they start booking again. You could set it live today with no config work needed, and let the reduced family price do the work.",
     partnerResponse:
       "Discount to cover a setup error? I'd rather fix whatever's actually broken than give away margin.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -205,7 +205,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the fix is clear, but skipping past why it matters - a commercially-minded manager wants the family segment's value named before he prioritises the work over everything else on his plate.",
     playerDialogue:
-      "Great, so that's the fix - just correct the child categories and we can move on to the next thing on the list.",
+      "Great, so that's the fix identified - just correct the child categories in the extranet and the two-room problem goes away on its own. I'd say we've got what we came for, so let's not overthink it - I'll make a note to check the setup's gone through, and then we can move on to the next thing on the list.",
     partnerResponse:
       "Before we move on - how much is this actually worth? I need to know it's worth prioritising.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -219,7 +219,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Oversells the fix with a guaranteed ranking transformation - a promise of placement reward that a data-led manager distrusts and that overshoots the concrete, honest impact.",
     playerDialogue:
-      "Fix this and I can promise it transforms your ranking overnight - you'll rocket up the results and stay there.",
+      "Fix this one thing and I can promise you it transforms your ranking overnight - the moment those family searches resolve properly, you'll rocket straight up the results, leapfrog the peers sitting above you, and stay planted there for the rest of peak season. This is the change that puts you top of the page and keeps you there.",
     partnerResponse:
       "'Rocket up overnight' sounds like a sales line. I'd trust a real number over a promise like that.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "He's a numbers manager who just asked for the impact - answering with 'a significant boost' instead of the concrete room-nights figure wastes the credibility a real number would have bought.",
     playerDialogue:
-      "You'd see a significant boost, honestly - fixing this opens up a lot of demand you're currently missing, so the upside is substantial.",
+      "You'd see a significant boost, honestly - fixing this opens up a whole pocket of family demand you're currently missing out on, and once those searches resolve the way they should, that lost volume starts converting instead of bouncing away to your peers. The upside is genuinely substantial, easily one of the bigger wins available to you right now, and it compounds through the back half of the month as the peak demand keeps flowing in.",
     partnerResponse:
       "'Significant' and 'substantial' - can you put an actual number on it? That's what I can take to my team.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -267,7 +267,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Turns a clean, quantified win into an immediate upsell of paid campaigns - reaching for more before the agreed fix is even in, which undercuts the trust the honest number just built.",
     playerDialogue:
-      "And to really capitalise, let's layer on a couple of paid campaigns and a visibility booster on top of the fix while demand is high.",
+      "And to really capitalise on this while we're here, let's not stop at the fix - I'd layer on a couple of paid campaigns and a visibility booster on top, so the moment those family searches start resolving properly, you're also pushing hard on placement while peak demand is at its highest. We could get the campaigns live alongside the configuration change, run them right through the back half of July, and stack every lever you've got to make the most of the window.",
     partnerResponse:
       "Let's get the actual fix in and see the result first before we start adding paid products on top.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -301,7 +301,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Sells the non-refundable rate with a guaranteed ranking reward - a promise of placement in exchange for a rate move, which breaches compliance in every regime, and overshoots the honest discoverability logic.",
     playerDialogue:
-      "Open your non-refundable rate a year out and I can guarantee it puts you top of the search results - that's a locked-in ranking win for the price move.",
+      "Open your non-refundable rate a full year out and I can guarantee it puts you straight to the top of the search results - that's a locked-in ranking win in exchange for the price move. The lower your first, most competitive price sits, the higher the platform will place you, so the deeper you go on that non-refundable rate the more placement you're rewarded with. Commit to it now and I'll personally make sure you hold that top position right through into next year - it's a guaranteed return on dropping the rate, and head office will see the ranking jump for themselves.",
     partnerResponse:
       "A guaranteed top spot? Nothing works like that, and head office would see straight through it. That actually weakens your case.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -315,7 +315,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Right that the family fix is the win, but ending there - on the last conversation of a strong call, a receptive, forward-leaning manager was open to a genuine 2027 planning discussion, and stopping short leaves that value on the table.",
     playerDialogue:
-      "Perfect - let's just get that family configuration corrected and I think we'll see those 45 room nights come through. I'll leave you to it.",
+      "Perfect - let's just get that family configuration corrected in the extranet and I'm confident we'll see those 45 room nights come through over the next few weeks. Honestly, that's a really clean result for one call, and I don't want to pile more onto your plate when you've already got a clear action to take away. Get the child categories fixed, keep an eye on the family pickup as it lands, and drop me a line if anything looks off once it's live. Otherwise I'll leave you to it and we'll catch up again down the line.",
     partnerResponse:
       "Sounds good... though I was rather hoping we'd talk about where we take this next year, while we've got the momentum.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

@@ -44,7 +44,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and frames a deliberate strategy as his error before you understand it. A brand-managed manager will close down.",
     playerDialogue:
-      "Your prices here are 20% too high - that's just wrong, and it's why the bookings dried up. You need to fix it.",
+      "Your prices on our platform are running about 20% too high, and honestly that's just a mistake - it's the whole reason your bookings dried up. There's nothing complicated here, you simply need to pull those rates down and get the setup fixed.",
     partnerResponse:
       "That's a deliberate strategy, not a mistake. If that's your pitch, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who just agreed to look at the insights.",
     playerDialogue:
-      "Honestly, I wouldn't read too much into a slow patch - these things usually sort themselves out over the quarter.",
+      "Honestly, Adam, I really wouldn't read too much into a slow patch like this - in my experience these things tend to even out on their own, and a quiet stretch one quarter usually turns around the next without anyone needing to touch a thing.",
     partnerResponse:
       "I set aside this time for the numbers. 'It'll sort itself out' isn't insight.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -100,7 +100,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the direct-channel premise - that guests will always find their way to his site - instead of surfacing the competitor-click behavior that loses the guest entirely.",
     playerDialogue:
-      "That's fair - your brand's strong enough that most of those guests will find their way to you directly anyway.",
+      "That's fair, and I take your point - your brand really is strong, and I'd agree that most of the guests who already know you will make the effort to find their way over to your own site and book directly, even when the price here is a little higher. If that's holding up the way you expect, then the direct-conversion play is doing its job.",
     partnerResponse:
       "So we agree the strategy works. Then what are we fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Flatly contradicts his read of his own brand rather than drawing out the search behavior. Lecturing a brand-managed manager shuts him down.",
     playerDialogue:
-      "Honestly, that brand-pull idea is wishful thinking - nobody's loyal enough to hunt you down when a competitor is right there and cheaper.",
+      "Honestly, Adam, that whole brand-pull idea is just wishful thinking - nobody out there is loyal enough to go hunting you down across the internet when there's a cheaper competitor sitting right next to you on the same search page. People take the easy, cheaper option every time, and expecting them to do otherwise is going to keep costing you these bookings.",
     partnerResponse:
       "You're telling me my brand means nothing? That's a strange way to win me over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "In a Narrow market you can ask him to align with his own Brand.com, but not to match other OTAs. Asking him to level his rates with the other platforms is a compliance breach.",
     playerDialogue:
-      "The cleanest fix is to give us the same rates you give the other OTAs, so you're level across every platform.",
+      "Honestly, the cleanest fix here is just to give us exactly the same rates you're giving the other OTAs - if you line all of them up so you're sitting level across every single platform, then nobody undercuts anybody and this whole gap disappears overnight. Match us to what you're offering everyone else and we're sorted.",
     partnerResponse:
       "You're asking me to line my rates up with the other OTAs? I didn't think that was something you could ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -170,7 +170,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes his dilution concern as the end of it and abandons the alignment thread - leaving the net-new travelers, and the gap, unaddressed.",
     playerDialogue:
-      "That's a fair point - if aligning dilutes your ADR, let's leave your public rates as they are.",
+      "That's a completely fair point, and I don't want to push you somewhere that hurts your average rate. If aligning your public rates here really would dilute your ADR and work against the selling proposition you've built, then let's not force it - I'm happy to leave your public rates exactly where they are for now.",
     partnerResponse:
       "So there's nothing to do? Then I'm not sure why we're talking.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -197,7 +197,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: he can still use fenced, closed member rates on his site to reward loyalty, while aligned public rates keep his organic ranking healthy. Then surface that his family-specific search visibility is dropping significantly.",
     playerDialogue:
-      "Not necessarily - you can still use fenced, closed member rates on your own site to reward loyalty. But keeping your public rates aligned keeps your organic ranking healthy. And while reviewing this, I noticed a gap in your family occupancy - your family-specific search visibility is dropping significantly.",
+      "Not necessarily - you can still use fenced, closed member rates on your own site to reward loyalty. But keeping your public rates and conditions aligned with your direct channel makes you more attractive to travelers on our platform. And while reviewing this, I noticed a gap in your family occupancy - your family-specific search visibility is dropping significantly.",
     partnerResponse:
       "That's odd. We're a family-friendly brand - our occupancy settings should be fine.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that competitiveness matters, wrong lever - it makes it a public discount ask rather than the align-with-your-own-website + fenced-member-rate structure, and walks straight into his ADR-dilution fear.",
     playerDialogue:
-      "Simplest thing is to cut your public rates here so you're the cheaper option - the ranking follows the price.",
+      "The simplest thing you can do here is just cut your public rates so you come out as the cheaper option on the page - being the lower price is what makes you competitive, so the moment you're sitting under the competition you're back in the mix for those bookings. Drop the public numbers a bit and you're the obvious choice for anyone comparing on price.",
     partnerResponse:
       "Cutting my public rate is exactly the ADR dilution I just flagged. That's a no.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Drops the family visibility gap rather than surfacing it, missing the one setup lever that could move without touching his ADR.",
     playerDialogue:
-      "The family stuff is probably nothing - let's not get distracted by it and stay on the public rates.",
+      "Honestly, that family occupancy thing is probably nothing worth chasing - these little dips come and go all the time and I wouldn't want to send you down a rabbit hole over it. Let's not get distracted by the family numbers and just keep our focus where it actually matters, which is sorting out these public rates and the gap against your own website.",
     partnerResponse:
       "You raised it, then waved it off. Which is it?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -268,7 +268,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right segment, wrong framing - it turns a setup correction into a price cut, which reads as another discount ask to a manager guarding his ADR, and misses the 'without touching your base rate' angle.",
     playerDialogue:
-      "You just need to drop your family prices here to be competitive and the family bookings will come.",
+      "The way I'd look at it, you just need to drop your family prices here so you come out competitive for those searches, and once the numbers look cheaper for families the bookings in that segment will start coming through on their own. Families are hunting for the best deal like everyone else, so if you make the family rate the obvious cheaper choice on the page, that whole part of your business opens back up.",
     partnerResponse:
       "So more discounting. That's the opposite of what I told you I can do.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -282,7 +282,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Frames the family mispricing as his oversight rather than a shared extranet check. Blaming a brand-managed manager for a config gap ends the collaboration.",
     playerDialogue:
-      "Your family rates are set up wrong on your side - honestly you should have caught this yourself by now.",
+      "I have to be straight with you here - your family rates are just set up wrong on your own side of the extranet, and honestly this is the kind of thing you really should have caught and sorted out yourself a long time ago. The children are being priced as full adults because nobody on your team checked the occupancy settings properly, and that oversight is sitting squarely with you, not with us.",
     partnerResponse:
       "So now it's my fault too. This is not going the way I hoped.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -324,7 +324,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Waves away a real operational concern instead of engineering around it with prepayment. Dismissing the Risky Guest worry is exactly what hardens his no.",
     playerDialogue:
-      "Honestly, that family-risk stuff barely happens - I wouldn't let a few bad bookings hold up a whole segment.",
+      "Honestly, Adam, all that family-risk stuff barely happens in practice - you get the odd invalid card or a last-minute cancellation now and then, but it's a tiny fraction of bookings and nowhere near enough to write off a whole segment over. I really wouldn't let a handful of bad experiences hold up something this valuable.",
     partnerResponse:
       "You clearly haven't cleaned the rooms afterward. We're done here.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -338,7 +338,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Attaches a visibility threat to his hesitation. Threatening ranking is banned in every regime, and it's the surest way to turn a strong no into a closed door.",
     playerDialogue:
-      "Just know that if you do nothing here, your ranking is only going to keep sliding.",
+      "I'll be direct with you, Adam - if you decide to do nothing here and leave all of this exactly as it is, then your ranking is only going to keep sliding further down, and once that slide sets in it gets very hard to climb back. The longer you sit on it, the more visibility you lose to the properties around you, and that's not somewhere you want to end up.",
     partnerResponse:
       "Threatening my ranking is exactly why this call is over. Goodbye.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

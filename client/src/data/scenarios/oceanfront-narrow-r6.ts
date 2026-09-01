@@ -25,7 +25,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: her conversion is outstanding - 17% above her local peer group - but page views are down 89%, and the likely root cause is a Booking.com price running ~10% higher than her website 66% of the time.",
     playerDialogue:
-      "Let's look at the data together. When guests find your property, your conversion rate is outstanding - beating your local peer group by 17%. But your page views are down 89%. The likely root cause is that your Booking.com price is consistently around 10% higher than your website 66% of the time.",
+      "Let's look at the data together. When guests find your property, your conversion rate is outstanding - beating your local peer group by 17%. But your page views are down 89%. The likely root cause is that your Booking.com price is consistently around 10% higher than your website around 65% of the time.",
     partnerResponse:
       "Let's be honest, Zara. That's entirely by design. I want travelers to find us on Booking.com, see the higher price, and think, 'let me go to their direct website for a better deal.' It's a practical tool to drive direct bookings and save on costs.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -40,7 +40,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut - it presumes the fix and hands an ROI-driven owner nothing to weigh.",
     playerDialogue:
-      "Your numbers are down because you're too expensive - the fix is to drop your Booking.com rates across the board and the traffic comes back.",
+      "Honestly, I can tell you right now what this is - your numbers are down because your Booking.com rates are simply too expensive compared to everyone else. The fix is straightforward: drop your rates across the board, bring them down to the pack, and the traffic comes straight back the moment you do it. That's the whole story.",
     partnerResponse:
       "You're telling me to cut all my rates before you've explained a thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -54,7 +54,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for an owner who just asked what is going on with her visibility.',
     playerDialogue:
-      "Honestly, I wouldn't read too much into one slow month - how are things going for you otherwise?",
+      "Honestly, I really wouldn't read too much into one slower month - these things move around a lot and it's usually nothing to worry about. Before we dig into any numbers, I'd love to just hear how the season's been treating you, how the team's doing, and whether there's anything else on your mind I can help with today.",
     partnerResponse:
       "I asked what's going on with my visibility. If it's just a slow month, tell me; if it isn't, show me.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -81,9 +81,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: when travelers compare side-by-side and her offer isn't attractive, they click a cheaper competitor rather than hunting for her website. Then probe how her direct site is doing and what it costs.",
     playerDialogue:
-      "I understand the strategy, but search behavior works a bit differently. When travelers compare properties side-by-side on our platform and your offer isn't attractive, they click a cheaper competitor instead of searching for your website. How is your direct website doing, and how much does it cost to maintain?",
+      "I understand the strategy, but search behavior works a bit differently. When travelers compare properties side-by-side on our platform and your offer isn't attractive, they click a cheaper competitor instead of searching for your website. How is your direct website doing?",
     partnerResponse:
-      "We run campaigns and ads on our side, so we can't tell exactly where the traffic comes from, but visibility on our direct website is increasing and that's what we aim for. There's a cost, of course - on average about 10% of our website price.",
+      "We run campaigns and ads on our side, so we can't tell exactly where the traffic comes from, but visibility on our direct website is increasing and that's what we aim for.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the reverse-billboard premise and never corrects the belief driving the visibility loss.",
     playerDialogue:
-      "That's fair - keeping your Booking.com price higher does push some guests to book direct, so the strategy is basically working.",
+      "That's fair, and honestly I can see the logic in it - keeping your Booking.com price higher than your website does push a fair number of guests to go and book with you directly, which saves you the commission you'd otherwise pay us. So in that sense the strategy you've built is basically working the way you intended it to.",
     partnerResponse:
       "So the markup is fine? Then I'm not sure what you're here to fix.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-cheaper play as a gimmick that doesn't work. Lecturing an owner who just told you it's deliberate shuts the conversation down.",
     playerDialogue:
-      "Honestly, that 'see it higher, book direct' idea is a gimmick - it doesn't actually work, and you should drop it.",
+      "Honestly, that whole 'see it higher, then book direct' idea is a bit of a gimmick, and I'd be doing you a disservice if I didn't just say so plainly - it doesn't actually work the way you think it does, travelers don't behave like that, and the sooner you drop the markup and stop relying on it, the better off you'll be.",
     partnerResponse:
       "You calling my strategy a gimmick isn't going to get us anywhere.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -137,7 +137,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: if visibility is fine on her website, improve it here too - matching her direct rates wins the guests who start on our platform and protects her ranking and discoverability.",
     playerDialogue:
-      "If visibility is fine on your website, why not improve it on our platform too? What would help is matching your direct rates here, so you win the guests who start their journey with us and protect your ranking and discoverability.",
+      "If visibility is fine on your website, why not improve it on our platform too? What would help is matching your direct rates here, so you win the guests who start their journey with us and protect your discoverability.",
     partnerResponse:
       "I see your point about losing them to the guy down the street before they even know who we are. But how does this affect my overall revenue mix if I bring the rates into alignment?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that competitiveness matters, wrong ask - undercutting her own site is the opposite of what she wants and skips the neutral direct-alignment framing.",
     playerDialogue:
-      "The clean fix is to make your Booking.com price lower than your direct site, so travelers just pick you here.",
+      "The clean fix here is simply to set your Booking.com price a little lower than the rate on your own direct site, so when travelers are comparing options they just pick you here without a second thought and you win that booking every time.",
     partnerResponse:
       "Undercutting my own website is the opposite of what I want. That's a non-starter.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Ask her to make sure she isn't pricier than the other OTAs and match them here. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "And make sure you're not pricier than the other OTAs either - match them here so you're competitive everywhere.",
+      "And while we're at it, make sure you're not sitting any pricier than the other big OTAs are showing either - go through their rates, match whatever they've got you listed at, and bring yourself into line here so you stay competitive everywhere.",
     partnerResponse:
       "You can't ask me to price against the other OTAs in this market.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -180,7 +180,7 @@ const step3: BranchingStep = {
   id: 'align-ask',
   label: 'Ask for direct-rate alignment',
   partnerPrompt:
-    "We run campaigns and ads on our side, so we can't tell exactly where the traffic comes from, but visibility on our direct website is increasing and that's what we aim for. There's a cost, of course - on average about 10% of our website price.",
+    "We run campaigns and ads on our side, so we can't tell exactly where the traffic comes from, but visibility on our direct website is increasing and that's what we aim for.",
   options: step3Options,
 };
 
@@ -193,7 +193,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed reframe: if she's ~10% cheaper direct and her acquisition cost is ~10%, her direct acquisition cost is higher than your commission - and this is about incremental demand, not stealing her direct guests.",
     playerDialogue:
-      "If your rates are around 10% cheaper than Booking.com and the acquisition cost for your direct guests is around 10%, then your acquisition cost is higher than the commission you pay us. This isn't about stealing your direct guests - it's about finding incremental demand.",
+      "Let's say your rates are around 10% cheaper than the ones on Booking.com - your acquisition cost could be higher than the commission you pay to us. This isn't about stealing your direct guests, but finding incremental demand.",
     partnerResponse:
       "It's about total revenue stability at the end of the day, isn't it? If I can get some revenue from those empty rooms, it's worth a trial.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -208,7 +208,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Turns the reframe into a plain 'be cheaper here' pitch rather than the acquisition-cost case, and walks into her fear of eroding direct.",
     playerDialogue:
-      "Look, the bottom line is you just need to be cheaper on our platform - that's what moves the volume.",
+      "Look, I'll cut through all the math for you - the bottom line is that you just need to be cheaper on our platform than you are anywhere else, plain and simple. That's the one lever that actually moves the volume, so bring your rates down here and the bookings will follow. It really is that straightforward.",
     partnerResponse:
       "'Just be cheaper' isn't a revenue case. Give me the actual economics.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -222,7 +222,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame her strategy as stubbornness. Accusatory - it burns the collaborative tone an autonomous owner responds to.",
     playerDialogue:
-      "Frankly, you're being stubborn here, and it's costing you the guests you say you care about.",
+      "Frankly, I think you're being stubborn about this, and I'm going to be straight with you because someone has to - this rigid attitude of yours is quietly costing you the very guests you keep telling me you care so much about, month after month, and you're the only one standing in the way of fixing it.",
     partnerResponse:
       "Calling me stubborn about my own business isn't the way to work together.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Fall back on the blanket cut - reduce everything at once - which erodes her ADR premium and gives her nothing clean to measure.",
     playerDialogue:
-      "Simplest thing is to just reduce all your rates now by 10% and watch the volume come back.",
+      "Simplest thing here is to just reduce every one of your rates right now by a flat 10% across the board, then sit back and watch all that lost volume come straight back to you.",
     partnerResponse:
       "An across-the-board cut torches my ADR - that's exactly what I don't want.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Close with a ranking threat if she doesn't align. Threatening visibility over her pricing is banned in every regime.",
     playerDialogue:
-      "And to be clear - if you don't align, our system will keep pushing your visibility down until you do.",
+      "And to be very clear about this - if you choose not to align those rates, our system is simply going to keep pushing your visibility further down until the day you finally do.",
     partnerResponse:
       "Ending on a threat about my ranking is the fastest way to lose me. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

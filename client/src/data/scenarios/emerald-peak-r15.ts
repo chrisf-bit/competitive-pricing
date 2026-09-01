@@ -61,7 +61,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right metric, wrong pitch - dramatizing an 8% forward gap as a crisis to a decisive, data-led GM reads as spin and hands her an easy reason to discount your whole read.",
     playerDialogue:
-      "We've got a real problem for next quarter, Sophia - your sell-through is falling off a cliff and you're going to be left with a lot of empty rooms if we don't act now.",
+      "Honestly, Sophia, next quarter is a real problem - your sell-through is falling off a cliff and you'll be sitting on a lot of empty rooms unless we act now.",
     partnerResponse:
       "Falling off a cliff? Let's not be dramatic. We still have plenty of runway to sell. What are the actual figures?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -75,7 +75,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Prescribes a price cut before any diagnosis - the one move a brand-first franchise defending its direct channel will reject immediately.",
     playerDialogue:
-      "Your pace is behind, so the fastest fix is to bring your public rates down and get more competitive across the board.",
+      "Your pace is behind, so honestly the fastest fix here is to bring your public rates down now and get yourself a lot more competitive right across the board.",
     partnerResponse:
       "Lower our public rates? That undercuts the entire reason we protect our direct channel. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -109,7 +109,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong framing - withholding the genuinely strong 40% room-nights history and leading only with the unsold rooms reads as a one-sided case to a numbers-led GM who asked for the full picture.",
     playerDialogue:
-      "The history doesn't really change the picture - the point is you left 12% of your rooms unsold and your visibility is well behind your peers. That's the headline.",
+      "The history honestly doesn't change the picture all that much, so I'll go straight to what matters: you left 12% of your rooms unsold over the last 30 days, and your visibility is sitting well behind your peers. That's the headline I'd want you focused on, and it's where the real opportunity is right now.",
     partnerResponse:
       "I asked how it compares historically and you skipped straight to the bad news. Give me the whole picture.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -123,7 +123,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right direction, missing the evidence - telling a data-led GM her visibility is 'slipping' without the 17%-vs-26% comparison gives her nothing concrete to weigh.",
     playerDialogue:
-      "The short version is your visibility has been slipping lately - travelers just aren't seeing you as much as they used to, and that's dragging on your bookings.",
+      "The short version is that your visibility has been slipping for a while now - travelers simply aren't seeing you in their results the way they used to, and that softer exposure is quietly dragging on your bookings across the whole quarter. It's a clear downward drift, and it tends to compound if it's left alone.",
     partnerResponse:
       "'Slipping' by how much, against whom? I don't act on vague impressions.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Turns the factual visibility point into a threat - keep your price high and we push you down the results. Threatening a ranking penalty based on her prices is off-side in every regime.",
     playerDialogue:
-      "Put simply, if you stay 10% above your peers the platform will keep pushing you further down the rankings until you bring the price into line.",
+      "Put it simply, Sophia - for as long as you sit 10% above your peers, the platform is going to keep pushing you further and further down the rankings, and it won't stop doing that until you bring your price back into line with everyone else. That's just how it works.",
     partnerResponse:
       "So that's a threat now - drop my price or you'll bury me. That tells me everything I need to know about this conversation.",
     styleMatch: { red: 0, yellow: -2, green: -2, blue: -2 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Accepts 'our price reflects our value' as the end of it - which forfeits the diagnosis and lets a decisive GM close the topic before the real cause surfaces.",
     playerDialogue:
-      "That's fair - if the price reflects the value you offer, then perhaps the search gap is just the cost of holding your positioning.",
+      "That's completely fair, Sophia - if the price genuinely reflects the value you offer your guests, then perhaps this search gap is really just the natural cost of holding your positioning, and there may not be all that much worth changing here at all.",
     partnerResponse:
       "Exactly. So we're agreed there's nothing to change here.",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: -2 },
@@ -205,7 +205,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the inflation hurts her, wrong framing - labelling her own-the-guest strategy a mistake attacks a deliberate brand decision and dictates how she should run her direct channel.",
     playerDialogue:
-      "Honestly, this whole 'keep our website cheaper' strategy is the mistake - you should be stopping that and leading with your best price here instead.",
+      "Honestly, Sophia, this whole 'keep our own website cheaper' strategy is the real mistake here, and it's working against you. What you should be doing is stopping that approach altogether and leading with your genuine best price on our platform instead, because that's the only way you're going to turn any of this around.",
     partnerResponse:
       "How I price my own website is my decision, not yours. This is exactly why I keep OTAs at arm's length.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -219,7 +219,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right conclusion, missing the mechanism - 'you need to be more competitive' skips the specific inflate-to-fund-Genius insight, so a sharp GM hears a generic discount nudge and tunes out.",
     playerDialogue:
-      "The bottom line is you just need to be more competitive on price here - that's what's holding your visibility and your mobile bookings back.",
+      "The bottom line, Sophia, is that you simply need to be more competitive on price here - when it comes down to it, that's the single thing holding back both your visibility and your mobile bookings, and once you sort out where you sit against everyone else, the rest of it should start to take care of itself.",
     partnerResponse:
       "'Be more competitive' is code for 'discount', and we've been over why I won't.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that the discount isn't reaching enough travelers, wrong lever - pushing a deeper Genius discount doubles down on the very inflate-to-fund pattern that caused the problem, and still misses the non-logged-in mobile audience.",
     playerDialogue:
-      "The simplest answer is to increase your Genius discount - go from one tier to the next so more travelers see a better price.",
+      "Honestly, the simplest answer here is to increase your Genius discount - step it up from where you are now to the next tier, so a wider group of travelers sees a stronger price the moment they come through. If more of them are looking at a bigger saving, more of them will book with you, and that alone should start to close the volume gap you're seeing over the coming weeks without you having to change much else.",
     partnerResponse:
       "Discount my loyal members even harder? That's the opposite of protecting my margin. No thank you.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -267,7 +267,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Oversells the mobile rate with a guaranteed visibility/share return for discounting - a promise of ranking or visibility reward in exchange for a price move, which breaches compliance in every regime.",
     playerDialogue:
-      "Switch on a mobile rate and I can guarantee you win that 60% back and climb straight up the mobile rankings - it's a sure thing.",
+      "Here's what I'd do - switch on a mobile rate and I can promise you'll win that 60% straight back and climb right up the mobile rankings within a matter of weeks. I've seen it land every single time, so I can guarantee you the visibility and the share come back the moment you turn it on. It really is a sure thing, and you'd be leaving an easy result on the table if you passed on it.",
     partnerResponse:
       "Nothing's a 'sure thing'. Guaranteeing me a ranking climb just makes me trust the rest of your numbers less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -301,7 +301,7 @@ const step6Options: BranchingOption[] = [
     description:
       "She's clearly declined - pressing again to 'just try the mobile rate' after a firm no reads as not listening, and spends the goodwill that would have kept the door open for next time.",
     playerDialogue:
-      "I really do think you're leaving money on the table here - can't I at least get you to trial the mobile rate for a few weeks before you decide?",
+      "I really do think you're leaving money on the table here, Sophia - and I know you've heard me out, but honestly, can't I get you to at least trial the mobile rate for just a few weeks before you settle on a final decision? I'm confident the numbers would win you over.",
     partnerResponse:
       "I've given you my answer, Mei. Pushing after that isn't going to change it - if anything it makes me less inclined next time.",
     styleMatch: { red: -1, yellow: -1, green: -1, blue: -1 },
@@ -315,7 +315,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Takes the no and quietly closes the door - no offer of support, no follow-up. A red/blue partner reads the flat retreat as disengagement, and there's no hook for the next conversation.",
     playerDialogue:
-      "No problem at all - I'll leave it there then. Sorry to have taken up your time today.",
+      "No problem at all, Sophia - I'll leave it there then, no need to go back over any of it again. I won't take up any more of your afternoon, and I'm sorry to have kept you this long today. I'll let you get back to everything else you've got on. Thanks again for hearing me out.",
     partnerResponse:
       "Right. Well, thanks for stopping by, I suppose.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -1 },

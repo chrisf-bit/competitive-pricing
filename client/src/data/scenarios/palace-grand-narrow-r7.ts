@@ -46,7 +46,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm and sympathetic, but it validates the competitor-noise framing instead of steering to his own performance - it lets the price-war logic stand rather than reframing to revenue and visibility.",
     playerDialogue:
-      "You're right, it's really unfair - those other OTAs are undercutting everyone and making your life difficult. It's a tough market out there.",
+      "You're right, and honestly it's really unfair - those other OTAs are undercutting everyone and making your life so much harder than it needs to be. It's a brutal market out there right now, and the fact that they keep pinging you about competitive prices while you're giving everyone the same rates just proves they're the ones stirring all this up.",
     partnerResponse:
       "So we agree they're the problem. Then what are you actually going to do about it?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that he's uncompetitive, wrong route - a blanket cut before any diagnosis presumes the fix and gives an ROI-minded operator nothing to weigh.",
     playerDialogue:
-      "The quickest fix is to drop your Booking.com rates across the board so you're competitive again - the traffic will follow.",
+      "Honestly, the quickest fix here is just to drop your Booking.com rates across the board so you look competitive again in every search - once the price comes down the traffic will follow almost immediately, so I'd get those numbers lowered now and we can worry about the finer details of mobile and families later.",
     partnerResponse:
       "You want me to cut everything before you've explained the actual problem. Slow down.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -87,9 +87,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: you don't want a price war, you can't prevent other OTAs cutting margins, and you can't ask him to change his rates on other platforms. To maximize Booking.com performance, keep Booking.com in line with his own direct website prices.",
     playerDialogue:
-      "We don't want to turn this into a price war, and we can't prevent other OTAs cutting their margins - nor would we ask you to change or raise your rates on other platforms. But to maximize your Booking.com performance and support your overall revenue goals, we'd recommend keeping Booking.com in line with your own direct website prices.",
+      "We can't prevent other OTAs cutting their margins - nor would we ask you to change or raise your rates on other platforms. But to maximize your Booking.com performance and support your overall revenue goals, we'd recommend keeping Booking.com in line with your own direct website prices.",
     partnerResponse:
-      "But from a distribution standpoint, our brand strategy limits families booking from OTAs. We prefer families to book directly so we can manage the room inventory and bed configurations better.",
+      "But from a distribution standpoint, our brand strategy limits booking from OTAs, especially families. We prefer families to book directly so we can manage the room inventory and bed configurations better.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -102,7 +102,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Sounds accommodating, but it concedes the Same Net trap - promising to burn margin whenever a competitor discounts - instead of anchoring him to his own direct website prices.",
     playerDialogue:
-      "That's fair - I'll take it back to my team and we'll look at matching those competitor campaigns so you're always covered on price here.",
+      "That's fair - I'll take this straight back to my team, and what we'll do is look at matching those competitor campaigns whenever they run one, so you're always covered on price here and never sitting above whoever happens to be cheapest that week. If they cut, we'll move with them, and you won't have to worry about being undercut on our platform again.",
     partnerResponse:
       "Good. So you'll just keep pace with whoever's cheapest that week?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
     description:
       "In a Narrow market you cannot ask for parity against other OTAs, only alignment with his own direct website. Asking him to level his rates with the other platforms is a compliance breach.",
     playerDialogue:
-      "The cleanest fix is to give us the same rates you give the other OTAs, so you're level across every platform.",
+      "The cleanest fix here is really just to give us the exact same rates you're giving the other OTAs, so that you're perfectly level right across every platform and none of them can claim they've got a better deal than we do. Once your rates line up identically everywhere, all this noise about who's cheaper simply goes away and everyone's on the same footing.",
     partnerResponse:
       "You're asking me to line my rates up with the other OTAs? I didn't think that was something you could ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -143,7 +143,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: 90% of travelers discover properties on the platform first. When families see an uncompetitive price they book a competitor right next door, not his direct site. Ask him to match the family rates and conditions of his own website so families can find him.",
     playerDialogue:
-      "Consider the traveler's discovery journey - around 90% of travelers discover properties on our platform first. When families see an uncompetitive price here, they don't jump to your direct site; they book a competitor right next to you. That's why we'd ask you to match the family rates and conditions of your own website here, so families can actually find you.",
+      "Consider the traveler's discovery journey - around 90% of travelers discover properties on our platform first. When families see an uncompetitive price here, they don't jump to your direct site; they book a competitor right next to you. That's why we'd ask you to match the family rates and conditions of your own website here, so families can actually find you. Similarly for mobile channel traffic.",
     partnerResponse:
       "What's the specific return if I adjust the family and mobile setup to match our website?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -158,7 +158,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong lever - it becomes a discount ask rather than an alignment-to-his-own-website ask, and it walks into the operational fear he'll raise. The move is matching his direct family rates, not cutting them.",
     playerDialogue:
-      "It's simple - just make your family rates on Booking.com the cheapest around and the bookings will follow.",
+      "It's really simple when you think about it - just make your family rates on Booking.com the cheapest around, cheaper than anywhere else a guest could look, and the bookings will follow almost on their own. Families always chase the lowest number they can see, so if you're consistently the cheapest option for them here, they'll pick you first every single time and the volume takes care of itself.",
     partnerResponse:
       "Undercutting my own family pricing is the opposite of what I want. Give me the commercial case.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -172,7 +172,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Direct him to hand over his full family inventory immediately. Dictating his distribution strategy oversteps, and pushing an autonomous operator this hard gets a fast no.",
     playerDialogue:
-      "Honestly, your direct-only family strategy is a mistake - you should open all your family rooms to us right now.",
+      "Honestly, your direct-only family strategy is a real mistake and it's costing you - you should open up all of your family rooms to us right now, the full inventory, and let us handle that segment for you properly. Keeping those rooms locked to your own website is exactly what's holding this property back, so the move is to hand the whole family allocation over to us today and stop protecting it.",
     partnerResponse:
       "You don't get to tell me how to allocate my own inventory. That's my decision.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -186,7 +186,7 @@ const step3: BranchingStep = {
   id: 'family-billboard',
   label: 'Family segment via the billboard effect',
   partnerPrompt:
-    "But from a distribution standpoint, our brand strategy limits families booking from OTAs. We prefer families to book directly so we can manage the room inventory and bed configurations better.",
+    "But from a distribution standpoint, our brand strategy limits booking from OTAs, especially families. We prefer families to book directly so we can manage the room inventory and bed configurations better.",
   options: step3Options,
 };
 
@@ -199,7 +199,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed collaborative probe: families grow nearly twice as fast, stay longer, and spend more. Then ask how he attracts families to his own website today and what his share of unsold family rooms is - the questions that surface the opportunity together.",
     playerDialogue:
-      "Families grow nearly twice as fast as other segments, stay longer, and spend significantly more during their stay. How are you attracting families to your own website today, and what's your share of unsold family rooms on average?",
+      "Families grow nearly twice as fast as other segments, stay longer, and spend more during their stay. How are you attracting families to your own website today, and what's your share of unsold family rooms on average?",
     partnerResponse:
       "We offer a great price, but it's hard to compare our own traffic with the amount you generate - just looking at your search results view, it's a powerful way to be discovered first. And in low-occupancy periods those big family rooms often stay unsold.",
     styleMatch: { red: 0, yellow: 0, green: 2, blue: 2 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "The right numbers, but no probe - it states the value and stops, missing the collaborative discovery an operator responds to. He never gets asked about his own unsold rooms, so the opportunity stays abstract.",
     playerDialogue:
-      "Families grow nearly twice as fast, stay longer, and spend more - so it's clearly worth doing. That's the return.",
+      "Families grow nearly twice as fast as other segments, they stay longer, and they spend noticeably more once they're on site - so it's clearly worth doing and the numbers make the case on their own. That's the return you'd be looking at here.",
     partnerResponse:
       "That's the theory. It still doesn't tell me what it does for my property specifically.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: 0 },
@@ -228,7 +228,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame his family setup as a deliberate choice to leave money on the table. It presumes intent and turns a collaborative probe into an accusation - the wrong register for this operator.",
     playerDialogue:
-      "Let's be honest - you're deliberately starving a segment that would make you real money, and that's the whole problem here.",
+      "Let's just be honest with each other here - you're deliberately starving a segment that would clearly make you real money, and if we're being straight about it, that choice is the whole problem we're sitting here trying to untangle today.",
     partnerResponse:
       "I came to you with the data and asked for help. Telling me I'm the problem isn't help.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -270,7 +270,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right plan, lost momentum - handing an operator a to-do for whenever he gets a chance drops the do-it-together energy that just got him to yes.",
     playerDialogue:
-      "Great - I'll have my team email you the steps and you can update the family and mobile settings whenever suits you.",
+      "Great - I'll have my team put together an email with all the steps laid out clearly, and then you can go in and update the family and mobile settings whenever it happens to suit you. There's no rush on our end, so just work through it at your own pace once it lands in your inbox.",
     partnerResponse:
       "Sure, though realistically that'll sit in my inbox for a while.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: 0 },
@@ -284,7 +284,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answer his openness with a requirement to be the lowest price - which pressures a rate reduction and abandons the align-to-his-own-website framing the whole call was built on.",
     playerDialogue:
-      "To really recover, you'll need to make sure Booking.com is always the cheapest place to book you - that's the only thing that moves the needle.",
+      "To really recover from where you are now, you'll need to make sure Booking.com is always the single cheapest place anyone can book you - lower than your own website, lower than everyone - because honestly that's the only thing that actually moves the needle here and everything else is just detail around the edges.",
     partnerResponse:
       "So after all that, the ask is just 'be the cheapest'? That's not what I signed up to discuss.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

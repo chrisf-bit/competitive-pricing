@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and frames a deliberate head-office policy as her error before you understand it. A franchise revenue manager will close down.",
     playerDialogue:
-      "Your prices here are 7% worse than your own site, and frankly that's costing you bookings - you'll need to bring them in line.",
+      "I've been through the numbers before this call, and the headline is simple: your prices here are running about 7% worse than your own direct site, and frankly that gap is costing you bookings every week. I really think you'll need to bring them into line so you stop losing out.",
     partnerResponse:
       "That's a head-office policy, not a mistake I made. If you're here to tell me it's wrong, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a revenue manager who came to review performance and wants the numbers.",
     playerDialogue:
-      "Honestly, your property looks great and the reviews are lovely - I wouldn't stress about the numbers too much today.",
+      "Honestly, before we get lost in spreadsheets, I just want to say your property looks fantastic and your recent reviews have been lovely to read. You're clearly doing a lot right, so I really wouldn't stress about the numbers too much today - let's keep this relaxed and just catch up.",
     partnerResponse:
       "I appreciate that, but I set aside this time to review performance. What does the data actually show?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Accepts the reverse-billboard premise - that a cheaper direct site is a fine trade-off - and never corrects the belief that's suppressing her visibility on both channels.",
     playerDialogue:
-      "That's fair enough - keeping your website cheaper does bring guests direct, so the trade-off is probably working for you.",
+      "That's fair enough, honestly - keeping your own website a bit cheaper does clearly bring a good share of guests straight to you, and there's real value in owning that direct relationship the way your head office wants. If that trade-off is working and your loyal guests keep booking with you directly, then I don't think there's much here you need to change - it sounds like the policy is doing its job for you.",
     partnerResponse:
       "So the policy's fine, then? I'm not sure what we're reviewing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -115,7 +115,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Threaten a further visibility slide unless she aligns. Threatening ranking over how she prices is banned in every regime and torches a franchise relationship.",
     playerDialogue:
-      "I'll be honest - while your site stays cheaper, our algorithm will keep pushing you down the results until you align.",
+      "I'll be honest with you - as long as your own site keeps undercutting the price you show here, our ranking algorithm is going to read you as uncompetitive and keep pushing your property further down the search results. That slide won't stop until you align your rates with us, so the longer this head-office policy stays in place, the harder it becomes to climb back up where you should be.",
     partnerResponse:
       "Threatening my ranking over a head-office pricing policy is not going to move me.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Concedes her framing that BSB is Booking.com seizing her price, and offers to remove the very shield protecting her competitiveness. It validates the objection instead of reframing it.",
     playerDialogue:
-      "You're right that BSB takes some control away from you - if it's bothering you, I can look into having it switched off for your property.",
+      "You're right that BSB does take some of the control over your pricing out of your hands. If it's genuinely bothering you and getting in the way, I can absolutely look into having it switched off for your property so you're back in full control of what guests see.",
     partnerResponse:
       "So you agree it's taking control from me. That doesn't reassure me at all.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Over-promises a specific outcome BSB doesn't guarantee. A data-led revenue manager will spot the hollow guarantee and trust you less for it.",
     playerDialogue:
-      "Honestly, just leave BSB running and it'll flood you with bookings - I can pretty much guarantee your numbers jump next month.",
+      "Honestly, my advice is to just leave BSB running exactly as it is and let it do the work - it'll flood your property with bookings before you know it. I can pretty much guarantee you'll see your numbers jump next month, so there's really nothing here for you to worry about.",
     partnerResponse:
       "You can guarantee that? That's exactly the kind of claim that makes me trust the number less, not more.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -198,7 +198,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: BSB isn't applied to all bookings, the partial room cost is paid by Booking.com on the guest's behalf, and she incurs no additional fees. Position it as a win-win: travelers see a better price, she gets stronger conversion, and prepaid bookings carry lower cancellation risk.",
     playerDialogue:
-      "BSB isn't applied to all of your bookings, and that partial room cost is paid by Booking.com on behalf of the guest - you don't incur any additional fees, and you still receive the full room price you set. It's a win-win: travelers see a better price, you get stronger conversion, and because these bookings are paid in advance, cancellation risk is lower.",
+      "BSB does not make you lose revenue or incur any additional fees - the partial room cost is paid by Booking.com on behalf of the guests. This is also not something we apply to all of your bookings. We position it as a win-win: travelers see a better price, you get stronger conversion, and because these bookings are paid in advance, cancellation risk is lower.",
     partnerResponse:
       "I don't want to win guests just on price - I want them to choose me for the outstanding view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews. Given you're already discounting my rate, why should I join any of your programmes or campaigns?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that BSB is funded, wrong tone - it waves away the brand-reputation concern a franchise revenue manager is mandated to protect, which is exactly what keeps her from engaging.",
     playerDialogue:
-      "Honestly, the whole brand-reputation worry is overblown - guests care about price far more than you think, so I wouldn't let that hold you back.",
+      "Honestly, I think the whole brand-reputation worry is a bit overblown here - when it comes down to it, guests care about getting a good price far more than most owners expect them to, and a slightly lower rate on our platform really isn't going to change how they feel about your property. I genuinely wouldn't let that concern hold you back from something that could grow your bookings.",
     partnerResponse:
       "My brand is the thing I'm here to protect. Telling me it doesn't matter isn't going to land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -227,7 +227,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Answers the funded-shield moment with a blanket demand to cut her published rate - which reintroduces the price-war fear BSB is meant to avoid and dictates her pricing.",
     playerDialogue:
-      "The simplest fix is to just cut your public rate here across the board so you're never the expensive option - BSB or not.",
+      "Honestly, the simplest fix here is to just cut your public rate across the board so that you're never the expensive option on our platform, BSB or not. If you bring your published price down far enough that nobody can undercut you, then all of this back-and-forth about shields and discounts goes away and you'll simply always be the cheapest choice a traveler sees.",
     partnerResponse:
       "So after all that, the ask is to cut my rate everywhere? That's the opposite of protecting my brand.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -269,7 +269,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Concedes that Booking guests leave worse reviews - reinforcing the belief driving her resistance instead of decoupling reviews from the price decision.",
     playerDialogue:
-      "You're probably right that our guests are a tougher crowd to please - it's just something that comes with the platform.",
+      "You're probably right, if I'm honest - our guests can be a tougher crowd to please, and they do tend to be quicker to leave a critical review than the ones who book with you directly. It's just one of those things that comes with the territory of being on a big platform like ours, and I don't think there's a huge amount either of us can really do to change that side of it.",
     partnerResponse:
       "So you agree the reviews are a problem here. That doesn't make me any keener to lean in.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -283,7 +283,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Corners a franchise revenue manager for a yes on the spot, when she needs to reconsider against head-office policy. Pushing here converts a warm follow-up into a hard no.",
     playerDialogue:
-      "Let's not leave this open - can you commit today to aligning your rates so we lock in the gains before next month?",
+      "Let's not leave this hanging open until next month - I'd really like us to nail it down today. Can you commit right now to aligning your rates with what you offer direct, so we can lock in these gains straight away rather than losing another few weeks? I honestly think a quick decision here is the right call, and there's no real reason to wait on it.",
     partnerResponse:
       "You're pushing me for a decision I've told you I can't make yet. Don't force it.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -325,7 +325,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Turns her reasonable deferral into a warning about lost revenue. A parting guilt-trip undoes the goodwill the compliant conversation just earned.",
     playerDialogue:
-      "Alright, but I'd hate for you to look back and realize how much revenue you left on the table every week you waited.",
+      "Alright, I'll leave it there for now - but honestly, I'd hate for you to look back in a few months and realize just how much revenue you left sitting on the table for every single week that you waited to act on this.",
     partnerResponse:
       "That's a strange note to end on. I said I'd reconsider - let's leave it there.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -339,7 +339,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Attaches a visibility ultimatum to her decision timeline. Threatening ranking is banned in every regime, and doing it on the way out is the worst possible last impression.",
     playerDialogue:
-      "Just so it's on your radar - if you haven't aligned by next month, expect your visibility to keep sliding in the meantime.",
+      "Just so it's on your radar before we wrap up - if you still haven't aligned your rates by the time we speak next month, then you should expect your visibility on our platform to keep sliding lower in the meantime.",
     partnerResponse:
       "So it's align or be buried? That's not the partnership I thought we had.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

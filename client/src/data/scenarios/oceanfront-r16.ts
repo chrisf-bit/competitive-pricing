@@ -63,7 +63,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right metric, missing the bridge - jumping straight to 'you're 12% behind' without crediting the trial she ran last time reads as ungrateful to a partner who took a chance for you, and puts her on the defensive.",
     playerDialogue:
-      "Let's get to it - your sell-through is running about 12% behind your peer group over the next quarter. That's the gap we need to talk about today.",
+      "Let's get straight to it today, because the number that matters is this: your sell-through is running about 12% behind your peer group over the next quarter, and that pacing gap is really the whole reason I wanted to talk. That's the shortfall we need to work through together right now.",
     partnerResponse:
       "Straight to the shortfall, then. We tried something for you last time - I'd hoped we'd start there.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: 0 },
@@ -77,7 +77,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Prescribes a rate cut before diagnosing - and she's just told you she'd rather hold rooms empty than compromise her OTA rates, so it lands as exactly the move she guards against.",
     playerDialogue:
-      "The pace is behind, so the cleanest fix is to bring your public rates down a little here and get more competitive.",
+      "The pace is running behind, so honestly the cleanest fix here is to bring your public rates down a little and get yourself more competitive on the platform. If we shave a bit off those rates now, I'd expect those rooms to start moving and the whole gap to close up fairly quickly.",
     partnerResponse:
       "Lower our public rates? That's the one thing I've said we won't do to protect our direct guests. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dictates how she should run her own marketing - shift spend off her overseas ads and onto the platform. Directing a partner's external marketing and distribution strategy oversteps in every regime.",
     playerDialogue:
-      "Honestly, those overseas ad campaigns are wasted spend - you'd get far more by pulling that budget and putting it into your presence on our platform instead.",
+      "Honestly, those overseas ad campaigns are wasted spend, and you'd see far more return by pulling that budget out of them and putting it into building up your presence on our platform instead. That's where I'd redirect the marketing money if I were you.",
     partnerResponse:
       "My marketing budget is my business, Kai. I didn't ask you to redraw it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -125,7 +125,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Takes 'I only want my website to grow' at face value and drops the thread - forfeiting the billboard reframe that would have shown the platform serving that same goal.",
     playerDialogue:
-      "That's completely fair - if the priority is your own website, then I understand OTAs just aren't where your focus is right now.",
+      "That's completely fair, and I understand where you're coming from - if the priority right now is growing your own website, then I get that OTAs simply aren't where you want to put your energy at the moment, and I won't push you on that today.",
     partnerResponse:
       "Right, exactly. So I'm not sure there's much for us to change here today.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
@@ -159,7 +159,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that the platform adds reach, wrong delivery - telling her that her own campaigns don't really work belittles the strategy she's invested in and makes a proud owner defend rather than listen.",
     playerDialogue:
-      "The truth is those campaigns aren't really moving the needle for you - that's why the rooms are sitting empty. Our reach is what you actually need.",
+      "The honest truth here is that those campaigns of yours just aren't really moving the needle for you the way you think they are - and that's exactly why those rooms are sitting empty at the end of the day. What you actually need is our reach behind you, not more of your own advertising.",
     partnerResponse:
       "Our campaigns are doing exactly what we built them to do. I won't have them written off like that.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -1 },
@@ -173,7 +173,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right idea, no traction - a generic 'we have huge reach' line without the zero-marketing-cost angle or a concrete number sounds like a sales boast to a data-led owner and doesn't connect to her goal.",
     playerDialogue:
-      "You should really lean into us more - we have enormous global reach and a huge audience, far bigger than you could reach on your own.",
+      "Honestly, you should really be leaning into us a lot more than you are - we have enormous global reach and an audience that's far, far bigger than anything you could ever hope to reach on your own. There's a whole world of travelers out there and we're the ones who can put you in front of them.",
     partnerResponse:
       "Every platform tells me they're the biggest. That on its own doesn't change my plan.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -207,7 +207,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that she's losing share, wrong altitude - keeping it at 'you're losing bookings overall' misses the one specific, high-value segment that actually makes her sit up, which is the whole point of the pivot.",
     playerDialogue:
-      "Across the board, that price gap is costing you bookings you should be winning - it's a broad drag on your whole performance here.",
+      "When you look across the board, that price gap is costing you bookings all over the place - bookings you really should be winning here. It's a broad drag weighing on your whole performance on the platform, and it's showing up everywhere I look, not in any one corner of your business.",
     partnerResponse:
       "'Across the board' just sounds like the general discount case again. I need something more specific than that.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -221,7 +221,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Inflates the share loss well past the data to shock her into acting - a numbers-led owner will check the figure, catch the exaggeration, and trust the rest of your case less.",
     playerDialogue:
-      "You're basically losing the entire US market right now - close to half of those travelers are booking elsewhere. It's a serious haemorrhage.",
+      "Look, the reality is you're basically losing the entire US market right now - we're talking close to half of all those travelers booking somewhere else instead of with you. It's a genuine haemorrhage of business that only gets worse the longer you leave it.",
     partnerResponse:
       "Half? That's not what your own data said a moment ago. Let's stick to the real number.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that she needs to be more competitive to US travelers, wrong instrument - a public discount is visible to her direct guests too, which is the exact thing she said she won't open up.",
     playerDialogue:
-      "Let's just put a small discount on your public rates - modest enough to protect margin but enough to win those US travelers back.",
+      "Let's keep this simple and just put a small discount on your public rates - modest enough to protect your margin but still enough to win those US travelers back onto your page. A little movement on the headline price is honestly the quickest way to get those searchers converting again.",
     partnerResponse:
       "A public discount is visible to my direct guests, Kai. That's precisely what I told you I won't do.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -269,7 +269,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answers her results question with a guaranteed revenue promise - exactly the specific-reward promise compliance forbids, and a red flag to an owner already burned by promo tags.",
     playerDialogue:
-      "I can promise you this will deliver - a guaranteed lift in net revenue from the US segment, no question. You can take that to the bank.",
+      "I can promise you this one will absolutely deliver - a guaranteed lift in net revenue coming straight from that US segment, no question about it whatsoever. Put it live and you'll see the return; honestly, this is one you can take right to the bank and count on.",
     partnerResponse:
       "The last people who 'guaranteed' me a lift cost me margin. A promise like that makes me trust it less, not more.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -303,7 +303,7 @@ const step6Options: BranchingOption[] = [
     description:
       "She's ready to consider it on her own terms - pressing for a yes now, after she asked for projections, overreaches and risks turning a warm deferral into a firm no.",
     playerDialogue:
-      "I'd really rather not leave without a decision - can we just agree to switch the US rate on today and review it once it's running?",
+      "I'd really rather not walk out of here today without some kind of decision from you - so can we just agree to switch the US rate on right now and then review how it's performing together once it's been running for a little while? I'm confident enough in this that I'd like to get it started today.",
     partnerResponse:
       "I asked to see the numbers first, Kai. Pushing me to commit now is only going to make me more cautious, not less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -317,7 +317,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Accepts the deferral but pins nothing - no projections, no KPIs, no date. A data-led owner needs the numbers she asked for, or the follow-up quietly evaporates.",
     playerDialogue:
-      "No problem at all - let's stay in touch and pick it back up whenever suits you.",
+      "No problem at all, honestly - let's just keep the lines open between us and pick this whole thing back up again whenever the timing happens to suit you better. There's no rush on my end, so whenever you feel ready to revisit it, you know where to find me and we'll take it from there.",
     partnerResponse:
       "I did ask for projections, though. Without those there's nothing for me to actually look at, is there?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },

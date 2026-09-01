@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps straight to a price cut without understanding how she runs her channels - an experienced manager reads that as being sold to.",
     playerDialogue:
-      "Your bookings are down 48% - the fix is to drop your Booking.com prices so you stop losing travelers. Shall we set that up?",
+      "Your bookings are down 48%, so the quickest fix here is straightforward - let's just drop your Booking.com prices so you stop losing travelers, and I can have that set up for you within the hour. Once the lower rates are live you'll see those bookings come back. Shall we get it going?",
     partnerResponse:
       "You're prescribing a cut before you understand how we run our channels.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - no numbers, no diagnosis. The wrong register for an evidence-led operator.',
     playerDialogue:
-      "That's a shame - I'm sure it'll pick back up. How's the team getting on otherwise?",
+      "That's a real shame to hear, but honestly I wouldn't worry too much about it - these things tend to ebb and flow, and I'm sure it'll pick back up before long. You've built such a lovely reputation that the guests always find their way back. How's the team getting on otherwise?",
     partnerResponse:
       "If there's no data behind that, what are we actually solving?",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -69,7 +69,7 @@ const step1: BranchingStep = {
   id: 'probe',
   label: 'Reveal the visibility collapse',
   partnerPrompt:
-    "Good morning! It's been busy, but the pace is good. Our main focus this year is driving guests directly to our own site to maximize returns - so we keep our direct website about 5.5% cheaper to 'steal' some guests from you. We want travelers to see us on your platform, realize they can save by booking direct, and then click away to buy on our website.",
+    "Good morning! It's been busy, but the pace is good. Our main focus this year is driving guests directly to our own site to maximize returns - so we keep our direct website about 5.5% cheaper to 'redirect' some guests from you. We want travelers to see us on your platform, realize they can save by booking direct, and then click away to book on our website.",
   options: step1Options,
 };
 
@@ -82,7 +82,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: because the platform works like a search engine, a traveler who discovers her but doesn't find a competitive price just books a cheaper local competitor on the same page - they don't switch tabs to find her brand. Probe how she mitigates that.",
     playerDialogue:
-      "Because our platform works like a search engine, a traveler who discovers you but doesn't find a competitive price just books elsewhere on our platform. They don't switch tabs to search your brand - they click a cheaper local competitor on the same page. How do you mitigate the risk of losing those bookings to your neighbors?",
+      "Think of our platform like a search engine: a traveler who discovers you but doesn't find a competitive price just books elsewhere on our platform. They rarely switch tabs to search your brand - they click a cheaper local competitor on the same page. How do you mitigate the risk of losing those bookings to your neighbors?",
     partnerResponse:
       "We believe our brand awareness is strong enough to bring them over. If they really want one of our properties, they'll look for our name online.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -97,7 +97,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the flawed premise that the exposure alone does the job, and offers only a token nudge - never correcting the belief driving the problem.",
     playerDialogue:
-      "You're right that the exposure helps - maybe just a small discount on the margin would nudge a few more over.",
+      "You're right that the exposure alone probably does most of the work for you - people see you on our platform and that visibility is genuinely valuable, so I don't want to overstate this. Maybe all it really needs is a small discount on the margin to nudge a few more of them over the line, and your brand is likely doing the heavier lifting anyway.",
     partnerResponse:
       "So the markup's fine, then? What are we actually fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator.",
     playerDialogue:
-      "The 'they'll book direct' idea is honestly a myth - travelers just book whatever's cheapest in front of them.",
+      "The whole 'they'll just book direct' idea is honestly a bit of a myth, and I think you're giving travelers far too much credit here - they're lazy, they don't hunt around for your brand, they simply book whatever happens to be the cheapest option sitting right in front of them on the page. Clinging to that belief is exactly what's costing you all this visibility.",
     partnerResponse:
       "Calling my strategy a myth isn't how to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -138,7 +138,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: to protect her direct loyalty incentive, use fenced member-only rates on her own site rather than a cheaper public rate; and align her public base rates with her Brand.com here, which is what lifts search discovery.",
     playerDialogue:
-      "If your goal is to drive direct bookings, we'd recommend fenced, member-only rates on your website rather than a cheaper public rate - that protects your direct loyalty incentive. Meanwhile, aligning your public base rates with your Brand.com here is what lifts your search discovery on our platform.",
+      "If your goal is to drive direct bookings, we'd recommend fenced, member-only rates on your website rather than a cheaper public rate - that protects your direct loyalty incentive. Meanwhile, aligning your public base rates with your Brand.com here helps attract more guests to you on our platform.",
     partnerResponse:
       "If I match my website rates on your channel, I lose the public incentive that drives direct business - fenced rates or not. Why don't we focus on specific targeted audiences instead of a general rate drop?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Asks for the public alignment but offers nothing to protect her direct incentive - the exact thing she's protecting - so it reads as asking her to simply give it up.",
     playerDialogue:
-      "Just align your public rates with your website here and you'll recover the visibility - the direct discount is costing you more than it earns.",
+      "Honestly, the simplest path is to just align your public rates with your website rates here, and once you do that you'll recover the visibility you've lost. The direct discount you're running is costing you far more in missed bookings than it's actually earning you, so bringing the two into line here is really the sensible move.",
     partnerResponse:
       "You keep asking me to give up my public incentive without protecting it. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Ask her to make sure she isn't pricier than the other OTAs and match them here. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "And make sure you're not pricier than the other OTAs either - match them here so you're competitive everywhere.",
+      "And while we're at it, make sure you're not sitting pricier than the other OTAs either - go and check what they're charging and match them here so you're never the most expensive option anywhere a traveler looks. If any of them are undercutting you, bring your rates on those channels down too so you stay competitive right across the board.",
     partnerResponse:
       "Policing my other-OTA pricing isn't your call in this market.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -194,7 +194,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the Segmented Pricing pushback: acknowledge why targeted feels safer, but base-rate alignment is the action most likely to restore visibility and ranking - keep targeted options as the fallback if alignment underdelivers.",
     playerDialogue:
-      "I understand why a targeted promotion feels safer. But base-rate alignment is the action most likely to restore your visibility and ranking. If aligning the base rate doesn't deliver the revenue you need, we can look at targeted options then. The opportunity to recover this lost visibility is significant.",
+      "I understand why a targeted promotion feels safer. But base-rate alignment is the action most likely to restore your visibility. If aligning the base rate doesn't deliver the revenue you need, we can look at targeted options then. The opportunity to recover this lost visibility is significant.",
     partnerResponse:
       "Your explanation makes a lot of sense, and a loss in traffic this big is too important to ignore. Let's try the base-rate alignment for exactly three weeks as a test - can we set a follow-up to see results?",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -209,7 +209,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Capitulates to targeted promotions only, abandoning the base-rate alignment the SME identifies as the primary lever for visibility - it hands her the weaker plan.",
     playerDialogue:
-      "Sure, let's just run some targeted promotions for now and skip the base alignment.",
+      "Sure, that's completely fair - let's just run some targeted promotions for now and set the base-rate alignment aside for the time being. Targeted deals give you far more control over exactly who gets the price, so let's start there and keep it simple, and we can always revisit the wider rate question another time.",
     partnerResponse:
       "If even you don't think the base alignment matters, why did you raise it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -223,7 +223,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame alignment as compulsory with a ranking penalty if she refuses. Threatening ranking to force a price move is banned.",
     playerDialogue:
-      "If you don't align the base rate, our system will keep dropping your ranking - it's really not optional.",
+      "I'll be straight with you - if you don't align the base rate, our system is simply going to keep dropping your ranking lower and lower until you do, and there's nothing I can do to stop that happening. This really isn't optional at this point, so the sensible thing is to align now before your placement slips further and it gets harder to claw back.",
     partnerResponse:
       "Framing it as 'not optional' with a ranking threat is exactly the wrong approach.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -265,7 +265,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Takes the win but pins no metric and no review date - a plan an evidence-led operator will let drift.",
     playerDialogue:
-      "Great, I'll get it set up and check in at some point to see how it's going.",
+      "Great, I'll get that all set up on our end and then I'll circle back at some point down the line to see how the whole thing is coming along for you.",
     partnerResponse:
       "'At some point'? Give me the review date and the metric, or this drifts.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -279,7 +279,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the agreed test with a further public cut and every discount on - the across-the-board ADR erosion she ruled out.",
     playerDialogue:
-      "Perfect - and let's also bring your public rates down a bit further and switch on every discount to really move volume.",
+      "Perfect - and while we're at it, let's also bring your public rates down a bit further and switch on every discount you've got to really move some volume.",
     partnerResponse:
       "That's the across-the-board move I just ruled out. Stick to the test.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

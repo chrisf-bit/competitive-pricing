@@ -26,7 +26,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: surface that her price competitiveness is capping her visibility and losing demand, then ask an open question about her strategy and goals before recommending anything.",
     playerDialogue:
-      "Right now your visibility is being heavily impacted by your price competitiveness, so we're losing demand for you on our platform. Before I go further - what's your current strategy, and what are your goals with us?",
+      "While your performance looks fine in general, we noticed an opportunity. To optimize the 90% of travelers who discover you through us, we ask for the same rates and conditions you provide to third parties and your direct channel. When you factor in our global marketing scale and your net acquisition costs, providing full parity here ensures maximum ROI.",
     partnerResponse:
       "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut. It presumes the fix, ignores that a franchise GM can't authorise an ADR-wide drop, and is the exact move the SME guidance says to avoid.",
     playerDialogue:
-      "Your rates are uncompetitive - the fix is to bring your Booking.com prices down across the board so you're competitive again. Can we do that?",
+      "Your rates just aren't competitive right now, and honestly the quickest fix is the straightforward one - let's bring your Booking.com prices down across the board so you're back in line with everyone else. Can we get that done today?",
     partnerResponse:
       "I can't authorise a flat rate drop - it breaks head-office policy and hits our ADR. That's a non-starter.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for a direct, time-pressured franchise GM who wants a commercial point.',
     playerDialogue:
-      "Hi Sophia, no big agenda - just wanted to check in and see how you're feeling about the partnership overall.",
+      "Hi Sophia, no big agenda from my side today - I really just wanted to check in, see how you're feeling about the partnership overall, and hear whether everything has been running smoothly for you lately on your end.",
     partnerResponse:
       "Let's be efficient - if there's a commercial point, show me the data.",
     styleMatch: { red: -2, yellow: 1, green: 1, blue: -1 },
@@ -81,7 +81,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: 90% of Booking.com bookers discover the property here first, so if she's uncompetitive travelers never find her and never reach her website either - the structural gap lowers ranking and discovery for BOTH channels.",
     playerDialogue:
-      "I understand the intent. But guest behavior has changed - up to 90% of the customers who book with us discover the property on our platform first. When your pricing here is uncompetitive, travelers can't find you on the results page, and they won't gravitate to your website either. This structural gap is lowering ranking and discovery for both channels.",
+      "I understand the intent. But guest behavior has changed - up to 90% of the customers who book with us discover the property on our platform first. When your pricing here is uncompetitive, you are less attractive to travelers, and they won't gravitate to your website either. This structural gap is lowering visibility and discovery for both channels in the long run.",
     partnerResponse:
       "The brand requires a rate advantage on our own website, no discussion. I cannot authorise a flat rate drop on Booking.com that impacts our ADR or breaks internal policies.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Accepts her reverse-billboard framing and offers only a token nudge - never correcting the belief that a higher price here is harmless because guests will click through to her site.",
     playerDialogue:
-      "That's fair - the exposure does help, so maybe just trim a little at the margin and the click-throughs will follow.",
+      "That's fair, and I can see the logic - the exposure we give you genuinely does help drive awareness, so I don't want to overhaul anything you've built. Maybe the move is just to trim your prices here a little at the margin, keep the billboard exposure working the way you've set it up, and let the click-throughs to your own website follow naturally from there.",
     partnerResponse:
       "So you agree the billboard model works? Then what exactly are we fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the head-office strategy as outdated and travelers as lazy. Lecturing a GM who's simply following mandated policy shuts the conversation down.",
     playerDialogue:
-      "Honestly, that whole billboard strategy is outdated - travelers are lazy, they just book whatever's cheapest in front of them.",
+      "Honestly, if you don't mind me saying, that whole billboard strategy your head office is running feels pretty outdated to me now - travelers today don't research anything, they just scan the results and book whatever happens to be the cheapest thing sitting right in front of them. The mandate really isn't doing you any favors.",
     partnerResponse:
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Come back to a blanket public cut - the one thing she's told you twice she can't authorise. Ignoring her constraint reads as not listening.",
     playerDialogue:
-      "The cleanest answer is still just to drop your public rates here a few percent across the board.",
+      "Look, I hear you on the brand rules, but honestly the cleanest answer here is still the same one - just drop your public rates on Booking.com by a few percent right across the board, nothing segmented or complicated, and that alone gets you back to competitive. It's the simplest path and the one that moves the needle fastest.",
     partnerResponse:
       "I've told you twice - I can't authorise an across-the-board cut. Are you listening?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tell her to go around her own head office and drop the direct-cheaper policy. Dictating her internal channel strategy oversteps and puts her in an impossible position.",
     playerDialogue:
-      "Honestly, you should just push back on head office and scrap the direct-cheaper policy - it's costing you.",
+      "Honestly, if it were me sitting in your seat, I'd just push back hard on head office and scrap that whole direct-cheaper policy altogether - it's plainly costing you real bookings every single week, and you're the one on the ground who can actually see it. Tell them the mandate has to change.",
     partnerResponse:
       "You don't get to tell me to overrule my own head office. That's not how this works.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -193,7 +193,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed solution: instead of a general discount, use a segmented approach on the underperforming family segment - she already runs a family discount on other channels, so matching those conditions here captures the demand without making the property cheaper for everyone.",
     playerDialogue:
-      "So instead of a general discount, we use a segmented approach for the family segment, where you're underperforming. You already run a family discount on other channels - matching those conditions on Booking.com captures that demand without making the property cheaper for everyone.",
+      "So instead of a general discount, we use a segmented approach for the family segment, where you're underperforming. You already run a family discount on other channels - matching those conditions on Booking.com captures that demand without making the property cheaper for everyone. Additionally, you could consider offering direct booking incentives (like member rates or value adds) instead of deep public discounts.",
     partnerResponse:
       "A targeted approach might align with corporate if it captures unbooked inventory. What's the concrete return?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -208,7 +208,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that action is needed, wrong lever - a general discount is exactly the ADR-wide move she can't make, and it wastes the compliant, fenced route the family segment offers.",
     playerDialogue:
-      "The simplest way to match your rules is a small general discount across the board here - just a few percent.",
+      "Honestly, I think the simplest way to work within your rules here is just a small general discount applied across the board on Booking.com - only a few percent, nothing dramatic - and that keeps everything consistent and easy for you to manage rather than fiddling with separate segment configurations.",
     partnerResponse:
       "A general discount is the one thing I keep telling you I can't do.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -222,7 +222,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Threaten to keep her visibility penalized until she aligns. Threatening ranking/visibility over her pricing is banned in every regime.",
     playerDialogue:
-      "If you don't align, our system will keep penalizing your visibility until you do - it's only going to get worse.",
+      "I'll be honest with you about how this actually works - if you don't align your pricing with us, our system is simply going to keep penalizing your visibility on the platform until you do, and it's only going to get worse from here. Aligning now really is the only way to stop that from happening.",
     partnerResponse:
       "Threatening my visibility to force my hand is exactly the wrong move. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -249,7 +249,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: quantify the upside (10% competitiveness -> ~30% more bookings, ~25% more revenue, ~10% more search appearances) and propose a short test adjusting the family configuration to match her direct rates.",
     playerDialogue:
-      "Improving your price competitiveness by just 10% on Booking.com generates, on average, 30% more bookings, 25% more revenue, and 10% more search appearances. Let's run a test over the next few weeks by adjusting the family configuration to match your direct rates, and review it together.",
+      "Improving your price competitiveness by 10% on Booking.com generates, on average, 30% more bookings, 25% more revenue, and 10% more search appearances. Let's run a test over the next few weeks by adjusting the family configuration to match your direct rates, and review it together.",
     partnerResponse:
       "That fits into our current operations without breaking any internal rules. Let's set up the targeted family rates.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Takes the win but never answers her direct question - the concrete return - and pins no test or review. A results-driven GM won't act on that.",
     playerDialogue:
-      "It'll definitely help - let's just get the family rates switched on and see how it goes.",
+      "Honestly, I'm confident this is going to help you a lot - I really wouldn't overthink the exact numbers at this stage. Let's just get the family rates switched on at your end, keep an eye on things as they come through, and see how it all goes over the coming weeks.",
     partnerResponse:
       "I asked for the concrete return. 'See how it goes' won't get this past corporate.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the fenced family test with a broad public cut - straight back to the ADR-wide move she cannot authorise.",
     playerDialogue:
-      "Perfect - and while we're at it, let's also trim your public rates across the board to really move the needle.",
+      "Perfect, that's great to hear - and honestly, while we've got the momentum going and you're already making changes here, let's also go ahead and trim your public rates across the board at the same time, just to really move the needle and capture everything we possibly can.",
     partnerResponse:
       "That's the across-the-board cut I can't make. Stick to the family rates.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

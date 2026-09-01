@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "You're right. Once travelers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and your bookings are 48% behind. Can you walk me through the strategy behind the rates you've listed with us?",
     partnerResponse:
-      "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with our agency, and then complete on our site.",
+      "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with us and complete the reservation on our site.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Names the data but jumps straight to the fix - drop the price - without understanding how she runs her channels. An experienced manager reads that as being sold to.",
     playerDialogue:
-      "Your bookings are down 48% - the fix is to bring your Booking.com rates down so travelers stop skipping you. Can we get that set up?",
+      "Your bookings are down 48% and your page views have dropped off a cliff too, so the fix here is pretty clear - we need to bring your Booking.com rates down so travelers stop skipping past you for the cheaper option next to you. Can we get that change set up on your side today?",
     partnerResponse:
       "You're prescribing a rate cut before you understand a thing about how we run our channels.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - no numbers, no diagnosis. The wrong register for an evidence-led operator.',
     playerDialogue:
-      "That's a shame to hear - I'm sure it'll pick up. How's the team doing otherwise?",
+      "That's a real shame to hear, and honestly I'm sure it's just a quiet patch that'll pick back up on its own before too long. These things tend to move in cycles anyway. How's the wider team getting on otherwise, and is there anything else going on your end I should know about?",
     partnerResponse:
       "If you don't have data behind that, I'm not sure what we're solving today.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -97,7 +97,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the flawed premise - that the markup is fine and the exposure does the job - and offers only a token nudge. It never corrects the belief driving the whole problem.",
     playerDialogue:
-      "You're right that the exposure helps - maybe a small discount just at the margin would be enough to nudge a few more over.",
+      "You're right that the exposure genuinely helps, and I don't want to argue with a model that's clearly worked for you over the years. Maybe we don't need to touch the markup much at all - a small discount just at the margin might be enough to nudge a few more of those guests over without changing your overall approach.",
     partnerResponse:
       "So you agree the markup is fine? Then what are we actually fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator - it shuts the conversation instead of reframing it.",
     playerDialogue:
-      "Honestly, the 'they'll book direct' idea is a myth - travelers are lazy, they just book whatever's cheapest in front of them.",
+      "Honestly, the whole 'they'll go and book direct' idea is a bit of a myth that a lot of operators cling to. Travelers usually just book whatever's cheapest sitting right in front of them and they don't go chasing a website they've never heard of.",
     partnerResponse:
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -138,7 +138,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: an uncompetitive rate lowers her search placement and the chance a guest ever reaches her site. Quantify the upside, ask her to match her direct-website rates here to restore visibility, and probe the blocker.",
     playerDialogue:
-      "Valid concern - but an uncompetitive rate lowers your search placement and the chance a guest ever reaches your website. Improving price competitiveness by 10% here generates on average 25% more revenue. That's why we'd ask you to match your direct-website rates on Booking.com and restore your visibility. What's the main blocker you foresee?",
+      "Valid concern - but an uncompetitive rate affects how attractive you are to travelers and the chance a guest ever reaches your website. Improving price competitiveness by 10% here generates on average 25% more revenue. That's why we'd ask you to match your direct-website rates on Booking.com and restore your visibility. What's the main blocker you foresee?",
     partnerResponse:
       "If I match the rates, my direct channel loses its competitive pricing advantage. I have to protect our margin.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that competitiveness matters, wrong tool - a blanket public cut erodes ADR across her whole portfolio and her owners' returns. The SME guidance is explicit: don't ask for a general rate drop.",
     playerDialogue:
-      "The simplest move is to bring your public rates down across the board here so you're competitive again.",
+      "Honestly, the simplest move here is just to bring your public rates down across the board so you're clearly the cheapest option on the search page again. If you're competitive everywhere at once, the visibility comes straight back and you stop losing those guests to the local properties next to you. Can we look at trimming the whole rate plan down together?",
     partnerResponse:
       "An across-the-board cut is exactly what erodes my owners' ADR. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Pressure her with an automated ranking penalty tied to how she prices her own site. Threatening ranking/visibility over external prices is banned in every regime.',
     playerDialogue:
-      "If you keep pricing higher than your own site, our system will keep pushing you down the rankings until you fix it.",
+      "I'll be straight with you - if you keep pricing higher here than on your own website, our system reads that as an uncompetitive partner and it will keep pushing you further down the rankings until you fix it. That's not me making a threat, that's just how the algorithm treats a markup like yours, and it only gets harder to climb back the longer you leave it.",
     partnerResponse:
       "Threatening my ranking over how I price my own website isn't a partnership conversation.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -194,7 +194,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed solution: align public rates to restore search ranking, while she runs closed, member-only deals on her own site to keep the direct incentive. She keeps the loyalty lever without the public undercut that buries her. Propose a test.",
     playerDialogue:
-      "I respect that. What if we aligned your public rates to restore your search ranking, while you run closed, member-only deals on your website to drive direct bookings? You keep your direct incentive without the public undercut that's burying you in search. Base alignment is the most effective lever to restore search power - shall we start a test this week?",
+      "I respect that. What if we aligned your public rates to restore your search visibility, while you run closed, member-only deals on your website to drive direct bookings? You keep your direct incentive without the public undercut that's burying you in search. Base alignment is the most effective lever to restore search power - shall we start a test this week?",
     partnerResponse:
       "Your perspective on search and visibility is logical. Let's align the rates as a test for exactly three weeks. If the revenue doesn't justify it, we'll pivot to targeted promotions we've used before.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -209,7 +209,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Asks for the public alignment but offers nothing to protect her direct incentive - the exact concern she just raised - so it reads as asking her to simply give up her advantage.",
     playerDialogue:
-      "Just align your public rates with your website and you'll recover the visibility - the direct discount was costing you more than it earned anyway.",
+      "Just align your public rates with your website here and you'll recover the visibility you've lost pretty quickly. Honestly, when you look at the numbers, the direct discount was costing you more in missed bookings than it was ever earning you on the direct side anyway, so you're not really losing much by letting it go. Let's get the rates matched up and move on.",
     partnerResponse:
       "You keep asking me to give up my direct advantage without protecting it. That's a non-starter.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -223,7 +223,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Direct her to abandon her cheaper-direct strategy and make Booking.com her main channel. Dictating her external and direct-channel strategy oversteps.",
     playerDialogue:
-      "Honestly, the cleanest fix is to stop keeping your website cheaper at all - just make Booking.com your main channel and the problem goes away.",
+      "Honestly, the cleanest fix here is to just stop keeping your own website cheaper at all - drop the direct discount completely, make Booking.com your main channel, and route your bookings through us instead of your agency site. Your direct channel is what's causing all of this, so the simplest thing is to stop competing with yourself and let us carry the volume.",
     partnerResponse:
       "You don't get to tell me to give up my direct channel. We're done if that's the pitch.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -265,7 +265,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Takes the win but pins no metric and no review date. An evidence-led operator will let a vague plan drift.",
     playerDialogue:
-      "Great, I'll get it set up on our side and check in at some point to see how it's going.",
+      "Great, that all sounds good to me. I'll get everything set up on our side over the next little while and then I'll check in with you at some point down the line to see how it's all going for you.",
     partnerResponse:
       "'At some point'? Give me the review date and what we're measuring, or this just drifts.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -279,7 +279,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the fenced test - a further public cut and every discount switched on. Straight back to the across-the-board ADR erosion she ruled out.",
     playerDialogue:
-      "Perfect - and let's also drop your public rates a bit further and switch on every discount to really move volume.",
+      "Perfect - and while we're at it, let's also drop your public rates a bit further and switch on every discount you've got available so we really move some serious volume through the channel from day one.",
     partnerResponse:
       "That's the across-the-board move I just ruled out. Stick to the test.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

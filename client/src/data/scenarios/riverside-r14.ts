@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but wrong for the room - a slow, relationship-first wind-up wastes the time of a GM who explicitly asked you to keep it brief, before you've earned it with a point.",
     playerDialogue:
-      "Before we get into anything, I'd love to hear how the events season is shaping up and how the team's feeling - it's been a while since we really caught up properly.",
+      "Before we get into any of the numbers, I'd love to hear how the whole events season is shaping up, how the team's been holding up through it, and whether the refurbishment landed the way you hoped - it's been far too long since we properly caught up on all of it.",
     partnerResponse:
       "Ren, I asked you to keep it brief - I'm mid-preparation. What's the actual situation with the numbers?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -1 },
@@ -71,7 +71,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Opens by telling him to price in line with the comparison set - the exact 'become a three-star' move his brand refuses, and a requirement to match others on price that oversteps in every regime.",
     playerDialogue:
-      "Your rooms aren't moving because you're priced above your comparison set - you'll need to bring your rates into line with them to compete.",
+      "Your rooms aren't moving because you're sitting well above your comparison set, and the only real way to fix that is to bring your rates down into line with those hotels - you'll need to price where they price if you want to compete for the same guests they're winning.",
     partnerResponse:
       "Match the three-star set? Absolutely not. That's the fastest way to destroy everything this property stands for.",
     styleMatch: { red: -1, yellow: -1, green: -2, blue: -1 },
@@ -105,7 +105,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the 'too unique' framing wholesale - if he really has no comparators, there's no competitiveness case to make, and the conversation stalls.",
     playerDialogue:
-      "You're right, honestly - a property like yours is really in a category of its own, so those peer comparisons probably don't apply to you.",
+      "You're right, honestly - and I don't want to pretend otherwise. A property like yours really is in a category of its own, with a character and a guest experience that the hotels around you simply can't offer. So I take your point that those peer comparisons probably don't apply to you in the way the system assumes, and it's fair to set them aside.",
     partnerResponse:
       "Exactly my point. So there's not much to discuss on the pricing front, is there?",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that the comparison is real, wrong move - telling him the algorithm's comp-set is correct and he should accept it meets his identity objection with a flat contradiction, hardening him.",
     playerDialogue:
-      "The comp-set the system built is accurate, Anton - those really are your competitors whether you like it or not, so it's best to just work with it.",
+      "The comparison set the system built is accurate, Anton - those really are your competitors whether you like it or not, and the sooner you accept that the better. The data doesn't get it wrong on this; those are the properties travelers are weighing you against, so the sensible thing is to stop resisting it and simply work with the set as it stands.",
     partnerResponse:
       "Don't tell me a piece of software understands my property better than I do. We're not the same as those hotels.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: 0 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right data, missing the bridge - opening with 'your price is 7% too high' before honouring where his uniqueness shows lets him dismiss it as just another generic average.",
     playerDialogue:
-      "The headline is this: your search price is 7% above your peer group. That gap is why your visibility is down - it really is that simple.",
+      "The headline is simply this: your search price is running about 7% above your peer group, and that gap is the direct reason your visibility has slipped. It really is that straightforward - the number is higher than the field around you, the field converts better, and the bookings follow the more competitive price. That's the whole story.",
     partnerResponse:
       "There it is - another platform average telling me to drop my price. I don't buy it, Ren.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: 0 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Reaches for a sweeping platform-wide stat to prove the point - exactly the 'global stat' a proud operator distrusts. It invites a credibility fight instead of grounding the gap in his own listing.",
     playerDialogue:
-      "Across our entire platform, properties priced above their peers see far lower conversion - it's a universal pattern, and you're no exception to it.",
+      "Across our entire platform, properties that price above their peer group consistently see far lower conversion - it's a universal pattern that holds true almost everywhere we look, and I'm afraid you're really no exception to it. The data across thousands of hotels tells exactly the same story, so it's a safe bet it applies to you here too.",
     partnerResponse:
       "Platform-wide averages mean nothing to a property like mine. Show me something that's actually about us, not everyone.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -201,7 +201,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the gap costs him, wrong angle - widening it to 'you're losing bookings everywhere' abandons the one high-value segment that would actually make him lean in, and sounds like the blanket case he keeps rejecting.",
     playerDialogue:
-      "It's not just one segment, Anton - you're losing bookings right across the board because of that price gap. Everyone's affected.",
+      "It's not just one segment, Anton - you're losing bookings across the board because of that price gap, and it's showing up in nearly every source market when I break the numbers down. Wherever travelers are searching your area, the same pattern repeats and the same guests slip away to a competitor. Everyone's affected by it.",
     partnerResponse:
       "'Everyone' again. If it's that broad, it's just the discount argument dressed up differently.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -215,7 +215,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frames his positioning as the problem - a jab at the brand identity he's proud of, which pushes a relationship-led GM to defend rather than engage.",
     playerDialogue:
-      "Honestly, this 'exclusivity over price' stance is what's costing you the bookings - you can't afford to be precious about it when rooms are empty.",
+      "Honestly, Anton, this whole 'exclusivity over price' stance is exactly what's costing you the bookings - you can't afford to be quite so precious about it when a quarter of your rooms are sitting empty every month. At some point the positioning has to give way to filling the beds, and right now it simply isn't.",
     partnerResponse:
       "'Precious'? That exclusivity is the entire business, Ren. I won't be lectured on it.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -1 },
@@ -249,7 +249,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that he needs to be more competitive, wrong instrument - a general public discount is exactly the across-the-board ADR hit he refuses, when a fenced segment offer would have won his yes.",
     playerDialogue:
-      "Let's just put a modest discount on your public rates for the next quarter - broad enough to lift the bookings and simple to run.",
+      "Let's just put a modest discount straight onto your public rates for the whole of the next quarter - nothing dramatic, but broad enough to lift the bookings across the board and simple to switch on and manage. A single percentage off everything is the cleanest way to get the rooms moving again, and you can lift it the moment the quarter picks back up and demand returns to where you want it.",
     partnerResponse:
       "A public discount across the board is precisely what I told you I won't do. Weren't you listening?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -263,7 +263,7 @@ const step5Options: BranchingOption[] = [
     description:
       'Sells the tool with a guaranteed visibility/ranking return for discounting. Promising ranking or visibility rewards in exchange for a price move is a compliance breach in every regime.',
     playerDialogue:
-      "Set up the US rate and I can guarantee your visibility jumps straight back up - the incentive buys you the placement, so it pays for itself.",
+      "Set up the US rate and I can genuinely guarantee your visibility jumps straight back up - the incentive buys you the placement, plain and simple, so it more than pays for itself. Switch it on and I promise you'll see your listing climb back above your peers within days, with the extra exposure locked in for as long as the rate is running. It's a guaranteed return on that bit of discount.",
     partnerResponse:
       "A guaranteed jump? Nothing's guaranteed. That kind of promise makes me trust the rest of your pitch less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -282,7 +282,7 @@ const step6Options: BranchingOption[] = [
     description:
       "SME-prescribed close: it's an opaque promotion and it does stack with Genius on the programme's room types; and since around 60% of users aren't logged in when they land, the more attractive desktop price makes a real first-glance difference. Let him own the setup.",
     playerDialogue:
-      "Straight answers: it's an opaque promotion, and yes, it does stack with the Genius discount on the room types in the programme. But bear in mind roughly 60% of users aren't logged in when they land on the platform, so that more attractive price on desktop is what makes the difference at first glance. You set the stay dates and any exceptions.",
+      "Straight answers: it does stack with the Genius discount on the room types in the programme. But there is a decent amount of searches on our platform that are not just from signed-in members, so the attractive public prices on our platform to travelers makes a difference and drives demand.",
     partnerResponse:
       "Fair enough. Let's set the US Country Rate up - I'll implement it myself so I can check the stay dates and apply a few exceptions.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -297,7 +297,7 @@ const step6Options: BranchingOption[] = [
     description:
       "He asked a direct, specific question about discount stacking - brushing past it ('don't worry about the detail') erodes trust with a partner who fixed that setup deliberately and is watching for exactly this.",
     playerDialogue:
-      "Don't get too bogged down in the Genius mechanics - it'll all sort itself out once it's live. The important thing is just to switch it on.",
+      "Honestly, don't get too bogged down in the Genius mechanics - it'll all sort itself out naturally once the rate is live and you can see it running. The important thing right now is just to switch it on and let it start pulling those US bookings in; we can always circle back to the finer detail of the stacking later if anything actually looks off to you.",
     partnerResponse:
       "I asked a direct question because I fixed that setup on purpose. 'Don't worry about it' is not an answer.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach past the fenced US segment he agreed - rolling it out to more markets 'while we're at it'. Reopens the ADR and brand worry he only just set aside.",
     playerDialogue:
-      "Great - and while we're setting it up, let's extend the same rate to a few more source markets so we really maximise the reach.",
+      "Great - and while we've got the setup open, let's not stop at the US; let's extend the very same rate out to a few more of your strongest source markets at the same time, so we really maximise the reach while the momentum's there. It makes sense to get it all switched on in one go rather than coming back to layer more on piece by piece later.",
     partnerResponse:
       "No. I agreed to a fenced US rate for a reason. Widen it and we're back to eroding the brand everywhere.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public price cut to be the cheapest option. Presumes the fix and invites the race to the bottom an ROI-driven professional avoids.",
     playerDialogue:
-      "Your room nights are down 32% - the quickest fix is to bring your Booking.com price down so you're the cheapest option on the page.",
+      "Your room nights are down 32%, and honestly the quickest fix here is a price move. Bring your Booking.com rate down so you're the cheapest option on the page, and the volume comes straight back. Let's just get you underpricing everyone and worry about the rest later.",
     partnerResponse:
       "I'm focused on my direct channel, not a race to the bottom on your platform. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Open by dismissing the drop as market softness. A numbers-first partner reads that as sloppy and disengages.',
     playerDialogue:
-      "We've noticed a small dip, but honestly it's probably just seasonal softness - nothing to worry about.",
+      "We've noticed a small dip in the last little while, but honestly I wouldn't read too much into it - it's almost certainly just the usual seasonal softness we see this time of year across the board. Nothing to really worry about, these things tend to even themselves out.",
     partnerResponse:
       "'Seasonal'? If that's your analysis, this call is a waste of my time.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -79,11 +79,11 @@ const step1: BranchingStep = {
 const step2Options: BranchingOption[] = [
   {
     id: 'sh-r2-narrow-step2-correct',
-    label: 'Refuse the price war; align Booking.com with her direct site',
+    label: 'Align Booking.com with her direct site',
     description:
       "SME-prescribed handling: acknowledge she wants to avoid OTA price wars, note that cheaper prices elsewhere devalue the rate she protects, and steer the only compliant ask in a Narrow market - aligning Booking.com with her own direct website.",
     playerDialogue:
-      "I understand you want to avoid OTA price wars, Chloe. But cheaper prices elsewhere devalue the rate you're protecting. What stays critical is keeping Booking.com aligned with your own direct website. How do you see that price inconsistency affecting your direct bookings?",
+      "I understand your difficulty, Chloe. But cheaper prices elsewhere devalue the rate you're protecting. What stays critical is keeping Booking.com aligned with your own direct website. How do you see that price inconsistency affecting your direct bookings?",
     partnerResponse:
       "Well, if they see it cheaper elsewhere, they buy elsewhere. But our website is the priority, especially for specific segments. I want families to book directly, which is why we don't have family rooms available on Booking.com.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -98,7 +98,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Capitulate to the margin-cut logic and fund a discount. It rewards the Same Net framing instead of reframing it, and edges into the price war the guidance says to avoid.",
     playerDialogue:
-      "You've got a point - let me see if we can fund a promotion on our side to close the price gap for you.",
+      "You've got a point, Chloe, and I don't want you fighting this alone. Let me see if we can fund a promotion on our side to close that price gap for you, so Booking.com comes out matching or beating what they're doing on price. We'll just cover the difference and keep you competitive.",
     partnerResponse:
       "Funding a promo to match a margin cut just proves my point. That's not a strategy.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -112,7 +112,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Ask her to make sure Booking.com isn't higher than the Key OTA. In a Narrow market you cannot ask a partner to price against other OTAs - only to align with their Brand.com.",
     playerDialogue:
-      "The fix is simple: make sure your price here isn't higher than the Key OTA's - match them on our platform and the gap closes.",
+      "The fix here is simple, Chloe: make sure your price on our platform isn't sitting higher than the Key OTA's. Just match what they're showing, or come in a touch under them, and the whole gap closes on its own. Keep an eye on where they land and price against them here, and your volume recovers.",
     partnerResponse:
       "You can't ask me to price against the Key OTA here. That's not how this market works.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -154,7 +154,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong framing - it asks her to hand family inventory to Booking.com at a lower price without the billboard logic that ties it back to her direct priority, so it reads as undercutting her own channel.",
     playerDialogue:
-      "Simple - put your family rooms on Booking.com and drop the price for that segment, and you'll fill them.",
+      "Simple - just put your family rooms on Booking.com and drop the price for that segment a bit, and you'll fill them fast. There's clearly demand for family stays, so list the inventory here at a competitive rate and let our traffic do the work. Get those rooms loaded at a lower price than you're running elsewhere and the bookings follow.",
     partnerResponse:
       "You want me to hand my family inventory to your channel at a lower price? That undercuts the direct priority I just described.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -168,7 +168,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tell her the family rooms are cheaper on the Key OTA, to match that here and pull them from the Key OTA. Pricing against another OTA and directing her channel mix are both off-limits in a Narrow market.",
     playerDialogue:
-      "Your family rooms are cheaper on the Key OTA - match that here and pull them from the Key OTA so we get the segment.",
+      "I've noticed your family rooms are showing cheaper on the Key OTA than anywhere else right now. Match that same price for them here on our platform, and honestly you'd be better off pulling that inventory off the Key OTA altogether so the segment comes to us instead. Price against them and move the rooms over, and we capture the family demand.",
     partnerResponse:
       "Pricing against the Key OTA and telling me to pull inventory is off the table in this market.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -210,7 +210,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right growth story, wrong handling - it tells her to just set the child rates everywhere and skips straight past the multi-property operational load she raised.",
     playerDialogue:
-      "Just set up the child rates across all your properties - the growth is more than worth the effort.",
+      "Just get the child rates set up across all your properties and you'll be fine - the growth on this segment is more than worth the effort involved. Family bookings are climbing fast and they spend more, so roll it out everywhere and let the volume prove it out.",
     partnerResponse:
       "You skipped straight past the operational reality I just described.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -224,7 +224,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Dismiss her concern as an execution failure on her side. Condescending to an operator who knows her portfolio - the opposite of the ROI framing that lands.",
     playerDialogue:
-      "Managing family inventory is fairly basic - if it's a headache, that's really an execution problem on your side.",
+      "Managing family inventory really is fairly basic once it's set up - if it's turning into a headache for your team, that's honestly more of an execution problem on your side than anything else. Plenty of operators handle this without issue, so the growth is there whenever you sort the process out.",
     partnerResponse:
       "I don't need you telling me my operations are the problem. Done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -266,7 +266,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Names no concrete tool and no test or measure. A data-led operator won't act on a vague promise.",
     playerDialogue:
-      "We can look at some international options for you and see how it goes.",
+      "We can definitely look at some international options for you and take it from there, then just keep an eye on how it goes over the coming weeks and adjust if we need to.",
     partnerResponse:
       "'Some options'? Give me the actual lever and how we'll measure it.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -280,7 +280,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach - price against the Key OTA for international and drop public rates to guarantee it. Other-OTA pricing and blanket discounting are both off the table in a Narrow market.",
     playerDialogue:
-      "And let's make sure you're cheaper than the Key OTA for international travelers - drop your public rates to guarantee it.",
+      "And on top of that, let's make sure you come in cheaper than the Key OTA for international travelers - just drop your public rates across the board to guarantee you're winning that comparison every time.",
     partnerResponse:
       "Pricing against the Key OTA and blanket discounting - neither is on the table. Let's stick to my direct alignment.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

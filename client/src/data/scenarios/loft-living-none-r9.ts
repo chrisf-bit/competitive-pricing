@@ -31,9 +31,9 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: conversion is down 68%, so future room nights are falling behind by 46% versus peer. Given his focus on maximizing revenue across channels, ask how he's planning to address the volume gap.",
     playerDialogue:
-      "I wanted to focus on your recent performance. We've seen a 68% drop in conversion, which means your future room nights are falling behind by 46% - both against your peer group. Given your focus on maximizing revenue across channels, how are you planning to address this volume gap?",
+      "I wanted to focus on your recent performance. We've seen a 68% drop in conversion, and your future room nights are falling behind by 46% - both against your peer group. Given your focus on maximizing revenue across channels, how are you planning to address this volume gap?",
     partnerResponse:
-      "We've raised our base rates to increase revenue per room. But yes, the empty rooms are starting to hurt. I just don't like how Booking.com uses Partner Offers to discount my rooms without my explicit consent - it feels like I'm losing control.",
+      "We've raised our base rates to increase revenue per room. But yes, the empty rooms are starting to hurt. I just don't like how Booking.com uses Partner Offers to discount my rooms without my consent - it feels like I'm losing control.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -46,7 +46,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and reads as a price lecture to an autonomous operator before you understand his strategy.",
     playerDialogue:
-      "The issue is plain - you've priced yourself out of the market, so the rates have to come down.",
+      "The issue here is plain, honestly - you've priced yourself well out of the market on Booking.com, and the numbers only go one way if the rates stay where they are. So the fix is simple: bring your prices down across the board and the volume comes back. That's really the whole conversation.",
     partnerResponse:
       "You've decided that in thirty seconds. That's not how I run my portfolio.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a data-led MPP who just agreed to dive straight into the metrics.",
     playerDialogue:
-      "Honestly, I wouldn't overthink one slow stretch - it tends to even out across a quarter.",
+      "Honestly, Lucas, I really wouldn't overthink one slower stretch like this - performance moves around a lot week to week, and it nearly always evens itself out once you look across a full quarter. I'd just sit tight, keep doing what you're doing, and give it a bit of time before we start reading too much into it.",
     partnerResponse:
       "I run on margins. 'It'll even out' isn't a plan I can use.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -87,7 +87,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: look at why those Partner Offers appear - some of his B2B rates are escaping into public B2C search, so travelers buy his rooms at wholesale prices. He has complete freedom over his pricing, but addressing the leak internally will help his performance.",
     playerDialogue:
-      "I hear you - but let's look at why those Partner Offers appear. Some of your B2B rates are escaping into public B2C search results, so travelers end up buying your rooms at wholesale prices. You have complete freedom over your pricing, but addressing that leak internally will really help your performance here.",
+      "I hear you. However these rates are actually coming from your wholesale agreements. Booking.com is contractually allowed to source rates and inventory from other third-party providers and to display these as a Partner Offer on its platform as per our General Delivery Terms.",
     partnerResponse:
       "Every wholesaler points fingers at the other. And in the meantime, I can't just lower my prices on Booking.com to chase volume.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -102,7 +102,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes his framing that Partner Offer is Booking.com discounting his rooms without permission, instead of explaining that it surfaces a leaked wholesale rate he can address at source.",
     playerDialogue:
-      "You're right, we are discounting your rooms through Partner Offer without asking you first - I understand why that feels like lost control.",
+      "You're right, and I won't pretend otherwise - we are discounting your rooms through Partner Offer without asking you first, and I completely understand why that feels like you've lost control of your own pricing. It's your inventory, so having us mark it down without a heads-up is a fair thing to be frustrated about, and I get it.",
     partnerResponse:
       "So you admit you're doing it to me. That's exactly my problem.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that the source is his B2B setup, wrong tone - dumping it on him abandons the acknowledgment and turns a commercial ally into an adversary.",
     playerDialogue:
-      "That's a supplier problem you created, so honestly it's on you to go sort it out with them.",
+      "Look, I'll be straight with you - that's a supplier problem you created on your own side, so honestly it's on you to go and sort it out with your wholesalers. It's not really something we can fix from here, and it's not our job to. Once you've cleaned up your own contracts, the leak stops, but that part is squarely down to you.",
     partnerResponse:
       "I called to look at performance, not to be told it's all my fault. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -130,7 +130,7 @@ const step2: BranchingStep = {
   id: 'leak-autonomy',
   label: 'Explain the leak; keep his autonomy explicit',
   partnerPrompt:
-    "We've raised our base rates to increase revenue per room. But yes, the empty rooms are starting to hurt. I just don't like how Booking.com uses Partner Offers to discount my rooms without my explicit consent - it feels like I'm losing control.",
+    "We've raised our base rates to increase revenue per room. But yes, the empty rooms are starting to hurt. I just don't like how Booking.com uses Partner Offers to discount my rooms without my consent - it feels like I'm losing control.",
   options: step2Options,
 };
 
@@ -143,7 +143,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: it isn't about lowering prices across the board, but an unsold room is revenue he can never recover. With conversion this slow he's leaving money on the table. While his pricing is entirely his choice, offering his best competitive price is the most direct lever to recover visibility.",
     playerDialogue:
-      "It's not about lowering your prices across the board - but an unsold room is revenue you can never recover. With conversion this slow, you're leaving real money on the table. Your pricing is entirely your choice, but offering your best competitive price is the most direct lever to recover that visibility.",
+      "It's not about lowering your prices across the board - but an unsold room is revenue you can never recover. With conversion this slow, you're leaving real money on the table.",
     partnerResponse:
       "If I offer a better price on Booking.com, my direct bookers might migrate over. That's a net loss for my margin.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -158,7 +158,7 @@ const step3Options: BranchingOption[] = [
     description:
       "In a No Parity market you cannot require a lower price or matching. Telling him he has to be the cheapest on Booking.com pressures a rate reduction and is a compliance breach.",
     playerDialogue:
-      "Realistically, to turn this around you'll need to make Booking.com the cheapest place to book you - that's what recovers the volume.",
+      "Realistically, to turn this around, you'll need to make Booking.com the cheapest place anyone can book you - cheaper than your own site and cheaper than anywhere else you sell. That's really the only thing that recovers the volume at this point, and until you're the lowest price on the platform the rooms just won't move.",
     partnerResponse:
       "So the ask is that I have to be the cheapest? I didn't think that was something you could require.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -172,7 +172,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes his margin worry as the end of the conversation and offers no lever - leaving the unsold rooms and the leak unaddressed.",
     playerDialogue:
-      "That's fair - if a better price risks your direct margin, then there's probably not much we can do here.",
+      "That's fair, and I don't want to talk over your concern - if offering a better price genuinely risks pulling your direct bookers across and hurting your margin, then I understand. Honestly, if that's the trade-off, there's probably not a great deal we can do here, so maybe we just leave things as they are for now and revisit it another time.",
     partnerResponse:
       "So we're stuck? That's a disappointing place to land.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Abandons the fenced, segment-targeted approach for an across-the-board cut - the very cannibalization he just flagged, and the price war the SME warns against.",
     playerDialogue:
-      "The simplest thing is to just drop your prices across the board here for a while and let the volume come back.",
+      "Honestly, the simplest thing here is to just drop your prices across the board on Booking.com for a while and let the volume come back. Don't overthink the segments or the setup - a straightforward cut across all your rates is the quickest way to get the rooms filling again, and once bookings pick back up you can always ease the prices back up later.",
     partnerResponse:
       "That's the blanket cut I said I won't do - it feeds my direct bookers to you and torches my margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -228,7 +228,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Waves away a real commercial concern rather than engineering around it with a fenced segment. Lecturing an autonomous MPP on his own channel mix shuts him down.",
     playerDialogue:
-      "Honestly, that migration worry is in your head - it just doesn't happen the way you think, so don't let it stop you.",
+      "Honestly, that migration worry is mostly in your head - the direct bookers who love booking with you directly are going to keep doing exactly that, and it really doesn't play out the way you're picturing it. I wouldn't let a fear like that hold you back from a move that could genuinely help, so I'd just set it aside and get on with it.",
     partnerResponse:
       "You're telling me my own numbers are imaginary? That's not going to land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: not necessarily a bigger discount - a 10% mobile discount triggers mobile search badges and improves ranking, but he's excluded all weekends and longer booking windows, so it isn't moving revenue; and because his base rates rose, the setup is no longer competitive. Clarify Partner Offer is a consumer-focused tool, not a punishment, and offering his best competitive price minimizes the leak's impact.",
     playerDialogue:
-      "Not necessarily a bigger discount. A 10% mobile discount triggers our mobile search badges and improves your ranking - but you've excluded all weekends and longer booking windows, so it isn't moving revenue the way it should. And because your base rates went up, your current mobile setup is no longer competitive. On Partner Offer - it's a consumer-focused tool to help travelers get the best price, not a punishment. While you fully control your pricing, offering your best competitive price minimizes the impact of those unauthorized leaks.",
+      "Not necessarily a bigger discount. A 10% mobile discount triggers our mobile search badges and makes you more attractive on our platform - but you've excluded all weekends and longer booking windows, so it isn't moving revenue the way it should. And because your base rates went up, your current mobile setup is no longer competitive. On Partner Offer - it's a tool we use to ensure travelers get a great price on Booking.com, it is not a punishment. It increases your likelihood of selling inventory while saving customers' time and effort to search the web for other options.",
     partnerResponse:
       "At the moment I'm not willing to share any more data or adjust my strategy. Thanks for all these inputs - I'll give this some thought and let you know next time we meet.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -270,7 +270,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answers a configuration problem with a blanket discount-and-cut, which pressures a lower price and misses the actual fix - the excluded weekends and long windows on an otherwise-live mobile rate.",
     playerDialogue:
-      "Just push that mobile discount way up and take your base rate down while you're at it - that'll force the competitiveness back.",
+      "Honestly, the fix here is just to push that mobile discount right up - take it well past 10% - and bring your base rate down at the same time so the whole thing lands lower. Don't get bogged down in which windows or weekends are switched on or off; that's fiddly detail that won't really move the needle. If you just discount harder across the board and shave the base rate, the competitiveness comes straight back and the mobile segment starts converting again. That's the quickest route back to the volume you're missing, so I'd crank both levers together and not overthink it.",
     partnerResponse:
       "So the answer is discount harder and cut my base? That's the opposite of protecting my margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -284,7 +284,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Concedes his framing that Partner Offer is punitive and offers to switch it off - validating the objection instead of clarifying that it surfaces the best public price.",
     playerDialogue:
-      "You're right that Partner Offer feels like a punishment - if it's the blocker, I can look into having it removed for you.",
+      "You know what, you're right, and I'm not going to argue the point - Partner Offer does feel like a punishment when it's marking your rooms down without you signing off on it, and I completely get why it's sitting badly with you. If it's genuinely the thing standing in the way of everything else we've talked about, then let me take it away as a blocker - I can go back and look into whether we can have it switched off or removed from your account entirely, so it stops getting in the way. I'd rather clear that off the table than have it sour the whole relationship.",
     partnerResponse:
       "So you agree it's punitive. That doesn't build my confidence in the rest of this.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -326,7 +326,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Turns his reasonable deferral into a warning about lost revenue. A parting guilt-trip undoes the goodwill the compliant conversation just earned.",
     playerDialogue:
-      "Alright, but every week you wait is real money walking out the door - I'd hate for you to look back on that.",
+      "Alright, but I'll be honest - every week you sit on this is real money walking straight out the door, and I'd genuinely hate for you to look back in a few months and regret waiting this long.",
     partnerResponse:
       "I told you I'd think it over. Pushing me now just makes me less inclined.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -340,7 +340,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Attaches a visibility ultimatum to his timeline. Threatening ranking is banned in every regime, and doing it on the way out is the worst possible last impression.",
     playerDialogue:
-      "Just so you know - if this isn't sorted by next month, expect your visibility to keep dropping in the meantime.",
+      "Just so you're clear before we wrap up - if this isn't sorted by next month, you should expect your visibility to keep sliding, and those rankings are hard to win back once they slip.",
     partnerResponse:
       "So it's act now or get buried? That's not the partnership I thought this was.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

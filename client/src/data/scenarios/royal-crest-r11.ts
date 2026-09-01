@@ -68,7 +68,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right data, wrong window - leading with what already happened hands Liam the 'that was a one-off month' escape. The forward pace is the sharper, less-arguable angle.",
     playerDialogue:
-      "Last month your numbers came in weak - occupancy dipped and you left a lot of rooms empty. I wanted to understand what happened there before we look ahead.",
+      "Last month your numbers came in on the weaker side - occupancy dipped and you left a good number of rooms sitting empty. Before we look at anything ahead, I wanted to walk back through what actually happened there and what drove that softer month.",
     partnerResponse:
       "Last month was an anomaly - off-peak, bad weather, late cancellations. You can't read much into one soft month, Anya.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -82,7 +82,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Skips the diagnosis and prescribes the one move his margin-first strategy exists to prevent - an across-the-board price drop. A driver reads it as being sold to.',
     playerDialogue:
-      "Your rooms aren't selling, so the quickest fix is to bring your rates down across the board until the occupancy comes back. Shall we get that set up today?",
+      "Your rooms simply aren't selling right now, so the quickest and cleanest fix here is to bring your rates down across the board until occupancy climbs back to where you want it. We can get that lower pricing set up together today and start filling those empty nights.",
     partnerResponse:
       "Dropping my rates across the board is exactly what I will not do. That protects nothing and trains guests to wait for a discount. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes his framing entirely - if it really is just a soft market, there's nothing to do. Plausibly empathetic, but it forfeits the forward signal that shows the gap is his competitiveness, not the market.",
     playerDialogue:
-      "You're probably right that it's a soft patch - a lot of properties are seeing it. Maybe we give it another month and see if demand picks back up on its own.",
+      "You're probably right that this is just a soft patch - honestly, a lot of properties in your area are telling me the same thing right now. There may not be much worth changing while the whole market is this quiet. Maybe the sensible move is to hold where you are, give it another month, and see whether demand picks back up on its own.",
     partnerResponse:
       "Fine by me - I'd rather hold my rates and ride it out than start chasing occupancy with discounts.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
@@ -130,7 +130,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Turns the visibility gap into a threat - keep your prices here and the system pushes you down the rankings. Pressuring ranking as a consequence of his pricing is off-side in every regime.',
     playerDialogue:
-      "If you keep sitting above your peers on price, the algorithm is going to keep reading you as uncompetitive and pushing your listing down the rankings until you fix it.",
+      "I'll be straight with you - if you keep sitting well above your peers on price like this, the algorithm is going to keep reading your listing as uncompetitive and quietly pushing you further down the rankings. Every week you leave it, you slip lower and get harder to find, and that only reverses once you bring your prices back into line.",
     partnerResponse:
       "So this is a 'lower your price or we bury you' conversation. That's not a partnership. We're done here.",
     styleMatch: { red: 0, yellow: -2, green: -2, blue: -2 },
@@ -164,7 +164,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that the data holds, wrong move - meeting 'I don't trust your averages' by insisting the averages are correct pulls him into a battle of data. The traveler's-eye reframe sidesteps that fight.",
     playerDialogue:
-      "These aren't generic averages, Liam - they're your actual peer group on our platform, measured on the same dates. The numbers are solid and they're telling you you're priced too high.",
+      "These aren't generic averages at all, Liam - they're your actual peer group on our platform, the properties travelers put you side by side with, measured on exactly the same dates you are. The methodology is sound and the numbers are solid, and they're telling us your pricing is sitting too high.",
     partnerResponse:
       "And I'm telling you my guests aren't your 'peer group'. We're not going to agree on whose numbers are right.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: 0 },
@@ -178,7 +178,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tells him the premium story is in his head and travelers only care about price. Belittles the exact positioning he's proud of - the fastest way to lose a driver.",
     playerDialogue:
-      "Honestly, the 'premium experience' angle is mostly in your head - travelers on our platform are comparing on price, full stop, and yours is too high.",
+      "I'll be honest with you, Liam - the whole 'premium experience' angle is mostly in your own head at this point. Travelers landing on our platform compare one listing against the next purely on price, full stop, and none of that story about your value registers with them. Yours is simply too high, and that's the whole problem.",
     partnerResponse:
       "Did you just tell me my product is all in my head? This conversation is over.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -2 },
@@ -199,7 +199,7 @@ const step4Options: BranchingOption[] = [
     playerDialogue:
       "An empty room earns nothing, so instead of touching your base rates, let's capture demand where you're losing it. There's a 40% rise in mobile searches for your area, yet your conversion on mobile is almost zero. Last time we spoke I suggested pairing mobile and country rates, but you tested only country rates.",
     partnerResponse:
-      "Yes, we went with the 'opaque' country rates - I've never been a fan of that green badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
+      "Yes, we went with the country rates - I've never been a fan of that green badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right toolkit, wrong dose - flipping on mobile, country and campaigns together to 'move fast' overshoots the controlled test a cautious, margin-first partner will actually agree to.",
     playerDialogue:
-      "Let's not overthink it - switch on mobile rates, country rates and a campaign all together so we cover every angle and move the numbers quickly.",
+      "Let's not overthink this one, Liam - the fastest way through it is to switch on your mobile rates, your country rates and a campaign all at the same time, so we're covering every possible angle at once. Turning them all on together is really the quickest route to moving those numbers and getting your empty rooms filling again this month.",
     partnerResponse:
       "That's a lot of discounting at once for a property that's supposedly premium. You're moving faster than I'm comfortable with.",
     styleMatch: { red: 1, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Points at his rates on other channels and tells him to bring Booking.com down to match them. Requiring a partner to match external prices oversteps in every regime and breaks No Parity outright.",
     playerDialogue:
-      "Your rooms are cheaper on other channels, so the fix is simple - bring your prices here down to match what you're offering everywhere else.",
+      "I've had a look, and your rooms are clearly cheaper on a couple of your other channels than they are with us, so the fix here is really quite simple - just bring your prices on Booking.com down until they match exactly what you're already offering everywhere else. Get them lined up with your other channels and this competitiveness gap closes on its own.",
     partnerResponse:
       "How I price on my other channels is my business, and being told to match it here is exactly the conversation I won't have.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -260,7 +260,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right conclusion, missing the proof - telling a blue/analytical partner 'trust me, it won't cannibalize' without the segment logic or the numbers gives him nothing to act on.",
     playerDialogue:
-      "Don't worry about cannibalization - it really won't be an issue here. This kind of thing tends to work out fine in practice, so I'd just give it a go.",
+      "Honestly, I wouldn't worry about cannibalization on this one - it really won't turn out to be an issue for a property like yours. In my experience this kind of targeted move just tends to work out fine once it's live, and the guests you picture losing at full price don't usually behave that way. I'd say switch it on and give it a proper go.",
     partnerResponse:
       "'It tends to work out' isn't the evidence I need before I discount anything. Give me the actual reasoning.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -274,7 +274,7 @@ const step5Options: BranchingOption[] = [
     description:
       'Sells the mobile rate by promising a ranking and visibility reward for discounting. Promising ranking rewards in exchange for a price move is a compliance breach in every regime.',
     playerDialogue:
-      "Switch on the mobile rate and I can promise it'll push you up the rankings and win back that visibility - the discount pays for itself in placement.",
+      "Here's the part that makes it worth it - the moment you switch on that mobile rate, I can promise you it'll push you straight back up the rankings and win back all of that visibility you've been losing to your peers. The discount genuinely pays for itself in placement, because the system rewards the more competitive price with a higher position.",
     partnerResponse:
       "So now there's a guaranteed ranking bump if I discount? That's the kind of promise that makes me trust the rest of your numbers less, not more.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -308,7 +308,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Takes the yes but pins nothing - no agreed metric, no review date. A measurement-minded partner will let an untracked test quietly lapse.",
     playerDialogue:
-      "Great, I'll get the mobile rate switched on and we can see how it goes from here.",
+      "Great, that's settled then - I'll go ahead and get the mobile rate switched on at our end, and from there we can just keep an eye on things and see how it all plays out over the coming weeks.",
     partnerResponse:
       "See how it goes measured by what, exactly? If we don't agree what success looks like, this just drifts.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -322,7 +322,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach for more - deepen the discount and extend it to every segment now. Blows past the controlled test he just agreed to and reopens the ADR fight.",
     playerDialogue:
-      "Perfect - and while you're in there, let's deepen the discount and roll it out across all your segments so we really move the needle this month.",
+      "Perfect - and honestly, while we're already in there setting it up, let's go a step further, deepen that discount and roll it out across all of your segments too, so we really move the needle and see a proper impact this month.",
     partnerResponse:
       "That's the across-the-board move I told you I won't make. Stick to the mobile test or forget it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -365,7 +365,7 @@ const steps: BranchingStep[] = [
     id: 'cannibalization',
     label: 'Handle the cannibalization worry',
     partnerPrompt:
-      "Yes, we went with the 'opaque' country rates - I've never been a fan of that green badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
+      "Yes, we went with the country rates - I've never been a fan of that green badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
     options: step5Options,
   },
   {

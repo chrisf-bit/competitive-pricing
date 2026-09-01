@@ -56,7 +56,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that competitiveness is the theme, wrong read of the room - piling more 'you're not competitive' pressure onto a partner who just told you he's sick of exactly that noise confirms his fear before you've earned any goodwill.",
     playerDialogue:
-      "Well, the other OTAs aren't wrong, Ethan - your competitiveness really is the issue, and it's showing up in your numbers here too. It's something you'll have to address.",
+      "Well, the other OTAs aren't wrong about this, Ethan - your competitiveness really is the issue, and it's showing up clearly in your own numbers here too, not just in their complaints. It's not noise, it's a real pattern, and it's something you're going to have to face up to and address sooner rather than later.",
     partnerResponse:
       "So you ARE bringing the same thing here. This is exactly the conversation I was hoping to avoid.",
     styleMatch: { red: 0, yellow: -2, green: -2, blue: -1 },
@@ -70,7 +70,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Prescribes a price cut before diagnosing - and it walks straight into the price-war fear he opened with, so a flexible-but-ROI-minded operator shuts it down.',
     playerDialogue:
-      "The simplest way to get those rooms moving is to bring your rate down a bit here so you stop losing to the competition.",
+      "The simplest way to get those rooms moving is to bring your rate down a bit here - if you shave a little off your price you'll stop losing those bookings to the competition, and the unsold inventory should start clearing on its own fairly quickly. Honestly, that's the quickest fix I can point you to today.",
     partnerResponse:
       "So your answer is 'drop your price' too. I give everyone the same rate for a reason - I'm not starting a price war.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -104,7 +104,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the demand excuse - if it's just a soft market, there's nothing to fix, and the diagnosis stalls before the real segment gap surfaces.",
     playerDialogue:
-      "You could well be right - demand is softer everywhere at the moment, so some of this is just the market rather than anything on your side.",
+      "You could well be right - demand is softer just about everywhere at the moment, so honestly a good part of this is probably just the market cooling off rather than anything on your side. Most properties are feeling the same squeeze, so I'd say we ride it out.",
     partnerResponse:
       "Good, that's what I thought. So we ride it out until demand picks back up.",
     styleMatch: { red: 0, yellow: 1, green: 0, blue: -2 },
@@ -118,7 +118,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Turns the gap into a threat - stay priced high and the platform keeps dropping you. Threatening ranking as a consequence of his pricing is off-side in every regime.',
     playerDialogue:
-      "Here's the reality: while you're priced above your peers, the platform will keep sliding you down the results, and you'll lose more than just this quarter.",
+      "Here's the reality: for as long as you're priced above your peers, the platform is going to keep sliding you further down the search results, and once that slide starts it's hard to pull back. You won't just lose this quarter - you'll lose visibility it took you years to build.",
     partnerResponse:
       "So drop my price or you sink my ranking. That's not the partnership I signed up for.",
     styleMatch: { red: 0, yellow: -2, green: -2, blue: -2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that it's not a full price war, wrong emphasis - calling a 5% gap 'barely anything' undersells the very segment problem you need him to act on, and a data-led operator will simply agree it's not worth his time.",
     playerDialogue:
-      "Honestly it's only about 5%, so it's really not a big deal - just a small nudge would sort it if you ever fancied it.",
+      "Honestly it's only about 5%, so it's really not a big deal in the grand scheme of things - a small nudge here or there would sort it out if you ever fancied it, but I wouldn't lose any sleep over a number that size. Plenty of properties sit around that gap and do perfectly well, so it's very much a take-it-or-leave-it thing.",
     partnerResponse:
       "If it's that small, then I'll leave it - no point fiddling with my rates over a rounding error.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       'Answers the "how much?" by telling him to bring his rate down to his competitors\'. Requiring a partner to match competitors on price oversteps in every regime.',
     playerDialogue:
-      "It's about 5% - so bring your rate down that 5% to line up with your competitors and the bookings will follow.",
+      "It's about 5% - so the straightforward move is to bring your rate down that 5% and line yourself right up with what your competitors are charging. Once you're matched to them on price the bookings will follow, because there'll be nothing left holding those travelers back from choosing you over the property next door.",
     partnerResponse:
       "That's the price war I just told you I won't fight. Matching everyone else isn't a strategy.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that it's segment-specific, wrong precision - 'it's spread across a few segments' denies a data-led operator the one concrete, fixable target and sounds like hedging.",
     playerDialogue:
-      "It's hard to pin to one thing - it's really across a few different traveler segments where you're coming up a bit expensive. Broadly, you're just less competitive than you'd want.",
+      "It's honestly hard to pin down to one single thing - it's really spread across a few different traveler segments where you're coming up a bit more expensive than your peers. Broadly speaking you're just a little less competitive than you'd ideally want to be, so it's more of a general pattern than one specific gap I can point to.",
     partnerResponse:
       "'A few segments' and 'broadly' doesn't give me anything to act on. Where exactly is the money going?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that there's a config issue, wrong delivery - framing it as his team's carelessness puts a collaborative partner on the defensive instead of teaming up on the fix.",
     playerDialogue:
-      "Frankly, this is a setup your team should have caught - your family rates are a mess and it's been costing you bookings for a while now.",
+      "Frankly, this is exactly the sort of setup your own team really should have caught long before now - your family rates are a bit of a mess, and that carelessness has quietly been costing you bookings for quite a while. A closer eye on the extranet configuration would have flagged it long ago.",
     partnerResponse:
       "A mess? We put real work into that setup. I don't appreciate the tone.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -248,7 +248,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that families are the segment, wrong root cause - pinning it all on the family-rate setup misses the missing EEA country rate, so the fix he'd make wouldn't actually close the gap.",
     playerDialogue:
-      "You've basically got it - just re-check your family rate configuration and that should close the whole gap on its own.",
+      "You've basically got it already - just go back and re-check your family rate configuration end to end, make sure the child settings are right, and that on its own should be enough to close the whole gap. Once the family setup is clean I'd expect those European bookers to start converting again.",
     partnerResponse:
       "We've been over the family config already, though. If that were the whole story, wouldn't it be fixed by now?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -262,7 +262,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right market, wrong dose - reaching for a large blanket EEA discount to 'guarantee' the gap closes is exactly the higher-discount move he's trying to avoid, and overshoots the targeted tool.",
     playerDialogue:
-      "The safest way to be sure is a solid discount across the whole EEA market - go big enough and the gap closes for certain.",
+      "The safest way to be really sure is to put a solid discount across the whole EEA market - not a targeted tweak but a proper blanket cut for that region. If you go big enough on it, the gap closes for certain and you don't have to worry about whether it was quite enough.",
     partnerResponse:
       "That's the higher-discount route I just said I want to avoid. There must be a smarter way than that.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -296,7 +296,7 @@ const step6Options: BranchingOption[] = [
     description:
       "He's cost-conscious about stacking discounts - not explaining that Country Rates don't stack with his mobile rate leaves the exact worry ('am I doubling my discount?') unanswered, and a data-led operator won't switch it on blind.",
     playerDialogue:
-      "Just switch the Country Rate on - don't worry too much about how it interacts with your other rates, it'll be fine once it's live.",
+      "Just go ahead and switch the Country Rate on - honestly, I wouldn't worry too much about how it interacts with your mobile rate or any of your other rates, it tends to sort itself out once it's live. Plenty of partners just turn it on and monitor the results from there rather than getting bogged down in the mechanics up front. Get it live, keep an eye on the European family bookings, and we can always fine-tune it later if anything looks off.",
     partnerResponse:
       "'Don't worry about it' is how I end up double-discounting. Does it stack with my mobile rate or not?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -310,7 +310,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the opening to reach for more - roll the Country Rate out to every market now. Overshoots the targeted EEA-family fix and reopens the blanket-discount worry.",
     playerDialogue:
-      "Great - and let's not stop at the EEA. Let's roll country rates out across all your source markets at once so we really move the numbers.",
+      "Great - and honestly, let's not stop at the EEA while we've got the momentum. If a Country Rate works for European families, there's no reason to keep it boxed in there - let's roll country rates out across every one of your source markets at once, top to bottom, so we really move the numbers this quarter instead of nudging one segment. Switch the whole lot on together and you'll see a much bigger swing than tinkering with just the EEA on its own.",
     partnerResponse:
       "Slow down - I agreed to try the EEA one for the family gap, not to discount every market at once.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
