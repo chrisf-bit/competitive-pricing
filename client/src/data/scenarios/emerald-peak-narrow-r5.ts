@@ -22,9 +22,9 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r5-narrow-step1-correct',
     label: 'Name the competitiveness impact, then ask her strategy and goals',
     description:
-      "SME-prescribed probe: surface that her price competitiveness is capping visibility and losing demand, then ask an open question about her strategy and goals.",
+      "SME-prescribed probe: acknowledge her strong demand, surface that she's losing the price comparison against her own direct site on nearly every public search, then ask an open question about her strategy and goals.",
     playerDialogue:
-      "Right now your visibility is being heavily impacted by your price competitiveness, so we're losing demand for you on our platform. Before I go further - what's your current strategy, and what are your goals with us?",
+      "Your demand here actually looks strong - your page views and conversion are well up on your peer group. The one thing standing out is price: on Booking.com you're losing the price comparison against your own direct site on virtually every public search. Before I go further - what's your current strategy, and what are your goals with us?",
     partnerResponse:
       "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -108,7 +108,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the head-office strategy as outdated. Lecturing a GM following mandated policy shuts the conversation down.",
     playerDialogue:
-      "Honestly, that whole billboard strategy your head office is pushing is pretty outdated at this point - the data just doesn't back it up anymore. Travelers today are impatient, they don't hunt around or click through to anyone's website, they simply book whatever happens to be cheapest and easiest right in front of them on the first page they land on.",
+      "Honestly, that whole billboard strategy your head office is pushing is pretty outdated at this point - the data just doesn't back it up anymore. On our platform most travelers compare on price before they ever click through to a property's own direct site.",
     partnerResponse:
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

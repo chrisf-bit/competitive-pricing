@@ -219,13 +219,13 @@ const step4Options: BranchingOption[] = [
   },
   {
     id: 'ob-r6-wide-step4-guilt',
-    label: 'Tell her she is losing loyal guests by being stubborn',
+    label: 'Guilt-trip her about losing loyal guests',
     description:
-      "Frame her strategy as stubbornness costing her loyal guests. Emotive and accusatory - it burns the ally framing you need with an autonomous owner.",
+      "Guilt-trip her that her strategy is costing her loyal guests. Emotive and accusatory - it burns the ally framing you need with an autonomous owner.",
     playerDialogue:
-      "Frankly, I think you're just being stubborn about all of this, and if I'm being honest with you, that stubbornness is quietly costing you the very loyal guests you keep telling me you care so much about. You're holding on to a strategy out of pride, and in the meantime those guests are slowly slipping away from you month after month.",
+      "Frankly, I have to be straight with you - holding on to this strategy is quietly costing you the very loyal guests you keep telling me you care so much about, and every month you leave it, more of them slip away. At some point you've got to ask whether it's really worth what it's costing you.",
     partnerResponse:
-      "Calling me stubborn about my own business is a strange way to build an alliance.",
+      "Pressuring me about my own business like that is a strange way to build an alliance.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
     compliance: 'safe',

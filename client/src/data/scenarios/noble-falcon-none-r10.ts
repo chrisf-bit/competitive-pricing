@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: page views have increased versus peer, but conversion is taking a hit. Ask what has changed in his pricing strategy that might be influencing this, rather than presuming.",
     playerDialogue:
-      "Reports show that your page views have increased versus your peer group, but conversion is taking a hit. What has changed in terms of pricing strategy that might be influencing this?",
+      "Reports show that your page views have increased versus your peer group, but conversion is taking a hit. What has changed in terms of your strategy that might be influencing this?",
     partnerResponse:
       "Our focus has shifted from a general 'revenue' goal to getting exactly how much we want from each channel. We're intentionally driving traffic away from third-party channels to reduce acquisition costs. We accept lower conversion on your platform as a necessary trade-off.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

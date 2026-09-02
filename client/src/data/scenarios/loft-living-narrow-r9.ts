@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     playerDialogue:
       "It does - but only when you have visibility. If travelers find you less attractive on Booking.com, they won't even go looking for your direct site. Aligning your Booking.com rate with your own website keeps a consistent presence. Would you be open to testing a temporary alignment to see if it lifts your overall direct traffic?",
     partnerResponse:
-      "I'd need to see that my total revenue across both channels actually goes up - I don't want to pay more commission for the same bookings.",
+      "I'd need to see that my total revenue across both channels actually goes up - I don't want to pay more commission for the same bookings. Also, what about the Partner Offer? I need it to disappear from my page on your platform.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -297,7 +297,7 @@ const step5: BranchingStep = {
   id: 'trial-clarify',
   label: 'Frame the trial; clarify Partner Offer and the Narrow limit',
   partnerPrompt:
-    "I'd need to see that my total revenue across both channels actually goes up - I don't want to pay more commission for the same bookings.",
+    "I'd need to see that my total revenue across both channels actually goes up - I don't want to pay more commission for the same bookings. Also, what about the Partner Offer? I need it to disappear from my page on your platform.",
   options: step5Options,
 };
 

@@ -102,6 +102,8 @@ export const miniScenarios: MiniScenario[] = [
           {
             id: 'A',
             text: 'The partner is deliberately trying to reduce their volume on Booking.com and steer travelers to their direct site, which needs addressing straight away.',
+            rationale:
+              'To be able to confirm this assumption, we need to investigate our data properly before addressing the matter with the partner in a compliant way.',
           },
           {
             id: 'B',

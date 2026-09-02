@@ -24,9 +24,9 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r5-wide-step1-correct',
     label: 'Name the competitiveness impact, then ask her strategy and goals',
     description:
-      "SME-prescribed probe: surface that her price competitiveness is capping her visibility and losing demand, then ask an open question about her strategy and goals before recommending anything.",
+      "SME-prescribed probe: acknowledge her strong demand, surface that she's losing the price comparison on nearly every public search against both her direct site and the key OTAs, then ask an open question about her strategy and goals before recommending anything.",
     playerDialogue:
-      "While your performance looks fine in general, we noticed an opportunity. To optimize the 90% of travelers who discover you through us, we ask for the same rates and conditions you provide to third parties and your direct channel. When you factor in our global marketing scale and your net acquisition costs, providing full parity here ensures maximum ROI.",
+      "Your demand here actually looks strong - your page views and conversion are well up on your peer group. The one thing standing out is price: on Booking.com you're losing the price comparison on virtually every public search, against both your own direct site and the key OTAs. Before I go further - what's your current strategy, and what are your goals with us?",
     partnerResponse:
       "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -108,9 +108,9 @@ const step2Options: BranchingOption[] = [
     id: 'ep-r5-wide-step2-lecture',
     label: 'Tell her the strategy is outdated',
     description:
-      "Dismiss the head-office strategy as outdated and travelers as lazy. Lecturing a GM who's simply following mandated policy shuts the conversation down.",
+      "Dismiss the head-office strategy as outdated. Lecturing a GM who's simply following mandated policy shuts the conversation down.",
     playerDialogue:
-      "Honestly, if you don't mind me saying, that whole billboard strategy your head office is running feels pretty outdated to me now - travelers today don't research anything, they just scan the results and book whatever happens to be the cheapest thing sitting right in front of them. The mandate really isn't doing you any favors.",
+      "Honestly, if you don't mind me saying, that whole billboard strategy your head office is running feels pretty outdated to me now - on our platform most travelers compare on price before they ever click through to a property's own site. The mandate really isn't doing you any favors.",
     partnerResponse:
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

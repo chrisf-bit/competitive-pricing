@@ -243,7 +243,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A10',
       prompt:
-        "A partner's Search Price versus peer has been uncompetitive for two quarters. Which OPC metric is most likely to have suffered as a direct consequence?",
+        "A partner's Search Price has been uncompetitive versus peer on Booking.com for two quarters. Which OPC metric is most likely to have suffered as a direct consequence?",
       options: [
         { text: 'Visibility Share', isCorrect: true },
         { text: 'Click Through Rate', isCorrect: false },
@@ -252,7 +252,7 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          'Yes, because pricing on our platform, such as Search Price versus peer, is one of the determining factors in ranking - so an uncompetitive Search Price versus peer pushes the property down and Visibility Share is the direct downstream signal.',
+          'Yes. Search Price versus peer is one of several inputs to ranking on our platform, so when it sits uncompetitive over time, Visibility Share is the OPC metric that tends to reflect it first.',
         incorrect:
           "It's Visibility Share. The connection here is between what is shown on the front end (Search Price versus peer) and the OPC metrics to be analyzed internally: Visibility Share is impacted when a partner's Search Price versus peer is not competitive.",
       },

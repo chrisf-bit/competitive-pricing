@@ -24,9 +24,9 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r5-none-step1-correct',
     label: 'Name the visibility drop, ask her strategy and how to help',
     description:
-      "SME-prescribed probe: surface that her visibility in search has dropped versus peers, then ask - collaboratively - about her strategy and how Booking.com can support her goals.",
+      "SME-prescribed probe: acknowledge her strong demand, neutrally note that her prices here sit higher than on her own direct site, then ask - collaboratively - about her strategy and how Booking.com can support her goals.",
     playerDialogue:
-      "Right now your visibility in search results has dropped noticeably compared to your peer group. Can you share your current strategy, and how Booking.com can support your overall goals?",
+      "Your overall performance here actually looks strong - your demand and conversion are well up on your peer group. The one thing we notice is that your prices on Booking.com sit consistently higher than on your own direct site. Could you share your current strategy, and how Booking.com can best support your goals?",
     partnerResponse:
       "Yeah, I know what's going on. It's tricky for me - head office has a super strict policy that our direct channel stays cheaper than anyone else. We love working with you, but we've basically been told to treat Booking.com as a 'window' and accept lower visibility as a trade-off.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public cut - which a franchise GM can't authorise, and which pressures a lower price a No Parity market doesn't permit.",
     playerDialogue:
-      "Your visibility is down and I don't think we need to overthink it - the quickest fix is to bring your public price on our platform down a good amount so you're competitive again and the searches come back.",
+      "Your prices here just aren't competitive and I don't think we need to overthink it - the quickest fix is to bring your public price on our platform down a good amount so you're competitive again and the bookings come back.",
     partnerResponse:
       "I can't authorise a flat rate drop - it breaks head-office policy. That's a non-starter.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

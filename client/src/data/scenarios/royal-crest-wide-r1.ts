@@ -39,7 +39,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: no general rate drop. Name the competing-OTA mobile promotion and ask him to provide those same conditions on Booking.com via the Mobile Rate to recapture mobile and international demand.",
     playerDialogue:
-      "I respect your strategy, and I'm not asking for a general rate drop. We can see you're running a mobile promotion on a competing OTA. So you aren't losing mobile conversion and international guests on our platform, we'd ask you to provide those same conditions here using our Mobile Rate.",
+      "I respect your strategy, and I'm not asking for a general rate drop. We can see you're running a mobile promotion on a competing OTA. There's an opportunity for you to convert better on mobile and with international guests on our platform, so we'd ask you to provide those same conditions here using our Mobile Rate.",
     partnerResponse: liamWhyRisk,
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,
@@ -121,7 +121,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Wave away the cannibalization worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
     playerDialogue:
-      "Honestly, this cannibalization worry is a bit of a myth that partners tell themselves - I hear it all the time and it rarely plays out the way people fear. The guests booking through us mostly aren't the ones who'd have found your direct site anyway. Just trust me on this one, turn those same conditions on, and you'll see it was the right call.",
+      "Honestly, this cannibalization worry is a bit of a myth that partners tell themselves - I hear it all the time and it rarely plays out the way people fear. The guests booking through us mostly aren't the ones who'd have found your direct site anyway. Just trust me on this one, turn those same conditions on, and you'll see it was the right call. What would you have to lose? All that will happen is increased business.",
     partnerResponse:
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

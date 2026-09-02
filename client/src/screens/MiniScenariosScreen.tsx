@@ -792,7 +792,9 @@ function InteractionPanel({
                 ? step.correctCoaching ??
                   'That\'s the strongest choice at this step.'
                 : `The strongest pick here was ${step.correctOptionId}. ${
-                    step.correctCoaching ?? ''
+                    step.options.find((o) => o.id === pickedId)?.rationale ??
+                    step.correctCoaching ??
+                    ''
                   }`}
             </div>
           </motion.div>

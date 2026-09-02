@@ -220,13 +220,13 @@ const step4Options: BranchingOption[] = [
   },
   {
     id: 'ob-r6-none-step4-guilt',
-    label: 'Tell her she is being stubborn',
+    label: 'Guilt-trip her about losing guests',
     description:
-      "Frame her caution as stubbornness. Accusatory - it burns the collaborative tone she's been giving you.",
+      "Guilt-trip her that her caution is costing her guests. Accusatory - it burns the collaborative tone she's been giving you.",
     playerDialogue:
-      "Frankly, I think you're being a bit stubborn about all of this, and the longer you dig in and refuse to move on the price, the more it ends up costing you the very guests you keep telling me you want. At some point you have to admit the caution is working against you here, not for you.",
+      "Frankly, I have to be straight with you - the longer you dig in and hold this position, the more it ends up costing you the very guests you keep telling me you want. At some point you have to admit the caution is working against you here, not for you.",
     partnerResponse:
-      "Calling me stubborn when I'm trying to work with you is a poor move.",
+      "Pressuring me like that when I'm trying to work with you is a poor move.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
     compliance: 'safe',

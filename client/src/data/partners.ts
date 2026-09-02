@@ -686,6 +686,15 @@ function royalCrestBase(args: {
   location: string;
   propertyImage: string;
   contactName: string;
+  // Regime-appropriate pre-call signal appended to the profile so the
+  // conversation's optimal ask is grounded in something the learner can
+  // actually see before the call. Each regime's optimal leans on a
+  // different fact (Wide: a competing-OTA mobile promo to mirror;
+  // Narrow: his Brand.com "Long Stay" deal to replicate; None: a
+  // lagging US-traveler segment), and none of those surfaced in the
+  // shared KPI data - a reviewer flagged the Wide/KAM call as "data was
+  // all Brand.com, then the ask is suddenly about a Key OTA."
+  channelSignal?: string;
 }): PartnerState[] {
   return [
     {
@@ -702,7 +711,8 @@ function royalCrestBase(args: {
         style: 'red',
         styleSecondary: 'blue',
         description:
-          "Property Manager running several owners' properties with highly delegated commercial autonomy. Profit-first and protective of the direct channel - keeps a strict policy that no OTA takes more than 30% of the business. Direct and time-pressured, but evidence-driven: he wants proof and a controlled experiment before he commits, and rewards a tight ROI case.",
+          "Property Manager running several owners' properties with highly delegated commercial autonomy. Profit-first and protective of the direct channel - keeps a strict policy that no OTA takes more than 30% of the business. Direct and time-pressured, but evidence-driven: he wants proof and a controlled experiment before he commits, and rewards a tight ROI case." +
+          (args.channelSignal ? ' ' + args.channelSignal : ''),
         commercialGoal:
           'Protect direct-channel margin and portfolio-wide RevPAR while filling unsold rooms',
       },
@@ -1949,6 +1959,8 @@ export const initialPartners: PartnerState[] = [
     contactName: "Liam O'Connell",
     propertyImage:
       'photo-1566073771259',
+    channelSignal:
+      'Going into the call, our data shows he is running a targeted mobile promotion on a competing OTA that is not matched on Booking.com, so mobile and international demand is leaking to that channel.',
   }),
   ...royalCrestBase({
     id: 'royal-crest-narrow',
@@ -1957,6 +1969,8 @@ export const initialPartners: PartnerState[] = [
     contactName: "Liam O'Connell",
     propertyImage:
       'photo-1551882547',
+    channelSignal:
+      "Going into the call, our data shows he runs a targeted 'Long Stay' deal on his own direct website that he has not extended to Booking.com.",
   }),
   ...royalCrestBase({
     id: 'royal-crest-none',
@@ -1965,6 +1979,8 @@ export const initialPartners: PartnerState[] = [
     contactName: "Liam O'Connell",
     propertyImage:
       'photo-1520250497591',
+    channelSignal:
+      'Going into the call, our data shows his share of US travelers is tracking below his peer group, with no US-specific rate live on Booking.com.',
   }),
 
   // ── Crystal Water Resort (Wide Parity) ──
@@ -2124,7 +2140,7 @@ export const initialPartners: PartnerState[] = [
   // roster (same SCORM debt as the rest - swap to bundled WebP before
   // the final package).
   ...withKamPills(
-    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'West Haven, Republic of Alden', contactName: "Liam O'Connell", propertyImage: 'photo-1566073771259' }),
+    royalCrestBase({ id: 'royal-crest-cross-regional', parityRegime: 'wide', location: 'West Haven, Republic of Alden', contactName: "Liam O'Connell", propertyImage: 'photo-1566073771259', channelSignal: 'Going into the call, our data shows he is running a targeted mobile promotion on a competing OTA that is not matched on Booking.com, so mobile and international demand is leaking to that channel.' }),
     { companyName: 'Alden Harbour Hotel Management', partnerType: 'Hotel Management Company', hqLocation: 'Republic of Alden', numberOfProperties: 26 },
   ),
   ...withKamPills(
