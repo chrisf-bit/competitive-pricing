@@ -636,18 +636,10 @@ export function BranchingConversationScreen({
                           : 'var(--shadow-sm)',
                     }}
                   >
-                    <div
-                      style={{
-                        fontSize: 11,
-                        fontWeight: 800,
-                        color: isSelected ? 'rgba(255,255,255,0.75)' : 'var(--brand-blue)',
-                        marginBottom: 3,
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.08em',
-                      }}
-                    >
-                      {option.label}
-                    </div>
+                    {/* Move label intentionally NOT shown - learners were
+                        scanning the titles and picking on those instead of
+                        reading the actual spoken response. The label still
+                        drives grading + the shuffle seed, just not rendered. */}
                     <div
                       style={{
                         fontSize: 13,
