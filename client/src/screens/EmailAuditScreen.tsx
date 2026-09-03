@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, Check, X, Video, ShieldCheck, ShieldAlert, FileText } from 'lucide-react';
+import { ChevronRight, Check, X, Video, ShieldCheck, ShieldAlert, FileText, Scale } from 'lucide-react';
 import { getEmailAudit, type EmailAuditScenario, type EmailPhrase } from '../data/emailAudit';
 import type { KnowledgeCheckResult, ParityRegime } from '../types';
 import { LaptopFrame } from '../components/DeviceFrame';
@@ -309,6 +309,26 @@ function EmailCard({
         >
           <Video size={12} />
           Zoom AI Transcript - recorded call
+          {scenario.regimeBadge && (
+            <span
+              style={{
+                marginLeft: 'auto',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
+                background: 'var(--brand-navy)',
+                color: 'var(--white)',
+                padding: '3px 10px',
+                borderRadius: 'var(--radius-pill)',
+                fontSize: 10,
+                fontWeight: 800,
+                letterSpacing: '0.06em',
+              }}
+            >
+              <Scale size={11} />
+              {scenario.regimeBadge}
+            </span>
+          )}
         </div>
         <table
           style={{

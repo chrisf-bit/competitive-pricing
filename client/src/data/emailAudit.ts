@@ -75,6 +75,14 @@ export interface EmailAuditScenario {
    * reminder that frames the whole activity.
    */
   closingNote?: string;
+  /**
+   * Optional regime badge rendered in the transcript header. Used by the
+   * Cross-Regional (KAM) audit, which reuses the No Parity call: KAMs work
+   * across mixed regimes, so the badge makes it unambiguous that this
+   * particular recorded call sat in a No Parity market and is being judged
+   * against No Parity rules.
+   */
+  regimeBadge?: string;
 }
 
 // ── Wide Parity scenario ────────────────────────────────────────────
@@ -379,12 +387,17 @@ const noParityScenario: EmailAuditScenario = {
     "In no-parity and narrow-parity markets, if a pricing discrepancy is observed, you can reactively discuss the existence of that discrepancy and seek to better understand the partner's pricing strategy across channels. Any such discussion should remain neutral and informational, with a focus on explaining how pricing decisions may affect performance on Booking.com. The goal is to better understand the partner's pricing strategy and the context of any observed differences in pricing across channels.",
 };
 
-// ── Cross-Regional ──────────────────────────────────────────────────
-// Cross-Regional partners (large corporate hotels and chains) sit
-// under a different set of rules that aren't yet authored. Falls back
-// to Wide Parity for now so the activity remains playable when the
-// regime is selectable.
-const crossRegionalScenario: EmailAuditScenario = wideParityScenario;
+// ── Cross-Regional (KAM) ────────────────────────────────────────────
+// KAMs manage portfolios spanning every parity regime, so there's no
+// single "cross-regional regime" for the call audit. We reuse the
+// SME-approved No Parity call (the strictest regime - if a learner can
+// judge this one, they're covered), and add an explicit header badge so
+// it's 100% clear the recorded call sat in a No Parity market and is
+// judged against No Parity rules.
+const crossRegionalScenario: EmailAuditScenario = {
+  ...noParityScenario,
+  regimeBadge: 'No Parity market',
+};
 
 export const emailAuditByRegime: Record<ParityRegime, EmailAuditScenario> = {
   wide: wideParityScenario,
