@@ -249,7 +249,9 @@ export function RoundSelectScreen({
         />
       </div>
 
-      {showScoring && <ScoringModal onClose={() => setShowScoring(false)} />}
+      {showScoring && (
+        <ScoringModal variant="navy" onClose={() => setShowScoring(false)} />
+      )}
     </div>
   );
 }
