@@ -1,4 +1,4 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import {
   Heart,
   Star,
@@ -14,6 +14,7 @@ import {
   ArrowUp,
   TrendingUp,
   Trophy,
+  HelpCircle,
 } from 'lucide-react';
 import type {
   ScoreBreakdown,
@@ -27,6 +28,7 @@ import { TOTAL_ROUNDS } from '../engine/gameEngine';
 import { getPersonaById } from '../data/characters';
 import { reportLessonStatus } from '../util/persistence';
 import { downloadDebriefPdf } from '../util/debriefPdf';
+import { ScoringModal } from '../components/ScoringModal';
 
 // Derived from the engine's TOTAL_ROUNDS so Practice Mode always covers
 // every playable round (all 20 today) - previously hard-coded to 3, which
@@ -107,6 +109,7 @@ export function DebriefScreen({
   onPracticeRound,
 }: DebriefScreenProps) {
   const gc = gradeConfig[score.overallGrade];
+  const [showScoring, setShowScoring] = useState(false);
 
   const totalStars = Object.values(roundStars).reduce<number>(
     (sum, s) => sum + s,
@@ -170,6 +173,27 @@ export function DebriefScreen({
           <p style={{ color: 'var(--grey-400)', fontSize: 14 }}>
             Here's how you performed across the {TOTAL_ROUNDS} rounds.
           </p>
+          <button
+            onClick={() => setShowScoring(true)}
+            style={{
+              marginTop: 10,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 6,
+              background: 'var(--white)',
+              border: '1px solid var(--grey-200)',
+              borderRadius: 'var(--radius-pill)',
+              padding: '6px 14px',
+              fontSize: 12.5,
+              fontWeight: 700,
+              color: 'var(--brand-navy)',
+              cursor: 'pointer',
+              boxShadow: 'var(--shadow-sm)',
+            }}
+          >
+            <HelpCircle size={14} style={{ color: 'var(--brand-blue)' }} />
+            How is this scored?
+          </button>
         </div>
 
         {/* Hero stat tiles */}
@@ -403,6 +427,8 @@ export function DebriefScreen({
           </button>
         </div>
       </div>
+
+      {showScoring && <ScoringModal onClose={() => setShowScoring(false)} />}
     </div>
   );
 }

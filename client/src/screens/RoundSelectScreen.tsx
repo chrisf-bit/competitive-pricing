@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Star,
@@ -7,8 +8,10 @@ import {
   Check,
   ChevronRight,
   Award,
+  HelpCircle,
 } from 'lucide-react';
 import roundSelectBackdrop from '../assets/round-select-backdrop.webp';
+import { ScoringModal } from '../components/ScoringModal';
 
 /**
  * Rounds available to play today. Mirrors TOTAL_ROUNDS in the engine -
@@ -60,6 +63,8 @@ export function RoundSelectScreen({
   onEnterRound,
   onViewDebrief,
 }: RoundSelectScreenProps) {
+  const [showScoring, setShowScoring] = useState(false);
+
   // "Current" is the first playable round the learner hasn't cleared
   // yet. Derived from roundStars rather than the engine's currentRound
   // because persistence restores roundStars but resets currentRound
@@ -176,6 +181,26 @@ export function RoundSelectScreen({
             Clear a round to unlock the next. Complete all ten to
             unlock the Level 2 series featuring OPC metrics.
           </p>
+          <button
+            onClick={() => setShowScoring(true)}
+            style={{
+              marginTop: 14,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 7,
+              background: 'rgba(255,255,255,0.10)',
+              border: '1px solid rgba(255,255,255,0.28)',
+              borderRadius: 'var(--radius-pill)',
+              padding: '7px 16px',
+              fontSize: 12.5,
+              fontWeight: 700,
+              color: 'var(--white)',
+              cursor: 'pointer',
+            }}
+          >
+            <HelpCircle size={14} style={{ color: 'var(--brand-yellow)' }} />
+            How you'll be scored
+          </button>
         </motion.div>
 
         {journeyComplete && onViewDebrief && (
@@ -223,6 +248,8 @@ export function RoundSelectScreen({
           onEnterRound={onEnterRound}
         />
       </div>
+
+      {showScoring && <ScoringModal onClose={() => setShowScoring(false)} />}
     </div>
   );
 }

@@ -37,7 +37,7 @@ export const metricDefinitions = {
   rpdLoyal: {
     label: 'RPD Loyal',
     helpText:
-      'Loyal RPD - the price comparison for logged-in Genius members. Often lower than Public RPD because Genius discounts apply.',
+      "Loyal RPD looks at Genius Level 1 users and compares our member price with competitors' public prices (pre-BSB and partner Offer).",
   },
   losePricePublic: {
     label: 'Lose Price',
@@ -52,7 +52,7 @@ export const metricDefinitions = {
   competitor: {
     label: 'Competitor',
     helpText:
-      "The platform driving the biggest share of this partner's price-comparison losses - either Brand.com (the partner's own direct site) or a Key OTA.",
+      'In the game, we compare price competitiveness with either Brand.com (the partner\'s direct website) or the Key OTA predefined for that simulation. In practice, check both in the pricing dashboards.',
   },
 
   // ── eRPD Price Bucket ──
