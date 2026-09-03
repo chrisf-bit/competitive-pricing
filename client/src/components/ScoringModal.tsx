@@ -72,14 +72,14 @@ export function ScoringModal({ onClose }: { onClose: () => void }) {
               width: 38,
               height: 38,
               borderRadius: 10,
-              background: '#e6f0f8',
+              background: '#fff5d6',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               flexShrink: 0,
             }}
           >
-            <HelpCircle size={19} style={{ color: 'var(--brand-blue)' }} />
+            <HelpCircle size={19} style={{ color: 'var(--brand-navy)' }} />
           </div>
           <h2 style={{ margin: 0, fontSize: 20, color: 'var(--brand-navy)' }}>
             How your score works
