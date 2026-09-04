@@ -107,7 +107,7 @@ const step2Options: BranchingOption[] = [
       "So you admit you're doing it to me. That's exactly my problem.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {

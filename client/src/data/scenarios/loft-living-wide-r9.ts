@@ -107,7 +107,7 @@ const step2Options: BranchingOption[] = [
       "So you admit it's you doing it. That doesn't fix my price integrity, it just confirms my problem.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -143,7 +143,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed clarification: Booking.com displays the rate to protect his sales volume but isn't the source - these rates come from his own wholesale agreements. Ask how he currently monitors where his wholesale rates end up.",
     playerDialogue:
-      "We display them to protect your sales volume, but we're not the source - these rates are actually coming from your own wholesale agreements. Instead of delivering opaque incremental value, they've broken into a space where you run a different pricing strategy. How do you currently monitor where your wholesale rates end up?",
+      "We display them to offer travelers attractive prices, but we aren't the source. These rates are actually coming from your wholesale agreements. How do you currently monitor where your wholesale rates end up?",
     partnerResponse:
       "We sign contracts with those distributors for a reason. If they leak them, it's a breach - but matching them publicly just makes it harder for me to manage my revenue.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

@@ -175,7 +175,7 @@ const step3Options: BranchingOption[] = [
       "I don't need you second-guessing how I run my rooms. Done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

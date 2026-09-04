@@ -43,7 +43,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: no general rate drop. Surface the lagging US-traveler share and offer a Country Rate he can choose to run for that segment, protecting his overall ADR - with the choice of strategy explicitly left to him.",
     playerDialogue:
-      "I respect that. Our data does show your share of US travelers is lower than your peer group. Rather than a general rate drop, you could choose to run a Country Rate aimed only at the US market - that lifts conversion in that segment while protecting your overall ADR. The choice of pricing and distribution strategy stays entirely yours.",
+      "I respect that. From Booker Insights dashboard in the extranet, it does show your share of US travelers is lower than your peer group. Rather than a general rate drop, you could choose to run a Country Rate aimed only at the US market - that lifts conversion in that segment while protecting your overall ADR. The choice of pricing and distribution strategy stays entirely yours.",
     partnerResponse: liamWhyRisk,
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,

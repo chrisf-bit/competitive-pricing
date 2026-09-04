@@ -173,7 +173,7 @@ const step3Options: BranchingOption[] = [
       "I don't need you telling me I'm careless. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

@@ -66,7 +66,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed opener: lead with the specific data anomaly (traffic up, forward room nights down) and ask an open question about his pricing strategy before recommending anything.",
     playerDialogue:
-      "You're completely free to choose your own pricing and distribution strategy, of course. I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Can you walk me through the strategic considerations behind your current pricing approach?",
+      "I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Can you walk me through the strategic considerations behind your current pricing approach?",
     partnerResponse: liam30PercentCap,
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,

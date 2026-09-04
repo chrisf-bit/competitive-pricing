@@ -49,7 +49,7 @@ const step1Options: BranchingOption[] = [
       "That's a deliberate strategy, not a mistake. If that's your pitch, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
   {

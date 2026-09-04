@@ -24,9 +24,9 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r5-none-step1-correct',
     label: 'Name the visibility drop, ask her strategy and how to help',
     description:
-      "SME-prescribed probe: acknowledge her strong demand, neutrally note that her prices here sit higher than on her own direct site, then ask - collaboratively - about her strategy and how Booking.com can support her goals.",
+      "SME-prescribed probe: acknowledge her strong demand, then ask - collaboratively - about her strategy and how Booking.com can support her goals. In a No Parity market, do not proactively raise any cross-channel price comparison.",
     playerDialogue:
-      "Your overall performance here actually looks strong - your demand and conversion are well up on your peer group. The one thing we notice is that your prices on Booking.com sit consistently higher than on your own direct site. Could you share your current strategy, and how Booking.com can best support your goals?",
+      "Your overall performance here actually looks strong - your demand and conversion are well up on your peer group. Could you share your current strategy, and how Booking.com can best support your goals?",
     partnerResponse:
       "Yeah, I know what's going on. It's tricky for me - head office has a super strict policy that our direct channel stays cheaper than anyone else. We love working with you, but we've basically been told to treat Booking.com as a 'window' and accept lower visibility as a trade-off.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },

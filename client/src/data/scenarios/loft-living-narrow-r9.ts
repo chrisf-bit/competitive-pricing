@@ -106,7 +106,7 @@ const step2Options: BranchingOption[] = [
       "So you agree you're undercutting me. That just confirms the problem, it doesn't solve it.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -211,14 +211,14 @@ const step4Options: BranchingOption[] = [
     id: 'll-r9-narrow-step4-require',
     label: 'Tell him he has to align now to recover',
     description:
-      "Right that alignment helps, wrong delivery - issuing it as a requirement rather than a measured test pushes an autonomous operator who explicitly fears cannibalization straight into a no.",
+      "Requires alignment and pins ranking on it - both off-limits: external prices don't factor into ranking, and in a Narrow market we can't require rate alignment or threaten a ranking penalty.",
     playerDialogue:
       "There's really no way around this one - you have to align your rate here, and you have to do it now, otherwise your ranking simply keeps falling and the situation gets harder to recover from. I know it's blunt, but this isn't something we can test our way into slowly; it needs to happen straight away if you want the position back.",
     partnerResponse:
       "'Have to' isn't a word I respond well to about my own pricing. Give me a reason, not an order.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'risky',
     trustChange: -6,
   },
   {

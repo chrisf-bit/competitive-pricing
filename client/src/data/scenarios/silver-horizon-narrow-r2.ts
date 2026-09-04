@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     playerDialogue:
       "The fix here is simple, Chloe: make sure your price on our platform isn't sitting higher than the Key OTA's. Just match what they're showing, or come in a touch under them, and the whole gap closes on its own. Keep an eye on where they land and price against them here, and your volume recovers.",
     partnerResponse:
-      "You can't ask me to price against the Key OTA here. That's not how this market works.",
+      "You can't require that from me.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
     compliance: 'risky',
@@ -170,7 +170,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "I've noticed your family rooms are showing cheaper on the Key OTA than anywhere else right now. Match that same price for them here on our platform, and honestly you'd be better off pulling that inventory off the Key OTA altogether so the segment comes to us instead. Price against them and move the rooms over, and we capture the family demand.",
     partnerResponse:
-      "Pricing against the Key OTA and telling me to pull inventory is off the table in this market.",
+      "Pricing against the Key OTA and telling me to pull inventory is off the table.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
     compliance: 'risky',

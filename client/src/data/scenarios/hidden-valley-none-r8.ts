@@ -162,7 +162,7 @@ const step3Options: BranchingOption[] = [
       "So you agree it's out of my control. That doesn't reassure me.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {

@@ -113,7 +113,7 @@ const step2Options: BranchingOption[] = [
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];
