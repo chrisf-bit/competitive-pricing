@@ -3752,8 +3752,10 @@ done via multi-agent workflows (rewrite + adversarial verify per file):
 
 **~29 needs-input review items** (compliance-label reassessments, legal
 questions, OPC metric data gaps) are catalogued in
-`docs/conversation-review-needs-input.md` for SME/legal sign-off - NOT yet
-applied. The ~11 compliance-label items matter twice: grading AND the new
+`docs/conversation-review-needs-input.md` for SME/legal sign-off. **A batch
+of these was applied in the Post-2026-09-04 session below** - the remaining
+open items (legal questions, OPC metric data gaps) still await sign-off.
+The ~11 compliance-label items matter twice: grading AND the new
 wrong-step cue both key off the tag.
 
 ### Small copy edits (pushed earlier in the session)
@@ -3801,9 +3803,88 @@ version bump is the only thing that resets saved progress (rare, flagged).
 `client/measure.cjs`. All persist on disk but are untracked - commit if
 wanted.
 
+## Post-2026-09-04 session (applying the conversation review needs-input items)
+
+Working through the `docs/conversation-review-needs-input.md` backlog
+(Irene's review comments) one item at a time as Chris relays them, applied
+and pushed to `release-2-partner-detail` (commit `a6e3ff0`). Two kinds of
+change: straight copy edits, and compliance-label reclassifications.
+
+**New convention - `borderline` for "legally safe but not commercially
+valid" distractors.** The reviewer's rule: the SAFE tag should mean an
+answer is BOTH legally safe AND commercially valid. Several wrong-answer
+distractors were tagged `compliance: 'safe'` because they carry no legal
+breach, but they're commercially wrong - either a **factually incorrect
+concession** (conceding the partner's mistaken framing, e.g. "we are
+discounting your rooms through Partner Offer" / "BSB takes control away
+from you" / "we are part of that race to the bottom" - all false; the leak
+is the partner's own wholesale/direct setup, BSB is a protective shield)
+or a **condescending/combative line** ("that's just a mistake", "your
+strategy is short-sighted", "that's a bit careless, you should have caught
+it"). Because the in-call **wrong-step cue** and the **review tool's tag
+display** both key off `compliance`, a `safe` tag meant the learner got no
+signal the pick was wrong (when the partner's *primary* style score is >=0,
+the style path doesn't flag it either) and the reviewer saw a contradictory
+"SAFE" label. Fix: reclassify these to **`borderline`**. Rationale that
+makes this safe to do wholesale:
+- They are **non-optimal distractors**, so grading is unchanged - they
+  already can't clear the optimal-diagnosis/pitch floor (still 0 stars).
+- `borderline` makes the real-time wrong-step cue fire and reads correctly
+  in the review tool.
+- The **dialogue is left as-is** - the blunt/incorrect wording IS the
+  lesson; softening it would blunt the teaching.
+- It slightly overloads the legal semantics of `borderline` (there's no
+  separate "commercially wrong" flag in the three-value `compliance`
+  field), but the tag is the only lever wired to the cue, so this is the
+  pragmatic representation. If a genuine "commercially-invalid" axis is
+  ever wanted, add a field rather than stretching `compliance` further.
+
+Distractors reclassified `safe -> borderline` this pass: `ll-r9-{wide,
+narrow,none}-step2-concede-po`, `hv-r8-{wide,narrow,none}-step3-apologize`,
+`nf-r10-narrow-step1-accuse`, `ep-r5-narrow-step2-lecture`,
+`rb-r4-none-step3-blame-config`, `sh-r2-none-step3-second-guess`. One
+distractor went `safe -> risky` (a real legal breach, not just
+commercial): `ll-r9-narrow-step4-require` (requires rate alignment AND pins
+ranking on external price - both DON'Ts in Narrow), with its description
+rewritten to name the breach.
+
+**Copy edits this pass** (mostly legal-driven neutral-wording fixes):
+- `sh-r2-narrow` step3: dropped "in this market" from a partner response;
+  step2 replaced a line with "You can't require that from me."
+- `rc-r1-none` correct opener: "Our data does show..." -> "From Booker
+  Insights dashboard in the extranet, it does show...".
+- **`royal-crest-base.ts` opener (all 3 regimes): removed a prepended
+  "You're completely free to choose your own pricing and distribution
+  strategy, of course." sentence** that had landed at the FRONT of the
+  optimal diagnostic probe (front-loading a disclaimer before the learner
+  probes). The opener is `step1Options` in the shared base, so one edit
+  covers wide/narrow/none.
+- `ll-r9-wide` step3: rewrote a garbled wholesale-leak line to a clean
+  "We display them to offer travelers attractive prices, but we aren't the
+  source...".
+- `ep-r5-none` correct opener: **deleted** the proactive cross-channel
+  comparison ("your prices on Booking.com sit consistently higher than on
+  your own direct site") - forbidden to raise proactively in No Parity;
+  description tidied to match. (Left the Wide/Narrow R5 openers alone -
+  that comparison is permitted there.)
+
+Left as-is after review: `rc-r1-none-step2-ranking-threat` stays `risky`
+(it's the sanctioned ranking-threat teaching distractor); the
+`sh-r12-step5-correct` Getaway Deal rephrase was already applied in the
+earlier content pass. `tsc -b` clean after the batch.
+
 ## Things to avoid
 
 - Don't reintroduce em dashes (saved as a feedback memory).
+- Don't re-tag a commercially-wrong-but-legally-clean distractor as
+  `safe`. Per the reviewer's rule, `compliance: 'safe'` means BOTH legally
+  safe AND commercially valid. A wrong-answer distractor that's legal but
+  factually/commercially wrong (a false concession, a condescending line)
+  should be `borderline` so the in-call wrong-step cue fires and the review
+  tool doesn't show a contradictory SAFE tag - even though it's a
+  non-optimal distractor whose star grading is already 0. Reserve `risky`
+  for actual legal breaches. See the Post-2026-09-04 session for the batch
+  that established this.
 - Don't decorate cards, callouts, or info panels with a thick
   coloured `borderLeft` rail (e.g. `borderLeft: '3px solid ...'`).
   Chris flags this pattern on sight as a tell-tale AI-generated
