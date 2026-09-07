@@ -102,7 +102,7 @@ const step2Options: BranchingOption[] = [
       "So you agree the markup is fine? Then what are we actually fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

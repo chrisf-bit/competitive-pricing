@@ -124,7 +124,7 @@ const step2Options: BranchingOption[] = [
       "So it IS the leak. Then there's nothing I can do on your platform until that's solved, right?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -4,
   },
 ];
@@ -302,7 +302,7 @@ const step6Options: BranchingOption[] = [
       "'It basically never happens' isn't the reasoning I need before I touch my desktop revenue. Why won't it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -4,
   },
   {

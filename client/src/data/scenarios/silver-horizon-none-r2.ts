@@ -231,7 +231,7 @@ const step4Options: BranchingOption[] = [
       "Telling me my operations are the problem ends this call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

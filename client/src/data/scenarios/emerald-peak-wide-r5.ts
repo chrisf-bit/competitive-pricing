@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
       "So you agree the billboard model works? Then what exactly are we fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -115,7 +115,7 @@ const step2Options: BranchingOption[] = [
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

@@ -126,7 +126,7 @@ const step3Options: BranchingOption[] = [
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -12,
   },
 ];

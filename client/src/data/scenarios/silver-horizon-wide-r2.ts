@@ -231,7 +231,7 @@ const step4Options: BranchingOption[] = [
       "I don't need a lecture on how to run my own business. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

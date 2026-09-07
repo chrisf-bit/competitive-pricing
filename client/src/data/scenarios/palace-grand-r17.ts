@@ -61,7 +61,7 @@ const step1Options: BranchingOption[] = [
       "So you ARE bringing the same thing here. This is exactly the conversation I was hoping to avoid.",
     styleMatch: { red: 0, yellow: -2, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
   {
@@ -109,7 +109,7 @@ const step2Options: BranchingOption[] = [
       "Good, that's what I thought. So we ride it out until demand picks back up.",
     styleMatch: { red: 0, yellow: 1, green: 0, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -219,7 +219,7 @@ const step4Options: BranchingOption[] = [
       "A mess? We put real work into that setup. I don't appreciate the tone.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];

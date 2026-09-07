@@ -121,7 +121,7 @@ const step2Options: BranchingOption[] = [
       "Fine by me - I'd rather hold my rates and ride it out than start chasing occupancy with discounts.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -183,7 +183,7 @@ const step3Options: BranchingOption[] = [
       "Did you just tell me my product is all in my head? This conversation is over.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -13,
   },
 ];

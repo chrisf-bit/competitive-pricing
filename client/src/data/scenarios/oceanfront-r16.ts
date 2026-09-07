@@ -130,7 +130,7 @@ const step2Options: BranchingOption[] = [
       "Right, exactly. So I'm not sure there's much for us to change here today.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -4,
   },
 ];
@@ -164,7 +164,7 @@ const step3Options: BranchingOption[] = [
       "Our campaigns are doing exactly what we built them to do. I won't have them written off like that.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
   {

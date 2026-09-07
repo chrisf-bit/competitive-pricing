@@ -121,7 +121,7 @@ const step2Options: BranchingOption[] = [
       "I called to look at performance, not to be told it's all my fault. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
 ];
@@ -233,7 +233,7 @@ const step4Options: BranchingOption[] = [
       "You're telling me my own numbers are imaginary? That's not going to land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];
@@ -289,7 +289,7 @@ const step5Options: BranchingOption[] = [
       "So you agree it's punitive. That doesn't build my confidence in the rest of this.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
 ];
@@ -331,7 +331,7 @@ const step6Options: BranchingOption[] = [
       "I told you I'd think it over. Pushing me now just makes me less inclined.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -6,
   },
   {

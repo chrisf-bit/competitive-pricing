@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
       "Exactly my point. So there's not much to discuss on the pricing front, is there?",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -124,7 +124,7 @@ const step2Options: BranchingOption[] = [
       "Don't tell me a piece of software understands my property better than I do. We're not the same as those hotels.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: 0 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
 ];
@@ -220,7 +220,7 @@ const step4Options: BranchingOption[] = [
       "'Precious'? That exclusivity is the entire business, Ren. I won't be lectured on it.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -10,
   },
 ];

@@ -3873,6 +3873,100 @@ Left as-is after review: `rc-r1-none-step2-ranking-threat` stays `risky`
 `sh-r12-step5-correct` Getaway Deal rephrase was already applied in the
 earlier content pass. `tsc -b` clean after the batch.
 
+## Post-2026-09-07 session (review-pack OPC fix + the big SAFE->BORDERLINE sweep)
+
+Two things, both on `release-2-partner-detail`. The OPC fix is committed
+(`524513b`); the 87-tag sweep + regenerated packs + change-list doc are
+**uncommitted working changes** as of session end (Chris was offered a
+commit and hadn't taken it yet - offer again next session).
+
+### Review-pack OPC grid: emit all seven fields (committed `524513b`)
+
+`reviewData.ts::buildDossier` only iterated the OPC keys present on the
+partner record, so partial OPC data (all partners today - peer figures
+still pending SME sign-off) rendered a short, insertion-order list in the
+Word packs (e.g. only 4 of 7 fields). Fixed to walk a fixed `OPC_KEYS`
+array (the seven cards in the sim's OPC-tab order: unsoldRooms,
+sellThroughRate, distributionOfSearch, visibilityShare, clickThroughRate,
+conversion, searchPrice), emitting **"Data pending"** for absent fields so
+the pack matches the sim's OPC tab exactly. Regenerated OPC packs 7 (R11-15)
+and 8 (R16-20). The value-only OPC metrics still show "(xx)" on-screen -
+that's the separate peer-data-pending needs-input item, unchanged.
+
+### The two-label review convention (what reviewers see, and the confusion)
+
+An SME reviewer got confused because a step can show **two SAFE options**,
+and because some clearly-poor lines were tagged SAFE. The packs render
+exactly two labels per conversation option (`make-review-pack.cjs`):
+- **`[OPTIMAL]`** - green, on exactly ONE option per step: the correct
+  answer / the line to review. Keyed off `option.optimal`.
+- **`[SAFE]` / `[BORDERLINE]` / `[RISKY]`** - the `compliance` tag, on
+  every option.
+Option move-titles and step names are hidden from learners so they are NOT
+rendered in the packs (fidelity rule); price-bucket number is hidden too.
+
+**The settled reviewer-facing framing** (use this verbatim if it comes up
+again - it's what finally landed with Chris):
+- **[OPTIMAL]** = the single correct answer (always also SAFE).
+- **SAFE** = legal AND commercially sound (a sensible thing to say).
+- **BORDERLINE** = legal, but NOT commercially sound (talks down to the
+  partner, or concedes something the partner has got wrong).
+- **RISKY** = not allowed (legal breach).
+- **SAFE does not equal OPTIMAL/correct** - more than one option can be
+  SAFE; the compliance tag is a separate axis from correctness. The tag is
+  NOT shown to learners in the actual game (only to reviewers), by design.
+So "commercial soundness" lives in the SAFE-vs-BORDERLINE split, not in a
+separate field - the three-value `compliance` tag is deliberately overloaded
+to carry both "is it legal" and "is it sensible to say" (same overloading
+the Post-2026-09-04 note established, now applied at scale).
+
+### The SAFE->BORDERLINE sweep (87 distractors, all 43 L1+L2 scenario files)
+
+Root cause of the reviewer confusion: combative/condescending lines and
+false concessions were tagged `safe`. Swept **87 non-optimal options from
+`compliance: 'safe'` to `'borderline'`** across the standard L1 (R1-10 x 3
+regimes) and L2 (R11-20) scenario files. This is the Post-2026-09-04
+convention applied wholesale rather than item-by-item.
+
+- **What changed:** combative/condescending distractors (dismiss, lecture,
+  blame, accuse, presume-intent, guilt-trip, shame, "should have caught it",
+  "brand worry overblown", "harder to please", "wishful thinking", "in your
+  head", cast-doubt-on-her-team, etc.) AND false concessions that validate a
+  harmful/incorrect partner belief ("Booking is just a billboard", "Partner
+  Offer is a punishment", "keep your site cheaper", "same-net is fine",
+  "you're in a category of one", "the market's soft, wait it out", etc.).
+- **What stayed SAFE:** pure fluff / route-error near-misses (soft check-in,
+  "agree but leave it vague", premature "jump to the fix", compliant-but-
+  incomplete asks). These are genuinely legal-and-sensible-just-not-best;
+  the absence of `[OPTIMAL]` is what marks them wrong.
+- **Left as SAFE deliberately (~15 judgment calls, NOT swept):** overpromises
+  ("BSB will guarantee a surge"), pushy closes ("commit today"), and the "be
+  cheaper / undercut your own site / cut public rates" asks. That last group
+  is a **legal** question (Narrow/No-Parity price-pressure), not a tone one -
+  flag to SME/legal separately, don't fold into this convention.
+- **Grading impact: none on the winning path.** Only non-optimal options
+  changed; the optimal path is all-optimal-all-safe and still 3-stars every
+  round. The change is a desirable tightening: a call containing a combative
+  or conceding line can no longer scrape a 1-star pass (borderline fails the
+  floor's all-safe criterion), and the in-call wrong-step cue now fires on
+  these picks. `tsc -b` clean.
+
+### Tooling for the sweep (untracked dev scripts in `client/scripts/`)
+
+- `audit-safe-distractors.entry.ts` + `.mjs` - enumerate/classify every
+  non-optimal `safe` distractor across the 8 packs and hold the canonical
+  `CHANGE_IDS` set (the 87 ids). Also generates the hand-edit list.
+- **`docs/review-pack-compliance-tag-fixes.md`** - the per-pack hand-edit
+  list (round + step + first ~20 words of the spoken line, since titles are
+  hidden), for Chris to apply the same SAFE->BORDERLINE changes to the
+  review packs he uploaded to **Google Drive** (he edits those by hand -
+  reviewers already commented, so re-upload would lose their work, and he'd
+  re-added the OPC tables manually). The `docs/review-packs/*.docx` in the
+  repo were regenerated to match; the Drive copies are the ones he edits.
+- To re-run the sweep or extend it: edit `CHANGE_IDS`, then the patch is
+  `id: '<id>'` -> next `compliance: 'safe'` becomes `'borderline'` (a
+  scratch node script did this; options always list compliance after id).
+
 ## Things to avoid
 
 - Don't reintroduce em dashes (saved as a feedback memory).

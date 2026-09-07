@@ -219,7 +219,7 @@ const step4Options: BranchingOption[] = [
       "So it might be nothing. Then I'll leave my rates where they are and keep watching.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -6,
   },
 ];

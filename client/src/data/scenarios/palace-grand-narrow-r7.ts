@@ -51,7 +51,7 @@ const step1Options: BranchingOption[] = [
       "So we agree they're the problem. Then what are you actually going to do about it?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -233,7 +233,7 @@ const step4Options: BranchingOption[] = [
       "I came to you with the data and asked for help. Telling me I'm the problem isn't help.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -9,
   },
 ];

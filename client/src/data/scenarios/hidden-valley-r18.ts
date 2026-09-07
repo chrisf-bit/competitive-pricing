@@ -207,7 +207,7 @@ const step4Options: BranchingOption[] = [
       "It's adjusting the price travelers see. 'Don't give it a second thought' is not reassuring to someone accountable for our positioning.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -4,
   },
   {

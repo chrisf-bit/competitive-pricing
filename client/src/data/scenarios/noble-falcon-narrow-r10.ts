@@ -105,7 +105,7 @@ const step2Options: BranchingOption[] = [
       "So we agree the strategy works. Then what are we fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
       "You're telling me my brand means nothing? That's a strange way to win me over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
 ];
@@ -231,7 +231,7 @@ const step4Options: BranchingOption[] = [
       "You raised it, then waved it off. Which is it?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -4,
   },
 ];
@@ -287,7 +287,7 @@ const step5Options: BranchingOption[] = [
       "So now it's my fault too. This is not going the way I hoped.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];
@@ -329,7 +329,7 @@ const step6Options: BranchingOption[] = [
       "You clearly haven't cleaned the rooms afterward. We're done here.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
   {

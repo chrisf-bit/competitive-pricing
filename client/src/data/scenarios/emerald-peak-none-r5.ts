@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
       "So the model's fine, then? What are we actually solving here?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {

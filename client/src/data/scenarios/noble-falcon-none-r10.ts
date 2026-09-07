@@ -50,7 +50,7 @@ const step1Options: BranchingOption[] = [
       "You've decided that in seconds. That's not how we run this brand.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
   {
@@ -106,7 +106,7 @@ const step2Options: BranchingOption[] = [
       "So we agree. Then I'm not sure what you're here to change.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -120,7 +120,7 @@ const step2Options: BranchingOption[] = [
       "A rounding error? You clearly don't run the P&L I run.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];
@@ -176,7 +176,7 @@ const step3Options: BranchingOption[] = [
       "So there's nothing to discuss. Disappointing use of the slot.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
 ];
@@ -232,7 +232,7 @@ const step4Options: BranchingOption[] = [
       "You don't get to decide how flexible my brand rules are. I do.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];
@@ -288,7 +288,7 @@ const step5Options: BranchingOption[] = [
       "So now it's my fault as well. This isn't going the way I hoped.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];
@@ -330,7 +330,7 @@ const step6Options: BranchingOption[] = [
       "You clearly haven't cleaned the rooms afterward. We're done here.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
   {

@@ -121,7 +121,7 @@ const step2Options: BranchingOption[] = [
       "I called to look at performance, not to be told my business is a mess. Watch your tone.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
 ];
@@ -163,7 +163,7 @@ const step3Options: BranchingOption[] = [
       "That's a lot of 'not us' and not much help. Where does that leave me?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -331,7 +331,7 @@ const step6Options: BranchingOption[] = [
       "I said I'd look at it by Friday. Pushing me now just makes me less inclined.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -6,
   },
   {

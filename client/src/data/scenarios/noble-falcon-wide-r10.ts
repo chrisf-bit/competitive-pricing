@@ -49,7 +49,7 @@ const step1Options: BranchingOption[] = [
       "That's a head-office directive, not a mistake I made. If you're here to tell me it's wrong, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
   {
@@ -105,7 +105,7 @@ const step2Options: BranchingOption[] = [
       "So the strategy's fine, then. I'm not sure what we're reviewing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
       "You're telling me I don't understand my own guests? That's a bold way to open.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
 ];
@@ -287,7 +287,7 @@ const step5Options: BranchingOption[] = [
       "So now it's my fault as well. I think we're done for today.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
 ];
@@ -329,7 +329,7 @@ const step6Options: BranchingOption[] = [
       "(The line is already dead. That last line will not have helped next month's conversation.)",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -6,
   },
   {

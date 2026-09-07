@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
       "That's a relief, honestly. So we just wait for demand to come back?",
     styleMatch: { red: 0, yellow: 1, green: 0, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -124,7 +124,7 @@ const step2Options: BranchingOption[] = [
       "My team knows our pricing inside out. I'm not going to sit here and let you tell me their numbers are wrong.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -7,
   },
 ];

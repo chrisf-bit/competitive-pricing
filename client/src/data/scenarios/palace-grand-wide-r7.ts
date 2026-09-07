@@ -232,7 +232,7 @@ const step4Options: BranchingOption[] = [
       "If your pitch is that this is all my fault, you can see why I'd rather just leave it as it is.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 2,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -8,
   },
 ];

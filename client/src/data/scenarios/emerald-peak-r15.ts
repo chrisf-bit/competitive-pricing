@@ -176,7 +176,7 @@ const step3Options: BranchingOption[] = [
       "Exactly. So we're agreed there's nothing to change here.",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: -2 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
 ];

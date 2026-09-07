@@ -117,7 +117,7 @@ const step2Options: BranchingOption[] = [
       "My loyalty base isn't a waste - it's the backbone of my business. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];
@@ -229,7 +229,7 @@ const step4Options: BranchingOption[] = [
       "Pressuring me like that when I'm trying to work with you is a poor move.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
     assertiveness: 3,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -11,
   },
 ];

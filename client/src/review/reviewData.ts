@@ -40,6 +40,7 @@ const PERSONAS = [
 export interface FlowOption {
   id: string;
   label: string;
+  description?: string;
   playerDialogue: string;
   partnerResponse: string;
   compliance: 'safe' | 'borderline' | 'risky';
@@ -203,6 +204,7 @@ function toFlowSteps(tree: BranchingConversationTree): FlowStep[] {
     options: s.options.map((o) => ({
       id: o.id,
       label: o.label,
+      description: o.description,
       playerDialogue: o.playerDialogue,
       partnerResponse: o.partnerResponse,
       compliance: o.compliance,
