@@ -16,6 +16,20 @@ const ALL_PARTNERS: PartnerState[] = [...initialPartners, ...pendingPartners];
 const recordFor = (id: string) =>
   ALL_PARTNERS.find((p) => p.persona.id === id) ?? null;
 
+// Canonical OPC field order - matches the seven cards the sim's OPC tab
+// renders (PartnerDetailScreen OpcMetricsTab). Iterating this fixed list
+// (rather than Object.keys on the partner data) keeps the review pack's
+// OPC grid complete: partial data shows "Data pending", never a short list.
+const OPC_KEYS = [
+  'unsoldRooms',
+  'sellThroughRate',
+  'distributionOfSearch',
+  'visibilityShare',
+  'clickThroughRate',
+  'conversion',
+  'searchPrice',
+] as const;
+
 const PERSONAS = [
   { id: 'conversation-architect', label: 'Conversation Architect' },
   { id: 'objection-navigator', label: 'Objection Navigator' },
@@ -118,10 +132,19 @@ function buildDossier(
   }
   // OPC metrics only surface from Level 2 (round >= 11) onward, mirroring
   // the sim: the On Platform Competitiveness tab is locked at Level 1.
-  if (m.opcMetrics && round >= 11) {
-    for (const [k, v] of Object.entries(m.opcMetrics)) {
-      if (v && typeof v === 'object' && 'value' in v)
-        metrics.push({ label: `OPC ${k}`, value: `${v.value}${v.peerValue !== undefined ? ` vs ${v.peerValue} peer` : v.deltaPct !== undefined ? ` (${v.deltaPct > 0 ? '+' : ''}${v.deltaPct}%)` : ''}` });
+  // Emit ALL seven OPC fields in the same fixed order the sim's OPC tab
+  // renders them, so the pack shows the full grid - unpopulated fields
+  // render "Data pending" exactly as the sim card does, rather than being
+  // silently dropped.
+  if (round >= 11) {
+    const opc = m.opcMetrics;
+    for (const k of OPC_KEYS) {
+      const v = opc?.[k];
+      const value =
+        v && typeof v === 'object' && 'value' in v
+          ? `${v.value}${v.peerValue !== undefined ? ` vs ${v.peerValue} peer` : v.deltaPct !== undefined ? ` (${v.deltaPct > 0 ? '+' : ''}${v.deltaPct}%)` : ''}`
+          : 'Data pending';
+      metrics.push({ label: `OPC ${k}`, value });
     }
   }
   if (m.lastPricingContactDaysAgo !== undefined)
