@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rate Right - SCORM Interaction Smoke Test</title>
+<style>
+  body { font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+    margin: 0; padding: 24px; background: #0b1b3a; color: #eef2fc; line-height: 1.5; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sub { color: #9db0d6; margin: 0 0 20px; font-size: 14px; }
+  .verdict { font-size: 16px; font-weight: 700; padding: 12px 16px; border-radius: 8px;
+    margin: 0 0 16px; background: #16305e; }
+  .verdict.ok { background: #14532d; }
+  .verdict.bad { background: #5b1a1a; }
+  .row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  button { font-size: 14px; padding: 10px 16px; border-radius: 8px; border: 0;
+    background: #ffca41; color: #06132e; font-weight: 700; cursor: pointer; }
+  button.secondary { background: #2f4a7e; color: #eef2fc; }
+  #log { background: #050f24; border: 1px solid #23407a; border-radius: 8px;
+    padding: 14px; font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12.5px; white-space: pre-wrap; word-break: break-word;
+    max-height: 60vh; overflow: auto; }
+  .ok-line { color: #7ee2a8; }
+  .bad-line { color: #ff9a9a; }
+  .dim { color: #8ea3cc; }
+  code { background: #16305e; padding: 1px 5px; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>Rate Right - SCORM Interaction Smoke Test</h1>
+  <p class="sub">SCORM 2004 3rd Edition. Writes completion, score and four
+    representative interactions, then commits. Watch the log to confirm every
+    call returns <code>true</code>.</p>
+
+  <div id="verdict" class="verdict">Running...</div>
+
+  <div class="row">
+    <button onclick="runTest()">Re-run test</button>
+    <button class="secondary" onclick="terminateNow()">Terminate</button>
+  </div>
+
+  <div id="log"></div>
+
+<script>
+/* ------------------------------------------------------------------ */
+/* SCORM 2004 API discovery (API_1484_11)                             */
+/* ------------------------------------------------------------------ */
+function findAPI(win) {
+  var tries = 0;
+  while (win.API_1484_11 == null && win.parent != null && win.parent != win && tries < 500) {
+    tries++;
+    win = win.parent;
+  }
+  return win.API_1484_11;
+}
+function getAPI() {
+  var api = findAPI(window);
+  if (api == null && window.opener != null && typeof window.opener != "undefined") {
+    api = findAPI(window.opener);
+  }
+  return api;
+}
+
+/* ------------------------------------------------------------------ */
+/* Logging helpers                                                     */
+/* ------------------------------------------------------------------ */
+var logEl = document.getElementById("log");
+function log(msg, cls) {
+  var line = document.createElement("div");
+  if (cls) line.className = cls;
+  line.textContent = msg;
+  logEl.appendChild(line);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+function setVerdict(text, cls) {
+  var v = document.getElementById("verdict");
+  v.textContent = text;
+  v.className = "verdict " + (cls || "");
+}
+
+/* ------------------------------------------------------------------ */
+/* Wrapped API calls that log their result                             */
+/* ------------------------------------------------------------------ */
+var API = null;
+var failures = 0;
+
+function ts() {
+  // SCORM 2004 timestamp: second precision, no milliseconds.
+  var d = new Date();
+  function p(n) { return (n < 10 ? "0" : "") + n; }
+  return d.getFullYear() + "-" + p(d.getMonth() + 1) + "-" + p(d.getDate()) +
+    "T" + p(d.getHours()) + ":" + p(d.getMinutes()) + ":" + p(d.getSeconds());
+}
+
+function set(el, val) {
+  var ok = API.SetValue(el, String(val));
+  if (ok === "true" || ok === true) {
+    log("SetValue  " + el + " = " + val + "  -> true", "ok-line");
+  } else {
+    failures++;
+    var code = API.GetLastError();
+    log("SetValue  " + el + " = " + val + "  -> " + ok +
+      "  [err " + code + ": " + API.GetErrorString(code) + " | " +
+      API.GetDiagnostic(code) + "]", "bad-line");
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* The test                                                            */
+/* ------------------------------------------------------------------ */
+function runTest() {
+  logEl.innerHTML = "";
+  failures = 0;
+  setVerdict("Running...", "");
+
+  API = getAPI();
+  if (API == null) {
+    setVerdict("FAIL - no SCORM 2004 API (API_1484_11) found. Is this launched inside the LMS?", "bad");
+    log("Could not locate API_1484_11 in any parent or opener window.", "bad-line");
+    return;
+  }
+  log("Found API_1484_11.", "ok-line");
+
+  var init = API.Initialize("");
+  if (init !== "true" && init !== true) {
+    var c = API.GetLastError();
+    setVerdict("FAIL - Initialize returned " + init, "bad");
+    log("Initialize -> " + init + "  [err " + c + ": " + API.GetErrorString(c) + "]", "bad-line");
+    return;
+  }
+  log("Initialize -> true", "ok-line");
+
+  // --- headline completion + score ---
+  set("cmi.completion_status", "completed");
+  set("cmi.success_status", "passed");
+  set("cmi.score.scaled", "0.82");
+  set("cmi.score.raw", "82");
+  set("cmi.score.min", "0");
+  set("cmi.score.max", "100");
+
+  log("--- writing interactions ---", "dim");
+
+  // Interaction 0: partner selection (choice, correct)
+  set("cmi.interactions.0.id", "l1.r3.partner-selection");
+  set("cmi.interactions.0.type", "choice");
+  set("cmi.interactions.0.timestamp", ts());
+  set("cmi.interactions.0.learner_response", "royal-crest");
+  set("cmi.interactions.0.result", "correct");
+  set("cmi.interactions.0.description", "L1 R3 - pick the priority partner");
+
+  // Interaction 1: diagnosis (choice, correct)
+  set("cmi.interactions.1.id", "l1.r3.diagnosis");
+  set("cmi.interactions.1.type", "choice");
+  set("cmi.interactions.1.timestamp", ts());
+  set("cmi.interactions.1.learner_response", "brandcom-gap");
+  set("cmi.interactions.1.result", "correct");
+  set("cmi.interactions.1.description", "L1 R3 - diagnosis pick");
+
+  // Interaction 2: objection response (choice, correct) - carries objection code
+  set("cmi.interactions.2.id", "l2.r15.obj.OBJ_14");
+  set("cmi.interactions.2.type", "choice");
+  set("cmi.interactions.2.timestamp", ts());
+  set("cmi.interactions.2.learner_response", "acknowledge-and-reframe");
+  set("cmi.interactions.2.result", "correct");
+  set("cmi.interactions.2.description", "L2 R15 - response to objection OBJ_14");
+
+  // Interaction 3: computed capability score (other, numeric-ish, neutral)
+  set("cmi.interactions.3.id", "cap.objection-handling");
+  set("cmi.interactions.3.type", "other");
+  set("cmi.interactions.3.timestamp", ts());
+  set("cmi.interactions.3.learner_response", "79");
+  set("cmi.interactions.3.result", "neutral");
+  set("cmi.interactions.3.description", "Computed capability score 0-100");
+
+  var commit = API.Commit("");
+  if (commit === "true" || commit === true) {
+    log("Commit -> true", "ok-line");
+  } else {
+    failures++;
+    var cc = API.GetLastError();
+    log("Commit -> " + commit + "  [err " + cc + ": " + API.GetErrorString(cc) + "]", "bad-line");
+  }
+
+  if (failures === 0) {
+    setVerdict("PASS - all values written and committed. Now check the Docebo report.", "ok");
+  } else {
+    setVerdict("PARTIAL - " + failures + " call(s) failed. See red lines below.", "bad");
+  }
+}
+
+function terminateNow() {
+  if (!API) { log("No API to terminate.", "dim"); return; }
+  var t = API.Terminate("");
+  log("Terminate -> " + t, (t === "true" || t === true) ? "ok-line" : "bad-line");
+}
+
+/* Auto-run on load, and terminate on unload so the attempt closes cleanly. */
+window.addEventListener("load", runTest);
+window.addEventListener("unload", function () {
+  try { if (API) API.Terminate(""); } catch (e) {}
+});
+</script>
+</body>
+</html>

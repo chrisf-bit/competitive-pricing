@@ -1,0 +1,43 @@
+Structural Changes Extract - August 2026
+Three pieces of client structural feedback have been implemented on branch release-2-partner-detail. This document lists every change, from before to after, for review. The build is clean: tsc and vite.
+Summary
+1. Fictional locations: Every real city or country has been replaced with a fictional place, so no location maps to the published parity list.
+2. Real room counts: The 10 lead hotels now show the real room numbers from Partner Data Set 46.
+3. Expedia to Key OTA: Every learner-facing reference to Expedia has been replaced with Key OTA.
+1. Fictional locations
+One fictional location is used per property across all of its parity-regime variants, so location no longer signals a regime. There is no gameplay impact: location is display-only, while parity is driven by a separate internal field.
+Lead hotels shown in the standard journey
+Hotel roundOld - Wide / Narrow / No ParityNew all regimesRoyal Crest Hotel (R1)Miami Beach, USA / Cotswolds, UK / Costa del Sol, SpainWest Haven, Republic of AldenSilver Horizon Resort (R2)Orlando, USA / Lake District, UK / Costa Brava, SpainSanta Delmar, Republic of ValoraOcean View Resort (R3)San Diego, USA / Brighton, UK / Alicante, SpainSan Carlos Port, United States of MarisotRiverside Boutique Hotel (R4)Charleston, USA / Bath, UK / Seville, SpainClayton-on-Mersey, Federal State of KenshireEmerald Peak Lodge (R5)Aspen, USA / Lake District, UK / Sierra Nevada, SpainArnesund, Kingdom of NorlandOceanfront Bliss Lodge (R6)San Diego, USA / Cornwall, UK / Málaga, SpainNusa Merah, Republic of NusantaraPalace Grand Resort (R7)Orlando, USA / London, UK / Marbella, SpainMont Bellerive, Grand Duchy of ValenceThe Hidden Valley Resort (R8)Aspen, USA / Lake District, UK / Sierra Nevada, SpainAltenstrad, Federal Republic of EldonLoft Living Inn (R9)Austin, USA / Manchester, UK / Seville, SpainKurokawa-Shi, State of ShinanoThe Noble Falcon Inn (R10)New York, USA / London, UK / Seville, SpainPort Al-Qasira, Emirate of Qasira
+Cross-Regional KAM companies: location and HQ pill
+Company base hotelOld locationOld HQNew locationNew HQNorthumbrian Quays (Royal Crest)London, UKLondonWest Haven, Republic of AldenRepublic of AldenHawkesbury Hotel Investments (Silver Horizon)Costa Brava, SpainSpainSanta Delmar, Republic of ValoraRepublic of ValoraAttica Harbour (Ocean View)Athens, GreeceAthensSan Carlos Port, United States of MarisotUnited States of MarisotGolf + Leisure Clubs (Riverside)SingaporeSingaporeClayton-on-Mersey, Federal State of KenshireFederal State of KenshireAravalli Hotels (Emerald Peak)Delhi, IndiaDelhiArnesund, Kingdom of NorlandKingdom of NorlandMarlow & Keene (Oceanfront)Amsterdam, NetherlandsAmsterdamNusa Merah, Republic of NusantaraRepublic of NusantaraThames Hospitality (Palace Grand)New York, USANew YorkMont Bellerive, Grand Duchy of ValenceGrand Duchy of ValenceValle do Paraiba (Hidden Valley)Rio de Janeiro, BrazilRio de JaneiroAltenstrad, Federal Republic of EldonFederal Republic of EldonMidtown River (Loft Living)London, UKLondonKurokawa-Shi, State of ShinanoState of ShinanoCuajimalpa Highlands (Noble Falcon)Mexico City, MexicoMexicoPort Al-Qasira, Emirate of QasiraEmirate of Qasira
+Non-active records
+These partner records are retired or parked and are not on any current portfolio. They were changed for completeness, so no real place name remains anywhere in the data.
+RecordOld per regime where applicableNewCrystal Water ResortMiami Beach / Cornwall / MarbellaValdecosta, Republic of MarenzaVelvet Sky Boutique HotelNew York / Edinburgh / MadridHighmoor, Kingdom of EstlandRaven InnValencia / Bath / BostonThornwick, Duchy of BrammarkDriftwood Bay ResortMallorca / Brighton / Newport BeachCoralport, Republic of SarabayaMarina boutique city hotelMadrid / London / New YorkSolenne, Republic of CasteauxCarlos city apartmentsBarcelona / Manchester / Los AngelesPuerto Vialta, Republic of AndiraJohn MarstonYork, EnglandAshcombe, Kingdom of WessmarkStavrosKos, GreeceKalithnos, Republic of AegoraHannahCotswolds, EnglandElderfield, Duchy of HarlenPriyaMumbai, IndiaChandrapur, Republic of BharatiYukiKyoto, JapanHoshimura, State of Yamato
+Portfolio market banner
+The seasonal and competitor banner previously named real cities per regime. It has been rewritten to be geography-neutral because learners in one regime now hold a portfolio spanning several fictional countries, so no single real market applies.
+RoundOld copyNew copy1Spanish coastal and city competitors are actively using discount tools...Coastal and city competitors are actively using discount tools...2Costa del Sol competitors have entered... Madrid and Barcelona hotels... Valencia and Mallorca demand is climbing.Competitors have entered with aggressive summer pricing. Established city hotels are holding steady while coastal and resort demand climbs week on week.2 notepeak Spanish summerpeak summer3Spanish market pricing competition has intensified...Market pricing competition has intensified...3 notePeak Spanish summer is imminent...Peak summer is imminent...Narrow previously used UK cities and Wide previously used US cities. All versions now use the same neutral copy above.
+2. Real room counts
+Source: SME Partner Data Set 46, using the Number of room column. These values are display-only.
+HotelOld roomsNew roomsRoyal Crest Hotel120101Silver Horizon Resort6461Ocean View Resort11090Riverside Boutique Hotel4249Emerald Peak Lodge88185Oceanfront Bliss Lodge58309Palace Grand Resort18470The Hidden Valley Resort9677Loft Living Inn46190The Noble Falcon Inn288288 unchanged
+3. Expedia to Key OTA
+Every learner-facing reference to Expedia has been replaced with Key OTA. The lesson in each compliance scenario is unchanged: it teaches the behaviour, not the brand.
+Rendered UI and data
+WhereBeforeAfterPartner Detail - Competitor KPIExpediaKey OTAData & Insights - hotspot table Competitor columnExpediaKey OTACompetitor metric tooltip...or Expedia / a Key OTA....or a Key OTA.Silver Horizon persona profileFields aggressive competitor calls (Expedia)...Fields aggressive Key OTA competitor calls...Conversation Review tool - Competitor valueExpediaKey OTA
+Conversation dialogue and coaching text
+* Silver Horizon R2 - Narrow: References to Expedia in partner lines, pricing options, inventory prompts, and coaching feedback were changed to Key OTA.
+* Silver Horizon R2 - Wide: References to Expedia in competitor-call lines, matching options, problem framing, and rate-alignment guidance were changed to Key OTA.
+* Riverside R4 - Narrow: References to Expedia in undercutting, pricing, and competitor prompts were changed to Key OTA.
+* Riverside R4 - Wide: References to Expedia in family occupancy, rate comparison, and inventory guidance were changed to Key OTA.
+* Loft Living R9 - Narrow: References to Expedia in price-gap, OTA comparison, and pricing guidance were changed to Key OTA.
+* Legacy distractor dialogue: References to Expedia in Marina, Carlos, and Priya dialogue were changed to Key OTA, even though these are not on current portfolios.
+Persona hint lines
+BeforeAfterExpect "Expedia cuts margin, I give everyone the same rate..."Expect "The Key OTA cuts margin, I give everyone the same rate..."...bleeding the high-value International and Family segments to Expedia....to the Key OTA....scenarios flag exactly where Expedia undercuts....where the Key OTA undercuts....Competitive Aggression from Expedia......from the Key OTA...
+Deliberately not changed
+* Internal, non-rendered strings: Code comments, scenario step IDs, and the internal competitor token still say expedia or hold old city names in comments. None of these appear to the learner.
+* KAM company names: Names such as Thames Hospitality Group and Aravalli Hotels carry mild regional hints. These were left as-is and can be neutralised if needed.
+* Contact names: Names such as Liam O'Connell and Anton Müller were unchanged because they were out of scope for this pass.
+* Cultural flavour in one parked record: Yuki's ryokans / Komorebi references were left unchanged because they are not city or country names and the record is not shown.
+Files touched
+The changes touched data/partners.ts, data/market.ts, data/metricDefinitions.ts, screens/PartnerDetailScreen.tsx, screens/DashboardHotspotScreen.tsx, review/reviewData.ts, data/personaHints.ts, and the scenario files silver-horizon-{narrow,wide}-r2.ts, riverside-{narrow,wide}-r4.ts, loft-living-narrow-r9.ts, conversations.ts, and conversations-priya.ts.
+
+
