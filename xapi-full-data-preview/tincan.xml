@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tin Can / xAPI launch manifest. An LMS that supports Tin Can packages
+  (Docebo, SCORM Cloud, etc.) reads this on upload, then launches
+  index.html appending the xAPI launch params: endpoint, auth, actor,
+  registration, activity_id.
+
+  This package generates a full worked-example playthrough (every statement
+  type in the Rate Right taxonomy) and shows the exact Snowflake table rows
+  each statement produces. It can also POST the whole set to the launching
+  LRS so the data team can see the rows land end to end.
+-->
+<tincan xmlns="http://projecttincan.com/tincan.xsd">
+  <activities>
+    <activity id="https://booking.com/xapi/rate-right/full-data-preview" type="http://adlnet.gov/expapi/activities/course">
+      <name>Rate Right - xAPI Full Data Preview</name>
+      <description lang="en-US">Generates a complete per-learner xAPI playthrough and renders the full Snowflake table structure (all six Fact/Dim tables) it produces. Optionally POSTs the whole set to the LRS.</description>
+      <launch lang="en-US">index.html</launch>
+    </activity>
+  </activities>
+</tincan>

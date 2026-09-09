@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rate Right - xAPI Full Data Preview</title>
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { font-family: ui-sans-serif, system-ui, "Segoe UI", Roboto, sans-serif;
+    margin: 0; padding: 24px; background: #0b1b3a; color: #eef2fc; line-height: 1.5; }
+  h1 { font-size: 21px; margin: 0 0 4px; }
+  h2 { font-size: 16px; margin: 22px 0 8px; color: #ffca41; }
+  .sub { color: #9db0d6; margin: 0 0 18px; font-size: 14px; max-width: 900px; }
+  .verdict { font-size: 15px; font-weight: 700; padding: 12px 16px; border-radius: 8px;
+    margin: 0 0 16px; background: #16305e; }
+  .verdict.ok { background: #14532d; }
+  .verdict.bad { background: #5b1a1a; }
+  .row { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: flex-end; }
+  button { font-size: 14px; padding: 10px 16px; border-radius: 8px; border: 0;
+    background: #ffca41; color: #06132e; font-weight: 700; cursor: pointer; }
+  button.secondary { background: #2f4a7e; color: #eef2fc; }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  label { display: block; font-size: 11.5px; color: #9db0d6; margin-bottom: 3px; }
+  input { font-size: 12.5px; padding: 8px 10px; border-radius: 6px; border: 1px solid #23407a;
+    background: #050f24; color: #eef2fc; font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .manual { background: #0f2247; border: 1px solid #23407a; border-radius: 8px;
+    padding: 14px; margin: 0 0 16px; }
+  .manual .row { margin-bottom: 10px; }
+  .tabs { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 4px; border-bottom: 1px solid #23407a; }
+  .tab { background: #16305e; color: #cdd9f2; border-radius: 8px 8px 0 0; padding: 9px 14px;
+    font-size: 13px; font-weight: 700; }
+  .tab.active { background: #ffca41; color: #06132e; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .stats { display: flex; gap: 20px; flex-wrap: wrap; margin: 4px 0 14px;
+    background: #0f2247; border: 1px solid #23407a; border-radius: 8px; padding: 12px 16px; }
+  .stat b { display: block; font-size: 22px; color: #ffca41; }
+  .stat span { font-size: 12px; color: #9db0d6; }
+  .tablewrap { overflow-x: auto; border: 1px solid #23407a; border-radius: 8px; margin-bottom: 8px; }
+  table { border-collapse: collapse; width: 100%; font-size: 12px;
+    font-family: ui-monospace, Menlo, Consolas, monospace; }
+  th, td { text-align: left; padding: 6px 9px; border-bottom: 1px solid #1c356b; white-space: nowrap; }
+  th { background: #16305e; color: #ffe08a; position: sticky; top: 0; font-weight: 700; }
+  td { border-bottom: 1px solid #14294f; color: #dbe6fb; }
+  tr:nth-child(even) td { background: #0d1f43; }
+  .ddl { color: #7f92b8; font-size: 11px; margin: 0 0 8px; }
+  .tablecard { margin-bottom: 26px; }
+  .tablecard .row { margin-bottom: 8px; }
+  #log { background: #050f24; border: 1px solid #23407a; border-radius: 8px;
+    padding: 14px; font-family: ui-monospace, Menlo, Consolas, monospace;
+    font-size: 12.5px; white-space: pre-wrap; word-break: break-word;
+    max-height: 50vh; overflow: auto; }
+  .ok-line { color: #7ee2a8; }
+  .bad-line { color: #ff9a9a; }
+  .dim { color: #8ea3cc; }
+  code { background: #16305e; padding: 1px 5px; border-radius: 4px; }
+  pre.json { background: #050f24; border: 1px solid #23407a; border-radius: 8px;
+    padding: 14px; font-size: 11.5px; max-height: 68vh; overflow: auto;
+    font-family: ui-monospace, Menlo, Consolas, monospace; }
+  .count-pill { font-size: 11px; background: #23407a; border-radius: 20px; padding: 2px 8px; margin-left: 6px; }
+</style>
+</head>
+<body>
+  <h1>Rate Right - xAPI Full Data Preview</h1>
+  <p class="sub">A complete, worked-example playthrough of one learner rendered as xAPI. It
+    generates every statement type in the Rate Right taxonomy for a full 20-round run, then
+    shows the exact <b>Snowflake table rows</b> each statement produces using the
+    field-to-column mapping in the Data Pipeline Schema (v0.2). Use it to see the full per-user
+    data structure before build, and (optionally) to POST the whole set to a live LRS.</p>
+
+  <div id="verdict" class="verdict">Generating a full playthrough...</div>
+
+  <div id="manual" class="manual">
+    <div class="row">
+      <div style="flex:1 1 220px">
+        <label>Learner id (actor.account.name)</label>
+        <input id="m-learner" style="width:100%" value="BK-1234" />
+      </div>
+      <div style="flex:1 1 160px">
+        <label>Regime</label>
+        <input id="m-regime" style="width:100%" value="no-parity" />
+      </div>
+      <div style="flex:2 1 340px">
+        <label>LRS endpoint (optional, for POST - must end with <code>/</code>)</label>
+        <input id="m-endpoint" style="width:100%" placeholder="https://cloud.scorm.com/lrs/XXXX/" />
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:0">
+      <div style="flex:1 1 260px">
+        <label>Auth header (optional, e.g. <code>Basic a2V5OnNlY3JldA==</code>)</label>
+        <input id="m-auth" style="width:100%" placeholder="Basic ..." />
+      </div>
+      <button class="secondary" onclick="regenerate()">Regenerate</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <button onclick="postAll()">POST all statements to LRS</button>
+    <button class="secondary" onclick="downloadStatements()">Download statements (JSON)</button>
+    <button class="secondary" onclick="queryCount()">Count statements in LRS</button>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="panel-tables" class="panel active"></div>
+  <div id="panel-statements" class="panel"><pre class="json" id="json"></pre></div>
+  <div id="panel-log" class="panel"><div id="log"></div></div>
+
+<script>
+"use strict";
+
+/* ================================================================== */
+/* Constants - namespaces from the Data Pipeline Schema v0.2           */
+/* ================================================================== */
+var XAPI_VERSION = "1.0.2";                              // Docebo LRS cap
+var NS  = "https://booking.com/xapi/rate-right";         // object-id root
+var EXT = "https://booking.com/xapi/extensions";         // extension-key root
+var VB  = "https://booking.com/xapi/verbs";              // custom-verb root
+var ADL = "http://adlnet.gov/expapi/verbs";
+var ACT = "http://adlnet.gov/expapi/activities";
+var CMII = ACT + "/cmi.interaction";
+
+/* ================================================================== */
+/* Small helpers                                                       */
+/* ================================================================== */
+function uuid() {
+  try { if (window.crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {}
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    var r = (Math.random() * 16) | 0, v = c === "x" ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+}
+function verb(id, word) { var v = { id: id, display: {} }; v.display["en-US"] = word; return v; }
+function cx(map) {                                       // context/result extension keys -> full IRIs
+  var e = {};
+  for (var k in map) if (map.hasOwnProperty(k)) e[EXT + "/" + k] = map[k];
+  return e;
+}
+function esc(s) {
+  return String(s).replace(/[&<>]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c];
+  });
+}
+
+/* ================================================================== */
+/* Playthrough definition - one learner, standard 20-round journey     */
+/* Partner ids reused across L1 (r1-10) and L2 (r11-20) per the sim.   */
+/* ================================================================== */
+var PARTNERS = ["royal-crest","silver-horizon","ocean-view","riverside","emerald-peak",
+                "oceanfront","palace-grand","hidden-valley","loft-living","noble-falcon"];
+var L1_STYLE = ["red","blue","blue","blue","red","blue","green","blue","red","blue"];
+var L2_STYLE = ["red","blue","blue","blue","red","blue","green","blue","red","blue"];
+
+// Primary objection code per L1 round (XPC set OBJ_1..OBJ_12), with a few supports.
+var L1_OBJ = { 1:["OBJ_1","OBJ_2"], 2:["OBJ_3"], 3:["OBJ_6"], 4:["OBJ_7"], 5:["OBJ_6"],
+               6:["OBJ_2"], 7:["OBJ_4","OBJ_3"], 8:["OBJ_10","OBJ_9"], 9:["OBJ_11"], 10:["OBJ_12"] };
+// L2 rounds present multiple OPC objections each (OBJ_13..OBJ_22).
+var L2_OBJ = { 11:["OBJ_13","OBJ_14","OBJ_15","OBJ_16"], 12:["OBJ_17","OBJ_18"],
+               13:["OBJ_19","OBJ_15","OBJ_20"], 14:["OBJ_19","OBJ_14","OBJ_20","OBJ_16"],
+               15:["OBJ_13","OBJ_21"], 16:["OBJ_16","OBJ_13","OBJ_21"], 17:["OBJ_17","OBJ_18"],
+               18:["OBJ_17","OBJ_18"], 19:["OBJ_17","OBJ_18"], 20:["OBJ_22"] };
+
+// Final star score per round (0-3). R8 is a 0-star first attempt that is retaken to 2.
+var L1_STARS = [2,3,1,2,3,2,3,2,2,3];   // final (post-retake) stars, rounds 1-10
+var L2_STARS = [3,2,3,2,1,2,3,2,3,3];   // rounds 11-20
+
+var STYLES_TXT = ["accommodating","assertive","analytical","expressive"];
+var CLEARANCE_ITEMS = ["a1","a2","a3","a4","a5","a6","b1","b2"];   // knowledge-check ids
+var MISCONCEPTIONS = { a3: "erpd-country-not-partner", b1: "parity-word-in-no-parity",
+                       a6: "cps-as-smart-objective" };
+
+var CAP_SLUGS = ["recognising-discrepancies","opc-cpc-understanding","diagnostic-to-pitch-flow",
+                 "signal-vs-proof","commercial-recommendation","objection-handling",
+                 "landing-next-steps","safe-framing","portfolio-prioritisation","ppai-integration"];
+var CAP_SCORES = { "recognising-discrepancies":84, "opc-cpc-understanding":72,
+  "diagnostic-to-pitch-flow":80, "signal-vs-proof":68, "commercial-recommendation":76,
+  "objection-handling":79, "landing-next-steps":81, "safe-framing":64,
+  "portfolio-prioritisation":77, "ppai-integration":70 };
+var CAP_ITEMCODES = { "recognising-discrepancies":["L0.1","L1.4"], "opc-cpc-understanding":["L0.2"],
+  "diagnostic-to-pitch-flow":["L0.4","L1.1","L1.3"], "signal-vs-proof":["L1.2"],
+  "commercial-recommendation":["L2.1","L2.2"], "objection-handling":["L2.3"],
+  "landing-next-steps":["L2.4"], "safe-framing":["L0.3"],
+  "portfolio-prioritisation":["L3.1","L3.2","L3.3","L3.4"], "ppai-integration":["L3.5"] };
+
+var COMPOSITE = 78, PERSONA = "data-detective";
+var PRIMARY_FOCUS = "safe-framing", SECONDARY_FOCUS = "objection-handling";
+
+/* ================================================================== */
+/* Config + actor                                                      */
+/* ================================================================== */
+function readConfig() {
+  var q = new URLSearchParams(window.location.search);
+  var learner = document.getElementById("m-learner").value.trim() || "BK-1234";
+  var regime  = document.getElementById("m-regime").value.trim() || "no-parity";
+  var endpoint = (q.get("endpoint") || document.getElementById("m-endpoint").value.trim() || "");
+  if (endpoint && endpoint.slice(-1) !== "/") endpoint += "/";
+  var auth = q.get("auth") || document.getElementById("m-auth").value.trim() || "";
+  // Prefer a launched actor; else the account-form actor from the schema doc.
+  var actor = null, rawActor = q.get("actor");
+  if (rawActor) { try { actor = normalizeActor(JSON.parse(rawActor)); } catch (e) {} }
+  if (!actor) {
+    actor = { objectType: "Agent", account: { homePage: NS, name: learner } };
+  }
+  // Use the registration the LMS passed at launch (Docebo correlates the
+  // attempt to it); fall back to a fresh UUID when opened directly.
+  // activity_id is the activity the LMS launched - the ONLY object id
+  // Docebo watches to mark the Tin Can lesson complete, so completion is
+  // sent against it (see completionStatement / postCompletion below).
+  return { learner: learner, regime: regime, endpoint: endpoint, auth: auth,
+    actor: actor, registration: q.get("registration") || uuid(),
+    activityId: q.get("activity_id") || "" };
+}
+function normalizeActor(a) {
+  if (!a || typeof a !== "object") return a;
+  ["mbox","name","openid"].forEach(function (k) { if (Array.isArray(a[k])) a[k] = a[k][0]; });
+  if (Array.isArray(a.account)) a.account = a.account[0];
+  if (!a.objectType) a.objectType = "Agent";
+  return a;
+}
+function learnerId(cfg) {
+  return (cfg.actor.account && cfg.actor.account.name) ||
+         (cfg.actor.mbox ? cfg.actor.mbox.replace("mailto:", "") : cfg.learner);
+}
+
+/* ================================================================== */
+/* Statement generation - a full playthrough                           */
+/* Every statement carries context.registration, level, regime.        */
+/* Scoring statements carry item-code + normalized-score; stars in      */
+/* result.score.raw (0-3), percentage in extensions.normalized-score.   */
+/* ================================================================== */
+var CLOCK = 0;                                           // seconds since session start
+function ts(baseMs, addSec) { return new Date(baseMs + addSec * 1000).toISOString(); }
+
+function buildPlaythrough(cfg) {
+  var out = [];
+  var reg = cfg.registration, actor = cfg.actor, regime = cfg.regime;
+  var base = Date.UTC(2026, 8, 15, 9, 0, 0);            // 2026-09-15 09:00:00Z
+  CLOCK = 0;
+  function tick(sec) { CLOCK += sec; return ts(base, CLOCK); }
+
+  function context(round, level, extraCtx) {
+    var m = { level: level, regime: regime };
+    if (round != null) m["round-number"] = round;
+    if (extraCtx) for (var k in extraCtx) if (extraCtx.hasOwnProperty(k)) m[k] = extraCtx[k];
+    return { registration: reg, platform: "Rate Right", language: "en-US", extensions: cx(m) };
+  }
+  function push(o) { o.id = uuid(); o.actor = actor; out.push(o); return o; }
+  function obj(idPath, name, type, interactionType) {
+    var d = { name: {}, type: type }; d.name["en-US"] = name;
+    if (interactionType) d.interactionType = interactionType;
+    return { objectType: "Activity", id: NS + idPath, definition: d };
+  }
+  function levelTag(n) { return "level-" + n; }
+  function pct(stars) { return Math.round((stars / 3) * 100); }
+
+  /* ---- 3.1 Sim initialized ---- */
+  push({ timestamp: tick(0), verb: verb(ADL + "/initialized", "initialized"),
+    object: obj("/simulation", "Rate Right Simulation", ACT + "/simulation"),
+    context: context(null, levelTag(0)) });
+
+  /* ---- Level 0: two clearance attempts (fail then pass) ---- */
+  function clearanceAttempt(attemptNo, passed, score, wrongItems) {
+    push({ timestamp: tick(5), verb: verb(ADL + "/initialized", "initialized"),
+      object: obj("/level-0/clearance", "Level 0 Clearance", ACT + "/assessment"),
+      context: context(null, levelTag(0), { "attempt-number": attemptNo,
+        "first-attempt": attemptNo === 1 }) });
+
+    // 3.7 item-answered for each knowledge check in this attempt.
+    var items = attemptNo === 1 ? CLEARANCE_ITEMS : wrongItems;
+    items.forEach(function (itemId, i) {
+      var isWrong = attemptNo === 1 && wrongItems.indexOf(itemId) !== -1;
+      var itemCode = itemId[0] === "a" ? "L0." + ((i % 4) + 1) : "L0.3";
+      var res = { success: !isWrong, completion: true, response: isWrong ? "opt-c" : "opt-a",
+        score: { raw: isWrong ? 0 : 1, min: 0, max: 1 } };
+      if (isWrong && MISCONCEPTIONS[itemId]) {
+        res.extensions = cx({ "misconception-code": MISCONCEPTIONS[itemId] });
+      }
+      push({ timestamp: tick(12), verb: verb(ADL + "/answered", "answered"),
+        object: obj("/level-0/item/" + itemId, "Clearance item " + itemId, CMII, "choice"),
+        result: res,
+        context: context(null, levelTag(0), { "item-code": itemCode }) });
+    });
+
+    // 3.6 attempt completed (passed | failed) -> FACT_CLEARANCE + FACT_GAME_EVENTS.
+    push({ timestamp: tick(6),
+      verb: passed ? verb(ADL + "/passed", "passed") : verb(ADL + "/failed", "failed"),
+      object: obj("/level-0/clearance", "Level 0 Clearance", ACT + "/assessment"),
+      result: { success: passed, completion: true,
+        score: { scaled: score / 100, raw: score, min: 0, max: 100 } },
+      context: context(null, levelTag(0), { "attempt-number": attemptNo,
+        "first-attempt": attemptNo === 1,
+        "time-to-completion-seconds": attemptNo === 1 ? 1240 : 640,
+        "normalized-score": score }) });
+  }
+  var wrong1 = ["a3", "a6", "b1"];
+  clearanceAttempt(1, false, 63, wrong1);
+  clearanceAttempt(2, true, 88, wrong1);
+
+  /* ---- 3.16 clearance milestone completed ---- */
+  push({ timestamp: tick(3), verb: verb(ADL + "/completed", "completed"),
+    object: obj("/level-0", "Clearance complete", ACT + "/course"),
+    result: { success: true, completion: true, score: { raw: 88, min: 0, max: 100, scaled: 0.88 },
+      extensions: cx({ "normalized-score": 88, "rounds-completed": 0 }) },
+    context: context(null, levelTag(0), { "milestone": "clearance-complete" }) });
+
+  /* ---- Levels 1 and 2: rounds ---- */
+  function partnerStyle(round) {
+    return round <= 10 ? L1_STYLE[round - 1] : L2_STYLE[round - 11];
+  }
+  function partnerId(round) { return PARTNERS[(round - 1) % 10]; }
+
+  function decision(round, level, phase, name, itemCode, stars, style, compliance, respTime, correct) {
+    var normalized = phase === "partner-selection" ? (correct ? 100 : 0) : pct(stars);
+    var res = { success: correct !== false, completion: true,
+      response: phase + "-opt-" + (correct === false ? "c" : "a"),
+      score: { raw: normalized, min: 0, max: 100 },
+      extensions: cx({ "normalized-score": normalized, "compliance-flag": compliance,
+        "style-match": style, "response-time-seconds": respTime, "partner-style": partnerStyle(round) }) };
+    if (phase === "partner-selection") {
+      res.extensions[EXT + "/target"] = partnerId(round);
+      res.extensions[EXT + "/response"] = partnerId(round);
+    }
+    push({ timestamp: tick(respTime), verb: verb(ADL + "/answered", "answered"),
+      object: obj("/" + level + "/round-" + round + "/" + phase, name, CMII, "choice"),
+      result: res, context: context(round, level, { "item-code": itemCode }) });
+  }
+
+  function runRound(round, stars, retakeFrom) {
+    var level = round <= 10 ? "level-1" : "level-2";
+    var lvlTag = round <= 10 ? levelTag(1) : levelTag(2);
+    var pid = partnerId(round), style = partnerStyle(round);
+    var objCodes = round <= 10 ? L1_OBJ[round] : L2_OBJ[round];
+
+    // 3.8 round initialized
+    push({ timestamp: tick(4), verb: verb(ADL + "/initialized", "initialized"),
+      object: obj("/" + level + "/round-" + round, "Round " + round, ACT + "/simulation"),
+      context: context(round, lvlTag, { "partner-id": pid }) });
+
+    if (round <= 10) {
+      // 3.9 partner selection
+      decision(round, level, "partner-selection", "Round " + round + " - partner selection",
+        "L1.4", stars, style === "red" ? 1 : 2, "safe", 22, true);
+      // 3.10 diagnostic flow completed (per-step correctness)
+      push({ timestamp: tick(40), verb: verb(ADL + "/completed", "completed"),
+        object: obj("/" + level + "/round-" + round + "/diagnostic-flow",
+          "Round " + round + " - Diagnostic Flow", ACT + "/simulation"),
+        result: { success: true, completion: true, score: { raw: 5, min: 0, max: 6 },
+          extensions: cx({ "normalized-score": 83, "coach-steps-correct": 5, "coach-path-match": 0.83,
+            "coach-steps": { trigger: true, issue: true, intent: true,
+              "root-cause": true, metric: true, hook: false } }) },
+        context: context(round, lvlTag, { "item-code": "L1.1",
+          "capability-code": "diagnostic-to-pitch-flow" }) });
+      // 3.11 conversation decisions: hook, diagnosis, pitch
+      decision(round, level, "hook", "Round " + round + " - hook", "L1.1", stars, 2, "safe", 15, true);
+      decision(round, level, "diagnosis", "Round " + round + " - diagnosis", "L1.3", stars, 2, "safe", 19, true);
+      decision(round, level, "pitch", "Round " + round + " - pitch", "L2.1", stars, stars >= 3 ? 2 : 1,
+        stars === 0 ? "risky" : "safe", 24, stars !== 0);
+    } else {
+      // L2: OPC conversation decisions
+      decision(round, level, "hook", "Round " + round + " - hook", "L3.1", stars, 2, "safe", 16, true);
+      decision(round, level, "diagnosis", "Round " + round + " - diagnosis", "L3.2", stars, 2, "safe", 20, true);
+      decision(round, level, "pitch", "Round " + round + " - pitch", "L2.2", stars, stars >= 3 ? 2 : 1,
+        "safe", 25, true);
+    }
+
+    // 3.12 + 3.13 each objection: presented (interacted) then response (answered)
+    objCodes.forEach(function (code, i) {
+      push({ timestamp: tick(6), verb: verb(ADL + "/interacted", "interacted"),
+        object: obj("/" + level + "/round-" + round + "/objection/" + code,
+          "Round " + round + " - objection " + code, CMII),
+        context: context(round, lvlTag, { "objection-type": code }) });
+      var oStars = Math.max(0, stars - (i === 0 ? 0 : 1));
+      decision(round, level, "objection-response", "Round " + round + " - objection response",
+        "L2.3", oStars, 2, oStars === 0 ? "borderline" : "safe", 18, oStars !== 0);
+      // Tag the last objection-response so the derivation routes it to FACT_OBJECTION_PERFORMANCE.
+      out[out.length - 1].result.extensions[EXT + "/objection-type"] = code;
+      out[out.length - 1].context.extensions[EXT + "/objection-type"] = code;
+    });
+
+    // 3.14 round completed with score
+    push({ timestamp: tick(5), verb: verb(ADL + "/completed", "completed"),
+      object: obj("/" + level + "/round-" + round, "Round " + round, ACT + "/simulation"),
+      result: { success: stars >= 1, completion: true, score: { raw: stars, min: 0, max: 3 },
+        extensions: cx({ "normalized-score": pct(stars), "partner-selection-correct": true,
+          "compliance-safe": stars !== 0, "style-match-sum": 5, "style-match-avg": 1.67,
+          "partner-style": style, "round-duration-seconds": 300 + round * 3,
+          "mode": retakeFrom ? "assessment" : "assessment",
+          "attempt-number": retakeFrom ? 2 : 1 }) },
+      context: context(round, lvlTag, { "item-code": round <= 10 ? "L1.4" : "L3.1" }) });
+  }
+
+  // Level 1 rounds 1-10. Round 8 is a 0-star first attempt, reset, then retaken to 2.
+  for (var r = 1; r <= 10; r++) {
+    if (r === 8) {
+      runRound(8, 0, false);
+      // 3.15 round reset (retake) - carries the prior score for traceability
+      push({ timestamp: tick(4), verb: verb(VB + "/reset", "reset"),
+        object: obj("/level-1/round-8", "Round 8", ACT + "/simulation"),
+        result: { extensions: cx({ "prior-score-raw": 0, "prior-normalized-score": 0 }) },
+        context: context(8, levelTag(1), { "attempt-number": 2 }) });
+      runRound(8, L1_STARS[7], true);
+    } else {
+      runRound(r, L1_STARS[r - 1], false);
+    }
+  }
+
+  /* ---- Level 1 milestone completed ---- */
+  var l1Stars = L1_STARS.reduce(function (a, b) { return a + b; }, 0);
+  push({ timestamp: tick(3), verb: verb(ADL + "/completed", "completed"),
+    object: obj("/level-1", "Level 1 complete", ACT + "/course"),
+    result: { success: true, completion: true,
+      score: { raw: Math.round(l1Stars / 30 * 100), min: 0, max: 100 },
+      extensions: cx({ "normalized-score": Math.round(l1Stars / 30 * 100),
+        "rounds-completed": 10, "total-stars": l1Stars }) },
+    context: context(null, levelTag(1), { "milestone": "level-1-complete" }) });
+
+  // Level 2 rounds 11-20
+  for (var r2 = 11; r2 <= 20; r2++) runRound(r2, L2_STARS[r2 - 11], false);
+
+  /* ---- Level 2 milestone completed ---- */
+  var l2Stars = L2_STARS.reduce(function (a, b) { return a + b; }, 0);
+  push({ timestamp: tick(3), verb: verb(ADL + "/completed", "completed"),
+    object: obj("/level-2", "Level 2 complete", ACT + "/course"),
+    result: { success: true, completion: true,
+      score: { raw: Math.round(l2Stars / 30 * 100), min: 0, max: 100 },
+      extensions: cx({ "normalized-score": Math.round(l2Stars / 30 * 100),
+        "rounds-completed": 10, "total-stars": l2Stars }) },
+    context: context(null, levelTag(2), { "milestone": "level-2-complete" }) });
+
+  /* ---- 3.3 ten capability-score-computed statements ---- */
+  CAP_SLUGS.forEach(function (slug) {
+    var s = CAP_SCORES[slug];
+    push({ timestamp: tick(2), verb: verb(VB + "/scored", "scored"),
+      object: obj("/capability/" + slug, slug + " capability", ACT + "/performance"),
+      result: { success: true, completion: true,
+        score: { scaled: s / 100, raw: s, min: 0, max: 100 },
+        extensions: cx({ "contributing-item-codes": CAP_ITEMCODES[slug], "statements-aggregated": 12 }) },
+      context: context(null, levelTag(3), { "capability-code": slug }) });
+  });
+
+  /* ---- 3.4 primary coaching focus identified ---- */
+  push({ timestamp: tick(2), verb: verb(VB + "/identified", "identified"),
+    object: obj("/simulation/primary-coaching-focus", "Primary coaching focus", ACT + "/performance"),
+    result: { completion: true, extensions: cx({ "primary-coaching-focus": PRIMARY_FOCUS,
+      "secondary-coaching-focus": SECONDARY_FOCUS,
+      "misconception-flags": Object.keys(MISCONCEPTIONS).map(function (k) { return MISCONCEPTIONS[k]; }) }) },
+    context: context(null, levelTag(3)) });
+
+  /* ---- 3.2 sim completed (game summary) ---- */
+  var total = l1Stars + l2Stars;
+  push({ timestamp: tick(2), verb: verb(ADL + "/completed", "completed"),
+    object: obj("/simulation", "Rate Right Simulation", ACT + "/simulation"),
+    result: { success: true, completion: true,
+      score: { scaled: COMPOSITE / 100, raw: COMPOSITE, min: 0, max: 100 },
+      extensions: cx({ "rounds-completed": 20, "total-stars": total, "persona": PERSONA,
+        "primary-coaching-focus": PRIMARY_FOCUS, "secondary-coaching-focus": SECONDARY_FOCUS }) },
+    context: context(null, levelTag(2)) });
+
+  return out;
+}
+
+/* ================================================================== */
+/* Derivation - statements -> Snowflake table rows (per schema sec 6)  */
+/* This mirrors what Booking's ETL does. Classification is by verb +   */
+/* object.id shape, exactly as the ETL would key off it.               */
+/* ================================================================== */
+function extOf(container, key) {
+  if (!container || !container.extensions) return undefined;
+  return container.extensions[EXT + "/" + key];
+}
+function objTail(id) { return id.replace(NS + "/", ""); }   // e.g. "level-1/round-3/pitch"
+function verbWord(s) { return s.verb.display["en-US"]; }
+
+function classify(s) {
+  var tail = objTail(s.object.id);
+  var seg = tail.split("/");
+  var v = verbWord(s);
+  if (tail === "simulation") return { table: "game", subtype: v === "initialized" ? "sim-initialized" : "sim-completed" };
+  if (tail === "simulation/primary-coaching-focus") return { table: "coaching" };
+  if (seg[0] === "capability") return { table: "capability", slug: seg[1] };
+  if (tail === "level-0/clearance")
+    return v === "initialized" ? { table: "game", subtype: "clearance-initialized" }
+                               : { table: "clearance" };
+  if (seg[0] === "level-0" && seg[1] === "item") return { table: "decision", decision: "clearance-item" };
+  if (/^level-\d+$/.test(tail)) return { table: "game", subtype: "level-milestone" };
+  // round-scoped objects
+  if (seg[2] === undefined && v === "initialized") return { table: "game", subtype: "round-initialized" };
+  if (seg[2] === undefined && v === "reset") return { table: "game", subtype: "round-reset" };
+  if (seg[2] === undefined && v === "completed") return { table: "decision", decision: "round-completed" };
+  if (seg[2] === "objection") return { table: "game", subtype: "objection-presented" };
+  if (seg[2] === "objection-response") return { table: "objection", decision: "objection-response" };
+  if (seg[2] === "diagnostic-flow") return { table: "decision", decision: "diagnostic-flow" };
+  if (seg[2]) return { table: "decision", decision: seg[2] };   // hook | diagnosis | pitch | partner-selection
+  return { table: "game", subtype: "other" };
+}
+
+function deriveTables(statements, cfg) {
+  var lid = learnerId(cfg), reg = cfg.registration;
+  var raw = [], game = [], decision = [], objection = [], clearance = [];
+  var capRow = { learner_id: lid, session_registration: reg }, capComputedAt = "";
+  var coachingRow = null;
+
+  statements.forEach(function (s) {
+    raw.push({ statement_id: s.id, stored_at: s.timestamp, payload: "{...xAPI JSON...}" });
+    var c = classify(s);
+    var lvl = extOf(s.context, "level");
+    var round = extOf(s.context, "round-number");
+    var regime = extOf(s.context, "regime");
+    var res = s.result || {};
+
+    if (c.table === "game") {
+      game.push({ event_id: s.id, learner_id: lid, session_registration: reg, level: lvl,
+        round_number: round == null ? "" : round, event_type: verbWord(s), event_subtype: c.subtype,
+        regime: regime || "", event_timestamp: s.timestamp, raw_statement_id: s.id });
+    } else if (c.table === "clearance") {
+      clearance.push({ attempt_id: s.id, learner_id: lid, session_registration: reg, level: lvl,
+        attempt_number: extOf(s.context, "attempt-number"), passed: !!res.success,
+        score: res.score ? res.score.raw : "", first_attempt: extOf(s.context, "first-attempt"),
+        time_to_completion_seconds: extOf(s.context, "time-to-completion-seconds"),
+        attempt_timestamp: s.timestamp, raw_statement_id: s.id });
+    } else if (c.table === "decision") {
+      var norm = extOf(res, "normalized-score");
+      var rawStars = res.score && res.score.max === 3 ? res.score.raw : "";
+      var scoreVal = norm != null ? norm : (res.score && res.score.max === 100 ? res.score.raw : "");
+      decision.push({ score_id: s.id, learner_id: lid, session_registration: reg, level: lvl,
+        item_code: extOf(s.context, "item-code") || "", capability_code: "(ETL lookup)",
+        round_number: round == null ? "" : round, decision_type: c.decision,
+        score: scoreVal == null ? "" : scoreVal, raw_score: rawStars == null ? "" : rawStars,
+        correctness: res.success == null ? "" : res.success,
+        compliance_flag: extOf(res, "compliance-flag") || "",
+        style_match: extOf(res, "style-match") == null ? "" : extOf(res, "style-match"),
+        response_time_seconds: extOf(res, "response-time-seconds") == null ? "" : extOf(res, "response-time-seconds"),
+        score_timestamp: s.timestamp, raw_statement_id: s.id });
+    } else if (c.table === "objection") {
+      objection.push({ objection_id: s.id, learner_id: lid, session_registration: reg, level: lvl,
+        round_number: round == null ? "" : round,
+        objection_type: extOf(s.context, "objection-type") || extOf(res, "objection-type") || "",
+        response_option: res.response || "", score: res.score ? res.score.raw : "",
+        compliance_flag: extOf(res, "compliance-flag") || "",
+        response_time_seconds: extOf(res, "response-time-seconds"),
+        objection_timestamp: s.timestamp, raw_statement_id: s.id });
+      // objection responses also land in FACT_DECISION_SCORES per 3.13
+      decision.push({ score_id: s.id, learner_id: lid, session_registration: reg, level: lvl,
+        item_code: extOf(s.context, "item-code") || "L2.3", capability_code: "(ETL lookup)",
+        round_number: round == null ? "" : round, decision_type: "objection-response",
+        score: extOf(res, "normalized-score"), raw_score: "",
+        correctness: res.success, compliance_flag: extOf(res, "compliance-flag") || "",
+        style_match: extOf(res, "style-match"), response_time_seconds: extOf(res, "response-time-seconds"),
+        score_timestamp: s.timestamp, raw_statement_id: s.id });
+    } else if (c.table === "capability") {
+      capRow[c.slug.replace(/-/g, "_")] = res.score ? res.score.raw : "";
+      capComputedAt = s.timestamp;
+    } else if (c.table === "coaching") {
+      coachingRow = { learner_id: lid, session_registration: reg,
+        primary_focus: extOf(res, "primary-coaching-focus"),
+        secondary_focus: extOf(res, "secondary-coaching-focus"),
+        misconception_flags: JSON.stringify(extOf(res, "misconception-flags") || []),
+        computed_at: s.timestamp };
+    }
+  });
+
+  // composite + computed_at from the sim-completed statement
+  var simDone = statements.filter(function (s) {
+    return objTail(s.object.id) === "simulation" && verbWord(s) === "completed"; })[0];
+  if (simDone) { capRow.composite_score = simDone.result.score.raw; capComputedAt = simDone.timestamp; }
+  capRow.computed_at = capComputedAt;
+
+  return {
+    RAW_STATEMENTS: { ddl: "statement_id, stored_at, payload (VARIANT)", cols:
+        ["statement_id","stored_at","payload"], rows: raw },
+    FACT_GAME_EVENTS: { ddl: "one row per lifecycle/milestone/objection-presented event", cols:
+        ["event_id","learner_id","session_registration","level","round_number","event_type",
+         "event_subtype","regime","event_timestamp","raw_statement_id"], rows: game },
+    FACT_DECISION_SCORES: { ddl: "one row per scored decision (items, partner pick, flow, hook/diag/pitch, objection response, round rollup)", cols:
+        ["score_id","learner_id","session_registration","level","item_code","capability_code",
+         "round_number","decision_type","score","raw_score","correctness","compliance_flag",
+         "style_match","response_time_seconds","score_timestamp","raw_statement_id"], rows: decision },
+    FACT_OBJECTION_PERFORMANCE: { ddl: "one row per objection response (several per L2/KAM round)", cols:
+        ["objection_id","learner_id","session_registration","level","round_number","objection_type",
+         "response_option","score","compliance_flag","response_time_seconds","objection_timestamp",
+         "raw_statement_id"], rows: objection },
+    FACT_CLEARANCE: { ddl: "one row per Level 0 attempt", cols:
+        ["attempt_id","learner_id","session_registration","level","attempt_number","passed","score",
+         "first_attempt","time_to_completion_seconds","attempt_timestamp","raw_statement_id"], rows: clearance },
+    DIM_CAPABILITY_SCORES: { ddl: "one row per learner playthrough (10 capability columns + composite)", cols:
+        ["learner_id","session_registration"].concat(CAP_SLUGS.map(function (s) { return s.replace(/-/g,"_"); }))
+          .concat(["composite_score","computed_at"]), rows: [capRow] },
+    DIM_COACHING_FOCUS: { ddl: "one row per learner playthrough", cols:
+        ["learner_id","session_registration","primary_focus","secondary_focus","misconception_flags","computed_at"],
+        rows: coachingRow ? [coachingRow] : [] }
+  };
+}
+
+/* ================================================================== */
+/* Rendering                                                           */
+/* ================================================================== */
+var CFG, STATEMENTS, TABLES;
+
+function setVerdict(text, cls) {
+  var v = document.getElementById("verdict");
+  v.textContent = text; v.className = "verdict " + (cls || "");
+}
+function renderStats() {
+  var s = document.getElementById("stats");
+  var counts = {};
+  for (var t in TABLES) counts[t] = TABLES[t].rows.length;
+  s.innerHTML =
+    stat(STATEMENTS.length, "xAPI statements") +
+    stat(counts.FACT_GAME_EVENTS, "FACT_GAME_EVENTS") +
+    stat(counts.FACT_DECISION_SCORES, "FACT_DECISION_SCORES") +
+    stat(counts.FACT_OBJECTION_PERFORMANCE, "FACT_OBJECTION_PERFORMANCE") +
+    stat(counts.FACT_CLEARANCE, "FACT_CLEARANCE") +
+    stat(counts.DIM_CAPABILITY_SCORES, "DIM_CAPABILITY_SCORES") +
+    stat(counts.DIM_COACHING_FOCUS, "DIM_COACHING_FOCUS");
+}
+function stat(n, label) { return '<div class="stat"><b>' + n + '</b><span>' + label + "</span></div>"; }
+
+function renderTables() {
+  var host = document.getElementById("panel-tables");
+  var html = "";
+  var order = ["FACT_GAME_EVENTS","FACT_DECISION_SCORES","FACT_OBJECTION_PERFORMANCE",
+    "FACT_CLEARANCE","DIM_CAPABILITY_SCORES","DIM_COACHING_FOCUS","RAW_STATEMENTS"];
+  order.forEach(function (name) {
+    var t = TABLES[name];
+    html += '<div class="tablecard"><h2>' + name +
+      '<span class="count-pill">' + t.rows.length + ' rows</span></h2>';
+    html += '<p class="ddl">' + esc(t.ddl) + "</p>";
+    html += '<div class="row"><button class="secondary" onclick="downloadCsv(\'' + name +
+      '\')">Download ' + name + ' (CSV)</button></div>';
+    html += '<div class="tablewrap"><table><thead><tr>';
+    t.cols.forEach(function (c) { html += "<th>" + esc(c) + "</th>"; });
+    html += "</tr></thead><tbody>";
+    var shown = t.rows.slice(0, 60);
+    shown.forEach(function (row) {
+      html += "<tr>";
+      t.cols.forEach(function (c) {
+        var val = row[c];
+        html += "<td>" + esc(val === undefined || val === null ? "" : val) + "</td>";
+      });
+      html += "</tr>";
+    });
+    html += "</tbody></table></div>";
+    if (t.rows.length > shown.length)
+      html += '<p class="dim">Showing first ' + shown.length + " of " + t.rows.length +
+        " rows. Download the CSV for the full set.</p>";
+    html += "</div>";
+  });
+  host.innerHTML = html;
+}
+function renderJson() {
+  document.getElementById("json").textContent = JSON.stringify(STATEMENTS, null, 2);
+}
+
+/* ---- tabs ---- */
+function buildTabs() {
+  var defs = [["tables", "Snowflake tables"], ["statements", "Raw statements"], ["log", "POST log"]];
+  var host = document.getElementById("tabs");
+  host.innerHTML = defs.map(function (d, i) {
+    return '<div class="tab' + (i === 0 ? " active" : "") + '" data-tab="' + d[0] + '" ' +
+      'onclick="showTab(\'' + d[0] + '\')">' + d[1] + "</div>";
+  }).join("");
+}
+function showTab(name) {
+  ["tables", "statements", "log"].forEach(function (n) {
+    document.getElementById("panel-" + n).classList.toggle("active", n === name);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll(".tab"), function (t) {
+    t.classList.toggle("active", t.getAttribute("data-tab") === name);
+  });
+}
+
+/* ================================================================== */
+/* Downloads                                                           */
+/* ================================================================== */
+function download(name, text, type) {
+  var blob = new Blob([text], { type: type || "text/plain" });
+  var a = document.createElement("a");
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+}
+function downloadStatements() {
+  download("rate-right-full-playthrough.json", JSON.stringify(STATEMENTS, null, 2), "application/json");
+}
+function csvCell(v) {
+  if (v === undefined || v === null) v = "";
+  v = String(v);
+  return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+}
+function downloadCsv(name) {
+  var t = TABLES[name];
+  var lines = [t.cols.join(",")];
+  t.rows.forEach(function (row) {
+    lines.push(t.cols.map(function (c) { return csvCell(row[c]); }).join(","));
+  });
+  download(name.toLowerCase() + ".csv", lines.join("\n"), "text/csv");
+}
+
+/* ================================================================== */
+/* Optional LRS POST (batched) + count                                 */
+/* ================================================================== */
+function headers(auth) {
+  return { "Content-Type": "application/json", "Authorization": auth,
+    "X-Experience-API-Version": XAPI_VERSION };
+}
+function log(msg, cls) {
+  var el = document.getElementById("log");
+  var line = document.createElement("div");
+  if (cls) line.className = cls;
+  line.textContent = msg; el.appendChild(line); el.scrollTop = el.scrollHeight;
+}
+/*
+ * Completion statement targeting the LMS-launched activity.
+ *
+ * Docebo (and any Tin Can LMS) only flips the lesson to Completed when it
+ * receives a `completed` statement whose object id is the activity_id it
+ * launched, under the registration it passed. None of the ~240 schema
+ * statements qualify - they use custom Rate Right activity ids for the
+ * data preview, which Docebo's built-in LRS also rejects as "Invalid
+ * activity". So we send this one extra statement, on the launched
+ * activity, as its own request (below) so it lands regardless of the
+ * schema batches. Returns null when opened directly (no activity_id -
+ * nothing to complete).
+ */
+function completionStatement() {
+  if (!CFG.activityId) return null;
+  return {
+    id: uuid(),
+    actor: CFG.actor,
+    verb: verb(ADL + "/completed", "completed"),
+    object: {
+      id: CFG.activityId,
+      objectType: "Activity",
+      definition: {
+        type: ACT + "/course",
+        name: { "en-US": "Rate Right - xAPI Full Data Preview" }
+      }
+    },
+    result: {
+      completion: true,
+      success: true,
+      score: { scaled: COMPOSITE / 100, raw: COMPOSITE, min: 0, max: 100 }
+    },
+    context: { registration: CFG.registration, platform: "Rate Right", language: "en-US" },
+    timestamp: new Date().toISOString()
+  };
+}
+function postCompletion(doneCb) {
+  var st = completionStatement();
+  if (!st) {
+    log("No launch activity_id in the URL - completion statement skipped " +
+      "(opened directly, so there is no LMS lesson to complete).", "dim");
+    if (doneCb) doneCb(false);
+    return;
+  }
+  log("Posting completion statement to the launch activity (" + st.object.id + ")...", "dim");
+  fetch(CFG.endpoint + "statements", { method: "POST", headers: headers(CFG.auth), body: JSON.stringify([st]) })
+    .then(function (res) { return res.text().then(function (t) { return { status: res.status, text: t }; }); })
+    .then(function (r) {
+      var ok = r.status >= 200 && r.status < 300;
+      log("completion -> " + r.status + (ok ? " (lesson marked complete)" : "  " + (r.text || "")),
+        ok ? "ok-line" : "bad-line");
+      if (doneCb) doneCb(ok);
+    })
+    .catch(function (err) { log("Completion POST failed: " + err, "bad-line"); if (doneCb) doneCb(false); });
+}
+function postAll() {
+  var endpoint = CFG.endpoint, auth = CFG.auth;
+  if (!endpoint || !auth) {
+    setVerdict("No LRS endpoint/auth. Fill them in above (or launch from an LMS) to POST. " +
+      "The tables and JSON below are ready regardless.", "bad");
+    showTab("log");
+    log("POST skipped - no endpoint/auth. This preview does not need an LRS.", "bad-line");
+    return;
+  }
+  showTab("log");
+  document.getElementById("log").innerHTML = "";
+  log("Posting " + STATEMENTS.length + " statements in batches of 25...", "dim");
+  var batches = [];
+  for (var i = 0; i < STATEMENTS.length; i += 25) batches.push(STATEMENTS.slice(i, i + 25));
+  var accepted = 0, idx = 0;
+  function next() {
+    if (idx >= batches.length) {
+      // Always follow the schema batches with the completion statement on
+      // the launched activity, so the LMS marks the lesson complete even
+      // when its built-in LRS rejects the custom-id schema statements.
+      postCompletion(function (completed) {
+        setVerdict(accepted + " of " + STATEMENTS.length +
+          " schema statements accepted by the LRS. " +
+          (CFG.activityId
+            ? (completed
+                ? "Lesson marked complete - refresh the LMS report to see Completed."
+                : "Completion statement was NOT accepted - see the POST log.")
+            : "Opened directly, so no LMS lesson to complete.") +
+          " Click Count to confirm the total.",
+          (CFG.activityId ? completed : accepted > 0) ? "ok" : "bad");
+      });
+      return;
+    }
+    var batch = batches[idx];
+    fetch(endpoint + "statements", { method: "POST", headers: headers(auth), body: JSON.stringify(batch) })
+      .then(function (res) { return res.text().then(function (t) { return { status: res.status, text: t }; }); })
+      .then(function (r) {
+        if (r.status >= 200 && r.status < 300) {
+          accepted += batch.length;
+          log("batch " + (idx + 1) + "/" + batches.length + " -> " + r.status + " (" + batch.length + " stmts)", "ok-line");
+        } else {
+          log("batch " + (idx + 1) + "/" + batches.length + " -> " + r.status, "bad-line");
+          log(r.text || "(no body)", "bad-line");
+        }
+        idx++; next();
+      })
+      .catch(function (err) { log("Network / CORS error on batch " + (idx + 1) + ": " + err, "bad-line");
+        setVerdict("FAIL - could not reach the LRS (likely CORS). See the POST log.", "bad"); });
+  }
+  next();
+}
+function queryCount() {
+  if (!CFG.endpoint || !CFG.auth) { setVerdict("Fill the LRS endpoint/auth first.", "bad"); return; }
+  showTab("log");
+  var url = CFG.endpoint + "statements?registration=" + encodeURIComponent(CFG.registration) + "&limit=500";
+  fetch(url, { method: "GET", headers: headers(CFG.auth) })
+    .then(function (res) { return res.text().then(function (t) { return { status: res.status, text: t }; }); })
+    .then(function (r) {
+      if (r.status !== 200) { log("GET statements -> " + r.status + "  " + r.text, "bad-line"); return; }
+      var n = 0; try { var j = JSON.parse(r.text); n = (j && j.statements) ? j.statements.length : 0; } catch (e) {}
+      log("GET statements (this registration) -> 200, count = " + n, "ok-line");
+    })
+    .catch(function (err) { log("Count failed: " + err, "bad-line"); });
+}
+
+/* ================================================================== */
+/* Boot                                                                */
+/* ================================================================== */
+function regenerate() {
+  CFG = readConfig();
+  STATEMENTS = buildPlaythrough(CFG);
+  TABLES = deriveTables(STATEMENTS, CFG);
+  renderStats(); renderTables(); renderJson();
+  var launched = !!(CFG.endpoint && CFG.auth);
+  setVerdict("Generated a full playthrough for " + learnerId(CFG) + ": " + STATEMENTS.length +
+    " statements across " + Object.keys(TABLES).length + " tables. " +
+    (launched ? "LRS ready - click POST all statements." :
+      "No LRS configured - preview only (add an endpoint/auth to POST)."), launched ? "" : "");
+}
+window.addEventListener("load", function () {
+  buildTabs();
+  regenerate();
+});
+</script>
+</body>
+</html>
