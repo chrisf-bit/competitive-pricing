@@ -561,6 +561,18 @@ visual now matches.
 
 ### Issue Tree Helper (guided diagnostic on Partner Detail)
 
+**SUPERSEDED (2026-09-09) - the drawer is now a "Tell"-format
+read-through, NOT a click-through wizard. See "Pricing Pathway drawer:
+Tell format (2026-09-09)" below.** The click-to-choose wizard mechanics
+described in the rest of this section (column-by-column picks, filtered
+option sets, `path` accumulation, auto-suggest "Data suggests this"
+chip, per-partner-round pick persistence via `issueTreeHelperStates`)
+no longer run. The drawer now reads out fixed SME copy per step. The
+Round 1 gate, launcher tab, dockable left/right, and mini-road are
+unchanged. `data/issueTree.ts` (the column option lists) and
+`suggestedPath`/`IssueTreePath` are now dead for the drawer (still used
+by scenario `issueTreePath` + the review tool). Kept below for history.
+
 **Renamed to "Diagnosis Coach" in Jul 2026 user-facing copy - internal
 identifiers kept.** See the "Jul 2026 session update" section below
 for the rename, coach-mode intro, auto-suggest, enlarged launcher
@@ -4117,3 +4129,94 @@ convention applied wholesale rather than item-by-item.
   The pipwerks SCORM API calls (`LMSGetValue` / `LMSSetValue`) are
   the only "outside the bundle" comms allowed, and those go to the
   LMS-injected `window.API` object, not the network.
+
+## Pricing Pathway drawer: Tell format (2026-09-09)
+
+Client request (deck: "Game vs Pathway Update", Daria / James / Irene).
+The in-round Pricing Pathway drawer
+([IssueTreeHelper.tsx](client/src/components/IssueTreeHelper.tsx)) was
+rebuilt from a learner-to-click wizard into a **"Tell"-format
+read-through**. It no longer asks the learner to pick a path column by
+column; it walks six fixed steps (Trigger, Primary pricing gaps, Intent
+and root causes, Evidence, Plan, Conversation angle) and tells them the
+answer or the guidance for each.
+
+- **Content lives in [data/pricingPathwayContent.ts](client/src/data/pricingPathwayContent.ts)**
+  with `getPricingPathwayContent(partnerId, round)`.
+  - **Detailed variant (Royal Crest only, rounds 1 and 11):** partner-
+    specific, SME-validated copy transcribed verbatim from the deck (R1
+    slides 7-13 XPC; R11 slides 16-22 OPC), ending with a **summary
+    card** (Trigger / Primary issue / Intent & root cause / Evidence /
+    Plan / Suggested hook). The resolver strips the regime + KAM suffix,
+    so it matches `royal-crest` in every regime and cross-regional.
+  - **Generic variant (every other partner-round):** 6 general-guidance
+    steps (deck slides 24-29), **no summary** (deck slide 30).
+- **Component** keeps the header, mini winding-road, dockable left/right,
+  and footer Back/Next. `helperState.stepIndex` still persists for
+  resume (the legacy `path` object is unused now). Panel widened to
+  `min(520px, 94vw)` and capped to `calc(100vh - 96px)` with the step
+  body scrolling internally, because the Tell copy is much longer than
+  the old option cards.
+- **Dead-for-the-drawer:** `data/issueTree.ts` column lists,
+  `suggestedPath`, and the "Data suggests this" auto-suggest. Still used
+  elsewhere (scenario `issueTreePath`, the review tool), so kept on disk.
+- **Decision applied:** the detailed pathway covers Royal Crest at R1/R11
+  in ALL journeys including KAM/cross-regional (same partner + data). If
+  the client ever wants KAM to use the generic one, it is a one-line
+  change in the resolver.
+
+## OPC metric changes (2026-09-09)
+
+- **Distribution of Search removed entirely** from the OPC set at the
+  client's request: dropped from `PartnerOpcMetrics`
+  ([types/index.ts](client/src/types/index.ts)), `metricDefinitions`,
+  the OPC tab (now **six** cards in a `repeat(3, 1fr)` 3x3 grid, was
+  seven in 4+3), and the review-pack `OPC_KEYS` / `OPC_LABEL`. Don't
+  reinstate without an explicit ask. Remaining OPC order: Unsold Rooms,
+  Sell Through Rate, Visibility Share, Click Through Rate, Conversion,
+  Search Price.
+- **SME OPC data added** (Click Through Rate + Conversion, the two
+  fields that were missing) to the priority partner records in
+  `partners.ts`, from the SME "OPC metrics" table. Conversion is stored
+  in `value` as a signed vs-peer figure (below = negative), matching the
+  existing convention. Chris's instruction was **add missing only, don't
+  change existing data**, so pre-existing OPC values were left as-is -
+  including **Silver Horizon's intentional 17/15 visibility** (the SME
+  table's 13/15 was NOT applied; it would break R12's Money-in-Bank
+  transcript). Exception: **Noble Falcon** was corrected (its
+  `clickThroughRate: 15.5` was a misfiled visibility peer-median; moved
+  to `visibilityShare.peerValue`, CTR now blank per the table).
+
+## xAPI full-data preview + reporting doc (2026-09-09)
+
+- **Completion fix.** [xapi-full-data-preview](xapi-full-data-preview/)
+  now reads Docebo's launched `registration` + `activity_id` and, after
+  the schema batches, posts one `completed`/`passed` statement against
+  the launched activity (its own request) so the Tin Can lesson marks
+  **Completed**. Root cause of the LMS team's "stuck In Progress": the
+  ~240 schema statements target custom Rate Right activity ids, none of
+  which is Docebo's launch activity, and Docebo's built-in LRS rejected
+  most of them as `400 Invalid activity` (batches are atomic, so one bad
+  statement drops 24 good ones). Zip rebuilt.
+- **OPEN with the LMS team (unresolved):** whether they are testing on
+  **sandbox vs live Docebo** (we pinned xAPI to 1.0.2 for the sandbox
+  LRS cap). Also offered but not yet done: change the full-data package
+  to POST statements individually so the valid `answered` decision
+  statements land (and detailed responses show) even when some are
+  rejected. The earlier "smoke test showed 4 answers" was the xAPI smoke
+  test (not SCORM) - its 5 statements were accepted; the full-data
+  package's mostly were not. See [[project-lms-xapi-open-thread]].
+- **Compliance-friendly schema doc.** New language revision of the Data
+  Pipeline Schema for a compliance/legal audience:
+  [docs/rate-right-learning-insights-data-pipeline-v0.3.md](docs/rate-right-learning-insights-data-pipeline-v0.3.md)
+  + a formatted `.docx` in `docs/`. Technically identical to v0.2 (verbs,
+  tables, DDL, mapping preserved); adds a positioning preamble and a
+  privacy-by-design section, retitles "Reporting" -> "Learning Insights",
+  and avoids "behavioural data / tracking / monitoring / performance
+  management". Positioning rule established: frame xAPI as **learning
+  insight for development and better learning design**, stress it is
+  **practice inside a simulation, not real job performance**, and use
+  positive-only phrasing (no defensive "it is not X" negations in
+  writing - hold those as reactive talking points). `FACT_OBJECTION_
+  PERFORMANCE` can't be renamed (Booking's own target table) - glossed
+  instead.
