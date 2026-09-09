@@ -320,9 +320,8 @@ function nobleFalconBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 21.3 },
           sellThroughRate: { value: 18.4 },
-          visibilityShare: { value: 14.5 },
-          clickThroughRate: { value: 15.5 },
-          conversion: { value: 1.3 },
+          visibilityShare: { value: 14.8, peerValue: 15.5 },
+          conversion: { value: -1.3 },
           searchPrice: { value: -15.2 },
         },
         // Legacy fields - kept for type compatibility and the old
@@ -754,6 +753,8 @@ function royalCrestBase(args: {
           unsoldRooms: { value: 50 },
           sellThroughRate: { value: -10 },
           visibilityShare: { value: 10.3, peerValue: 17.9 },
+          clickThroughRate: { value: 3.5 },
+          conversion: { value: -0.5 },
           searchPrice: { value: 7 },
         },
         // Legacy fields - kept for type compatibility.
@@ -873,6 +874,8 @@ function silverHorizonBase(args: {
           // matches the call. The Round 12 data table's 13% (below 15%)
           // contradicted its own transcript - flagged for SME review.
           visibilityShare: { value: 17, peerValue: 15 },
+          clickThroughRate: { value: 10 },
+          conversion: { value: 1.1 },
           searchPrice: { value: 6 },
         },
         // Legacy fields - kept for type compatibility.
@@ -991,6 +994,8 @@ function oceanViewBase(args: {
           unsoldRooms: { value: 45 },
           sellThroughRate: { value: -18 },
           visibilityShare: { value: 20, peerValue: 30 },
+          clickThroughRate: { value: 4.9 },
+          conversion: { value: -1.1 },
           searchPrice: { value: -3 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1105,6 +1110,8 @@ function riversideBase(args: {
           unsoldRooms: { value: 24 },
           sellThroughRate: { value: -8 },
           visibilityShare: { value: 12, peerValue: 21 },
+          clickThroughRate: { value: 7.8 },
+          conversion: { value: 1.7 },
           searchPrice: { value: 7 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1219,6 +1226,8 @@ function emeraldPeakBase(args: {
           unsoldRooms: { value: 12 },
           sellThroughRate: { value: -9 },
           visibilityShare: { value: 17, peerValue: 26 },
+          clickThroughRate: { value: 7.7 },
+          conversion: { value: 0.9 },
           searchPrice: { value: 10 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1332,6 +1341,8 @@ function oceanfrontBase(args: {
           unsoldRooms: { value: 17 },
           sellThroughRate: { value: -12 },
           visibilityShare: { value: 17, peerValue: 25 },
+          clickThroughRate: { value: 1.7 },
+          conversion: { value: -0.53 },
           searchPrice: { value: 4 },
         },
         // Legacy fields - kept for type compatibility.
@@ -1433,6 +1444,7 @@ function palaceGrandBase(args: {
           unsoldRooms: { value: 21 },
           sellThroughRate: { value: -13 },
           visibilityShare: { value: 17, peerValue: 16 },
+          clickThroughRate: { value: 2.3 },
           conversion: { value: 0.53 },
           searchPrice: { value: 4 },
         },

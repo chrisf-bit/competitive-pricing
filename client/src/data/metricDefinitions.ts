@@ -154,11 +154,6 @@ export const metricDefinitions = {
     helpText:
       'Share of available inventory that gets sold within a given window, vs peer group.',
   },
-  distributionOfSearch: {
-    label: 'Distribution of Search',
-    helpText:
-      'How search traffic is distributed across competitor properties for the same demand. Tells you where attention is going.',
-  },
   visibilityShare: {
     label: 'Visibility Share',
     helpText:

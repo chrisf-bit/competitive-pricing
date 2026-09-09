@@ -16,14 +16,13 @@ const ALL_PARTNERS: PartnerState[] = [...initialPartners, ...pendingPartners];
 const recordFor = (id: string) =>
   ALL_PARTNERS.find((p) => p.persona.id === id) ?? null;
 
-// Canonical OPC field order - matches the seven cards the sim's OPC tab
+// Canonical OPC field order - matches the six cards the sim's OPC tab
 // renders (PartnerDetailScreen OpcMetricsTab). Iterating this fixed list
 // (rather than Object.keys on the partner data) keeps the review pack's
 // OPC grid complete: partial data shows "Data pending", never a short list.
 const OPC_KEYS = [
   'unsoldRooms',
   'sellThroughRate',
-  'distributionOfSearch',
   'visibilityShare',
   'clickThroughRate',
   'conversion',

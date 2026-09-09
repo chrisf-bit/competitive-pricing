@@ -246,8 +246,6 @@ export interface PartnerOpcMetrics {
   unsoldRooms?: SecondaryMetricValue;
   /** Sell Through Rate, value is a %, comparator vs peer. */
   sellThroughRate?: SecondaryMetricValue;
-  /** Distribution of Search, value is a %, comparator vs peer. */
-  distributionOfSearch?: SecondaryMetricValue;
   /** Visibility Share, value is a %, comparator vs peer. */
   visibilityShare?: SecondaryMetricValue;
   /** Click Through Rate, value is a %, comparator vs peer. */

@@ -2624,14 +2624,19 @@ on `release-2-partner-detail`.
   `PartnerMetrics.opcMetrics` field. Same `SecondaryMetricValue`
   (`{ value, deltaPct? }`) shape as the Driving Metrics secondary
   cards. Every field optional.
-- **`OpcMetricsTab`** (`PartnerDetailScreen.tsx`) renders **seven**
-  OPC cards in a `repeat(4, 1fr)` grid (4+3), reusing
+- **`OpcMetricsTab`** (`PartnerDetailScreen.tsx`) renders **six**
+  OPC cards in a `repeat(3, 1fr)` grid (3+3), reusing
   `SecondaryMetricCard`. Unpopulated cards render the dashed
   **"Data pending"** state, so the grid is complete and it's obvious
   where numbers are still owed. All comparators are "vs peer".
-  Order: Unsold Rooms, Sell Through Rate, Distribution of Search,
-  Visibility Share, Click Through Rate, Conversion, Search Price.
-  (Net Booked Share was briefly added as an 8th card mid-session
+  Order: Unsold Rooms, Sell Through Rate, Visibility Share,
+  Click Through Rate, Conversion, Search Price.
+  (**Distribution of Search was removed entirely on 2026-09-09** at
+  the client's request - dropped from the `PartnerOpcMetrics` type,
+  `metricDefinitions`, the OPC tab, the review-pack `OPC_KEYS` /
+  `OPC_LABEL`, taking the grid from seven cards to six. Don't
+  reinstate it without an explicit ask.
+  Net Booked Share was briefly added as an 8th card mid-session
   then removed at Chris's request - don't reinstate it without an
   explicit ask.)
 - **All seven definitions/tooltips live in `metricDefinitions.ts`**

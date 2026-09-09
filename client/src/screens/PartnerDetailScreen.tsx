@@ -30,6 +30,7 @@ import {
 import { getPersonaById, type SuperPowerPersona } from '../data/characters';
 import { getPersonaTipChip } from '../data/personaHints';
 import { IssueTreeHelper } from '../components/IssueTreeHelper';
+import { getPricingPathwayContent } from '../data/pricingPathwayContent';
 import { PathwayGlyph } from '../components/PathwayGlyph';
 import { getBranchingScenario } from '../data/branchingScenarios';
 import { getConversationTree } from '../data/conversations';
@@ -663,11 +664,10 @@ export function PartnerDetailScreen({
             side={dockSide}
             onToggleDock={toggleDock}
             partnerName={partner.persona.name}
-            partnerFirstName={partner.persona.name.split(' ')[0]}
-            suggestedPath={
-              getBranchingScenario(partner.persona.id, currentRound)
-                ?.issueTreePath
-            }
+            content={getPricingPathwayContent(
+              partner.persona.id,
+              currentRound,
+            )}
             helperState={helperState}
             onUpdate={(next) =>
               onSetIssueTreeHelperState(
@@ -1132,14 +1132,15 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
         </span>
       </div>
 
-      {/* Seven OPC cards. All comparators are vs peer. Cards with no
+      {/* Six OPC cards. All comparators are vs peer. Cards with no
           authored value render "Data pending" so the grid stays
-          consistent and it's obvious where numbers are still owed. */}
+          consistent and it's obvious where numbers are still owed.
+          (Distribution of Search was removed 2026-09-09 per client.) */}
       <div
         data-tutorial="partner-detail-opc"
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(3, 1fr)',
           gap: 8,
         }}
       >
@@ -1152,12 +1153,6 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
         <SecondaryMetricCard
           metricKey="sellThroughRate"
           value={opc?.sellThroughRate}
-          comparator="vs peer"
-          format="percent"
-        />
-        <SecondaryMetricCard
-          metricKey="distributionOfSearch"
-          value={opc?.distributionOfSearch}
           comparator="vs peer"
           format="percent"
         />
