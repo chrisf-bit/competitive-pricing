@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: credit her strong on-page conversion (+39% vs peer), note that page views and future bookings are trending down and her prices read as consistently higher here, then ask - neutrally - about her strategy.",
     playerDialogue:
-      "On your performance with us: it's very positive that once a traveler lands on your page, your conversion is 39% higher than your peers on our platform. But both your page views and your future bookings are trending down, and we can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
+      "Regarding your performance with us: we see that you are barely generating any bookings compared to last year. While there are some positive signs regarding your conversion compared to your peers on our platform, both your page views and future bookings are trending down. We can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
     partnerResponse:
       "It's about channel costs. We intentionally keep our website prices lower to stimulate travelers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

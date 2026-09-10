@@ -83,9 +83,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: don't fight the cap - optimize the 30% he wants. He's missing advance bookings; his best available price improves conversion (1% -> ~2.7% net revenue / ~3% room nights), and it's entirely his decision.",
     playerDialogue:
-      "Understood - I'd like to focus on optimizing the 30% you do want. Looking at your performance data versus your peer on our platform, you're missing advance bookings versus peers; supplying the best price you're comfortable with would improve conversion - a 1% improvement drives about 2.7% more net revenue and 3% more room nights on average. But that's entirely your decision.",
+      "Thanks for your transparency here - I'd like to focus on optimizing the 30% you do want. Looking at your performance data versus your peer on our platform, you're missing advance bookings versus peers; supplying the best price you're comfortable with would improve conversion - a 1% improvement drives about 2.7% more net revenue and 3% more room nights on average. Would you be open to reviewing some options? Of course, the choice of distribution and pricing strategy stays entirely yours.",
     partnerResponse:
-      "Maybe we can push advance bookings a bit, but we're wary of selling low in advance and missing last-minute demand at the price we want. By the way, why is our occupancy configuration underperforming?",
+      "Maybe we can push advance bookings a bit, but we're wary of selling low in advance and missing last-minute demand at the price we want. By the way, why are families not being captured by my property?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -251,7 +251,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: if Genius doesn't fit his strategy, a US Country Rate targets better - his US-traveler share lags peers, and a Country Rate boosts conversion in that segment while protecting overall ADR. Offer to set it up together.",
     playerDialogue:
-      "If Genius doesn't fit your strategy right now, a tool that targets better is a US Country Rate. Your share of US travelers is lower than your peers, and a Country Rate lets you boost conversion in that segment while protecting your overall ADR. Shall we look at the setup together? I'll send a follow-up to review the results.",
+      "If you are looking into different targeted actions, a tool that can help you is a US Country Rate. Your share of US travelers is lower than your peers, and a Country Rate lets you boost conversion in that segment while protecting your overall ADR. Shall we look at the setup together? I'll send a follow-up to review the results.",
     partnerResponse:
       "That fits our strategy better - the US market runs a higher ADR, and those are exactly the guests we want. Let's look at the setup options.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

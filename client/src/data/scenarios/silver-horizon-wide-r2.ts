@@ -32,7 +32,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I've been reviewing your portfolio. Forward volume for the next three months is strong, but room nights in the last 30 days are down 32% year-on-year. Have you seen more cancellations from our platform, or a shift in your distribution mix?",
     partnerResponse:
-      "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because the Key OTA is cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
+      "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because they are cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -85,7 +85,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: acknowledge the frustration but don't match a margin cut. Reframe inconsistent pricing as brand/trust erosion she can control, and steer to the high-value demand she's not capturing.",
     playerDialogue:
-      "I understand that's frustrating. But rate inconsistencies across platforms devalue your brand, confuse customers and weaken trust. You can't control a third party's margin cut, but you can keep your own base rates and promotions aligned and competitive here. Let's focus on the high-value demand where you currently lack visibility.",
+      "I understand. However, inconsistent rates across platforms can weaken your brand, confuse customers and reduce trust. While you can't control a third party's margin cut, you can keep your base rates and promotions aligned and competitive here. Your visibility and conversion are already stronger than peers on Booking, so the opportunity is to protect your base rate while ensuring our offer remains attractive to valuable family and international travelers, who currently see better prices on a competing OTA.",
     partnerResponse:
       "Visibility is fine on our end. If a customer is confused, they book elsewhere. How does that affect my margin today?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -128,7 +128,7 @@ const step2: BranchingStep = {
   id: 'same-net',
   label: 'Handle the Competitive Aggression / Same Net objection',
   partnerPrompt:
-    "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because the Key OTA is cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
+    "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because they are cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
   options: step2Options,
 };
 
@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: explain the lost-checkout dynamic, ask her to provide the same rates and conditions she gives other third-party channels, then pivot to how she's capturing the family and international segments behind the volume drop.",
     playerDialogue:
-      "When travelers on our platform see your price is higher, conversion is likely to drop and they book elsewhere on our platform. To maximize traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels. And how are you capturing the family and international segments that are driving the drop?",
+      "When travelers on our platform see your price is higher, conversion is likely to drop and they book elsewhere on our platform. To maximize traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels, focus on family and international demand where an additional booking could be incremental. How are you currently managing those segments?",
     partnerResponse:
       "Families are a headache for vacation rentals. We restrict our double rooms from family searches and don't offer free cots - we prefer to sell those larger units directly, where we control the guest risk. For international bookers we're not running any specific campaigns.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: accept the minimum-stay guardrail she asked for, combine it with international-booker targeting for net-revenue upside, and commit to monitoring and sharing the impact.",
     playerDialogue:
-      "We can easily set a minimum length of stay on family rooms to protect your margins. Combine that with targeting international bookers, and you grow net revenue through high-value guests. If you're happy, I'll monitor the impact and share the results in two weeks.",
+      "We can set a minimum length of stay on family rooms to protect your margins. Combine that with targeting international bookers, and you grow net revenue through high-value guests. If you agree, I'll monitor the impact and share the results in a month.",
     partnerResponse:
       "Okay, that's a fair compromise. Set up the three-night minimum for families and the targeted international rates, and I'll align my rates to what's showing on the Key OTA. Let's see if the revenue actually moves.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

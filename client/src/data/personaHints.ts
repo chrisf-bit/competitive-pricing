@@ -221,6 +221,29 @@ const riversideR4Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
 };
 
+// Wide-only persona-hint overrides (Review Pack 1). Kept Wide-specific
+// because only the Wide pack has been reviewed; the Narrow / No-Parity
+// variants keep the shared blocks until their own packs land.
+const oceanViewR3WideHints: Partial<Record<PersonaId, PersonaHint>> = {
+  ...oceanViewR3Hints,
+  'data-detective': {
+    oneLiner:
+      'Anomaly: conversion +39% vs peer but page views -61% and Lose Price Brand 97% - she is not chosen because she is barely seen; the Brand and App Scenario and 0% coverage are the wedge.',
+  },
+};
+
+const riversideR4WideHints: Partial<Record<PersonaId, PersonaHint>> = {
+  ...riversideR4Hints,
+  'objection-navigator': {
+    oneLiner:
+      'Expect the Value Proposition Wall ("I only want 30% from you") - break the wall by optimizing the 30%, never a blanket cut.',
+  },
+  'data-detective': {
+    oneLiner:
+      'Anomaly: Key OTA eRPD +6.56 in a month, family RPD above couple RPD, and Loyal RPD 0.3% against Public 6.0% - a family setup gap and a non-genuine Genius discount.',
+  },
+};
+
 /**
  * Shared persona hint content for Emerald Peak Lodge R5 (SME Round 5
  * priority), applied verbatim across all three regime variants. Sophia's
@@ -647,13 +670,13 @@ export const personaHints: PersonaHintsByRound = {
 
   // Ocean View Resort R3 - the SME Round 3 priority across all three
   // regime variants (retires Noble Falcon as the R3 hints owner).
-  'ocean-view-wide': { 3: oceanViewR3Hints, 13: oceanViewR13Hints },
+  'ocean-view-wide': { 3: oceanViewR3WideHints, 13: oceanViewR13Hints },
   'ocean-view-narrow': { 3: oceanViewR3Hints, 13: oceanViewR13Hints },
   'ocean-view-none': { 3: oceanViewR3Hints, 13: oceanViewR13Hints },
 
   // Riverside Boutique Hotel R4 - the SME Round 4 priority across all
   // three regime variants.
-  'riverside-wide': { 4: riversideR4Hints, 14: riversideR14Hints },
+  'riverside-wide': { 4: riversideR4WideHints, 14: riversideR14Hints },
   'riverside-narrow': { 4: riversideR4Hints, 14: riversideR14Hints },
   'riverside-none': { 4: riversideR4Hints, 14: riversideR14Hints },
 

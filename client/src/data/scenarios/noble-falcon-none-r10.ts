@@ -86,7 +86,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: acknowledge it makes sense to look at the distribution mix, then ask how he calculates the true cost of an empty room versus the commission cost of a new guest acquisition - drawing out the trade-off himself.",
     playerDialogue:
-      "Thank you for sharing - it makes sense to look at the distribution mix. But let me ask: how do you calculate the true cost of an empty room?",
+      "Thank you for sharing - it makes sense to look at the distribution mix. But let me ask: how do you calculate the true cost of an empty room versus the cost of acquiring a new guest through commission?",
     partnerResponse:
       "An empty room is a loss, obviously. But high commission eats our margins. We need to keep our website always more competitive than yours or the other third-party channels.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -198,7 +198,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: a large share of the platform's bookers are international travelers who'd never have found his brand otherwise. Making his best price available leverages that visibility at zero cost to fill empty rooms, which he can then convert into loyal direct guests. Ask how that fits his long-term plan.",
     playerDialogue:
-      "That's where our global reach adds value. A large share of our bookers are international travelers who'd never have found your brand otherwise. By making your best price available to us, you leverage that visibility at zero cost to fill your empty rooms - and once they stay with you, they might become loyal direct guests. How does that fit into your long-term plan?",
+      "That's where our global reach adds value. A large share of our bookers are international travelers who'd never have found your brand otherwise. By making your best price available to us, you leverage that visibility at zero upfront cost to fill your empty rooms - and once they stay with you, they might become loyal direct guests. How does that fit into your long-term plan?",
     partnerResponse:
       "It makes sense for international guests, but our brand restrictions are very tight right now.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -310,7 +310,7 @@ const step6Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: replicate the strict cancellation or prepayment conditions he uses for high-risk periods on family rooms too, while keeping the base rate competitive - and offer to implement it together on the call. He still ends the call without committing; the win is the compliant, supportive offer that keeps the door open.",
     playerDialogue:
-      "Then let's replicate the strict cancellation or prepayment conditions you use for high-risk periods on family rooms too, while keeping the base rate competitive. I'm here to support your occupancy and revenue goals - if there are settings in the way, take the chance of having me on the call and we can implement it together.",
+      "Then let's replicate the strict cancellation or prepayment conditions you already use for high-risk periods on family rooms too - that way you manage the risk without changing the base rate. I'm here to support your occupancy and revenue goals - if there are settings in the way, take the chance of having me on the call and we can implement it together.",
     partnerResponse:
       "This isn't enough to prevent the risks from actually happening, and I don't want to change all the settings again - this isn't the way I want to cooperate. Thank you very much for the opportunity, but I really have to take off the phone. Speak to you soon.",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 1 },

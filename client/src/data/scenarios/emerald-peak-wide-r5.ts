@@ -26,7 +26,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: acknowledge her strong demand, surface that she's losing the price comparison on nearly every public search against both her direct site and the key OTAs, then ask an open question about her strategy and goals before recommending anything.",
     playerDialogue:
-      "Your demand here actually looks strong - your page views and conversion are well up on your peer group. The one thing standing out is price: on Booking.com you're losing the price comparison on virtually every public search, against both your own direct site and the key OTAs. Before I go further - what's your current strategy, and what are your goals with us?",
+      "Your demand here actually looks strong - your page views and conversion are well up on your peer group. The one thing standing out is price: on Booking.com you're losing on price in virtually every public comparison, against your own direct site. Before I go further - what's your current strategy, and what are your goals with us?",
     partnerResponse:
       "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -81,7 +81,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: 90% of Booking.com bookers discover the property here first, so if she's uncompetitive travelers never find her and never reach her website either - the structural gap lowers ranking and discovery for BOTH channels.",
     playerDialogue:
-      "I understand the intent. But guest behavior has changed - up to 90% of the customers who book with us discover the property on our platform first. When your pricing here is uncompetitive, you are less attractive to travelers, and they won't gravitate to your website either. This structural gap is lowering visibility and discovery for both channels in the long run.",
+      "I understand the intent. But up to 90% of the customers who book with us discover the property on our platform first. When your pricing here is uncompetitive, you are less attractive to travelers, and may lose the booking before they ever reach your website. Since your current traffic is already strong, the opportunity is to convert more of that discovery without breaking the brand policy.",
     partnerResponse:
       "The brand requires a rate advantage on our own website, no discussion. I cannot authorise a flat rate drop on Booking.com that impacts our ADR or breaks internal policies.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -137,7 +137,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: don't threaten her brand integrity - to optimize the 90% who discover her through us, ask for the same rates and conditions she gives third parties and her direct channel, framed as leveraging Booking.com's marketing scale and metasearch presence.",
     playerDialogue:
-      "We don't want to compromise your brand integrity. But to optimize the 90% of travelers who discover you through us, we'd ask for the same rates and conditions you provide to third parties and your direct channel. When you leverage our global marketing scale and metasearch presence, you secure that incremental demand.",
+      "We don't want to compromise your brand integrity. But to optimize the 90% of travelers who discover you through us and capture travelers who use our platform exclusively, providing us the same rates and conditions you provide to third parties and your direct channel helps you maximize your reach for the rooms you do want to fill. When you leverage our global marketing scale and metasearch presence, you secure that incremental demand.",
     partnerResponse:
       "How can I match rates without violating my brand rules?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -193,7 +193,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed solution: instead of a general discount, use a segmented approach on the underperforming family segment - she already runs a family discount on other channels, so matching those conditions here captures the demand without making the property cheaper for everyone.",
     playerDialogue:
-      "So instead of a general discount, we use a segmented approach for the family segment, where you're underperforming. You already run a family discount on other channels - matching those conditions on Booking.com captures that demand without making the property cheaper for everyone. Additionally, you could consider offering direct booking incentives (like member rates or value adds) instead of deep public discounts.",
+      "Providing the best price you can make available to Booking.com remains one of the strongest ways to improve visibility and unlock more demand. That said, I also understand that we need to prove the value within your brand rules first. We can start with a targeted approach for the family segment, where you're underperforming. You already run a family discount on other channels - matching those conditions on Booking.com captures that demand without making the property cheaper for everyone. Additionally, you could consider offering direct booking incentives (like member rates or value adds) instead of deep public discounts.",
     partnerResponse:
       "A targeted approach might align with corporate if it captures unbooked inventory. What's the concrete return?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -249,7 +249,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: quantify the upside (10% competitiveness -> ~30% more bookings, ~25% more revenue, ~10% more search appearances) and propose a short test adjusting the family configuration to match her direct rates.",
     playerDialogue:
-      "Improving your price competitiveness by 10% on Booking.com generates, on average, 30% more bookings, 25% more revenue, and 10% more search appearances. Let's run a test over the next few weeks by adjusting the family configuration to match your direct rates, and review it together.",
+      "Improving your price competitiveness by 10% on Booking.com generates, on average, 30% more bookings, 25% more revenue, and 10% more search appearances. Let's run a test over the next few weeks by adjusting the family configuration to match your direct rates and on third parties, and review it together.",
     partnerResponse:
       "That fits into our current operations without breaking any internal rules. Let's set up the targeted family rates.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

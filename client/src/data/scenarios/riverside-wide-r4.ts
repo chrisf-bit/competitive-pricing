@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: surface that his rates run higher than the Key OTA on family occupancy and that Genius isn't performing, then ask an open question about his goals before recommending anything.",
     playerDialogue:
-      "I've been looking at your competitiveness with us, and your rates are running higher than the Key OTA's - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
+      "I've been looking at your pricing with us, and your rates are running higher than other OTA - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
     partnerResponse:
       "Let me share our strategy. We deliberately cap our Booking.com volume at 30% to protect our own website - so if Genius isn't pulling numbers, that's by design. The family rates, though, aren't intentional. I'd happily give you the same rates as the other OTAs. How much am I leaving on the table on the family segment?",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
@@ -83,7 +83,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed answer to his family question: quantify the growth and value, then ask him to give Booking.com the same rates he already gives third parties so you capture the incremental family demand he's missing.",
     playerDialogue:
-      "On families: over the past two years those bookings grew nearly twice as fast as any other segment, and they spend more, stay longer, and are 24% more likely to leave a review. By giving us the same rates you already give third parties, we can capture the incremental family demand you're missing right now.",
+      "On families: over the past two years those bookings grew nearly twice as fast as any other segment, and they spend more, stay longer, and are 24% more likely to leave a review. If you make the family rates, availability, and conditions on Booking.com consistent with your other third-party channels, we can test the incremental demand you're missing without changing your 30% cap.",
     partnerResponse:
       "That's interesting - thank you for flagging it, we'll definitely fix it. Now, what about the Genius program issue you mentioned?",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: 2 },
@@ -195,7 +195,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: to lift visibility on the empty inventory, provide the same rates and availability he gives his direct channel and third parties, backed by the 1% competitiveness -> ~2.7% net revenue / ~3% room nights figure.",
     playerDialogue:
-      "To lift your visibility on that empty inventory, we'd ask you to provide us the same rates and availability you give your direct channel and third parties - that directly improves visibility and conversion. Our data shows a 1% competitiveness improvement drives about 2.7% more net revenue and 3% more room nights on average.",
+      "For those weaker periods, we can align the rates and availability you give your direct channel and other third parties. That improves visibility and conversion where you need pickup. On average, our data shows a 1% competitiveness improvement drives about 2.7% more net revenue and 3% more room nights on average. Which periods would you be comfortable testing first?",
     partnerResponse:
       "Well - I can think about it, you're not wrong. How can I improve the campaigns I'm already running on your platform?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -251,7 +251,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed pitch: his public base was raised to offset Genius, so the discount reads as non-genuine and conversion drops. Realign the base rate and set accurate family rates to optimize the 30% share with higher-value guests, then commit to a follow-up.",
     playerDialogue:
-      "To improve performance, realign the base rate to ensure a genuinely discounted price for Genius travelers. In addition, with the updated family rates, it helps optimize that 30% share with higher-spending, longer-staying guests - right now families book rival Genius properties because your page lacks a competitive offer. If you also agree with this approach, I'll get it set up and send a follow-up to review the impact.",
+      "To improve the campaigns you're already running, let's first make sure the Genius price is a real discount for travelers from the right base rate. Then we can update the family offer so that your existing 30% share includes higher-spending, longer-staying guests. If you also agree with this approach, we can set it up together and I'll send a follow-up to review the impact in four weeks.",
     partnerResponse:
       "The logic is clear. The family rates and the Genius discount aren't working properly - let's adjust both to regain our visibility and booking share.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

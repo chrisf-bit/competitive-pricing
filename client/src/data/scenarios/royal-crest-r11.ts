@@ -53,7 +53,7 @@ const step1Options: BranchingOption[] = [
     description:
       'SME-prescribed open: name the forward-looking OPC signal - half the rooms unsold and sell-through pacing behind peers - and tie it to revenue he already senses is soft.',
     playerDialogue:
-      "Looking at the next 90 days, there's a trend that needs attention: your property is showing 50% unsold rooms and your forward sell-through is pacing at -10% against your peer group. That lines up with the softer revenue you're feeling.",
+      "Looking back over the past 90 days, your property had 50% unsold rooms. Looking ahead to the next 90 days, forward sell-through is pacing at -10% against your peer group. Together, these metrics help explain the softer revenue you're seeing.",
     partnerResponse:
       "50% unsold? That sounds a bit high. Look, the market is just soft right now, every manager in town is feeling it. And last month wasn't even peak season - bad weather, a lot of late cancellations. I'm not going to panic over what happened last month.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       'SME-prescribed handling of the "market is soft / one bad month" objection: accept that past data guides planning, then move to what live demand is doing now - visibility share below the peer median and a search-price gap that loses travelers at the search stage.',
     playerDialogue:
-      "Past months guide our planning, agreed. But look at what live demand is doing right now: your visibility share is 10.3% while your peer group averages 17.9%. Travelers are searching, but your search price is running about 7% above your peers on key dates, so many drop off before they ever reach your page.",
+      "Past months guide our planning, agreed. But your peer group is achieving a higher sell-through rate, which suggests there is active demand in the area. Against that backdrop, your visibility share is 10.3%, compared with 17.9% for your peers. Travelers are searching, but your search price is running about 7% above your peers on key dates, so many may drop off before reaching your page.",
     partnerResponse:
       "A 7% difference in search price? We offer a premium experience, Anya. Our repeat guests know our value. I don't buy into these generic platform averages that tell me to drop prices for everyone.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -245,9 +245,9 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the cannibalization worry: mobile bookers are a distinct, high-intent, last-minute segment. Being 10% more competitive there drives on average 30% more bookings and 25% more revenue, lifting sell-through without changing his wider strategy.",
     playerDialogue:
-      "Mobile bookers are a specific segment - often last-minute, with high intent to actually stay. They're largely incremental, not the full-price guest you already have. Being 10% more competitive to them generates, on average, 30% more bookings and 25% more revenue, so it lifts your sell-through without touching your overall strategy.",
+      "Looking at stays in the next 30 days, mobile bookers are a distinct segment with high intent to stay. They're often incremental to the full-price guests you already attract. Being 10% more competitive with this segment generates, on average, 30% more bookings and 25% more revenue, lifting your sell-through without changing your overall strategy.",
     partnerResponse:
-      "Hmm... a controlled discount aimed at last-minute mobile guests, to be more competitive against my peers. That's not a bad idea, actually.",
+      "Hmm... a controlled discount aimed at mobile guests booking stays in the next 30 days, to be more competitive against my peers. That's not a bad idea, actually.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -372,7 +372,7 @@ const steps: BranchingStep[] = [
     id: 'close',
     label: 'Close on a measured test',
     partnerPrompt:
-      "Hmm... a controlled discount aimed at last-minute mobile guests, to be more competitive against my peers. That's not a bad idea, actually.",
+      "Hmm... a controlled discount aimed at mobile guests booking stays in the next 30 days, to be more competitive against my peers. That's not a bad idea, actually.",
     options: step6Options,
   },
 ];

@@ -40,9 +40,9 @@ const step1Options: BranchingOption[] = [
     id: 'ov-r13-step1-correct',
     label: 'Credit the guest-experience work, then flag the unsold rooms',
     description:
-      "SME-prescribed open: acknowledge the family and long-stay welcome work she's proud of, then name the forward signal - close to half the rooms unsold last quarter and sell-through pacing well behind peers.",
+      "SME-prescribed open: acknowledge the family and long-stay welcome work she's proud of, then name the forward signal - close to half the rooms unsold last month and sell-through pacing well behind peers.",
     playerDialogue:
-      "The welcome experience you've been building for families and long-stay guests really shows. I've looked at both your history and your forward pace, and there's one area where demand is getting stuck: around 45% of your rooms went unsold last quarter and your forward sell-through is pacing about 18% behind your peer group.",
+      "The welcome experience you've been building for families and long-stay guests really shows. I've looked at both your history and your forward pace, and there's one area where demand is getting stuck: around 45% of your rooms went unsold last month and your forward sell-through is pacing about 18% behind your peer group.",
     partnerResponse:
       "Oh dear... 45% unsold? That is concerning, Javier. But honestly, I find it confusing. My revenue team double-checked our setup, and overall our rates on your platform are very aggressive - we're consistently priced about 3% cheaper than our Peer Group. If we're already cheaper than the competition, why aren't those rooms selling?",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 2 },
@@ -186,7 +186,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the ADR-dilution worry: correcting the child-rate configuration does not touch her rate or lower adult prices - it simply makes the family calculation fair, accurate and competitive.",
     playerDialogue:
-      "I hear the concern completely. Correcting the child-rate configuration doesn't touch your rate or lower your prices for adults at all. It simply makes sure that when a parent searches for a family stay, the price they see is calculated fairly and accurately - nothing about your adult ADR changes.",
+      "I hear the concern completely. Correcting the child-rate configuration doesn't touch your rate or lower your prices for adults at all. It simply makes sure that when a parent searches for a family stay, the price they see is calculated fairly and accurately - nothing about your adult price changes.",
     partnerResponse:
       "Ok, I'm just checking, because after the price-alignment test last time I want to be sure we're not diluting our ADR any further. The results then were good, but we had no idea there was this family-rates issue sitting underneath...",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 2 },
@@ -234,7 +234,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed reframe: it's a quick technical fix - like opening a door that was accidentally locked. Right now families search, assume the property isn't set up for them, and move on before they ever consider it.",
     playerDialogue:
-      "Think of it as opening a door that was accidentally locked. It's a quick technical fix, not a big project. Right now, families are searching, seeing an inflated price, and assuming your property just isn't set up for them - so they move on before they ever really consider you.",
+      "Think of it as opening a door that was accidentally locked. It's a quick technical fix, not a big project. Right now, families are searching, seeing an inflated price compared to your peers, and assuming your property just isn't set up for them - so they move on before they ever really consider you.",
     partnerResponse:
       "I see... when you explain the traveler's journey like that, it makes complete sense. We certainly don't want families thinking we don't welcome them. But what kind of impact do you think we'll actually see on revenue?",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 1 },

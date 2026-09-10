@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: acknowledge the strong demand she's already sensing (visibility above the peer median, traffic up), then name the real problem - forward sell-through pacing behind and rooms sitting unsold. Frames it as a conversion issue, not a demand one.",
     playerDialogue:
-      "That matches what I'm seeing - the demand is genuinely there. Your visibility share is 17%, above your peer group at 15%, and your page views are up 71% year on year. But your forward sell-through is pacing at -8% and around 15% of your rooms are sitting unsold, so the gap is conversion, not traffic.",
+      "That matches what I'm seeing - the demand is genuinely there. Your visibility share is 17%, above your peer group at 15%, and your page views are up 71% year on year. But your forward sell-through is pacing at -8%, while around 15% of your rooms went unsold over the past 30 days, so the gap is conversion, not traffic.",
     partnerResponse:
       "I see, but if people are looking and not buying, that's not something I can solve. We've already talked about other OTAs cutting their margin and selling B2B rates as if they were B2C. I haven't found the source yet, and I'm not lowering my prices over this never-ending problem.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -137,7 +137,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: her listings sit about 6% above the peer group in search, so travelers reach her page but do the final math at checkout and abandon. Names exactly where the money leaks.",
     playerDialogue:
-      "When travelers search your area, your listings come up about 6% higher than your peer group. So guests find you, click through, but when they hit the checkout screen and do the final math, they hesitate and abandon the booking. That's where your sell-through is leaking.",
+      "When travelers search your area, your listings come up priced about 6% higher than your peer group. So guests find you, click through, but when they hit the checkout screen and do the final math, they hesitate and abandon the booking. That's where your sell-through is leaking.",
     partnerResponse:
       "A 6% difference at checkout is making people walk away? That feels a bit theoretical, Diego. Is a minor gap really causing that big a drop in sell-through?",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

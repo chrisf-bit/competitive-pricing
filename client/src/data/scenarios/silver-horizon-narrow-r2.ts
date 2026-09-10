@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public price cut to be the cheapest option. Presumes the fix and invites the race to the bottom an ROI-driven professional avoids.",
     playerDialogue:
-      "Your room nights are down 32%, and honestly the quickest fix here is a price move. Bring your Booking.com rate down so you're the cheapest option on the page, and the volume comes straight back. Let's just get you underpricing everyone and worry about the rest later.",
+      "Your room nights are down 32%, and honestly the quickest fix here is a price move. Bring your Booking.com rate down so you're the cheapest option on the page, and the volume should come back up. Let's just get you to undercut the competition and figure out the rest later.",
     partnerResponse:
       "I'm focused on my direct channel, not a race to the bottom on your platform. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -168,7 +168,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tell her the family rooms are cheaper on the Key OTA, to match that here and pull them from the Key OTA. Pricing against another OTA and directing her channel mix are both off-limits in a Narrow market.",
     playerDialogue:
-      "I've noticed your family rooms are showing cheaper on the Key OTA than anywhere else right now. Match that same price for them here on our platform, and honestly you'd be better off pulling that inventory off the Key OTA altogether so the segment comes to us instead. Price against them and move the rooms over, and we capture the family demand.",
+      "I've noticed your family rooms are showing cheaper on the Key OTA than anywhere else right now. Match that same price for them here on our platform, and remove some of the inventory from the Key OTA to recover your performance here. Price against them and move the rooms over, and we capture the family demand.",
     partnerResponse:
       "Pricing against the Key OTA and telling me to pull inventory is off the table.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -210,7 +210,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right growth story, wrong handling - it tells her to just set the child rates everywhere and skips straight past the multi-property operational load she raised.",
     playerDialogue:
-      "Just get the child rates set up across all your properties and you'll be fine - the growth on this segment is more than worth the effort involved. Family bookings are climbing fast and they spend more, so roll it out everywhere and let the volume prove it out.",
+      "Just get the child rates set up across all your properties and you'll be fine - the growth in this segment is more than worth the effort involved. Family bookings are climbing fast and they spend more, so roll it out everywhere and let the volume prove it out.",
     partnerResponse:
       "You skipped straight past the operational reality I just described.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },

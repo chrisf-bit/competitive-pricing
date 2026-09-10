@@ -26,9 +26,9 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge she converts well once seen, surface the -61% page views / -48% bookings visibility problem, then ask her to walk you through the rate strategy before recommending anything.",
     playerDialogue:
-      "You're right. Once travelers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and your bookings are 48% behind. Can you walk me through the strategy behind the rates you've listed with us?",
+      "You're right. Once travelers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and next-three-month room nights are 48% behind. Can you walk me through the strategy behind the rates you've listed with us?",
     partnerResponse:
-      "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with us and complete the reservation on our site.",
+      "Based on my experience, we keep your platform marked up by about 5 to 6% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with us and complete the reservation on our site.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -82,7 +82,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter to the reverse-billboard belief: a traveler who sees a higher price here doesn't hunt for an unknown direct site - they book a cheaper local competitor on the same page. Then probe how she weighs that risk.",
     playerDialogue:
-      "I understand the intent. But when a traveler sees a higher price here, they rarely go hunting for a direct site they don't know yet - they just book a cheaper local competitor on the same search page. How do you weigh the risk of losing those guests to local properties entirely?",
+      "I understand the intent. However, many travelers usually choose a cheaper comparable property on the same search page rather than look for a direct site they do not know yet. How do you weigh the risk of losing those guests to local properties entirely?",
     partnerResponse:
       "Some might book elsewhere, but we believe our repeat guests and brand strength capture the serious bookers. Why should we lower our base rate here and risk revenue on our direct channel?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -125,7 +125,7 @@ const step2: BranchingStep = {
   id: 'billboard-counter',
   label: 'Counter the reverse-billboard belief',
   partnerPrompt:
-    "Based on my experience, we keep your platform marked up by about 5.5% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with our agency, and then complete on our site.",
+    "Based on my experience, we keep your platform marked up by about 5 to 6% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with our agency, and then complete on our site.",
   options: step2Options,
 };
 
@@ -194,7 +194,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed solution: align public rates to restore search ranking, while she runs closed, member-only deals on her own site to keep the direct incentive. She keeps the loyalty lever without the public undercut that buries her. Propose a test.",
     playerDialogue:
-      "I respect that. What if we aligned your public rates to restore your search visibility, while you run closed, member-only deals on your website to drive direct bookings? You keep your direct incentive without the public undercut that's burying you in search. Base alignment is the most effective lever to restore search power - shall we start a test this week?",
+      "I respect that. What if we aligned your public rates to restore your search visibility, while you run closed, member-only deals on your website to drive direct bookings? You keep your direct incentive without the public undercut. Public base rate alignment is the first lever I'd suggest - shall we start a test this week?",
     partnerResponse:
       "Your perspective on search and visibility is logical. Let's align the rates as a test for exactly three weeks. If the revenue doesn't justify it, we'll pivot to targeted promotions we've used before.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -250,7 +250,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: confirm the base alignment plus member-only deals, agree what you're measuring, and book the three-week review so the test actually lands.",
     playerDialogue:
-      "Perfect - let's do exactly that. I'll set up the base alignment and the member-only deals with you, agree what we're measuring, and I'm already booking a call in three weeks to review the impact together.",
+      "Perfect - let's do exactly that. I'll help you set up the base alignment, and let's discuss when you'll run the member-only direct offer, agree what we're measuring, and I'm already booking a call in three weeks to review the impact together.",
     partnerResponse:
       "Sounds good. Let's define the metric now, and review the traffic and revenue in three weeks.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

@@ -28,7 +28,7 @@ import {
  */
 
 const liamWhyRisk =
-  "The mobile and international segments matter, but I'm not willing to take any action that impacts revenue. If I start offering discounts on your platform, even targeted ones, while a mobile promotion is already active elsewhere as a calculated move, I worry it cannibalizes the guests already willing to pay full price on our website. Why should we risk compromising our direct strategy for a lift - in theory?";
+  "I still don't want a public rate change to pull guests away from our website. The mobile and international segments matter, but if I start offering discounts on your platform, even targeted ones, while a mobile promotion is already active elsewhere as a calculated move, I worry it cannibalizes the guests already willing to pay full price on our website. Why should we risk compromising our direct strategy for a lift - in theory?";
 
 // ───────── Step 2 - The segmented ask ─────────
 
@@ -39,7 +39,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: no general rate drop. Name the competing-OTA mobile promotion and ask him to provide those same conditions on Booking.com via the Mobile Rate to recapture mobile and international demand.",
     playerDialogue:
-      "I respect your strategy, and I'm not asking for a general rate drop. We can see you're running a mobile promotion on a competing OTA. There's an opportunity for you to convert better on mobile and with international guests on our platform, so we'd ask you to provide those same conditions here using our Mobile Rate.",
+      "I respect your strategy, and I'm not asking for a general rate drop. Booking.com is not just a booking channel but also a search-and-comparison engine, where your best price offer can help attract travelers who may not otherwise discover your direct website. Would you be open to testing to provide us the same rates and conditions you offer on your direct channel? There's also an opportunity for you to convert better on mobile and with international guests on our platform, where we noticed you're running promotions on a competing OTA, so we'd ask you to provide those same conditions here using our Mobile Rate.",
     partnerResponse: liamWhyRisk,
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,
@@ -93,7 +93,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: acknowledge the risk, quantify the upside with the competitiveness stat, and de-risk it as a controlled test on a fenced segment rather than a blanket change.",
     playerDialogue:
-      "I understand, but an empty room is lost revenue. Data shows improving price competitiveness by 10% on our platform yields, on average, 30% more bookings and 25% more revenue. By providing those same conditions here you leverage our visibility to convert new travelers into loyal guests. Would you be open to testing it on one fenced segment?",
+      "I understand, but an empty room is lost revenue. Data shows improving price competitiveness by 10% on our platform yields, on average, 30% more bookings and 25% more revenue. By providing those same conditions here you leverage our visibility to convert new travelers into loyal guests. Would you be open to testing it on a more targeted approach - base-rate alignment with your direct channel for a selected period and inventory first, and add a fenced Mobile Rate to attract travelers on Booking.com?",
     partnerResponse: liamControlledExperiment,
     styleMatch: { red: 2, yellow: 1, green: 0, blue: 2 },
     assertiveness: 2,
@@ -138,6 +138,41 @@ const step3: BranchingStep = {
   options: step3Options,
 };
 
+// ───────── Wide-only overrides (Review Pack 1) ─────────
+// These two steps are shared with the Narrow / No-Parity files via the
+// base module. The reviewer's Wide edits below are Wide-specific: the
+// Step 1 probe adds a PROACTIVE cross-channel price comparison (a Wide DO
+// that is forbidden in No-Parity), so we override the optimal option here
+// rather than editing the shared base steps. Only the optimal option's
+// playerDialogue changes; everything else (options, tags, scoring) is the
+// shared step verbatim.
+
+const wideStep1Probe: BranchingStep = {
+  ...royalCrestStep1Probe,
+  options: royalCrestStep1Probe.options.map((o) =>
+    o.id === 'rc-r1-step1-correct'
+      ? {
+          ...o,
+          playerDialogue:
+            "I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Also, from the data, we see Booking.com's prices are on average 5% more expensive than your own brand channel. Can you walk me through the strategic considerations behind your current pricing approach?",
+        }
+      : o,
+  ),
+};
+
+const wideStep4Close: BranchingStep = {
+  ...royalCrestStep4Close,
+  options: royalCrestStep4Close.options.map((o) =>
+    o.id === 'rc-r1-step4-correct'
+      ? {
+          ...o,
+          playerDialogue:
+            "Perfect, Liam - let's do exactly that. We'll discuss and fence it to those segments where you have less direct presence, agree what we're measuring, and I'll bring the impact to our follow-up in a month.",
+        }
+      : o,
+  ),
+};
+
 // ───────── Assembled tree ─────────
 
 export const royalCrestWideR1: BranchingConversationTree = {
@@ -146,5 +181,5 @@ export const royalCrestWideR1: BranchingConversationTree = {
   round: 1,
   issueTreePath: royalCrestR1IssueTreePath,
   openingAm: royalCrestOpeningAm,
-  steps: [royalCrestStep1Probe, step2, step3, royalCrestStep4Close],
+  steps: [wideStep1Probe, step2, step3, wideStep4Close],
 };

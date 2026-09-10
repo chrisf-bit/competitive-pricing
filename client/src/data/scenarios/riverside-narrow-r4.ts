@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "The Slippery Road trap: oversimplify to 'bring your ADR down.' Presumes the fix and is exactly what a boutique protecting its positioning refuses.",
     playerDialogue:
-      "There's room for improvement, and honestly the simplest fix is to bring your overall ADR down so you're more competitive - lower the rate across the board and the bookings will follow.",
+      "There's room for improvement, and the best fix is to bring your overall ADR down so you're more competitive - lower the rate across the board and your performance will recover.",
     partnerResponse:
       "Dropping my ADR across the board is exactly what I won't do - I run a boutique, not a discount channel.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right segment, no diagnosis - it tells him to open family rooms and add cots without naming the direct-rate alignment, so it doesn't move him.",
     playerDialogue:
-      "Families are a great segment for you - honestly the quickest win is just to open up all your family rooms, add a few cots and interconnecting options, and make sure the photos show them off. Put a family label on the listings, mention the kids-stay-free angle in the description, and they'll start filling on their own before long.",
+      "Families are a great segment for you - my advice would be to open up all your family rooms, add a few cots and interconnecting options, and make sure the photos show them off. Put a family label on the listings, mention the kids-stay-free angle in the description, and they'll start filling on their own before long.",
     partnerResponse:
       "That's a bit thin - I'd want to understand where the gap actually is first.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -193,7 +193,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: to hit his goals he needs to be competitive, so provide the same rates and conditions he offers on his own website, backed by the 1% -> ~2.7% net revenue / ~3% room nights figure.",
     playerDialogue:
-      "To help you achieve your goals, we'd ask you to provide us the same rates and conditions you offer on your own website - that improves visibility and conversion. Our data shows a 1% price improvement drives about 2.7% more net revenue and 3% more room nights on average.",
+      "To help you achieve your goals, we'd ask you to provide us with the same rates and conditions you offer on your own website - that improves visibility and conversion. Our data shows a 1% price improvement drives about 2.7% more net revenue and 3% more room nights on average.",
     partnerResponse:
       "How can I improve the campaigns I'm already running on your platform?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -208,7 +208,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Compliant ask but bare - 'align your website rates and you'll be fine.' An analytical GM won't act without the numbers.",
     playerDialogue:
-      "Honestly, just line your rates here with what you're already showing on your own website and you'll be fine - that's really all it takes. Once they match, everything else tends to sort itself out on its own, so there's no need to overthink it. Get the website rates aligned here and you'll see things move in the right direction.",
+      "You should bring in line your rates here with what you're already showing on your own website and you'll be fine - that's really all it takes. Once they match, everything else tends to sort itself out on its own, so there's no need to overthink it. Get the website rates aligned here and you'll see things move in the right direction.",
     partnerResponse:
       "'You'll be fine' isn't a business case. Show me the numbers.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -222,7 +222,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Tell him to make sure he isn't pricier than the other OTAs either. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "And make sure you're not sitting pricier than the other OTAs either - go through what each of them is charging for these rooms and match them here so you're competitive everywhere, not just against your own website. If a channel undercuts you, bring your rates down to meet it so nobody beats you.",
+      "And make sure you're not priced higher than the other OTAs either - go through what each of them is charging for these rooms and match them here so you're competitive everywhere, not just against your own website. If a channel undercuts you, bring your rates down to meet it so nobody beats you.",
     partnerResponse:
       "Policing my other-OTA pricing isn't your call in this market.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

@@ -38,7 +38,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: no general rate drop. Mirror the targeted 'Long Stay' offer he already runs on his own website, aligning those Brand.com conditions on Booking.com to capture travelers who only book through us.",
     playerDialogue:
-      "I respect your strategy, and I'm not asking for a general rate drop. I can see you run a 'Long Stay' deal on your own website - we can replicate that same targeted offer here. Providing those Brand.com conditions on Booking.com helps you capture travelers who rely solely on our platform.",
+      "I respect your strategy. However, to capture the travelers who use our platform exclusively, your best price offer can help attract them and not lose the new guests who discover you on Booking.com. Would you be open to testing to match the rates and conditions with your direct channel here for a selected period and inventory first? Also, I can see you run a 'Long Stay' deal on your own website - we can replicate that same targeted offer here which helps you capture travelers who rely solely on our platform.",
     partnerResponse: liamWhyRisk,
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,
@@ -92,7 +92,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: acknowledge the risk, quantify the upside with the competitiveness stat, and de-risk it as a controlled test on a fenced segment by aligning his direct-site conditions here.",
     playerDialogue:
-      "I understand, but an empty room is lost revenue. Data shows improving price competitiveness by 10% on our platform yields, on average, 30% more bookings and 25% more revenue. By aligning those direct-site conditions here you leverage our visibility to convert new travelers into loyal guests. Would you be open to testing it on one fenced segment?",
+      "I understand, but an empty room is lost revenue. Our data shows improving price competitiveness by 10% on our platform yields, on average, 30% more bookings and 25% more revenue. By aligning those direct-site conditions here you leverage our visibility at zero upfront cost to fill your empty rooms, and potentially to convert new travelers into loyal guests. Would you be open to testing it on one fenced segment?",
     partnerResponse: liamControlledExperiment,
     styleMatch: { red: 2, yellow: 1, green: 0, blue: 2 },
     assertiveness: 2,
@@ -137,6 +137,39 @@ const step3: BranchingStep = {
   options: step3Options,
 };
 
+// ───────── Narrow-only overrides (Review Pack 2) ─────────
+// Step 1 probe and Step 4 close are shared with the other regimes via the
+// base module. The reviewer's Narrow edits are Narrow-specific (the probe
+// cites Booking.com vs the partner's own brand channel - a Narrow DO,
+// aligning to Brand.com), so we override the optimal option here rather
+// than editing the shared base steps.
+
+const narrowStep1Probe: BranchingStep = {
+  ...royalCrestStep1Probe,
+  options: royalCrestStep1Probe.options.map((o) =>
+    o.id === 'rc-r1-step1-correct'
+      ? {
+          ...o,
+          playerDialogue:
+            "I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Also, from the data, on average, we see Booking.com's public prices are more expensive than your own brand channel almost all the time. Can you walk me through the strategic considerations behind your current pricing approach?",
+        }
+      : o,
+  ),
+};
+
+const narrowStep4Close: BranchingStep = {
+  ...royalCrestStep4Close,
+  options: royalCrestStep4Close.options.map((o) =>
+    o.id === 'rc-r1-step4-correct'
+      ? {
+          ...o,
+          playerDialogue:
+            "Perfect, Liam - let's do exactly that. We'll discuss and fence it to those segments where you have less direct presence, agree what we're measuring, and I'll bring the impact to our follow-up in a month.",
+        }
+      : o,
+  ),
+};
+
 // ───────── Assembled tree ─────────
 
 export const royalCrestNarrowR1: BranchingConversationTree = {
@@ -145,5 +178,5 @@ export const royalCrestNarrowR1: BranchingConversationTree = {
   round: 1,
   issueTreePath: royalCrestR1IssueTreePath,
   openingAm: royalCrestOpeningAm,
-  steps: [royalCrestStep1Probe, step2, step3, royalCrestStep4Close],
+  steps: [narrowStep1Probe, step2, step3, narrowStep4Close],
 };

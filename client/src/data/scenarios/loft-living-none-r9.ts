@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: conversion is down 68%, so future room nights are falling behind by 46% versus peer. Given his focus on maximizing revenue across channels, ask how he's planning to address the volume gap.",
     playerDialogue:
-      "I wanted to focus on your recent performance. We've seen a 68% drop in conversion, and your future room nights are falling behind by 46% - both against your peer group. Given your focus on maximizing revenue across channels, how are you planning to address this volume gap?",
+      "I wanted to focus on your recent performance. Your conversion is down 68% compared to your peer group, and future room nights are 46% behind - while your average daily rate is 88% above peers. That combination suggests there's a significant revenue opportunity being left on the table. Given your focus on maximizing revenue across channels, how are you looking at this gap?",
     partnerResponse:
       "We've raised our base rates to increase revenue per room. But yes, the empty rooms are starting to hurt. I just don't like how Booking.com uses Partner Offers to discount my rooms without my consent - it feels like I'm losing control.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -87,7 +87,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: look at why those Partner Offers appear - some of his B2B rates are escaping into public B2C search, so travelers buy his rooms at wholesale prices. He has complete freedom over his pricing, but addressing the leak internally will help his performance.",
     playerDialogue:
-      "I hear you. However these rates are actually coming from your wholesale agreements. Booking.com is contractually allowed to source rates and inventory from other third-party providers and to display these as a Partner Offer on its platform as per our General Delivery Terms.",
+      "I hear you and I understand the frustration. However these rates are actually coming from your wholesale agreements. Booking.com is contractually allowed to source rates and inventory from other third-party providers and to display these as a Partner Offer on its platform as per our General Delivery Terms. Booking.com isn't the source of these rates; we're displaying what's available in the market.",
     partnerResponse:
       "Every wholesaler points fingers at the other. And in the meantime, I can't just lower my prices on Booking.com to chase volume.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: not necessarily a bigger discount - a 10% mobile discount triggers mobile search badges and improves ranking, but he's excluded all weekends and longer booking windows, so it isn't moving revenue; and because his base rates rose, the setup is no longer competitive. Clarify Partner Offer is a consumer-focused tool, not a punishment, and offering his best competitive price minimizes the leak's impact.",
     playerDialogue:
-      "Not necessarily a bigger discount. A 10% mobile discount triggers our mobile search badges and makes you more attractive on our platform - but you've excluded all weekends and longer booking windows, so it isn't moving revenue the way it should. And because your base rates went up, your current mobile setup is no longer competitive. On Partner Offer - it's a tool we use to ensure travelers get a great price on Booking.com, it is not a punishment. It increases your likelihood of selling inventory while saving customers' time and effort to search the web for other options.",
+      "Not necessarily a bigger discount. A 10% mobile discount triggers our mobile search badges and makes you more attractive on our platform - but you've excluded all weekends and longer booking windows, so it isn't moving revenue the way it should. And because your base rates went up, your current mobile setup is no longer competitive against peers. As for Partner Offer - it's designed to help travelers access a great price and increases your likelihood of selling inventory. We understand the frustration, but the rates behind it come from your wholesale distribution, not from us.",
     partnerResponse:
       "At the moment I'm not willing to share any more data or adjust my strategy. Thanks for all these inputs - I'll give this some thought and let you know next time we meet.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

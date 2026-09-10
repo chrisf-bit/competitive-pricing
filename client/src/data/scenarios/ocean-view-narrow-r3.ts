@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps straight to a price cut without understanding how she runs her channels - an experienced manager reads that as being sold to.",
     playerDialogue:
-      "Your bookings are down 48%, so the quickest fix here is straightforward - let's just drop your Booking.com prices so you stop losing travelers, and I can have that set up for you within the hour. Once the lower rates are live you'll see those bookings come back. Shall we get it going?",
+      "Your bookings are down 48%, so let's fix that and drop your Booking.com prices so you stop losing travelers, and I can have that set up for you within the hour. Once the lower rates are live you'll see those bookings come back. Shall we get it going?",
     partnerResponse:
       "You're prescribing a cut before you understand how we run our channels.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Asks for the public alignment but offers nothing to protect her direct incentive - the exact thing she's protecting - so it reads as asking her to simply give it up.",
     playerDialogue:
-      "Honestly, the simplest path is to just align your public rates with your website rates here, and once you do that you'll recover the visibility you've lost. The direct discount you're running is costing you far more in missed bookings than it's actually earning you, so bringing the two into line here is really the sensible move.",
+      "The simplest path is to just align your public rates with your website rates here, and once you do that you'll recover the visibility you've lost. The direct discount you're running is costing you far more in missed bookings than it's actually earning you, so bringing the two into line here is really the sensible move.",
     partnerResponse:
       "You keep asking me to give up my public incentive without protecting it. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Ask her to make sure she isn't pricier than the other OTAs and match them here. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "And while we're at it, make sure you're not sitting pricier than the other OTAs either - go and check what they're charging and match them here so you're never the most expensive option anywhere a traveler looks. If any of them are undercutting you, bring your rates on those channels down too so you stay competitive right across the board.",
+      "You should also make sure you're not sitting pricier than the other OTAs either - go and check what they're charging and match them here so you're never the most expensive option anywhere a traveler looks. If any of them are undercutting you, bring your rates on those channels down too so you stay competitive right across the board.",
     partnerResponse:
       "Policing my other-OTA pricing isn't your call in this market.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -250,9 +250,9 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: confirm the three-week base-alignment test, agree what you're measuring, and book the follow-up so it lands.",
     playerDialogue:
-      "Absolutely, Camila - I'll set that up shortly. Let's agree the metric now and book our follow-up so we review it properly in three weeks.",
+      "Absolutely, Camila - I'll set that up shortly. Let's agree on the metric now and book our follow-up so we review it properly in three weeks.",
     partnerResponse:
-      "Good. Let's agree the metric and review it in three weeks.",
+      "Good. Let's agree on the metric and review it in three weeks.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',

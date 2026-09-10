@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: contrast strong forward volume with the 32% YoY room-night drop and ask, open-endedly, what she's currently doing to turn the trend around.",
     playerDialogue:
-      "I've been reviewing your portfolio. Forward volume for the next three months is strong, but room nights in the last 30 days are down 32% year-on-year. What strategies do you have in place right now to turn that trend around?",
+      "I've been reviewing your portfolio. Room nights on the books for the next three months are strong, but room nights generated over the last 30 days are down 32% year-on-year. Do you have any strategies in place to turn that trend around?",
     partnerResponse:
       "Honestly, we're focusing on the channels that give us the highest margin. Some platforms are cutting their own margins to offer cheaper prices, and I'm fine with that. I'm not looking to lower my rates on Booking just to chase volume.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -85,7 +85,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: her strategy is her call, but a higher price here sends the traveler to a competitor - an unrecoverable unsold room. Her best available price is the fastest way to regain visibility, and you surface her concern before pushing.",
     playerDialogue:
-      "Your pricing strategy is entirely your decision. From the customer's side, though, a higher price here sends the traveler to a competitor's property - that's an unrecoverable unsold room. Your best available price on our platform is the fastest way to regain lost visibility and fill empty nights. What's your main concern about adjusting your position here?",
+      "Your pricing strategy is entirely your decision. From the customer's side, though, a higher price here may leave your properties with unsold availability - that's a booking opportunity you may not get back. Your best available price on our platform is the fastest way to get back on track and fill empty nights. What's your main concern about adjusting your pricing here?",
     partnerResponse:
       "My worry is that if I offer a discount on Booking, customers just complete the booking there instead of finding me and booking on our own website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed pivot: the platform is an acquisition tool, so instead of a general discount, target high-value segments - international and family. Then probe the reason behind her family-room restriction rather than assuming it.",
     playerDialogue:
-      "That's a common concern - but our platform is a powerful acquisition tool. Rather than a general discount, we can target high-value segments: international bookers and families. We can see you're currently restricting double rooms from family searches - what's the main reason behind that?",
+      "That is a valid concern. However, 90% of bookings on our platform originate from customers discovering an accommodation they want to stay at directly on Booking.com. This means that not having a great price here might send travelers to a competitor's property. Instead of giving a general discount, what about targeting high-value segments? We can see you're currently restricting double rooms from family searches - what's the main reason behind that?",
     partnerResponse:
       "Families are operationally expensive - cots, extra linen, higher risk of damage. I'd rather keep those rooms for couples, and I don't want one-night weekend bookings blocking longer stays.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

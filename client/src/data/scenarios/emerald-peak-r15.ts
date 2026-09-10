@@ -44,11 +44,11 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r15-step1-correct',
     label: 'Name the forward sell-through gap',
     description:
-      "SME-prescribed open: point to the one forward metric that needs attention - sell-through pacing about 8% behind her peer group over the next 90 days.",
+      "SME-prescribed open: point to the one forward metric that needs attention - sell-through pacing about 9 percentage points behind her peer group over the next 90 days.",
     playerDialogue:
-      "Looking at the next 90 days, there's one metric worth your attention: your forward sell-through is pacing about 8% behind your peer group.",
+      "Looking at the next 90 days, there's one metric worth your attention: your forward sell-through is pacing about 9 percentage points behind your peer group.",
     partnerResponse:
-      "Well, that doesn't concern me a great deal - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off. We accept lower conversion on external platforms to safeguard our direct channel. How does that 8% compare against our historical data?",
+      "Well, that doesn't concern me a great deal - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off. We accept lower conversion on external platforms to safeguard our direct channel. How does that nine-point gap compare against our historical data?",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r15-step1-alarm',
     label: 'Open by raising the alarm',
     description:
-      "Right metric, wrong pitch - dramatizing an 8% forward gap as a crisis to a decisive, data-led GM reads as spin and hands her an easy reason to discount your whole read.",
+      "Right metric, wrong pitch - dramatizing a 9-point forward gap as a crisis to a decisive, data-led GM reads as spin and hands her an easy reason to discount your whole read.",
     playerDialogue:
       "Honestly, Sophia, next quarter is a real problem - your sell-through is falling off a cliff and you'll be sitting on a lot of empty rooms unless we act now.",
     partnerResponse:
@@ -92,9 +92,9 @@ const step2Options: BranchingOption[] = [
     id: 'ep-r15-step2-correct',
     label: 'Give the history, then the visibility gap',
     description:
-      "SME-prescribed handling: honour her ask for history - room nights sold up 40% vs peers over the last 30 days - but flag the missed opportunity in the 12% left unsold, and that her visibility sits at 17% against peers at 26%.",
+      "SME-prescribed handling: honour her ask for history - room nights sold up 110% vs peers over the last 30 days - but flag the missed opportunity in the 12% left unsold, and that her visibility sits at 17% against peers at 26%.",
     playerDialogue:
-      "Happy to. Historically you're strong - room nights sold are up 40% versus your peers over the last 30 days. But there's a missed opportunity in the 12% of rooms that went unsold, and traveler search behaviour is driving it: your visibility share is sitting at 17%, while your peers average 26%.",
+      "Happy to. Historically you're strong - room nights sold are up 110% versus your peers over the last 30 days. But there's a missed opportunity in the 12% of rooms that went unsold, and traveler search behaviour is driving it: your visibility share is sitting at 17%, while your peers average 26%.",
     partnerResponse:
       "Mmh, okay... so what's actually happening at the searching stage that drives that difference?",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -337,7 +337,7 @@ const steps: BranchingStep[] = [
     id: 'history-visibility',
     label: 'Historical context + visibility gap',
     partnerPrompt:
-      "Well, it doesn't concern me a lot - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off: we accept lower conversion on external platforms to safeguard our direct channel. How does that 8% figure compare against our historical data?",
+      "Well, it doesn't concern me a lot - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off: we accept lower conversion on external platforms to safeguard our direct channel. How does that nine-point figure compare against our historical data?",
     options: step2Options,
   },
   {

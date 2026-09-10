@@ -90,7 +90,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the 'too unique' refusal: respect the position, then reframe - travelers don't know his brand or his competitors, they search by destination and amenities, so it's the market, not the algorithm, that sets the comparison.",
     playerDialogue:
-      "I completely respect that, Anton. But think about the traveler's journey: they don't know you, and they don't know your competitors. They search for a destination, similar amenities, a similar stay. So in the end it's the market that sets the comparison, not us - and it's worth seeing it through the guest's eyes.",
+      "I completely respect that, Anton. But think about the traveler's journey: they search for a destination, similar amenities and a similar stay. Your peer group is based on the other properties guests actually see and consider in those searches, so it reflects the market you're competing in, not a hand-picked list from us. In the end, it's worth seeing the comparison through the guest's eyes.",
     partnerResponse:
       "I take the point, but I'd want guests to get some sense of the uniqueness of our property right from the very beginning of their journey on your platform.",
     styleMatch: { red: 0, yellow: 1, green: 2, blue: 2 },
@@ -186,7 +186,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the 'not our audience' objection: look at who's actually shopping the listing. For US couples booking 30+ days out - a high-spending, long-stay segment - he's losing 15% visibility share directly to his peer group.",
     playerDialogue:
-      "That's fair for your repeaters. But look at who's actually shopping your listing right now. For US couples booking 30 or more days ahead - a high-spending, long-stay segment - you're losing 15% visibility share directly to your peer group. They're viewing you, then choosing a competitor.",
+      "That's fair for your repeaters and direct customers. But look at who's actually shopping your listing on our platform right now. For US couples booking 30 or more days ahead - a high-spending, long-stay segment - you're losing 15% visibility share directly to your peer group. They're viewing you, then choosing a competitor.",
     partnerResponse:
       "Hmm... US couples booking a month out are exactly the guest profile we want. They spend heavily on extra services...",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },

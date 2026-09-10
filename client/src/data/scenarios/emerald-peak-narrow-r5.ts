@@ -94,7 +94,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Accepts her reverse-billboard framing with only a token nudge - never correcting the belief that a higher price here is harmless.",
     playerDialogue:
-      "That's fair, honestly - the exposure you get from being on our platform genuinely does help drive awareness, so I take your point that the billboard effect is doing real work for you. Maybe all we do is trim a little at the very margin on a few dates, keep your website as the cheaper option, and let the click-throughs follow naturally from the visibility.",
+      "That's fair - the exposure you get from being on our platform genuinely does help drive awareness, so I take your point that the billboard effect is doing real work for you. Maybe all we do is trim a little at the very margin on a few dates, keep your website as the cheaper option, and let the click-throughs follow naturally from the visibility.",
     partnerResponse:
       "So you agree the billboard model works? Then what exactly are we fixing?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -108,7 +108,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the head-office strategy as outdated. Lecturing a GM following mandated policy shuts the conversation down.",
     playerDialogue:
-      "Honestly, that whole billboard strategy your head office is pushing is pretty outdated at this point - the data just doesn't back it up anymore. On our platform most travelers compare on price before they ever click through to a property's own direct site.",
+      "That whole billboard strategy your head office is pushing is pretty outdated at this point - the data just doesn't back it up anymore. On our platform most travelers compare on price before they ever click through to a property's own direct site.",
     partnerResponse:
       "You're telling me head-office policy is outdated? That's not a conversation I can have with you.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -150,7 +150,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Come back to a blanket public cut - the one thing she's told you twice she can't authorise.",
     playerDialogue:
-      "Look, I hear the brand-integrity point, but the cleanest answer on the table is still just to drop your public rates here on Booking.com by a few percent across the board - that one move gets you competitive again immediately, and everything else we've talked about is really just working around it. Can we do that?",
+      "Look, I hear the brand-integrity point, but the cleanest answer on the table is to drop your public rates here on Booking.com by a few percent across the board - that one move gets you competitive again immediately, and everything else we've talked about is really just working around it. Can we do that?",
     partnerResponse:
       "I've told you twice - I can't authorise an across-the-board cut. Are you listening?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -262,7 +262,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Never answers her question - the concrete return - and pins no test or review.",
     playerDialogue:
-      "It'll definitely help, I'm confident of that - honestly the upside here is real and you'll feel the difference once it's live. Let's not overthink it: let's just get the family rates switched on, leave them running, and see how it goes over the coming weeks before we worry about pulling any figures together.",
+      "It'll definitely help, I'm confident of that - the upside here is real and you'll feel the difference once it's live. Let's not overthink it: let's just get the family rates switched on, leave them running, and see how it goes over the coming weeks before we worry about pulling any figures together.",
     partnerResponse:
       "I asked for the concrete return. 'See how it goes' won't get this past corporate.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -276,7 +276,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the fenced family test with a broad public cut she cannot authorise.",
     playerDialogue:
-      "Perfect, that's great - and honestly, while we've got the momentum, let's not stop at the family rates. Let's also trim your public rates across the board here by a few percent at the same time, so the whole property looks sharper to travelers and we really move the needle on your numbers, not just the one segment.",
+      "Perfect, that's great - and while we've got the momentum, let's not stop at the family rates. Let's also trim your public rates across the board here by a few percent at the same time, so the whole property looks sharper to travelers and we really move the needle on your numbers, not just the one segment.",
     partnerResponse:
       "That's the across-the-board cut I can't make. Stick to the family rates.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

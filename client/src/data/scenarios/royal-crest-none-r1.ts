@@ -9,7 +9,6 @@ import {
   royalCrestStep1Probe,
   royalCrestStep4Close,
   liam30PercentCap,
-  liamControlledExperiment,
 } from './royal-crest-base';
 
 /**
@@ -34,6 +33,12 @@ import {
 const liamWhyRisk =
   "The international target is a valid angle, but I'm very cautious about anything that touches revenue. If I start offering discounts on your platform, even targeted ones, I worry it cannibalizes the guests already willing to pay full price on our website. Why should we risk compromising our direct strategy for a lift - in theory?";
 
+// No-Parity-only variant of the shared base line (Review Pack 3): "no
+// direct marketing presence" -> "less direct marketing presence". Kept
+// local so the shared base line (used by Wide / Narrow) is untouched.
+const liamControlledExperimentNone =
+  "You have a point that an empty room is revenue lost. If we can strictly isolate this to a specific segment where we currently have less direct marketing presence, it makes sense as a controlled experiment.";
+
 // ───────── Step 2 - The segmented ask ─────────
 
 const step2Options: BranchingOption[] = [
@@ -43,7 +48,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: no general rate drop. Surface the lagging US-traveler share and offer a Country Rate he can choose to run for that segment, protecting his overall ADR - with the choice of strategy explicitly left to him.",
     playerDialogue:
-      "I respect that. From Booker Insights dashboard in the extranet, it does show your share of US travelers is lower than your peer group. Rather than a general rate drop, you could choose to run a Country Rate aimed only at the US market - that lifts conversion in that segment while protecting your overall ADR. The choice of pricing and distribution strategy stays entirely yours.",
+      "I respect that. However, to capture the travelers who use our platform exclusively, offering your competitive price can help attract them and leverage our platform's global reach at zero upfront cost to fill your empty rooms, and some might become your loyal guests in the future. From Booker Insights in the extranet, it shows your share of US travelers is lower than your peer group, and you currently don't have a US Country Rate live. Rather than changing your overall public rate, we could test a Country Rate for US travelers first. Would that be worth exploring? Of course, the choice of pricing and distribution strategy stays entirely yours.",
     partnerResponse: liamWhyRisk,
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 1 },
     assertiveness: 2,
@@ -97,8 +102,8 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: frame the gap as visibility he isn't earning with unique audiences, quantify the upside with the competitiveness stat, and de-risk it as a controlled test on a fenced segment.",
     playerDialogue:
-      "Right now your property isn't visible to unique audiences who wouldn't otherwise find you. Data shows improving price competitiveness by 10% on our platform generates, on average, 30% more bookings and 25% more revenue. You already attract strong traffic on Booking.com, improving conversion can help capture more of that demand, while some travellers may later choose to book directly. Based on your goals, would you be open to testing it on one fenced segment?",
-    partnerResponse: liamControlledExperiment,
+      "I understand, but an empty room is lost revenue. Our data shows improving price competitiveness by 10% on our platform generates, on average, 30% more bookings and 25% more revenue. You already attract strong traffic on Booking.com, 20% above peers, but conversion is 4% below. So the opportunity is to convert more of the demand you are getting, without changing your whole pricing strategy. We could test a US Country Rate, where your booker share is below peers, and monitor performance with the current baseline. Would you be open to that?",
+    partnerResponse: liamControlledExperimentNone,
     styleMatch: { red: 2, yellow: 1, green: 0, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -142,6 +147,25 @@ const step3: BranchingStep = {
   options: step3Options,
 };
 
+// ───────── No-Parity-only close override (Review Pack 3) ─────────
+// The Step 4 close is shared with the other regimes via the base module.
+// The reviewer's No-Parity edits ("discuss and", "you have less direct
+// presence", and the partner's "less direct marketing presence" prompt)
+// are applied here so the shared base close is untouched for Wide / Narrow.
+const noneStep4Close: BranchingStep = {
+  ...royalCrestStep4Close,
+  partnerPrompt: liamControlledExperimentNone,
+  options: royalCrestStep4Close.options.map((o) =>
+    o.id === 'rc-r1-step4-correct'
+      ? {
+          ...o,
+          playerDialogue:
+            "Perfect, Liam - let's do exactly that. We'll discuss and fence it to those segments where you have less direct presence, agree what we're measuring, and I'll bring the impact to our follow-up in a month.",
+        }
+      : o,
+  ),
+};
+
 // ───────── Assembled tree ─────────
 
 export const royalCrestNoneR1: BranchingConversationTree = {
@@ -150,5 +174,5 @@ export const royalCrestNoneR1: BranchingConversationTree = {
   round: 1,
   issueTreePath: royalCrestR1IssueTreePath,
   openingAm: royalCrestOpeningAm,
-  steps: [royalCrestStep1Probe, step2, step3, royalCrestStep4Close],
+  steps: [royalCrestStep1Probe, step2, step3, noneStep4Close],
 };
