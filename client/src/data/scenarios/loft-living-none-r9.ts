@@ -136,7 +136,7 @@ const step2Options: BranchingOption[] = [
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
     compliance: 'risky',
-    trustChange: -8,
+    trustChange: -12,
   },
 ];
 
