@@ -111,17 +111,31 @@ const step2Options: BranchingOption[] = [
     trustChange: -5,
   },
   {
+    id: 'll-r9-none-step2-empathize',
+    label: 'Acknowledge the frustration without explaining the leak',
+    description:
+      "Genuine, understanding reply - but it stops at empathy and never explains that the Partner Offer price comes from his own leaked wholesale rate, so it leaves a data-led partner without the answer he needs. Safe to say, just not the strongest move.",
+    playerDialogue:
+      "You're right to be frustrated, and I completely understand - when Partner Offer prices appear lower than your direct rates, it does feel like you've lost control of your pricing. I can see how that's difficult from your side.",
+    partnerResponse:
+      "I appreciate the understanding, but sympathy doesn't put money back in my pocket. What are you actually going to do about it?",
+    styleMatch: { red: 0, yellow: 0, green: 1, blue: -1 },
+    assertiveness: 1,
+    compliance: 'safe',
+    trustChange: -3,
+  },
+  {
     id: 'll-r9-none-step2-blame',
     label: 'Tell him the leak is his problem to solve alone',
     description:
-      "Right that the source is his B2B setup, wrong tone - dumping it on him abandons the acknowledgment and turns a commercial ally into an adversary.",
+      "Dumps the leak on him as his problem to solve alone and refuses to help - an unacceptable brush-off that abandons the partner and turns a commercial ally into an adversary.",
     playerDialogue:
       "Look, I'll be straight with you - that's a supplier problem you created on your own side, so honestly it's on you to go and sort it out with your wholesalers. It's not really something we can fix from here, and it's not our job to. Once you've cleaned up your own contracts, the leak stops, but that part is squarely down to you.",
     partnerResponse:
       "I called to look at performance, not to be told it's all my fault. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
     assertiveness: 3,
-    compliance: 'borderline',
+    compliance: 'risky',
     trustChange: -8,
   },
 ];
@@ -214,7 +228,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Abandons the fenced, segment-targeted approach for an across-the-board cut - the very cannibalization he just flagged, and the price war the SME warns against.",
     playerDialogue:
-      "Honestly, the simplest thing here is to just drop your prices across the board on Booking.com for a while and let the volume come back. Don't overthink the segments or the setup - a straightforward cut across all your rates is the quickest way to get the rooms filling again, and once bookings pick back up you can always ease the prices back up later.",
+      "How about we lower your rates on Booking.com only for a few months and let the volume come back. Don't overthink the segments or the setup; a straightforward cut across all your rates is the quickest way to get the rooms filling again, and you can always adjust the prices later once bookings pick up.",
     partnerResponse:
       "That's the blanket cut I said I won't do - it feeds my direct bookers to you and torches my margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
