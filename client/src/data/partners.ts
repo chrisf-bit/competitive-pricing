@@ -829,7 +829,7 @@ function silverHorizonBase(args: {
         style: 'blue',
         styleSecondary: 'red',
         description:
-          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimization and strict ROI when balancing channels. Fields aggressive Key OTA competitor calls and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
+          "Multi-Property Professional running a portfolio of vacation-rental units as an entrepreneurial business, with full commercial autonomy. Leads with net-revenue maths, margin optimization and strict ROI when balancing channels. Stands firm against aggressive Key OTA competitor calls and won't be drawn into a platform price war - she wants the ROI case, not a gross-rate argument.",
         commercialGoal:
           'Maximize net revenue and margin across the portfolio while balancing a mix of distribution channels',
       },

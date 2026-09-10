@@ -154,7 +154,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "Understood - 30% is your call, and I'm not going to push you off it. Let's just work within that ceiling and make the most of Genius for the share you do give us. We'll focus on getting those bookings as valuable as we can inside the 30%, and leave the cap right where you've set it.",
     partnerResponse:
-      "So we're just accepting the ceiling? I thought you saw an opportunity here.",
+      "We do have a 30% cap, however now it sounds like we may not be exploring the opportunity to further improve our performance.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
     compliance: 'safe',
@@ -266,7 +266,7 @@ const step5Options: BranchingOption[] = [
     playerDialogue:
       "Just deepen your Genius discount here - take it up to 20% instead of what you're running now - and the Genius travelers will start coming back. The bigger the discount looks, the more it'll stand out to them in the results, so push it as far as you're comfortable going. Bump it up, let the members see the sharper number, and the bookings from that group should recover on their own.",
     partnerResponse:
-      "A deeper discount on an inflated base is the same problem, isn't it? That doesn't fix the value.",
+      "Inflating our base rates and giving a bigger discount sounds like offering the same value in the end. That does not sound like it will solve the issue.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 2,
     compliance: 'safe',
