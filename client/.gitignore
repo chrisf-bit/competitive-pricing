@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# review-pack extractor build artifact
+scripts/.extract-review-pack.bundle.mjs

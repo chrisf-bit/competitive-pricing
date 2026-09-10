@@ -254,7 +254,7 @@ for (const flow of flows) {
     // Step labels are internal too (the branching call shows numbered dots,
     // not named steps), so only the number is rendered.
     children.push(new Paragraph({ spacing: { before: 200, after: 60 }, children: [
-      new TextRun({ text: `Step ${si + 1}`, bold: true, color: YELLOW, size: 22 }),
+      new TextRun({ text: step.displayLabel || `Step ${si + 1}`, bold: true, color: YELLOW, size: 22 }),
     ]}));
     children.push(new Paragraph({ spacing: { after: 40 }, children: [new TextRun({ text: `${d.contact} says:`, bold: true, color: GREY, size: 19 })] }));
     children.push(quote(step.partnerPrompt, NAVY));
