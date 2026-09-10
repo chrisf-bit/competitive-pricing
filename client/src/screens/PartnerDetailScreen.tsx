@@ -1148,7 +1148,7 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
           metricKey="unsoldRooms"
           value={opc?.unsoldRooms}
           comparator="vs peer"
-          format="number"
+          format="percentLevel"
         />
         <SecondaryMetricCard
           metricKey="sellThroughRate"
@@ -1263,7 +1263,9 @@ function SecondaryMetricCard({
   metricKey: keyof typeof metricDefinitions;
   value: SecondaryMetricValue | undefined;
   comparator: 'vs last year' | 'vs peer';
-  format: 'number' | 'percent';
+  // 'percent' = signed delta (e.g. +5%, -9%); 'percentLevel' = a plain
+  // percentage level with no sign (e.g. 12% unsold); 'number' = raw count.
+  format: 'number' | 'percent' | 'percentLevel';
 }) {
   const def = metricDefinitions[metricKey];
 
@@ -1305,7 +1307,9 @@ function SecondaryMetricCard({
   const primary =
     format === 'percent'
       ? `${!hasPeer && value.value > 0 ? '+' : ''}${to1dp(value.value)}%`
-      : `${Math.round(value.value).toLocaleString('en-GB')}`;
+      : format === 'percentLevel'
+        ? `${to1dp(value.value)}%`
+        : `${Math.round(value.value).toLocaleString('en-GB')}`;
   const delta = hasPeer
     ? `${to1dp(value.peerValue as number)}${format === 'percent' ? '%' : ''} peer`
     : value.deltaPct === undefined

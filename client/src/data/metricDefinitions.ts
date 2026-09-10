@@ -27,22 +27,22 @@ export const metricDefinitions = {
   erpd: {
     label: 'eRPD',
     helpText:
-      "Experienced RPD - the relative price difference between what travelers see on Booking.com and what they'd pay on Key OTA or Brand.com. Higher % = partner is more expensive on our platform. The difference is shown as month on month.",
+      "Experienced Relative Price Difference (before BSB and Partner Offer) - it shows how much cheaper or more expensive Booking.com is compared to Brand.com on Meta or a key OTA on direct, based on prices that non-logged-in and Genius Level 1 travelers would see on our platform. When above 0% = pricing is more expensive on average on our platform. The difference is shown month-on-month.",
   },
   rpdPublic: {
     label: 'RPD Public',
     helpText:
-      'Public RPD - the price comparison for travelers who are NOT logged into a Genius account. Reflects the rate seen by the bulk of traffic.',
+      "The demand-weighted price comparison between Booking.com's prices for non-logged-in travelers and the competitor's public prices (before BSB and Partner Offer) where Brand.com is measured on Meta and Key OTA on direct.",
   },
   rpdLoyal: {
     label: 'RPD Loyal',
     helpText:
-      "Loyal RPD looks at Genius Level 1 users and compares our member price with competitors' public prices (pre-BSB and partner Offer).",
+      "The demand-weighted price comparison between Booking.com's prices for Genius Level 1 travelers and the competitor's public prices (before BSB and Partner Offer) where Brand.com is measured on Meta and Key OTA on direct.",
   },
   losePricePublic: {
     label: 'Lose Price',
     helpText:
-      'Share of public-traffic searches where Booking.com loses the price comparison vs Brand.com / Key OTA. Higher % = more searches where this partner looked uncompetitive.',
+      "The share of public-search scans where Booking.com prices are more expensive than Brand.com (on Meta) or a key OTA (on direct). A higher percentage means the partner's prices on Booking.com are more frequently higher than those on Brand.com or the key OTA.",
   },
   activeScenarios: {
     label: 'Scenarios',
@@ -52,21 +52,21 @@ export const metricDefinitions = {
   competitor: {
     label: 'Competitor',
     helpText:
-      'In the game, we compare price competitiveness with either Brand.com (the partner\'s direct website) or the Key OTA predefined for that simulation. In practice, check both in the pricing dashboards.',
+      "In the game, each round uses a predefined primary comparison player for ERPD and price metrics: either Brand.com (measured on Meta) or the key OTA (on direct). This keeps the simulations focused. In practice, and under your manager's guidance, align with the office-country ERPD objectives direction and use pricing dashboard insights to prioritize actions between Brand.com and the key OTA. Consider the potential ERPD impact, partner value, observed trends, and any applicable parity guardrails.",
   },
 
   // ── eRPD Price Bucket ──
   priceBucket: {
     label: 'eRPD Price Bucket',
     helpText:
-      'Where this partner sits on the seven-bucket Booking.com price spectrum. Bucket 1 (eRPD ≤ -3%) = most competitive; Bucket 7 (eRPD > 12%) = least competitive. Used for internal portfolio prioritization only - never quoted to the partner.',
+      'Where this partner sits on the seven-bucket eRPD price spectrum. Bucket 1 (eRPD < -3%) = most competitive; Bucket 7 (eRPD > 12%) = least competitive. Used for internal portfolio prioritization and account planning only - never quoted to the partner.',
   },
 
   // ── Secondary metrics row (PDF page 1) ──
   last30dAbrn: {
     label: 'Last 30D ABRN',
     helpText:
-      "Action-Based Room Nights produced over the last 30 days - the volume of bookings driven through Booking.com. Compared vs last year so the learner sees year-on-year change.",
+      "As Booked Room Nights produced over the last 30 days. Compared vs the same 30 days last year so the learner sees year-on-year change.",
   },
   last30dRoomNights: {
     label: 'Last 30D Room Nights',
@@ -81,7 +81,7 @@ export const metricDefinitions = {
   last90dPageViews: {
     label: 'Last 30D Page Views',
     helpText:
-      "Share of expected page views the property received over the last 30 days, relative to peers. Negative % = the property is being seen less than peers.",
+      "Number of times users clicked through to the hotel's detail page on Booking.com from search results over the last 30 days. Compared with the partner's peer group in the same period. Negative % = the property is being seen less than peers.",
   },
   last90dConversion: {
     label: 'Last 30D Conversion',
@@ -98,7 +98,7 @@ export const metricDefinitions = {
   lastPricingContact: {
     label: 'Last Pricing Contact',
     helpText:
-      'Date of the most recent pricing-focused conversation with this partner. Stale dates can signal a partner who has drifted without engagement.',
+      'Date of the most recent logged pricing-focused contact with this partner. Old dates can signal a partner who has drifted without engagement.',
   },
   pricingCoverageQTD: {
     label: 'Pricing Coverage (QTD)',
@@ -108,7 +108,7 @@ export const metricDefinitions = {
   partnerValueAbrn: {
     label: 'Partner Value (ABRN ly)',
     helpText:
-      "Total ABRN (Actual Booked Room Nights) the partner delivered last year. Scale indicator: how much value they represent to Booking.com, independent of how well they're currently priced. Big + poorly-priced = high-priority call; big + well-priced = healthy; small + poorly-priced = still worth a look but less urgent.",
+      "Partner Value (ABRN last year) expresses the order of magnitude of a partner's business to Booking.com, regardless of their current pricing performance. For price competitiveness opportunities, we recommend prioritizing with higher Experienced RPD x Partner Value, to focus where price gaps matter most commercially.",
   },
 
   // ── Advanced View (locked R2, content lands R3) - PDF page 21 ──
@@ -147,7 +147,7 @@ export const metricDefinitions = {
   unsoldRooms: {
     label: 'Unsold Rooms',
     helpText:
-      'Inventory gaps - room nights the property has available but has not yet sold. Often where OTAs can support partners who are not at full occupancy.',
+      "Average share of the property's total room capacity that remains unsold throughout the month, including listed and unlisted rooms. Highlights opportunities to support partners that are not at full occupancy.",
   },
   sellThroughRate: {
     label: 'Sell Through Rate',
@@ -172,7 +172,7 @@ export const metricDefinitions = {
   searchPrice: {
     label: 'Search Price',
     helpText:
-      "The price shown to a typical searcher on this property's results card, vs peer group.",
+      'The average price shown on the front-end, weighted by the number of visitors.',
   },
 } as const satisfies Record<string, MetricDefinition>;
 
