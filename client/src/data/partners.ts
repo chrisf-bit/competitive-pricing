@@ -1241,10 +1241,11 @@ function emeraldPeakBase(args: {
       metricHistory: [],
       trust: 50,
       relationship: 'neutral',
-      // Three products active per the SME data set: Genius Program,
-      // Family Rates and Payments. But the Genius discount is
-      // Fake-Value (base inflated to offset it) and the family setup is
-      // misaligned - the gap sits inside "active" products.
+      // Genius Program and Payments active. The Genius discount is
+      // Fake-Value (base inflated to offset it). Family Rates shows
+      // Inactive (Review Pack 3 sign-off): the R5 commitment is to set the
+      // family rates up, so the card should read Inactive rather than
+      // active-but-misaligned.
       discounts: [
         { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
@@ -1255,7 +1256,7 @@ function emeraldPeakBase(args: {
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
         { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
-        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
         { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
       ],
       conversationLog: [],
