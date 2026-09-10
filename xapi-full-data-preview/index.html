@@ -96,7 +96,7 @@
   </div>
 
   <div class="row">
-    <button onclick="postAll()">POST all statements to LRS</button>
+    <button onclick="postAll()">POST all statements to LRS (one at a time)</button>
     <button class="secondary" onclick="downloadStatements()">Download statements (JSON)</button>
     <button class="secondary" onclick="queryCount()">Count statements in LRS</button>
   </div>
@@ -278,7 +278,12 @@ function buildPlaythrough(cfg) {
         res.extensions = cx({ "misconception-code": MISCONCEPTIONS[itemId] });
       }
       push({ timestamp: tick(12), verb: verb(ADL + "/answered", "answered"),
-        object: obj("/level-0/item/" + itemId, "Clearance item " + itemId, CMII, "choice"),
+        // interactionType intentionally omitted: Docebo's LRS rejects a
+        // cmi.interaction activity that declares interactionType without the
+        // full choices + correctResponsesPattern ("Invalid activity"). The
+        // learner's pick + score already live in result.response / extensions,
+        // so the interaction metadata is not needed for the Snowflake mapping.
+        object: obj("/level-0/item/" + itemId, "Clearance item " + itemId, CMII),
         result: res,
         context: context(null, levelTag(0), { "item-code": itemCode }) });
     });
@@ -322,8 +327,10 @@ function buildPlaythrough(cfg) {
       res.extensions[EXT + "/target"] = partnerId(round);
       res.extensions[EXT + "/response"] = partnerId(round);
     }
+    // interactionType intentionally omitted - see the clearance-item note
+    // above (Docebo rejects interactionType without choices/correctResponsesPattern).
     push({ timestamp: tick(respTime), verb: verb(ADL + "/answered", "answered"),
-      object: obj("/" + level + "/round-" + round + "/" + phase, name, CMII, "choice"),
+      object: obj("/" + level + "/round-" + round + "/" + phase, name, CMII),
       result: res, context: context(round, level, { "item-code": itemCode }) });
   }
 
@@ -777,18 +784,42 @@ function postAll() {
   }
   showTab("log");
   document.getElementById("log").innerHTML = "";
-  log("Posting " + STATEMENTS.length + " statements in batches of 25...", "dim");
-  var batches = [];
-  for (var i = 0; i < STATEMENTS.length; i += 25) batches.push(STATEMENTS.slice(i, i + 25));
-  var accepted = 0, idx = 0;
+  log("Posting " + STATEMENTS.length + " statements ONE AT A TIME (individual POSTs), so a " +
+      "single rejected statement can never drop the others with it. Each line below shows " +
+      "the statement type + verb + the LRS response.", "dim");
+  var accepted = 0, rejected = 0, idx = 0, firstError = "";
+  var byType = {};   // "table/subtype" -> { ok: n, bad: n }
+  function typeLabel(s) {
+    var c = classify(s);
+    if (c.decision) return c.table + "/" + c.decision;
+    if (c.subtype)  return c.table + "/" + c.subtype;
+    if (c.slug)     return c.table + "/" + c.slug;
+    return c.table;
+  }
+  function tally(lbl, ok) {
+    if (!byType[lbl]) byType[lbl] = { ok: 0, bad: 0 };
+    byType[lbl][ok ? "ok" : "bad"]++;
+  }
   function next() {
-    if (idx >= batches.length) {
-      // Always follow the schema batches with the completion statement on
-      // the launched activity, so the LMS marks the lesson complete even
-      // when its built-in LRS rejects the custom-id schema statements.
+    if (idx >= STATEMENTS.length) {
+      // Per-type breakdown so it is obvious WHICH statement types the LRS
+      // accepts and which it rejects (the batched version hid this - one bad
+      // statement failed a whole block of 25).
+      log("--------------------------------------------------", "dim");
+      log("Accepted " + accepted + " / " + STATEMENTS.length + ", rejected " + rejected +
+          ". Breakdown by statement type:", "dim");
+      Object.keys(byType).sort().forEach(function (k) {
+        var b = byType[k];
+        log("  " + k + ": " + b.ok + " accepted, " + b.bad + " rejected",
+            b.bad === 0 ? "ok-line" : "bad-line");
+      });
+      if (firstError) log("First rejection body: " + firstError.slice(0, 300), "dim");
+      // Follow with the completion statement on the launched activity, so the
+      // LMS still marks the lesson complete regardless of the schema results.
       postCompletion(function (completed) {
         setVerdict(accepted + " of " + STATEMENTS.length +
-          " schema statements accepted by the LRS. " +
+          " schema statements accepted (posted individually). " +
+          (rejected > 0 ? rejected + " rejected - see the per-type breakdown in the log. " : "") +
           (CFG.activityId
             ? (completed
                 ? "Lesson marked complete - refresh the LMS report to see Completed."
@@ -799,20 +830,20 @@ function postAll() {
       });
       return;
     }
-    var batch = batches[idx];
-    fetch(endpoint + "statements", { method: "POST", headers: headers(auth), body: JSON.stringify(batch) })
+    var s = STATEMENTS[idx];
+    var lbl = typeLabel(s);
+    fetch(endpoint + "statements", { method: "POST", headers: headers(auth), body: JSON.stringify([s]) })
       .then(function (res) { return res.text().then(function (t) { return { status: res.status, text: t }; }); })
       .then(function (r) {
-        if (r.status >= 200 && r.status < 300) {
-          accepted += batch.length;
-          log("batch " + (idx + 1) + "/" + batches.length + " -> " + r.status + " (" + batch.length + " stmts)", "ok-line");
-        } else {
-          log("batch " + (idx + 1) + "/" + batches.length + " -> " + r.status, "bad-line");
-          log(r.text || "(no body)", "bad-line");
-        }
+        var ok = r.status >= 200 && r.status < 300;
+        if (ok) { accepted++; } else { rejected++; if (!firstError) firstError = r.text || "(no body)"; }
+        tally(lbl, ok);
+        log("#" + (idx + 1) + "/" + STATEMENTS.length + " [" + lbl + "] " + verbWord(s) +
+            " -> " + r.status + (ok ? "" : "  " + (r.text || "").slice(0, 120)),
+            ok ? "ok-line" : "bad-line");
         idx++; next();
       })
-      .catch(function (err) { log("Network / CORS error on batch " + (idx + 1) + ": " + err, "bad-line");
+      .catch(function (err) { log("Network / CORS error on #" + (idx + 1) + ": " + err, "bad-line");
         setVerdict("FAIL - could not reach the LRS (likely CORS). See the POST log.", "bad"); });
   }
   next();
