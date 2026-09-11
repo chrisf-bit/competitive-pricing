@@ -30,9 +30,9 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: conversion is down 68% recently and future room nights are down 46%, both against peer. Ask how that impacts his revenue objectives for the current quarter - framing it around what he cares about.",
     playerDialogue:
-      "Your conversion has dropped by 68% recently, and your future room nights are down 46% - both against your peer group. How does that impact your revenue objectives for the current quarter?",
+      "Your conversion has dropped by 68% recently, and your future room nights are down 46% - both against your peer group and versus same time last year. How does that impact your revenue objectives for the current quarter?",
     partnerResponse:
-      "It's a major hit, obviously. But I'm facing a lot of noise. The Key OTA keeps pointing out price gaps, and then I see Booking.com undercutting me too. It feels like a race to the bottom.",
+      "It's a major hit, obviously. But I'm facing a lot of noise. The Key OTA keeps pointing out price gaps caused by Booking.com undercutting me too. It feels like a race to the bottom.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the drop matters, wrong route - it presumes the fix and reads as a lecture to a commercial operator before you understand his strategy.",
     playerDialogue:
-      "The numbers make it obvious - your pricing is simply wrong for this market, and that's the thing you need to fix. There's not much to diagnose here; the report has already told us where the problem is.",
+      "The numbers make it obvious - there is one problem on rate leakage and that's the thing you need to fix or the price you need to match. There's not much to diagnose here; the report has already told us where the problem is.",
     partnerResponse:
       "You've decided that from one report. That's not how I make decisions about my portfolio.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -86,9 +86,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: acknowledge the frustration, then identify that static B2B rates intended for wholesalers are leaking publicly - acting as a tax on his brand rather than delivering opaque incremental volume. Probe whether there's a discrepancy in how his base rate or occupancy is set up here versus his other channels.",
     playerDialogue:
-      "It's understandable to feel that way. But we've identified that static B2B rates intended for wholesalers are leaking publicly on external channels. Could there be a discrepancy in how your base rate is set up on Booking.com compared to your other channels?",
+      "It's understandable to feel that way. We've identified static B2B rates intended for wholesale packaging, are leaking unpackaged on public channels. Besides that, there seem to be some further rate differences - could there be a discrepancy in how your base rates are set up on Booking.com compared to your other channels?",
     partnerResponse:
-      "My website has our best-rate guarantee, and with the other OTAs I have more or less the same agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
+      "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less the aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes his race-to-the-bottom framing that Booking.com is one of the ones undercutting him, instead of separating the wholesale leak from the platform and reframing it.",
     playerDialogue:
-      "You're right, and I'll be honest with you - we are part of that race to the bottom you're describing, and Booking.com is one of the channels undercutting you. It's a genuinely tough spot to be in, and I completely see why it feels like everyone is pulling your price down at once. I don't think it's fair on you either, and I understand why the whole thing is so frustrating right now.",
+      "You're right, and I'll be honest with you - we are part of that race to the bottom you're describing, and Booking.com is one of the channels undercutting you, however not as extreme as the Key OTA leaking wholesale rates. But, it's a genuinely tough spot to be in, and I completely see why it feels like everyone is pulling your price down at once. I don't think it's fair on you either, and I understand why the whole thing is so frustrating right now.",
     partnerResponse:
       "So you agree you're undercutting me. That just confirms the problem, it doesn't solve it.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -115,7 +115,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Sends him off to battle the competitor instead of reframing the leak - it takes the price-war bait the SME warns against and abandons the diagnosis.",
     playerDialogue:
-      "If the Key OTA is the one constantly poking at your price gaps, then honestly the simplest thing is to go straight at them - match whatever they're showing and undercut them back until they stop flagging it. Once you've beaten them on price and shut them up, the noise goes away and you can stop worrying about all these comparisons people keep throwing at you.",
+      "If the Key OTA is the one constantly poking at your price gaps while they go extreme by showing wholesale rates then honestly the simplest thing is to go straight at them - match whatever they're showing and undercut them back until they stop flagging it. Once you've beaten them on price and shut them up, the noise goes away and you can stop worrying about all these comparisons people keep throwing at you.",
     partnerResponse:
       "So your advice is to chase the Key OTA down on price? That's the race I'm trying to get out of.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -129,7 +129,7 @@ const step2: BranchingStep = {
   id: 'leakage-tax',
   label: 'Reframe the leak; probe the setup',
   partnerPrompt:
-    "It's a major hit, obviously. But I'm facing a lot of noise. The Key OTA keeps pointing out price gaps, and then I see Booking.com undercutting me too. It feels like a race to the bottom.",
+    "It's a major hit, obviously. But I'm facing a lot of noise. The Key OTA keeps pointing out price gaps caused by Booking.com undercutting me too. It feels like a race to the bottom.",
   options: step2Options,
 };
 
@@ -157,12 +157,12 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes his cannibalization worry at face value and abandons the alignment thread entirely - leaving the visibility problem and the leak unaddressed.",
     playerDialogue:
-      "That's fair enough - if aligning your rate here genuinely risks your direct bookings, then let's just forget about the whole idea and leave things exactly as they are for now.",
+      "That's fair enough - if aligning your rate here genuinely feels like it risks your direct bookings, then let's just forget about reviewing your base rates and leave those as they are for now. You can review addressing the wholesale rates only instead.",
     partnerResponse:
       "So there's nothing to discuss? Then what are we doing here?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
   {
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Flatly tells him his concern is imaginary rather than drawing out the logic with a question. Lecturing an autonomous MPP on his own channel mix shuts him down.",
     playerDialogue:
-      "Cannibalization is basically a myth - you're worrying yourself about a problem that doesn't really exist in practice. Trust me on this, I've seen the numbers plenty of times.",
+      "Cannibalization is basically a myth - you're worrying yourself about a problem that doesn't really exist in practice. Trust me on this, I've seen the numbers plenty of times. Fix this and the wholesale rates and you will be back on track in no-time.",
     partnerResponse:
       "You're telling me my direct channel doesn't matter? I've watched it pay my bills for years.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -185,7 +185,7 @@ const step3: BranchingStep = {
   id: 'socratic',
   label: 'Socratic probe on visibility vs direct',
   partnerPrompt:
-    "My website has our best-rate guarantee, and with the other OTAs I have more or less the same agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
+    "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less the aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
   options: step3Options,
 };
 
@@ -198,7 +198,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: it works only when he has visibility - if travelers can't find him because his ranking dropped, they never search his direct site. Aligning his Booking.com rate with his own website keeps a consistent presence. Propose a temporary alignment test to see if it lifts his overall direct traffic.",
     playerDialogue:
-      "It does - but only when you have visibility. If travelers find you less attractive on Booking.com, they won't even go looking for your direct site. Aligning your Booking.com rate with your own website keeps a consistent presence. Would you be open to testing a temporary alignment to see if it lifts your overall direct traffic?",
+      "It does - but only when you have great visibility. If travelers do not find you on Booking.com in the first place, or find you less attractive versus higher ranked and better priced offers of competitors they won't even go looking for your direct site. Aligning your Booking.com rate with your own website improves your pricepoint automatically versus your peers on our website, which impacts your visibility positively. Would you be open to testing a temporary alignment to see if it lifts your overall direct traffic?",
     partnerResponse:
       "I'd need to see that my total revenue across both channels actually goes up - I don't want to pay more commission for the same bookings. Also, what about the Partner Offer? I need it to disappear from my page on your platform.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Requires alignment and pins ranking on it - both off-limits: external prices don't factor into ranking, and in a Narrow market we can't require rate alignment or threaten a ranking penalty.",
     playerDialogue:
-      "There's really no way around this one - you have to align your rate here, and you have to do it now, otherwise your ranking simply keeps falling and the situation gets harder to recover from. I know it's blunt, but this isn't something we can test our way into slowly; it needs to happen straight away if you want the position back.",
+      "There's really no way around this one - you have to align your rate here, and you have to do it now, otherwise your ranking simply keeps falling and the situation gets harder to recover from. I know it's blunt, but this isn't something we can test our way into slowly; it needs to happen straight away if you want your original visibility back.",
     partnerResponse:
       "'Have to' isn't a word I respond well to about my own pricing. Give me a reason, not an order.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -227,7 +227,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right idea, but with no test or metric attached, a proof-driven MPP has nothing concrete to say yes to.",
     playerDialogue:
-      "Aligning will definitely help your visibility here - it's genuinely the right thing to do, so my honest advice is to just go ahead and do it. You don't really need to overthink it or set up some elaborate measurement around it; it's a sound move and it'll work in your favour. Trust that it's the correct call and put it in place, and I'm confident you'll be glad you did.",
+      "Aligning will definitely help your visibility here as you will improve pricepoint versus your competition - it's genuinely the right thing to do, so my honest advice is to just go ahead and do it. You don't really need to overthink it or set up some elaborate measurement around it; it's a sound move and it'll work in your favour. Trust that it's the correct call and put it in place, and I'm confident you'll be glad you did.",
     partnerResponse:
       "'Definitely' based on what? I don't move on adjectives, I move on numbers.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -281,15 +281,15 @@ const step5Options: BranchingOption[] = [
     id: 'll-r9-narrow-step5-concede-po',
     label: 'Agree Partner Offer is a punishment and offer to remove it',
     description:
-      "Concedes his framing that Partner Offer is Booking.com punishing him, and offers to switch it off - validating the objection instead of clarifying that it surfaces the best public price.",
+      "Promises to have Partner Offer switched off or removed from his account - a promise an account manager cannot keep, on top of conceding his framing that it is Booking.com punishing him. Making a commitment you can't deliver is not something an AM can say.",
     playerDialogue:
       "You know, you're right that Partner Offer does feel like a punishment from where you're sitting - it drops a cheaper rate in front of travelers and makes it look like we're working against you. If that's genuinely the sticking point for you here, then I can go away and look into having it switched off or removed from your account entirely, so it stops getting in the way of the rest of what we're trying to do together. I'd rather clear that obstacle than have it sour the whole conversation.",
     partnerResponse:
       "So you agree it's punitive. That doesn't build much confidence in the rest of your pitch.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'borderline',
-    trustChange: -5,
+    compliance: 'risky',
+    trustChange: -12,
   },
 ];
 

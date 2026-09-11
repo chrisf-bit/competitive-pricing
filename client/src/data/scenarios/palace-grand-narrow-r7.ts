@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge the frustration, then reframe to revenue - he converts very well once guests find him, but page views are down 53% because his prices appear uncompetitive in most searches, concentrated in mobile traffic and family configurations.",
     playerDialogue:
-      "I understand how frustrating that is, but let's look at it from a revenue perspective. You convert very well once guests find you, but your page views are down 53% because your prices appear uncompetitive in the majority of searches. That gap is concentrated in your mobile traffic and your family configurations.",
+      "I understand how frustrating that is, but let's look at it from a revenue perspective. You convert very well once guests find you, but your page views are down 53% because your prices appear uncompetitive compared to your peers in the majority of searches. That gap is concentrated in your mobile traffic and your family configurations.",
     partnerResponse:
       "The other platform is telling us we need to drop our rates or let them run exclusive campaigns to fix it. If they're cutting margins to win the guest, we expect Booking.com to just match their actions.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -102,7 +102,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Sounds accommodating, but it concedes the Same Net trap - promising to burn margin whenever a competitor discounts - instead of anchoring him to his own direct website prices.",
     playerDialogue:
-      "That's fair - I'll take this straight back to my team, and what we'll do is look at matching those competitor campaigns whenever they run one, so you're always covered on price here and never sitting above whoever happens to be cheapest that week. If they cut, we'll move with them, and you won't have to worry about being undercut on our platform again.",
+      "That's fair - and what we can do is to look at matching those competitor campaigns whenever they run one, so you're always covered on price here and never sitting above whoever happens to be cheapest that week. If they cut, we'll move with them, and you won't have to worry about being undercut on our platform again.",
     partnerResponse:
       "Good. So you'll just keep pace with whoever's cheapest that week?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -172,7 +172,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Direct him to hand over his full family inventory immediately. Dictating his distribution strategy oversteps, and pushing an autonomous operator this hard gets a fast no.",
     playerDialogue:
-      "Honestly, your direct-only family strategy is a real mistake and it's costing you - you should open up all of your family rooms to us right now, the full inventory, and let us handle that segment for you properly. Keeping those rooms locked to your own website is exactly what's holding this property back, so the move is to hand the whole family allocation over to us today and stop protecting it.",
+      "Honestly, your direct-only family strategy is costing you - you should open up all of your family rooms to us right now, and let us handle that segment for you properly. Keeping those rooms locked to your own website is exactly what's holding this property back, so the move is to hand the whole family allocation over to us today and stop protecting it.",
     partnerResponse:
       "You don't get to tell me how to allocate my own inventory. That's my decision.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -228,7 +228,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame his family setup as a deliberate choice to leave money on the table. It presumes intent and turns a collaborative probe into an accusation - the wrong register for this operator.",
     playerDialogue:
-      "Let's just be honest with each other here - you're deliberately starving a segment that would clearly make you real money, and if we're being straight about it, that choice is the whole problem we're sitting here trying to untangle today.",
+      "You're deliberately starving a segment that would clearly make you real money, and if we're being straight about it, that choice is the whole problem we're sitting here trying to untangle today.",
     partnerResponse:
       "I came to you with the data and asked for help. Telling me I'm the problem isn't help.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -282,15 +282,15 @@ const step5Options: BranchingOption[] = [
     id: 'pg-r7-narrow-step5-cheapest',
     label: 'Tell him he must be the cheapest to recover',
     description:
-      "Answer his openness with a requirement to be the lowest price - which pressures a rate reduction and abandons the align-to-his-own-website framing the whole call was built on.",
+      "Answer his openness with a requirement to be the lowest price everywhere - which in a Narrow market is a breach (you may only align with his own direct website, not require him to undercut every channel), and abandons the align-to-his-own-website framing the whole call was built on.",
     playerDialogue:
       "To really recover from where you are now, you'll need to make sure Booking.com is always the single cheapest place anyone can book you - lower than your own website, lower than everyone - because honestly that's the only thing that actually moves the needle here and everything else is just detail around the edges.",
     partnerResponse:
       "So after all that, the ask is just 'be the cheapest'? That's not what I signed up to discuss.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
-    compliance: 'borderline',
-    trustChange: -8,
+    compliance: 'risky',
+    trustChange: -12,
   },
 ];
 

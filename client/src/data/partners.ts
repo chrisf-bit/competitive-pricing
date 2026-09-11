@@ -1610,7 +1610,7 @@ function loftLivingBase(args: {
         description:
           "PMC Revenue Manager running a portfolio of vacation-rental units as a commercially minded business with strong autonomy. He responds to revenue impact, margin logic, and ROI across channels, and he wants proof before he moves. He's frustrated that his B2B / wholesale rates are leaking into public search and blames Booking.com for surfacing them - lead with the commercial case, not a price cut.",
         commercialGoal:
-          'Protect ADR and margin while recovering lost visibility and demand across channels',
+          'Protect ADR and profit margin while recovering lost visibility and demand across channels',
       },
       // Metrics map to the SME Round 9 data set (Hotel ID 301). A SEVERE
       // Key OTA gap (eRPD 31.7% / Bucket 7, +30.75 MoM) from B2B /

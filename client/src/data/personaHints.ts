@@ -336,7 +336,7 @@ const hiddenValleyR8Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'objection-navigator': {
     oneLiner:
-      'Expect the BSB / Payments Shield ("you take control of my price") plus Direct-Is-Cheaper and a brand-reputation / bad-review worry; separate the price opportunity from the review risk and let her reconsider.',
+      'Expect the BSB objection ("you take control of my price") plus Direct-Is-Cheaper and a brand-reputation / bad-review worry; separate the price opportunity from the review risk and let her reconsider.',
   },
   storyteller: {
     oneLiner:
@@ -358,11 +358,11 @@ const hiddenValleyR8Hints: Partial<Record<PersonaId, PersonaHint>> = {
 const loftLivingR9Hints: Partial<Record<PersonaId, PersonaHint>> = {
   'conversation-architect': {
     oneLiner:
-      "Lucas is red/blue and margin-led: acknowledge the leak, reframe B2B as a leakage tax once it hits B2C, and don't chase a yes today - he'll defer, so earn the follow-up with proof.",
+      "Lucas is red/blue and profit margin-led: acknowledge the leak, reframe B2B as a leakage tax once it hits B2C, and don't chase a yes today - he'll defer, so earn the follow-up with proof.",
   },
   'objection-navigator': {
     oneLiner:
-      'Expect the Wholesaler Leak ("Partner Offer is undercutting me") plus Competitive Aggression from the Key OTA; clarify Booking.com isn\'t the source, avoid a price war, and offer a fenced mobile fix.',
+      'Expect the Wholesaler Leak ("Partner Offer is undercutting me") plus Competitive Aggression from the Key OTA; clarify Booking.com isn\'t the source, avoid a price war.',
   },
   storyteller: {
     oneLiner:

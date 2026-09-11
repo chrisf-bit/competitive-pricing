@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I've noticed your bookings have slowed down, and it seems to be because prices on our platform are currently around 20% higher than the rates on your website. Can you walk me through the strategy behind this setup?",
     partnerResponse:
-      "Morning, Mark. It's simple: we want direct conversion. If a traveler sees it's cheaper on our site, they leave your platform and book with us.",
+      "Morning, Mark. It's simple: we want direct conversion. If a traveler sees it's cheaper on our site, they will likely not book on your platform but directly with us.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -44,7 +44,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and frames a deliberate strategy as his error before you understand it. A brand-managed manager will close down.",
     playerDialogue:
-      "Your prices on our platform are running about 20% too high, and honestly that's just a mistake - it's the whole reason your bookings dried up. There's nothing complicated here, you simply need to pull those rates down and get the setup fixed.",
+      "Your prices on our platform are running about 20% too high - it's the whole reason your bookings dried up. You have become too expensive for what you are offering so without fixing it, do not expect anything to improve.",
     partnerResponse:
       "That's a deliberate strategy, not a mistake. If that's your pitch, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who just agreed to look at the insights.",
     playerDialogue:
-      "Honestly, Adam, I really wouldn't read too much into a slow patch like this - in my experience these things tend to even out on their own, and a quiet stretch one quarter usually turns around the next without anyone needing to touch a thing.",
+      "Honestly, Adam, I really wouldn't read too much into a slow patch like this as this strategy is not new for you - in my experience these things tend to even out on their own, and a quiet stretch one quarter usually turns around the next without anyone needing to touch a thing if you are after getting the regular share with us and not per se increased business.",
     partnerResponse:
       "I set aside this time for the numbers. 'It'll sort itself out' isn't insight.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -85,9 +85,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: guest search behavior shows a different pattern - when travelers see a higher price here than on his website, they don't jump to his site, they click a cheaper competitor on the same search page. Ask how he evaluates that risk of losing the customer entirely.",
     playerDialogue:
-      "I understand the logic. But guest search behavior on our platform shows a different pattern - when travelers see a higher price here than on your website, they don't jump to your site, they usually just click a cheaper competitor on the same search page. How do you evaluate that risk of losing the customer entirely?",
+      "I understand the logic. But you risk sit with all guests that do not go to your website as a first step - up to 90% of customers who book with Booking.com discover the property on the platform first. Guest search behavior on our platform shows a different pattern - when they search on our website they compare properties against each other, and with such a high price you risk them not clicking on your property in the first place and others having better visibility. This way they do not even start the journey that leads them to click on your website to get your best price.",
     partnerResponse:
-      "Our data suggests our brand pull is strong enough to capture them directly.",
+      "Our data suggests our brand pull is strong enough to capture them already directly.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Flatly contradicts his read of his own brand rather than drawing out the search behavior. Lecturing a brand-managed manager shuts him down.",
     playerDialogue:
-      "Honestly, Adam, that whole brand-pull idea is just wishful thinking - nobody out there is loyal enough to go hunting you down across the internet when there's a cheaper competitor sitting right next to you on the same search page. People take the easy, cheaper option every time, and expecting them to do otherwise is going to keep costing you these bookings.",
+      "Honestly, Adam, that whole brand-pull idea is just wishful thinking - nobody out there is loyal enough to go hunting you down across the internet when they mostly look on big OTA websites as ours to book a trip and finding there are cheaper competitors is comparable properties sitting right next to you on the same search page. People take the convenient and cheaper option most of the time, and expecting them to do otherwise is going to keep costing you these bookings.",
     partnerResponse:
       "You're telling me my brand means nothing? That's a strange way to win me over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -141,7 +141,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: for loyal guests his brand pull works, but net-new travelers who don't know his brand are the value the platform brings. Ask him to align his public rates and conditions with his own direct website here, so he doesn't lose the guests who start their journey on Booking.com.",
     playerDialogue:
-      "For your loyal guests, absolutely. But what about the net-new travelers who don't know your brand yet? That's the value we bring - and it's why we ask that you align your public rates and conditions with your direct website here, so you don't lose the guests who start their journey on our platform.",
+      "For your loyal guests, absolutely. But what about the net-new travelers who don't know your brand yet? That's the value we bring - and it's why we ask that you align your public rates and conditions with your direct website here: this will make you more competitively priced on our platform versus your competition, which improves your visibility to these new travelers, enabling you to capture more bookers that start their journey on our platform.",
     partnerResponse:
       "If I align the public rates, I only dilute our ADR and compromise our selling proposition.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "In a Narrow market you can ask him to align with his own Brand.com, but not to match other OTAs. Asking him to level his rates with the other platforms is a compliance breach.",
     playerDialogue:
-      "Honestly, the cleanest fix here is just to give us exactly the same rates you're giving the other OTAs - if you line all of them up so you're sitting level across every single platform, then nobody undercuts anybody and this whole gap disappears overnight. Match us to what you're offering everyone else and we're sorted.",
+      "Honestly, the cleanest fix here is just to give us exactly the same rates you're giving the other OTAs - if you line all of them up so you're sitting level across every single platform, then nobody undercuts anybody and this whole gap disappears overnight. This way you do not touch your own direct rates vs us, and with a clean playing field making the value proposition of your property more clear on all channels. So if you match us to what you're offering everyone else you likely have both the undercutting sorted as well as the challenges in conversion.",
     partnerResponse:
       "You're asking me to line my rates up with the other OTAs? I didn't think that was something you could ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -170,12 +170,12 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes his dilution concern as the end of it and abandons the alignment thread - leaving the net-new travelers, and the gap, unaddressed.",
     playerDialogue:
-      "That's a completely fair point, and I don't want to push you somewhere that hurts your average rate. If aligning your public rates here really would dilute your ADR and work against the selling proposition you've built, then let's not force it - I'm happy to leave your public rates exactly where they are for now.",
+      "That's a completely fair point, and I don't want to push you somewhere that hurts your business model. If aligning your public rates on your own website with us really would dilute your ADR and work against the selling proposition you've built, then let's not force it - leave your public rates exactly where they are for now.",
     partnerResponse:
       "So there's nothing to do? Then I'm not sure why we're talking.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
-    compliance: 'safe',
+    compliance: 'borderline',
     trustChange: -5,
   },
 ];
@@ -197,7 +197,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: he can still use fenced, closed member rates on his site to reward loyalty, while aligned public rates keep his organic ranking healthy. Then surface that his family-specific search visibility is dropping significantly.",
     playerDialogue:
-      "Not necessarily - you can still use fenced, closed member rates on your own site to reward loyalty. But keeping your public rates and conditions aligned with your direct channel makes you more attractive to travelers on our platform. And while reviewing this, I noticed a gap in your family occupancy - your family-specific search visibility is dropping significantly.",
+      "Not necessarily - you can still use fenced, closed member rates on your own site to reward loyalty. But keeping your public rates and conditions aligned with your direct channel makes your rates more attractive versus competition to net-new travelers on our platform. And while reviewing your rate setups, I noticed a gap in your family occupancy setting - causing your family-specific search visibility to drop significantly.",
     partnerResponse:
       "That's odd. We're a family-friendly brand - our occupancy settings should be fine.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Drops the family visibility gap rather than surfacing it, missing the one setup lever that could move without touching his ADR.",
     playerDialogue:
-      "Honestly, that family occupancy thing is probably nothing worth chasing - these little dips come and go all the time and I wouldn't want to send you down a rabbit hole over it. Let's not get distracted by the family numbers and just keep our focus where it actually matters, which is sorting out these public rates and the gap against your own website.",
+      "Honestly, that family occupancy thing is probably nothing worth chasing - it's not the biggest demand so not the biggest potential win. Let's not get distracted by the family numbers and just keep our focus where it actually matters, which is sorting out these public rates and the gap against your own website.",
     partnerResponse:
       "You raised it, then waved it off. Which is it?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },

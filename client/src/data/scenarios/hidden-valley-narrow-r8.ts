@@ -87,7 +87,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed reframe: large price differences erode traveler trust, and improving competitiveness by 10% here generates on average 30% more bookings and 25% more revenue. Ask her to align her rates with her own website; if she wants to reward direct guests, fenced member rates beat a cheaper public price.",
     playerDialogue:
-      "I get it, but large price differences erode traveler trust, and our reports show improving your competitiveness by 10% here generates on average 30% more bookings and 25% more revenue. By aligning your rates to the ones on your own website, you capture that demand through our global marketing at zero upfront cost. And if you want to reward loyal guests directly, fenced member rates do that without a cheaper public price hurting your discovery.",
+      "I get it, but the trade-off is that travelers who see a less competitive price on Booking.com may choose your local competitors before they ever reach your website, and our data shows improving your competitiveness by 10% here generates on average 30% more bookings and 25% more revenue. By aligning your rates to the ones on your own website, you capture that demand through our global marketing at zero upfront cost. And if you want to reward loyal guests directly, fenced member rates do that without a cheaper public price hurting your discovery.",
     partnerResponse:
       "Those are solid numbers. But how can I control any of this if you apply the Booking Sponsored Benefit whenever you want, without my consent?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -143,7 +143,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed explanation: BSB is a customer-facing product entirely funded by Booking.com to attract guests, and because BSB reservations require pre-payment they're less likely to be cancelled - a win-win of better price, stronger conversion, and lower cancellation risk.",
     playerDialogue:
-      "Booking Sponsored Benefit is a customer-facing product entirely funded by us and designed to attract guests to your property. Because BSB reservations require pre-payment from the guest, they're less likely to be cancelled. It's a win-win: travelers see a better price, you get stronger conversion, and cancellation risk is lower.",
+      "Booking Sponsored Benefit is a customer-facing product entirely funded by us and designed to attract guests to your property. Plus, BSB reservations require pre-payment from the guest, they're less likely to be cancelled. It's a win-win: travelers see a better price, you get stronger conversion, and cancellation risk is lower.",
     partnerResponse:
       "I don't see any benefit in showing a lower price to guests, even if it isn't a revenue loss for me. It's about my brand reputation - guests will never book with me again if the lowest price is always on Booking.com!",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -199,7 +199,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: BSB isn't applied to all bookings and is only offered to a limited audience; the partial room cost is paid by Booking.com and she incurs no additional fees, still receiving the full room price she set.",
     playerDialogue:
-      "BSB incentives are only applied to some reservations and are designed to help attract guests to your property. This price reduction reflects the partial payment we make on behalf of the traveller. You always receive the full transaction value of each booking.",
+      "BSB incentives are only applied to some reservations and are designed to help attract guests to your property. Our algorithm determines when BSB applies to encourage travelers to book, to help convert demand that might otherwise not book. This price reduction reflects the partial payment we make on behalf of the traveller. You always receive the full transaction value of each booking.",
     partnerResponse:
       "I don't want to win guests just on price - I want them to choose me for the view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: guests with a less positive experience often just want to be heard, so acknowledging feedback shows improvement. Separate the review risk from the price opportunity, and note she can still run targeted promotions or campaigns to reach the audience she wants.",
     playerDialogue:
-      "Sometimes guests with a less positive experience simply want to be heard - acknowledging their feedback already signals what you're doing to improve. Let's separate that from the price opportunity, though. You can keep competitive prices to stay visible while BSB helps convert the demand, and none of this stops you running targeted promotions or campaigns to reach the audience you want.",
+      "I understand that brand reputation and review quality matter. BSB can support conversion on eligible bookings, but it does not determine the guest experience. Sometimes guests with a less positive experience simply want to be heard - acknowledging their feedback already signals what you're doing to improve. Let's separate that from the price opportunity, though. You can keep competitive prices to stay visible while BSB helps convert the demand, and none of this stops you running targeted promotions or campaigns to reach the audience you want.",
     partnerResponse:
       "Okay, I can't make a decision right now - let me reconsider all of this and let's connect next month.",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 1 },
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "SME-prescribed close on a soft no: don't push. Respect her need to reconsider, offer support in the meantime, and schedule the follow-up for next month - leaving the relationship warm and the door open.",
     playerDialogue:
-      "No problem at all - take the time you need. Let me know if I can support you on anything in the meantime, and I'll schedule a follow-up for next month. Thank you for your time today, Claire.",
+      "No problem at all - take the time you need. Let me know if I can support you on anything in the meantime, I'll send a short recap of our discussion, along with some data points to help us follow up on the other opportunities we didn't have time to cover today - for example, to better capture demand from the high-value family segment. I'll schedule a follow-up for next month. Thank you for your time today, Claire.",
     partnerResponse:
       "Thank you, Oliver - I appreciate you not pushing. Let's talk again next month once I've thought it through.",
     styleMatch: { red: 2, yellow: 1, green: 2, blue: 1 },

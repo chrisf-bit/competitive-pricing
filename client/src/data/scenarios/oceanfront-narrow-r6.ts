@@ -40,7 +40,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut - it presumes the fix and hands an ROI-driven owner nothing to weigh.",
     playerDialogue:
-      "Honestly, I can tell you right now what this is - your numbers are down because your Booking.com rates are simply too expensive compared to everyone else. The fix is straightforward: drop your rates across the board, bring them down to the pack, and the traffic comes straight back the moment you do it. That's the whole story.",
+      "Honestly, I can tell you right now what this is - your numbers are down because your Booking.com rates are simply too expensive compared to your peers. The fix is straightforward: drop your rates across the board to the same level as your website, and the traffic should come straight back the moment you do it. That's the whole story.",
     partnerResponse:
       "You're telling me to cut all my rates before you've explained a thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the reverse-billboard premise and never corrects the belief driving the visibility loss.",
     playerDialogue:
-      "That's fair, and honestly I can see the logic in it - keeping your Booking.com price higher than your website does push a fair number of guests to go and book with you directly, which saves you the commission you'd otherwise pay us. So in that sense the strategy you've built is basically working the way you intended it to.",
+      "That's fair, and honestly I can see the logic in it - keeping your Booking.com price higher than your website does push a number of guests to go and book with you directly, which saves you the commission you'd otherwise pay us. But you're also missing out on new guests who decided to book a cheaper competitor. So the strategy you've built is working the way you intended it to by driving some direct bookings but hurting you overall.",
     partnerResponse:
       "So the markup is fine? Then I'm not sure what you're here to fix.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -206,15 +206,15 @@ const step4Options: BranchingOption[] = [
     id: 'ob-r6-narrow-step4-just-cheaper',
     label: 'Make it a discount argument',
     description:
-      "Turns the reframe into a plain 'be cheaper here' pitch rather than the acquisition-cost case, and walks into her fear of eroding direct.",
+      "Turns the reframe into a 'be cheaper here than anywhere else' pitch - which in a Narrow market oversteps (you may only align with her own direct site, not push her below every channel), and walks into her fear of eroding direct.",
     playerDialogue:
-      "Look, I'll cut through all the math for you - the bottom line is that you just need to be cheaper on our platform than you are anywhere else, plain and simple. That's the one lever that actually moves the volume, so bring your rates down here and the bookings will follow. It really is that straightforward.",
+      "Look, I'll cut through all the math for you - the bottom line is that you need to be cheaper on our platform than you are anywhere else, plain and simple. That's the one lever that actually moves the volume, so bring your rates down here and the bookings will follow. It really is that straightforward.",
     partnerResponse:
       "'Just be cheaper' isn't a revenue case. Give me the actual economics.",
-    styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
+    styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
-    compliance: 'safe',
-    trustChange: -5,
+    compliance: 'risky',
+    trustChange: -12,
   },
   {
     id: 'ob-r6-narrow-step4-guilt',
@@ -222,7 +222,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Guilt-trip her that her strategy is costing her guests. Accusatory - it burns the collaborative tone an autonomous owner responds to.",
     playerDialogue:
-      "Frankly, I'm going to be straight with you because someone has to - holding on to this position is quietly costing you the very guests you keep telling me you care so much about, month after month, and you're the one standing in the way of fixing it.",
+      "I'm going to be straight with you because someone has to - holding on to this position is quietly costing you the very guests you keep telling me you care so much about, month after month, and you're the one standing in the way of fixing it.",
     partnerResponse:
       "Pressuring me about my own business like that isn't the way to work together.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Fall back on the blanket cut - reduce everything at once - which erodes her ADR premium and gives her nothing clean to measure.",
     playerDialogue:
-      "Simplest thing here is to just reduce every one of your rates right now by a flat 10% across the board, then sit back and watch all that lost volume come straight back to you.",
+      "The simplest thing here is to just reduce every one of your rates right now by a flat 10% across the board, then sit back and watch all that lost volume come straight back to you.",
     partnerResponse:
       "An across-the-board cut torches my ADR - that's exactly what I don't want.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Close with a ranking threat if she doesn't align. Threatening visibility over her pricing is banned in every regime.",
     playerDialogue:
-      "And to be very clear about this - if you choose not to align those rates, our system is simply going to keep pushing your visibility further down until the day you finally do.",
+      "To be very clear about this - if you choose not to align those rates, our system is simply going to keep pushing your visibility further down until the day you finally do.",
     partnerResponse:
       "Ending on a threat about my ranking is the fastest way to lose me. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
