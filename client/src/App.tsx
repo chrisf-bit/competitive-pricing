@@ -6,6 +6,7 @@ import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
 import { DevNav } from './components/DevNav';
 import { FeedbackButton } from './components/FeedbackButton';
+import { DisclaimerModal } from './components/DisclaimerModal';
 import { ClearanceShell } from './components/ClearanceShell';
 import { ConversationMissing } from './components/ConversationMissing';
 import { SplashScreen } from './screens/SplashScreen';
@@ -321,6 +322,13 @@ export default function App() {
               onEnterRound={game.onEnterRound}
               onViewDebrief={game.onViewDebrief}
             />
+          )}
+          {/* One-time sim disclaimer: mandatory acknowledge gate on the
+              first Round Select entry after clearance (the threshold into
+              the sim), once the learner has met eRPD / Brand.com / the key
+              OTA in clearance. Fires once ever via disclaimerAcknowledged. */}
+          {state.screen === 'round-select' && !state.disclaimerAcknowledged && (
+            <DisclaimerModal onAcknowledge={game.acknowledgeDisclaimer} />
           )}
           {state.screen === 'portfolio' && (
             <PortfolioScreen

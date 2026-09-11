@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Star, Check, X, ChevronRight, RotateCcw } from 'lucide-react';
+import { Star, Check, X, ChevronRight, RotateCcw, Compass } from 'lucide-react';
 import type { LastConversationGrade, PartnerState } from '../types';
 import { getPersonaById } from '../data/characters';
+import { getBranchingScenario } from '../data/branchingScenarios';
 
 interface ConversationReportScreenProps {
   grade: LastConversationGrade;
@@ -57,6 +58,16 @@ export function ConversationReportScreen({
   // it gives the answer away. The criterion line below just signals
   // 'you picked the wrong one' and the learner has to re-read the
   // portfolio data on retake.
+
+  // Closing LPS coaching note for scenarios that end on a no by design
+  // (soft-no R8/R9, strong-no R10). Shown only when the learner actually
+  // played the call well (stars >= 1) and still got the no - the case
+  // where "the partner didn't budge" could otherwise read as "forget it".
+  const closingCoachNote =
+    grade.stars >= 1
+      ? getBranchingScenario(grade.partnerId, grade.round)?.closingCoachNote ??
+        null
+      : null;
 
   const passed = grade.stars > 0;
   // The round counts as passed if any attempt (this one or an earlier
@@ -215,6 +226,9 @@ export function ConversationReportScreen({
 
         {/* Persona retro - shown on wins and losses, hidden on 1-star passes */}
         {persona && personaRetro && <PersonaRetro persona={persona} text={personaRetro} />}
+
+        {/* Closing LPS coaching note for by-design no-commit endings */}
+        {closingCoachNote && <ClosingCoachNote text={closingCoachNote} />}
 
         {bestStars > grade.stars && (
           <div
@@ -449,6 +463,49 @@ function PersonaRetro({
         }}
       />
       <span>{text}</span>
+    </div>
+  );
+}
+
+function ClosingCoachNote({ text }: { text: string }) {
+  return (
+    <div
+      style={{
+        width: '100%',
+        background: 'rgba(254,186,2,0.08)',
+        border: '1px solid rgba(254,186,2,0.28)',
+        borderRadius: 10,
+        padding: '14px 18px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 8,
+      }}
+    >
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8,
+          fontSize: 11,
+          fontWeight: 800,
+          letterSpacing: '0.12em',
+          textTransform: 'uppercase',
+          color: 'var(--brand-yellow)',
+        }}
+      >
+        <Compass size={14} />
+        From your LPS coach
+      </div>
+      <p
+        style={{
+          margin: 0,
+          fontSize: 13.5,
+          color: 'rgba(255,255,255,0.90)',
+          lineHeight: 1.6,
+        }}
+      >
+        {text}
+      </p>
     </div>
   );
 }

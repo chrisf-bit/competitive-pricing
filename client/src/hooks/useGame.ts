@@ -43,6 +43,7 @@ export function useGame() {
         roundStars: persisted.roundStars,
         tutorialShown: persisted.tutorialShown,
         partnerDetailTutorialShown: persisted.partnerDetailTutorialShown,
+        disclaimerAcknowledged: persisted.disclaimerAcknowledged,
       });
     }
     // Fresh boot - if the LMS provided a student name, seed the
@@ -70,6 +71,7 @@ export function useGame() {
       cleared: state.level0Progress.cleared,
       clearedForRegime: state.level0Progress.clearedForRegime,
       stars: state.roundStars,
+      disclaimerAcknowledged: state.disclaimerAcknowledged,
     });
     if (snapshot !== lastPersistedRef.current) {
       lastPersistedRef.current = snapshot;
@@ -334,6 +336,11 @@ export function useGame() {
     setState((s) => ({ ...s, partnerDetailTutorialShown: true }));
   }, []);
 
+  /** Mark the one-time sim disclaimer as acknowledged. */
+  const acknowledgeDisclaimer = useCallback(() => {
+    setState((s) => ({ ...s, disclaimerAcknowledged: true }));
+  }, []);
+
   /**
    * Persist Issue Tree Helper picks for a partner-round so the
    * learner can close the drawer to peek at data and resume their
@@ -465,6 +472,7 @@ export function useGame() {
     requestLevel0Retry,
     markTutorialShown,
     markPartnerDetailTutorialShown,
+    acknowledgeDisclaimer,
     setIssueTreeHelperState,
     markIssueTreeHelperOpened,
     markLevel0Cleared,

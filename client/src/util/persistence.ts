@@ -64,6 +64,12 @@ export interface PersistedState {
    */
   tutorialShown?: boolean;
   partnerDetailTutorialShown?: boolean;
+  /**
+   * Whether the one-time sim disclaimer has been acknowledged. Optional
+   * for backwards compatibility - older payloads parse as undefined, the
+   * disclaimer shows one more time, then sticks.
+   */
+  disclaimerAcknowledged?: boolean;
 }
 
 function parsePayload(raw: string | null): PersistedState | null {
@@ -84,6 +90,7 @@ function parsePayload(raw: string | null): PersistedState | null {
       roundsResetToken: ROUNDS_RESET_TOKEN,
       tutorialShown: parsed.tutorialShown ?? false,
       partnerDetailTutorialShown: parsed.partnerDetailTutorialShown ?? false,
+      disclaimerAcknowledged: parsed.disclaimerAcknowledged ?? false,
     };
   } catch {
     return null;
@@ -113,6 +120,7 @@ export function savePersistedState(state: GameState): void {
     roundsResetToken: ROUNDS_RESET_TOKEN,
     tutorialShown: state.tutorialShown,
     partnerDetailTutorialShown: state.partnerDetailTutorialShown,
+    disclaimerAcknowledged: state.disclaimerAcknowledged,
   };
   const serialised = JSON.stringify(payload);
   const scorm = getScormAdapter();

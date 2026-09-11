@@ -555,6 +555,17 @@ export interface BranchingConversationTree {
   /** Ordered list of exchanges in this scenario. Typically 4-6 steps. */
   steps: BranchingStep[];
   /**
+   * Optional LPS coaching note shown on the Conversation Report after a
+   * well-played call (stars >= 1). Written for scenarios that END ON A
+   * NO by design (the soft-no R8/R9 and the strong-no R10): it tells the
+   * learner the no is a realistic, well-handled outcome and names the
+   * concrete next step, so a compliant call that didn't move the partner
+   * doesn't read as "they didn't budge, forget it". Rendered LPS-side
+   * (report screen), so internal framing is fine here. Absent on
+   * scenarios that close on a yes.
+   */
+  closingCoachNote?: string;
+  /**
    * The SME-prescribed path through the Pricing Issue Tree. The
    * Issue Tree Helper uses this to validate the learner's
    * pre-call diagnosis. Optional only until the SME provides it
@@ -771,6 +782,15 @@ export interface GameState {
    * clear on full restart via `onRestart`.
    */
   partnerDetailTutorialShown: boolean;
+  /**
+   * Whether the learner has acknowledged the one-time sim disclaimer
+   * (fictional locations + the predefined per-round comparison player).
+   * Shown as an acknowledge gate on the first Round Select entry after
+   * clearance, so it lands once the learner has met eRPD / Brand.com /
+   * the key OTA in clearance. Persisted so it fires once ever, not once
+   * per session; preserved across Play Again, cleared on full restart.
+   */
+  disclaimerAcknowledged: boolean;
   /**
    * Issue Tree Helper progress per partner-round. The Helper drawer
    * is intentionally close-and-reopenable (learner pops out to check

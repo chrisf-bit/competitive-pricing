@@ -40,11 +40,11 @@ const step1Options: BranchingOption[] = [
     id: 'll-r19-step1-correct',
     label: 'Set the leak aside, ask his forward strategy',
     description:
-      "SME-prescribed open: acknowledge the wholesaler-leak frustration, set it aside, and ask him to frame his strategy for his inventory over the next 90 days - keeps the call on ground he controls.",
+      "SME-prescribed open, adjusted per review: acknowledge the wholesaler-leak frustration and give a concrete pointer (review the reservations individually to trace the source) rather than brushing it aside, then move to his on-platform performance and ask him to frame his strategy for the next 90 days - keeps the call on ground he controls without dismissing his concern.",
     playerDialogue:
-      "I understand that, Lucas, and I get the frustration. Let's step away from the wholesale leak and look strictly at your performance on our platform. When you look at your inventory over the next 90 days, what's your strategy?",
+      "I understand that, Lucas, and I get the frustration. On the wholesale leak itself there's little we can do directly from here - my honest recommendation would be to review those reservations individually to trace where they're coming from. What I can help with today is your performance on our platform: when you look at your inventory over the next 90 days, what's your strategy?",
     partnerResponse:
-      "Our priority is to maximise margins - we're in the middle of peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect. We're trying to work out why conversion stays slow despite solid demand in our destination.",
+      "Our priority is to maximise margins - we're in the middle of peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect. We're trying to work out why conversion stays low despite solid demand in our destination.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -88,9 +88,9 @@ const step2Options: BranchingOption[] = [
     id: 'll-r19-step2-correct',
     label: 'Name the sell-through and conversion collapse',
     description:
-      "SME-prescribed handling: his portfolio's sell-through is pacing about 7% behind peers, and while demand exists his listings show a severe conversion drop (nearly -50% versus the same period last year), with 33% of last month's inventory unsold.",
+      "SME-prescribed handling, adjusted per review (comment 32): state OPC comparisons qualitatively, no exact data points. His portfolio's sell-through is pacing lower than peers, and while demand exists his listings show a severe conversion drop versus the same period last year, with a large share of last month's inventory unsold.",
     playerDialogue:
-      "Looking at the metrics, your portfolio's sell-through is pacing about 7% behind your peer group. Demand exists, but your listings are seeing a severe conversion drop - almost -50% versus the same period last year - and 33% of last month's inventory went unsold. That's a real missed-revenue opportunity.",
+      "Looking at the metrics, your portfolio's sell-through is pacing lower than your peer group. Demand exists, but your listings are seeing a severe conversion drop versus the same period last year, and a large share of last month's inventory went unsold. That's a real missed-revenue opportunity.",
     partnerResponse:
       "That's not reassuring. But since travelers clearly are interested - our page views are well up versus last year - what specifically is stopping them from becoming bookers?",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -186,7 +186,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the Regional Office Shield: make clear you're not asking him to challenge head-office policy, then narrow to device - over the next three months his search price on mobile is running about 18% higher than peers.",
     playerDialogue:
-      "I'm not asking you to challenge your head-office policy at all. When we break it down by device over the next three months, your search price on mobile is running about 18% higher than your peers.",
+      "I'm not asking you to challenge your head-office policy at all. Let's identify what's driving the higher search price and which factors are having the biggest impact, then see what we can do without going against that policy. When we break it down by device over the next three months, your search price on mobile is running about 18% higher than your peers.",
     partnerResponse:
       "We're 18% more expensive on mobile? Why is that happening specifically there?",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -333,7 +333,7 @@ const steps: BranchingStep[] = [
     id: 'present-gap',
     label: 'Present the severe conversion gap',
     partnerPrompt:
-      "Our priority is to maximise margins - we're mid peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect, and we're trying to work out why conversion stays slow despite solid demand.",
+      "Our priority is to maximise margins - we're mid peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect, and we're trying to work out why conversion stays low despite solid demand.",
     options: step2Options,
   },
   {

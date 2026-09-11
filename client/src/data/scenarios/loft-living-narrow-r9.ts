@@ -265,11 +265,11 @@ const step5Options: BranchingOption[] = [
   },
   {
     id: 'll-r9-narrow-step5-raise-ota',
-    label: 'Ask him to lift his rates on the other OTAs',
+    label: 'Tie Partner Offer removal to full cross-channel alignment',
     description:
-      "In a Narrow market you cannot ask him to change or raise his rates on the Key OTA or other OTAs. Telling him to lift his other-OTA pricing to close the gap is a compliance breach.",
+      "SME rewrite (Pack 5, Beppie): in a Narrow market you may only ask him to align with his own Brand.com - never to align across the key OTAs, and never to give Booking a better rate than other channels; OTA discrepancies may only be raised reactively and neutrally. Tying Partner Offer removal to a cross-channel parity plus best-rate demand is a compliance breach.",
     playerDialogue:
-      "The cleanest fix here is honestly just to raise your rates on the Key OTA and on the other OTAs across the board, so there's simply no cheaper option sitting out there undercutting what you show on Booking.com. Once you've lifted those external rates and closed the gap yourself, the comparisons stop hurting you and the whole leak problem goes away on its own. Push your prices up on those channels and the noise you've been dealing with disappears.",
+      "If you want Partner Offer to go away, ensure you align all rates, both Brand.com and the key OTAs, with us, or give us a better rate than the others. Otherwise this will keep happening, as we have to ensure we give our best prices to our customers.",
     partnerResponse:
       "You're telling me how to price on the Key OTA now? That's not yours to ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

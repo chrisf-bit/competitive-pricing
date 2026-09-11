@@ -365,4 +365,6 @@ export const nobleFalconNarrowR10: BranchingConversationTree = {
   issueTreePath: nobleFalconR10IssueTreePath,
   openingAm,
   steps: [step1, step2, step3, step4, step5, step6],
+  closingCoachNote:
+    "A firm no here is a realistic outcome, not a failed call. Adam is fully brand-managed with little room to move, and you kept the conversation compliant, respectful, and focused on his goals - which is exactly what keeps the door open. Don't write him off: log the family-setup fix and the prepayment offer you put forward, and follow up next cycle, when his numbers or his head-office guidance may have shifted. A well-handled no you can return to is worth more than a yes you had to pressure out.",
 };

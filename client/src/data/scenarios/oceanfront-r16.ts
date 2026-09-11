@@ -50,7 +50,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "First, I want to acknowledge that the trial last time had a genuinely impressive outcome. Offering your best price clearly lifted conversion, which shows guests respond when you're competitive. Looking ahead over the next 3 months, though, your sell-through is pacing about 12% behind your peer group, so there's an opportunity to build on that success and close the gap.",
     partnerResponse:
-      "Okay, but that isn't alarming for us during low-demand periods. Honestly, we'd rather keep those rooms unbooked for a few extra days than do anything that compromises our rates on OTAs.",
+      "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty programme is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -339,7 +339,7 @@ const steps: BranchingStep[] = [
     id: 'probe-visibility',
     label: 'Probe: website-only or general visibility?',
     partnerPrompt:
-      "Okay, but that isn't alarming for us during low-demand periods. Honestly, we'd rather keep those rooms unbooked for a few extra days than do anything that compromises our rates on OTAs.",
+      "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty programme is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
     options: step2Options,
   },
   {

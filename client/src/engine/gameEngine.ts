@@ -92,6 +92,7 @@ export function createInitialState(overrides?: {
   roundStars?: GameState['roundStars'];
   tutorialShown?: boolean;
   partnerDetailTutorialShown?: boolean;
+  disclaimerAcknowledged?: boolean;
 }): GameState {
   const partners = initialPartners.map((p) => {
     // Apply the Round 1 baseline so the partner data the learner sees
@@ -130,6 +131,7 @@ export function createInitialState(overrides?: {
     level0RetryItemIds: null,
     tutorialShown: overrides?.tutorialShown ?? false,
     partnerDetailTutorialShown: overrides?.partnerDetailTutorialShown ?? false,
+    disclaimerAcknowledged: overrides?.disclaimerAcknowledged ?? false,
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
     currentRound: 1,

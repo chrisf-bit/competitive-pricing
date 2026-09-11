@@ -40,7 +40,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut - it presumes the fix and hands an ROI-driven owner nothing to weigh.",
     playerDialogue:
-      "Honestly, I can tell you right now what this is - your numbers are down because your Booking.com rates are simply too expensive compared to your peers. The fix is straightforward: drop your rates across the board to the same level as your website, and the traffic should come straight back the moment you do it. That's the whole story.",
+      "Honestly, I can tell you right now what this is - your numbers are down because your Booking.com rates are simply too expensive compared to your peers. The fix is straightforward: drop your rates across the board to the same level as your website, and the traffic comes straight back the moment you do it. That's the whole story.",
     partnerResponse:
       "You're telling me to cut all my rates before you've explained a thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

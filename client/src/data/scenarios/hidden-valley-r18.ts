@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: rather than pitch, ask her to frame her forward priorities and overall performance first, so the diagnosis lands against her own goals.",
     playerDialogue:
-      "Exactly. I've pulled some data to see how we can support your goals. To start - when you review your forward bookings for the next 90 days, what are your priorities, and how are you performing overall?",
+      "Exactly. I've pulled some data to see how we can support your goals. To start - when you review your performance for the upcoming 90 days, what are your priorities, and how are you performing overall?",
     partnerResponse:
       "Well, Oliver, our main directive from head office remains the same: protect our ADR and keep our website the core channel for guest acquisition. We track revenue closely and keep price consistency across platforms. That's our long-term brand strategy, and right now it's paying off - we're in line with expectations.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right data, wrong sequence - leading with 'here's what's wrong' before inviting a brand-bound Revenue Manager to frame her own priorities skips the alignment that makes her receptive.",
     playerDialogue:
-      "Let's get straight to it, Claire - I've pulled the data together and found a clear gap in your forward performance that we need to work through today. Your bookings are pacing behind where they really should be.",
+      "Let's get straight to it, Claire - I've pulled the data together and found a clear performance gap for future check-in months that we can focus on for today. Your bookings are pacing behind from where they could be.",
     partnerResponse:
       "Behind by what measure? Our reporting says we're meeting our targets. I'd want to understand your framing before I accept 'a gap'.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: 0 },
