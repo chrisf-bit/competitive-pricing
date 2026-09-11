@@ -272,12 +272,12 @@ export function ClearanceSummaryScreen({
   return (
     <div
       style={{
-        height: '100%',
+        minHeight: '100%',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--brand-navy-dark)',
         color: 'var(--white)',
-        overflow: 'hidden',
+        overflow: 'hidden auto',
       }}
     >
       {/* Top label */}

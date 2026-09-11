@@ -141,7 +141,7 @@ export default function App() {
         />
       )}
 
-      <div style={{ flex: 1, overflow: 'hidden', display: 'flex' }}>
+      <div style={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex' }}>
         {/* Guide panel */}
         {showGuide && (
           <GuidePanel
@@ -157,8 +157,11 @@ export default function App() {
           />
         )}
 
-        {/* Main content */}
-        <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+        {/* Main content. overflow-y auto (not hidden) so that on a short
+            viewport - a windowed browser after ESC-ing out of fullscreen, or
+            a limited-size LMS iframe - content that exceeds the height scrolls
+            rather than being clipped and unreachable. */}
+        <div style={{ flex: 1, minWidth: 0, minHeight: 0, overflow: 'hidden auto', display: 'flex', flexDirection: 'column' }}>
           {state.screen === 'briefing' && (
             <BriefingScreen
               hasCleared={state.level0Progress.cleared}

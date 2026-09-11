@@ -168,7 +168,7 @@ export function EmailAuditScreen({
         {/* Left: email card */}
         <div
           style={{
-            overflow: 'hidden',
+            overflow: 'hidden auto',
             padding: '14px 14px 14px 22px',
             display: 'flex',
             flexDirection: 'column',

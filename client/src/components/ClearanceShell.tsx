@@ -28,7 +28,11 @@ export function ClearanceShell({ currentScreen, children }: ClearanceShellProps)
   return (
     <div
       style={{
-        height: '100vh',
+        // minHeight (not fixed height) so a short viewport - windowed after
+        // ESC, or a small LMS iframe - lets the clearance content grow and
+        // scroll (via the App content area) rather than clipping the intro,
+        // question or Continue button out of reach.
+        minHeight: '100vh',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',

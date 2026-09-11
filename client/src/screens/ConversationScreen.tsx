@@ -134,9 +134,10 @@ export function ConversationScreen({
     <div
       style={{
         flex: 1,
+        minHeight: 0,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'hidden',
+        overflow: 'hidden auto',
         background: 'var(--off-white)',
         padding: '12px',
       }}

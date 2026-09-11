@@ -43,7 +43,7 @@ export function Level2CompleteScreen({
         position: 'fixed',
         inset: 0,
         background: 'var(--brand-navy-dark)',
-        overflow: 'hidden',
+        overflow: 'hidden auto',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

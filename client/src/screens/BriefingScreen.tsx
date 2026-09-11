@@ -10,12 +10,11 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
   return (
     <div
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--brand-navy)',
         color: 'var(--white)',
-        overflow: 'hidden',
       }}
     >
       {/* Hero */}

@@ -35,7 +35,7 @@ export function IssueTreeRevealScreen({ onComplete }: IssueTreeRevealScreenProps
         flexDirection: 'column',
         background: 'var(--brand-navy-dark)',
         color: 'var(--white)',
-        overflow: 'hidden',
+        overflow: 'hidden auto',
       }}
     >
       {/* Infographic - the revealed step copy floats beside the active

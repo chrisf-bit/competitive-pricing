@@ -93,12 +93,12 @@ export function DashboardHotspotScreen({ onComplete, retryItemIds }: DashboardHo
     <div
       style={{
         position: 'relative',
-        height: '100%',
+        minHeight: '100%',
         display: 'flex',
         flexDirection: 'column',
         background: 'var(--brand-navy-dark)',
         color: 'var(--white)',
-        overflow: 'hidden',
+        overflow: 'hidden auto',
       }}
     >
       {/* Backdrop - darkened so the table and text stay legible on top.
