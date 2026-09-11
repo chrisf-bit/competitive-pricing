@@ -25,7 +25,12 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
         position: 'fixed',
         inset: 0,
         background: 'var(--brand-navy-dark)',
-        overflow: 'hidden',
+        // Scrollable flex container so the centered title/Begin/Reset group
+        // stays reachable on a short (windowed / LMS iframe) viewport rather
+        // than the Begin button dropping off the bottom.
+        overflow: 'hidden auto',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {/* Background image */}
@@ -55,14 +60,25 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
         }}
       />
 
-      {/* Title block - centered vertically */}
+      {/* Centered content group: title + Begin/loader + Reset. In normal
+          flow inside the scrollable flex root, centered via margin:auto so
+          the whole group stays reachable (and scrolls) on a short viewport
+          instead of each absolutely-positioned block falling off the edge. */}
       <div
         style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
+          position: 'relative',
           zIndex: 2,
+          margin: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '48px 0',
+          width: '100%',
+        }}
+      >
+      {/* Title block */}
+      <div
+        style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -120,15 +136,12 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
       {/* Loader / Begin slot - sits below the title and swaps from one to the other at 4s */}
       <div
         style={{
-          position: 'absolute',
-          top: 'calc(50% + 130px)',
-          left: '50%',
-          transform: 'translateX(-50%)',
           zIndex: 3,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          height: 200,
+          minHeight: 200,
+          marginTop: 'clamp(24px, 8vh, 90px)',
         }}
       >
         <AnimatePresence mode="wait">
@@ -214,10 +227,7 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
             if (ok) onResetProgress();
           }}
           style={{
-            position: 'absolute',
-            top: 'calc(50% + 290px)',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            marginTop: 'clamp(16px, 3vh, 34px)',
             zIndex: 4,
             background: 'rgba(255,255,255,0.08)',
             color: 'rgba(255,255,255,0.7)',
@@ -246,6 +256,7 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
           Reset progress
         </motion.button>
       )}
+      </div>
     </div>
   );
 }
