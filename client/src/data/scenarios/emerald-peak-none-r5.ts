@@ -24,9 +24,9 @@ const step1Options: BranchingOption[] = [
     id: 'ep-r5-none-step1-correct',
     label: 'Name the visibility drop, ask her strategy and how to help',
     description:
-      "SME-prescribed probe: acknowledge her strong demand, then ask - collaboratively - about her strategy and how Booking.com can support her goals. In a No Parity market, do not proactively raise any cross-channel price comparison.",
+      "SME-prescribed probe: acknowledge her strong demand, reactively recall that she previously mentioned keeping her direct channel cheaper, then ask - collaboratively - about her strategy and how Booking.com can support her goals. Referencing what she disclosed in a prior call is reactive and neutral, not a proactive cross-channel comparison.",
     playerDialogue:
-      "Your overall performance here actually looks strong - your demand and conversion are well up on your peer group. Could you share your current strategy, and how Booking.com can best support your goals?",
+      "Your overall performance here actually looks strong - your demand and conversion are well up on your peer group. And I recall our last conversation where you mentioned that your prices are kept lower on another channel. Could you share your current strategy, and how Booking.com can best support your goals?",
     partnerResponse:
       "Yeah, I know what's going on. It's tricky for me - head office has a super strict policy that our direct channel stays cheaper than anyone else. We love working with you, but we've basically been told to treat Booking.com as a 'window' and accept lower visibility as a trade-off.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -81,9 +81,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: ask how you can collaborate around the roadblock, acknowledge she follows internal guidelines and is free to price how she chooses, and explain that her best available price improves ranking and discovery for her whole business.",
     playerDialogue:
-      "How can we collaborate to find a way around that roadblock? I know you have to follow your internal guidelines, and you're completely free to price how you choose. But by making your best price available to our platform, it could make your property more attractive to travelers and benefit your overall business.",
+      "How can we collaborate to find a way around that roadblock? I know you have to follow your internal guidelines, and you're completely free to price how you choose. However, travelers often compare properties side-by-side on Booking.com. By making your best price available to our platform, it could make your property more attractive to travelers and benefit your overall business.",
     partnerResponse:
-      "So you're basically saying this visibility drop on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
+      "So you're basically saying being less attractive than our local competitors on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -137,7 +137,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: yes, it creates a reverse billboard effect - if travelers can't find her on the platform they won't hunt for her website, they'll book competitors. 90% of bookers discover the property here first.",
     playerDialogue:
-      "I hear you - but yes, it does create a reverse 'billboard effect': if travelers can't find you on our platform, they won't go looking for your website, they'll book your competitors instead. Up to 90% of the customers who book with us discover the property here first - that's a powerful window for your entire visibility.",
+      "I hear you - but yes, it does create a reverse 'billboard effect': when travelers often find your prices less attractive on our platform, they may choose your peers here before they ever reach your website. Up to 90% of the customers who book with us discover the property here first - that's a powerful window for your entire visibility.",
     partnerResponse:
       "Well... it's true. How can we improve this without causing friction with our internal policies?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -180,7 +180,7 @@ const step3: BranchingStep = {
   id: 'billboard-counter',
   label: 'Break the reverse-billboard belief',
   partnerPrompt:
-    "So you're basically saying this visibility drop on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
+    "So you're basically saying being less attractive than our local competitors on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
   options: step3Options,
 };
 
@@ -191,11 +191,11 @@ const step4Options: BranchingOption[] = [
     id: 'ep-r5-none-step4-correct',
     label: 'Offer a fenced family rate, autonomy preserved',
     description:
-      "SME-prescribed solution: a policy-safe workaround - her family-traveler share lags peers, so instead of a general rate drop she can voluntarily use a family rate. The choice of strategy stays entirely hers.",
+      "SME-prescribed solution: a policy-safe workaround - her family-traveler share lags peers, and family rates are already active, so instead of a general rate drop she can review and correct the family-rate configuration. The choice of strategy stays entirely hers.",
     playerDialogue:
-      "We don't want to cause any friction - let's find something that aligns with your revenue goal without breaking policy. Our data shows your share of family travelers is lower than your peers. Instead of a general rate drop, you can use a family rate. Of course, the choice of distribution and pricing strategy stays entirely yours.",
+      "We don't want to cause any friction - let's find an option that supports your revenue goal without breaking policy. Our data shows your share of family travelers is lower than your peers. Since Family rates are already active, we could review the setup and correct some configurations first. Would that fit within your head-office guidelines?",
     partnerResponse:
-      "Oh, that's a brilliant workaround! Corporate doesn't monitor opaque segment rates. What kind of traction can we get from that?",
+      "Yes we can try that. Corporate doesn't monitor segment rates. What kind of traction can we get from that?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -249,9 +249,9 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed close: quantify it (10% competitiveness -> ~30% more bookings, ~25% more revenue) and note families spend more and stay longer, so it's a big revenue lift without cheapening the property for everyone else.",
     playerDialogue:
-      "It's massive, Sophia. On average, improving price competitiveness by 10% on Booking.com generates about 30% more bookings and 25% more revenue. And because family bookings spend more and stay longer, this is a real revenue lift without making the property cheaper for everyone else. Let's set it up and I'll book a follow-up to review.",
+      "On average, improving price competitiveness by 10% on Booking.com generates about 30% more bookings and 25% more revenue. And because family bookings spend more and stay longer, this is a real high-value segment that can help maximize your occupancy and ADR. Let's set it up and I'll book a follow-up to review.",
     partnerResponse:
-      "This is exactly the kind of support that's most valuable for us - it lets me hit my revenue targets while keeping the auditors perfectly happy. Let's set up that targeted family rate today!",
+      "This is exactly the kind of support we need - it lets me hit my revenue targets while keeping the auditors perfectly happy. Let's set up that targeted family rate today and agree how we'll measure the results!",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -292,7 +292,7 @@ const step5: BranchingStep = {
   id: 'close',
   label: 'Quantify the family upside and close',
   partnerPrompt:
-    "Oh, that's a brilliant workaround! Corporate doesn't monitor opaque segment rates. What kind of traction can we get from that?",
+    "Yes we can try that. Corporate doesn't monitor segment rates. What kind of traction can we get from that?",
   options: step5Options,
 };
 

@@ -266,7 +266,7 @@ const emeraldPeakR5Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: strong on every demand metric (room nights +110%, conversion +42% vs peer) yet Lose Price 100% and eRPD 10.2% - a deliberate direct-cheaper policy plus a Fake-Value Genius markup (Public 12.7 / Loyal 3.6).',
+      'Anomaly: strong on every demand metric (room nights +110%, conversion +42% vs peer) yet Lose Price 100% and eRPD 10.2% - a deliberate direct-cheaper policy plus a nongenuine Genius markup (Public 12.7 / Loyal 3.6) and active family scenario.',
   },
 };
 
@@ -468,7 +468,7 @@ const emeraldPeakR15Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   storyteller: {
     oneLiner:
-      'Fake value: she inflates her public price to fund the Genius discount, so her search price runs 10% high and non-logged-in mobile conversion drops 60%.',
+      'Nongenuine: she inflates her public price to fund the Genius discount, so her search price runs 10% high and non-logged-in mobile conversion drops 60%.',
   },
   'data-detective': {
     oneLiner:

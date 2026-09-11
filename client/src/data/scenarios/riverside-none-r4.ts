@@ -26,9 +26,9 @@ const step1Options: BranchingOption[] = [
     id: 'rb-r4-none-step1-correct',
     label: 'Name the family visibility drop, then ask his strategy',
     description:
-      "SME-prescribed probe: surface that his visibility among families searching multi-occupancy stays is dropping versus peers, then ask him to walk you through his strategy.",
+      "SME-prescribed probe: lead with the visible pattern - strong demand (room nights and page views up on peers) but room nights down year-on-year and conversion slightly below peers - then flag the family-traveler opportunity and ask him to walk you through his strategy.",
     playerDialogue:
-      "Our metrics show your visibility among families is dropping compared to your peer group. Before I go further, could you walk me through your current strategy?",
+      "Your demand looks strong compared with your peer group: room nights are up 40%, page views are up 39%. At the same time, your room nights performance is down 59% year on year and conversion is 3% below peers from the last 30 days. From internal data, we also see an opportunity to improve the value and mix of the bookings you're getting, such as family travelers. Before I go further, could you walk me through your current strategy?",
     partnerResponse:
       "Ren, we keep a strict 30% cap on OTAs. We don't expect our rates to be the same across all channels - but for availability, yes, we can decide the share we give you.",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
@@ -83,9 +83,9 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: don't fight the cap - optimize the 30% he wants. He's missing advance bookings; his best available price improves conversion (1% -> ~2.7% net revenue / ~3% room nights), and it's entirely his decision.",
     playerDialogue:
-      "Thanks for your transparency here - I'd like to focus on optimizing the 30% you do want. Looking at your performance data versus your peer on our platform, you're missing advance bookings versus peers; supplying the best price you're comfortable with would improve conversion - a 1% improvement drives about 2.7% more net revenue and 3% more room nights on average. Would you be open to reviewing some options? Of course, the choice of distribution and pricing strategy stays entirely yours.",
+      "Thanks for your transparency here - I'd like to focus on optimizing the 30% you do want. Looking at your performance data versus your peers on our platform, you're missing advance bookings; supplying the best price you're comfortable with would improve conversion - a 1% improvement drives about 2.7% more net revenue and 3% more room nights on average. Would you be open to reviewing some options? Of course, the choice of distribution and pricing strategy stays entirely yours.",
     partnerResponse:
-      "Maybe we can push advance bookings a bit, but we're wary of selling low in advance and missing last-minute demand at the price we want. By the way, why are families not being captured by my property?",
+      "Maybe we can push advance bookings a bit, but we're wary of selling low in advance and missing last-minute demand at the price we want. By the way, what's the family traveler opportunity you just mentioned?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -139,9 +139,9 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: because family rates aren't explicitly defined, that segment sees an inflated price. Quantify why families are worth fixing (grew ~2x faster, spend more, stay longer, review 24% more often).",
     playerDialogue:
-      "Because your family rates aren't correctly configured, any family search would see the price as a full adult stay, making it look inflated. Family bookings grew nearly twice as fast as any other segment over the past two years - they spend more, stay longer, and review 24% more often. It's a valuable segment for driving your occupancy.",
+      "We noticed your family rates aren't correctly configured, so most family searches would see the price as a full adult stay, making it look inflated. Family bookings grew nearly twice as fast as any other segment over the past two years on our platform - they spend more, stay longer, and review their stays 24% more often. It's a valuable segment for driving your occupancy, with the right family rate configuration.",
     partnerResponse:
-      "Families matter to us given how many family rooms we have, so I'll make sure those settings get fixed. You mentioned my peer group is more competitive - tell me more about that.",
+      "Families matter to us given how many family rooms we have, so I'll make sure those settings get fixed. You mentioned my performance is down 59% year on year - tell me more about that.",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -182,7 +182,7 @@ const step3: BranchingStep = {
   id: 'family-setup',
   label: 'Diagnose the family setup gap',
   partnerPrompt:
-    "Maybe we can push advance bookings a bit, but we're wary of selling low in advance and missing last-minute demand at the price we want. By the way, why is our occupancy configuration underperforming?",
+    "Maybe we can push advance bookings a bit, but we're wary of selling low in advance and missing last-minute demand at the price we want. By the way, what's the family traveler opportunity you just mentioned?",
   options: step3Options,
 };
 
@@ -195,7 +195,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: he's in Genius but it isn't working because the discount looks non-genuine, so families book rival Genius properties with a genuinely competitive rate; a more competitive price makes him more attractive versus peers.",
     playerDialogue:
-      "You're in the Genius program, but it isn't working as it should. Because the discount looks non-genuine to travelers, Genius members and families are likely to book elsewhere on our platform with genuinely discounted rates. By providing the best price you can make available to us, you get more competitive versus the peers you compete with for demand.",
+      "Absolutely. In addition to the family segment, there's also an opportunity to improve your appeal to Genius members on our platform. You're in the Genius program, but it isn't working as it should because the discount may not look genuine to travelers. Genius members are likely to book elsewhere on our platform with genuinely discounted rates. By providing the best price you can make available to us, you are more attractive versus the peers you compete with for demand.",
     partnerResponse:
       "All your customers are Genius - I don't want to give everyone a discount.",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
@@ -238,7 +238,7 @@ const step4: BranchingStep = {
   id: 'genius',
   label: 'Diagnose the non-genuine Genius discount',
   partnerPrompt:
-    "Families matter to us given how many family rooms we have, so I'll make sure those settings get fixed. You mentioned my peer group is more competitive - tell me more about that.",
+    "Families matter to us given how many family rooms we have, so I'll make sure those settings get fixed. You mentioned my performance is down 59% year on year - tell me more about that.",
   options: step4Options,
 };
 
@@ -249,11 +249,11 @@ const step5Options: BranchingOption[] = [
     id: 'rb-r4-none-step5-correct',
     label: 'Offer a targeted US Country Rate, ADR protected, close',
     description:
-      "SME-prescribed close: if Genius doesn't fit his strategy, a US Country Rate targets better - his US-traveler share lags peers, and a Country Rate boosts conversion in that segment while protecting overall ADR. Offer to set it up together.",
+      "SME-prescribed close: stay on the Genius opportunity first - keep it targeted with room-type selection and blackout dates and make his best available price visible - then, as a further targeted action, offer a US Country Rate where his US-traveler share lags, protecting overall ADR. Offer to set it up together.",
     playerDialogue:
-      "If you are looking into different targeted actions, a tool that can help you is a US Country Rate. Your share of US travelers is lower than your peers, and a Country Rate lets you boost conversion in that segment while protecting your overall ADR. Shall we look at the setup together? I'll send a follow-up to review the results.",
+      "That's fair, but an empty room is lost revenue. We can keep Genius more targeted by reviewing which room types are included and using blackout dates to pause the discount when occupancy is already strong. Would you be open to testing those adjustments and making your best available price visible to us, so you can benefit from the Genius program and not lose the new guests who discover you on Booking.com? If you are looking into different targeted actions, a tool that can help you is a US Country Rate. Your share of US travelers is lower than your peers, and a Country Rate lets you boost conversion in that segment while protecting your overall ADR. Shall we look at the setup together? I'll send a follow-up to review the results.",
     partnerResponse:
-      "That fits our strategy better - the US market runs a higher ADR, and those are exactly the guests we want. Let's look at the setup options.",
+      "That fits our strategy better. Let's correct the family-rate settings first, then review a more targeted Genius setup for the right room types and dates.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',

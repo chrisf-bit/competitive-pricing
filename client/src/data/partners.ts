@@ -1241,11 +1241,12 @@ function emeraldPeakBase(args: {
       metricHistory: [],
       trust: 50,
       relationship: 'neutral',
-      // Genius Program and Payments active. The Genius discount is
-      // Fake-Value (base inflated to offset it). Family Rates shows
-      // Inactive (Review Pack 3 sign-off): the R5 commitment is to set the
-      // family rates up, so the card should read Inactive rather than
-      // active-but-misaligned.
+      // Genius Program, Family Rates and Payments active. The Genius
+      // discount is nongenuine (base inflated to offset it). Family Rates
+      // stays ACTIVE by design (Review Pack 3, second SME pass): this is a
+      // nongenuine / misconfigured family setup, not a missing product -
+      // the R5 conversation addresses it as "already active, review and
+      // correct the configuration", not as switching it on.
       discounts: [
         { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
@@ -1256,7 +1257,7 @@ function emeraldPeakBase(args: {
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
         { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
-        { id: 'family-rates', label: 'Family rates', status: 'inactive', category: 'foundations-payments' },
+        { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
         { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
       ],
       conversationLog: [],
