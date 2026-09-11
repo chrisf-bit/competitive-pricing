@@ -270,7 +270,7 @@ function nobleFalconBase(args: {
         style: 'blue',
         styleSecondary: 'red',
         description:
-          "Revenue Manager for a fully-managed-by-brand property with limited local autonomy. Process-led and measured, he works to a head-office directive that keeps the direct site cheaper, and he uses a higher Booking.com price to filter out 'risky' guests. He guards his brand's autonomy closely, bristles at advice on how to run his own website, and will end a call rather than be pushed - separate price from risk and stay respectful, and even then he may not commit.",
+          "Revenue Manager for a fully chain-managed property with limited local autonomy. Process-led and measured, he works to a head-office directive that keeps the direct site cheaper, and he uses a higher Booking.com price to filter out 'risky' guests. He guards his brand's autonomy closely, bristles at advice on how to run his own website, and will end a call rather than be pushed - separate price from risk and stay respectful, and even then he may not commit.",
         commercialGoal:
           'Hit brand-set commercial KPIs without compromising brand consistency or guest experience',
       },

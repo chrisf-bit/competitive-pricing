@@ -138,7 +138,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: despite rising visibility versus last year, his share versus peers is falling 15% behind, and his search price averages 12% higher than theirs - so travelers see him much less, and when they do the offer isn't attractive, so volume drops.",
     playerDialogue:
-      "Let's look at exactly where travelers dropped out. Even with your visibility share up vs last year, your visibility share vs the peer group is falling about 15% behind, and your search price averages 12% higher than theirs. So travelers see you less than your peers - and when they do, the offer isn't attractive enough - the travelers do not click on your property page, potentially due to your search price.",
+      "Let's look at exactly where travelers dropped off. Even with your visibility share up vs last year, your visibility share vs the peer group is falling about 15% behind, and your search price averages 12% higher than theirs. So travelers see you less than your peers - and when they do, the offer isn't attractive enough - the travelers do not click on your property page, potentially due to your search price.",
     partnerResponse:
       "Hmm, got it. But my regional office won't allow rate cuts, especially with all the noise from those leaked wholesale rates.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -234,7 +234,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: his basic mobile discount is active, but exclusions on weekends and longer booking windows mean over 70% of mobile searches don't match the incentive - and the data shows an 80% drop-off in mobile conversions versus his peer group.",
     playerDialogue:
-      "Your basic mobile discount is active - but it excludes weekends and longer booking windows, so over 70% of mobile searches don't actually match the incentive. The result is an 80% drop-off in mobile conversions compared to your peer group. The discount is there; it's just not reaching the potential searches.",
+      "Your basic mobile discount is active - but it excludes weekends and longer booking windows, so over 70% of mobile searches don't actually match the more competitive rate. The result is an 80% drop-off in mobile conversions compared to your peer group. The discount is there; it's just not reaching the potential searches.",
     partnerResponse:
       "That's a big loss. But if we adjust the mobile setup, doesn't that risk cannibalizing our desktop rates?",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -280,9 +280,9 @@ const step6Options: BranchingOption[] = [
     id: 'll-r19-step6-correct',
     label: 'Explain it extends existing country rates, then close',
     description:
-      "SME-prescribed close: mobile rates are opaque to desktop searchers, so there's no cannibalization. And he already runs country rates - so the same competitive rate he offers EEA, US and UK would simply become available to mobile bookers too, widening the audience rather than discounting deeper.",
+      "SME-prescribed close (adjusted per review, comment 36): mobile rates are opaque to desktop searchers, so there's no cannibalization of his desktop/direct rate. Extending the mobile rate reaches the mobile searchers currently excluded by the weekend and long-window carve-outs, recovering the drop-off. (Note: the mobile rate stacks with his country rates, so avoid claiming it is the 'same competitive rate / not deeper' for those bookers.)",
     playerDialogue:
-      "Not at all - mobile rates aren't visible to desktop searchers, so your desktop rate is untouched. You're widening the audience, not cutting deeper. Let's set it up and review the mobile recovery together.",
+      "Not at all - mobile rates aren't visible to desktop searchers, so your desktop rate stays untouched. This simply reaches the mobile searchers who slip through today. Let's set it up and review the mobile recovery together.",
     partnerResponse:
       "Ok, that's clear. Honestly I lose my mind keeping up with all the promotions and stacking, but the logic makes sense - let's reconnect in two months to see the impact of the mobile rate.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

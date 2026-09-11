@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "Understood - the 30% cap is entirely your call. Let's just work within that ceiling and make the most of Genius on the share you do give us. If that's the box we're operating in, I'll focus on getting the programme right and leave the volume where you've set it.",
     partnerResponse:
-      "So we're just accepting the ceiling? I thought you saw an opportunity here.",
+      "Fair enough - you've respected the cap. I did think you had something to help me get more out of the share I already give you, though, not just manage the programme.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
     compliance: 'safe',
@@ -268,7 +268,7 @@ const step5Options: BranchingOption[] = [
     playerDialogue:
       "Just deepen your Genius discount - take it up to 20% - and the Genius travelers will start coming back to you. A bigger headline saving is what catches their eye, so make the discount look more generous and let that pull the bookings through. Leave the base rate exactly where it is; you don't need to touch that, just widen the gap on the Genius side and lean into the deeper offer. That's the quickest way to get the programme moving again without reworking anything underneath it.",
     partnerResponse:
-      "A deeper discount on an inflated base is the same problem, isn't it? That doesn't fix the value.",
+      "Deepen the discount? I've spent this whole conversation trying to protect my rate, not cut it further - I'm not convinced a bigger discount is what turns this around.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 2,
     compliance: 'safe',

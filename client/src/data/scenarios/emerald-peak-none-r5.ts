@@ -83,7 +83,7 @@ const step2Options: BranchingOption[] = [
     playerDialogue:
       "How can we collaborate to find a way around that roadblock? I know you have to follow your internal guidelines, and you're completely free to price how you choose. However, travelers often compare properties side-by-side on Booking.com. By making your best price available to our platform, it could make your property more attractive to travelers and benefit your overall business.",
     partnerResponse:
-      "So you're basically saying being less attractive than our local competitors on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
+      "So you're saying being less competitive than our local rivals on your platform drags our own website down as well... Maybe. But even if that's true, my hands are tied - my bosses will lose their minds if our base rate on Booking.com matches our website rate.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -180,7 +180,7 @@ const step3: BranchingStep = {
   id: 'billboard-counter',
   label: 'Break the reverse-billboard belief',
   partnerPrompt:
-    "So you're basically saying being less attractive than our local competitors on your platform is hitting our website too... I get it, but my hands are tied. My bosses will lose their minds if our base rate on Booking.com matches our website rate.",
+    "So you're saying being less competitive than our local rivals on your platform drags our own website down as well... Maybe. But even if that's true, my hands are tied - my bosses will lose their minds if our base rate on Booking.com matches our website rate.",
   options: step3Options,
 };
 
