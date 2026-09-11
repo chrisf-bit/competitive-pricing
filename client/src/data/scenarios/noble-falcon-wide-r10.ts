@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I noticed your price competitiveness has dropped significantly this month - around a 20% gap compared to your website. How does that align with your current strategy?",
     partnerResponse:
-      "Hi Mark. This is actually an intentional directive from head office. We maintain a strict policy to keep our website at least 15% cheaper, to own the customer relationship.",
+      "Hi Mark. This is actually an intentional directive from the head office. We maintain a strict policy to keep our website at least 15% cheaper, to own the customer relationship.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -85,7 +85,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: the billboard approach works only if the property stays visible. When the gap is this wide, ranking is affected by guest behavior - if travelers can't find him here, they won't know to look for his website. Probe what feedback he's had from guests comparing rates.",
     playerDialogue:
-      "I respect that goal, but looking at data your conversion is 17% behind your peers on our platform. To optimize the travelers who discover you through us, and to capture those net-new international guests, we ask that you provide us with the same rates and availability you give to your direct channel. This ensures you maximize your reach for the rooms you do want to fill.",
+      "I respect that goal, but looking at data your conversion is 17% lower than your peers on our platform. To optimize the travelers who discover you through our website, and to capture those net-new international guests, we ask that you provide us with the same rates and availability you give to your direct channel. This ensures you maximize your reach for the rooms you do want to fill.",
     partnerResponse:
       "Most of our loyal guests know to book directly. Besides, keeping your platform priced higher helps us filter out high-risk bookings - invalid cards, short-notice cancellations, that sort of thing.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -197,7 +197,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: 90% of global travelers discover his property first on Booking.com. In a Wide market you can ask him to apply the same rates and conditions he offers third parties and his direct channel here. To reward direct bookers without losing visibility, suggest fenced member rates on his website rather than a cheaper public price.",
     playerDialogue:
-      "Did you know around 90% of global travelers discover your property for the first time on our platform? To optimize that traffic, we ask that you apply the same rates and conditions you have on third parties and your website here too. And to reward direct bookers without losing your visibility, have you considered fenced member rates on your own site rather than a cheaper public price?",
+      "Did you know around 90% of global travelers discover your property for the first time on our platform? Applying the same rates and conditions that you have on your direct channel and other third party sites can help you to optimize for that traffic. And to reward direct bookers without losing your visibility, have you considered fenced member rates on your own site rather than a cheaper public price?",
     partnerResponse:
       "I don't like getting advice on how to run campaigns on our own website. That strategy is entirely ours.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: clarify you weren't telling him how to run his site - you're there to support his occupancy goals. Then surface the family setup gap: his capacity settings are optimized on other platforms but not here, so families see artificially high prices. Ask him to match those conditions to stop looking expensive to families.",
     playerDialogue:
-      "That wasn't my intention at all - I'm here to support your occupancy goals, not run your campaigns. On that note, we'd want to make sure your family setups are competitive. Your capacity settings look optimized on other platforms but not here, which can make you appear artificially expensive to families. Could we match those conditions here so families see the right price?",
+      "That wasn't my intention at all - I'm here to support your occupancy goals, not run your campaigns. On that note, we'd want to make sure your family setups are configured to match the capacity settings on your other channels, so you don't appear artificially more expensive to families. Your capacity settings look optimized on other platforms but not here. Could we match those conditions here so families see the right price?",
     partnerResponse:
       "I have the same settings all over the place - we don't give any advantage to other OTAs. It's more likely your extranet isn't reflecting what we have in our channel manager. I don't want to go deeper on these operational issues, sorry. I have to get off the phone. Bye.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

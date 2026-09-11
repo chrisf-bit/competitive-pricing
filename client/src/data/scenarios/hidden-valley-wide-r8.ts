@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: note that Booking.com is displaying prices around 7% less competitive than her direct channel, and open it up neutrally - ask about the strategy behind it rather than presuming.",
     playerDialogue:
-      "I've pulled some metrics to help us look at how we can support your revenue goals. To start, I noticed our platform is currently displaying prices around 7% less competitive than your direct channel. I'd like to explore the strategy behind that with you.",
+      "I've pulled some metrics to help us look at how we can support your revenue goals. To start, I noticed our platform is currently displaying prices which are around 7% less competitive than your direct channel. I'd like to explore the strategy behind that with you.",
     partnerResponse:
       "Ah, yes. Our head office mandates a strict policy to keep our website cheaper to own the guest relationship. We're fully aware this means lower visibility on Booking.com, but it's a trade-off we accept because we want our loyal guests booking directly.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -86,7 +86,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed reframe: up to 90% of travelers who book with Booking.com discover the property here first, so an uncompetitive price means they discover competitors nearby - which hurts her direct discovery too. In a Wide market you can ask for the same rates and conditions she gives Brand.com.",
     playerDialogue:
-      "The billboard effect is real, but up to 90% of travelers who book with us discover your property on our platform first. When your rates here aren't competitive, they're more likely to discover another property nearby - which actually dents your direct-channel discovery as well. To optimize that, we'd ask for the same rates and conditions you provide your direct channel.",
+      "The billboard effect is real, but up to 90% of travelers who book with us discover your property on our platform first. When your rates here aren't competitive, those travelers are more likely to discover another property nearby - which actually impacts your direct-channel discovery as well. Providing the same rates and conditions on Booking.com as your direct channel can help to ensure you're able to optimize for this traffic on our platform.",
     partnerResponse:
       "Hmm. I see the logic, but the policies are strict about this. If we match prices, we worry about third parties cutting their margins. And your guests already get a great price when they get that discount... how do you call it?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

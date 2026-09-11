@@ -26,7 +26,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge her conversion is 17% above peer, then surface the hard numbers - page views down 89% vs peers and room nights down 84% year-on-year for the same window.",
     playerDialogue:
-      "That's exactly what I want to address. Your conversion rate is actually 17% higher than your peer group. But your page views are down 89% versus your peers, and your room nights are down 84% year-on-year for the same 30-day window.",
+      "That's exactly what I want to address. Your conversion rate is actually 17% higher than your peer group, so travelers who see you are converting well. But your page views are down 89% versus your peers, and your room nights are down 84% year-on-year for the same 30-day window.",
     partnerResponse:
       "A drop of 89% in page views is significant. Why is the visibility failing so drastically if our conversion is that high?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -82,7 +82,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed explanation: it's about how appealing the offer looks in search - her Booking.com price runs almost 10% higher than her website 65% of the time, which hammers how attractive she looks on the results page and on meta.",
     playerDialogue:
-      "It connects to how appealing your offer looks during the search. There's a structural pattern where your Booking.com price is almost 10% higher than your website around 65% of the time. That severely affects how attractive your property looks on our site - especially when travelers compare on meta, or against your competitors on our platform.",
+      "It comes back to how attractive your offer looks in search. Your Booking.com price is almost 10% higher than your website around two-thirds of public price checks. That affects how attractive your property looks on our site - especially when travelers compare on meta, or against your competitors on our platform.",
     partnerResponse:
       "That is entirely intentional. Booking.com is a direct competitor for us, so we will never let third-party platforms capture more than 30% of our total business. I'd honestly rather leave a room empty during certain windows than compromise our brand.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -138,7 +138,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: position it as a shared goal, then ask how she's capturing the other 70% and what the acquisition cost is - the question that sets up the ROI math.",
     playerDialogue:
-      "We would like to better support you in achieving your performance goal. How are you capturing the remaining 70% of your guests, and what's the acquisition cost for that?",
+      "I understand you want to keep Booking.com within that 30% cap. And we would like to better support you in achieving your overall performance goal. How are you capturing the other 70% today, and roughly what does that cost you per booking?",
     partnerResponse:
       "We run marketing campaigns and sponsored ads, and we have a solid reputation with US and Canadian guests. I don't know the exact cost - probably around 10% of the room price on our website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -194,7 +194,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed reframe: if her rates are ~10% cheaper direct and her acquisition cost is ~10%, her direct acquisition cost is higher than your commission. And this isn't about stealing direct guests - it's finding net-new ones who'd never discover the property.",
     playerDialogue:
-      "Look at it from a revenue perspective. If your rates are around 10% cheaper direct and your acquisition cost is also around 10%, then your acquisition cost is actually higher than the commission you pay us. And this isn't about stealing your direct guests - it's about finding new guests who would otherwise never discover the property.",
+      "Look at it from a revenue perspective. If your rates are around 10% cheaper on your direct site and your acquisition cost is also around 10%, then your direct-booking acquisition cost is actually higher than the commission you pay us. And this isn't about stealing your direct guests - it's about finding new guests who would otherwise never discover the property.",
     partnerResponse:
       "I understand that being more competitive on your platform could be a win for our overall strategy. But how can I measure the impact if we just reduce all the rates at once?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -250,7 +250,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed ask: frame the platform as a zero-marketing-cost global search engine, ask for the same rates and availability she gives third parties and her direct channel as the first step, and propose starting this week with a measured window.",
     playerDialogue:
-      "Our platform is a global search engine at zero upfront marketing cost, reaching audiences who'd never search your site directly. To attract them, we'd ask for the same rates and availability you offer third parties and your direct channel as an effective first step. Could we begin implementing this by the end of the week and monitor the lift?",
+      "Booking.com gives you access to travelers globally who may never find your site, without an upfront marketing fee. To attract them, we'd ask for the same rates and availability you offer third parties and your direct channel as an effective first step. Could we begin implementing this by the end of the week and monitor the lift, such as tracking page views, room nights and conversion for 14 days first?",
     partnerResponse:
       "The math makes sense and the visibility drop is too large to ignore. Let's align the rates to match our direct site today and monitor the traffic lift over the next 14 days.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

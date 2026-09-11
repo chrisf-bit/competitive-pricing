@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: his ADR is well above peer, but past and future room nights are dropping severely - around 45% versus peers. Surface it and ask him to help you understand his current pricing approach rather than presuming.",
     playerDialogue:
-      "Your average daily rate is well above your peer group, but your past and future room nights are dropping severely versus peers - around 45%. Did you notice this volume drop, and could you help me understand your current pricing approach?",
+      "Your average daily rate is well above your peer group, but your past and future room nights are dropping severely versus peers - around 45%. Have you noticed a recent change in your occupancy? And, could you help me understand your current pricing strategy?",
     partnerResponse:
       "I've noticed it, but frankly I'm frustrated. Booking.com keeps applying those 'Partner Offers' and undercutting my direct rates. It's hurting my price integrity.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -87,7 +87,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: acknowledge the frustration - B2B distribution is built for opaque volume, but the moment it leaks into B2C it becomes a leakage tax on his brand. In a Wide market you can ask for the same rates he makes available to third parties and his direct channel, so his direct offering isn't undercut.",
     playerDialogue:
-      "B2B distribution is designed for filling rooms that would otherwise stay empty through closed groups. The moment a B2B rate 'leaks' into the B2C space, it stops being a volume tool and starts resulting in potentially less business in the otherwise higher-performing, higher-ADR channels. While we currently lack extranet data to show the exact roomnights impacted by Partner Offer, we ask that you provide us the same rates available to third parties and your direct channel so your direct offering isn't undercut.",
+      "B2B distribution is designed for filling rooms that would otherwise stay empty through closed user groups. The moment a B2B rate 'leaks' into the B2C space, it stops being a volume tool and starts resulting in potentially less business in the otherwise higher-performing, higher-ADR channels. While we currently lack extranet data to show the exact roomnights impacted by Partner Offer, we ask that you provide us the same rates available to third parties and your direct channel so your direct offering isn't undercut.",
     partnerResponse:
       "But these 'offers' are displayed on your platform. How am I even supposed to understand where they come from?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -143,7 +143,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed clarification: Booking.com displays the rate to protect his sales volume but isn't the source - these rates come from his own wholesale agreements. Ask how he currently monitors where his wholesale rates end up.",
     playerDialogue:
-      "We display them to offer travelers attractive prices, but we aren't the source. These rates are actually coming from your wholesale agreements. How do you currently monitor where your wholesale rates end up?",
+      "We display them to offer travelers attractive prices, but we aren't the source. These rates are actually coming from your wholesale agreements. Do you have a system in place to monitor your wholesale rate distribution?",
     partnerResponse:
       "We sign contracts with those distributors for a reason. If they leak them, it's a breach - but matching them publicly just makes it harder for me to manage my revenue.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -199,7 +199,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed link: travelers are buying those opaque rates instead of the platform's, which is why conversion is down 68% versus peers. To stop the leakage eroding his revenue, re-ask for the same rates and conditions he makes available to other third parties and his direct website.",
     playerDialogue:
-      "Right now travelers are booking those rates from your wholesale agreements instead of our platforms - and that's why your conversion is down 68% versus peers. To stop this from eroding your revenue, we ask that you provide us the same rates and conditions you make available to other third parties and your direct website.",
+      "Right now travelers are booking those rates from your wholesale agreements instead of our platforms - and that's why your conversion is down 68% versus peers. Providing the same price and conditions available to other third parties and your direct website could help to stop this from continuing to erode your revenue.",
     partnerResponse:
       "If I match those rates on your end, I'm just giving away more margin on Booking.com.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: if visibility keeps dropping, those rooms sit empty and hurt him more than any margin trade. His mobile rate is uncompetitive because the rate rise outpaced the discount. You can't tell him to stop working with the wholesaler, but you can align his base rates so he stays attractive and recover demand.",
     playerDialogue:
-      "If your visibility keeps sliding, those rooms will likely sit empty - which costs you far more than the margin you're protecting. Your mobile rate is also uncompetitive right now, probably because your rate increase outpaced the discount. What if we align your base rates so you stay an attractive option and start recovering that demand?",
+      "If your visibility keeps declining, those rooms will likely sit empty - which comes at a higher cost than the margin you're protecting. Your mobile rate is also uncompetitive right now, probably because your rate increase outpaced the discount. What if we align your base rates so you stay an attractive option and start recovering that demand?",
     partnerResponse:
       "Ok, I get your point, but I can't take any action right now. I'll look at it by the end of the week - thanks for bringing this up.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

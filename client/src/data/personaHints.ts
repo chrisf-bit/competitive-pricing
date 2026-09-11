@@ -101,7 +101,7 @@ const velvetSkyR2Hints: Partial<Record<PersonaId, PersonaHint>> = {
 const nobleFalconR10Hints: Partial<Record<PersonaId, PersonaHint>> = {
   'conversation-architect': {
     oneLiner:
-      "Adam is blue/red and works to a head-office directive: separate price from risk (targeted prepayment, not a higher rate), respect his autonomy over his own site, and expect a firm no even done well.",
+      "Adam is blue/red and works to a head-office directive: separate price from risk (targeted prepayment, not a higher rate), respect his autonomy over his own site, and expect a firm no, even if done well.",
   },
   'objection-navigator': {
     oneLiner:
