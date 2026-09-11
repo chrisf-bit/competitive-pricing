@@ -185,7 +185,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: the gap is concentrated in European family searches, where the search price runs 12% higher because children are currently charged as adults from a misconfiguration in the extranet.",
     playerDialogue:
-      "It's concentrated in European family searches. For those queries your search price comes up about 12% higher than your peer group - because children are currently being charged as adults, from a misconfiguration in your extranet. That 12% is what pushes those bookers to abandon and pick a competitor.",
+      "It's concentrated in European family searches. For those queries your search price comes up about 12% higher than your peer group - making it harder to compete. That 12% is what pushes those bookers to abandon and pick a competitor.",
     partnerResponse:
       "Sorry Diego, I thought we already worked on the family segment to make the property attractive for families - it's a high-spending, growing segment. Is that still not working properly?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -233,7 +233,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: it's not the family rates alone - the gap is driven by the missing EEA Country Rate, which is the market most of these families are booking from right now.",
     playerDialogue:
-      "It's not the family rates on their own. The gap is really driven by a missing EEA Country Rate - and the EEA is exactly the market most of these families are booking from at the moment. So even with the family setup fixed, that market is where you're coming up short.",
+      "Exactly. The family rates themselves aren't the issue here. The gap is that the EEA Country Rate isn't switched on, even though the EEA is where many of these families are booking from. Activating it would make your price more competitive for those searches and help you capture more of that demand.",
     partnerResponse:
       "That makes sense from a data perspective. But a 12% gap is quite high - how do we close it without applying higher discounts?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },

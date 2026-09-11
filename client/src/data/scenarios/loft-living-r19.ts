@@ -138,7 +138,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: despite rising visibility versus last year, his share versus peers is falling 15% behind, and his search price averages 12% higher than theirs - so travelers see him much less, and when they do the offer isn't attractive, so volume drops.",
     playerDialogue:
-      "Let's look at exactly where users drop out. Even with your visibility up versus last year, your share against your peer group is falling about 15% behind, and your search price averages 12% higher than theirs. So travelers see you much less - and when they do, the offer isn't attractive enough - and the volume drops.",
+      "Let's look at exactly where travelers dropped out. Even with your visibility share up vs last year, your visibility share vs the peer group is falling about 15% behind, and your search price averages 12% higher than theirs. So travelers see you less than your peers - and when they do, the offer isn't attractive enough - the travelers do not click on your property page, potentially due to your search price.",
     partnerResponse:
       "Hmm, got it. But my regional office won't allow rate cuts, especially with all the noise from those leaked wholesale rates.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -186,7 +186,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the Regional Office Shield: make clear you're not asking him to challenge head-office policy, then narrow to device - over the next three months his search price on mobile is running about 18% higher than peers.",
     playerDialogue:
-      "I'm not asking you to challenge your head-office policy at all. Let's just look closer at where the gap does the most damage. When we break it down by device over the next three months, your search price on mobile is running about 18% higher than your peers.",
+      "I'm not asking you to challenge your head-office policy at all. When we break it down by device over the next three months, your search price on mobile is running about 18% higher than your peers.",
     partnerResponse:
       "We're 18% more expensive on mobile? Why is that happening specifically there?",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -234,7 +234,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: his basic mobile discount is active, but exclusions on weekends and longer booking windows mean over 70% of mobile searches don't match the incentive - and the data shows an 80% drop-off in mobile conversions versus his peer group.",
     playerDialogue:
-      "Your basic mobile discount is active - but it excludes weekends and longer booking windows, so over 70% of mobile searches don't actually match the incentive. The result is an 80% drop-off in mobile conversions compared to your peer group. The discount is there; it's just not reaching the searches.",
+      "Your basic mobile discount is active - but it excludes weekends and longer booking windows, so over 70% of mobile searches don't actually match the incentive. The result is an 80% drop-off in mobile conversions compared to your peer group. The discount is there; it's just not reaching the potential searches.",
     partnerResponse:
       "That's a big loss. But if we adjust the mobile setup, doesn't that risk cannibalizing our desktop rates?",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -282,7 +282,7 @@ const step6Options: BranchingOption[] = [
     description:
       "SME-prescribed close: mobile rates are opaque to desktop searchers, so there's no cannibalization. And he already runs country rates - so the same competitive rate he offers EEA, US and UK would simply become available to mobile bookers too, widening the audience rather than discounting deeper.",
     playerDialogue:
-      "Not at all - mobile rates aren't visible to desktop searchers, so your desktop rate is untouched. And you already run country rates: this just means the same competitive rate you give EEA, US and UK travelers becomes available to mobile bookers too. You're widening the audience, not cutting deeper. Let's set it up and review the mobile recovery together.",
+      "Not at all - mobile rates aren't visible to desktop searchers, so your desktop rate is untouched. You're widening the audience, not cutting deeper. Let's set it up and review the mobile recovery together.",
     partnerResponse:
       "Ok, that's clear. Honestly I lose my mind keeping up with all the promotions and stacking, but the logic makes sense - let's reconnect in two months to see the impact of the mobile rate.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },

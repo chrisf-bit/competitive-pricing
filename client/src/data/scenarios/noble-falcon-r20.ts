@@ -46,7 +46,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: demand is strong and his page views prove it - July is his biggest opportunity of the year. But performance is below peer, with conversion at 1.3% and visibility share at 14.5%. Ask him why he thinks the property isn't capturing that demand.",
     playerDialogue:
-      "Demand is strong right now - your page-view volume is clear evidence - and July is your biggest opportunity of the year. But performance is sitting below peer level: conversion at 1.3% and visibility share at 14.5%. Why do you think the property isn't capturing more of that demand?",
+      "Your demand picture is strong - page views are running 26% above peers, and forward room nights for the next three months are 81% above. July is clearly your biggest window of the year. Where I'd want us to look together is a gap underneath that: your search price is 15% below peers, which should be converting well, but your conversion is sitting at 1.3% and visibility share at 14.5%. Somewhere in between the search to booking funnel guests are lost and not converting to an actual booking. What's your read on why that might be?",
     partnerResponse:
       "Well, I'm not sure... July is traditionally our highest-demand month, so expectations are high. Total revenue is steady, but frankly our pickup for the second half of the month feels slow versus last year. Our benchmarking says our general rate here sits roughly 15% below our local peers. If the price is that competitive, why is our conversion not in line with our visibility?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -94,7 +94,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed diagnosis: his headline price looks competitive, but a granular segment breakdown reveals a gap. Searching the property as a family would (2 adults and a four-year-old), the recommended option came back as two premium double rooms - two rooms for a small family.",
     playerDialogue:
-      "That's exactly the question I wanted to answer. Your headline price does look very competitive - but a granular segment breakdown shows a gap. I searched your property the way a family would, two adults and a four-year-old, and the recommended option that came back was two premium double rooms. Two rooms, for a small family.",
+      "That's exactly the question I wanted to dig into. Your price is competitive, so that does not seem to be the issue causing the low conversion rate. When I searched your property the way a family would, two adults and a four-year-old, I saw something interesting; the recommended option that came back was two premium double rooms. Two rooms, for a small family of 3.",
     partnerResponse:
       "How is that possible? Our rates across all room types are mapped consistently from our channel manager.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -142,7 +142,7 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: it's a configuration gap, as discussed last time. Child age categories are currently misconfigured in the extranet, so the platform automatically charges children as adults - which is what forces the two-room recommendation.",
     playerDialogue:
-      "It's a configuration gap, Adam - the same theme we touched on last time. Your child age categories are currently misconfigured in the extranet, so the platform automatically charges children as adults. That's what forces a small family into two rooms instead of one.",
+      "The channel manager mapping is consistent and this isn't a rate issue. It's a configuration gap in the Extranet: your child age categories aren't set up correctly, so the platform charges children as adults. That's what pushes a small family into two rooms instead of one. You can see it yourself by running that same family search: two adults, one child aged four.",
     partnerResponse:
       "I see. I thought I'd been quite strict about the family configuration, but I didn't realise it was like this - I've honestly never searched as a specific guest type like a couple or a family. That's a good tip, actually.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -190,7 +190,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: reinforce that the search page is the best source for seeing how guests perceive the property from every angle, and frame the stakes - family bookers are among the highest-spending segments in peak season, the perfect audience for the back half of July.",
     playerDialogue:
-      "Exactly - the search page is the best place to see how guests actually perceive you, from every angle. And this matters commercially: family bookers are among your highest-spending segments in peak season, so for the back half of July they're the perfect audience to be winning, not losing.",
+      "It's a useful habit to search your own property the way different guest types would. This matters commercially: family bookers tend to be among your highest-spending segments during peak season. For the back half of July, they're exactly the audience you want to be capturing this time of year and not losing to a competitor whose family setup is correct and therefore converting the family searches you are potentially missing. Do you have a sense on what impact on multi-occupancy pickup has been?",
     partnerResponse:
       "That would explain the drop-off we've seen in multi-occupancy room pickup, too. Do you know what the impact of the correct setup would be?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -238,7 +238,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: closing the gap specifically for family searches could mean an immediate pickup of roughly 45 additional room nights next month. To sustain it, correct family rates year-round - and think about advance-booking families at the end of the season who could become repeat guests next year.",
     playerDialogue:
-      "Closing that gap specifically for family searches could mean an immediate pickup of roughly 45 additional room nights next month. To sustain it, keep the family rates correctly configured year-round - and think about families booking ahead at the end of the season: if your availability is open and your prices are competitive, you're already working toward next year's guests, and many of them become repeaters.",
+      "Based on the family search volume in your market, closing that configuration gap could immediately mean 45 additional room nights next month. To capture current demand, this would be critical for the rest of the July peak. To sustain it beyond July, keeping the family age categories correctly configured year-round remains important, as families tend to book ahead toward the end of the season. By ensuring your availability is open and your family pricing is correctly set, you can start capturing next year's peak-season demand, as we often see families booking ahead and becoming repeat bookers.",
     partnerResponse:
       "That's a tangible commercial outcome. What would you recommend to sustain this kind of momentum through the upcoming months?",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -286,7 +286,7 @@ const step6Options: BranchingOption[] = [
     description:
       "SME-prescribed close, turning the call forward: get all room types bookable with up-to-date content, and activate both flexible and non-refundable rates. Explain the non-refundable point factually - as the first, most competitive price it surfaces the listing in filtered searches and brings guests to the page, even if they ultimately book a flexible or half-board rate. This is the final, forward-looking beat of the journey.",
     playerDialogue:
-      "Let's turn to next year. First, availability - make sure all your room types are bookable and your content, photos and services, is fully up to date. I'd also activate both flexible and non-refundable rates. I noticed your non-refundable rates are currently closed - and here's why they matter: as your first, most competitive price, a non-refundable rate is what surfaces you when travelers filter by price range. It brings them to your page. They may end up booking a flexible or half-board rate, but they found you because of it.",
+      "Two things. First, availability; make sure all room types are open and bookable as far out as your calendar allows, and that your content, photos and services, is fully up to date. That's what keeps you visible to guests planning ahead. Second, I noticed your non-refundable rates aren't currently active on the platform. Here's why that matters: a non-refundable rate is typically your lowest published price, and that's the leading role when travelers filter or sort by price. It brings them to your page since you show up with the non-refundable rate in the search overview. That increases your page views and those searches may end up booking your flexible or breakfast included rate in the end, but they found you because that non-refundable rate brought you into their searches.",
     partnerResponse:
       "Absolutely - I can see how that makes the difference in the discoverability phase. Head office keeps non-refundable exclusive to our own website today, but if you can share some data on advance non-refundable value, I'll present this at our upcoming QBR and genuinely push for approval. Thank you for this.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },

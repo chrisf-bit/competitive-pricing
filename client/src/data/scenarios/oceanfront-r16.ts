@@ -48,7 +48,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: acknowledge the impressive result from last time's trial (offering her best price lifted conversion), then flag the forward signal - sell-through pacing about 12% behind her peer group over the next 3 months.",
     playerDialogue:
-      "First, I want to acknowledge that the trial last time had a genuinely impressive outcome - offering your best price here clearly lifted your conversion. Building on that, when I look at the next 3 months, your sell-through is pacing about 12% behind your peer group.",
+      "First, I want to acknowledge that the trial last time had a genuinely impressive outcome. Offering your best price clearly lifted conversion, which shows guests respond when you're competitive. Looking ahead over the next 3 months, though, your sell-through is pacing about 12% behind your peer group, so there's an opportunity to build on that success and close the gap.",
     partnerResponse:
       "Okay, but that isn't alarming for us during low-demand periods. Honestly, we'd rather keep those rooms unbooked for a few extra days than do anything that compromises our rates on OTAs.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -339,7 +339,7 @@ const steps: BranchingStep[] = [
     id: 'probe-visibility',
     label: 'Probe: website-only or general visibility?',
     partnerPrompt:
-      "Sure, we can look. But to be honest, Kai, our reports show our occupancy is exactly where we expect it to be. Our brand loyalty programme is our main engine, and we really don't feel the need to alter our strategy on OTAs just to chase extra room nights. What are your numbers showing?",
+      "Okay, but that isn't alarming for us during low-demand periods. Honestly, we'd rather keep those rooms unbooked for a few extra days than do anything that compromises our rates on OTAs.",
     options: step2Options,
   },
   {
