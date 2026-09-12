@@ -4220,3 +4220,156 @@ answer or the guidance for each.
   writing - hold those as reactive talking points). `FACT_OBJECTION_
   PERFORMANCE` can't be renamed (Booking's own target table) - glossed
   instead.
+
+## Post-2026-09-11 session (review-pack sweep, sim disclaimer, R10 coach note, responsive/scroll fix)
+
+Worked 2026-09-11 to 2026-09-12 on `release-2-partner-detail`. Everything
+below is committed and pushed (commits `07f9cd0`, `f29d3fe`, `72f9ecd`,
+`a0ca0a6`, plus the disclaimer/R16 commit). Builds clean.
+
+### One-time sim disclaimer (new feature, live)
+
+New `disclaimerAcknowledged: boolean` on `GameState`. A mandatory
+acknowledge-gate ([DisclaimerModal.tsx](client/src/components/DisclaimerModal.tsx))
+shown on the first **Round Select** entry after clearance (the threshold
+into the sim, once the learner has met eRPD / Brand.com / the key OTA).
+Covers two points: (1) partner **locations are fictional**; (2) each round
+uses **one predefined comparison player** (Brand.com or the key OTA) for
+eRPD/price metrics to keep it focused, with the real-world "follow your
+office-country eRPD objectives + dashboard insights" framing. Wired exactly
+like `tutorialShown`: seeded in `createInitialState`, persisted in
+[persistence.ts](client/src/util/persistence.ts) (SCORM suspend_data /
+localStorage), setter `acknowledgeDisclaimer` in
+[useGame.ts](client/src/hooks/useGame.ts), rendered from App.tsx on
+`screen === 'round-select' && !disclaimerAcknowledged`. Preserved across
+Play Again, reset on full restart. Fires once ever. **This disclaimer is
+why "Key OTA" as partner-facing language is now acceptable and was left in
+dialogue** (see review-pack note below).
+
+### R10 strong-no closing coach note (new field, live)
+
+New optional `closingCoachNote?: string` on `BranchingConversationTree`
+([types/index.ts](client/src/types/index.ts)). For scenarios that END ON A
+NO BY DESIGN (soft-no R8/R9, strong-no R10), it renders a "From your LPS
+coach" card on the [Conversation Report](client/src/screens/ConversationReportScreen.tsx),
+**gated to a well-played call (stars >= 1)**, resolved via
+`getBranchingScenario(partnerId, round)`. Populated on all three Noble
+Falcon R10 trees (carries to the KAM R10 automatically, since the KAM
+wrapper spreads the base tree). Answers Beppie's Pack 5 comment (don't
+leave learners with "partner didn't budge, forget it"); the strong-no
+itself stays by design (Youvenna confirmed). The field is generic and
+ready to populate on R8/R9 (soft-no) too if wanted.
+
+### Review-pack sweep - method + governing principle
+
+**Governing principle (Chris, hard rule):** only change a conversation
+that carries a comment / tracked change; never extend an edit to other
+rounds unless the comment explicitly says "apply across all rounds" (or
+similar). Do NOT infer a global rule from a single flagged line.
+
+**How to read a review pack:** the reviewer packs are `.docx` files in
+`C:\Users\chris\Downloads\Review Pack N - <regime> - Rounds X-Y.docx`
+(and `Review Pack - Cross-Regional (KAM) ...`). Extract with PowerShell:
+unzip the docx, read `word/comments.xml` (each `w:comment` has author +
+text) and `word/document.xml` (anchor = text between
+`commentRangeStart/End` for a given id; tracked edits = `w:ins`/`w:del`).
+Many comment anchors are zero-width or sit on already-deleted text, so
+walk forward/around the range and match the phrase against the code. Pack
+map: 1 = Wide R1-5, 2 = Narrow R1-5, 3 = No Parity R1-5, 4 = No Parity
+R6-10, 5 = Narrow R6-10, 6 = Wide R6-10, 7 = OPC R11-15, 8 = OPC R16-20.
+Reviewers: Pei-Shyuan, Vincent, Daniela, Daria, Beppie (legal/SME),
+Emi, Florian (OPC data), Anouk, James, Youvenna.
+
+**Watch out:** a reviewer's own tracked "rewrite" can contradict their own
+compliance comment, and can target a DISTRACTOR not the optimal line - the
+R9 case below was both. Always confirm which option the anchor sits on
+(optimal vs distractor) before applying, especially when the wording looks
+non-compliant (a non-compliant line is correct *as a risky distractor*).
+
+### Review edits applied this session
+
+- **R16 (Oceanfront OPC)** - approved step-1 partner response swap.
+- **R6 (Oceanfront Narrow)** - "should come" -> "comes" (borderline flavour).
+- **R9 (Loft Living Narrow) step 5** - Beppie's tracked rewrite was for the
+  **risky distractor** (`ll-r9-narrow-step5-raise-ota`), not the optimal
+  line: a cross-channel parity + best-rate demand, kept `risky` (correct as
+  the wrong answer that teaches the Narrow breach her comment 22 describes).
+- **R19 (Loft Living OPC)** - merged Florian's wholesale-leak acknowledgement
+  into the opener (comment 30); stated the flagged sell-through line
+  qualitatively, no exact figures (comment 32, applied to the ONE flagged
+  line only); "incentive" -> "more competitive rate"; "dropped out" ->
+  "dropped off"; dropped the invalid "not cutting deeper" close claim
+  (mobile stacks with country rates - comment 36).
+- **R18 (Hidden Valley OPC)** - optimal opener "forward bookings for the
+  next 90 days" -> "performance for the upcoming 90 days" (c27); distractor
+  reworded (c28, still a distractor).
+- **Partner-line rewrites** (lines that voiced Booking's argument / a partner
+  wouldn't say): Riverside R4 **Wide** two distractor responses (c13/c14 -
+  note: flagged in the Narrow pack but the text lives in the Wide file, a
+  review-pack/code regime mismatch worth watching); Emerald Peak R5 **None**
+  softened the too-easy "I get it" to preserve her strong-views persona (c21).
+- **Noble Falcon profile** - "fully-managed-by-brand" -> "fully chain-managed"
+  (Beppie c15).
+- **Already-in-code (verified, from the earlier Pack 3 v2 pass):** Pack 3
+  C12 (opener leads with the visible pattern), C13 ("what's the family
+  traveler opportunity you just mentioned?"), C23 ("opaque" removed), C24
+  ("It's massive, Sophia" gone); Pack 1 C3 (trial window "a month").
+
+### Decisions closed / parked
+
+- **Key OTA** - CLOSED, leave it. The acknowledged disclaimer names "the key
+  OTA" as a sim construct, so it's covered. Do NOT sweep "Key OTA" out of
+  spoken dialogue.
+- **Family product Active vs Inactive (R10, R3/Ocean View)** - keep **Active**
+  (it's a misconfiguration / setup gap, not an absent product); overrides the
+  reviewers' "show Inactive" suggestion. Data-detective hint already consistent.
+- **OPC exact figures - PARKED, awaiting the client's answer** (Chris asked
+  the client). This is the one open decision. The conflict: Florian (Pack 8)
+  says exact OPC data points aren't allowed (qualitative "pacing lower than
+  peer group" only); Anouk (Pack 7, R15 Emerald Peak) wants the exact numbers
+  *corrected* ("9 not 8, percentage-points not percent; 40% vs the card's
+  110%"). They contradict, and both conflict with the only-flagged-lines rule.
+  Only Florian's single flagged R19 line has been made qualitative so far.
+  Once the client replies, apply consistently across L2 (R11-R20).
+- **Still to spot-check on a short viewport (not blocking):** Day one / GM
+  chat (phone frame), Warm Up summary panel, and the celebration panels'
+  top on a very short window.
+
+### Responsive / scroll fix (windowed + LMS iframe)
+
+Users on ~1470x956 laptops lost buttons/instructions when they accidentally
+ESC-ed out of fullscreen: the app was a fixed "kiosk" (`html,body,#root {
+height:100%; overflow:hidden }` + `100vh` shells + `overflow:hidden`
+everywhere), so a short viewport clipped content with no scrollbar. This
+also matters because the eventual self-contained SCORM/xAPI package opens
+in a possibly-small LMS iframe. Fix is **pure CSS overflow (no JS, no
+network - SCORM-safe)**; the fixed header stays put and only the content
+area scrolls. `100vh` maps to the iframe height in an embed.
+
+- **App content area** ([App.tsx](client/src/App.tsx)) - `overflow:hidden`
+  -> `overflow:'hidden auto'` + `minHeight:0`. This is the umbrella that
+  makes Portfolio, Partner Detail, Debrief, Market Select, Conversation
+  Report scroll instead of clip.
+- Fixed `100vh`/`100%` + `overflow:hidden` roots switched to `minHeight` +
+  scroll: Briefing, ClearanceShell, Clearance Summary, Data & Insights.
+- `position:fixed` celebration screens (Cleared / Level 1 / Level 2):
+  `overflow:hidden` -> `hidden auto`.
+- Conversation + Branching conversation screens, Diagnose (Pathway reveal),
+  Warm Up (right interaction panel), Call Audit / Email Audit (transcript
+  column inside the laptop frame) all scroll now.
+- **Splash** was rebuilt: title + Begin + Reset were each absolutely
+  positioned at `top: calc(50% + Npx)` off viewport-centre, so Begin fell
+  off the bottom on a short window. They're now one flow-based flex column
+  centred via `margin:auto` in a scrollable flex root - stays together,
+  centres when there's room, scrolls when not. `clamp()` spacing keeps the
+  fullscreen look.
+- **Left as-is:** device-frame screens keep `height:100%` (the absolute
+  inset:0 frame needs a definite height - switching to minHeight collapses
+  it); their inner content scrolls instead. Day one / GM chat phone-frame
+  chat list already scrolls.
+- **Pattern for any new screen:** don't set a fixed `height:100vh` +
+  `overflow:hidden` on a content root. Use `minHeight` + `overflow:'hidden
+  auto'` (or let the App content-area umbrella scroll it). For centered
+  full-bleed content that must scroll, center via a child `margin:auto`
+  inside an `overflow-y:auto` flex column, NOT `justifyContent:center`
+  (which clips the top when content overflows).
