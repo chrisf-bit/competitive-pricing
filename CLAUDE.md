@@ -4373,3 +4373,72 @@ area scrolls. `100vh` maps to the iframe height in an embed.
   full-bleed content that must scroll, center via a child `margin:auto`
   inside an `overflow-y:auto` flex column, NOT `justifyContent:center`
   (which clips the top when content overflows).
+
+## Post-2026-09-12 session (legal copy pack tool + Irene's clearance/Warm Up edits)
+
+On `release-2-partner-detail`, committed/pushed (`771f7d7` and the packs).
+
+### Legal copy pack tool (copy only, no data/metrics)
+
+A copy-only sibling of the review-pack pipeline, for legal / compliance
+review (they want the wording, not the dashboard numbers).
+- **New renderer [client/scripts/make-legal-copy-pack.cjs](client/scripts/make-legal-copy-pack.cjs)** -
+  consumes the SAME extract JSON as `make-review-pack.cjs` but renders only
+  the copy: partner identity + Profile/Commercial-goal text, the persona
+  chips, and the full conversation (all 3 options per step + `[OPTIMAL]` +
+  SAFE/BORDERLINE/RISKY). OMITS every data block (Portfolio-card metrics,
+  driving metrics, eRPD price bucket, secondary + OPC metrics, discount-
+  product status, room counts). **Rule: numbers INSIDE a spoken line
+  ("conversion is down 68%") are kept - that's wording legal reviews; only
+  the standalone metric displays are stripped.**
+- **`PACK_JOURNEY=all`** added to
+  [extract-review-pack.entry.ts](client/scripts/extract-review-pack.entry.ts)
+  (dumps every flow, R1-20, standard x3 regimes + KAM + decoy = 77 flows).
+- Usage + the split convention are documented in
+  [client/scripts/REVIEW-PACKS.md](client/scripts/REVIEW-PACKS.md). Two
+  commands: extract (env vars for journey/regime/round-range) then
+  `node scripts/make-legal-copy-pack.cjs <in.json> <out.docx> "<title>" "<subtitle>"`.
+- **Legal packs use the same split as the original review packs** (Pack 1
+  Wide R1-5, 2 Narrow R1-5, 3 No-Parity R1-5, 4 No-Parity R6-10, 5 Narrow
+  R6-10, 6 Wide R6-10, 7 OPC R11-15, 8 OPC R16-20). Generated so far and
+  committed to `docs/review-packs/`: **Legal Review Pack 1, 2, 3, 6** (+ the
+  full `Rate Right - Learner-Facing Copy (Legal Review).docx`). **Packs 4,
+  5, 7, 8 not yet generated** - run the two commands with the matching
+  regime/round range when needed (e.g. Pack 4 = `PACK_JOURNEY=standard
+  PACK_REGIME=none PACK_FROM=6 PACK_TO=10`).
+
+### Irene's clearance + Warm Up legal edits (from "Clearance and Warmup" docx)
+
+Reviewers Juliette Sailleau, Pei-Shyuan Yu, Nicoletta Simili. The docx was a
+**stale export** - much was already fixed in code, so only the still-
+outstanding tracked changes were applied. Through-line: **external pricing
+does NOT affect ranking; only on-platform pricing vs peers does**; drop
+ranking reward/penalty framing; CPS is discussable in Wide/Narrow (not "never
+in a partner conversation").
+- `data/gameMasterScript.ts`: **A2** "eRPD goes DOWN" -> "BELOW 0%" + "Lower
+  eRPD means cheaper" -> "eRPD below 0% means cheaper on average" (lower eRPD
+  = "improving", not automatically "cheaper"; competitive = 0% threshold).
+  **A4** "The pyramid is" -> "The drivers are". **A6 (CPS)** "never goes into
+  a partner conversation" / "Internal only" -> "follow the legal guidance on
+  if and how to use key pricing metrics in partner conversations per parity
+  regime". **A9** removed the inaccurate "eRPD compares your Search Price
+  against the peer set's Search Prices" claim -> "Search Price is somewhat
+  relevant to Public RPD, part of upstream of eRPD"; prompt -> "has a more
+  direct relationship with eRPD". **A12** "winning the pricing competition"
+  -> "competitive pricing".
+- `data/miniScenarios.ts` (Warm Up correct option): tail -> "explain that
+  different aspects of the partner offer - including prices, booking
+  conditions, availability, and reviews - can influence how attractive its
+  property is to travelers on Booking.com".
+- **Already in code (verified, skipped):** A10/A11 already use the legal-safe
+  "Search Price versus peer / on-platform ranking" framing; the Data &
+  Insights "which partner's pricing is improving" question no longer reveals
+  "(eRPD trending DOWN)"; the Warm Up *partner-facing* line already dropped
+  intentional/unintentional. B2's "ranking" mention is on-platform peer
+  pricing, which is explicitly permitted - left as-is.
+- **Decision:** the Warm Up correct option still LEADS with "If the gap is
+  unintentional... if it is intentional..." - left as-is because Irene only
+  tracked a change to the tail, not the lead. Governing rule reaffirmed: a
+  reviewer *comment* is context; the *tracked change* is the instruction -
+  don't extend beyond what was tracked. (Comment c20 flagged the wording but
+  no tracked change was made to the lead.)
