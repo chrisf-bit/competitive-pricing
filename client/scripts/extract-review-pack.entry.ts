@@ -29,21 +29,38 @@ if (!OUT) throw new Error('PACK_OUT env var required');
 const JOURNEY = (process.env.PACK_JOURNEY ?? 'standard') as
   | 'standard'
   | 'decoy'
-  | 'kam';
+  | 'kam'
+  | 'all';
 const REGIME = process.env.PACK_REGIME ?? 'wide';
 const FROM = Number(process.env.PACK_FROM ?? '1');
-const TO = Number(process.env.PACK_TO ?? '5');
+// 'all' spans the whole journey by default (rounds 1-20); slices default to 1-5.
+const TO = Number(process.env.PACK_TO ?? (JOURNEY === 'all' ? '20' : '5'));
 
-let flows = buildFlows().filter(
-  (f) => f.journey === JOURNEY && f.round >= FROM && f.round <= TO,
-);
-// Standard journey has one flow per regime; narrow to the requested one.
-// decoy / kam carry no single regime, so no regime filter is applied.
-if (JOURNEY === 'standard') {
-  flows = flows.filter((f) => f.regimes.includes(REGIME));
+let flows = buildFlows();
+if (JOURNEY === 'all') {
+  // Every flow the tool produces - standard (all three regimes), KAM and
+  // decoy - across the round range. Used for the legal copy pack, which
+  // wants the full learner-facing wording in one document.
+  flows = flows.filter((f) => f.round >= FROM && f.round <= TO);
+} else {
+  flows = flows.filter(
+    (f) => f.journey === JOURNEY && f.round >= FROM && f.round <= TO,
+  );
+  // Standard journey has one flow per regime; narrow to the requested one.
+  // decoy / kam carry no single regime, so no regime filter is applied.
+  if (JOURNEY === 'standard') {
+    flows = flows.filter((f) => f.regimes.includes(REGIME));
+  }
 }
 
-flows.sort((a, b) => a.round - b.round);
+// Group by journey, then by round, so an 'all' dump reads standard -> then
+// the others in a stable order.
+const journeyOrder: Record<string, number> = { standard: 0, kam: 1, decoy: 2 };
+flows.sort(
+  (a, b) =>
+    (journeyOrder[a.journey] ?? 9) - (journeyOrder[b.journey] ?? 9) ||
+    a.round - b.round,
+);
 
 writeFileSync(OUT, JSON.stringify(flows, null, 2), 'utf8');
 console.log(`Wrote ${flows.length} flows (${JOURNEY}) to ${OUT}`);

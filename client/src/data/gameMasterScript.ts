@@ -71,7 +71,7 @@ export const gmScript: GMBeat[] = [
     type: 'question',
     question: {
       itemId: 'A2',
-      prompt: 'When eRPD goes DOWN, are our prices getting more or less competitive?',
+      prompt: 'When eRPD goes BELOW 0%, are our prices getting more or less competitive?',
       options: [
         { text: 'Less competitive vs Brand.com and Key OTAs', isCorrect: false },
         { text: 'More competitive vs Brand.com and Key OTAs', isCorrect: true },
@@ -79,9 +79,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Exactly. Lower eRPD means we're cheaper relative to competitors. The 2026 goal is literally to get this number lower vs last year.",
+          "Exactly. eRPD below 0% means we're cheaper relative to competitors on average. The 2026 goal is literally to get this number lower vs last year.",
         incorrect:
-          "Other way around. Lower eRPD means we're cheaper relative to competitors - so going DOWN is what we want. The 2026 objective is explicitly to lower it vs last year.",
+          "Other way around. eRPD below 0% means we're cheaper relative to competitors - so going DOWN is what we want. The 2026 objective is explicitly to lower it vs last year.",
       },
     },
   },
@@ -118,7 +118,7 @@ export const gmScript: GMBeat[] = [
         correct:
           "Right. Review Score isn't on the pricing pyramid - it shapes overall partner performance but it isn't a pricing driver. The drivers are Public RPD, Loyal RPD, the two Adoption metrics, and Competitive Partner Share.",
         incorrect:
-          "Review Score is the odd one out - it shapes overall partner performance but it isn't a pricing driver. The pyramid is Public RPD, Loyal RPD, Public Pricing Adoption, Genius Pricing Adoption, and Competitive Partner Share.",
+          "Review Score is the odd one out - it shapes overall partner performance but it isn't a pricing driver. The drivers are Public RPD, Loyal RPD, Public Pricing Adoption, Genius Pricing Adoption, and Competitive Partner Share.",
       },
     },
   },
@@ -158,9 +158,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Yep. eRPD less than or equal to zero is the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value is sitting inside it. Purely internal prioritization - it never goes into a partner conversation.",
+          "Yep. eRPD less than or equal to zero is the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value is sitting inside it. Purely internal prioritization, and please follow the legal guidance on if and how to use key pricing metrics in partner conversations per parity regime.",
         incorrect:
-          "It's eRPD less than or equal to zero - the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value sits inside that band, so we know where the healthy price competitiveness lives. Internal only, don't put it into a partner conversation.",
+          "It's eRPD less than or equal to zero - the 'competitive' zone. Competitive Partner Share tells us how much of a portfolio's partner value sits inside that band, so we know where the healthy price competitiveness lives. Mainly internal use for prioritization, and please follow the legal guidance on if and how to use key pricing metrics in partner conversations per parity regime.",
       },
     },
   },
@@ -223,7 +223,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A9',
       prompt:
-        'Which of the new OPC metrics is a direct INPUT to how eRPD is calculated?',
+        'Which of the new OPC metrics has a more direct relationship with eRPD?',
       options: [
         { text: 'Search Price', isCorrect: true },
         { text: 'Visibility Share', isCorrect: false },
@@ -232,9 +232,9 @@ export const gmScript: GMBeat[] = [
       ],
       followUp: {
         correct:
-          "Right. Search Price is the average public price shown on the front-end, weighted by visitors. eRPD compares your Search Price against the peer set's Search Prices to produce a competitiveness position. So Search Price is upstream of eRPD; change one and you change the other. The other OPC metrics either sit downstream of eRPD or are independent context.",
+          "Right. Search Price is the average public price shown on the front-end, weighted by visitor count. So Search Price is somewhat relevant to Public RPD, which is part of upstream of eRPD. The other OPC metrics either sit downstream of eRPD or are independent context.",
         incorrect:
-          "It's Search Price. eRPD compares your Search Price (the average public price shown on the front-end) against the peer set's Search Prices. Search Price is the upstream input; the rest sit downstream of eRPD or are independent context.",
+          "It's Search Price. Search Price is somewhat relevant to Public RPD, which is part of upstream of eRPD; the rest sit downstream of eRPD or are independent context.",
       },
     },
   },
@@ -315,7 +315,7 @@ export const gmScript: GMBeat[] = [
         correct:
           'Right. Net Booked Share is the aggregate outcome, blending eRPD (are we competitive), Visibility Share (are we seen), and inventory decisions. When eRPD trends competitive over time, Net Booked Share tends to grow because the platform is winning more of the partner\'s capacity. When eRPD drifts uncompetitive, NBS slows. Other factors can move NBS too, like inventory allocation and capacity constraints, but eRPD is a major driver.',
         incorrect:
-          "Net Booked Share is a compound outcome. Competitive eRPD tends to grow it over time because winning the pricing competition means Booking.com captures more of the partner's capacity. Visibility Share and inventory decisions also feed in, but eRPD is a major driver. It doesn't replace eRPD or derive from it, they're linked but distinct.",
+          "Net Booked Share is a compound outcome. Competitive eRPD tends to grow it over time because competitive pricing means Booking.com captures more of the partner's capacity. Visibility Share and inventory decisions also feed in, but eRPD is a major driver. It doesn't replace eRPD or derive from it, they're linked but distinct.",
       },
     },
   },

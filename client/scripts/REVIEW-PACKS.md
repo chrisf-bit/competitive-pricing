@@ -51,6 +51,36 @@ node scripts/make-review-pack.cjs /tmp/pack.json \
 Wide/Narrow/No-Parity x (R1-5, R6-10) = 6 packs (all of Level 1), plus OPC
 Level 2 R11-15 and R16-20 = 8 total. See `docs/review-packs/`.
 
+## Legal copy pack (copy only, no data/metrics)
+
+A copy-only sibling for legal / compliance review: same conversation
+coverage as the review packs, but with every on-screen metric / data block
+removed (Portfolio-card metrics, Partner Detail driving metrics, eRPD price
+bucket, secondary + OPC metrics, discount-product status, room counts). It
+keeps the wording a learner reads/hears - the conversation, the profile and
+commercial-goal text, and the persona chips - plus the compliance tags.
+Numbers that sit INSIDE a spoken line (e.g. "conversion is down 68%") are
+kept; only the standalone data displays are stripped.
+
+Two steps, same extract + a different renderer:
+
+```bash
+# 1. extract EVERY flow in one pass (standard all regimes + KAM + decoy, R1-20)
+PACK_OUT=/tmp/legal.json PACK_JOURNEY=all node scripts/extract-review-pack.mjs
+
+# 2. render copy-only
+node scripts/make-legal-copy-pack.cjs /tmp/legal.json \
+  "../docs/review-packs/Rate Right - Learner-Facing Copy (Legal Review).docx" \
+  "Learner-facing copy" "Legal / compliance review - wording only, metrics omitted"
+```
+
+`PACK_JOURNEY=all` (added for this) dumps the whole set (defaults to rounds
+1-20); it also works with the normal `make-review-pack.cjs` if you ever want
+one big data-inclusive pack. You can still slice (`PACK_JOURNEY=standard
+PACK_REGIME=narrow PACK_FROM=6 PACK_TO=10`) and feed that JSON to the legal
+renderer for a copy-only slice. Latest full copy pack lives in
+`docs/review-packs/`.
+
 ## Fidelity rules baked into the renderer
 
 These mirror what the learner actually sees on screen - do not "restore"

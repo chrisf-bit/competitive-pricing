@@ -177,7 +177,7 @@ export const miniScenarios: MiniScenario[] = [
           },
           {
             id: 'C',
-            text: 'If the gap is unintentional, help fix it; if it is intentional, keep the discussion neutral and explain how that pricing choice may affect visibility and conversion on Booking.com.',
+            text: 'If the gap is unintentional, help fix it; if it is intentional, keep the discussion neutral and explain that different aspects of the partner offer - including prices, booking conditions, availability, and reviews - can influence how attractive its property is to travelers on Booking.com.',
           },
         ],
         correctOptionId: 'C',
