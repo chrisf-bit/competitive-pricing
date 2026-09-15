@@ -88,7 +88,7 @@ const step2Options: BranchingOption[] = [
     playerDialogue:
       "It's understandable to feel that way. We've identified static B2B rates intended for wholesale packaging, are leaking unpackaged on public channels. Besides that, there seem to be some further rate differences - could there be a discrepancy in how your base rates are set up on Booking.com compared to your other channels?",
     partnerResponse:
-      "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less the aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
+      "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -185,7 +185,7 @@ const step3: BranchingStep = {
   id: 'socratic',
   label: 'Socratic probe on visibility vs direct',
   partnerPrompt:
-    "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less the aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
+    "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
   options: step3Options,
 };
 
