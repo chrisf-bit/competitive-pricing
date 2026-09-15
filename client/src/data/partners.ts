@@ -312,6 +312,13 @@ function nobleFalconBase(args: {
         // final Level 1 round with the SME Round 10 content (Adam Cole,
         // The Risky Guest, strong-no ending). Full-year 2025 ABRN.
         partnerValueAbrn: 13957,
+        // SME-confirmed note (Irene, 2026-09-14, Pack 5 c21/c24): keep
+        // Family Rates Active (the product is implemented) and flag the
+        // pricing opportunity in a note rather than marking it Inactive.
+        // Here the family occupancy setup prices children as adults, so
+        // the opportunity is a configuration fix surfaced in-call.
+        productsNote:
+          'Family Rates are active, but our data suggests a family pricing opportunity is still there - the family occupancy setup is pricing children as adults, so it is worth reviewing the configuration in the conversation.',
         // OPC layer from the SME Round 10 doc - only surfaced when the
         // On Platform Competitiveness tab unlocks (Level 2 / KAM); at
         // R10 (Level 1) the tab stays locked, so this is future data.
