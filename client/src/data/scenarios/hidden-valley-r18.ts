@@ -91,7 +91,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: on Booking.com over the next three months her sell-through is pacing about 8% behind her peer group, and over the last 90 days 24% of rooms went unsold - inventory that emptied out in the end.",
     playerDialogue:
-      "Thank you for sharing. Looking at your metrics here over the next three months, your sell-through is pacing about 8% behind your peer group. And looking back over the last 90 days, around 24% of your rooms went unsold - inventory that emptied out in the end.",
+      "Thank you for sharing. Looking at your metrics here over the next three months, your sell-through is pacing behind your peer group. And looking back over the last 90 days, around 24% of your rooms went unsold - inventory that emptied out in the end.",
     partnerResponse:
       "24% unsold rooms... let's put that in context, Oliver. Our reports show our revenue goals are being met, past and future. If our volume on OTAs is somewhat lower, that's a trade-off we accept. We'd rather hold our price positioning than sell 100% of inventory.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },

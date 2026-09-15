@@ -42,7 +42,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: acknowledge the family and long-stay welcome work she's proud of, then name the forward signal - close to half the rooms unsold last month and sell-through pacing well behind peers.",
     playerDialogue:
-      "The welcome experience you've been building for families and long-stay guests really shows. I've looked at both your history and your forward pace, and there's one area where demand is getting stuck: around 45% of your rooms went unsold last month and your forward sell-through is pacing about 18% behind your peer group.",
+      "The welcome experience you've been building for families and long-stay guests really shows. I've looked at both your history and your forward pace, and there's one area where demand is getting stuck: around 45% of your rooms went unsold last month and your forward sell-through is pacing behind your peer group.",
     partnerResponse:
       "Oh dear... 45% unsold? That is concerning, Javier. But honestly, I find it confusing. My revenue team double-checked our setup, and overall our rates on your platform are very aggressive - we're consistently priced about 3% cheaper than our Peer Group. If we're already cheaper than the competition, why aren't those rooms selling?",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 2 },

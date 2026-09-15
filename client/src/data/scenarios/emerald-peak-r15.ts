@@ -46,9 +46,9 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: point to the one forward metric that needs attention - sell-through pacing about 9 percentage points behind her peer group over the next 90 days.",
     playerDialogue:
-      "Looking at the next 90 days, there's one metric worth your attention: your forward sell-through is pacing about 9 percentage points behind your peer group.",
+      "Looking at the next 90 days, there's one metric worth your attention: your forward sell-through is pacing behind your peer group.",
     partnerResponse:
-      "Well, that doesn't concern me a great deal - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off. We accept lower conversion on external platforms to safeguard our direct channel. How does that nine-point gap compare against our historical data?",
+      "Well, that doesn't concern me a great deal - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off. We accept lower conversion on external platforms to safeguard our direct channel. How does that gap compare against our historical data?",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -190,9 +190,9 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handling of the Fake Value trap: acknowledge her strategy of keeping her own site cheaper to own the guest, then show the cost - inflating the public price to fund the Genius discount is what makes her search price 10% uncompetitive, which drops her share to 17% and costs a 60% fall in last-minute mobile conversions.",
     playerDialogue:
-      "I understand the strategy is to keep your own site cheaper to own the guest. But raising your public price to fund the Genius discount is exactly what's making your search price 10% uncompetitive. That's what drops your share to 17% - and it's costing you around a 60% fall in last-minute mobile conversions.",
+      "I understand the strategy is to keep your own site cheaper to own the guest. But raising your public price to fund the Genius discount is exactly what's making your search price 10% uncompetitive. That's what drops your share to 17% - and it's costing you a significant fall in last-minute mobile conversions.",
     partnerResponse:
-      "Down 60%, specifically on mobile searches? Why would that be? I've made sure our Genius programme is correctly set up and shown to your users.",
+      "A drop that large, specifically on mobile searches? Why would that be? I've made sure our Genius programme is correctly set up and shown to your users.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -337,7 +337,7 @@ const steps: BranchingStep[] = [
     id: 'history-visibility',
     label: 'Historical context + visibility gap',
     partnerPrompt:
-      "Well, it doesn't concern me a lot - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off: we accept lower conversion on external platforms to safeguard our direct channel. How does that nine-point figure compare against our historical data?",
+      "Well, it doesn't concern me a lot - we still have time to sell. If our volume on third-party channels is lower, that's a calculated trade-off: we accept lower conversion on external platforms to safeguard our direct channel. How does that gap compare against our historical data?",
     options: step2Options,
   },
   {
@@ -358,7 +358,7 @@ const steps: BranchingStep[] = [
     id: 'mobile-genius',
     label: 'Non-logged-in mobile + Genius coverage',
     partnerPrompt:
-      "Down 60%, specifically on mobile searches? Why would that be? I've made sure our Genius programme is correctly set up and shown to your users.",
+      "A drop that large, specifically on mobile searches? Why would that be? I've made sure our Genius programme is correctly set up and shown to your users.",
     options: step5Options,
   },
   {

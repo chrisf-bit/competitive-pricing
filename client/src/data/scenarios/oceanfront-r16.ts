@@ -48,7 +48,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: acknowledge the impressive result from last time's trial (offering her best price lifted conversion), then flag the forward signal - sell-through pacing about 12% behind her peer group over the next 3 months.",
     playerDialogue:
-      "First, I want to acknowledge that the trial last time had a genuinely impressive outcome. Offering your best price clearly lifted conversion, which shows guests respond when you're competitive. Looking ahead over the next 3 months, though, your sell-through is pacing about 12% behind your peer group, so there's an opportunity to build on that success and close the gap.",
+      "First, I want to acknowledge that the trial last time had a genuinely impressive outcome. Offering your best price clearly lifted conversion, which shows guests respond when you're competitive. Looking ahead over the next 3 months, though, your sell-through is pacing behind your peer group, so there's an opportunity to build on that success and close the gap.",
     partnerResponse:
       "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty programme is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -63,7 +63,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right metric, missing the bridge - jumping straight to 'you're 12% behind' without crediting the trial she ran last time reads as ungrateful to a partner who took a chance for you, and puts her on the defensive.",
     playerDialogue:
-      "Let's get straight to it today, because the number that matters is this: your sell-through is running about 12% behind your peer group over the next quarter, and that pacing gap is really the whole reason I wanted to talk. That's the shortfall we need to work through together right now.",
+      "Let's get straight to it today, because the signal that matters is this: your sell-through is running behind your peer group over the next quarter, and that pacing gap is really the whole reason I wanted to talk. That's the shortfall we need to work through together right now.",
     partnerResponse:
       "Straight to the shortfall, then. We tried something for you last time - I'd hoped we'd start there.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: 0 },

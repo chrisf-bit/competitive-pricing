@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: validate the noise he's dealing with, set it aside, and present the forward signal - sell-through pacing behind peers and a fifth of last month's rooms left unsold.",
     playerDialogue:
-      "I completely understand how frustrating that noise is. Let's set it aside and look at your own performance. Over the next 90 days your sell-through is pacing about 13% behind your peer group, and last month you had around 21% of rooms left unsold. That's revenue that could have been captured.",
+      "I completely understand how frustrating that noise is. Let's set it aside and look at your own performance. Over the next 90 days your sell-through is pacing behind your peer group, and last month you had around 21% of rooms left unsold. That's revenue that could have been captured.",
     partnerResponse:
       "21% unsold inventory... Let's look at the broader picture, Diego. Our page views are positive, and when guests land on our page our conversion is solid. If our sell-through is slow, isn't that just a consequence of the general drop in demand?",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 2 },

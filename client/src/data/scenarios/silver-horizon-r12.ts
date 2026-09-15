@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open: acknowledge the strong demand she's already sensing (visibility above the peer median, traffic up), then name the real problem - forward sell-through pacing behind and rooms sitting unsold. Frames it as a conversion issue, not a demand one.",
     playerDialogue:
-      "That matches what I'm seeing - the demand is genuinely there. Your visibility share is 17%, above your peer group at 15%, and your page views are up 71% year on year. But your forward sell-through is pacing at -8%, while around 15% of your rooms went unsold over the past 30 days, so the gap is conversion, not traffic.",
+      "That matches what I'm seeing - the demand is genuinely there. Your visibility share is 17%, above your peer group at 15%, and your page views are up 71% year on year. But your forward sell-through is pacing behind your peer group, while around 15% of your rooms went unsold over the past 30 days, so the gap is conversion, not traffic.",
     partnerResponse:
       "I see, but if people are looking and not buying, that's not something I can solve. We've already talked about other OTAs cutting their margin and selling B2B rates as if they were B2C. I haven't found the source yet, and I'm not lowering my prices over this never-ending problem.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

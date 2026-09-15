@@ -322,6 +322,17 @@ export interface PartnerMetrics {
    * which round they appear in.
    */
   partnerValueAbrn?: number;
+  /**
+   * Optional learner-facing note rendered beneath the Discount Products
+   * block on Partner Detail, above the standard "selection of products"
+   * disclaimer. Used where a product's Active status alone would mislead -
+   * e.g. Family Rates are active (the partner has implemented the product)
+   * but the data still shows a family pricing opportunity from
+   * intentional strategy or a configuration gap. SME-confirmed (Irene,
+   * 2026-09-14): keep the product Active and flag the opportunity in a
+   * note rather than marking it Inactive.
+   */
+  productsNote?: string;
 
   // ── Legacy fields (drive conversation effects and scoring internally;
   // not surfaced on the new KPI cards). Will be retired post-MVP once

@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public price cut to be the cheapest option. Presumes the fix and invites the race to the bottom an ROI-driven professional avoids.",
     playerDialogue:
-      "Your room nights are down 32%, and honestly the quickest fix here is a price move. Bring your Booking.com rate down so you're the cheapest option on the page, and the volume should come back up. Let's just get you to undercut the competition and figure out the rest later.",
+      "Your room nights are down 32%. My recommendation would be a price move: bring your Booking.com rate down so you're the cheapest option on the page, and the volume should recover. Let's price you below the competition and look at the rest afterwards.",
     partnerResponse:
       "I'm focused on my direct channel, not a race to the bottom on your platform. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

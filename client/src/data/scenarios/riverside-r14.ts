@@ -42,7 +42,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed open, matched to a time-pressured GM: state the friction plainly - revenue left on the table, roughly a quarter of rooms unsold last month, forward sell-through pacing behind the local set.",
     playerDialogue:
-      "I'll keep it tight. There's a clear friction over the next quarter: the property is leaving revenue on the table - around 24% of rooms went unsold last month and your forward sell-through is pacing about 8% behind your local market set.",
+      "I'll keep it tight. There's a clear friction over the next quarter: the property is leaving revenue on the table - around 24% of rooms went unsold last month and your forward sell-through is pacing behind your local market set.",
     partnerResponse:
       "24% unsold rooms? Look, Ren, we've talked about this. We are a premium boutique hotel. I'm not going to panic and start dropping rates to match the standard three-star hotels your algorithm decided to make my competitors. Our product is far too unique for those comparisons, and discounting damages our positioning.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

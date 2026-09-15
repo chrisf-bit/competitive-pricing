@@ -53,7 +53,7 @@ const step1Options: BranchingOption[] = [
     description:
       'SME-prescribed open: name the forward-looking OPC signal - half the rooms unsold and sell-through pacing behind peers - and tie it to revenue he already senses is soft.',
     playerDialogue:
-      "Looking back over the past 90 days, your property had 50% unsold rooms. Looking ahead to the next 90 days, forward sell-through is pacing at -10% against your peer group. Together, these metrics help explain the softer revenue you're seeing.",
+      "Looking back over the past 90 days, your property had 50% unsold rooms. Looking ahead to the next 90 days, your forward sell-through is pacing behind your peer group. Together, these metrics help explain the softer revenue you're seeing.",
     partnerResponse:
       "50% unsold? That sounds a bit high. Look, the market is just soft right now, every manager in town is feeling it. And last month wasn't even peak season - bad weather, a lot of late cancellations. I'm not going to panic over what happened last month.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "The Slippery Road trap: oversimplify to 'bring your ADR down.' Presumes the fix and is exactly what a boutique protecting its positioning refuses.",
     playerDialogue:
-      "There's room for improvement, and the best fix is to bring your overall ADR down so you're more competitive - lower the rate across the board and your performance will recover.",
+      "There's room for improvement here. My recommendation would be to bring your overall ADR down so you're more competitive - lower the rate across the board and performance should recover.",
     partnerResponse:
       "Dropping my ADR across the board is exactly what I won't do - I run a boutique, not a discount channel.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right segment, no diagnosis - it tells him to open family rooms and add cots without naming the direct-rate alignment, so it doesn't move him.",
     playerDialogue:
-      "Families are a great segment for you - my advice would be to open up all your family rooms, add a few cots and interconnecting options, and make sure the photos show them off. Put a family label on the listings, mention the kids-stay-free angle in the description, and they'll start filling on their own before long.",
+      "Families are a strong segment for you - my recommendation would be to open up all your family rooms, add a few cots and interconnecting options, and make sure the photos show them off. Put a family label on the listings, mention the kids-stay-free angle in the description, and you should start to capture more of that family demand.",
     partnerResponse:
       "That's a bit thin - I'd want to understand where the gap actually is first.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },

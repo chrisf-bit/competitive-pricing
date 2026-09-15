@@ -986,6 +986,12 @@ function oceanViewBase(args: {
         // at R3 - Ocean View is the call on visibility debt (97% Lose
         // Price, page views -61%), not size.
         partnerValueAbrn: 7000,
+        // SME-confirmed note (Irene, 2026-09-14): Family Rates stay Active
+        // (the partner has implemented the product) but the data still
+        // shows a family pricing opportunity - so flag it rather than
+        // marking the product Inactive.
+        productsNote:
+          'Family Rates are active, but our data suggests a family pricing opportunity is still there - worth exploring rate and configuration optimization in the conversation.',
         // OPC layer from the SME doc - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM). Note the
         // headline search price is actually -3% vs peers; the real leak

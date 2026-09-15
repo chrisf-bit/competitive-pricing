@@ -234,7 +234,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handling: his basic mobile discount is active, but exclusions on weekends and longer booking windows mean over 70% of mobile searches don't match the incentive - and the data shows an 80% drop-off in mobile conversions versus his peer group.",
     playerDialogue:
-      "Your basic mobile discount is active - but it excludes weekends and longer booking windows, so over 70% of mobile searches don't actually match the more competitive rate. The result is an 80% drop-off in mobile conversions compared to your peer group. The discount is there; it's just not reaching the potential searches.",
+      "Your basic mobile discount is active - but it excludes weekends and longer booking windows, so over 70% of mobile searches don't actually match the more competitive rate. The result is a marked drop-off in mobile conversions compared to your peer group. The discount is there; it's just not reaching the potential searches.",
     partnerResponse:
       "That's a big loss. But if we adjust the mobile setup, doesn't that risk cannibalizing our desktop rates?",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },

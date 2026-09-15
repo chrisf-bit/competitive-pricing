@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps straight to a price cut without understanding how she runs her channels - an experienced manager reads that as being sold to.",
     playerDialogue:
-      "Your bookings are down 48%, so let's fix that and drop your Booking.com prices so you stop losing travelers, and I can have that set up for you within the hour. Once the lower rates are live you'll see those bookings come back. Shall we get it going?",
+      "Your bookings are down 48%. I'd recommend bringing your Booking.com prices down so you stop losing travelers - once the lower rates are live, the bookings should start to recover. Shall we set that up?",
     partnerResponse:
       "You're prescribing a cut before you understand how we run our channels.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Asks for the public alignment but offers nothing to protect her direct incentive - the exact thing she's protecting - so it reads as asking her to simply give it up.",
     playerDialogue:
-      "The simplest path is to just align your public rates with your website rates here, and once you do that you'll recover the visibility you've lost. The direct discount you're running is costing you far more in missed bookings than it's actually earning you, so bringing the two into line here is really the sensible move.",
+      "My recommendation would be to align your public rates with your website rates here - once you do, you should recover the visibility you've lost. The direct discount you're running is likely costing you more in missed bookings than it's earning, so bringing the two into line is the move I'd suggest.",
     partnerResponse:
       "You keep asking me to give up my public incentive without protecting it. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },

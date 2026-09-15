@@ -421,6 +421,18 @@ export function PartnerDetailScreen({
               label="Products"
             />
             <DiscountProductsGrid discounts={partner.discounts} />
+            {partner.metrics.productsNote && (
+              <p
+                style={{
+                  marginTop: 10,
+                  fontSize: 11.5,
+                  color: 'var(--grey-600)',
+                  lineHeight: 1.45,
+                }}
+              >
+                {partner.metrics.productsNote}
+              </p>
+            )}
             <p
               style={{
                 marginTop: 10,
