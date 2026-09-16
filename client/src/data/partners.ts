@@ -319,17 +319,18 @@ function nobleFalconBase(args: {
         // the opportunity is a configuration fix surfaced in-call.
         productsNote:
           'Family Rates are active, but our data suggests a family pricing opportunity is still there - the family occupancy setup is pricing children as adults, so it is worth reviewing the configuration in the conversation.',
-        // OPC layer from the SME Round 10 doc - only surfaced when the
+        // OPC layer from the SME metrics sheet - only surfaced when the
         // On Platform Competitiveness tab unlocks (Level 2 / KAM); at
         // R10 (Level 1) the tab stays locked, so this is future data.
-        // Search price -15.2% vs peer, but conversion 1.3% and
-        // visibility share 14.5% both lag - the gap hides in families.
+        // Search price €73 vs €86 peer (below), but conversion 1.3% and
+        // visibility share 15% both lag - the gap hides in families.
         opcMetrics: {
-          unsoldRooms: { value: 21.3 },
-          sellThroughRate: { value: 18.4 },
-          visibilityShare: { value: 14.8, peerValue: 15.5 },
-          conversion: { value: -1.3 },
-          searchPrice: { value: -15.2 },
+          unsoldRooms: { value: 21 },
+          sellThroughRate: { value: 48, peerLabel: 'above' },
+          visibilityShare: { value: 15, peerValue: 16 },
+          clickThroughRate: { value: 4.1, peerLabel: 'below' },
+          conversion: { value: 1.3, peerLabel: 'below' },
+          searchPrice: { value: 73, peerValue: 86 },
         },
         // Legacy fields - kept for type compatibility and the old
         // conversation system; not surfaced on the R2 Partner Detail.
@@ -354,6 +355,8 @@ function nobleFalconBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'active', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'active', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'active', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'active', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -748,21 +751,19 @@ function royalCrestBase(args: {
         // low (20%) pricing coverage - an under-steered partner.
         lastPricingContactDaysAgo: 83,
         pricingCoverageQTD: 20,
-        // Not in Sheet 7's roster; annualised from the 283 Last-30D
-        // ABRN and sized to sit below Marina's 8,200 so "biggest
-        // value" pattern-matching fails - Royal Crest is the R1 call
-        // on pricing risk (99% Lose Price / Bucket 4), not size.
-        partnerValueAbrn: 4200,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Royal Crest is
+        // the R1 call on pricing risk (99% Lose Price / Bucket 4).
+        partnerValueAbrn: 4386,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM), so it
         // is invisible at Round 1 but ready for the future round.
         opcMetrics: {
           unsoldRooms: { value: 50 },
-          sellThroughRate: { value: -10 },
-          visibilityShare: { value: 10.3, peerValue: 17.9 },
-          clickThroughRate: { value: 3.5 },
-          conversion: { value: -0.5 },
-          searchPrice: { value: 7 },
+          sellThroughRate: { value: 33, peerLabel: 'below' },
+          visibilityShare: { value: 10, peerValue: 18 },
+          clickThroughRate: { value: 3.5, peerLabel: 'below' },
+          conversion: { value: 0.5, peerLabel: 'below' },
+          searchPrice: { value: 153, peerValue: 143 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 52,
@@ -783,6 +784,8 @@ function royalCrestBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -865,25 +868,23 @@ function silverHorizonBase(args: {
         // 2026-08-03 that's 83 days back. Stored as an offset.
         lastPricingContactDaysAgo: 83,
         pricingCoverageQTD: 14,
-        // Not in Sheet 7's roster; sized to sit below Raven Inn's
-        // 5,800 so "biggest value" pattern-matching picks the wrong
-        // partner at R2 - Silver Horizon is the call on the sharp
-        // eRPD spike and segment leakage, not size.
-        partnerValueAbrn: 5200,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Silver Horizon is
+        // the R2 call on the sharp eRPD spike and segment leakage.
+        partnerValueAbrn: 6283,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
           unsoldRooms: { value: 15 },
-          sellThroughRate: { value: -8 },
+          sellThroughRate: { value: 38, peerLabel: 'below' },
           // SME data reconciliation: the Round 12 OPC conversation frames
           // visibility as sitting just ABOVE the peer median (the "demand
           // is there, you're losing them at checkout" lesson), so the tab
-          // matches the call. The Round 12 data table's 13% (below 15%)
-          // contradicted its own transcript - flagged for SME review.
+          // matches the call. The metrics sheet's 13% (below 15%)
+          // contradicted its own transcript - kept at 17/15 per Chris.
           visibilityShare: { value: 17, peerValue: 15 },
-          clickThroughRate: { value: 10 },
-          conversion: { value: 1.1 },
-          searchPrice: { value: 6 },
+          clickThroughRate: { value: 10, peerLabel: 'above' },
+          conversion: { value: 1.1, peerLabel: 'in-line' },
+          searchPrice: { value: 120, peerValue: 113 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 48,
@@ -905,6 +906,8 @@ function silverHorizonBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -988,11 +991,9 @@ function oceanViewBase(args: {
         // the 0% pricing coverage (completely un-actioned).
         lastPricingContactDaysAgo: 279,
         pricingCoverageQTD: 0,
-        // Not in Sheet 7's roster; sized to sit below Marina's 8,200
-        // so "biggest value" pattern-matching picks the wrong partner
-        // at R3 - Ocean View is the call on visibility debt (97% Lose
-        // Price, page views -61%), not size.
-        partnerValueAbrn: 7000,
+        // SME metrics sheet (Partner Value ABRN 2025). Ocean View is the
+        // R3 call on visibility debt (97% Lose Price, page views -61%).
+        partnerValueAbrn: 1658,
         // SME-confirmed note (Irene, 2026-09-14): Family Rates stay Active
         // (the partner has implemented the product) but the data still
         // shows a family pricing opportunity - so flag it rather than
@@ -1005,11 +1006,11 @@ function oceanViewBase(args: {
         // is families indexing +8% from missing child rates.
         opcMetrics: {
           unsoldRooms: { value: 45 },
-          sellThroughRate: { value: -18 },
+          sellThroughRate: { value: 15, peerLabel: 'below' },
           visibilityShare: { value: 20, peerValue: 30 },
-          clickThroughRate: { value: 4.9 },
-          conversion: { value: -1.1 },
-          searchPrice: { value: -3 },
+          clickThroughRate: { value: 4.9, peerLabel: 'below' },
+          conversion: { value: 1.1, peerLabel: 'below' },
+          searchPrice: { value: 140, peerValue: 144 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 55,
@@ -1031,6 +1032,8 @@ function oceanViewBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -1113,19 +1116,18 @@ function riversideBase(args: {
         // 2026-08-03 that's 83 days back.
         lastPricingContactDaysAgo: 83,
         pricingCoverageQTD: 13,
-        // Not in Sheet 7's roster; the SME flags eRPD x Partner Value as
-        // high, so this sits mid-high - but below Marina's 8,200 so the
-        // R4 decoy Marina reads as "bigger" and "biggest value" fails.
-        partnerValueAbrn: 6500,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). The SME flags
+        // eRPD x Partner Value as high for R4.
+        partnerValueAbrn: 5920,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
           unsoldRooms: { value: 24 },
-          sellThroughRate: { value: -8 },
+          sellThroughRate: { value: 41, peerLabel: 'below' },
           visibilityShare: { value: 12, peerValue: 21 },
-          clickThroughRate: { value: 7.8 },
-          conversion: { value: 1.7 },
-          searchPrice: { value: 7 },
+          clickThroughRate: { value: 7.8, peerLabel: 'above' },
+          conversion: { value: 1.7, peerLabel: 'above' },
+          searchPrice: { value: 161, peerValue: 150 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 50,
@@ -1146,6 +1148,8 @@ function riversideBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -1213,7 +1217,7 @@ function emeraldPeakBase(args: {
         rpdLoyal: 3.6,
         losePricePublic: 100,
         activeScenarios: 2,
-        activeScenarioNames: ['Brand Scenario', 'Family 2+1'],
+        activeScenarioNames: ['Brand Scenario', 'Family 2+2'],
         competitor: 'brand',
         secondaryMetrics: {
           last30dAbrn: { value: 444, deltaPct: 6 },
@@ -1228,20 +1232,18 @@ function emeraldPeakBase(args: {
         // 0% pricing coverage (completely un-actioned).
         lastPricingContactDaysAgo: 144,
         pricingCoverageQTD: 0,
-        // Not in Sheet 7's roster; sits mid-high but below Marina's
-        // 8,200 so the R5 decoy Marina reads as "bigger" and "biggest
-        // value" fails - Emerald Peak is the call on Bucket 6 / 100%
-        // Lose Price.
-        partnerValueAbrn: 7000,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Emerald Peak is
+        // the R5 call on Bucket 6 / 100% Lose Price.
+        partnerValueAbrn: 3584,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
           unsoldRooms: { value: 12 },
-          sellThroughRate: { value: -9 },
+          sellThroughRate: { value: 29, peerLabel: 'below' },
           visibilityShare: { value: 17, peerValue: 26 },
-          clickThroughRate: { value: 7.7 },
-          conversion: { value: 0.9 },
-          searchPrice: { value: 10 },
+          clickThroughRate: { value: 7.7, peerLabel: 'above' },
+          conversion: { value: 0.9, peerLabel: 'in-line' },
+          searchPrice: { value: 171, peerValue: 155 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 58,
@@ -1259,12 +1261,15 @@ function emeraldPeakBase(args: {
       // stays ACTIVE by design (Review Pack 3, second SME pass): this is a
       // nongenuine / misconfigured family setup, not a missing product -
       // the R5 conversation addresses it as "already active, review and
-      // correct the configuration", not as switching it on.
+      // correct the configuration", not as switching it on. Last Minute
+      // Deals is active per the SME metrics sheet.
       discounts: [
         { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'active', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -1346,19 +1351,18 @@ function oceanfrontBase(args: {
         // 0% pricing coverage (completely un-actioned).
         lastPricingContactDaysAgo: 146,
         pricingCoverageQTD: 0,
-        // Not in Sheet 7's roster; sits mid but below Marina's 8,200 so
-        // the R6 decoy Marina reads as "bigger" and "biggest value"
-        // fails - Oceanfront is the call on Bucket 6 / visibility debt.
-        partnerValueAbrn: 6000,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Oceanfront is the
+        // R6 call on Bucket 6 / visibility debt.
+        partnerValueAbrn: 917,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
           unsoldRooms: { value: 17 },
-          sellThroughRate: { value: -12 },
+          sellThroughRate: { value: 19, peerLabel: 'below' },
           visibilityShare: { value: 17, peerValue: 25 },
-          clickThroughRate: { value: 1.7 },
-          conversion: { value: -0.53 },
-          searchPrice: { value: 4 },
+          clickThroughRate: { value: 1.7, peerLabel: 'below' },
+          conversion: { value: 0.5, peerLabel: 'below' },
+          searchPrice: { value: 155, peerValue: 149 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 58,
@@ -1371,19 +1375,21 @@ function oceanfrontBase(args: {
       metricHistory: [],
       trust: 50,
       relationship: 'neutral',
-      // Two products active per the SME data set: Family Rates and
-      // Payments. No Genius, no base rate plan, no targeted public
-      // pricing - a lean, direct-first setup.
+      // Per the SME metrics sheet: Base Rate Plan, Family Rates and
+      // Payments active. No Genius, no targeted public pricing - a lean,
+      // direct-first setup.
       discounts: [
         { id: 'mobile-rate', label: 'Mobile Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-dynamic', label: 'Genius dynamic pricing', status: 'inactive', category: 'genius-pricing' },
-        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'inactive', category: 'foundations-payments' },
+        { id: 'base-rate-plan', label: 'Base Rate Plan', status: 'active', category: 'foundations-payments' },
         { id: 'family-rates', label: 'Family rates', status: 'active', category: 'foundations-payments' },
         { id: 'payments', label: 'Payments', status: 'active', category: 'foundations-payments' },
       ],
@@ -1447,21 +1453,20 @@ function palaceGrandBase(args: {
         // 0% pricing coverage despite the huge +10.95 MoM spike.
         lastPricingContactDaysAgo: 175,
         pricingCoverageQTD: 0,
-        // Not in Sheet 7's roster; sits below Marina's 8,200 so the R7
-        // decoy Marina reads as "bigger" and "biggest value" fails -
-        // Palace Grand is the call on Bucket 5 / +10.95 spike.
-        partnerValueAbrn: 6800,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Palace Grand is
+        // the R7 call on Bucket 5 / +10.95 spike.
+        partnerValueAbrn: 5069,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
-        // Visibility is holding (17% vs 16% peer) but search price runs
-        // +4% and conversion is weak, driving 21% unsold rooms.
+        // Visibility is holding (17% vs 16% peer); search price €239 vs
+        // €249 peer (below) and conversion is weak, driving 21% unsold.
         opcMetrics: {
           unsoldRooms: { value: 21 },
-          sellThroughRate: { value: -13 },
+          sellThroughRate: { value: 44, peerLabel: 'below' },
           visibilityShare: { value: 17, peerValue: 16 },
-          clickThroughRate: { value: 2.3 },
-          conversion: { value: 0.53 },
-          searchPrice: { value: 4 },
+          clickThroughRate: { value: 2.3, peerLabel: 'below' },
+          conversion: { value: 0.5, peerLabel: 'below' },
+          searchPrice: { value: 239, peerValue: 249 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 52,
@@ -1482,6 +1487,8 @@ function palaceGrandBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'inactive', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -1550,20 +1557,19 @@ function hiddenValleyBase(args: {
         // 0% pricing coverage (her uncompetitive setup has been missed).
         lastPricingContactDaysAgo: 229,
         pricingCoverageQTD: 0,
-        // Not in Sheet 7's roster; sits below Marina's 8,200 so the R8
-        // decoy Marina reads as "bigger" and "biggest value" fails -
-        // Hidden Valley is the call on Bucket 5 / structural Brand gap.
-        partnerValueAbrn: 7100,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Hidden Valley is
+        // the R8 call on Bucket 5 / structural Brand gap.
+        partnerValueAbrn: 2663,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM). Search
-        // price +10% vs peer with visibility share 21% vs 28% median.
+        // price €175 vs €159 peer with visibility share 21% vs 28% median.
         opcMetrics: {
           unsoldRooms: { value: 24 },
-          sellThroughRate: { value: -8 },
+          sellThroughRate: { value: 22, peerLabel: 'below' },
           visibilityShare: { value: 21, peerValue: 28 },
-          clickThroughRate: { value: 5.4 },
-          conversion: { value: 1.2 },
-          searchPrice: { value: 10 },
+          clickThroughRate: { value: 5.4, peerLabel: 'above' },
+          conversion: { value: 1.2, peerLabel: 'above' },
+          searchPrice: { value: 175, peerValue: 159 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 52,
@@ -1585,6 +1591,8 @@ function hiddenValleyBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'inactive', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'inactive', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },
@@ -1652,21 +1660,19 @@ function loftLivingBase(args: {
         // 2026-08-05 that's 115 days back - a ~3.8-month gap.
         lastPricingContactDaysAgo: 115,
         pricingCoverageQTD: 20,
-        // Not in Sheet 7's roster; the SME notes its prioritization index
-        // (eRPD x Partner Value) is on the higher end, but Bucket 7 alone
-        // makes it the obvious call - kept below Marina's 8,200 so the
-        // "biggest value wins" shortcut still fails.
-        partnerValueAbrn: 7500,
-        // OPC layer from the SME doc - only surfaced when the On
+        // SME metrics sheet (Partner Value ABRN 2025). Bucket 7 alone
+        // makes Loft Living the obvious R9 call.
+        partnerValueAbrn: 2458,
+        // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM). Search
-        // price +12% vs peer, visibility 8% vs 23% median.
+        // price €67 vs €60 peer, visibility 8% vs 23% median.
         opcMetrics: {
           unsoldRooms: { value: 33 },
-          sellThroughRate: { value: -7 },
+          sellThroughRate: { value: 30, peerLabel: 'below' },
           visibilityShare: { value: 8, peerValue: 23 },
-          clickThroughRate: { value: 3.2 },
-          conversion: { value: 0.84 },
-          searchPrice: { value: 12 },
+          clickThroughRate: { value: 3.2, peerLabel: 'below' },
+          conversion: { value: 0.8, peerLabel: 'below' },
+          searchPrice: { value: 67, peerValue: 60 },
         },
         // Legacy fields - kept for type compatibility.
         experiencedRPD: 85,
@@ -1688,6 +1694,8 @@ function loftLivingBase(args: {
         { id: 'country-rate', label: 'Country Rates', status: 'active', category: 'public-pricing' },
         { id: 'portfolio-deals', label: 'Portfolio Deals', status: 'active', category: 'public-pricing' },
         { id: 'campaigns', label: 'Campaigns', status: 'active', category: 'public-pricing' },
+        { id: 'last-minute', label: 'Last Minute Deals', status: 'inactive', category: 'public-pricing' },
+        { id: 'early-booker', label: 'Early Booker Deal', status: 'inactive', category: 'public-pricing' },
         { id: 'genius-programme', label: 'Genius Program', status: 'active', category: 'genius-pricing' },
         { id: 'genius-15', label: 'Genius 15%', status: 'inactive', category: 'genius-pricing' },
         { id: 'genius-20', label: 'Genius 20%', status: 'inactive', category: 'genius-pricing' },

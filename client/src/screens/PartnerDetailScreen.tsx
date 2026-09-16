@@ -1088,7 +1088,7 @@ function DrivingMetricsTab({ partner }: { partner: PartnerState }) {
           metricKey="last30dAdr"
           value={m.secondaryMetrics?.last30dAdr}
           comparator="vs peer"
-          format="number"
+          format="currency"
         />
         <SecondaryMetricCard
           metricKey="last90dPageViews"
@@ -1166,31 +1166,31 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
           metricKey="sellThroughRate"
           value={opc?.sellThroughRate}
           comparator="vs peer"
-          format="percent"
+          format="percentLevel"
         />
         <SecondaryMetricCard
           metricKey="visibilityShare"
           value={opc?.visibilityShare}
           comparator="vs peer"
-          format="percent"
+          format="percentLevel"
         />
         <SecondaryMetricCard
           metricKey="clickThroughRate"
           value={opc?.clickThroughRate}
           comparator="vs peer"
-          format="percent"
+          format="percentLevel"
         />
         <SecondaryMetricCard
           metricKey="conversion"
           value={opc?.conversion}
           comparator="vs peer"
-          format="percent"
+          format="percentLevel"
         />
         <SecondaryMetricCard
           metricKey="searchPrice"
           value={opc?.searchPrice}
           comparator="vs peer"
-          format="number"
+          format="currency"
         />
       </div>
     </div>
@@ -1276,8 +1276,9 @@ function SecondaryMetricCard({
   value: SecondaryMetricValue | undefined;
   comparator: 'vs last year' | 'vs peer';
   // 'percent' = signed delta (e.g. +5%, -9%); 'percentLevel' = a plain
-  // percentage level with no sign (e.g. 12% unsold); 'number' = raw count.
-  format: 'number' | 'percent' | 'percentLevel';
+  // percentage level with no sign (e.g. 12% unsold); 'number' = raw count;
+  // 'currency' = a euro amount (e.g. EUR 145), delta/peer euro-formatted.
+  format: 'number' | 'percent' | 'percentLevel' | 'currency';
 }) {
   const def = metricDefinitions[metricKey];
 
@@ -1316,18 +1317,33 @@ function SecondaryMetricCard({
   // shown side-by-side with the peer (no leading '+' and no delta paren);
   // otherwise it stays the signed-delta / value-only convention.
   const hasPeer = value.peerValue !== undefined;
+  const euro = (n: number) => `€${Math.round(n).toLocaleString('en-GB')}`;
   const primary =
-    format === 'percent'
-      ? `${!hasPeer && value.value > 0 ? '+' : ''}${to1dp(value.value)}%`
-      : format === 'percentLevel'
-        ? `${to1dp(value.value)}%`
-        : `${Math.round(value.value).toLocaleString('en-GB')}`;
-  const delta = hasPeer
-    ? `${to1dp(value.peerValue as number)}${format === 'percent' ? '%' : ''} peer`
-    : value.deltaPct === undefined
-      ? '(xx)'
-      : `(${value.deltaPct > 0 ? '+' : ''}${to1dp(value.deltaPct)}%)`;
-  const deltaIsPending = !hasPeer && value.deltaPct === undefined;
+    format === 'currency'
+      ? euro(value.value)
+      : format === 'percent'
+        ? `${!hasPeer && value.value > 0 ? '+' : ''}${to1dp(value.value)}%`
+        : format === 'percentLevel'
+          ? `${to1dp(value.value)}%`
+          : `${Math.round(value.value).toLocaleString('en-GB')}`;
+  const peerWord =
+    value.peerLabel === 'below'
+      ? 'below peer'
+      : value.peerLabel === 'above'
+        ? 'above peer'
+        : value.peerLabel === 'in-line'
+          ? 'in line with peer'
+          : undefined;
+  const delta = peerWord
+    ? peerWord
+    : hasPeer
+      ? format === 'currency'
+        ? `${euro(value.peerValue as number)} peer`
+        : `${to1dp(value.peerValue as number)}${format === 'percent' || format === 'percentLevel' ? '%' : ''} peer`
+      : value.deltaPct === undefined
+        ? '(xx)'
+        : `(${value.deltaPct > 0 ? '+' : ''}${to1dp(value.deltaPct)}%)`;
+  const deltaIsPending = !hasPeer && !peerWord && value.deltaPct === undefined;
 
   return (
     <div

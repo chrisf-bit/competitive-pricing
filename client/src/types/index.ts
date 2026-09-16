@@ -201,10 +201,18 @@ export interface SecondaryMetricValue {
    * AND the peer benchmark (e.g. Visibility Share 10.3% vs 17.9% peer).
    * When set, the card renders "{peerValue} peer" instead of the
    * parenthesised deltaPct - it's a side-by-side benchmark, not a
-   * delta. Only Visibility Share carries it today; the other OPC
-   * cards keep the value-only / deltaPct convention.
+   * delta. Visibility Share and Search Price carry it; the other OPC
+   * cards keep the value-only / deltaPct / peerLabel convention.
    */
   peerValue?: number;
+  /**
+   * Optional qualitative peer comparator, used by OPC metrics where the
+   * SME data expresses the benchmark as a word rather than a number
+   * (Sell Through Rate, Click Through Rate, Conversion). Renders as
+   * "below peer" / "in line with peer" / "above peer" on the comparator
+   * line. Takes precedence over deltaPct; ignored when peerValue is set.
+   */
+  peerLabel?: 'below' | 'in-line' | 'above';
 }
 
 /**
