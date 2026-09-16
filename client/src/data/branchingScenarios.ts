@@ -54,7 +54,7 @@ import {
   KAM_CLOSE_BY_ROUND,
   KAM_DIST_BY_ROUND,
 } from './kamLayout';
-import { kamL1Factories } from './scenarios/kam-l1';
+import { kamL1Factories, KAM_CLOSINGS } from './scenarios/kam-l1';
 
 /**
  * Branching conversation scenarios.
@@ -259,10 +259,14 @@ for (let round = 1; round <= 20; round++) {
   const priorityBase = KAM_PRIORITY_BY_ROUND[round];
   const priorityId = `${priorityBase}-cross-regional`;
   const pBucket = (branchingScenarios[priorityId] ??= {});
+  // L1 trees carry the KAM closing via withHelicopter (kam-l1.ts); L2
+  // reuses the regime-neutral OPC factory, so stamp the KAM closing here
+  // too (keyed by the tree's round). Optimal-path-only gating happens at
+  // render time in BranchingConversationScreen.
   pBucket[round] =
     round <= 10
       ? kamL1Factories[priorityBase](priorityId)
-      : KAM_L2_FACTORIES[priorityBase](priorityId);
+      : { ...KAM_L2_FACTORIES[priorityBase](priorityId), closingAmLine: KAM_CLOSINGS[round] };
 
   const closeId = `${KAM_CLOSE_BY_ROUND[round]}-cross-regional`;
   (branchingScenarios[closeId] ??= {})[round] = buildCloseDecoyScenario(closeId, round);

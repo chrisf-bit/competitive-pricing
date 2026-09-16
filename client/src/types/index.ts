@@ -577,6 +577,18 @@ export interface BranchingConversationTree {
    */
   closingCoachNote?: string;
   /**
+   * Optional scripted AM wrap-up line that plays as the final turn of
+   * the call, AFTER the partner's last response - the graceful close the
+   * learner would give once the conversation has landed. Rendered as a
+   * non-interactive AM turn (the learner doesn't pick it) and ONLY on the
+   * optimal path (when the final close pick was the optimal option), so a
+   * poorly played call still ends on the partner's reaction. Used by the
+   * Cross-Regional / KAM journey to carry the KAM playbook's portfolio-
+   * voiced closings (executive summary, loop in the local Account Manager,
+   * portfolio review), which the property-level standard trees don't have.
+   */
+  closingAmLine?: string;
+  /**
    * The SME-prescribed path through the Pricing Issue Tree. The
    * Issue Tree Helper uses this to validate the learner's
    * pre-call diagnosis. Optional only until the SME provides it

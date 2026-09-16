@@ -493,6 +493,49 @@ export function BranchingConversationScreen({
                 );
               })()}
           </motion.div>
+
+          {/* KAM scripted wrap-up: the AM's graceful closing line, played
+              as a final non-interactive turn AFTER the partner's last
+              response, and ONLY on the optimal path (the final close pick
+              was optimal). Carries the KAM playbook's portfolio-voiced
+              close; property-level standard trees leave closingAmLine unset. */}
+          {isComplete && tree.closingAmLine && lastPickedOption?.optimal && (
+            <div style={{ marginTop: 24 }}>
+              <div
+                style={{
+                  fontSize: 11,
+                  fontWeight: 800,
+                  color: 'var(--brand-navy)',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.14em',
+                  marginBottom: 10,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                }}
+              >
+                <span
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    background: 'var(--brand-yellow)',
+                  }}
+                />
+                You said
+              </div>
+              <div
+                style={{
+                  fontSize: 17,
+                  lineHeight: 1.6,
+                  color: 'var(--grey-700)',
+                  fontWeight: 500,
+                }}
+              >
+                &ldquo;{tree.closingAmLine}&rdquo;
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Response footer / completion CTA */}

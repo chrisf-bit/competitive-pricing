@@ -37,6 +37,39 @@ import { nobleFalconNoneR10 } from './noble-falcon-none-r10';
  * company's L1 round in branchingScenarios.ts.
  */
 
+/**
+ * KAM playbook closing statements, keyed by the conversation's round
+ * (L1 rounds 1-10 from the "KAM Conversations - GAME LEVEL 1" playbook;
+ * L2 rounds 11-20 from the "GAME LEVEL 2" playbook). These are the AM's
+ * final graceful wrap-up - portfolio-voiced (executive summary, loop in
+ * the local Account Manager, portfolio review) - which the property-level
+ * standard trees don't carry. Rendered as a non-interactive final AM turn
+ * on the optimal path only (see `closingAmLine` on BranchingConversationTree).
+ * Applied to L1 here (withHelicopter) and to L2 in branchingScenarios.ts.
+ */
+export const KAM_CLOSINGS: Record<number, string> = {
+  1: "Let's get the international rates activated for Royal Crest Hotel for the upcoming quarter. I'll loop in the Account Manager and on my side I'll monitor the property's visibility and conversion share against your regional portfolio benchmarks, for which I'll share an updated breakdown during our monthly review.",
+  2: "Now that we've discussed the strategy for this property, let's keep an eye on its conversion over the next 30 days. If we see the expected conversion lift, we can look at applying this same fenced structure to the rest of your regional portfolio.",
+  3: "I appreciate your agreement to align the base rates. I'll update our portfolio tracking report and we can review the remaining properties on the group list during our next meeting.",
+  4: "Great, let's set up the US rate. I'll also schedule a follow-up meeting for us next month to review the portfolio report and monitor the property's performance against your regional benchmarks.",
+  5: "Excellent. I'll send over a brief executive summary for your records. I'll also brief our local Account Manager to connect with your team to assist with the setup, and we'll review the portfolio performance impact together in our next monthly check-in.",
+  6: "I'll brief our local Account Manager to check on the setup once your distribution team has aligned the rates. We can review the portfolio traffic uplift together in our next monthly check-in and discuss the performance recovery.",
+  7: "Perfect! I'll set up a follow-up for us next month to review the portfolio reports and monitor the recovery. Speak soon, Ethan!",
+  8: "I will send you the summary of our meeting. Once you have reviewed the recommendation, I will also loop in our local Account Manager to coordinate with the property's team on any next steps you have decided upon. I'll schedule our follow-up for next month - thank you for your time.",
+  9: "I can understand that resolving wholesale rate leakage takes time and internal coordination. Since we are aligned on addressing these distribution gaps for Loft Living Inn, I'll send you a brief executive summary outlining the data and visibility impact for your records.",
+  10: "We certainly don't want to push any setup that feels out of sync with your brand operations or risk management policies. Since any adjustment to family configurations or rate rules touches your broader group strategy, I'll send you an executive summary outlining the conversion data and risk-mitigation recommendations for The Noble Falcon Inn for your team to review. Speak soon!",
+  11: "That's a completely fair compromise. Since we have your agreement to expand our test with mobile rates for Royal Crest Hotel, I'll prepare an executive summary of our benchmarks today. I'll schedule our portfolio review for next month to evaluate the impact together. Thanks for your time today, Liam!",
+  12: "Perfect! Once it's live, we'll track the sell-through rate and conversion impact, and we can review the portfolio performance results together during our next monthly portfolio alignment. How does this sound?",
+  13: "I'll make sure to get that report over to you, Camila. To ensure a smooth operational setup, I'll also loop in your local account manager for support and to track performance closely alongside your teams. Let's speak in two months to evaluate the impact while we review the group performance.",
+  14: "Perfect! Let's touch base in our portfolio review next month to analyze the performance and discuss scaling this across your other regional assets that can benefit from this approach. Talk soon, Anton.",
+  15: "You're welcome, Sophia. Our goal is to support where it makes commercial sense for your group. I'll email you a summary of these 90-day insights for your records. I'll keep monitoring the portfolio trends on our end and reach out during our next monthly check-in to see how Q3 is tracking. Thanks for your time today, Sophia!",
+  16: "Sure, I'll send through the revenue projection for the US country rate. Let's reconnect during our portfolio review next month to go over the numbers - talk soon, Priya!",
+  17: "Sure, no problem! Let's take a phased data driven approach. I'll loop in our local account manager to ensure the EEA country rate is well set up. Let's reconnect during our next portfolio review to analyze the conversion impact from European bookers.",
+  18: "Looks like we found a good workaround, Claire. I'll brief our local account manager to support your on-property revenue team and adjust those deal settings right away. Talk soon, Claire!",
+  19: "That's a good and proactive approach, Lucas. Our account manager will reach out locally to check that the mobile rate configuration has been optimized. I'll also send over an executive summary, and let's analyze the volume recovery across your portfolio during our review in two months.",
+  20: "I'll compile a dedicated summary so that you have a solid business case ready for your internal QBR. I'll also keep our local account manager in the loop so they are ready to support the property as soon as the internal sign-off goes through. Let's touch base during our portfolio check-in next month.",
+};
+
 function withHelicopter(
   base: BranchingConversationTree,
   partnerId: string,
@@ -46,7 +79,13 @@ function withHelicopter(
   const steps = base.steps.map((s, i) =>
     i === 0 ? { ...s, partnerPrompt: firstPartnerReply } : s,
   );
-  return { ...base, partnerId, openingAm, steps };
+  return {
+    ...base,
+    partnerId,
+    openingAm,
+    steps,
+    closingAmLine: KAM_CLOSINGS[base.round],
+  };
 }
 
 // ── Round 1 - Royal Crest Hotel (Wide) - Liam O'Connell / Anya Sharma ──
