@@ -4442,3 +4442,137 @@ in a partner conversation").
   reviewer *comment* is context; the *tracked change* is the instruction -
   don't extend beyond what was tracked. (Comment c20 flagged the wording but
   no tracked change was made to the lead.)
+
+## Post-2026-09-16 session (SME review blockers, KAM closings, legal packs 4-10)
+
+Relayed SME/legal review items plus a KAM closing gap. All on
+`release-2-partner-detail`, committed and pushed (commits `baa5a18`,
+`e718c67`, `b1e0b1e`, `cd4f022`, `b8649c0`, `bd881fa`). `tsc -b` clean.
+
+### Three SME review blockers (commit baa5a18)
+
+- **OPC exact figures -> qualitative (Florian).** Florian confirmed that for
+  future check-in months we cannot share exact OPC data points, only
+  equal/higher/lower vs peers, explicitly for **Sell Through Rate and
+  Conversion**. Applied across ALL L2 SPOKEN dialogue (R11-R20,
+  `data/scenarios/*-r1{1..9}.ts` + `noble-falcon-r20.ts`): every exact
+  sell-through % / conversion % in a spoken line became qualitative ("pacing
+  behind your peer group", "a marked drop-off in mobile conversions"),
+  including the partner replies that echoed a figure (Emerald Peak's
+  "nine-point gap" / "-60%", Noble Falcon's "1.3%"). LEFT exact: unsold
+  rooms, visibility share, search price (Florian named only the two metrics)
+  - that is the still-open "part (b)". LEFT untouched: internal
+  `description:` SME-rationale fields (not learner-facing). The partner-card
+  `(xx)` / peer-data display is a SEPARATE parked decision (Florian / James /
+  Anouk, Monday meeting) - do NOT touch the card wireframe; Anouk's "9 not 8
+  / 110% vs 40%" R15 correction lands there, so it stays parked.
+- **Distractor tone: flawed reasoning, not flawed tone (Irene / Vincent
+  Pack 2).** Vincent (Review Pack 2, Narrow R1-5) flagged wrong options
+  over-using "honestly / simplest / quickest" and "rooms fill on their own"
+  vs the correct "capture demand" - learners pattern-match on tone. Irene's
+  rule: keep the flawed decision, express it neutrally ("Simply lower all
+  your rates" -> "I would recommend lower rates across the board"); fix the
+  ME-flagged ones + 2-3 steps per round, not every distractor. Rewrote the 5
+  clear tone-crutch distractors Vincent flagged: `silver-horizon-narrow-r2`
+  (jump-to-cheapest), `ocean-view-narrow-r3` (prescribe-cut + "simplest path
+  to align"), `riverside-narrow-r4` (lower-ADR + "fill on their own" ->
+  "capture more family demand"). Left the 2 compliance-flaw distractors he
+  also touched (ocean-view-r3 other-OTAs = risky, silver-horizon-r2 Key-OTA
+  family) - neutral tone already, flaw is content/compliance (the
+  content-based distinction he wants). STILL OPEN: the same pattern recurs in
+  the Wide/None siblings + L2 + other L1 rounds (~80 instances); only the
+  flagged Narrow ones were done. Pack 4 (Daria) is a different issue
+  ("distractor feels like a safe option, remove") - not actioned.
+- **Family Active vs Inactive + learner note (Irene).** Keep Family Rates
+  **Active** (product is implemented; pricing opportunity remains via
+  strategy or config gap) and ADD a learner-facing note rather than marking
+  it Inactive. New `PartnerMetrics.productsNote?: string`, rendered under the
+  Discount Products block on Partner Detail (`PartnerDetailScreen.tsx`).
+  Populated on Ocean View (`oceanViewBase`, covers R3/R13 + all regimes +
+  KAM) and Noble Falcon (`nobleFalconBase`, R10/R20, children-priced-as-
+  adults). Resolves the Pack 5 c21/c24 "data-detective calls family a wedge
+  but family shows active" consistency concern - Beppie's alternative (mark
+  family Inactive) is SUPERSEDED by Irene's keep-Active ruling.
+
+### Review Pack 5 (Narrow R6-10) R9/R10 pass (commits e718c67, b1e0b1e)
+
+Most Pack 5 R9 (Loft Living) + R10 (Noble Falcon) comments were ALREADY
+applied by the Sept-7 SAFE->BORDERLINE sweep + prior passes (verified against
+code): R9 c8/c10/c11/c12 and R10 c15/c22/c23 are in; the strong-no coach note
+(R10 c25-28) is the `closingCoachNote` from the Sept-11 session. Net new: the
+Noble Falcon family note (c21/c24, above) and a grammar fix in
+`loft-living-narrow-r9.ts` ("more or less the aligned agreements" -> "more or
+less aligned agreements", in both the step-2 optimal response and the step-3
+prompt that mirrors it). "Add country" (c7/c14) is stale - locations already
+carry fictional sovereign entities and Chris confirmed they are fictional.
+c16 (eRPD "(+21.42)" display label) is still an open display-clarity question.
+
+### Legal copy packs 4, 5, 7, 8 (commit cd4f022)
+
+Generated the remaining copy-only legal packs (metrics stripped) so the set
+1-8 is complete in `docs/review-packs/`: Pack 4 (No Parity R6-10), Pack 5
+(Narrow R6-10), Pack 7 (OPC R11-15), Pack 8 (OPC R16-20). Generated from live
+source, so they include the OPC qualitative sweep + distractor edits above.
+See `client/scripts/REVIEW-PACKS.md` for the two-command flow.
+
+### KAM closing statements (commit b8649c0) - the main build
+
+Client flagged that the closing statements in the legal packs did not match
+the Content Hub. Root cause: the two `Content Hub ... Playbook, Narrative,
+Learning*.docx` in `~/Downloads` are the **KAM playbook** (no-suffix file =
+Level 1 / XPC, the "(1)" file = Level 2 / OPC), and their closings are
+portfolio-voiced ("executive summary for your records", "loop in the local
+Account Manager", "portfolio review"). The KAM journey was built by
+`withHelicopter()` reusing the standard property-level trees and swapping ONLY
+the opening, so the KAM closings were NEVER in the game - KAM calls ended one
+beat early on the partner's last line (agree AND no rounds). Chris confirmed:
+implement the Content Hub closings, **KAM journey only** (they are KAM-voiced
+and would read wrong in the property-level standard journey), as a scripted
+outro on the **optimal path only**.
+
+- New optional `closingAmLine?: string` on `BranchingConversationTree`.
+- `KAM_CLOSINGS` map (rounds 1-20) in `data/scenarios/kam-l1.ts`, verbatim
+  from the two Content Hub docs, normalised to plain punctuation, keyed by
+  the tree's round (L1 1-10, L2 11-20).
+- Wired in via `withHelicopter` (L1) and the KAM L2 registration loop in
+  `branchingScenarios.ts` (spreads `closingAmLine` onto the reused L2 factory
+  tree). KAM-only: standard trees never get it.
+- Rendered in `BranchingConversationScreen.tsx` as a non-interactive final
+  "You said" AM turn AFTER the partner's last response, gated on
+  `isComplete && tree.closingAmLine && lastPickedOption?.optimal` - only
+  shows when the final (close) pick was optimal; a sub-optimal path ends on
+  the partner's reaction as before.
+- **Scoring is unaffected (verified).** `gradeBranchingRound` reads only the
+  picked options; `closingAmLine` is never in a `step.options` array, so the
+  grader never sees it. Smoke-tested: all 20 KAM optimal paths still score 3
+  stars. Grader reminder: floor = right partner + optimal diagnosis (>= half
+  non-final picks optimal) + optimal pitch (final pick optimal) + all safe +
+  no -2 style on primary; then 3 stars at avg style/step >= 1.33, 2 at
+  >= 1.0, else 1. Every authored optimal path clears 1.33 by design.
+
+### Legal packs 9-10 (KAM) with openings + closings (commit bd881fa)
+
+Wired `closingAmLine` through the review extractor (`src/review/reviewData.ts`
+Flow type + the three flow-build sites) and BOTH pack renderers
+(`make-legal-copy-pack.cjs`, `make-review-pack.cjs`), rendered as a "Closing
+line (learner / AM) - optimal path only" section after the conversation
+(mirrors the opening-line section). Generated the two missing KAM legal copy
+packs WITH the Helicopter openings and the closings: `Legal Review Pack 9 -
+Cross-Regional (KAM) - Rounds 1-10` and `Legal Review Pack 10 - Cross-Regional
+(KAM) - Rounds 11-20`. Standard packs 1-8 did not need regenerating (they
+already render openings and correctly have no closings). Naming continues 1-8
+(standard) -> 9-10 (KAM).
+
+### Still open (next session)
+
+- **OPC part (b) + the parked card decision.** Whether the other spoken-exact
+  OPC figures (unsold rooms, visibility share, search price) should also go
+  qualitative, and the partner-card `(xx)` / peer-data decision parked for
+  the Monday SME meeting (Anouk's R15 number correction rides on it).
+- **Distractor tone breadth.** Only the Vincent-flagged Narrow R1-5
+  distractors were neutralised; the pattern recurs across Wide/None siblings,
+  L2, and other L1 rounds. Pack 4 (Daria) remove-vs-retag items not actioned.
+- **Family note breadth.** Applied to Ocean View + Noble Falcon; Riverside
+  R4/R14 and Palace Grand R7 share the same family-active-with-opportunity
+  situation if the note should be extended.
+- **c16** eRPD "(+21.42)" display-label clarity (tooltip/label?).
