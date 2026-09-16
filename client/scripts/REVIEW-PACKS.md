@@ -74,6 +74,24 @@ node scripts/make-legal-copy-pack.cjs /tmp/legal.json \
   "Learner-facing copy" "Legal / compliance review - wording only, metrics omitted"
 ```
 
+### KAM openings-and-closings-only mode
+
+The Cross-Regional (KAM) journey reuses the standard property-level dialogue
+verbatim for the middle steps (already covered by legal packs 1-8); only the
+Helicopter openings and the closings are KAM-specific. So a KAM legal pack
+should show ONLY those. Pass `PACK_OPENCLOSE=1` to the legal renderer: it
+skips the identity/persona sections and the middle conversation steps, and
+renders per round just the opening exchange (AM opener + partner's first
+reply) and the closing line. The shipped KAM legal packs (9 = R1-10, 10 =
+R11-20) are generated this way:
+
+```bash
+PACK_OUT=/tmp/kam.json PACK_JOURNEY=kam PACK_FROM=1 PACK_TO=10 node scripts/extract-review-pack.mjs
+PACK_OPENCLOSE=1 node scripts/make-legal-copy-pack.cjs /tmp/kam.json \
+  "../docs/review-packs/Legal Review Pack 9 - Cross-Regional (KAM) - Openings and Closings R1-10.docx" \
+  "Legal Review Pack 9 ..." "KAM openings and closings only"
+```
+
 `PACK_JOURNEY=all` (added for this) dumps the whole set (defaults to rounds
 1-20); it also works with the normal `make-review-pack.cjs` if you ever want
 one big data-inclusive pack. You can still slice (`PACK_JOURNEY=standard

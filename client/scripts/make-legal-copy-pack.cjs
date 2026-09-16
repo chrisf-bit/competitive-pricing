@@ -37,6 +37,14 @@ if (!inPath || !outPath) {
 
 const flows = JSON.parse(fs.readFileSync(inPath, 'utf8'));
 
+// Openings-and-closings-only mode. The KAM journey reuses the standard
+// property-level dialogue verbatim for the middle steps (already covered by
+// legal packs 1-8), so a KAM legal pack should show ONLY the helicopter
+// opening exchange and the closing line per round. Set PACK_OPENCLOSE=1 to
+// skip the identity/persona sections and the middle conversation steps.
+const OPEN_CLOSE_ONLY =
+  process.env.PACK_OPENCLOSE === '1' || process.env.PACK_OPENCLOSE === 'true';
+
 // ── Label maps ──
 const STYLE_LABEL = {
   red: 'Director (red)', yellow: 'Socialiser (yellow)',
@@ -128,11 +136,18 @@ children.push(new Paragraph({
   spacing: { before: 500, after: 80 },
   children: [new TextRun({ text: 'How to read this pack', bold: true, color: NAVY, size: 24 })],
 }));
-[
-  'Each scenario lists the partner identity and personality copy, the persona coaching chips, and the full branching conversation. The numeric dashboard the learner sees on Partner Detail is deliberately left out - this pack is for reviewing language, not data.',
-  'Every conversation step lists all three response options. The option marked [OPTIMAL] is the SME-preferred (correct) pick. Each option shows the exact words the learner would say, the partner’s scripted reply, and the compliance tag (SAFE / BORDERLINE / RISKY).',
-  'Numbers that appear inside a spoken line (for example “conversion is down 68%”) are kept - they are part of the wording the learner hears. Only the standalone metric / data displays are removed.',
-].forEach((t) => children.push(new Paragraph({
+(OPEN_CLOSE_ONLY
+  ? [
+    'This is a Cross-Regional (KAM) pack. Each round shows ONLY the Helicopter opening exchange (the KAM AM opener and the partner’s first reply) and the closing line. The middle conversation is intentionally omitted: for the KAM journey it is the same standard property-level dialogue reviewed in legal packs 1-8, unchanged. Only the openings and closings are KAM-specific.',
+    'The closing line is the AM’s wrap-up shown on the optimal path (when the learner closes the call well). The numeric dashboard the learner sees on Partner Detail is left out - this pack is for reviewing language, not data.',
+    'Numbers that appear inside a spoken line (for example “conversion is down 68%”) are kept - they are part of the wording the learner hears.',
+  ]
+  : [
+    'Each scenario lists the partner identity and personality copy, the persona coaching chips, and the full branching conversation. The numeric dashboard the learner sees on Partner Detail is deliberately left out - this pack is for reviewing language, not data.',
+    'Every conversation step lists all three response options. The option marked [OPTIMAL] is the SME-preferred (correct) pick. Each option shows the exact words the learner would say, the partner’s scripted reply, and the compliance tag (SAFE / BORDERLINE / RISKY).',
+    'Numbers that appear inside a spoken line (for example “conversion is down 68%”) are kept - they are part of the wording the learner hears. Only the standalone metric / data displays are removed.',
+  ]
+).forEach((t) => children.push(new Paragraph({
   spacing: { after: 80 }, bullet: { level: 0 },
   children: [new TextRun({ text: t, size: 20 })],
 })));
@@ -168,6 +183,7 @@ for (const flow of flows) {
   }));
   children.push(divider());
 
+  if (!OPEN_CLOSE_ONLY) {
   // 1. Who the partner is (identity + personality copy - no data)
   children.push(h2('Partner (identity and personality)'));
   children.push(labelValue('Property', d.displayName));
@@ -201,14 +217,24 @@ for (const flow of flows) {
       }));
     }
   }
+  } // end: identity + persona sections (skipped in openings-and-closings mode)
 
-  // 3. Conversation
-  children.push(h2('Conversation'));
+  // 3. Conversation. In openings-and-closings mode (KAM) show only the
+  //    helicopter opening exchange + the closing: the middle dialogue is the
+  //    reused, already-reviewed standard property-level tree (packs 1-8).
+  children.push(h2(OPEN_CLOSE_ONLY ? 'Opening and closing' : 'Conversation'));
   if (flow.openingAm) {
     children.push(h3('Opening line (learner / AM)'));
     children.push(quote(flow.openingAm, NAVY));
   }
-  flow.steps.forEach((step, si) => {
+  if (OPEN_CLOSE_ONLY && flow.steps[0] && flow.steps[0].partnerPrompt) {
+    children.push(new Paragraph({
+      spacing: { after: 40 },
+      children: [new TextRun({ text: `${d.contact} replies:`, bold: true, color: GREY, size: 19 })],
+    }));
+    children.push(quote(flow.steps[0].partnerPrompt, NAVY));
+  }
+  if (!OPEN_CLOSE_ONLY) flow.steps.forEach((step, si) => {
     children.push(new Paragraph({
       spacing: { before: 200, after: 60 },
       children: [new TextRun({ text: step.displayLabel || `Step ${si + 1}`, bold: true, color: YELLOW, size: 22 })],
