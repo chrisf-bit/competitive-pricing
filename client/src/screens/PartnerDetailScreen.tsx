@@ -1161,6 +1161,7 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
           value={opc?.unsoldRooms}
           comparator="vs peer"
           format="percentLevel"
+          hideComparator
         />
         <SecondaryMetricCard
           metricKey="sellThroughRate"
@@ -1271,10 +1272,15 @@ function SecondaryMetricCard({
   value,
   comparator,
   format,
+  hideComparator = false,
 }: {
   metricKey: keyof typeof metricDefinitions;
   value: SecondaryMetricValue | undefined;
   comparator: 'vs last year' | 'vs peer';
+  // When true, the metric has no peer/comparator by design (e.g. Unsold
+  // Rooms): suppress the "(vs peer)" caption and the comparator line
+  // entirely rather than showing the "(xx)" data-pending placeholder.
+  hideComparator?: boolean;
   // 'percent' = signed delta (e.g. +5%, -9%); 'percentLevel' = a plain
   // percentage level with no sign (e.g. 12% unsold); 'number' = raw count;
   // 'currency' = a euro amount (e.g. EUR 145), delta/peer euro-formatted.
@@ -1297,7 +1303,12 @@ function SecondaryMetricCard({
           height: '100%',
         }}
       >
-        <SecondaryMetricLabel label={def.label} helpText={def.helpText} comparator={comparator} />
+        <SecondaryMetricLabel
+          label={def.label}
+          helpText={def.helpText}
+          comparator={comparator}
+          hideComparator={hideComparator}
+        />
         <div
           style={{
             fontSize: 11,
@@ -1373,6 +1384,9 @@ function SecondaryMetricCard({
       >
         {primary}
       </div>
+      {/* Keep the comparator line's height even when hidden (Unsold
+          Rooms) so values stay baseline-aligned across the row; just
+          render it blank instead of the "(xx)" placeholder. */}
       <div
         style={{
           fontSize: 10.5,
@@ -1381,7 +1395,7 @@ function SecondaryMetricCard({
           marginTop: 2,
         }}
       >
-        {delta}
+        {hideComparator ? ' ' : delta}
       </div>
     </div>
   );
@@ -1391,10 +1405,12 @@ function SecondaryMetricLabel({
   label,
   helpText,
   comparator,
+  hideComparator = false,
 }: {
   label: string;
   helpText: string;
   comparator: string;
+  hideComparator?: boolean;
 }) {
   return (
     <div
@@ -1411,17 +1427,19 @@ function SecondaryMetricLabel({
         align="top-center"
         iconSize={10}
       />
-      <span
-        style={{
-          fontSize: 8.5,
-          fontWeight: 700,
-          color: 'var(--grey-300)',
-          textTransform: 'uppercase',
-          letterSpacing: '0.06em',
-        }}
-      >
-        ({comparator})
-      </span>
+      {!hideComparator && (
+        <span
+          style={{
+            fontSize: 8.5,
+            fontWeight: 700,
+            color: 'var(--grey-300)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.06em',
+          }}
+        >
+          ({comparator})
+        </span>
+      )}
     </div>
   );
 }
