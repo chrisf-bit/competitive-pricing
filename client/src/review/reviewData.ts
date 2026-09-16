@@ -84,6 +84,7 @@ export interface Flow {
   title: string;
   dossier: Dossier;
   openingAm?: string;
+  closingAmLine?: string;
   steps: FlowStep[];
 }
 
@@ -288,6 +289,7 @@ export function buildFlows(): Flow[] {
       title: `R${round} - ${rec.persona.companyName ?? rec.persona.propertyName} (${REGIME_LABEL[rec.persona.parityRegime ?? 'none']})`,
       dossier: buildDossier(rec, round, tree),
       openingAm: tree.openingAm,
+      closingAmLine: tree.closingAmLine,
       steps: toFlowSteps(tree),
     });
   }
@@ -332,6 +334,7 @@ export function buildFlows(): Flow[] {
       title: `R${round} - ${healthyRec.persona.companyName ?? healthyRec.persona.propertyName} (decoy)`,
       dossier: buildDossier(healthyRec, round, tree),
       openingAm: tree.openingAm,
+      closingAmLine: tree.closingAmLine,
       steps: toFlowSteps(tree),
     });
   }

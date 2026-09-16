@@ -242,6 +242,11 @@ for (const flow of flows) {
     });
   });
 
+  if (flow.closingAmLine) {
+    children.push(h3('Closing line (learner / AM) - optimal path only'));
+    children.push(quote(flow.closingAmLine, NAVY));
+  }
+
   children.push(new Paragraph({ children: [new PageBreak()] }));
 }
 
