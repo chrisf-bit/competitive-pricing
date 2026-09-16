@@ -70,6 +70,104 @@ export const KAM_CLOSINGS: Record<number, string> = {
   20: "I'll compile a dedicated summary so that you have a solid business case ready for your internal QBR. I'll also keep our local account manager in the loop so they are ready to support the property as soon as the internal sign-off goes through. Let's touch base during our portfolio check-in next month.",
 };
 
+/**
+ * KAM Level 2 (OPC) opening exchanges, from the "KAM Conversations - GAME
+ * LEVEL 2" playbook (the "(1)" Content Hub doc). Like the L1 Helicopter
+ * openings, the KAM L2 opener reframes the standard property-level opening
+ * as a portfolio-level check-in that references the previous (L1) call, then
+ * zooms into the one lagging property. Keyed by the L2 round (11-20). Applied
+ * by withKamL2 below, which also stamps the KAM closing.
+ */
+export const KAM_L2_OPENINGS: Record<
+  number,
+  { openingAm: string; firstPartnerReply: string }
+> = {
+  11: {
+    openingAm:
+      "Hi Liam, thanks for reconnecting today. Following up on our initial test with country rates, I wanted to review your broader portfolio performance and address some persistent visibility bottlenecks affecting Royal Crest Hotel. Do you have a moment to review the high-level metrics together?",
+    firstPartnerReply:
+      "Let's dive in, Anya. We are keeping our prices the same to protect our profits, but I admit that revenue is lower than I would like. What is your data showing?",
+  },
+  12: {
+    openingAm:
+      "Hi Chloe, thanks for reconnecting today. Following up on the optimized family rates and international rates we implemented across your portfolio, overall group demand is holding steady. However, Silver Horizon Resort is still experiencing a bottleneck in conversion compared to your broader portfolio. Do you have a quick moment to look into what's driving this?",
+    firstPartnerReply:
+      "Hey Diego! Sure, I've got some time. Honestly, we're seeing plenty of eyes on our listings, but the actual bookings aren't moving quite as fast as I'd like. What are your numbers showing?",
+  },
+  13: {
+    openingAm:
+      "Good morning, Camila. From a group perspective, traveler interest across the resorts on the western coast remains high. However, Ocean View Resort is still showing a gap leading to a noticeable drop in conversion. I wanted to bring this to your attention so we can explore targeted tools to address it without impacting your broader brand strategy.",
+    firstPartnerReply:
+      "Thanks for bringing this to my attention, Javier. We've been focusing a lot on our guest welcome experience lately... You know, making sure our families and long-term guests feel completely at home. Though, to be completely transparent with you, my team is still a bit anxious about our pace for the upcoming months.",
+  },
+  14: {
+    openingAm:
+      "Hi Anton, thanks for joining our quarterly portfolio review. Before we dive into macro growth, I want to address Riverside Boutique Hotel's drop in conversion. Can we discuss this property before diving into the overall performance?",
+    firstPartnerReply:
+      "Hi Ren. Yes, keep it brief. We are right in the middle of preparations for some major events. As you know, my focus is protecting our revenue and maintaining brand standards. What's the situation?",
+  },
+  15: {
+    openingAm:
+      "Good afternoon Sophia, I've analyzed your regional portfolio performance and zoomed into properties that are losing out on conversion. While our local account manager confirmed that the family rate configuration was successfully enabled at Emerald Peak Lodge, it still needs your attention based on the trends we captured.",
+    firstPartnerReply:
+      "Good afternoon, Mei. Yes, let's go! What trends do you see in the extranet for this upcoming quarter?",
+  },
+  16: {
+    openingAm:
+      "Hello Priya. Following up on our last discussion, our local account manager confirmed that your distribution team successfully aligned the rates for Oceanfront Bliss Lodge. While the trial delivered positive results, we still see an opportunity to optimize its conversion.",
+    firstPartnerReply:
+      "Hey Kai! We've been super focused on some marketing campaigns and looking over our internal reports. Things look ok on our end, so I'm curious to see what you wanted to run through today!",
+  },
+  17: {
+    openingAm:
+      "Now that we have reviewed your regional portfolio performance for the upcoming quarter, shall we take a look at the data together on how Palace Grand Resort is performing based on our last conversation?",
+    firstPartnerReply:
+      "Sure, Diego. I have our PMS open. However, to be frank, I'm still dealing with a lot of noise from other OTAs complaining about price competitiveness, even though I provide everyone the exact same rate. That is really bothering me considering the operational effort I have to deal with everyday. By the way, I hope you are not bringing the same thing here...",
+  },
+  18: {
+    openingAm:
+      "Good morning, Claire. Great to speak with you again. Last time when we discussed the Hidden Valley Resort during the portfolio review, you said you needed some time to reconsider our pricing recommendations. How have things been so far?",
+    firstPartnerReply:
+      "Good morning, Oliver. Things are going very well, thank you. Based on our scheduled agenda today, I understand we are reviewing our performance for the upcoming quarter.",
+  },
+  19: {
+    openingAm:
+      "Hi Lucas, thanks for taking the time today. Overall, your portfolio's market presence is looking healthy across the region. That being said, Loft Living Inn is still losing out on conversion this quarter. I want to walk you through what we're seeing there so we can improve the situation.",
+    firstPartnerReply:
+      "Hello, Elena. To be completely honest, I'm still struggling with those wholesale rates ending up online as B2C offers. What do your internal data show us right now?",
+  },
+  20: {
+    openingAm:
+      "Good morning, Adam. Following up on our last discussion regarding The Noble Falcon Inn, I know we ended on your risk-mitigation concerns around family room settings. Today I would like to zoom into this property's performance over the next quarter. Shall we go straight into reviewing the data together?",
+    firstPartnerReply:
+      "Morning, Mark. Yes, let's start! What trends are you noticing on your end?",
+  },
+};
+
+/**
+ * Apply the KAM treatment to a Level 2 (OPC) tree: swap the opening to the
+ * KAM Helicopter opener + partner reply (KAM_L2_OPENINGS) and stamp the KAM
+ * closing (KAM_CLOSINGS). Everything else (options, responses, tags,
+ * grading) is the reused standard L2 tree, unchanged. Used in
+ * branchingScenarios.ts for the -cross-regional ids at rounds 11-20.
+ */
+export function withKamL2(
+  base: BranchingConversationTree,
+): BranchingConversationTree {
+  const opening = KAM_L2_OPENINGS[base.round];
+  const steps = opening
+    ? base.steps.map((s, i) =>
+        i === 0 ? { ...s, partnerPrompt: opening.firstPartnerReply } : s,
+      )
+    : base.steps;
+  return {
+    ...base,
+    ...(opening ? { openingAm: opening.openingAm } : {}),
+    steps,
+    closingAmLine: KAM_CLOSINGS[base.round],
+  };
+}
+
 function withHelicopter(
   base: BranchingConversationTree,
   partnerId: string,

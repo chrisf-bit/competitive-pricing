@@ -4563,6 +4563,35 @@ Cross-Regional (KAM) - Rounds 1-10` and `Legal Review Pack 10 - Cross-Regional
 already render openings and correctly have no closings). Naming continues 1-8
 (standard) -> 9-10 (KAM).
 
+### KAM pack corrections (commits 1c1e131, plus the L2-openings fix)
+
+Two follow-up fixes after the client reviewed the KAM packs:
+
+- **KAM legal packs are OPENINGS-AND-CLOSINGS ONLY.** The first cut rendered
+  the full conversation, but for KAM the middle steps ARE the reused standard
+  property-level dialogue (already in packs 1-8), so only the Helicopter
+  opening exchange and the closing are KAM-specific. Added a `PACK_OPENCLOSE=1`
+  mode to `make-legal-copy-pack.cjs` (skips identity/persona sections + middle
+  steps; renders per round the opening AM line + partner's first reply + the
+  closing). KAM packs 9/10 renamed "... Openings and Closings ..." and
+  regenerated that way; the earlier full-conversation versions were removed.
+  Documented in `client/scripts/REVIEW-PACKS.md`.
+- **KAM L2 (R11-20) openings were MISSING in-game and had to be added.** The
+  KAM build reworked openings for L1 only (via `withHelicopter`); L2 reused
+  the standard OPC factory directly, so KAM L2 played the standard property-
+  level openings, not the reworked cross-regional ones. Added `KAM_L2_OPENINGS`
+  (rounds 11-20, from the "(1)" GAME LEVEL 2 Content Hub doc) + a `withKamL2`
+  helper in `kam-l1.ts` that swaps `openingAm` + `steps[0].partnerPrompt` AND
+  stamps the closing; `branchingScenarios.ts` L2 registration now calls
+  `withKamL2(...)` instead of only spreading the closing. Verified: all 10 L2
+  KAM openings now match the Content Hub and all L2 optimal paths still score
+  3 stars (opening swap is display copy, not graded). Fixed one Content Hub
+  typo in transcription: R14 AM opener "Hi Ren" (Ren Garcia greeting himself)
+  -> "Hi Anton" (the partner); the partner's "Hi Ren" reply is correct and
+  left as-is. **Takeaway for future KAM work: openings AND closings differ for
+  KAM at BOTH levels - never assume "only the opening changes" or "L2 == L1
+  mechanics".**
+
 ### Still open (next session)
 
 - **OPC part (b) + the parked card decision.** Whether the other spoken-exact
