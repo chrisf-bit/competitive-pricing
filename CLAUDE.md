@@ -3984,8 +3984,107 @@ convention applied wholesale rather than item-by-item.
   `id: '<id>'` -> next `compliance: 'safe'` becomes `'borderline'` (a
   scratch node script did this; options always list compliance after id).
 
+## Post-2026-09-17 session (SME metrics-sheet reconciliation for Partner Detail)
+
+Cross-referenced the ten priority partner records against the SME
+"metrics sheet" Chris supplied (one row per partner, Examples 1-10 =
+Hotel IDs, mapped to rounds 1-10) and reconciled the sim to it. Chris's
+ruling: **the sheet is the source of truth**, Review Score is out of
+scope, all monetary values show EUR, add the new discount products, and
+show the peer word (below / in line / above) in the OPC comparator
+slots. Committed + pushed to `release-2-partner-detail` (commits
+`9ce40f7` then `717b099`). `tsc -b` + `npm run build` clean.
+
+### What changed (all in `data/partners.ts`, 10 priority base helpers)
+
+- **Partner Value (ABRN 2025) = real sheet values** (were Claude-invented
+  placeholders "sized below Marina's 8,200"; that rationale was stale
+  since decoys are now other lead hotels). New values: Royal Crest 4386,
+  Silver Horizon 6283, Ocean View 1658, Riverside 5920, Emerald Peak
+  3584, Oceanfront 917, Palace Grand 5069, Hidden Valley 2663, Loft
+  Living 2458, Noble Falcon 13957 (already correct). Several priorities
+  are now genuinely low-value (Ocean View, Oceanfront) - this is fine and
+  *strengthens* the "don't just pick the biggest" lesson; the correct
+  partner per round is hard-coded and still reads worst on the card risk
+  metrics (eRPD, eRPD MoM, Lose Price), which were NOT touched. Round
+  puzzle integrity verified to hold by that reasoning (decoys unchanged).
+- **OPC values = real sheet figures.** Sell Through, Conversion, Click
+  Through set to the real per-partner values; **Noble Falcon CTR added
+  (4.1)** (the earlier "table has no CTR" reconciliation was superseded
+  by this sheet); **Palace Grand search-price sign corrected** (was +4,
+  the sheet has it below peer at 239 vs 249). Search Price switched from
+  a relative % to real **value + peerValue** pairs (absolute price vs
+  peer median) for all ten.
+- **Emerald Peak** active scenario Family 2+1 -> **Family 2+2** (sheet).
+- **Oceanfront** Base Rate Plan inactive -> **active** (sheet).
+- **Two new discount products** added to all ten priority helpers for
+  grid consistency, reusing the existing legacy ids **`last-minute`
+  (Last Minute Deals)** and **`early-booker` (Early Booker Deal)** in the
+  `public-pricing` category, `active` only where the sheet shows them on:
+  Last Minute for **Emerald Peak**, both for **Noble Falcon**; inactive
+  elsewhere. (The sheet's other wide-taxonomy deals - Black Friday, Early
+  202x, Late Escape - were NOT added; Chris: "just use the ones that are
+  ever on.")
+
+### Two intentional divergences KEPT (Chris's call - do NOT "fix" to the raw sheet without adjusting the matching dialogue)
+
+- **Silver Horizon Visibility Share stays 17% vs 15% peer**; the sheet
+  says 13% vs 15%. Kept so the dashboard agrees with the R12
+  "Money-in-Bank" conversation (visibility ABOVE peer, "demand's there,
+  you lose them at checkout").
+- **Hidden Valley Lose Price stays 50%**; the sheet's raw Brand column is
+  99% (50% is its Key OTA column). Kept per the SME data-insight the R8
+  pitch was built on.
+
+### Display changes (`types/index.ts` + `screens/PartnerDetailScreen.tsx`)
+
+- **New `peerLabel?: 'below' | 'in-line' | 'above'` on
+  `SecondaryMetricValue`** - a qualitative peer comparator for the OPC
+  metrics the sheet gives as a word (Sell Through, Click Through,
+  Conversion). Renders "below peer" / "in line with peer" / "above peer"
+  on the comparator line; takes precedence over `deltaPct`, ignored when
+  `peerValue` is set. Those three OPC cards now use `format="percentLevel"`
+  (plain "33%", not a signed "+33%").
+- **EUR on ADR and Search Price only** - new `format="currency"` on
+  `SecondaryMetricCard` renders `€145` / `€153` and euro-formats the peer
+  (`€143 peer`). ADR (a secondary card) and Search Price (OPC) are the
+  only monetary fields anywhere; Portfolio card and the Data & Insights
+  teaching table carry no currency, so nothing else changed.
+- **Unsold Rooms "(xx)" removed** - the sheet gives no peer figure for
+  Unsold, so a new `hideComparator` prop on `SecondaryMetricCard`
+  suppresses both the "(vs peer)" caption and the "(xx)" comparator line
+  for that one card. The comparator line's height is kept (rendered
+  blank) so OPC card values stay baseline-aligned across the row.
+
+### Not surfaced by design (sheet columns the sim intentionally does not show)
+
+- **ABRN vs peer** (sheet column 12) - the Last-30D ABRN card carries
+  only the **vs-last-year** comparator. Note the sheet has TWO distinct
+  "vs peer" columns that look confusable: **ABRN vs peer** (col 12) and
+  **Room Nights vs peer** (col 53). The sim's Room Nights card shows the
+  col-53 value (verified matching all ten); the col-12 ABRN-vs-peer is a
+  different metric with no card. (Chris queried Silver Horizon 119 vs
+  116: 119 = Room Nights vs peer = correct; 116 = the unshown ABRN vs
+  peer.)
+- **Review Score** - never in scope; no `reviewScore` field exists on
+  `PartnerMetrics`.
+
+### Open (only if Chris asks later)
+
+- Whether to surface **ABRN vs peer** (would swap the ABRN card's
+  comparator or show both) and whether to add **Review Score**.
+- Whether to ever flip the two intentional divergences to the raw sheet
+  (needs the R12 / R8 dialogue adjusted in step).
+
 ## Things to avoid
 
+- Don't flip the two SME-sheet reconciliation divergences to the raw
+  sheet without adjusting the matching dialogue in the same pass:
+  **Silver Horizon Visibility 17/15** (raw sheet 13/15, kept for the R12
+  script) and **Hidden Valley Lose Price 50** (raw sheet 99, kept for the
+  R8 pitch). See the Post-2026-09-17 session note. And don't re-add the
+  invented placeholder Partner Values - the real SME 2025 values are now
+  the source of truth even where a priority reads low-value.
 - Don't reintroduce em dashes (saved as a feedback memory).
 - Don't re-tag a commercially-wrong-but-legally-clean distractor as
   `safe`. Per the reviewer's rule, `compliance: 'safe'` means BOTH legally
