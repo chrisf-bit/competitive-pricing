@@ -137,9 +137,9 @@ const step3Options: BranchingOption[] = [
     id: 'hv-r18-step3-correct',
     label: 'Share the visibility and search-price gap',
     description:
-      "SME-prescribed handling of the Money-in-Bank trade-off: there's still room to improve. Two metrics - her visibility share is 21%, about 7% behind her peer group, and the price travelers see in search is 10% higher than peers.",
+      "SME-prescribed handling of the Money-in-Bank trade-off: there's still room to improve. Two metrics - her visibility share is 21% (her own figure, no peer comparison), and the price travelers see in search is 10% higher than peers.",
     playerDialogue:
-      "I hear you, and it's a fair trade-off to weigh. But there's still room to improve. Two metrics worth sharing: your visibility share is 21%, about 7% behind your peer group, and the price travelers see when they search is running about 10% higher than your peers.",
+      "I hear you, and it's a fair trade-off to weigh. But there's still room to improve. Two metrics worth sharing: your visibility share is 21%, and the price travelers see when they search is running about 10% higher than your peers.",
     partnerResponse:
       "10% more expensive than competitors. But Oliver, as we discussed, when automated programs like the Booking Sponsored Benefit kick in to adjust the price, it feels like we lose control of our own strategy. I don't want guests seeing us as an 'affordable' option or booking purely on price.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -154,7 +154,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that visibility lags, incomplete - naming the visibility gap without the 10% search-price cause leaves a data-led partner unable to connect the symptom to anything she can act on.",
     playerDialogue:
-      "The main thing is that your visibility share here is sitting behind your peer group - travelers simply aren't seeing you in their search results as often as they should be, and to my mind that's the real issue we need to be focused on solving today.",
+      "The main thing is that your visibility share here is sitting low - travelers simply aren't seeing you in their search results as often as they should be, and to my mind that's the real issue we need to be focused on solving today.",
     partnerResponse:
       "And why would that be? Visibility doesn't drop for no reason - what's actually driving it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -216,9 +216,9 @@ const step4Options: BranchingOption[] = [
     description:
       "Answers her worry by promising BSB alone guarantees her visibility back - an overpromise that a data-led partner will test against the numbers, and that ignores the residual 10% gap.",
     playerDialogue:
-      "Just lean on the Booking Sponsored Benefit here - it'll carry your visibility all the way back on its own, guaranteed, so there's genuinely nothing else you'd need to lift a finger on. Let that program do the heavy lifting for you and you'll be level with your peers again before you know it, no further changes needed.",
+      "Just lean on the Booking Sponsored Benefit here - it'll carry your visibility all the way back on its own, guaranteed, so there's genuinely nothing else you'd need to lift a finger on. Let that program do the heavy lifting for you and your visibility will be right back before you know it, no further changes needed.",
     partnerResponse:
-      "If it fully solved it, my visibility wouldn't still be behind, would it? That doesn't add up.",
+      "If it fully solved it, my visibility wouldn't still be lagging, would it? That doesn't add up.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
     compliance: 'safe',

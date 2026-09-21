@@ -97,7 +97,6 @@ const H_LOSE = [26, 33, 22, 38, 24, 41, 29, 44, 21, 31];
 const H_UNSOLD = [9, 12, 8, 14, 10, 13, 11, 7, 12, 9];
 const H_SELL = [4, 2, 5, 1, 3, 2, 4, 6, 2, 3];
 const H_VIS = [24, 21, 26, 19, 23, 20, 22, 27, 20, 25];
-const H_VIS_PEER = [20, 19, 22, 17, 20, 18, 19, 23, 18, 21];
 const H_SEARCH = [-1, 0, -2, 1, -1, 0, -1, -2, 0, -1];
 const H_CONTACT_DAYS = [24, 31, 19, 36, 22, 40, 27, 44, 20, 33];
 const H_COVERAGE = [58, 52, 61, 48, 55, 46, 57, 44, 60, 50];
@@ -127,7 +126,7 @@ function healthyMetrics(i: number): PartnerMetrics {
     opcMetrics: {
       unsoldRooms: { value: H_UNSOLD[i] },
       sellThroughRate: { value: H_SELL[i] },
-      visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
+      visibilityShare: { value: H_VIS[i] },
       searchPrice: { value: H_SEARCH[i] },
     },
     lastPricingContactDaysAgo: H_CONTACT_DAYS[i],
@@ -185,7 +184,7 @@ export function closeDecoyMetricsFor(baseId: string): PartnerMetrics {
     opcMetrics: {
       unsoldRooms: { value: 16 + (i % 4) * 2 },
       sellThroughRate: { value: -2 - (i % 2) },
-      visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
+      visibilityShare: { value: H_VIS[i] },
       searchPrice: { value: 1 + (i % 2) },
     },
   };
@@ -208,7 +207,7 @@ function healthySteps(meta: HotelMeta): BranchingStep[] {
       description:
         'Acknowledge the strong position honestly and ask whether there is anything they would value a second look at - no manufactured problem.',
       playerDialogue:
-        "That matches what I'm seeing - your pricing is competitive and your visibility is holding above your peers, so there's nothing pressing here. Is there anything you'd want a second pair of eyes on while we're talking?",
+        "That matches what I'm seeing - your pricing is competitive and your visibility is holding up well, so there's nothing pressing here. Is there anything you'd want a second pair of eyes on while we're talking?",
       partnerResponse:
         "Honestly, not really - we're in good shape and I'd rather not fix what isn't broken. Nice to hear you agree with our own read.",
       styleMatch: { ...stylePlus(s, 2), green: 1 },

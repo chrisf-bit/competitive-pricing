@@ -99,9 +99,9 @@ const step2Options: BranchingOption[] = [
     id: 'rc-r11-step2-correct',
     label: 'Pivot from last month to live traveler demand',
     description:
-      'SME-prescribed handling of the "market is soft / one bad month" objection: accept that past data guides planning, then move to what live demand is doing now - visibility share below the peer median and a search-price gap that loses travelers at the search stage.',
+      'SME-prescribed handling of the "market is soft / one bad month" objection: accept that past data guides planning, then move to what live demand is doing now - a low visibility share (shown as her own figure, no peer comparison) and a search-price gap that loses travelers at the search stage.',
     playerDialogue:
-      "Past months guide our planning, agreed. But your peer group is achieving a higher sell-through rate, which suggests there is active demand in the area. Against that backdrop, your visibility share is 10.3%, compared with 17.9% for your peers. Travelers are searching, but your search price is running about 7% above your peers on key dates, so many may drop off before reaching your page.",
+      "Past months guide our planning, agreed. But your peer group is achieving a higher sell-through rate, which suggests there is active demand in the area. Against that backdrop, your visibility share is sitting at 10.3%. Travelers are searching, but your search price is running about 7% above your peers on key dates, so many may drop off before reaching your page.",
     partnerResponse:
       "A 7% difference in search price? We offer a premium experience, Anya. Our repeat guests know our value. I don't buy into these generic platform averages that tell me to drop prices for everyone.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -274,7 +274,7 @@ const step5Options: BranchingOption[] = [
     description:
       'Sells the mobile rate by promising a ranking and visibility reward for discounting. Promising ranking rewards in exchange for a price move is a compliance breach in every regime.',
     playerDialogue:
-      "Here's the part that makes it worth it - the moment you switch on that mobile rate, I can promise you it'll push you straight back up the rankings and win back all of that visibility you've been losing to your peers. The discount genuinely pays for itself in placement, because the system rewards the more competitive price with a higher position.",
+      "Here's the part that makes it worth it - the moment you switch on that mobile rate, I can promise you it'll push you straight back up the rankings and win back all of that visibility you've been losing. The discount genuinely pays for itself in placement, because the system rewards the more competitive price with a higher position.",
     partnerResponse:
       "So now there's a guaranteed ranking bump if I discount? That's the kind of promise that makes me trust the rest of your numbers less, not more.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

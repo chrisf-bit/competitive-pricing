@@ -136,9 +136,9 @@ const step3Options: BranchingOption[] = [
     id: 'll-r19-step3-correct',
     label: 'Show the visibility and search-price drop-off',
     description:
-      "SME-prescribed diagnosis: despite rising visibility versus last year, his share versus peers is falling 15% behind, and his search price averages 12% higher than theirs - so travelers see him much less, and when they do the offer isn't attractive, so volume drops.",
+      "SME-prescribed diagnosis: despite rising visibility versus last year, his visibility is still falling short, and his search price averages 12% higher than peers - so travelers see him less often, and when they do the offer isn't attractive, so volume drops. Visibility is his own figure (up on last year); the peer comparison rides on search price.",
     playerDialogue:
-      "Let's look at exactly where travelers dropped off. Even with your visibility share up vs last year, your visibility share vs the peer group is falling about 15% behind, and your search price averages 12% higher than theirs. So travelers see you less than your peers - and when they do, the offer isn't attractive enough - the travelers do not click on your property page, potentially due to your search price.",
+      "Let's look at exactly where travelers dropped off. Even with your visibility share up on last year, it's still falling short, and your search price averages about 12% higher than your peers. So travelers see you less often - and when they do, the offer isn't attractive enough - they don't click through to your property page, potentially due to your search price.",
     partnerResponse:
       "Hmm, got it. But my regional office won't allow rate cuts, especially with all the noise from those leaked wholesale rates.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that visibility lags, incomplete - the visibility gap without the 12% search-price cause leaves a data-led operator unable to see the lever, so he can't act on it.",
     playerDialogue:
-      "The core issue here is that your visibility share is steadily falling behind your peer group - travelers just aren't seeing your listings often enough when they search, and every time you slip down that ranking you lose another slice of demand, which is what's quietly dragging your whole volume down month after month.",
+      "The core issue here is that your visibility share is steadily falling - travelers just aren't seeing your listings often enough when they search, and every time you slip down that ranking you lose another slice of demand, which is what's quietly dragging your whole volume down month after month.",
     partnerResponse:
       "And what's causing the visibility to fall? There's always a lever behind it - what's mine?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

@@ -88,9 +88,9 @@ const step2Options: BranchingOption[] = [
     id: 'ov-r13-step2-correct',
     label: 'Credit her price, then reveal the visibility gap',
     description:
-      "SME-prescribed handling: validate that her headline competitiveness is real, then show the deeper signal - travelers are searching, but her visibility share is only 20% against a peer group at 30%, so a large share never see her listings at all.",
+      "SME-prescribed handling: validate that her headline competitiveness is real, then show the deeper funnel signal - her visibility share is only 20% and forward sell-through is pacing behind her peer group, so a large share of searchers never reach her listings. Visibility is shown as her own figure (no peer number per the OPC peer rules); the peer signal rides on sell-through.",
     playerDialogue:
-      "You're right, and your commitment to staying competitive is visible in the headline price. But look one level deeper into what travelers actually see: your visibility share is sitting at just 20%, while your peers are at 30%. Travelers are coming to search, but a big portion of them never actually reach your listings.",
+      "You're right, and your commitment to staying competitive is visible in the headline price. But look one level deeper into what travelers actually see. Your visibility share - the slice of searches where your listing actually shows up - is sitting at just 20%, and your forward sell-through is pacing behind your peer group. Travelers are coming to search, but a big portion of them never actually reach your listings.",
     partnerResponse:
       "Well... if our rates are lower, how is it possible that our visibility is dropping? Is the platform's algorithm placing us further down the results?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
