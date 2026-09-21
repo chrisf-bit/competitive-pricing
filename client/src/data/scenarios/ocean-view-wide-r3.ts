@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - no numbers, no diagnosis. The wrong register for an evidence-led operator.',
     playerDialogue:
-      "That's a real shame to hear, and honestly I'm sure it's just a quiet patch that'll pick back up on its own before too long. These things tend to move in cycles anyway. How's the wider team getting on otherwise, and is there anything else going on your end I should know about?",
+      "That's a real shame to hear, and I'm sure it's just a quiet patch that'll pick back up on its own before too long. These things tend to move in cycles anyway. How's the wider team getting on otherwise, and is there anything else going on your end I should know about?",
     partnerResponse:
       "If you don't have data behind that, I'm not sure what we're solving today.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator - it shuts the conversation instead of reframing it.",
     playerDialogue:
-      "Honestly, the whole 'they'll go and book direct' idea is a bit of a myth that a lot of operators cling to. Travelers usually just book whatever's cheapest sitting right in front of them and they don't go chasing a website they've never heard of.",
+      "The whole 'they'll go and book direct' idea is a bit of a myth that a lot of operators cling to. Travelers usually just book whatever's cheapest sitting right in front of them and they don't go chasing a website they've never heard of.",
     partnerResponse:
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that competitiveness matters, wrong tool - a blanket public cut erodes ADR across her whole portfolio and her owners' returns. The SME guidance is explicit: don't ask for a general rate drop.",
     playerDialogue:
-      "Honestly, the simplest move here is just to bring your public rates down across the board so you're clearly the cheapest option on the search page again. If you're competitive everywhere at once, the visibility comes straight back and you stop losing those guests to the local properties next to you. Can we look at trimming the whole rate plan down together?",
+      "One move here is just to bring your public rates down across the board so you're clearly the cheapest option on the search page again. If you're competitive everywhere at once, the visibility comes straight back and you stop losing those guests to the local properties next to you. Can we look at trimming the whole rate plan down together?",
     partnerResponse:
       "An across-the-board cut is exactly what erodes my owners' ADR. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -209,7 +209,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Asks for the public alignment but offers nothing to protect her direct incentive - the exact concern she just raised - so it reads as asking her to simply give up her advantage.",
     playerDialogue:
-      "Just align your public rates with your website here and you'll recover the visibility you've lost pretty quickly. Honestly, when you look at the numbers, the direct discount was costing you more in missed bookings than it was ever earning you on the direct side anyway, so you're not really losing much by letting it go. Let's get the rates matched up and move on.",
+      "Just align your public rates with your website here and you'll recover the visibility you've lost pretty quickly. When you look at the numbers, the direct discount was costing you more in missed bookings than it was ever earning you on the direct side anyway, so you're not really losing much by letting it go. Let's get the rates matched up and move on.",
     partnerResponse:
       "You keep asking me to give up my direct advantage without protecting it. That's a non-starter.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -223,7 +223,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Direct her to abandon her cheaper-direct strategy and make Booking.com her main channel. Dictating her external and direct-channel strategy oversteps.",
     playerDialogue:
-      "Honestly, the cleanest fix here is to just stop keeping your own website cheaper at all - drop the direct discount completely, make Booking.com your main channel, and route your bookings through us instead of your agency site. Your direct channel is what's causing all of this, so the simplest thing is to stop competing with yourself and let us carry the volume.",
+      "The cleanest fix here is to just stop keeping your own website cheaper at all - drop the direct discount completely, make Booking.com your main channel, and route your bookings through us instead of your agency site. Your direct channel is what's causing all of this, so one thing is to stop competing with yourself and let us carry the volume.",
     partnerResponse:
       "You don't get to tell me to give up my direct channel. We're done if that's the pitch.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

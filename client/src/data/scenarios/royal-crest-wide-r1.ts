@@ -53,7 +53,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right instinct (improve competitiveness) but the wrong tool - a blanket public rate cut lowers his ADR everywhere, the exact thing his margin-first strategy protects. The SME guidance is explicit: don't ask for a general rate drop.",
     playerDialogue:
-      "Honestly, the cleanest fix here is just to bring your overall public rates down by a few percent so you're sitting competitively across the board on our platform. If your headline prices come down everywhere, the whole portfolio looks sharper to travelers and we stop losing them on price.",
+      "The cleanest fix here is just to bring your overall public rates down by a few percent so you're sitting competitively across the board on our platform. If your headline prices come down everywhere, the whole portfolio looks sharper to travelers and we stop losing them on price.",
     partnerResponse:
       "Dropping my ADR across the board is the one thing I won't do. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -121,7 +121,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Wave away the cannibalization worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
     playerDialogue:
-      "Honestly, this cannibalization worry is a bit of a myth that partners tell themselves - I hear it all the time and it rarely plays out the way people fear. The guests booking through us mostly aren't the ones who'd have found your direct site anyway. Just trust me on this one, turn those same conditions on, and you'll see it was the right call. What would you have to lose? All that will happen is increased business.",
+      "This cannibalization worry is a bit of a myth that partners tell themselves - I hear it all the time and it rarely plays out the way people fear. The guests booking through us mostly aren't the ones who'd have found your direct site anyway. Just trust me on this one, turn those same conditions on, and you'll see it was the right call. What would you have to lose? All that will happen is increased business.",
     partnerResponse:
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

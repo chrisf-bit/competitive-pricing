@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that he's uncompetitive, wrong route - prescribe a blanket cut before diagnosing anything. It presumes the fix and hands an ROI-minded operator nothing to weigh, exactly the move he'll push back on.",
     playerDialogue:
-      "Your page views are down for one simple reason - you're priced too high against everyone else, and the quickest way to turn that around is to drop your Booking.com rates right across the board. Bring them down, undercut the other channels, and the traffic and the bookings will come straight back to you within the month.",
+      "Your page views are down for one simple reason - you're priced too high against everyone else, and one way to turn that around is to drop your Booking.com rates right across the board. Bring them down, undercut the other channels, and the traffic and the bookings will come straight back to you within the month.",
     partnerResponse:
       "You're telling me to cut everything before you've explained a single thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for an operator who opened by asking exactly what the data shows.',
     playerDialogue:
-      "Honestly, I really wouldn't read too much into one quieter month - in my experience these things tend to even themselves out once the season turns, and a single dip rarely means anything is actually wrong. You've got a strong property with loyal guests, so let's not get bogged down in one number. How's everything else going on your side?",
+      "I really wouldn't read too much into one quieter month - in my experience these things tend to even themselves out once the season turns, and a single dip rarely means anything is actually wrong. You've got a strong property with loyal guests, so let's not get bogged down in one number. How's everything else going on your side?",
     partnerResponse:
       "I asked what the data shows. If it's just a slow month, tell me that; if it isn't, show me.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong lever - it turns a setup opportunity into a discount ask, and it walks straight into the operational fear he'll raise next. The win is availability and configuration, not a price cut.",
     playerDialogue:
-      "It's simple, really - the families are out there searching, so the fastest way to win them is on price. Just lower your family rates here on Booking.com so you're clearly the cheapest option for a family of four, undercut what they'd pay anywhere else, and those family bookings will start flowing to you almost straight away. Price is the lever that moves this quickest.",
+      "The families are out there searching, so one way to win them is on price. Just lower your family rates here on Booking.com so you're clearly the cheapest option for a family of four, undercut what they'd pay anywhere else, and those family bookings will start flowing to you almost straight away. Price is the lever that moves this.",
     partnerResponse:
       "Cutting my family prices is the opposite of protecting that inventory. Give me a commercial reason, not a discount.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },

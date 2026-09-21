@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - no numbers, no diagnosis. The wrong register for an evidence-led operator.',
     playerDialogue:
-      "That's a real shame to hear, but honestly I wouldn't worry too much about it - these things tend to ebb and flow, and I'm sure it'll pick back up before long. You've built such a lovely reputation that the guests always find their way back. How's the team getting on otherwise?",
+      "That's a real shame to hear, but I wouldn't worry too much about it - these things tend to ebb and flow, and I'm sure it'll pick back up before long. You've built such a lovely reputation that the guests always find their way back. How's the team getting on otherwise?",
     partnerResponse:
       "If there's no data behind that, what are we actually solving?",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator.",
     playerDialogue:
-      "The whole 'they'll just book direct' idea is honestly a bit of a myth, and I think you're giving travelers far too much credit here - they're lazy, they don't hunt around for your brand, they simply book whatever happens to be the cheapest option sitting right in front of them on the page. Clinging to that belief is exactly what's costing you all this visibility.",
+      "The whole 'they'll just book direct' idea is a bit of a myth, and I think you're giving travelers far too much credit here - they're lazy, they don't hunt around for your brand, they book whatever happens to be the cheapest option sitting right in front of them on the page. Clinging to that belief is exactly what's costing you all this visibility.",
     partnerResponse:
       "Calling my strategy a myth isn't how to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -223,7 +223,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frame alignment as compulsory with a ranking penalty if she refuses. Threatening ranking to force a price move is banned.",
     playerDialogue:
-      "I'll be straight with you - if you don't align the base rate, our system is simply going to keep dropping your ranking lower and lower until you do, and there's nothing I can do to stop that happening. This really isn't optional at this point, so the sensible thing is to align now before your placement slips further and it gets harder to claw back.",
+      "I'll be straight with you - if you don't align the base rate, our system is going to keep dropping your ranking lower and lower until you do, and there's nothing I can do to stop that happening. This really isn't optional at this point, so the sensible thing is to align now before your placement slips further and it gets harder to claw back.",
     partnerResponse:
       "Framing it as 'not optional' with a ranking threat is exactly the wrong approach.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

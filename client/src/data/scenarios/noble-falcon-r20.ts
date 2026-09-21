@@ -61,7 +61,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Reaches for the price lever before diagnosing - and he's already 15% below peers, so 'go cheaper' is both the wrong lever and easy for a data-led manager to see through.",
     playerDialogue:
-      "Your conversion's on the low side, so the simplest move here is to get you more competitive still - bring your headline rate down a notch, maybe test a small reduction across your main room types, and I'd expect the bookings to start following once you're clearly the cheapest option travelers see.",
+      "Your conversion's on the low side, so one move here is to get you more competitive still - bring your headline rate down a notch, maybe test a small reduction across your main room types, and I'd expect the bookings to start following once you're clearly the cheapest option travelers see.",
     partnerResponse:
       "We're already 15% below our peers, Mark. If price were the issue, we'd be converting - so cutting further makes no sense to me.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -75,7 +75,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm but empty - opening with 'everything looks great, keep it up' on his biggest month of the year wastes the opportunity and gives a results-minded manager nothing to work with.",
     playerDialogue:
-      "Honestly, Adam, from where I'm sitting things are looking really solid on your end - the numbers are steady, the property's ticking along nicely, and I didn't want to overcomplicate a good month. I mostly just wanted to check in, say it's great to reconnect, and tell you to keep doing exactly what you're doing.",
+      "Adam, from where I'm sitting things are looking really solid on your end - the numbers are steady, the property's ticking along nicely, and I didn't want to overcomplicate a good month. I mostly just wanted to check in, say it's great to reconnect, and tell you to keep doing exactly what you're doing.",
     partnerResponse:
       "I appreciate it, but our pickup is slow for a peak month. I'd rather use this time to find out why than hear it's all fine.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -1 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong fix - adding a family discount to offset a broken configuration gives away margin to paper over a setup error, instead of correcting the config that's inflating the family price.",
     playerDialogue:
-      "The quickest patch here is to layer a family discount on top of your existing rates, so the price families actually see drops back down to something attractive and they start booking again. You could set it live today with no config work needed, and let the reduced family price do the work.",
+      "One patch here is to layer a family discount on top of your existing rates, so the price families actually see drops back down to something attractive and they start booking again. You could set it live today with no config work needed, and let the reduced family price do the work.",
     partnerResponse:
       "Discount to cover a setup error? I'd rather fix whatever's actually broken than give away margin.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "He's a numbers manager who just asked for the impact - answering with 'a significant boost' instead of the concrete room-nights figure wastes the credibility a real number would have bought.",
     playerDialogue:
-      "You'd see a significant boost, honestly - fixing this opens up a whole pocket of family demand you're currently missing out on, and once those searches resolve the way they should, that lost volume starts converting instead of bouncing away to your peers. The upside is genuinely substantial, easily one of the bigger wins available to you right now, and it compounds through the back half of the month as the peak demand keeps flowing in.",
+      "You'd see a significant boost - fixing this opens up a whole pocket of family demand you're currently missing out on, and once those searches resolve the way they should, that lost volume starts converting instead of bouncing away to your peers. The upside is genuinely substantial, easily one of the bigger wins available to you right now, and it compounds through the back half of the month as the peak demand keeps flowing in.",
     partnerResponse:
       "'Significant' and 'substantial' - can you put an actual number on it? That's what I can take to my team.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -315,7 +315,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Right that the family fix is the win, but ending there - on the last conversation of a strong call, a receptive, forward-leaning manager was open to a genuine 2027 planning discussion, and stopping short leaves that value on the table.",
     playerDialogue:
-      "Perfect - let's just get that family configuration corrected in the extranet and I'm confident we'll see those 45 room nights come through over the next few weeks. Honestly, that's a really clean result for one call, and I don't want to pile more onto your plate when you've already got a clear action to take away. Get the child categories fixed, keep an eye on the family pickup as it lands, and drop me a line if anything looks off once it's live. Otherwise I'll leave you to it and we'll catch up again down the line.",
+      "Perfect - let's just get that family configuration corrected in the extranet and I'm confident we'll see those 45 room nights come through over the next few weeks. That's a really clean result for one call, and I don't want to pile more onto your plate when you've already got a clear action to take away. Get the child categories fixed, keep an eye on the family pickup as it lands, and drop me a line if anything looks off once it's live. Otherwise I'll leave you to it and we'll catch up again down the line.",
     partnerResponse:
       "Sounds good... though I was rather hoping we'd talk about where we take this next year, while we've got the momentum.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

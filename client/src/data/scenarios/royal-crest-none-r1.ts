@@ -62,7 +62,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right instinct, wrong tool - a blanket public rate cut lowers his ADR everywhere, the exact thing his margin-first strategy protects. The SME guidance is explicit: don't ask for a general rate drop.",
     playerDialogue:
-      "Honestly, the cleanest fix here is to bring your overall public rates down a few percent so you're competitive across the board on our platform. If the headline price is lower everywhere, you stop losing the price comparison and your listing looks sharper, so the bookings should follow. I'd take the whole rate down rather than fiddling with one segment at a time.",
+      "The cleanest fix here is to bring your overall public rates down a few percent so you're competitive across the board on our platform. If the headline price is lower everywhere, you stop losing the price comparison and your listing looks sharper, so the bookings should follow. I'd take the whole rate down rather than fiddling with one segment at a time.",
     partnerResponse:
       "Dropping my ADR across the board is the one thing I won't do. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -130,7 +130,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Wave away the cannibalization worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
     playerDialogue:
-      "Honestly, cannibalization is a bit of a myth that partners tell themselves to avoid trying anything new. In my experience it just doesn't play out the way people fear, and the guests you'd win here aren't the same ones booking direct anyway. I've seen this work plenty of times, so you don't need to run the numbers yourself - just trust me on this one and turn it on.",
+      "Cannibalization is a bit of a myth that partners tell themselves to avoid trying anything new. In my experience it just doesn't play out the way people fear, and the guests you'd win here aren't the same ones booking direct anyway. I've seen this work plenty of times, so you don't need to run the numbers yourself - just trust me on this one and turn it on.",
     partnerResponse:
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

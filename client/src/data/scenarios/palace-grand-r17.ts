@@ -70,7 +70,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Prescribes a price cut before diagnosing - and it walks straight into the price-war fear he opened with, so a flexible-but-ROI-minded operator shuts it down.',
     playerDialogue:
-      "The simplest way to get those rooms moving is to bring your rate down a bit here - if you shave a little off your price you'll stop losing those bookings to the competition, and the unsold inventory should start clearing on its own fairly quickly. Honestly, that's the quickest fix I can point you to today.",
+      "One way to get those rooms moving is to bring your rate down a bit here - if you shave a little off your price you'll stop losing those bookings to the competition, and the unsold inventory should start clearing on its own fairly quickly. That's one fix I can point you to today.",
     partnerResponse:
       "So your answer is 'drop your price' too. I give everyone the same rate for a reason - I'm not starting a price war.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -104,7 +104,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the demand excuse - if it's just a soft market, there's nothing to fix, and the diagnosis stalls before the real segment gap surfaces.",
     playerDialogue:
-      "You could well be right - demand is softer just about everywhere at the moment, so honestly a good part of this is probably just the market cooling off rather than anything on your side. Most properties are feeling the same squeeze, so I'd say we ride it out.",
+      "You could well be right - demand is softer just about everywhere at the moment, so a good part of this is probably just the market cooling off rather than anything on your side. Most properties are feeling the same squeeze, so I'd say we ride it out.",
     partnerResponse:
       "Good, that's what I thought. So we ride it out until demand picks back up.",
     styleMatch: { red: 0, yellow: 1, green: 0, blue: -2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that it's not a full price war, wrong emphasis - calling a 5% gap 'barely anything' undersells the very segment problem you need him to act on, and a data-led operator will simply agree it's not worth his time.",
     playerDialogue:
-      "Honestly it's only about 5%, so it's really not a big deal in the grand scheme of things - a small nudge here or there would sort it out if you ever fancied it, but I wouldn't lose any sleep over a number that size. Plenty of properties sit around that gap and do perfectly well, so it's very much a take-it-or-leave-it thing.",
+      "It's only about 5%, so it's really not a big deal in the grand scheme of things - a small nudge here or there would sort it out if you ever fancied it, but I wouldn't lose any sleep over a number that size. Plenty of properties sit around that gap and do perfectly well, so it's very much a take-it-or-leave-it thing.",
     partnerResponse:
       "If it's that small, then I'll leave it - no point fiddling with my rates over a rounding error.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that it's segment-specific, wrong precision - 'it's spread across a few segments' denies a data-led operator the one concrete, fixable target and sounds like hedging.",
     playerDialogue:
-      "It's honestly hard to pin down to one single thing - it's really spread across a few different traveler segments where you're coming up a bit more expensive than your peers. Broadly speaking you're just a little less competitive than you'd ideally want to be, so it's more of a general pattern than one specific gap I can point to.",
+      "It's hard to pin down to one single thing - it's really spread across a few different traveler segments where you're coming up a bit more expensive than your peers. Broadly speaking you're just a little less competitive than you'd ideally want to be, so it's more of a general pattern than one specific gap I can point to.",
     partnerResponse:
       "'A few segments' and 'broadly' doesn't give me anything to act on. Where exactly is the money going?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -296,7 +296,7 @@ const step6Options: BranchingOption[] = [
     description:
       "He's cost-conscious about stacking discounts - not explaining that Country Rates don't stack with his mobile rate leaves the exact worry ('am I doubling my discount?') unanswered, and a data-led operator won't switch it on blind.",
     playerDialogue:
-      "Just go ahead and switch the Country Rate on - honestly, I wouldn't worry too much about how it interacts with your mobile rate or any of your other rates, it tends to sort itself out once it's live. Plenty of partners just turn it on and monitor the results from there rather than getting bogged down in the mechanics up front. Get it live, keep an eye on the European family bookings, and we can always fine-tune it later if anything looks off.",
+      "Just go ahead and switch the Country Rate on - I wouldn't worry too much about how it interacts with your mobile rate or any of your other rates, it tends to sort itself out once it's live. Plenty of partners just turn it on and monitor the results from there rather than getting bogged down in the mechanics up front. Get it live, keep an eye on the European family bookings, and we can always fine-tune it later if anything looks off.",
     partnerResponse:
       "'Don't worry about it' is how I end up double-discounting. Does it stack with my mobile rate or not?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -310,7 +310,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the opening to reach for more - roll the Country Rate out to every market now. Overshoots the targeted EEA-family fix and reopens the blanket-discount worry.",
     playerDialogue:
-      "Great - and honestly, let's not stop at the EEA while we've got the momentum. If a Country Rate works for European families, there's no reason to keep it boxed in there - let's roll country rates out across every one of your source markets at once, top to bottom, so we really move the numbers this quarter instead of nudging one segment. Switch the whole lot on together and you'll see a much bigger swing than tinkering with just the EEA on its own.",
+      "Great - and let's not stop at the EEA while we've got the momentum. If a Country Rate works for European families, there's no reason to keep it boxed in there - let's roll country rates out across every one of your source markets at once, top to bottom, so we really move the numbers this quarter instead of nudging one segment. Switch the whole lot on together and you'll see a much bigger swing than tinkering with just the EEA on its own.",
     partnerResponse:
       "Slow down - I agreed to try the EEA one for the family gap, not to discount every market at once.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

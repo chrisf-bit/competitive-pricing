@@ -47,7 +47,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and push him to bring his price down. It presumes the fix, and pressuring a lower price isn't permitted in a No Parity market.",
     playerDialogue:
-      "Honestly, the quickest way to turn this around is to bring your public price here down until you're clearly competitive again. Once your price on the platform sits below where you are now, the searches that pass you by today will start converting, and the whole gap closes on its own without us needing to dig any deeper.",
+      "One way to turn this around is to bring your public price here down until you're clearly competitive again. Once your price on the platform sits below where you are now, the searches that pass you by today will start converting, and the whole gap closes on its own without us needing to dig any deeper.",
     partnerResponse:
       "You're telling me to cut my price before we've even looked at the problem together. Let's slow down.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -103,7 +103,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the Same Net premise instead of reframing it - if you agree it's not his problem when competitors discount, there's nothing left to fix and the visibility gap stands.",
     playerDialogue:
-      "That's fair enough, honestly - if your boss gives everyone the same rate across the board, then the competitors cutting their own margins or throwing coupons around really isn't something you should have to answer for. You're holding a consistent line, which is a perfectly reasonable way to run things, and it's hard to argue you're the one who needs to move when they're the ones discounting.",
+      "That's fair enough - if your boss gives everyone the same rate across the board, then the competitors cutting their own margins or throwing coupons around really isn't something you should have to answer for. You're holding a consistent line, which is a perfectly reasonable way to run things, and it's hard to argue you're the one who needs to move when they're the ones discounting.",
     partnerResponse:
       "So we agree the approach is fine? Then I'm not sure what we're fixing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -173,7 +173,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Wave away his operational worry and tell him to open the family rooms regardless. Dictating his distribution and brushing off a real concern burns the collaboration this operator responds to.",
     playerDialogue:
-      "The operational stuff is honestly a bit of a non-issue - you just need to open all of your family rooms to us and stop overthinking the beds and cots side of it. Plenty of properties handle more complexity than this without any fuss, so the simplest move is to just switch the whole family inventory on for us and let it run.",
+      "The operational stuff is a bit of a non-issue - you just need to open all of your family rooms to us and stop overthinking the beds and cots side of it. Plenty of properties handle more complexity than this without any fuss, so one move is to just switch the whole family inventory on for us and let it run.",
     partnerResponse:
       "The operational stuff is my day job, not a non-issue. Waving it away doesn't help me.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -215,7 +215,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the family setup is the opportunity, wrong route - a blanket family discount contradicts the 'without discounting' framing and erodes the ADR the family segment is supposed to lift.",
     playerDialogue:
-      "The simplest path here is to just knock a decent chunk off all of your family rates for the low season and let the volume take care of itself. Once those family rooms are clearly the cheaper option through that quieter stretch, the bookings tend to follow on their own, and you can bring the rates back up again as soon as demand picks up.",
+      "One path here is to just knock a decent chunk off all of your family rates for the low season and let the volume take care of itself. Once those family rooms are clearly the cheaper option through that quieter stretch, the bookings tend to follow on their own, and you can bring the rates back up again as soon as demand picks up.",
     partnerResponse:
       "Discounting everything is exactly what I'm trying to avoid. I thought this was about setup, not price cuts.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -229,7 +229,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Turn a setup pitch into a requirement to be the lowest price for families. Requiring the cheapest rate pressures a price reduction, which isn't permitted in a No Parity market.",
     playerDialogue:
-      "Honestly, to really win the family segment you'll need to make sure you come out as the cheapest option for them anywhere on our platform - that's simply what it takes. If a comparable property is showing families a lower number than you are, they'll book that one every time, so your family rooms have to sit right at the bottom of the list.",
+      "To really win the family segment you'll need to make sure you come out as the cheapest option for them anywhere on our platform - that's what it takes. If a comparable property is showing families a lower number than you are, they'll book that one every time, so your family rooms have to sit right at the bottom of the list.",
     partnerResponse:
       "Now it's 'be the cheapest'? That's the price war I was told we weren't having.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -271,7 +271,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right lever, lost momentum - flagging the blocked mobile rate and then parking it drops the do-it-now energy that just got him to yes, and the exclusions keep costing him bookings.",
     playerDialogue:
-      "There's also a mobile rate on here that could genuinely use a proper look at some point, but honestly that feels like a job for another day rather than right now - we've already covered a lot in this call, and I'd rather not pile too much onto you all at once.",
+      "There's also a mobile rate on here that could genuinely use a proper look at some point, but that feels like a job for another day rather than right now - we've already covered a lot in this call, and I'd rather not pile too much onto you all at once.",
     partnerResponse:
       "Alright, though if it's costing me bookings now, I'm not sure why we'd leave it.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -1 },

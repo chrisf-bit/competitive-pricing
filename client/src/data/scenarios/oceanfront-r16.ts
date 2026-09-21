@@ -77,7 +77,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Prescribes a rate cut before diagnosing - and she's just told you she'd rather hold rooms empty than compromise her OTA rates, so it lands as exactly the move she guards against.",
     playerDialogue:
-      "The pace is running behind, so honestly the cleanest fix here is to bring your public rates down a little and get yourself more competitive on the platform. If we shave a bit off those rates now, I'd expect those rooms to start moving and the whole gap to close up fairly quickly.",
+      "The pace is running behind, so the cleanest fix here is to bring your public rates down a little and get yourself more competitive on the platform. If we shave a bit off those rates now, I'd expect those rooms to start moving and the whole gap to close up fairly quickly.",
     partnerResponse:
       "Lower our public rates? That's the one thing I've said we won't do to protect our direct guests. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dictates how she should run her own marketing - shift spend off her overseas ads and onto the platform. Directing a partner's external marketing and distribution strategy oversteps in every regime.",
     playerDialogue:
-      "Honestly, those overseas ad campaigns are wasted spend, and you'd see far more return by pulling that budget out of them and putting it into building up your presence on our platform instead. That's where I'd redirect the marketing money if I were you.",
+      "Those overseas ad campaigns are wasted spend, and you'd see far more return by pulling that budget out of them and putting it into building up your presence on our platform instead. That's where I'd redirect the marketing money if I were you.",
     partnerResponse:
       "My marketing budget is my business, Kai. I didn't ask you to redraw it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -125,7 +125,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Takes 'I only want my website to grow' at face value and drops the thread - forfeiting the billboard reframe that would have shown the platform serving that same goal.",
     playerDialogue:
-      "That's completely fair, and I understand where you're coming from - if the priority right now is growing your own website, then I get that OTAs simply aren't where you want to put your energy at the moment, and I won't push you on that today.",
+      "That's completely fair, and I understand where you're coming from - if the priority right now is growing your own website, then I get that OTAs aren't where you want to put your energy at the moment, and I won't push you on that today.",
     partnerResponse:
       "Right, exactly. So I'm not sure there's much for us to change here today.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
@@ -173,7 +173,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right idea, no traction - a generic 'we have huge reach' line without the zero-marketing-cost angle or a concrete number sounds like a sales boast to a data-led owner and doesn't connect to her goal.",
     playerDialogue:
-      "Honestly, you should really be leaning into us a lot more than you are - we have enormous global reach and an audience that's far, far bigger than anything you could ever hope to reach on your own. There's a whole world of travelers out there and we're the ones who can put you in front of them.",
+      "You should really be leaning into us a lot more than you are - we have enormous global reach and an audience that's far, far bigger than anything you could ever hope to reach on your own. There's a whole world of travelers out there and we're the ones who can put you in front of them.",
     partnerResponse:
       "Every platform tells me they're the biggest. That on its own doesn't change my plan.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -255,7 +255,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that she needs to be more competitive to US travelers, wrong instrument - a public discount is visible to her direct guests too, which is the exact thing she said she won't open up.",
     playerDialogue:
-      "Let's keep this simple and just put a small discount on your public rates - modest enough to protect your margin but still enough to win those US travelers back onto your page. A little movement on the headline price is honestly the quickest way to get those searchers converting again.",
+      "Let's keep this simple and just put a small discount on your public rates - modest enough to protect your margin but still enough to win those US travelers back onto your page. A little movement on the headline price is one way to get those searchers converting again.",
     partnerResponse:
       "A public discount is visible to my direct guests, Kai. That's precisely what I told you I won't do.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -269,7 +269,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answers her results question with a guaranteed revenue promise - exactly the specific-reward promise compliance forbids, and a red flag to an owner already burned by promo tags.",
     playerDialogue:
-      "I can promise you this one will absolutely deliver - a guaranteed lift in net revenue coming straight from that US segment, no question about it whatsoever. Put it live and you'll see the return; honestly, this is one you can take right to the bank and count on.",
+      "I can promise you this one will absolutely deliver - a guaranteed lift in net revenue coming straight from that US segment, no question about it whatsoever. Put it live and you'll see the return; this is one you can take right to the bank and count on.",
     partnerResponse:
       "The last people who 'guaranteed' me a lift cost me margin. A promise like that makes me trust it less, not more.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -317,7 +317,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Accepts the deferral but pins nothing - no projections, no KPIs, no date. A data-led owner needs the numbers she asked for, or the follow-up quietly evaporates.",
     playerDialogue:
-      "No problem at all, honestly - let's just keep the lines open between us and pick this whole thing back up again whenever the timing happens to suit you better. There's no rush on my end, so whenever you feel ready to revisit it, you know where to find me and we'll take it from there.",
+      "No problem at all - let's just keep the lines open between us and pick this whole thing back up again whenever the timing happens to suit you better. There's no rush on my end, so whenever you feel ready to revisit it, you know where to find me and we'll take it from there.",
     partnerResponse:
       "I did ask for projections, though. Without those there's nothing for me to actually look at, is there?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },

@@ -42,7 +42,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and press her to lower her public price. It presumes the fix, and pressuring a lower price isn't permitted in a No Parity market.",
     playerDialogue:
-      "The quickest way to turn this around is to bring your public price here down. If you lower what you're charging on our platform so you're clearly cheaper than the properties around you, the visibility comes straight back and the bookings follow - so let's get that price down first and worry about the rest afterward.",
+      "One way to turn this around is to bring your public price here down. If you lower what you're charging on our platform so you're clearly cheaper than the properties around you, the visibility comes straight back and the bookings follow - so let's get that price down first and worry about the rest afterward.",
     partnerResponse:
       "You're telling me to cut my price before you've explained the actual problem. Slow down.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -112,7 +112,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Wave away her loyalty-member discounts as pointless. Dismissive of a deliberate strategy she just explained - it shuts the collaboration down.",
     playerDialogue:
-      "Honestly, protecting your loyalty members with cheaper rates on your own site is a waste of effort - all it's really doing is holding back the traffic we could be sending you and quietly costing you the bookings you're trying to protect.",
+      "Protecting your loyalty members with cheaper rates on your own site is a waste of effort - all it's really doing is holding back the traffic we could be sending you and quietly costing you the bookings you're trying to protect.",
     partnerResponse:
       "My loyalty base isn't a waste - it's the backbone of my business. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

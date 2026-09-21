@@ -52,7 +52,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right instinct, wrong tool - a blanket public rate cut lowers his ADR everywhere, the exact thing his margin-first strategy protects. The SME guidance is explicit: don't ask for a general rate drop.",
     playerDialogue:
-      "Honestly, the cleanest fix here is just to bring your overall public rates down by a few percent so you sit competitively across every date and room type we sell. A lower headline rate keeps you in the running on more searches, and the extra bookings should come through without any of the fenced-offer complexity to set up.",
+      "The cleanest fix here is just to bring your overall public rates down by a few percent so you sit competitively across every date and room type we sell. A lower headline rate keeps you in the running on more searches, and the extra bookings should come through without any of the fenced-offer complexity to set up.",
     partnerResponse:
       "Dropping my ADR across the board is the one thing I won't do. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -120,7 +120,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Wave away the cannibalization worry as a myth and ask him to take it on faith. The opposite of what an evidence-driven partner wants.",
     playerDialogue:
-      "Honestly, cannibalization is a bit of a myth that partners tell themselves to avoid making a move, and I've seen plenty of hotels talk themselves out of real growth because of it. I wouldn't lose sleep over it if I were you. Just trust me on this one, turn it on, and I'm confident you'll be glad you did once the bookings start landing.",
+      "Cannibalization is a bit of a myth that partners tell themselves to avoid making a move, and I've seen plenty of hotels talk themselves out of real growth because of it. I wouldn't lose sleep over it if I were you. Just trust me on this one, turn it on, and I'm confident you'll be glad you did once the bookings start landing.",
     partnerResponse:
       "Telling me my concern is a myth and to 'just trust you' is not a data conversation. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

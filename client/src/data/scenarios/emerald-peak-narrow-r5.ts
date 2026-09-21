@@ -39,7 +39,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut - which a franchise GM can't authorise, and which the SME guidance says to avoid.",
     playerDialogue:
-      "Your rates just aren't competitive at the moment, and the simplest fix I can see is to bring your Booking.com prices down across the board by a few percent so you're competitive again. Can we get that change made this week?",
+      "Your rates just aren't competitive at the moment, and one fix I can see is to bring your Booking.com prices down across the board by a few percent so you're competitive again. Can we get that change made this week?",
     partnerResponse:
       "I can't authorise a flat rate drop - it breaks head-office policy and hits our ADR. That's a non-starter.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -206,7 +206,7 @@ const step4Options: BranchingOption[] = [
     description:
       "The ADR-wide move she can't make - and it wastes the compliant, fenced family route.",
     playerDialogue:
-      "The simplest way to work within your rules is probably just a small general discount across the board here - nothing dramatic, just a few percent shaved off everything so the whole property reads as better value to travelers comparing options. It's the least fiddly option and we could switch it on today.",
+      "One way to work within your rules is probably just a small general discount across the board here - nothing dramatic, just a few percent shaved off everything so the whole property reads as better value to travelers comparing options. It's the least fiddly option and we could switch it on today.",
     partnerResponse:
       "A general discount is the one thing I keep telling you I can't do.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -220,7 +220,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Threaten to keep her visibility penalized until she aligns. A visibility threat over pricing is banned in every regime.",
     playerDialogue:
-      "I'll be straight with you - if you don't align on this, our system is simply going to keep penalizing your visibility until you do, and that decline compounds week over week. The longer it sits unaddressed the harder it gets to claw back, so this really is only going to get worse until you move on it.",
+      "I'll be straight with you - if you don't align on this, our system is going to keep penalizing your visibility until you do, and that decline compounds week over week. The longer it sits unaddressed the harder it gets to claw back, so this really is only going to get worse until you move on it.",
     partnerResponse:
       "Threatening my visibility to force my hand is exactly the wrong move. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

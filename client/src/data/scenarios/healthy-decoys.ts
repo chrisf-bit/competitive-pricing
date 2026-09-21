@@ -426,7 +426,7 @@ function closeSteps(meta: HotelMeta): BranchingStep[] {
       description:
         'Answer one soft signal with a heavy, premature intervention - overkill for a property that needs watching, not a big move today.',
       playerDialogue:
-        "The quickest way to shake off that soft pace is to launch a broad promotion right now and pull the demand forward. Shall we set that up today?",
+        "One way to shake off that soft pace is to launch a broad promotion right now and pull the demand forward. Shall we set that up today?",
       partnerResponse:
         "A broad promotion for a property that's otherwise doing fine? That just trains guests to wait for a deal. No.",
       styleMatch: stylePlus(s, -1),
@@ -472,7 +472,7 @@ function closeSteps(meta: HotelMeta): BranchingStep[] {
       description:
         'Tell the partner not to worry about the soft pace at all - the opposite over-correction, leaving a real if minor signal unaddressed.',
       playerDialogue:
-        "Honestly, I wouldn't give that soft pace a second thought - these things always sort themselves out. There's nothing here for you to act on.",
+        "I wouldn't give that soft pace a second thought - these things always sort themselves out. There's nothing here for you to act on.",
       partnerResponse:
         "You flagged it a minute ago and now it's nothing? If it's worth watching, let's watch it - don't just brush it off.",
       styleMatch: stylePlus(s, -1),

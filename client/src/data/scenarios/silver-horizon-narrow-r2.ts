@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Open by dismissing the drop as market softness. A numbers-first partner reads that as sloppy and disengages.',
     playerDialogue:
-      "We've noticed a small dip in the last little while, but honestly I wouldn't read too much into it - it's almost certainly just the usual seasonal softness we see this time of year across the board. Nothing to really worry about, these things tend to even themselves out.",
+      "We've noticed a small dip in the last little while, but I wouldn't read too much into it - it's almost certainly just the usual seasonal softness we see this time of year across the board. Nothing to really worry about, these things tend to even themselves out.",
     partnerResponse:
       "'Seasonal'? If that's your analysis, this call is a waste of my time.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -224,7 +224,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Dismiss her concern as an execution failure on her side. Condescending to an operator who knows her portfolio - the opposite of the ROI framing that lands.",
     playerDialogue:
-      "Managing family inventory really is fairly basic once it's set up - if it's turning into a headache for your team, that's honestly more of an execution problem on your side than anything else. Plenty of operators handle this without issue, so the growth is there whenever you sort the process out.",
+      "Managing family inventory really is fairly basic once it's set up - if it's turning into a headache for your team, that's more of an execution problem on your side than anything else. Plenty of operators handle this without issue, so the growth is there whenever you sort the process out.",
     partnerResponse:
       "I don't need you telling me my operations are the problem. Done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

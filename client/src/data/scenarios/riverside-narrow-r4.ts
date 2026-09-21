@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Point at the Key OTA and tell him to make sure he isn't pricier than them on families. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "You're clearly cheaper on the Key OTA for families right now, and that's where the demand is leaking to - so the move is simply to make sure your family rates on our platform aren't sitting any higher than the Key OTA's. Line them up against what the Key OTA is showing, undercut where you can, and you'll pull those family bookings straight back.",
+      "You're clearly cheaper on the Key OTA for families right now, and that's where the demand is leaking to - so the move is to make sure your family rates on our platform aren't sitting any higher than the Key OTA's. Line them up against what the Key OTA is showing, undercut where you can, and you'll pull those family bookings straight back.",
     partnerResponse:
       "You can't ask me to price against the Key OTA here - that's not how this market works.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Fall back on an across-the-board discount - the Slippery Road trap the boutique has refused throughout.",
     playerDialogue:
-      "Simplest of all - just take a flat 10% off every one of your rates across the board and everything else sorts itself out from there. Don't overcomplicate it with base rates and Genius and family splits; one clean cut applied to the whole lot makes you cheaper everywhere at once. Drop the ten percent across the board, sit back, and let the extra volume roll in without fussing over the detail.",
+      "One option - just take a flat 10% off every one of your rates across the board and everything else sorts itself out from there. Don't overcomplicate it with base rates and Genius and family splits; one clean cut applied to the whole lot makes you cheaper everywhere at once. Drop the ten percent across the board, sit back, and let the extra volume roll in without fussing over the detail.",
     partnerResponse:
       "Across-the-board discounting is the one thing I keep telling you I won't do.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

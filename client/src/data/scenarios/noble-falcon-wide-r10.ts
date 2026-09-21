@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who just agreed to look at the insight.",
     playerDialogue:
-      "Honestly, your property looks wonderful and your reviews are genuinely lovely - I really wouldn't get too caught up in the numbers today. Let's just have a relaxed catch-up instead.",
+      "Your property looks wonderful and your reviews are genuinely lovely - I really wouldn't get too caught up in the numbers today. Let's just have a relaxed catch-up instead.",
     partnerResponse:
       "I set aside this time to review performance. What does the data actually show?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Flatly contradicts his read of his own guests rather than drawing out the visibility logic. Lecturing a brand-managed manager on his own base shuts him down.",
     playerDialogue:
-      "Honestly, that loyal-guest theory just doesn't hold up when you look at how people really book - most of them would go wherever is cheapest on the day, and your direct following is far smaller than you think. Travelers are far less loyal than any hotel wants to believe, and assuming they'll all hunt down your website is exactly the kind of thinking that costs you bookings.",
+      "That loyal-guest theory just doesn't hold up when you look at how people really book - most of them would go wherever is cheapest on the day, and your direct following is far smaller than you think. Travelers are far less loyal than any hotel wants to believe, and assuming they'll all hunt down your website is exactly the kind of thinking that costs you bookings.",
     partnerResponse:
       "You're telling me I don't understand my own guests? That's a bold way to open.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that price matters, wrong route - it ignores the Risky Guest concern entirely instead of decoupling price from risk, so the very worry blocking him is left standing.",
     playerDialogue:
-      "Honestly, the risk thing is a bit of a distraction here - the numbers just don't support building a whole pricing policy around a handful of bad bookings. If you simply bring your price down to match on our platform, the extra volume you pick up will more than cover the odd cancellation or dodgy card that slips through. The occasional problem guest is just a cost of doing business.",
+      "The risk thing is a bit of a distraction here - the numbers just don't support building a whole pricing policy around a handful of bad bookings. If you bring your price down to match on our platform, the extra volume you pick up will more than cover the odd cancellation or dodgy card that slips through. The occasional problem guest is just a cost of doing business.",
     partnerResponse:
       "So you want me to eat the fraud and cancellations too? That's easy to say from your side.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the gap is the problem, wrong lever - instructing him to lift his direct-site price dictates his own channel strategy, the exact thing this brand-managed manager guards most fiercely.",
     playerDialogue:
-      "The simplest fix here is really just to put your own website price up so the gap disappears - if you lift your direct rate to sit level with ours, then everything lines up on its own and the whole problem goes away. You've got room to move it; nudge the price on your site up by that 15% or so and we're all on the same footing overnight. It's completely in your hands to sort out.",
+      "One fix here is really just to put your own website price up so the gap disappears - if you lift your direct rate to sit level with ours, then everything lines up on its own and the whole problem goes away. You've got room to move it; nudge the price on your site up by that 15% or so and we're all on the same footing overnight. It's completely in your hands to sort out.",
     partnerResponse:
       "You want to set the price on my own website now? That's absolutely not yours to decide.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },

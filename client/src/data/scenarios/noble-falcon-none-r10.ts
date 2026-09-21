@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the split matters, wrong route - it presumes the cause and reads as a lecture to a brand-managed manager before you understand his strategy.",
     playerDialogue:
-      "Your conversion is tanking because you've simply priced yourself out of the market - that's the real problem here, and it's the one thing you need to go and fix before we bother looking at anything else.",
+      "Your conversion is tanking because you've priced yourself out of the market - that's the real problem here, and it's the one thing you need to go and fix before we bother looking at anything else.",
     partnerResponse:
       "You've decided that in seconds. That's not how we run this brand.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who agreed to align on strategy.",
     playerDialogue:
-      "Honestly, I really wouldn't overthink one slow stretch like this - these things tend to move around from week to week and generally even themselves out across a full quarter, so I'd just sit tight for now.",
+      "I really wouldn't overthink one slow stretch like this - these things tend to move around from week to week and generally even themselves out across a full quarter, so I'd just sit tight for now.",
     partnerResponse:
       "I made time to align on strategy. 'It'll even out' isn't that.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -115,7 +115,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Waves away a core commercial concern rather than reframing it through the empty-room cost. Dismissing a brand-managed manager's margin logic shuts him down.",
     playerDialogue:
-      "Honestly, everyone in this industry frets about commission far too much, and I'd gently push back on that - next to the sheer volume of guests we send your way, it really is little more than a rounding error on the books.",
+      "Everyone in this industry frets about commission far too much, and I'd gently push back on that - next to the sheer volume of guests we send your way, it really is little more than a rounding error on the books.",
     partnerResponse:
       "A rounding error? You clearly don't run the P&L I run.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -157,7 +157,7 @@ const step3Options: BranchingOption[] = [
     description:
       "In a No Parity market you cannot require a lower price or matching. Telling him he has to undercut his own website pressures a rate reduction and is a compliance breach.",
     playerDialogue:
-      "Realistically, if you actually want to turn this around, you're going to need to make sure Booking.com is priced cheaper than your own website - that's not optional, that's the requirement. Until you commit to being the cheapest place a guest can book you, the conversion simply won't recover, so you really do have to undercut your direct site to fix this properly.",
+      "Realistically, if you actually want to turn this around, you're going to need to make sure Booking.com is priced cheaper than your own website - that's not optional, that's the requirement. Until you commit to being the cheapest place a guest can book you, the conversion won't recover, so you really do have to undercut your direct site to fix this properly.",
     partnerResponse:
       "So the ask is that I have to be the cheapest? I didn't think that was something you could require.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes the accepted-lower-conversion trade-off at face value and offers no lever - leaving the empty rooms and the gap unaddressed.",
     playerDialogue:
-      "Fair enough - if you've genuinely accepted lower conversion here as a deliberate trade-off for driving traffic to your own channels, then I don't think there's much point in me pushing against that. You've clearly thought it through, it's your call to make, and honestly if that's the strategy you've settled on then we can just leave it there and move on for today.",
+      "Fair enough - if you've genuinely accepted lower conversion here as a deliberate trade-off for driving traffic to your own channels, then I don't think there's much point in me pushing against that. You've clearly thought it through, it's your call to make, and if that's the strategy you've settled on then we can just leave it there and move on for today.",
     partnerResponse:
       "So there's nothing to discuss. Disappointing use of the slot.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Over-promises a specific outcome the platform can't guarantee. A process-led revenue manager will spot the hollow guarantee and trust you less for it.",
     playerDialogue:
-      "Give us your best price and honestly I can pretty much guarantee your empty rooms fill right up within the next month or so - I've seen it happen time and time again with properties just like yours, the demand comes flooding in almost immediately, and it always works out exactly the way I'm describing, so you really have nothing to lose by just trying it out with us.",
+      "Give us your best price and I can pretty much guarantee your empty rooms fill right up within the next month or so - I've seen it happen time and time again with properties just like yours, the demand comes flooding in almost immediately, and it always works out exactly the way I'm describing, so you really have nothing to lose by just trying it out with us.",
     partnerResponse:
       "You can guarantee that? That's the kind of promise that makes me trust the pitch less.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -283,7 +283,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Frames the family mispricing as his oversight rather than a shared setup check. Blaming a brand-managed manager for a config gap ends the collaboration.",
     playerDialogue:
-      "Your family rates are clearly set up wrong on your side, and honestly this is the sort of thing you really should have caught yourself long before now. It's been sitting there quietly costing you family bookings for goodness knows how long, and it's fairly basic housekeeping at the end of the day, so I'm a little surprised nobody on your team spotted it and sorted it out well ahead of this call.",
+      "Your family rates are clearly set up wrong on your side, and this is the sort of thing you really should have caught yourself long before now. It's been sitting there quietly costing you family bookings for goodness knows how long, and it's fairly basic housekeeping at the end of the day, so I'm a little surprised nobody on your team spotted it and sorted it out well ahead of this call.",
     partnerResponse:
       "So now it's my fault as well. This isn't going the way I hoped.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -325,7 +325,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Waves away a real operational concern instead of engineering around it with prepayment. Dismissing the Risky Guest worry is exactly what hardens his no.",
     playerDialogue:
-      "Honestly, that whole family-risk thing barely ever happens in practice - I really wouldn't let a handful of bad bookings a year hold up an entire segment that could be filling your empty rooms. The invalid cards and the messy check-outs you're describing are genuinely rare, and in the grand scheme of the volume we're talking about they're just not worth the worry.",
+      "That whole family-risk thing barely ever happens in practice - I really wouldn't let a handful of bad bookings a year hold up an entire segment that could be filling your empty rooms. The invalid cards and the messy check-outs you're describing are genuinely rare, and in the grand scheme of the volume we're talking about they're just not worth the worry.",
     partnerResponse:
       "You clearly haven't cleaned the rooms afterward. We're done here.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },

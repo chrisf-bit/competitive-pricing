@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who just agreed to look at the insights.",
     playerDialogue:
-      "Honestly, Adam, I really wouldn't read too much into a slow patch like this as this strategy is not new for you - in my experience these things tend to even out on their own, and a quiet stretch one quarter usually turns around the next without anyone needing to touch a thing if you are after getting the regular share with us and not per se increased business.",
+      "Adam, I really wouldn't read too much into a slow patch like this as this strategy is not new for you - in my experience these things tend to even out on their own, and a quiet stretch one quarter usually turns around the next without anyone needing to touch a thing if you are after getting the regular share with us and not per se increased business.",
     partnerResponse:
       "I set aside this time for the numbers. 'It'll sort itself out' isn't insight.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Flatly contradicts his read of his own brand rather than drawing out the search behavior. Lecturing a brand-managed manager shuts him down.",
     playerDialogue:
-      "Honestly, Adam, that whole brand-pull idea is just wishful thinking - nobody out there is loyal enough to go hunting you down across the internet when they mostly look on big OTA websites as ours to book a trip and finding there are cheaper competitors is comparable properties sitting right next to you on the same search page. People take the convenient and cheaper option most of the time, and expecting them to do otherwise is going to keep costing you these bookings.",
+      "Adam, that whole brand-pull idea is just wishful thinking - nobody out there is loyal enough to go hunting you down across the internet when they mostly look on big OTA websites as ours to book a trip and finding there are cheaper competitors is comparable properties sitting right next to you on the same search page. People take the convenient and cheaper option most of the time, and expecting them to do otherwise is going to keep costing you these bookings.",
     partnerResponse:
       "You're telling me my brand means nothing? That's a strange way to win me over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "In a Narrow market you can ask him to align with his own Brand.com, but not to match other OTAs. Asking him to level his rates with the other platforms is a compliance breach.",
     playerDialogue:
-      "Honestly, the cleanest fix here is just to give us exactly the same rates you're giving the other OTAs - if you line all of them up so you're sitting level across every single platform, then nobody undercuts anybody and this whole gap disappears overnight. This way you do not touch your own direct rates vs us, and with a clean playing field making the value proposition of your property more clear on all channels. So if you match us to what you're offering everyone else you likely have both the undercutting sorted as well as the challenges in conversion.",
+      "The cleanest fix here is just to give us exactly the same rates you're giving the other OTAs - if you line all of them up so you're sitting level across every single platform, then nobody undercuts anybody and this whole gap disappears overnight. This way you do not touch your own direct rates vs us, and with a clean playing field making the value proposition of your property more clear on all channels. So if you match us to what you're offering everyone else you likely have both the undercutting sorted as well as the challenges in conversion.",
     partnerResponse:
       "You're asking me to line my rates up with the other OTAs? I didn't think that was something you could ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that competitiveness matters, wrong lever - it makes it a public discount ask rather than the align-with-your-own-website + fenced-member-rate structure, and walks straight into his ADR-dilution fear.",
     playerDialogue:
-      "The simplest thing you can do here is just cut your public rates so you come out as the cheaper option on the page - being the lower price is what makes you competitive, so the moment you're sitting under the competition you're back in the mix for those bookings. Drop the public numbers a bit and you're the obvious choice for anyone comparing on price.",
+      "One thing you can do here is just cut your public rates so you come out as the cheaper option on the page - being the lower price is what makes you competitive, so the moment you're sitting under the competition you're back in the mix for those bookings. Drop the public numbers a bit and you're the obvious choice for anyone comparing on price.",
     partnerResponse:
       "Cutting my public rate is exactly the ADR dilution I just flagged. That's a no.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Drops the family visibility gap rather than surfacing it, missing the one setup lever that could move without touching his ADR.",
     playerDialogue:
-      "Honestly, that family occupancy thing is probably nothing worth chasing - it's not the biggest demand so not the biggest potential win. Let's not get distracted by the family numbers and just keep our focus where it actually matters, which is sorting out these public rates and the gap against your own website.",
+      "That family occupancy thing is probably nothing worth chasing - it's not the biggest demand so not the biggest potential win. Let's not get distracted by the family numbers and just keep our focus where it actually matters, which is sorting out these public rates and the gap against your own website.",
     partnerResponse:
       "You raised it, then waved it off. Which is it?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -282,7 +282,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Frames the family mispricing as his oversight rather than a shared extranet check. Blaming a brand-managed manager for a config gap ends the collaboration.",
     playerDialogue:
-      "I have to be straight with you here - your family rates are just set up wrong on your own side of the extranet, and honestly this is the kind of thing you really should have caught and sorted out yourself a long time ago. The children are being priced as full adults because nobody on your team checked the occupancy settings properly, and that oversight is sitting squarely with you, not with us.",
+      "I have to be straight with you here - your family rates are just set up wrong on your own side of the extranet, and this is the kind of thing you really should have caught and sorted out yourself a long time ago. The children are being priced as full adults because nobody on your team checked the occupancy settings properly, and that oversight is sitting squarely with you, not with us.",
     partnerResponse:
       "So now it's my fault too. This is not going the way I hoped.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -324,7 +324,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Waves away a real operational concern instead of engineering around it with prepayment. Dismissing the Risky Guest worry is exactly what hardens his no.",
     playerDialogue:
-      "Honestly, Adam, all that family-risk stuff barely happens in practice - you get the odd invalid card or a last-minute cancellation now and then, but it's a tiny fraction of bookings and nowhere near enough to write off a whole segment over. I really wouldn't let a handful of bad experiences hold up something this valuable.",
+      "Adam, all that family-risk stuff barely happens in practice - you get the odd invalid card or a last-minute cancellation now and then, but it's a tiny fraction of bookings and nowhere near enough to write off a whole segment over. I really wouldn't let a handful of bad experiences hold up something this valuable.",
     partnerResponse:
       "You clearly haven't cleaned the rooms afterward. We're done here.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },

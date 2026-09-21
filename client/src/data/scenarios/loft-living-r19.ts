@@ -71,7 +71,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Prescribes a rate cut before diagnosing - and a margin-first operator mid-peak-season, already boxed in by a regional-office ban on cuts, rejects it immediately.',
     playerDialogue:
-      "Honestly, Lucas, your bookings are running slow, so the quickest lever we've got is to bring your rates down here and get you more competitive through the peak - drop the price a bit and the volume should start coming back.",
+      "Lucas, your bookings are running slow, so one lever we've got is to bring your rates down here and get you more competitive through the peak - drop the price a bit and the volume should start coming back.",
     partnerResponse:
       "Cut rates in the middle of peak season? My margins are the priority, and my regional office wouldn't allow it anyway.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -105,7 +105,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right instinct to keep it collaborative, wrong move - downplaying a 33%-unsold, -50%-conversion collapse robs a margin-focused operator of the urgency the data actually warrants.",
     playerDialogue:
-      "Honestly, Lucas, it's nothing too dramatic - conversion has dipped a touch and yes there's a bit of unsold inventory sitting there, but broadly you're in reasonable shape for the season and I wouldn't lose sleep over it. Let's not blow it out of proportion when your wholesale headache is the bigger fire to put out right now.",
+      "Lucas, it's nothing too dramatic - conversion has dipped a touch and yes there's a bit of unsold inventory sitting there, but broadly you're in reasonable shape for the season and I wouldn't lose sleep over it. Let's not blow it out of proportion when your wholesale headache is the bigger fire to put out right now.",
     partnerResponse:
       "A touch? If it's minor, then I won't prioritise it over the wholesale problem that's actually eating my margin.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that conversion is the problem, wrong cause - blaming it all on the wholesale leak validates his opener but misses the on-platform search-price gap that's the real, fixable driver.",
     playerDialogue:
-      "Honestly, Lucas, this conversion drop is almost certainly your wholesale leak biting - once those cheaper rates are floating around the web as B2C offers, travelers see them and simply hold off booking with you here, waiting to see if the price falls further. Sort the leak and I'd expect a lot of this conversion softness to ease.",
+      "Lucas, this conversion drop is almost certainly your wholesale leak biting - once those cheaper rates are floating around the web as B2C offers, travelers see them and hold off booking with you here, waiting to see if the price falls further. Sort the leak and I'd expect a lot of this conversion softness to ease.",
     partnerResponse:
       "So it IS the leak. Then there's nothing I can do on your platform until that's solved, right?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -263,7 +263,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that mobile is the lever, wrong fix - deepening the discount doesn't help when the problem is that 70% of searches are excluded from it; it just gives away more margin on the searches that already qualify.",
     playerDialogue:
-      "Honestly the simplest move here is just to increase your mobile discount, Lucas - push the mobile price down a good bit further so that travelers browsing on their phones see a sharper deal and start converting the way they should. Make the discount deep enough and the mobile numbers will look after themselves.",
+      "One move here is just to increase your mobile discount, Lucas - push the mobile price down a good bit further so that travelers browsing on their phones see a sharper deal and start converting the way they should. Make the discount deep enough and the mobile numbers will look after themselves.",
     partnerResponse:
       "Give away even more margin? In peak season? That's the last thing I want to do.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -297,7 +297,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Right conclusion, no evidence - telling a data-led operator 'don't worry, it won't cannibalize' without the opaque-to-desktop mechanism leaves his specific concern unanswered.",
     playerDialogue:
-      "Honestly, Lucas, I wouldn't overthink the cannibalization on this one - in my experience it basically never happens in practice, and I've seen plenty of partners switch a mobile rate on without any drama at all on their desktop side. So I'd just go ahead and flip the mobile rate on, then keep an eye on how it lands over the first few weeks.",
+      "Lucas, I wouldn't overthink the cannibalization on this one - in my experience it basically never happens in practice, and I've seen plenty of partners switch a mobile rate on without any drama at all on their desktop side. So I'd just go ahead and flip the mobile rate on, then keep an eye on how it lands over the first few weeks.",
     partnerResponse:
       "'It basically never happens' isn't the reasoning I need before I touch my desktop revenue. Why won't it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the opening to pile on more - stack campaigns and deals on top of the mobile rate. Overwhelms a partner already frustrated by stacking complexity and muddies a clean, targeted fix.",
     playerDialogue:
-      "Perfect - and honestly, while we're at it, Lucas, let's not stop at just the mobile rate. Let's stack a couple of campaigns and a targeted deal right on top of it as well, layer in a genius offer where we can, and really maximise the whole push across every channel we've got. The more we pile on together now, the harder your mobile numbers will work for you this season.",
+      "Perfect - and while we're at it, Lucas, let's not stop at just the mobile rate. Let's stack a couple of campaigns and a targeted deal right on top of it as well, layer in a genius offer where we can, and really maximise the whole push across every channel we've got. The more we pile on together now, the harder your mobile numbers will work for you this season.",
     partnerResponse:
       "I just told you I'm drowning in stacked promotions. Piling more on is the opposite of what I need.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

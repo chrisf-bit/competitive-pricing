@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps to a public price cut without understanding her channel strategy - and pressuring a lower price is off-limits in a No Parity market.",
     playerDialogue:
-      "Your future bookings are clearly down, and honestly the quickest fix here is straightforward - you should drop your public price on our platform so you're properly competitive again. Once your rate here comes down and undercuts what's out there, the volume comes straight back and you'll climb the results fast.",
+      "Your future bookings are clearly down, and one fix here is straightforward - you should drop your public price on our platform so you're properly competitive again. Once your rate here comes down and undercuts what's out there, the volume comes straight back and you'll climb the results fast.",
     partnerResponse:
       "You're prescribing a price cut before you understand our channel strategy at all.",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm but empty - no numbers, no diagnosis. The wrong register for an evidence-led operator.',
     playerDialogue:
-      "That's honestly a bit of a shame to hear, and I really do feel for you - these things tend to move in cycles and I'm sure it'll all pick up again before too long. You've built something lovely there and travelers always come back around eventually. Anyway, enough about the numbers - how's the wider team getting on otherwise?",
+      "That's a bit of a shame to hear, and I really do feel for you - these things tend to move in cycles and I'm sure it'll all pick up again before too long. You've built something lovely there and travelers always come back around eventually. Anyway, enough about the numbers - how's the wider team getting on otherwise?",
     partnerResponse:
       "No data behind that? Then what are we solving today?",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -113,7 +113,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-booking belief as a myth and travelers as lazy. Condescending to an experienced operator.",
     playerDialogue:
-      "I'll be honest with you - this whole 'they'll go and book direct' idea is really just a myth that a lot of operators cling to, and the sooner you let go of it the better. Travelers simply aren't that loyal or that motivated; they just book whatever happens to be the cheapest thing sitting in front of them and they don't think twice about it.",
+      "I'll be honest with you - this whole 'they'll go and book direct' idea is really just a myth that a lot of operators cling to, and the sooner you let go of it the better. Travelers aren't that loyal or that motivated; they just book whatever happens to be the cheapest thing sitting in front of them and they don't think twice about it.",
     partnerResponse:
       "Calling my strategy a myth isn't the way to have this conversation.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -155,7 +155,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Falls back on a blanket discount across her rooms - the ADR erosion she's protecting, and pressure to lower prices a No Parity market doesn't permit.",
     playerDialogue:
-      "Honestly the simplest thing you can do here is just put a general discount right across all of your rooms on our platform, and you'll climb straight back up the results where travelers can see you again. Once your rates come down and sit below what's out there, the bookings follow quickly - a broad cut across the board is the fastest way to get your volume back.",
+      "One thing you can do here is just put a general discount right across all of your rooms on our platform, and you'll climb straight back up the results where travelers can see you again. Once your rates come down and sit below what's out there, the bookings follow quickly - a broad cut across the board is one way to get your volume back.",
     partnerResponse:
       "A blanket discount is me giving up my whole advantage - that's my exact worry.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

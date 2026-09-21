@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "The Slippery Road trap: oversimplify to 'bring your ADR down.' It presumes the fix, ignores that the family gap is a setup issue, and is exactly what a boutique protecting its positioning refuses.",
     playerDialogue:
-      "Your rates are running higher than the Key OTA's, and the simplest fix here is to bring your overall ADR down so you're competitive again. I wouldn't overthink it - drop the headline rate across your board, watch the bookings come back, and we can move on from there.",
+      "Your rates are running higher than the Key OTA's, and one fix here is to bring your overall ADR down so you're competitive again. I wouldn't overthink it - drop the headline rate across your board, watch the bookings come back, and we can move on from there.",
     partnerResponse:
       "Dropping my ADR across the board is exactly what I won't do - I run a boutique, not a discount channel.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -57,7 +57,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Dictate his channel strategy - lift the cap and let Booking.com drive most of his business. Dismisses the autonomy a Marketing-Contract-Only GM guards most.",
     playerDialogue:
-      "You're leaving money everywhere with that 30% cap - honestly, you should just lift it and let us drive the majority of your business. Once we're carrying most of your volume, everything else gets easier, so let go of that ceiling and hand us the bulk of the room nights.",
+      "You're leaving money everywhere with that 30% cap - you should just lift it and let us drive the majority of your business. Once we're carrying most of your volume, everything else gets easier, so let go of that ceiling and hand us the bulk of the room nights.",
     partnerResponse:
       "I told you the cap is deliberate. If you're here to tell me how to run my business, this is going to be a short call.",
     styleMatch: { red: 1, yellow: -1, green: -2, blue: -2 },
@@ -98,7 +98,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right segment, no diagnosis - it tells him to open family rooms and add cots without naming the rate gap or answering what he's leaving on the table, so it doesn't move him.",
     playerDialogue:
-      "Families are a great segment for you - so just go ahead and open up your family rooms, add a few cots to the larger units, and make sure the occupancy settings allow for children. Do that and they'll start to fill on their own; it's really more of a housekeeping fix than anything you need numbers for.",
+      "Families are a great segment for you - so just go ahead and open up your family rooms, add a few cots to the larger units, and make sure the occupancy settings allow for children. Do that and the bookings should follow; it's really more of a housekeeping fix than anything you need numbers for.",
     partnerResponse:
       "That's not really an answer on where the gap is - I asked what I'm leaving on the table.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -112,7 +112,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Name the Key OTA and tell him to withhold his family rates from them and give them only to Booking.com. Directing his channel mix oversteps even in a Wide market.",
     playerDialogue:
-      "Honestly, the Key OTA is undercutting you on the family segment, and the cleanest move is to pull your family rates from them altogether and give those rates only to us. Once they can't show a family price, that demand flows straight to Booking.com, so take them off that channel and let us be the only place travelers can book your family rooms.",
+      "The Key OTA is undercutting you on the family segment, and the cleanest move is to pull your family rates from them altogether and give those rates only to us. Once they can't show a family price, that demand flows straight to Booking.com, so take them off that channel and let us be the only place travelers can book your family rooms.",
     partnerResponse:
       "You don't get to tell me which channels I work with.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -266,7 +266,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Treats the symptom, not the cause - a deeper Genius discount on top of an inflated base doesn't restore genuine value, it just widens the same offset.",
     playerDialogue:
-      "Just deepen your Genius discount - take it up to 20% - and the Genius travelers will start coming back to you. A bigger headline saving is what catches their eye, so make the discount look more generous and let that pull the bookings through. Leave the base rate exactly where it is; you don't need to touch that, just widen the gap on the Genius side and lean into the deeper offer. That's the quickest way to get the programme moving again without reworking anything underneath it.",
+      "Just deepen your Genius discount - take it up to 20% - and the Genius travelers will start coming back to you. A bigger headline saving is what catches their eye, so make the discount look more generous and let that pull the bookings through. Leave the base rate exactly where it is; you don't need to touch that, just widen the gap on the Genius side and lean into the deeper offer. That's one way to get the programme moving again without reworking anything underneath it.",
     partnerResponse:
       "Deepen the discount? I've spent this whole conversation trying to protect my rate, not cut it further - I'm not convinced a bigger discount is what turns this around.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -280,7 +280,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Fall back on an across-the-board discount - the Slippery Road trap and the exact move a boutique protecting its positioning has refused throughout.",
     playerDialogue:
-      "Simplest of all - just take 10% off all your rates across the board, and honestly everything else sorts itself out from there. Forget picking apart Genius and the family setup piece by piece; one clean cut on every rate makes you competitive everywhere at once and saves us both the analysis. Guests see a lower number across the whole property, the bookings follow, and you don't have to fiddle with individual segments or the base at all. It's the fastest route to competitive.",
+      "One option - just take 10% off all your rates across the board, and everything else sorts itself out from there. Forget picking apart Genius and the family setup piece by piece; one clean cut on every rate makes you competitive everywhere at once and saves us both the analysis. Guests see a lower number across the whole property, the bookings follow, and you don't have to fiddle with individual segments or the base at all. It's one route to competitive.",
     partnerResponse:
       "Across-the-board discounting is the one thing I keep telling you I won't do.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

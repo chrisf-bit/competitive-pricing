@@ -46,7 +46,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and frames a deliberate head-office policy as her error before you understand it. A franchise revenue manager will close down.",
     playerDialogue:
-      "Your rates here are around 7% worse than your own website, and honestly that's just a mistake that needs correcting. You'll need to put it right if you want those bookings back, because there's really no good reason to be sitting below your own direct price like this. Let's get it fixed today so it stops costing you.",
+      "Your rates here are around 7% worse than your own website, and that's just a mistake that needs correcting. You'll need to put it right if you want those bookings back, because there's really no good reason to be sitting below your own direct price like this. Let's get it fixed today so it stops costing you.",
     partnerResponse:
       "That's a head-office directive, not my mistake. If your pitch is that it's wrong, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a revenue manager who asked to get straight to the data.",
     playerDialogue:
-      "Honestly, I really wouldn't read too much into a dip like this - a slow patch tends to sort itself out over the quarter without anyone needing to do much about it. Let's not get bogged down in the numbers today; these things ebb and flow, and I'm sure you'll see it bounce back on its own before long.",
+      "I really wouldn't read too much into a dip like this - a slow patch tends to sort itself out over the quarter without anyone needing to do much about it. Let's not get bogged down in the numbers today; these things ebb and flow, and I'm sure you'll see it bounce back on its own before long.",
     partnerResponse:
       "I asked to get straight to the point. 'It'll sort itself out' isn't the data.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -102,7 +102,7 @@ const step2Options: BranchingOption[] = [
     description:
       "In a Narrow market you align Booking.com to her own website - you cannot instruct her to change her direct-channel pricing. Telling her to lift her Brand.com rate dictates her external strategy and oversteps.",
     playerDialogue:
-      "The cleanest fix here is honestly to just put the price on your own direct website up so that it matches your Booking.com rate. Once you lift your direct rate to sit level with ours, there's no gap left to worry about and the whole problem simply disappears on its own. It's by far the simplest way to close this - raise your website price to match and we're basically done here.",
+      "The cleanest fix here is to just put the price on your own direct website up so that it matches your Booking.com rate. Once you lift your direct rate to sit level with ours, there's no gap left to worry about and the whole problem disappears on its own. It's by far one way to close this - raise your website price to match and we're basically done here.",
     partnerResponse:
       "You want me to raise the price on my own website? That's my direct channel, not yours to set.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the reverse-billboard premise - that a cheaper direct site is a fine trade-off - and never corrects the belief suppressing her visibility on both channels.",
     playerDialogue:
-      "That's fair enough, honestly - if driving direct acquisition is your head-office priority, then taking a bit of a visibility hit with us here is a perfectly reasonable trade to make. Plenty of partners think about it in exactly that way, and if the commission saving genuinely matters more to you, then I can completely see why you'd want to keep the cheaper rate sitting on your own site.",
+      "That's fair enough - if driving direct acquisition is your head-office priority, then taking a bit of a visibility hit with us here is a perfectly reasonable trade to make. Plenty of partners think about it in exactly that way, and if the commission saving genuinely matters more to you, then I can completely see why you'd want to keep the cheaper rate sitting on your own site.",
     partnerResponse:
       "So the policy's fine, then. I'm still not clear what we're improving.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -172,7 +172,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Over-promises a specific outcome BSB doesn't guarantee. A data-led revenue manager will spot the hollow guarantee and trust you less for it.",
     playerDialogue:
-      "Honestly, just leave BSB running exactly as it is and I can pretty much guarantee your bookings will jump next month - it works like this every single time we switch it on for a property. You won't need to change anything else at all; the moment it goes live the reservations start climbing, so I'd say just trust it and watch the numbers move for you.",
+      "Just leave BSB running exactly as it is and I can pretty much guarantee your bookings will jump next month - it works like this every single time we switch it on for a property. You won't need to change anything else at all; the moment it goes live the reservations start climbing, so I'd say just trust it and watch the numbers move for you.",
     partnerResponse:
       "You can guarantee that? That's the kind of claim that makes me trust the numbers less.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that BSB is funded, wrong tone - it waves away the brand-reputation concern a franchise revenue manager is mandated to protect, which is exactly what keeps her from engaging.",
     playerDialogue:
-      "Honestly, I think the whole brand-reputation worry is a bit overblown - at the end of the day guests care about getting a genuinely good price far more than they care about image, so I really wouldn't let that concern hold you back from leaning in here.",
+      "I think the whole brand-reputation worry is a bit overblown - at the end of the day guests care about getting a genuinely good price far more than they care about image, so I really wouldn't let that concern hold you back from leaning in here.",
     partnerResponse:
       "My brand is the thing I'm here to protect. Telling me it doesn't matter won't land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -228,7 +228,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Answers the funded-shield moment with a blanket demand to cut her published rate - reintroducing the price-war fear BSB is meant to avoid and dictating her pricing.",
     playerDialogue:
-      "The simplest fix, honestly, is to just cut your public rate here across the board so that you're never the expensive option, with or without BSB. If your published price is always the lowest showing, none of this brand worry even comes up, so I'd drop the rate everywhere.",
+      "One fix, is to just cut your public rate here across the board so that you're never the expensive option, with or without BSB. If your published price is always the lowest showing, none of this brand worry even comes up, so I'd drop the rate everywhere.",
     partnerResponse:
       "So the ask is to cut my rate everywhere? That's the opposite of protecting my brand.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -270,7 +270,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Concedes that Booking guests leave worse reviews - reinforcing the belief driving her resistance instead of decoupling reviews from the price decision.",
     playerDialogue:
-      "You're probably right, honestly - our guests here can be a tougher crowd to please, and I'm afraid that just comes with the platform to some degree. A lot of partners tell me the very same thing, that the reviews on Booking.com tend to run a little harder than the ones on their own direct channels, so I completely understand why that would make you cautious about leaning in on the price side of things.",
+      "You're probably right - our guests here can be a tougher crowd to please, and I'm afraid that just comes with the platform to some degree. A lot of partners tell me the very same thing, that the reviews on Booking.com tend to run a little harder than the ones on their own direct channels, so I completely understand why that would make you cautious about leaning in on the price side of things.",
     partnerResponse:
       "So you agree the reviews are a problem here. That doesn't make me keener to lean in.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },

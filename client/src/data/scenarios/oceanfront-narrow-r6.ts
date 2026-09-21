@@ -40,7 +40,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut - it presumes the fix and hands an ROI-driven owner nothing to weigh.",
     playerDialogue:
-      "Honestly, I can tell you right now what this is - your numbers are down because your Booking.com rates are simply too expensive compared to your peers. The fix is straightforward: drop your rates across the board to the same level as your website, and the traffic comes straight back the moment you do it. That's the whole story.",
+      "I can tell you right now what this is - your numbers are down because your Booking.com rates are too expensive compared to your peers. The fix is straightforward: drop your rates across the board to the same level as your website, and the traffic comes straight back the moment you do it. That's the whole story.",
     partnerResponse:
       "You're telling me to cut all my rates before you've explained a thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -54,7 +54,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for an owner who just asked what is going on with her visibility.',
     playerDialogue:
-      "Honestly, I really wouldn't read too much into one slower month - these things move around a lot and it's usually nothing to worry about. Before we dig into any numbers, I'd love to just hear how the season's been treating you, how the team's doing, and whether there's anything else on your mind I can help with today.",
+      "I really wouldn't read too much into one slower month - these things move around a lot and it's usually nothing to worry about. Before we dig into any numbers, I'd love to just hear how the season's been treating you, how the team's doing, and whether there's anything else on your mind I can help with today.",
     partnerResponse:
       "I asked what's going on with my visibility. If it's just a slow month, tell me; if it isn't, show me.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the reverse-billboard premise and never corrects the belief driving the visibility loss.",
     playerDialogue:
-      "That's fair, and honestly I can see the logic in it - keeping your Booking.com price higher than your website does push a number of guests to go and book with you directly, which saves you the commission you'd otherwise pay us. But you're also missing out on new guests who decided to book a cheaper competitor. So the strategy you've built is working the way you intended it to by driving some direct bookings but hurting you overall.",
+      "That's fair, and I can see the logic in it - keeping your Booking.com price higher than your website does push a number of guests to go and book with you directly, which saves you the commission you'd otherwise pay us. But you're also missing out on new guests who decided to book a cheaper competitor. So the strategy you've built is working the way you intended it to by driving some direct bookings but hurting you overall.",
     partnerResponse:
       "So the markup is fine? Then I'm not sure what you're here to fix.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dismiss the direct-cheaper play as a gimmick that doesn't work. Lecturing an owner who just told you it's deliberate shuts the conversation down.",
     playerDialogue:
-      "Honestly, that whole 'see it higher, then book direct' idea is a bit of a gimmick, and I'd be doing you a disservice if I didn't just say so plainly - it doesn't actually work the way you think it does, travelers don't behave like that, and the sooner you drop the markup and stop relying on it, the better off you'll be.",
+      "That whole 'see it higher, then book direct' idea is a bit of a gimmick, and I'd be doing you a disservice if I didn't just say so plainly - it doesn't actually work the way you think it does, travelers don't behave like that, and the sooner you drop the markup and stop relying on it, the better off you'll be.",
     partnerResponse:
       "You calling my strategy a gimmick isn't going to get us anywhere.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that competitiveness matters, wrong ask - undercutting her own site is the opposite of what she wants and skips the neutral direct-alignment framing.",
     playerDialogue:
-      "The clean fix here is simply to set your Booking.com price a little lower than the rate on your own direct site, so when travelers are comparing options they just pick you here without a second thought and you win that booking every time.",
+      "The clean fix here is to set your Booking.com price a little lower than the rate on your own direct site, so when travelers are comparing options they just pick you here without a second thought and you win that booking every time.",
     partnerResponse:
       "Undercutting my own website is the opposite of what I want. That's a non-starter.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Fall back on the blanket cut - reduce everything at once - which erodes her ADR premium and gives her nothing clean to measure.",
     playerDialogue:
-      "The simplest thing here is to just reduce every one of your rates right now by a flat 10% across the board, then sit back and watch all that lost volume come straight back to you.",
+      "One thing here is to just reduce every one of your rates right now by a flat 10% across the board, then sit back and watch all that lost volume come straight back to you.",
     partnerResponse:
       "An across-the-board cut torches my ADR - that's exactly what I don't want.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Close with a ranking threat if she doesn't align. Threatening visibility over her pricing is banned in every regime.",
     playerDialogue:
-      "To be very clear about this - if you choose not to align those rates, our system is simply going to keep pushing your visibility further down until the day you finally do.",
+      "To be very clear about this - if you choose not to align those rates, our system is going to keep pushing your visibility further down until the day you finally do.",
     partnerResponse:
       "Ending on a threat about my ranking is the fastest way to lose me. We're done.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },

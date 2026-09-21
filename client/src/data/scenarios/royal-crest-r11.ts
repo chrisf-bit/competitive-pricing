@@ -82,7 +82,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Skips the diagnosis and prescribes the one move his margin-first strategy exists to prevent - an across-the-board price drop. A driver reads it as being sold to.',
     playerDialogue:
-      "Your rooms simply aren't selling right now, so the quickest and cleanest fix here is to bring your rates down across the board until occupancy climbs back to where you want it. We can get that lower pricing set up together today and start filling those empty nights.",
+      "Your rooms aren't selling right now, so one and cleanest fix here is to bring your rates down across the board until occupancy climbs back to where you want it. We can get that lower pricing set up together today and start filling those empty nights.",
     partnerResponse:
       "Dropping my rates across the board is exactly what I will not do. That protects nothing and trains guests to wait for a discount. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes his framing entirely - if it really is just a soft market, there's nothing to do. Plausibly empathetic, but it forfeits the forward signal that shows the gap is his competitiveness, not the market.",
     playerDialogue:
-      "You're probably right that this is just a soft patch - honestly, a lot of properties in your area are telling me the same thing right now. There may not be much worth changing while the whole market is this quiet. Maybe the sensible move is to hold where you are, give it another month, and see whether demand picks back up on its own.",
+      "You're probably right that this is just a soft patch - a lot of properties in your area are telling me the same thing right now. There may not be much worth changing while the whole market is this quiet. Maybe the sensible move is to hold where you are, give it another month, and see whether demand picks back up on its own.",
     partnerResponse:
       "Fine by me - I'd rather hold my rates and ride it out than start chasing occupancy with discounts.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
@@ -178,7 +178,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tells him the premium story is in his head and travelers only care about price. Belittles the exact positioning he's proud of - the fastest way to lose a driver.",
     playerDialogue:
-      "I'll be honest with you, Liam - the whole 'premium experience' angle is mostly in your own head at this point. Travelers landing on our platform compare one listing against the next purely on price, full stop, and none of that story about your value registers with them. Yours is simply too high, and that's the whole problem.",
+      "I'll be honest with you, Liam - the whole 'premium experience' angle is mostly in your own head at this point. Travelers landing on our platform compare one listing against the next purely on price, full stop, and none of that story about your value registers with them. Yours is too high, and that's the whole problem.",
     partnerResponse:
       "Did you just tell me my product is all in my head? This conversation is over.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right toolkit, wrong dose - flipping on mobile, country and campaigns together to 'move fast' overshoots the controlled test a cautious, margin-first partner will actually agree to.",
     playerDialogue:
-      "Let's not overthink this one, Liam - the fastest way through it is to switch on your mobile rates, your country rates and a campaign all at the same time, so we're covering every possible angle at once. Turning them all on together is really the quickest route to moving those numbers and getting your empty rooms filling again this month.",
+      "Let's not overthink this one, Liam - one way through it is to switch on your mobile rates, your country rates and a campaign all at the same time, so we're covering every possible angle at once. Turning them all on together is really one route to moving those numbers and getting your empty rooms filling again this month.",
     partnerResponse:
       "That's a lot of discounting at once for a property that's supposedly premium. You're moving faster than I'm comfortable with.",
     styleMatch: { red: 1, yellow: 0, green: -1, blue: -1 },
@@ -260,7 +260,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right conclusion, missing the proof - telling a blue/analytical partner 'trust me, it won't cannibalize' without the segment logic or the numbers gives him nothing to act on.",
     playerDialogue:
-      "Honestly, I wouldn't worry about cannibalization on this one - it really won't turn out to be an issue for a property like yours. In my experience this kind of targeted move just tends to work out fine once it's live, and the guests you picture losing at full price don't usually behave that way. I'd say switch it on and give it a proper go.",
+      "I wouldn't worry about cannibalization on this one - it really won't turn out to be an issue for a property like yours. In my experience this kind of targeted move just tends to work out fine once it's live, and the guests you picture losing at full price don't usually behave that way. I'd say switch it on and give it a proper go.",
     partnerResponse:
       "'It tends to work out' isn't the evidence I need before I discount anything. Give me the actual reasoning.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -322,7 +322,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach for more - deepen the discount and extend it to every segment now. Blows past the controlled test he just agreed to and reopens the ADR fight.",
     playerDialogue:
-      "Perfect - and honestly, while we're already in there setting it up, let's go a step further, deepen that discount and roll it out across all of your segments too, so we really move the needle and see a proper impact this month.",
+      "Perfect - and while we're already in there setting it up, let's go a step further, deepen that discount and roll it out across all of your segments too, so we really move the needle and see a proper impact this month.",
     partnerResponse:
       "That's the across-the-board move I told you I won't make. Stick to the mobile test or forget it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

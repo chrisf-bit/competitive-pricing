@@ -46,7 +46,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong route - it presumes the fix and reads as a price lecture to an autonomous operator before you understand his strategy.",
     playerDialogue:
-      "The issue here is plain, honestly - you've priced yourself well out of the market on Booking.com, and the numbers only go one way if the rates stay where they are. So the fix is simple: bring your prices down across the board and the volume comes back. That's really the whole conversation.",
+      "The issue here is plain - you've priced yourself well out of the market on Booking.com, and the numbers only go one way if the rates stay where they are. So the fix is simple: bring your prices down across the board and the volume comes back. That's really the whole conversation.",
     partnerResponse:
       "You've decided that in thirty seconds. That's not how I run my portfolio.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a data-led MPP who just agreed to dive straight into the metrics.",
     playerDialogue:
-      "Honestly, Lucas, I really wouldn't overthink one slower stretch like this - performance moves around a lot week to week, and it nearly always evens itself out once you look across a full quarter. I'd just sit tight, keep doing what you're doing, and give it a bit of time before we start reading too much into it.",
+      "Lucas, I really wouldn't overthink one slower stretch like this - performance moves around a lot week to week, and it nearly always evens itself out once you look across a full quarter. I'd just sit tight, keep doing what you're doing, and give it a bit of time before we start reading too much into it.",
     partnerResponse:
       "I run on margins. 'It'll even out' isn't a plan I can use.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -130,7 +130,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Dumps the leak on him as his problem to solve alone and refuses to help - an unacceptable brush-off that abandons the partner and turns a commercial ally into an adversary.",
     playerDialogue:
-      "Look, I'll be straight with you - that's a supplier problem you created on your own side, so honestly it's on you to go and sort it out with your wholesalers. It's not really something we can fix from here, and it's not our job to. Once you've cleaned up your own contracts, the leak stops, but that part is squarely down to you.",
+      "Look, I'll be straight with you - that's a supplier problem you created on your own side, so it's on you to go and sort it out with your wholesalers. It's not really something we can fix from here, and it's not our job to. Once you've cleaned up your own contracts, the leak stops, but that part is squarely down to you.",
     partnerResponse:
       "I called to look at performance, not to be told it's all my fault. Careful.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -186,7 +186,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes his margin worry as the end of the conversation and offers no lever - leaving the unsold rooms and the leak unaddressed.",
     playerDialogue:
-      "That's fair, and I don't want to talk over your concern - if offering a better price genuinely risks pulling your direct bookers across and hurting your margin, then I understand. Honestly, if that's the trade-off, there's probably not a great deal we can do here, so maybe we just leave things as they are for now and revisit it another time.",
+      "That's fair, and I don't want to talk over your concern - if offering a better price genuinely risks pulling your direct bookers across and hurting your margin, then I understand. If that's the trade-off, there's probably not a great deal we can do here, so maybe we just leave things as they are for now and revisit it another time.",
     partnerResponse:
       "So we're stuck? That's a disappointing place to land.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -228,7 +228,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Abandons the fenced, segment-targeted approach for an across-the-board cut - the very cannibalization he just flagged, and the price war the SME warns against.",
     playerDialogue:
-      "How about we lower your rates on Booking.com only for a few months and let the volume come back. Don't overthink the segments or the setup; a straightforward cut across all your rates is the quickest way to get the rooms filling again, and you can always adjust the prices later once bookings pick up.",
+      "How about we lower your rates on Booking.com only for a few months and let the volume come back. Don't overthink the segments or the setup; a straightforward cut across all your rates is one way to get the rooms filling again, and you can always adjust the prices later once bookings pick up.",
     partnerResponse:
       "That's the blanket cut I said I won't do - it feeds my direct bookers to you and torches my margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -242,7 +242,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Waves away a real commercial concern rather than engineering around it with a fenced segment. Lecturing an autonomous MPP on his own channel mix shuts him down.",
     playerDialogue:
-      "Honestly, that migration worry is mostly in your head - the direct bookers who love booking with you directly are going to keep doing exactly that, and it really doesn't play out the way you're picturing it. I wouldn't let a fear like that hold you back from a move that could genuinely help, so I'd just set it aside and get on with it.",
+      "That migration worry is mostly in your head - the direct bookers who love booking with you directly are going to keep doing exactly that, and it really doesn't play out the way you're picturing it. I wouldn't let a fear like that hold you back from a move that could genuinely help, so I'd just set it aside and get on with it.",
     partnerResponse:
       "You're telling me my own numbers are imaginary? That's not going to land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -284,7 +284,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answers a configuration problem with a blanket discount-and-cut, which pressures a lower price and misses the actual fix - the excluded weekends and long windows on an otherwise-live mobile rate.",
     playerDialogue:
-      "Honestly, the fix here is just to push that mobile discount right up - take it well past 10% - and bring your base rate down at the same time so the whole thing lands lower. Don't get bogged down in which windows or weekends are switched on or off; that's fiddly detail that won't really move the needle. If you just discount harder across the board and shave the base rate, the competitiveness comes straight back and the mobile segment starts converting again. That's the quickest route back to the volume you're missing, so I'd crank both levers together and not overthink it.",
+      "The fix here is just to push that mobile discount right up - take it well past 10% - and bring your base rate down at the same time so the whole thing lands lower. Don't get bogged down in which windows or weekends are switched on or off; that's fiddly detail that won't really move the needle. If you just discount harder across the board and shave the base rate, the competitiveness comes straight back and the mobile segment starts converting again. That's one route back to the volume you're missing, so I'd crank both levers together and not overthink it.",
     partnerResponse:
       "So the answer is discount harder and cut my base? That's the opposite of protecting my margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

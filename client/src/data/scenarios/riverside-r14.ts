@@ -105,7 +105,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the 'too unique' framing wholesale - if he really has no comparators, there's no competitiveness case to make, and the conversation stalls.",
     playerDialogue:
-      "You're right, honestly - and I don't want to pretend otherwise. A property like yours really is in a category of its own, with a character and a guest experience that the hotels around you simply can't offer. So I take your point that those peer comparisons probably don't apply to you in the way the system assumes, and it's fair to set them aside.",
+      "You're right - and I don't want to pretend otherwise. A property like yours really is in a category of its own, with a character and a guest experience that the hotels around you can't offer. So I take your point that those peer comparisons probably don't apply to you in the way the system assumes, and it's fair to set them aside.",
     partnerResponse:
       "Exactly my point. So there's not much to discuss on the pricing front, is there?",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: -2 },
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that the comparison is real, wrong move - telling him the algorithm's comp-set is correct and he should accept it meets his identity objection with a flat contradiction, hardening him.",
     playerDialogue:
-      "The comparison set the system built is accurate, Anton - those really are your competitors whether you like it or not, and the sooner you accept that the better. The data doesn't get it wrong on this; those are the properties travelers are weighing you against, so the sensible thing is to stop resisting it and simply work with the set as it stands.",
+      "The comparison set the system built is accurate, Anton - those really are your competitors whether you like it or not, and the sooner you accept that the better. The data doesn't get it wrong on this; those are the properties travelers are weighing you against, so the sensible thing is to stop resisting it and work with the set as it stands.",
     partnerResponse:
       "Don't tell me a piece of software understands my property better than I do. We're not the same as those hotels.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: 0 },
@@ -153,7 +153,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right data, missing the bridge - opening with 'your price is 7% too high' before honouring where his uniqueness shows lets him dismiss it as just another generic average.",
     playerDialogue:
-      "The headline is simply this: your search price is running about 7% above your peer group, and that gap is the direct reason your visibility has slipped. It really is that straightforward - the number is higher than the field around you, the field converts better, and the bookings follow the more competitive price. That's the whole story.",
+      "The headline is this: your search price is running about 7% above your peer group, and that gap is the direct reason your visibility has slipped. It really is that straightforward - the number is higher than the field around you, the field converts better, and the bookings follow the more competitive price. That's the whole story.",
     partnerResponse:
       "There it is - another platform average telling me to drop my price. I don't buy it, Ren.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: 0 },
@@ -215,7 +215,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Frames his positioning as the problem - a jab at the brand identity he's proud of, which pushes a relationship-led GM to defend rather than engage.",
     playerDialogue:
-      "Honestly, Anton, this whole 'exclusivity over price' stance is exactly what's costing you the bookings - you can't afford to be quite so precious about it when a quarter of your rooms are sitting empty every month. At some point the positioning has to give way to filling the beds, and right now it simply isn't.",
+      "Anton, this whole 'exclusivity over price' stance is exactly what's costing you the bookings - you can't afford to be quite so precious about it when a quarter of your rooms are sitting empty every month. At some point the positioning has to give way to filling the beds, and right now it isn't.",
     partnerResponse:
       "'Precious'? That exclusivity is the entire business, Ren. I won't be lectured on it.",
     styleMatch: { red: -1, yellow: -2, green: -2, blue: -1 },
@@ -297,7 +297,7 @@ const step6Options: BranchingOption[] = [
     description:
       "He asked a direct, specific question about discount stacking - brushing past it ('don't worry about the detail') erodes trust with a partner who fixed that setup deliberately and is watching for exactly this.",
     playerDialogue:
-      "Honestly, don't get too bogged down in the Genius mechanics - it'll all sort itself out naturally once the rate is live and you can see it running. The important thing right now is just to switch it on and let it start pulling those US bookings in; we can always circle back to the finer detail of the stacking later if anything actually looks off to you.",
+      "Don't get too bogged down in the Genius mechanics - it'll all sort itself out naturally once the rate is live and you can see it running. The important thing right now is just to switch it on and let it start pulling those US bookings in; we can always circle back to the finer detail of the stacking later if anything actually looks off to you.",
     partnerResponse:
       "I asked a direct question because I fixed that setup on purpose. 'Don't worry about it' is not an answer.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

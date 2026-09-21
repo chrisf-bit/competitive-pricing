@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a revenue manager who came to look at the trends.",
     playerDialogue:
-      "Honestly, I wouldn't overthink it - these dips usually even themselves out over a quarter or so, and I'd hate for you to lose sleep over a bit of noise in the numbers. You run a lovely property and the guests clearly love it, so I'm confident things will bounce back on their own before long. Let's not read too much into a quiet stretch.",
+      "I wouldn't overthink it - these dips usually even themselves out over a quarter or so, and I'd hate for you to lose sleep over a bit of noise in the numbers. You run a lovely property and the guests clearly love it, so I'm confident things will bounce back on their own before long. Let's not read too much into a quiet stretch.",
     partnerResponse:
       "You said you had trends to show me. 'It'll even out' isn't a trend.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       "In a No Parity market you cannot require a lower price or matching. Telling her she has to be the cheapest to fix her pace pressures a rate reduction and is a compliance breach.",
     playerDialogue:
-      "Realistically, to turn this around you'll need to make sure Booking.com is the cheapest place to book you - guests compare before they commit, and if you're not the lowest here they simply move on to whoever is. So the practical requirement is that your rate on our platform has to come in under everywhere else you sell, direct site included. That's the single thing that will move the pace back up.",
+      "Realistically, to turn this around you'll need to make sure Booking.com is the cheapest place to book you - guests compare before they commit, and if you're not the lowest here they move on to whoever is. So the practical requirement is that your rate on our platform has to come in under everywhere else you sell, direct site included. That's the single thing that will move the pace back up.",
     partnerResponse:
       "So the ask is that I have to be the cheapest? I didn't think that was something you could require.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Over-promises a specific outcome BSB doesn't guarantee. A data-led revenue manager will spot the hollow guarantee and trust you less for it.",
     playerDialogue:
-      "Honestly, just leave BSB running and I can pretty much guarantee your bookings will jump next month - I've seen it happen for property after property and it always works out the same way. Give it a few weeks and you'll be looking at a booking surge you won't believe, and any worries about your brand or your margin will look small next to those numbers.",
+      "Just leave BSB running and I can pretty much guarantee your bookings will jump next month - I've seen it happen for property after property and it always works out the same way. Give it a few weeks and you'll be looking at a booking surge you won't believe, and any worries about your brand or your margin will look small next to those numbers.",
     partnerResponse:
       "You can guarantee that? That's the kind of claim that makes me trust the numbers less.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that BSB is funded, wrong tone - it waves away the brand-reputation concern a franchise revenue manager is mandated to protect, which is exactly what keeps her from engaging.",
     playerDialogue:
-      "Honestly, the brand-reputation worry is a bit overblown - in my experience guests care about price far more than they care about image, and the difference in review scores between direct and platform bookings is tiny. I really wouldn't let that concern hold you back from something that could move your numbers.",
+      "The brand-reputation worry is a bit overblown - in my experience guests care about price far more than they care about image, and the difference in review scores between direct and platform bookings is tiny. I really wouldn't let that concern hold you back from something that could move your numbers.",
     partnerResponse:
       "My brand is the thing I'm here to protect. Telling me it doesn't matter won't land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -227,7 +227,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Answers the funded-shield moment with a blanket demand to cut her published rate - pressuring a lower price, which isn't permitted in a No Parity market.",
     playerDialogue:
-      "The simplest fix is to cut your public rate across the board, so you're never the expensive option whether BSB is running or not. If you bring your published price down far enough that guests always find you cheaper on our platform, the pace problem takes care of itself and we stop having this conversation.",
+      "One fix is to cut your public rate across the board, so you're never the expensive option whether BSB is running or not. If you bring your published price down far enough that guests always find you cheaper on our platform, the pace problem takes care of itself and we stop having this conversation.",
     partnerResponse:
       "So the ask is to cut my rate everywhere? That's the opposite of protecting my brand.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

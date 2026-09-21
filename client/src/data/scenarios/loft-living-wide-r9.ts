@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a data-led MPP who just agreed to go straight to the numbers.",
     playerDialogue:
-      "Honestly, Lucas, your average daily rate looks really strong to me, so I genuinely wouldn't worry too much about any of this - in my experience the room nights tend to catch up with a healthy rate over time, and I'm sure yours will settle just fine.",
+      "Lucas, your average daily rate looks really strong to me, so I genuinely wouldn't worry too much about any of this - in my experience the room nights tend to catch up with a healthy rate over time, and I'm sure yours will settle just fine.",
     partnerResponse:
       "I run a portfolio on margins. 'It'll catch up' isn't something I can take to my owners.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -102,7 +102,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes his framing that Partner Offer is Booking.com discounting his rooms, and offers to switch it off - validating the objection instead of reframing where the leak actually comes from.",
     playerDialogue:
-      "You're absolutely right, Lucas - Partner Offer is essentially us discounting your rooms and undercutting your direct rates, so I completely understand the frustration here. If it's causing you this much grief and hurting your price integrity, the simplest thing I can do is look into having it switched off and removed from your property.",
+      "You're absolutely right, Lucas - Partner Offer is essentially us discounting your rooms and undercutting your direct rates, so I completely understand the frustration here. If it's causing you this much grief and hurting your price integrity, one thing I can do is look into having it switched off and removed from your property.",
     partnerResponse:
       "So you admit it's you doing it. That doesn't fix my price integrity, it just confirms my problem.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -158,7 +158,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Deflects onto his suppliers without giving him the useful clarification - that the rate is his wholesale rate, not Booking's. It reads as dodging rather than diagnosing.",
     playerDialogue:
-      "Honestly, this really isn't our fault at all - it's entirely a supplier problem on your side, and I don't think it's fair to point the finger at us over it. Those distributors are the ones putting the rates out there, so the right move is for you to go straight to them and take it up directly, because there's genuinely not a lot we can do about it from where we sit.",
+      "This really isn't our fault at all - it's entirely a supplier problem on your side, and I don't think it's fair to point the finger at us over it. Those distributors are the ones putting the rates out there, so the right move is for you to go straight to them and take it up directly, because there's genuinely not a lot we can do about it from where we sit.",
     partnerResponse:
       "That's a lot of 'not us' and not much help. Where does that leave me?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -172,7 +172,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Concedes his objection and drops the alignment ask entirely - leaving the leak in place and the visibility problem unaddressed.",
     playerDialogue:
-      "That's a really fair point, Lucas, and I don't want to make your job any harder than it already is. If aligning those rates with your other channels genuinely complicates your revenue management and makes the day-to-day tougher for you, then honestly let's just leave your rates exactly as they are for now and not force the issue.",
+      "That's a really fair point, Lucas, and I don't want to make your job any harder than it already is. If aligning those rates with your other channels genuinely complicates your revenue management and makes the day-to-day tougher for you, then let's just leave your rates exactly as they are for now and not force the issue.",
     partnerResponse:
       "So we agree there's nothing to do? Then I'm not sure why we're on the call.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the leaked rate is the problem, wrong route - telling him to go lower than the wholesale rate across the board is the price war the SME warns against, and it torches the ADR he's protecting.",
     playerDialogue:
-      "Honestly, the fastest fix here is to just price yourself below that leaked wholesale rate everywhere it shows up - go lower than them across every channel you sell on, and the leak simply stops mattering because you're always the cheapest option travelers can find. Beat them on price and the whole problem disappears on its own.",
+      "One fix here is to just price yourself below that leaked wholesale rate everywhere it shows up - go lower than them across every channel you sell on, and the leak stops mattering because you're always the cheapest option travelers can find. Beat them on price and the whole problem disappears on its own.",
     partnerResponse:
       "So your answer is a race to the bottom that kills the ADR I've worked to hold? No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -270,7 +270,7 @@ const step5Options: BranchingOption[] = [
     description:
       "In a Wide market you may name the third party leaking the rate, but you cannot instruct the partner to stop working with the wholesaler. Telling him to cut them off oversteps.",
     playerDialogue:
-      "Honestly, Lucas, the cleanest fix by a mile is to just stop working with that wholesaler altogether - if you cut the contract with them completely, the rate has nowhere to leak from and the whole problem disappears overnight. I'd seriously look at winding down that distributor relationship, because as long as you keep feeding them rates they'll keep leaking into the public space and undercutting everything you're trying to protect here.",
+      "Lucas, the cleanest fix by a mile is to just stop working with that wholesaler altogether - if you cut the contract with them completely, the rate has nowhere to leak from and the whole problem disappears overnight. I'd seriously look at winding down that distributor relationship, because as long as you keep feeding them rates they'll keep leaking into the public space and undercutting everything you're trying to protect here.",
     partnerResponse:
       "You don't get to tell me which distributors I work with. That's my commercial decision, not yours.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -284,7 +284,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answers the margin worry with a blanket base-rate cut - reintroducing the price war and giving up the ADR premium instead of the targeted alignment and mobile fix.",
     playerDialogue:
-      "Honestly, the simplest thing you can do here is just cut your base rate right across the board so that you're never showing up as the expensive option to anyone browsing - drop it everywhere and you stop worrying about the leak entirely, because no wholesale rate can undercut you if you're already the cheapest number on the page. Take the rate down and the volume comes straight back to you.",
+      "One thing you can do here is just cut your base rate right across the board so that you're never showing up as the expensive option to anyone browsing - drop it everywhere and you stop worrying about the leak entirely, because no wholesale rate can undercut you if you're already the cheapest number on the page. Take the rate down and the volume comes straight back to you.",
     partnerResponse:
       "That's the everything-off approach again. It torches my ADR and I can't measure it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

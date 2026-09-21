@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe an across-the-board cut. It presumes the fix and hands an ROI-driven owner nothing to weigh - exactly the move she'll ask you to justify later.",
     playerDialogue:
-      "Your numbers are down because you're simply too expensive, plain and simple. The fix here is straightforward - drop your Booking.com rates right across the board, keep them low, and the traffic and the bookings come straight back to you.",
+      "Your numbers are down because you're too expensive, plain and simple. The fix here is straightforward - drop your Booking.com rates right across the board, keep them low, and the traffic and the bookings come straight back to you.",
     partnerResponse:
       "You're telling me to cut all my rates before you've explained a thing. Walk me through the actual problem first.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for an owner who opened by asking exactly what the data shows.',
     playerDialogue:
-      "Honestly, I really wouldn't read too much into one quieter month - these things tend to even themselves out over time. How have things been going for you and the team otherwise, and how's the wider season shaping up on your side?",
+      "I really wouldn't read too much into one quieter month - these things tend to even themselves out over time. How have things been going for you and the team otherwise, and how's the wider season shaping up on your side?",
     partnerResponse:
       "I asked what the data shows. If it's just a slow month, tell me; if it isn't, show me.",
     styleMatch: { red: -1, yellow: 1, green: 1, blue: -2 },
@@ -111,7 +111,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Tell her the cap and the direct-cheaper play are simply wrong. Lecturing an owner who just told you the strategy is deliberate shuts the conversation down.",
     playerDialogue:
-      "Honestly, I'll be straight with you - that 30% cap and the decision to keep your own site cheaper than us is just a plain mistake, and I think you know it. You're leaving a serious amount of money on the table every single month by clinging to it, and my strong advice is that you should stop doing this and change the approach now.",
+      "I'll be straight with you - that 30% cap and the decision to keep your own site cheaper than us is just a plain mistake, and I think you know it. You're leaving a serious amount of money on the table every single month by clinging to it, and my strong advice is that you should stop doing this and change the approach now.",
     partnerResponse:
       "I just told you it's deliberate. If you're here to tell me my strategy is a mistake, this'll be a short call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Threaten a further visibility drop unless she aligns. Threatening ranking over her pricing is banned in every regime.",
     playerDialogue:
-      "If you keep pricing higher than your own direct site, our system is simply going to keep dropping your visibility lower and lower until you finally decide to fix it.",
+      "If you keep pricing higher than your own direct site, our system is going to keep dropping your visibility lower and lower until you finally decide to fix it.",
     partnerResponse:
       "Threatening my ranking over how I price my own website is not how you'll win me over.",
     styleMatch: { red: 1, yellow: -2, green: -2, blue: -2 },
@@ -265,7 +265,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answer her measurement question with the blanket cut she was worried about - reduce everything at once - which erodes the ADR premium she carries and gives her nothing to measure cleanly.",
     playerDialogue:
-      "The simplest thing to do here is really just to reduce all of your rates right now by around 10% across the board, keep it nice and straightforward, and then we sit back and watch the booking volume come flooding straight back in to you over the next week or two. No need to overcomplicate any of it with tests or staggered windows.",
+      "One thing to do here is really just to reduce all of your rates right now by around 10% across the board, keep it nice and straightforward, and then we sit back and watch the booking volume come flooding straight back in to you over the next week or two. No need to overcomplicate any of it with tests or staggered windows.",
     partnerResponse:
       "That's the 'reduce everything at once' move I just flagged - I can't measure that, and it torches my ADR.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -279,7 +279,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Direct her to stop feeding the other OTAs and give the good rates only to Booking.com. Instructing an owner on her external channel mix oversteps even in a Wide market.",
     playerDialogue:
-      "And honestly, if you really want to fix this properly, the move is to stop feeding all of your best rates and availability to the other OTAs you're working with - pull them right back and keep the strongest rates exclusive to us. That way we're the obvious place to book, and those other platforms stop eating into what should be coming through here.",
+      "And if you really want to fix this properly, the move is to stop feeding all of your best rates and availability to the other OTAs you're working with - pull them right back and keep the strongest rates exclusive to us. That way we're the obvious place to book, and those other platforms stop eating into what should be coming through here.",
     partnerResponse:
       "You don't get to tell me which channels I work with. That's my call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

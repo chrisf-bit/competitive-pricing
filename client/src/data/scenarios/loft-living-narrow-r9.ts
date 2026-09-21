@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a data-led MPP who just agreed to dive straight into the metrics.",
     playerDialogue:
-      "Honestly, I really wouldn't read too much into a soft patch like this - these things tend to sort themselves out over the course of the quarter, and I'd hate for you to over-react to a couple of quiet weeks.",
+      "I really wouldn't read too much into a soft patch like this - these things tend to sort themselves out over the course of the quarter, and I'd hate for you to over-react to a couple of quiet weeks.",
     partnerResponse:
       "I run on margins. 'It'll sort itself out' isn't a plan I can act on.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -115,7 +115,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Sends him off to battle the competitor instead of reframing the leak - it takes the price-war bait the SME warns against and abandons the diagnosis.",
     playerDialogue:
-      "If the Key OTA is the one constantly poking at your price gaps while they go extreme by showing wholesale rates then honestly the simplest thing is to go straight at them - match whatever they're showing and undercut them back until they stop flagging it. Once you've beaten them on price and shut them up, the noise goes away and you can stop worrying about all these comparisons people keep throwing at you.",
+      "If the Key OTA is the one constantly poking at your price gaps while they go extreme by showing wholesale rates then one thing is to go straight at them - match whatever they're showing and undercut them back until they stop flagging it. Once you've beaten them on price and shut them up, the noise goes away and you can stop worrying about all these comparisons people keep throwing at you.",
     partnerResponse:
       "So your advice is to chase the Key OTA down on price? That's the race I'm trying to get out of.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Requires alignment and pins ranking on it - both off-limits: external prices don't factor into ranking, and in a Narrow market we can't require rate alignment or threaten a ranking penalty.",
     playerDialogue:
-      "There's really no way around this one - you have to align your rate here, and you have to do it now, otherwise your ranking simply keeps falling and the situation gets harder to recover from. I know it's blunt, but this isn't something we can test our way into slowly; it needs to happen straight away if you want your original visibility back.",
+      "There's really no way around this one - you have to align your rate here, and you have to do it now, otherwise your ranking keeps falling and the situation gets harder to recover from. I know it's blunt, but this isn't something we can test our way into slowly; it needs to happen straight away if you want your original visibility back.",
     partnerResponse:
       "'Have to' isn't a word I respond well to about my own pricing. Give me a reason, not an order.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

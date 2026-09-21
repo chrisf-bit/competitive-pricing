@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public price cut to be the cheapest option - pressure to lower prices a No Parity market doesn't permit, and it presumes the fix.",
     playerDialogue:
-      "Your room nights are down 32%, so let's not overthink this - the quickest fix is to bring your Booking.com price down until you're the cheapest option on the page, and the volume should follow pretty fast.",
+      "Your room nights are down 32%, so let's not overthink this - one fix is to bring your Booking.com price down until you're the cheapest option on the page, and the volume should follow pretty fast.",
     partnerResponse:
       "I'm not chasing volume with a price cut. That's not the business I run. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Open by dismissing the drop as market softness. A numbers-first operator reads that as sloppy and disengages.',
     playerDialogue:
-      "We've noticed a small dip in the last 30 days, but honestly I wouldn't read too much into it - it's probably just seasonal softness, and these things tend to even out on their own over the coming weeks, so it's really nothing to worry about.",
+      "We've noticed a small dip in the last 30 days, but I wouldn't read too much into it - it's probably just seasonal softness, and these things tend to even out on their own over the coming weeks, so it's really nothing to worry about.",
     partnerResponse:
       "'Seasonal'? If that's your analysis, this call is a waste of my time.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -170,7 +170,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Tell her the restriction is short-sighted before understanding it. Condescending to an operator who knows her own risk - it shuts the conversation instead of opening the segment.",
     playerDialogue:
-      "Restricting families is honestly costing you more than you realize - it's a pretty short-sighted call, and it's dragging your numbers down every single week you leave it in place. You've got real demand from that segment sitting right there and you're just turning it away at the door.",
+      "Restricting families is costing you more than you realize - it's a pretty short-sighted call, and it's dragging your numbers down every single week you leave it in place. You've got real demand from that segment sitting right there and you're just turning it away at the door.",
     partnerResponse:
       "I don't need you second-guessing how I run my rooms. Done.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right segment, wrong handling - it tells her to open the rooms because the growth outweighs the hassle, ignoring the operational risk she just named, so it earns a no.",
     playerDialogue:
-      "Honestly, just open those rooms up to families and let the bookings come - the growth on that segment clearly outweighs whatever extra hassle it creates for you. The numbers on family demand are strong enough that a bit of extra cleaning or the odd cot really shouldn't be the thing holding you back.",
+      "Just open those rooms up to families and let the bookings come - the growth on that segment clearly outweighs whatever extra hassle it creates for you. The numbers on family demand are strong enough that a bit of extra cleaning or the odd cot really shouldn't be the thing holding you back.",
     partnerResponse:
       "You skipped straight past the operational risk. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Wave away cots and linen as a cost she should just absorb. Dismissive of a real operational concern - it ends the conversation instead of de-risking it.",
     playerDialogue:
-      "Cots and linen are just a cost of doing business, the same as it is for every property that takes family bookings - if a bit of extra setup like that is genuinely what's stopping you here, then honestly that's on your operations to sort out, not a reason to keep the segment switched off.",
+      "Cots and linen are just a cost of doing business, the same as it is for every property that takes family bookings - if a bit of extra setup like that is genuinely what's stopping you here, then that's on your operations to sort out, not a reason to keep the segment switched off.",
     partnerResponse:
       "Telling me my operations are the problem ends this call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

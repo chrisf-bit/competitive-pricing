@@ -72,7 +72,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Opens by nudging her off the one thing head office mandates - protecting ADR. It's dead on arrival for a brand-bound partner and marks you as not listening.",
     playerDialogue:
-      "The quickest win here would be to ease off that strict ADR discipline a little and let your prices flex downward where demand looks soft. Loosen the floor a touch and the bookings should start following through.",
+      "One win here would be to ease off that strict ADR discipline a little and let your prices flex downward where demand looks soft. Loosen the floor a touch and the bookings should start following through.",
     partnerResponse:
       "Protecting ADR is a head-office directive, not a preference. That's simply not on the table, Oliver.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -106,7 +106,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right metric, wrong pitch - dramatizing 24% unsold as a crisis invites a data-led Revenue Manager to counter with her own on-target reporting and dismiss the framing.",
     playerDialogue:
-      "24% unsold is a serious amount of lost revenue, Claire - honestly, that's the kind of number that should really be setting off alarms on your side. Rooms sitting empty like that is money you never get back, and I'd expect it to be worrying your team.",
+      "24% unsold is a serious amount of lost revenue, Claire - that's the kind of number that should really be setting off alarms on your side. Rooms sitting empty like that is money you never get back, and I'd expect it to be worrying your team.",
     partnerResponse:
       "Our reporting isn't alarmed, because we're on target. I'd rather look at facts than adjectives.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -154,7 +154,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that visibility lags, incomplete - naming the visibility gap without the 10% search-price cause leaves a data-led partner unable to connect the symptom to anything she can act on.",
     playerDialogue:
-      "The main thing is that your visibility share here is sitting low - travelers simply aren't seeing you in their search results as often as they should be, and to my mind that's the real issue we need to be focused on solving today.",
+      "The main thing is that your visibility share here is sitting low - travelers aren't seeing you in their search results as often as they should be, and to my mind that's the real issue we need to be focused on solving today.",
     partnerResponse:
       "And why would that be? Visibility doesn't drop for no reason - what's actually driving it?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -168,7 +168,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right that price affects visibility, wrong angle - telling a premium-positioning brand to lean into being 'the affordable choice' hits the exact fear she voiced and reads as tone-deaf to her strategy.",
     playerDialogue:
-      "Honestly, being seen as the more affordable option here wouldn't be a bad thing at all - if you lean into it and let travelers find you at a keener price, the extra bookings will follow and start filling those empty rooms in no time at all.",
+      "Being seen as the more affordable option here wouldn't be a bad thing at all - if you lean into it and let travelers find you at a keener price, the extra bookings will follow and start filling those empty rooms in no time at all.",
     partnerResponse:
       "That's the opposite of everything our brand stands for. I explicitly don't want to be the 'affordable' option.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -202,7 +202,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that BSB is benign, wrong delivery - flatly telling a control-minded Revenue Manager her concern is 'nothing to worry about' without explaining the mechanism dismisses a real objection instead of resolving it.",
     playerDialogue:
-      "Honestly, Claire, there's really nothing at all to worry about with that program - it just quietly works away in the background and you'll barely notice that it's running. I genuinely wouldn't give it a second thought if I were you; it's the last thing on your list that should be keeping you up at night.",
+      "Claire, there's really nothing at all to worry about with that program - it just quietly works away in the background and you'll barely notice that it's running. I genuinely wouldn't give it a second thought if I were you; it's the last thing on your list that should be keeping you up at night.",
     partnerResponse:
       "It's adjusting the price travelers see. 'Don't give it a second thought' is not reassuring to someone accountable for our positioning.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -250,7 +250,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that she needs to close the 10% gap, wrong instrument - a general reduction is the ADR hit head office forbids, so it's dead on arrival with a brand-bound partner.",
     playerDialogue:
-      "The cleanest way to close that 10% is a modest general reduction on your rates here - just enough to bring the price travelers see in search back into line with your peer group. Bring everything down a notch across the board and the gap simply closes on its own, without any of the fiddly targeted setups you'd otherwise have to manage afterwards.",
+      "The cleanest way to close that 10% is a modest general reduction on your rates here - just enough to bring the price travelers see in search back into line with your peer group. Bring everything down a notch across the board and the gap closes on its own, without any of the fiddly targeted setups you'd otherwise have to manage afterwards.",
     partnerResponse:
       "A general reduction hits our ADR, which head office strictly prohibits. That's exactly what I can't do.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

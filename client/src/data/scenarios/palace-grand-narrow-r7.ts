@@ -46,7 +46,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm and sympathetic, but it validates the competitor-noise framing instead of steering to his own performance - it lets the price-war logic stand rather than reframing to revenue and visibility.",
     playerDialogue:
-      "You're right, and honestly it's really unfair - those other OTAs are undercutting everyone and making your life so much harder than it needs to be. It's a brutal market out there right now, and the fact that they keep pinging you about competitive prices while you're giving everyone the same rates just proves they're the ones stirring all this up.",
+      "You're right, and it's really unfair - those other OTAs are undercutting everyone and making your life so much harder than it needs to be. It's a brutal market out there right now, and the fact that they keep pinging you about competitive prices while you're giving everyone the same rates just proves they're the ones stirring all this up.",
     partnerResponse:
       "So we agree they're the problem. Then what are you actually going to do about it?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right that he's uncompetitive, wrong route - a blanket cut before any diagnosis presumes the fix and gives an ROI-minded operator nothing to weigh.",
     playerDialogue:
-      "Honestly, the quickest fix here is just to drop your Booking.com rates across the board so you look competitive again in every search - once the price comes down the traffic will follow almost immediately, so I'd get those numbers lowered now and we can worry about the finer details of mobile and families later.",
+      "One fix here is just to drop your Booking.com rates across the board so you look competitive again in every search - once the price comes down the traffic will follow almost immediately, so I'd get those numbers lowered now and we can worry about the finer details of mobile and families later.",
     partnerResponse:
       "You want me to cut everything before you've explained the actual problem. Slow down.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -116,7 +116,7 @@ const step2Options: BranchingOption[] = [
     description:
       "In a Narrow market you cannot ask for parity against other OTAs, only alignment with his own direct website. Asking him to level his rates with the other platforms is a compliance breach.",
     playerDialogue:
-      "The cleanest fix here is really just to give us the exact same rates you're giving the other OTAs, so that you're perfectly level right across every platform and none of them can claim they've got a better deal than we do. Once your rates line up identically everywhere, all this noise about who's cheaper simply goes away and everyone's on the same footing.",
+      "The cleanest fix here is really just to give us the exact same rates you're giving the other OTAs, so that you're perfectly level right across every platform and none of them can claim they've got a better deal than we do. Once your rates line up identically everywhere, all this noise about who's cheaper goes away and everyone's on the same footing.",
     partnerResponse:
       "You're asking me to line my rates up with the other OTAs? I didn't think that was something you could ask.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -172,7 +172,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Direct him to hand over his full family inventory immediately. Dictating his distribution strategy oversteps, and pushing an autonomous operator this hard gets a fast no.",
     playerDialogue:
-      "Honestly, your direct-only family strategy is costing you - you should open up all of your family rooms to us right now, and let us handle that segment for you properly. Keeping those rooms locked to your own website is exactly what's holding this property back, so the move is to hand the whole family allocation over to us today and stop protecting it.",
+      "Your direct-only family strategy is costing you - you should open up all of your family rooms to us right now, and let us handle that segment for you properly. Keeping those rooms locked to your own website is exactly what's holding this property back, so the move is to hand the whole family allocation over to us today and stop protecting it.",
     partnerResponse:
       "You don't get to tell me how to allocate my own inventory. That's my decision.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -284,7 +284,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Answer his openness with a requirement to be the lowest price everywhere - which in a Narrow market is a breach (you may only align with his own direct website, not require him to undercut every channel), and abandons the align-to-his-own-website framing the whole call was built on.",
     playerDialogue:
-      "To really recover from where you are now, you'll need to make sure Booking.com is always the single cheapest place anyone can book you - lower than your own website, lower than everyone - because honestly that's the only thing that actually moves the needle here and everything else is just detail around the edges.",
+      "To really recover from where you are now, you'll need to make sure Booking.com is always the single cheapest place anyone can book you - lower than your own website, lower than everyone - because that's the only thing that actually moves the needle here and everything else is just detail around the edges.",
     partnerResponse:
       "So after all that, the ask is just 'be the cheapest'? That's not what I signed up to discuss.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

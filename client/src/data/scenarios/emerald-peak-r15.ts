@@ -61,7 +61,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Right metric, wrong pitch - dramatizing a 9-point forward gap as a crisis to a decisive, data-led GM reads as spin and hands her an easy reason to discount your whole read.",
     playerDialogue:
-      "Honestly, Sophia, next quarter is a real problem - your sell-through is falling off a cliff and you'll be sitting on a lot of empty rooms unless we act now.",
+      "Sophia, next quarter is a real problem - your sell-through is falling off a cliff and you'll be sitting on a lot of empty rooms unless we act now.",
     partnerResponse:
       "Falling off a cliff? Let's not be dramatic. We still have plenty of runway to sell. What are the actual figures?",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -75,7 +75,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Prescribes a price cut before any diagnosis - the one move a brand-first franchise defending its direct channel will reject immediately.",
     playerDialogue:
-      "Your pace is behind, so honestly the fastest fix here is to bring your public rates down now and get yourself a lot more competitive right across the board.",
+      "Your pace is behind, so one fix here is to bring your public rates down now and get yourself a lot more competitive right across the board.",
     partnerResponse:
       "Lower our public rates? That undercuts the entire reason we protect our direct channel. No.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -109,7 +109,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong framing - withholding the genuinely strong 40% room-nights history and leading only with the unsold rooms reads as a one-sided case to a numbers-led GM who asked for the full picture.",
     playerDialogue:
-      "The history honestly doesn't change the picture all that much, so I'll go straight to what matters: you left 12% of your rooms unsold over the last 30 days, and your visibility share is sitting at just 17%. That's the headline I'd want you focused on, and it's where the real opportunity is right now.",
+      "The history doesn't change the picture all that much, so I'll go straight to what matters: you left 12% of your rooms unsold over the last 30 days, and your visibility share is sitting at just 17%. That's the headline I'd want you focused on, and it's where the real opportunity is right now.",
     partnerResponse:
       "I asked how it compares historically and you skipped straight to the bad news. Give me the whole picture.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -123,7 +123,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right direction, missing the evidence - telling a data-led GM her visibility is 'slipping' without her actual visibility figure or the search-price mechanism behind it gives her nothing concrete to weigh.",
     playerDialogue:
-      "The short version is that your visibility has been slipping for a while now - travelers simply aren't seeing you in their results the way they used to, and that softer exposure is quietly dragging on your bookings across the whole quarter. It's a clear downward drift, and it tends to compound if it's left alone.",
+      "The short version is that your visibility has been slipping for a while now - travelers aren't seeing you in their results the way they used to, and that softer exposure is quietly dragging on your bookings across the whole quarter. It's a clear downward drift, and it tends to compound if it's left alone.",
     partnerResponse:
       "'Slipping' by how much? Put an actual figure on it. I don't act on vague impressions.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -205,7 +205,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that the inflation hurts her, wrong framing - labelling her own-the-guest strategy a mistake attacks a deliberate brand decision and dictates how she should run her direct channel.",
     playerDialogue:
-      "Honestly, Sophia, this whole 'keep our own website cheaper' strategy is the real mistake here, and it's working against you. What you should be doing is stopping that approach altogether and leading with your genuine best price on our platform instead, because that's the only way you're going to turn any of this around.",
+      "Sophia, this whole 'keep our own website cheaper' strategy is the real mistake here, and it's working against you. What you should be doing is stopping that approach altogether and leading with your genuine best price on our platform instead, because that's the only way you're going to turn any of this around.",
     partnerResponse:
       "How I price my own website is my decision, not yours. This is exactly why I keep OTAs at arm's length.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -219,7 +219,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right conclusion, missing the mechanism - 'you need to be more competitive' skips the specific inflate-to-fund-Genius insight, so a sharp GM hears a generic discount nudge and tunes out.",
     playerDialogue:
-      "The bottom line, Sophia, is that you simply need to be more competitive on price here - when it comes down to it, that's the single thing holding back both your visibility and your mobile bookings, and once you sort out where you sit against everyone else, the rest of it should start to take care of itself.",
+      "The bottom line, Sophia, is that you need to be more competitive on price here - when it comes down to it, that's the single thing holding back both your visibility and your mobile bookings, and once you sort out where you sit against everyone else, the rest of it should start to take care of itself.",
     partnerResponse:
       "'Be more competitive' is code for 'discount', and we've been over why I won't.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -253,7 +253,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that the discount isn't reaching enough travelers, wrong lever - pushing a deeper Genius discount doubles down on the very inflate-to-fund pattern that caused the problem, and still misses the non-logged-in mobile audience.",
     playerDialogue:
-      "Honestly, the simplest answer here is to increase your Genius discount - step it up from where you are now to the next tier, so a wider group of travelers sees a stronger price the moment they come through. If more of them are looking at a bigger saving, more of them will book with you, and that alone should start to close the volume gap you're seeing over the coming weeks without you having to change much else.",
+      "One answer here is to increase your Genius discount - step it up from where you are now to the next tier, so a wider group of travelers sees a stronger price the moment they come through. If more of them are looking at a bigger saving, more of them will book with you, and that alone should start to close the volume gap you're seeing over the coming weeks without you having to change much else.",
     partnerResponse:
       "Discount my loyal members even harder? That's the opposite of protecting my margin. No thank you.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -301,7 +301,7 @@ const step6Options: BranchingOption[] = [
     description:
       "She's clearly declined - pressing again to 'just try the mobile rate' after a firm no reads as not listening, and spends the goodwill that would have kept the door open for next time.",
     playerDialogue:
-      "I really do think you're leaving money on the table here, Sophia - and I know you've heard me out, but honestly, can't I get you to at least trial the mobile rate for just a few weeks before you settle on a final decision? I'm confident the numbers would win you over.",
+      "I really do think you're leaving money on the table here, Sophia - and I know you've heard me out, but can't I get you to at least trial the mobile rate for just a few weeks before you settle on a final decision? I'm confident the numbers would win you over.",
     partnerResponse:
       "I've given you my answer, Mei. Pushing after that isn't going to change it - if anything it makes me less inclined next time.",
     styleMatch: { red: -1, yellow: -1, green: -1, blue: -1 },

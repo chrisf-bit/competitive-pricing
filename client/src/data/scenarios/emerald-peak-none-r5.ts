@@ -41,7 +41,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe a public cut - which a franchise GM can't authorise, and which pressures a lower price a No Parity market doesn't permit.",
     playerDialogue:
-      "Your prices here just aren't competitive and I don't think we need to overthink it - the quickest fix is to bring your public price on our platform down a good amount so you're competitive again and the bookings come back.",
+      "Your prices here just aren't competitive and I don't think we need to overthink it - one fix is to bring your public price on our platform down a good amount so you're competitive again and the bookings come back.",
     partnerResponse:
       "I can't authorise a flat rate drop - it breaks head-office policy. That's a non-starter.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -55,7 +55,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, no data - the wrong register for a direct, policy-bound franchise GM.',
     playerDialogue:
-      "Hi Sophia, honestly no big agenda today - I just wanted to check in and see how you're feeling about the partnership overall, whether things are running smoothly on your end and if anything's on your mind.",
+      "Hi Sophia, no big agenda today - I just wanted to check in and see how you're feeling about the partnership overall, whether things are running smoothly on your end and if anything's on your mind.",
     partnerResponse:
       "Let's be efficient - if there's a commercial point, show me the data.",
     styleMatch: { red: -2, yellow: 1, green: 1, blue: -1 },
@@ -96,7 +96,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Press her to hand over her lowest price to fix visibility. In a No Parity market you ask for her best available price - you don't require her lowest, and she can't give it anyway.",
     playerDialogue:
-      "The way to fix this is honestly pretty simple, and I don't want to overcomplicate it for you: just give us your single lowest price, the one you'd never normally share, and put it live on our platform. The moment you do that the visibility comes right back and you'll be sitting where you want to be in the results again.",
+      "The way to fix this is pretty simple, and I don't want to overcomplicate it for you: just give us your single lowest price, the one you'd never normally share, and put it live on our platform. The moment you do that the visibility comes right back and you'll be sitting where you want to be in the results again.",
     partnerResponse:
       "'Give us your lowest' - I literally can't, that's the policy. Were you listening?",
     styleMatch: { red: 1, yellow: -1, green: -1, blue: -1 },
@@ -110,7 +110,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Tell her to fight her own head office and drop the policy. Dictating her internal strategy puts her in an impossible position.",
     playerDialogue:
-      "Honestly, I think head office has got this completely wrong, and someone needs to say it to them. You should push back hard on this policy - go to your bosses, lay out what it's costing you, and get that direct-cheaper rule dropped once and for all. Until you challenge them on it directly, nothing here is going to change for you.",
+      "I think head office has got this completely wrong, and someone needs to say it to them. You should push back hard on this policy - go to your bosses, lay out what it's costing you, and get that direct-cheaper rule dropped once and for all. Until you challenge them on it directly, nothing here is going to change for you.",
     partnerResponse:
       "Telling me to fight my own head office isn't help.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -152,7 +152,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Accepts the billboard framing with only a token nudge - never correcting the belief that a higher price here is harmless.",
     playerDialogue:
-      "That's fair enough, honestly - the exposure you get from being listed with us really does help your name travel, so I wouldn't lose sleep over the gap. Maybe just trim a little at the margin whenever it suits you and the click-throughs should follow on their own over time. The wider model you've got here is basically sound, so there's no need to force anything.",
+      "That's fair enough - the exposure you get from being listed with us really does help your name travel, so I wouldn't lose sleep over the gap. Maybe just trim a little at the margin whenever it suits you and the click-throughs should follow on their own over time. The wider model you've got here is basically sound, so there's no need to force anything.",
     partnerResponse:
       "So the model's fine, then? What are we actually solving here?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -208,7 +208,7 @@ const step4Options: BranchingOption[] = [
     description:
       "A general discount is the ADR-wide friction she's trying to avoid, and it wastes the compliant, fenced family route.",
     playerDialogue:
-      "Honestly, I'd keep this really simple - just run a small general discount across the board here on our platform and let it lift everything at once, rather than fiddling with individual segments. A modest cut applied to all your rates is the cleanest way to move the needle, it's easy to switch on, and the whole listing responds together at the same time.",
+      "I'd keep this really simple - just run a small general discount across the board here on our platform and let it lift everything at once, rather than fiddling with individual segments. A modest cut applied to all your rates is the cleanest way to move the needle, it's easy to switch on, and the whole listing responds together at the same time.",
     partnerResponse:
       "A general discount is exactly the friction I'm trying to avoid.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -264,7 +264,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Never answers her question - the traction - and pins no review. A results-driven GM needs the numbers for corporate.",
     playerDialogue:
-      "It'll help a lot, honestly, I'm really confident about that - the family angle is exactly the kind of thing that tends to work well for properties like yours. Let's just get the family rate switched on, keep it nice and simple for now, and then see how it goes over the coming weeks. I think you'll be pleased with the direction it takes.",
+      "It'll help a lot, I'm really confident about that - the family angle is exactly the kind of thing that tends to work well for properties like yours. Let's just get the family rate switched on, keep it nice and simple for now, and then see how it goes over the coming weeks. I think you'll be pleased with the direction it takes.",
     partnerResponse:
       "I asked for the traction - I need the numbers to take back to corporate.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Overreach past the fenced family rate to a public base cut - the exact ADR-wide, policy-breaking move she can't touch.",
     playerDialogue:
-      "Perfect, let's do the family rate - and honestly, while we've got the momentum going, let's also bring your public base price down just a little at the same time to really push the whole thing along. If the family rate is going to lift things, a small trim on the main rate on top of it will accelerate the visibility even faster.",
+      "Perfect, let's do the family rate - and while we've got the momentum going, let's also bring your public base price down just a little at the same time to really push the whole thing along. If the family rate is going to lift things, a small trim on the main rate on top of it will accelerate the visibility even faster.",
     partnerResponse:
       "That's the base-rate move I can't touch. Family rate only.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

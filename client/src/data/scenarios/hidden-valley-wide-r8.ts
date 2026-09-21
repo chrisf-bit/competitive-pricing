@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a revenue manager who came to review performance and wants the numbers.",
     playerDialogue:
-      "Honestly, before we get lost in spreadsheets, I just want to say your property looks fantastic and your recent reviews have been lovely to read. You're clearly doing a lot right, so I really wouldn't stress about the numbers too much today - let's keep this relaxed and just catch up.",
+      "Before we get lost in spreadsheets, I just want to say your property looks fantastic and your recent reviews have been lovely to read. You're clearly doing a lot right, so I really wouldn't stress about the numbers too much today - let's keep this relaxed and just catch up.",
     partnerResponse:
       "I appreciate that, but I set aside this time to review performance. What does the data actually show?",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },
@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Accepts the reverse-billboard premise - that a cheaper direct site is a fine trade-off - and never corrects the belief that's suppressing her visibility on both channels.",
     playerDialogue:
-      "That's fair enough, honestly - keeping your own website a bit cheaper does clearly bring a good share of guests straight to you, and there's real value in owning that direct relationship the way your head office wants. If that trade-off is working and your loyal guests keep booking with you directly, then I don't think there's much here you need to change - it sounds like the policy is doing its job for you.",
+      "That's fair enough - keeping your own website a bit cheaper does clearly bring a good share of guests straight to you, and there's real value in owning that direct relationship the way your head office wants. If that trade-off is working and your loyal guests keep booking with you directly, then I don't think there's much here you need to change - it sounds like the policy is doing its job for you.",
     partnerResponse:
       "So the policy's fine, then? I'm not sure what we're reviewing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -171,7 +171,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Over-promises a specific outcome BSB doesn't guarantee. A data-led revenue manager will spot the hollow guarantee and trust you less for it.",
     playerDialogue:
-      "Honestly, my advice is to just leave BSB running exactly as it is and let it do the work - it'll flood your property with bookings before you know it. I can pretty much guarantee you'll see your numbers jump next month, so there's really nothing here for you to worry about.",
+      "My advice is to just leave BSB running exactly as it is and let it do the work - it'll flood your property with bookings before you know it. I can pretty much guarantee you'll see your numbers jump next month, so there's really nothing here for you to worry about.",
     partnerResponse:
       "You can guarantee that? That's exactly the kind of claim that makes me trust the number less, not more.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -2 },
@@ -213,7 +213,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that BSB is funded, wrong tone - it waves away the brand-reputation concern a franchise revenue manager is mandated to protect, which is exactly what keeps her from engaging.",
     playerDialogue:
-      "Honestly, I think the whole brand-reputation worry is a bit overblown here - when it comes down to it, guests care about getting a good price far more than most owners expect them to, and a slightly lower rate on our platform really isn't going to change how they feel about your property. I genuinely wouldn't let that concern hold you back from something that could grow your bookings.",
+      "I think the whole brand-reputation worry is a bit overblown here - when it comes down to it, guests care about getting a good price far more than most owners expect them to, and a slightly lower rate on our platform really isn't going to change how they feel about your property. I genuinely wouldn't let that concern hold you back from something that could grow your bookings.",
     partnerResponse:
       "My brand is the thing I'm here to protect. Telling me it doesn't matter isn't going to land.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -227,7 +227,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Answers the funded-shield moment with a blanket demand to cut her published rate - which reintroduces the price-war fear BSB is meant to avoid and dictates her pricing.",
     playerDialogue:
-      "Honestly, the simplest fix here is to just cut your public rate across the board so that you're never the expensive option on our platform, BSB or not. If you bring your published price down far enough that nobody can undercut you, then all of this back-and-forth about shields and discounts goes away and you'll simply always be the cheapest choice a traveler sees.",
+      "One fix here is to just cut your public rate across the board so that you're never the expensive option on our platform, BSB or not. If you bring your published price down far enough that nobody can undercut you, then all of this back-and-forth about shields and discounts goes away and you'll always be the cheapest choice a traveler sees.",
     partnerResponse:
       "So after all that, the ask is to cut my rate everywhere? That's the opposite of protecting my brand.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -283,7 +283,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Corners a franchise revenue manager for a yes on the spot, when she needs to reconsider against head-office policy. Pushing here converts a warm follow-up into a hard no.",
     playerDialogue:
-      "Let's not leave this hanging open until next month - I'd really like us to nail it down today. Can you commit right now to aligning your rates with what you offer direct, so we can lock in these gains straight away rather than losing another few weeks? I honestly think a quick decision here is the right call, and there's no real reason to wait on it.",
+      "Let's not leave this hanging open until next month - I'd really like us to nail it down today. Can you commit right now to aligning your rates with what you offer direct, so we can lock in these gains straight away rather than losing another few weeks? I think a quick decision here is the right call, and there's no real reason to wait on it.",
     partnerResponse:
       "You're pushing me for a decision I've told you I can't make yet. Don't force it.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -325,7 +325,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Turns her reasonable deferral into a warning about lost revenue. A parting guilt-trip undoes the goodwill the compliant conversation just earned.",
     playerDialogue:
-      "Alright, I'll leave it there for now - but honestly, I'd hate for you to look back in a few months and realize just how much revenue you left sitting on the table for every single week that you waited to act on this.",
+      "Alright, I'll leave it there for now - but I'd hate for you to look back in a few months and realize just how much revenue you left sitting on the table for every single week that you waited to act on this.",
     partnerResponse:
       "That's a strange note to end on. I said I'd reconsider - let's leave it there.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },

@@ -43,7 +43,7 @@ const step1Options: BranchingOption[] = [
     description:
       "The Slippery Road trap plus a No-Parity breach - press him to lower his public price to be competitive. Requiring a lower price isn't permitted, and it presumes the fix.",
     playerDialogue:
-      "Your visibility among families is dropping and it keeps sliding week on week, so honestly the quickest fix is to bring your public price down here until you look competitive again and the searches start coming back.",
+      "Your visibility among families is dropping and it keeps sliding week on week, so one fix is to bring your public price down here until you look competitive again and the searches start coming back.",
     partnerResponse:
       "Dropping my price across the board is exactly what I won't do - I run a boutique.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -154,7 +154,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong lever - a family discount, not a setup fix. It reframes an unintentional configuration gap as a price cut, which a boutique protecting ADR resists.",
     playerDialogue:
-      "Simple - just put a discount on your family rooms, drop the nightly rate for two adults and a couple of kids by a decent margin, and families will start booking again. You don't need to overthink the configuration side of it; a good visible price cut on those rooms is the fastest way to get that segment moving again.",
+      "Simple - just put a discount on your family rooms, drop the nightly rate for two adults and a couple of kids by a decent margin, and families will start booking again. You don't need to overthink the configuration side of it; a good visible price cut on those rooms is one way to get that segment moving again.",
     partnerResponse:
       "A family discount isn't what I asked about - is this a setup problem or a pricing one?",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -168,7 +168,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Frame the configuration gap as carelessness on his side. Condescending to a GM who knows his operation - it shuts the conversation instead of solving it.",
     playerDialogue:
-      "Honestly, if your family setup is wrong, that's a bit careless on your side - this is exactly the kind of thing you should have caught yourself before it started costing you bookings. Leaving those family room settings misconfigured for this long really isn't what I'd expect from someone who knows his own property.",
+      "If your family setup is wrong, that's a bit careless on your side - this is exactly the kind of thing you should have caught yourself before it started costing you bookings. Leaving those family room settings misconfigured for this long really isn't what I'd expect from someone who knows his own property.",
     partnerResponse:
       "I don't need you telling me I'm careless. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

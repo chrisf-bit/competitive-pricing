@@ -70,7 +70,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Prescribes a general price cut before diagnosing anything - exactly the move a margin-first operator with owners to answer to will reject on sight.',
     playerDialogue:
-      "Your rooms just aren't converting the way they should, so honestly the simplest fix here is to bring your prices down a few points right across the group and get the bookings flowing again. Trim the rates a little and I think you'll see the volume come back fairly quickly.",
+      "Your rooms just aren't converting the way they should, so one fix here is to bring your prices down a few points right across the group and get the bookings flowing again. Trim the rates a little and I think you'll see the volume come back fairly quickly.",
     partnerResponse:
       "Cut my rates across the group? My owners would have my head. That's a non-starter, Diego.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -118,7 +118,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Advises her to pull the wholesalers/OTAs where the cheap rates surface. Dictating a partner\'s external distribution strategy is off-side in every regime.',
     playerDialogue:
-      "Honestly, if those channels keep undercutting you like this, the cleanest answer is just to switch them off completely and stop selling through them altogether - close the wholesalers and OTAs where the cheap rates keep surfacing, and the leak goes away on its own.",
+      "If those channels keep undercutting you like this, the cleanest answer is just to switch them off completely and stop selling through them altogether - close the wholesalers and OTAs where the cheap rates keep surfacing, and the leak goes away on its own.",
     partnerResponse:
       "You don't get to tell me which channels to run. My distribution mix is my call, not yours.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -214,7 +214,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Folds on the objection - agreeing the gap is small undercuts the whole diagnosis and leaves her no reason to act.",
     playerDialogue:
-      "You might well be right that 6% is fairly minor, honestly - it may not really be the main driver of what you're seeing, and I don't want to overstate it. Perhaps the sensible thing is to give it a bit more time and wait to see whether it sorts itself out before we change anything on your side.",
+      "You might well be right that 6% is fairly minor - it may not really be the main driver of what you're seeing, and I don't want to overstate it. Perhaps the sensible thing is to give it a bit more time and wait to see whether it sorts itself out before we change anything on your side.",
     partnerResponse:
       "So it might be nothing. Then I'll leave my rates where they are and keep watching.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -262,7 +262,7 @@ const step5Options: BranchingOption[] = [
     description:
       'Sells the campaign by promising a guaranteed ranking and visibility reward for discounting. Promising ranking rewards in exchange for a price move is a compliance breach in every regime.',
     playerDialogue:
-      "Run the campaign and I can promise you it pushes you straight up the rankings - the discount effectively buys you the placement, so every point you give up comes back to you in higher visibility and better positioning. Honestly it pays for itself, because the ranking lift you get in exchange is guaranteed to more than cover the discount.",
+      "Run the campaign and I can promise you it pushes you straight up the rankings - the discount effectively buys you the placement, so every point you give up comes back to you in higher visibility and better positioning. It pays for itself, because the ranking lift you get in exchange is guaranteed to more than cover the discount.",
     partnerResponse:
       "A guaranteed ranking bump for discounting? That's the kind of promise that makes me trust your numbers less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -296,7 +296,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Takes the yes but never answers her ask for real numbers - no agreed metric, no review. An operator who needs to defend this to her team and owners will let an unmeasured campaign quietly lapse.",
     playerDialogue:
-      "Great, let's just get the campaign switched on and live as quickly as we can, and then we'll simply keep an eye on how the rooms start to move from there. No need to overcomplicate it - once it's running we can watch the bookings come through and take it as it goes over the next few weeks.",
+      "Great, let's just get the campaign switched on and live as quickly as we can, and then we'll keep an eye on how the rooms start to move from there. No need to overcomplicate it - once it's running we can watch the bookings come through and take it as it goes over the next few weeks.",
     partnerResponse:
       "See how they move measured against what? I told you I need real numbers to take back to my team.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
@@ -310,7 +310,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach past the fenced scope she agreed - all rooms, all dates. Reopens the exact margin fight with her owners she just told you to avoid.",
     playerDialogue:
-      "Perfect - and honestly, let's not bother fencing it to specific rooms after all; let's just run the whole thing across every room type and every date so we really maximise the volume while we've got the momentum. The wider we cast it, the more inventory moves, so let's open it right up rather than hold any rooms back.",
+      "Perfect - and let's not bother fencing it to specific rooms after all; let's just run the whole thing across every room type and every date so we really maximise the volume while we've got the momentum. The wider we cast it, the more inventory moves, so let's open it right up rather than hold any rooms back.",
     partnerResponse:
       "No - I said specific rooms for a reason. Widen it to everything and my owners are back on my case.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

@@ -45,7 +45,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Skip the diagnosis and prescribe: tell her to drop her Booking.com price to be the cheapest option. Presumes the fix and invites the exact race-to-the-bottom an ROI-driven professional refuses.",
     playerDialogue:
-      "Your room nights over the last 30 days are down 32%, so let's not overthink the cause. The quickest fix is to bring your Booking.com price down until you're the cheapest option on the search page, and the volume should follow. Shall we set that up now?",
+      "Your room nights over the last 30 days are down 32%, so let's not overthink the cause. One fix is to bring your Booking.com price down until you're the cheapest option on the search page, and the volume should follow. Shall we set that up now?",
     partnerResponse:
       "Dropping my price to be the cheapest is exactly the race to the bottom I avoid. Do better.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Open by dismissing the drop as market softness. A numbers-first partner reads that as sloppy and disengages.',
     playerDialogue:
-      "We've noticed a small dip in the last 30 days, but honestly I wouldn't read too much into it - this is almost certainly just seasonal softness across the market at this time of year. Every property in the area tends to see it, so there's really nothing here to worry about.",
+      "We've noticed a small dip in the last 30 days, but I wouldn't read too much into it - this is almost certainly just seasonal softness across the market at this time of year. Every property in the area tends to see it, so there's really nothing here to worry about.",
     partnerResponse:
       "If you're going to tell me it's 'just seasonal,' this call is a waste of my time.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
@@ -114,7 +114,7 @@ const step2Options: BranchingOption[] = [
     description:
       'Name the Key OTA as the problem and tell her to stop giving them rates and go exclusive with Booking.com. In a Wide market you may name the third party but you cannot instruct the partner to stop working with them.',
     playerDialogue:
-      "Honestly, the Key OTA is the real problem here, and as long as you keep feeding them the same rates they'll keep undercutting you and pointing the finger back at us. The cleanest fix is to stop giving them your rates altogether and work with us exclusively instead. Pull your inventory off them, put it all with us, and this whole undercutting issue simply goes away for good.",
+      "The Key OTA is the real problem here, and as long as you keep feeding them the same rates they'll keep undercutting you and pointing the finger back at us. The cleanest fix is to stop giving them your rates altogether and work with us exclusively instead. Pull your inventory off them, put it all with us, and this whole undercutting issue goes away for good.",
     partnerResponse:
       "You don't get to tell me who I distribute with. Stay in your lane.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },
@@ -156,7 +156,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Compliant ask (same conditions as the Key OTA) but it stops at protecting the status quo - it never opens the family/international growth that actually answers her 'what's in it for my margin' question.",
     playerDialogue:
-      "The simplest move here is to give us the exact same rates and conditions you already give the Key OTA, so we're showing the same price they are and you stop losing those checkouts to them. Match that across your rooms and I think we've solved the immediate issue - once the pricing lines up on the page, we're basically done here.",
+      "One move here is to give us the exact same rates and conditions you already give the Key OTA, so we're showing the same price they are and you stop losing those checkouts to them. Match that across your rooms and I think we've solved the immediate issue - once the pricing lines up on the page, we're basically done here.",
     partnerResponse:
       "Matching the Key OTA just protects the status quo. Where's the upside for my margin?",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right segment, wrong handling - it tells her to open the rooms and add cots while ignoring the operational-risk concern she just raised, so it earns a no.",
     playerDialogue:
-      "Just open your double rooms up to family searches and add free cots across the board - that's genuinely the fastest way to fill those larger units on the quiet nights and lift your numbers straight away. Turn it on now and you'll see the family bookings start flowing in almost immediately.",
+      "Just open your double rooms up to family searches and add free cots across the board - that's genuinely one way to fill those larger units on the quiet nights and lift your numbers straight away. Turn it on now and you'll see the family bookings start flowing in almost immediately.",
     partnerResponse:
       "You just ignored everything I said about operational risk. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -226,7 +226,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Tell her her segmentation is simply wrong. Condescending to an owner who knows her own operation - the opposite of the ROI framing that would land.",
     playerDialogue:
-      "Restricting families is honestly just bad business, and I think you already know that - you're leaving a lot of money on the table and quietly hurting your own reviews and ranking every single week. Frankly, any operator running the numbers would have opened these rooms up long ago.",
+      "Restricting families is just bad business, and I think you already know that - you're leaving a lot of money on the table and quietly hurting your own reviews and ranking every single week. Frankly, any operator running the numbers would have opened these rooms up long ago.",
     partnerResponse:
       "I don't need a lecture on how to run my own business. This is over.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

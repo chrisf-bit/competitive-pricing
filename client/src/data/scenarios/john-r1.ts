@@ -88,7 +88,7 @@ export const johnR1: BranchingConversationTree = {
           description:
             "Open by suggesting he turn on a new discount program.",
           playerDialogue:
-            "I had a look at your account and I think you should turn on the Genius weekend boost. It'll get you more bookings and it's the quickest win I can see on here.",
+            "I had a look at your account and I think you should turn on the Genius weekend boost. It'll get you more bookings and it's one win I can see on here.",
           partnerResponse:
             "Right, this is exactly what I was hoping to avoid. I don't want another discount conversation. I'm trying to protect my margin, not erode it.",
           styleMatch: { red: -2, yellow: -2, green: -2, blue: -2 },

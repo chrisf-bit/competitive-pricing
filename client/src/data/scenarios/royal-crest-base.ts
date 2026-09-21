@@ -149,7 +149,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Push beyond the controlled experiment he just agreed to - a blanket public rate drop and every discount switched on. Blows up the exact ADR discipline he protects.",
     playerDialogue:
-      "Perfect - and honestly, while we're at it, let's not stop at one segment. Let's bring your public rates down right across the board and switch on every discount you've got so we really move the needle here.",
+      "Perfect - and while we're at it, let's not stop at one segment. Let's bring your public rates down right across the board and switch on every discount you've got so we really move the needle here.",
     partnerResponse:
       "That is exactly the across-the-board move I told you I won't make. Stick to the test, or we're done.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

@@ -71,7 +71,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Jumps to a price cut before diagnosing - and she's already priced below her comp set, so it's both premature and factually the wrong lever. The unsold rooms aren't a headline-price problem.",
     playerDialogue:
-      "Honestly, if the rooms simply aren't selling, then the quickest lever you have is price. Let's bring your rates down a bit further so you're undercutting the competition even more clearly than you already are - if you're the cheapest option on every search, the bookings should start flowing back and those empty rooms will fill up a lot faster.",
+      "If the rooms aren't selling, then one lever you have is price. Let's bring your rates down a bit further so you're undercutting the competition even more clearly than you already are - if you're the cheapest option on every search, the bookings should start flowing back and those empty rooms will fill up a lot faster.",
     partnerResponse:
       "But we're already cheaper than our comp set. How would cutting further even help? That just gives away margin.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -119,7 +119,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that her internal read is incomplete, wrong delivery - implying her team got it wrong turns it into an internal-vs-external data fight instead of widening her view to the traveler's.",
     playerDialogue:
-      "Honestly, I'd take your revenue team's 'we're 3% cheaper than our comp set' claim with a fairly large pinch of salt. Our platform data tells a very different story from theirs, and at the end of the day ours is the version that reflects what travelers are actually doing when they come to search. I'd trust our numbers over your team's read on this one.",
+      "I'd take your revenue team's 'we're 3% cheaper than our comp set' claim with a fairly large pinch of salt. Our platform data tells a very different story from theirs, and at the end of the day ours is the version that reflects what travelers are actually doing when they come to search. I'd trust our numbers over your team's read on this one.",
     partnerResponse:
       "My team knows our pricing inside out. I'm not going to sit here and let you tell me their numbers are wrong.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -1 },
@@ -167,7 +167,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Right segment, wrong fix - jumping to 'add a family discount' treats a broken configuration as a pricing problem, so it gives away margin instead of correcting the setup that's inflating the family price.",
     playerDialogue:
-      "The fix here is really simple, honestly. Just put a discount on your family rates so that families searching see a noticeably lower price and start booking with you again. If the family price is what's putting them off, then bringing that number straight down is the fastest way to win those bookings back and get the empty rooms filling.",
+      "The fix here is really simple. Just put a discount on your family rates so that families searching see a noticeably lower price and start booking with you again. If the family price is what's putting them off, then bringing that number straight down is one way to win those bookings back and get the empty rooms filling.",
     partnerResponse:
       "Discount the family rate? I don't want to erode my ADR further - we've only just recovered from the last price test.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -215,7 +215,7 @@ const step4Options: BranchingOption[] = [
     description:
       'Reassures her by promising the config fix will push her up the rankings. Promising a ranking reward in exchange for a change is a compliance breach in every regime.',
     playerDialogue:
-      "And honestly, the best part is this - once you fix the family configuration, I can promise you the algorithm rewards you with a genuine ranking boost, so you'll climb straight back up the search results almost immediately. Get this sorted and I can more or less guarantee you'll be above your peers again in no time.",
+      "And the best part is this - once you fix the family configuration, I can promise you the algorithm rewards you with a genuine ranking boost, so you'll climb straight back up the search results almost immediately. Get this sorted and I can more or less guarantee you'll be above your peers again in no time.",
     partnerResponse:
       "A guaranteed ranking boost? That sounds too good to be true, and it makes me trust the rest less.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
@@ -249,7 +249,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Right that it matters, wrong tone - piling on urgency ('every day you wait you lose families') pressures a partner who's already on side and cuts against the calm, collaborative register that's working.",
     playerDialogue:
-      "You really need to move on this as fast as you possibly can - every single day it stays broken, you're losing family bookings that you simply can't ever get back. We should honestly get this fixed today, right now if we can, because every hour of delay is families booking with someone else instead of you.",
+      "You really need to move on this as fast as you possibly can - every single day it stays broken, you're losing family bookings that you can't ever get back. We should get this fixed today, right now if we can, because every hour of delay is families booking with someone else instead of you.",
     partnerResponse:
       "There's no need to rush me - I'm already hearing you. Let's keep this constructive.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -263,7 +263,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Undersells the fix as a minor tidy-up - which deflates the value and gives a partner nervous about effort an easy reason to deprioritise it.",
     playerDialogue:
-      "It's honestly a really small thing when you get down to it - just a little bit of housekeeping tucked away in the settings, nothing that's going to take any real time. Fix it whenever you happen to get a spare moment, there's genuinely no rush on it at all, so just slot it in around everything else.",
+      "It's a really small thing when you get down to it - just a little bit of housekeeping tucked away in the settings, nothing that's going to take any real time. Fix it whenever you happen to get a spare moment, there's genuinely no rush on it at all, so just slot it in around everything else.",
     partnerResponse:
       "If it's that minor, I'll probably just add it to the pile and get to it eventually.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -1 },
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the goodwill to reach for a general discount on top of the fix - reintroducing the ADR-dilution fear she just told you she's wary of, and muddying a clean config win.",
     playerDialogue:
-      "Perfect - and honestly, while we've got the momentum and you're happy to make changes, let's go ahead and add a broad across-the-board discount on top of the fix as well, just to accelerate all those bookings coming back in. Combine the configuration fix with a solid discount everywhere and you'll fill the rooms even faster.",
+      "Perfect - and while we've got the momentum and you're happy to make changes, let's go ahead and add a broad across-the-board discount on top of the fix as well, just to accelerate all those bookings coming back in. Combine the configuration fix with a solid discount everywhere and you'll fill the rooms even faster.",
     partnerResponse:
       "No - that's exactly the ADR dilution I told you I want to avoid. Let's keep it to the fix.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
