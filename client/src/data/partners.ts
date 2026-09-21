@@ -1119,6 +1119,12 @@ function riversideBase(args: {
         // SME metrics sheet (Partner Value ABRN 2025). The SME flags
         // eRPD x Partner Value as high for R4.
         partnerValueAbrn: 5920,
+        // Family Rates stay Active (the product is implemented) but the
+        // data still shows a family pricing opportunity - the family
+        // occupancy setup is not correctly configured, so family searches
+        // see a full adult price. Flag it rather than marking it Inactive.
+        productsNote:
+          'Family Rates are active, but our data suggests a family pricing opportunity is still there - the family occupancy setup is not correctly configured, so family searches see a full adult price, which is worth reviewing in the conversation.',
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
@@ -1456,6 +1462,12 @@ function palaceGrandBase(args: {
         // SME metrics sheet (Partner Value ABRN 2025). Palace Grand is
         // the R7 call on Bucket 5 / +10.95 spike.
         partnerValueAbrn: 5069,
+        // Family Rates stay Active (the product is implemented) but the
+        // data still shows a family pricing opportunity - the family setup
+        // can be optimized to capture more of the family demand. Flag it
+        // rather than marking the product Inactive.
+        productsNote:
+          'Family Rates are active, but our data suggests a family pricing opportunity is still there - the family setup can be optimized to capture more of the family demand, which is worth exploring in the conversation.',
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         // Visibility is holding (17% vs 16% peer); search price €239 vs
