@@ -1371,7 +1371,12 @@ function SecondaryMetricCard({
         height: '100%',
       }}
     >
-      <SecondaryMetricLabel label={def.label} helpText={def.helpText} comparator={comparator} />
+      <SecondaryMetricLabel
+        label={def.label}
+        helpText={def.helpText}
+        comparator={comparator}
+        hideComparator={hideComparator}
+      />
       <div
         style={{
           fontSize: 17,
