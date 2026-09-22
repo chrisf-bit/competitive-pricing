@@ -37,7 +37,9 @@ const METRIC_LABEL = {
   next3mRoomNights: 'Next 3M Room Nights (vs peer)',
 };
 const OPC_LABEL = {
-  unsoldRooms: 'Unsold Rooms (vs peer)',
+  // Unsold Rooms carries NO peer comparison (SME rule), so it is not
+  // labelled "(vs peer)" - it renders on the sim card without a peer figure.
+  unsoldRooms: 'Unsold Rooms',
   sellThroughRate: 'Sell Through Rate (vs peer)',
   visibilityShare: 'Visibility Share (vs peer)',
   clickThroughRate: 'Click Through Rate (vs peer)',
@@ -205,7 +207,7 @@ for (const flow of flows) {
       const key = m.label.slice(4);
       return [OPC_LABEL[key] || key, m.value];
     })));
-    children.push(para(new TextRun({ text: 'On screen, OPC metrics without a peer figure display a "(xx)" comparator placeholder (peer data still pending SME sign-off).', italics: true, color: GREY, size: 18 })));
+    children.push(para(new TextRun({ text: 'On screen, Unsold Rooms shows no peer comparison (it has none by rule). Other OPC metrics without a peer figure display a "(xx)" placeholder while their peer data is pending SME sign-off.', italics: true, color: GREY, size: 18 })));
   }
 
   const profileMeta = d.metrics.filter((m) => ['Last Pricing Contact', 'Pricing Coverage (QTD)'].includes(m.label));
