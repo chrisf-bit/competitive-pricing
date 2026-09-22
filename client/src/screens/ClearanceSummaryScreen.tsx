@@ -257,7 +257,14 @@ export function ClearanceSummaryScreen({
   const totalAttempted = scorable.reduce((sum, a) => sum + a.attempted, 0);
   const totalCorrect = scorable.reduce((sum, a) => sum + a.correct, 0);
   const overallPct = totalAttempted === 0 ? 0 : totalCorrect / totalAttempted;
-  const cleared = overallPct >= PASS_THRESHOLD && scorable.every((a) => a.attempted >= a.activity.totalItems);
+  const scoreMet = overallPct >= PASS_THRESHOLD;
+  const allAttempted = scorable.every((a) => a.attempted >= a.activity.totalItems);
+  const cleared = scoreMet && allAttempted;
+  // When the score already clears 80% but an activity isn't fully done, the
+  // blocker is completeness, not the percentage. The messaging below must
+  // say that rather than the false "below the 80% threshold" (which read as
+  // a bug to a learner sitting on 86%).
+  const incompleteOnly = scoreMet && !allAttempted;
   // The activity the learner should fix next: the first not passing / not
   // fully attempted, else (defensive - so the button is NEVER a dead
   // "Locked" while not cleared) the one with the most missed items, else
@@ -301,6 +308,7 @@ export function ClearanceSummaryScreen({
           {/* Status banner */}
           <StatusBanner
             cleared={cleared}
+            scoreMet={scoreMet}
             overallPct={overallPct}
             totalCorrect={totalCorrect}
             totalAttempted={totalAttempted}
@@ -342,9 +350,13 @@ export function ClearanceSummaryScreen({
         <div style={{ fontSize: 12, color: 'rgba(255,255,255,0.6)', maxWidth: 480 }}>
           {cleared
             ? "You're cleared. Time to put it into practice with real partners."
-            : firstRetryable
-              ? `You need 80% or higher to clear. Retry ${firstRetryable.activity.label} to raise your score - or use the Retry buttons on any activity above.`
-              : 'You need 80% or higher to clear.'}
+            : incompleteOnly
+              ? firstRetryable
+                ? `You're above the 80% mark, but every activity has to be completed to clear. Finish ${firstRetryable.activity.label} - or use the buttons on any activity flagged above.`
+                : "You're above the 80% mark, but every activity has to be completed to clear."
+              : firstRetryable
+                ? `You need 80% or higher to clear. Retry ${firstRetryable.activity.label} to raise your score - or use the Retry buttons on any activity above.`
+                : 'You need 80% or higher to clear.'}
         </div>
         <button
           onClick={() => {
@@ -389,7 +401,7 @@ export function ClearanceSummaryScreen({
           {cleared
             ? 'Continue to the partner sim'
             : firstRetryable
-              ? `Retry ${firstRetryable.activity.label} to clear`
+              ? `${incompleteOnly && firstRetryable.attempted < firstRetryable.activity.totalItems ? 'Finish' : 'Retry'} ${firstRetryable.activity.label} to clear`
               : 'Locked'}
           <ChevronRight size={17} />
         </button>
@@ -402,11 +414,13 @@ export function ClearanceSummaryScreen({
 
 function StatusBanner({
   cleared,
+  scoreMet,
   overallPct,
   totalCorrect,
   totalAttempted,
 }: {
   cleared: boolean;
+  scoreMet: boolean;
   overallPct: number;
   totalCorrect: number;
   totalAttempted: number;
@@ -462,7 +476,9 @@ function StatusBanner({
             ? `${totalCorrect} of ${totalAttempted} questions correct overall (${Math.round(overallPct * 100)}%). ${
                 cleared
                   ? 'Above the 80% threshold.'
-                  : `Below the 80% threshold - revisit the activities flagged below if you want.`
+                  : scoreMet
+                    ? 'Above the 80% threshold - you just need to complete every activity to clear (see the ones flagged below).'
+                    : 'Below the 80% threshold - revisit the activities flagged below if you want.'
               }`
             : "You haven't attempted any of the activities yet."}
         </div>
