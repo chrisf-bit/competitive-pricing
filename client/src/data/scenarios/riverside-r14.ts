@@ -136,9 +136,9 @@ const step3Options: BranchingOption[] = [
     id: 'rv-r14-step3-correct',
     label: 'Point uniqueness to content, then show the visibility gap',
     description:
-      "SME-prescribed handling: his uniqueness comes through in strong photos and descriptions - that's where it belongs. Then surface the gap: visibility share down to 12% (his own figure, no peer comparison), with his search price about 7% above peers.",
+      "SME-prescribed handling: his uniqueness comes through in strong photos and descriptions - that's where it belongs. Then surface the gap: visibility share down to 12% against a peer group at 21%, with his search price about 7% above peers.",
     playerDialogue:
-      "That uniqueness absolutely comes through - in strong photography and a rich description, which is exactly where it should land. But alongside that, your visibility share has dropped to 12%, and when travelers search your area your search price is running about 7% above your peers.",
+      "That uniqueness absolutely comes through - in strong photography and a rich description, which is exactly where it should land. But alongside that, your visibility share has dropped to 12% while your peer group sits at 21%, and when travelers search your area your search price is running about 7% above them.",
     partnerResponse:
       "A 7% difference doesn't concern me if those travelers aren't our target audience. Our guests value exclusivity over price.",
     styleMatch: { red: 0, yellow: 1, green: 1, blue: 2 },
@@ -184,9 +184,9 @@ const step4Options: BranchingOption[] = [
     id: 'rv-r14-step4-correct',
     label: 'Tie the gap to the exact guests he wants',
     description:
-      "SME-prescribed handling of the 'not our audience' objection: look at who's actually shopping the listing. For US couples booking 30+ days out - a high-spending, long-stay segment - his visibility share is falling well short.",
+      "SME-prescribed handling of the 'not our audience' objection: look at who's actually shopping the listing. For US couples booking 30+ days out - a high-spending, long-stay segment - he's losing 15% visibility share directly to his peer group.",
     playerDialogue:
-      "That's fair for your repeaters and direct customers. But look at who's actually shopping your listing on our platform right now. For US couples booking 30 or more days ahead - a high-spending, long-stay segment - your visibility share is falling well short. They're viewing you, then choosing a competitor.",
+      "That's fair for your repeaters and direct customers. But look at who's actually shopping your listing on our platform right now. For US couples booking 30 or more days ahead - a high-spending, long-stay segment - you're losing 15% visibility share directly to your peer group. They're viewing you, then choosing a competitor.",
     partnerResponse:
       "Hmm... US couples booking a month out are exactly the guest profile we want. They spend heavily on extra services...",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },

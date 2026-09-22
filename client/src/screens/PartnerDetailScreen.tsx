@@ -1174,7 +1174,6 @@ function OpcMetricsTab({ partner }: { partner: PartnerState }) {
           value={opc?.visibilityShare}
           comparator="vs peer"
           format="percentLevel"
-          hideComparator
         />
         <SecondaryMetricCard
           metricKey="clickThroughRate"

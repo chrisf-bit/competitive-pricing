@@ -92,9 +92,9 @@ const step2Options: BranchingOption[] = [
     id: 'ep-r15-step2-correct',
     label: 'Give the history, then the visibility gap',
     description:
-      "SME-prescribed handling (Anouk reframe): answer her 'vs history' question with her own strong recent performance - room nights up, conversion above peers once travelers reach the page - then pivot to exposure: 12% unsold and visibility at 17% (her own figure) mean travelers convert when they find her; the gap is how many find her. Visibility carries no peer number per the OPC peer rules.",
+      "SME-prescribed handling (Anouk reframe): answer her 'vs history' question with her own strong recent performance - room nights up, conversion above peers once travelers reach the page - then pivot to exposure: 12% unsold and visibility at 17% against a peer group at 26% mean travelers convert when they find her; the gap is how many find her.",
     playerDialogue:
-      "Happy to. Recently you're performing strongly - your room nights sold are up 110% on your peer group over the last 30 days, and once travelers reach your page your conversion sits above your peer group too. So demand and closing are both working in your favour. The gap is earlier in the journey: 12% of your rooms went unsold last month, and your visibility share is only 17%, so a large share of travelers never reach your page. Your guests convert when they find you - the real question is how many find you.",
+      "Happy to. Recently you're performing strongly - your room nights sold are up 110% on your peer group over the last 30 days, and once travelers reach your page your conversion sits above your peer group too. So demand and closing are both working in your favour. The gap is earlier in the journey: 12% of your rooms went unsold last month, and your visibility share is only 17%, against a peer group at 26%, so a large share of travelers never reach your page. Your guests convert when they find you - the real question is how many find you.",
     partnerResponse:
       "Mmh, okay... so what's actually happening at the searching stage that drives that difference?",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -109,7 +109,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Right that the gap matters, wrong framing - withholding the genuinely strong 40% room-nights history and leading only with the unsold rooms reads as a one-sided case to a numbers-led GM who asked for the full picture.",
     playerDialogue:
-      "The history doesn't change the picture all that much, so I'll go straight to what matters: you left 12% of your rooms unsold over the last 30 days, and your visibility share is sitting at just 17%. That's the headline I'd want you focused on, and it's where the real opportunity is right now.",
+      "The history doesn't change the picture all that much, so I'll go straight to what matters: you left 12% of your rooms unsold over the last 30 days, and your visibility is sitting well behind your peers. That's the headline I'd want you focused on, and it's where the real opportunity is right now.",
     partnerResponse:
       "I asked how it compares historically and you skipped straight to the bad news. Give me the whole picture.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -121,11 +121,11 @@ const step2Options: BranchingOption[] = [
     id: 'ep-r15-step2-vague-visibility',
     label: 'Cite falling visibility with no numbers',
     description:
-      "Right direction, missing the evidence - telling a data-led GM her visibility is 'slipping' without her actual visibility figure or the search-price mechanism behind it gives her nothing concrete to weigh.",
+      "Right direction, missing the evidence - telling a data-led GM her visibility is 'slipping' without the 17%-vs-26% comparison gives her nothing concrete to weigh.",
     playerDialogue:
       "The short version is that your visibility has been slipping for a while now - travelers aren't seeing you in their results the way they used to, and that softer exposure is quietly dragging on your bookings across the whole quarter. It's a clear downward drift, and it tends to compound if it's left alone.",
     partnerResponse:
-      "'Slipping' by how much? Put an actual figure on it. I don't act on vague impressions.",
+      "'Slipping' by how much, against whom? I don't act on vague impressions.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
     assertiveness: 1,
     compliance: 'safe',

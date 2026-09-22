@@ -88,7 +88,7 @@ const step2Options: BranchingOption[] = [
     id: 'ov-r13-step2-correct',
     label: 'Credit her price, then reveal the visibility gap',
     description:
-      "SME-prescribed handling: validate that her headline competitiveness is real, then show the deeper funnel signal - her visibility share is only 20% and forward sell-through is pacing behind her peer group, so a large share of searchers never reach her listings. Visibility is shown as her own figure (no peer number per the OPC peer rules); the peer signal rides on sell-through.",
+      "SME-prescribed handling: validate that her headline competitiveness is real, then show the deeper funnel signal - her visibility share is only 20% and forward sell-through is pacing behind her peer group, so a large share of searchers never reach her listings. Per SME, R13 leads on the sell-through/exposure signal; visibility is shown as her own figure here (the peer signal rides on sell-through).",
     playerDialogue:
       "You're right, and your commitment to staying competitive is visible in the headline price. But look one level deeper into what travelers actually see. Your visibility share - the slice of searches where your listing actually shows up - is sitting at just 20%, and your forward sell-through is pacing behind your peer group. Travelers are coming to search, but a big portion of them never actually reach your listings.",
     partnerResponse:

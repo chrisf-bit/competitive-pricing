@@ -327,7 +327,7 @@ function nobleFalconBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 21 },
           sellThroughRate: { value: 48, peerLabel: 'above' },
-          visibilityShare: { value: 15 },
+          visibilityShare: { value: 15, peerValue: 16 },
           clickThroughRate: { value: 4.1, peerLabel: 'below' },
           conversion: { value: 1.3, peerLabel: 'below' },
           searchPrice: { value: 73, peerValue: 86 },
@@ -760,7 +760,7 @@ function royalCrestBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 50 },
           sellThroughRate: { value: 33, peerLabel: 'below' },
-          visibilityShare: { value: 10 },
+          visibilityShare: { value: 10, peerValue: 18 },
           clickThroughRate: { value: 3.5, peerLabel: 'below' },
           conversion: { value: 0.5, peerLabel: 'below' },
           searchPrice: { value: 153, peerValue: 143 },
@@ -881,7 +881,7 @@ function silverHorizonBase(args: {
           // is there, you're losing them at checkout" lesson), so the tab
           // matches the call. The metrics sheet's 13% (below 15%)
           // contradicted its own transcript - kept at 17/15 per Chris.
-          visibilityShare: { value: 17 },
+          visibilityShare: { value: 17, peerValue: 15 },
           clickThroughRate: { value: 10, peerLabel: 'above' },
           conversion: { value: 1.1, peerLabel: 'in-line' },
           searchPrice: { value: 120, peerValue: 113 },
@@ -1007,7 +1007,7 @@ function oceanViewBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 45 },
           sellThroughRate: { value: 15, peerLabel: 'below' },
-          visibilityShare: { value: 20 },
+          visibilityShare: { value: 20, peerValue: 30 },
           clickThroughRate: { value: 4.9, peerLabel: 'below' },
           conversion: { value: 1.1, peerLabel: 'below' },
           searchPrice: { value: 140, peerValue: 144 },
@@ -1130,7 +1130,7 @@ function riversideBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 24 },
           sellThroughRate: { value: 41, peerLabel: 'below' },
-          visibilityShare: { value: 12 },
+          visibilityShare: { value: 12, peerValue: 21 },
           clickThroughRate: { value: 7.8, peerLabel: 'above' },
           conversion: { value: 1.7, peerLabel: 'above' },
           searchPrice: { value: 161, peerValue: 150 },
@@ -1246,7 +1246,7 @@ function emeraldPeakBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 12 },
           sellThroughRate: { value: 29, peerLabel: 'below' },
-          visibilityShare: { value: 17 },
+          visibilityShare: { value: 17, peerValue: 26 },
           clickThroughRate: { value: 7.7, peerLabel: 'above' },
           conversion: { value: 0.9, peerLabel: 'in-line' },
           searchPrice: { value: 171, peerValue: 155 },
@@ -1365,7 +1365,7 @@ function oceanfrontBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 17 },
           sellThroughRate: { value: 19, peerLabel: 'below' },
-          visibilityShare: { value: 17 },
+          visibilityShare: { value: 17, peerValue: 25 },
           clickThroughRate: { value: 1.7, peerLabel: 'below' },
           conversion: { value: 0.5, peerLabel: 'below' },
           searchPrice: { value: 155, peerValue: 149 },
@@ -1475,7 +1475,7 @@ function palaceGrandBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 21 },
           sellThroughRate: { value: 44, peerLabel: 'below' },
-          visibilityShare: { value: 17 },
+          visibilityShare: { value: 17, peerValue: 16 },
           clickThroughRate: { value: 2.3, peerLabel: 'below' },
           conversion: { value: 0.5, peerLabel: 'below' },
           searchPrice: { value: 239, peerValue: 249 },
@@ -1578,7 +1578,7 @@ function hiddenValleyBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 24 },
           sellThroughRate: { value: 22, peerLabel: 'below' },
-          visibilityShare: { value: 21 },
+          visibilityShare: { value: 21, peerValue: 28 },
           clickThroughRate: { value: 5.4, peerLabel: 'above' },
           conversion: { value: 1.2, peerLabel: 'above' },
           searchPrice: { value: 175, peerValue: 159 },
@@ -1681,7 +1681,7 @@ function loftLivingBase(args: {
         opcMetrics: {
           unsoldRooms: { value: 33 },
           sellThroughRate: { value: 30, peerLabel: 'below' },
-          visibilityShare: { value: 8 },
+          visibilityShare: { value: 8, peerValue: 23 },
           clickThroughRate: { value: 3.2, peerLabel: 'below' },
           conversion: { value: 0.8, peerLabel: 'below' },
           searchPrice: { value: 67, peerValue: 60 },
