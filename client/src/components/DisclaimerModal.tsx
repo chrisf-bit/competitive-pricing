@@ -1,4 +1,4 @@
-import { Info, MapPin, Scale, ChevronRight } from 'lucide-react';
+import { Info, MapPin, Scale, Tag, ChevronRight } from 'lucide-react';
 
 /**
  * One-time sim disclaimer, shown as a mandatory acknowledge gate on the
@@ -78,6 +78,14 @@ export function DisclaimerModal({ onAcknowledge }: { onAcknowledge: () => void }
             insights to decide where to focus between Brand.com and the key
             OTA, weighing the potential eRPD impact, partner value, observed
             trends, and any applicable parity guardrails.
+          </Point>
+
+          <Point icon={<Tag size={17} />}>
+            To simplify the content, we use Key OTA whenever we refer to a
+            third-party competitor. Each market has its own Key OTA, the most
+            relevant player in that area. In wide parity markets, you can
+            proactively talk about alignment with Brand.com and key OTAs,
+            where allowed.
           </Point>
         </div>
 
