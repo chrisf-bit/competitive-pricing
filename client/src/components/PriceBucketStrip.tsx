@@ -47,7 +47,7 @@ interface BucketSpec {
 const BUCKETS: BucketSpec[] = [
   { bucket: 1, thresholdLabel: 'eRPD ≤ -3%', color: '#1f8a3a' },
   { bucket: 2, thresholdLabel: '-3% < eRPD ≤ 0%', color: '#56b66f' },
-  { bucket: 3, thresholdLabel: '0% < eRPD ≤ 3%', color: '#c7d04a' },
+  { bucket: 3, thresholdLabel: '0% < eRPD ≤ 3%', color: '#e0cf3e' },
   { bucket: 4, thresholdLabel: '3% < eRPD ≤ 6%', color: '#f0c64a' },
   { bucket: 5, thresholdLabel: '6% < eRPD ≤ 9%', color: '#ec8a48' },
   { bucket: 6, thresholdLabel: '9% < eRPD ≤ 12%', color: '#d8504a' },
