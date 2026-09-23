@@ -165,7 +165,7 @@ export function closeDecoyMetricsFor(baseId: string): PartnerMetrics {
   const i = raw < 0 ? 0 : raw;
   const m = healthyMetrics(i);
   // Deliberately keep eRPD, its trend, Lose Price and the RPD split at
-  // HEALTHY (competitive) levels. Those are the headline card metrics, and
+  // HEALTHY levels. Those are the headline card metrics, and
   // some priorities read LOW on them (their tell is a momentum spike or a
   // structural gap, not the level) - so a near-miss that carried an eRPD /
   // Lose-Price flag could wrongly out-worst a subtle priority. The single
@@ -208,7 +208,7 @@ function healthySteps(meta: HotelMeta): BranchingStep[] {
       description:
         'Acknowledge the strong position honestly and ask whether there is anything they would value a second look at - no manufactured problem.',
       playerDialogue:
-        "That matches what I'm seeing - your pricing is competitive and your visibility is holding above your peers, so there's nothing pressing here. Is there anything you'd want a second pair of eyes on while we're talking?",
+        "That matches what I'm seeing - your pricing is in good shape and your visibility is holding above your peers, so there's nothing pressing here. Is there anything you'd want a second pair of eyes on while we're talking?",
       partnerResponse:
         "Honestly, not really - we're in good shape and I'd rather not fix what isn't broken. Nice to hear you agree with our own read.",
       styleMatch: { ...stylePlus(s, 2), green: 1 },
@@ -235,11 +235,11 @@ function healthySteps(meta: HotelMeta): BranchingStep[] {
       id: 'hd-open-hardsell',
       label: 'Push an unneeded discount',
       description:
-        'Suggest a broad discount for a partner who is already competitive and selling well - well-meant, but it gives away margin they do not need to.',
+        'Suggest a broad discount for a partner who is already in good shape and selling well - well-meant, but it gives away margin they do not need to.',
       playerDialogue:
         "We could always open up a broad discount to chase a bit more volume this quarter - want to give it a go?",
       partnerResponse:
-        "Why would I discount when I'm already competitive and selling well? That just gives away margin.",
+        "Why would I discount when I'm already in good shape and selling well? That just gives away margin.",
       styleMatch: stylePlus(s, -1),
       assertiveness: 2,
       compliance: 'safe',
@@ -398,7 +398,7 @@ function closeSteps(meta: HotelMeta): BranchingStep[] {
       description:
         'Acknowledge the property is broadly healthy, flag the single soft signal (forward pace a touch behind peers) and frame it as worth watching, not a fire to fight today.',
       playerDialogue:
-        "Overall you're in good shape - pricing is competitive and visibility is holding. The one thing I'd flag is your forward pace running slightly behind your peer group. It's worth keeping an eye on, but nothing that needs a big move today.",
+        "Overall you're in good shape - pricing is steady and visibility is holding. The one thing I'd flag is your forward pace running slightly behind your peer group. It's worth keeping an eye on, but nothing that needs a big move today.",
       partnerResponse:
         "That matches my read - we're comfortable, and I'd noticed the forward book was a little soft. Good to know it's on your radar too.",
       styleMatch: { ...stylePlus(s, 2), green: 1 },
