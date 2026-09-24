@@ -91,7 +91,15 @@ export const HEALTHY_DECOY_ROUNDS: Record<string, number[]> = {
 
 // ── Healthy metrics (varied per hotel; clearly better than any
 //    priority's problem state) ─────────────────────────────────────
-const H_ERPD = [-1.6, 0.5, 1.3, 2.2, -0.8, 1.9, 0.7, 2.5, -1.2, 1.1];
+// Every healthy decoy sits at eRPD <= 0 (the "competitive" zone). This is
+// deliberate: prioritisation is eRPD x Partner Value, so a decoy must never
+// out-score the round's real priority on that product. A competitive decoy
+// (eRPD <= 0) always yields a product <= 0, which is below any genuine
+// priority (positive eRPD x positive value) by construction - regardless of
+// how large the decoy's Partner Value is (e.g. Noble Falcon at ~14k). Values
+// stay varied so two decoy cards never read as clones. See
+// scripts/prioritization-audit.mjs for the guard that enforces this.
+const H_ERPD = [-1.6, -0.6, -0.4, -0.9, -0.8, -1.1, -0.3, -1.3, -1.2, -0.5];
 const H_ERPD_CHG = [-0.4, -0.9, 0.3, -0.2, -0.6, 0.1, -0.3, -0.7, -0.5, 0.2];
 const H_LOSE = [26, 33, 22, 38, 24, 41, 29, 44, 21, 31];
 const H_UNSOLD = [9, 12, 8, 14, 10, 13, 11, 7, 12, 9];
