@@ -95,7 +95,7 @@ export const miniScenarios: MiniScenario[] = [
         label: 'Signal',
         showBullets: [
           'The partner is more competitive on their own website than on Booking.com.',
-          'Brand eRPD is above 0%.',
+          'Brand eRPD is +2%.',
         ],
         prompt: 'What should you take from this first?',
         options: [
