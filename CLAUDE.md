@@ -4076,6 +4076,131 @@ slots. Committed + pushed to `release-2-partner-detail` (commits
 - Whether to ever flip the two intentional divergences to the raw sheet
   (needs the R12 / R8 dialogue adjusted in step).
 
+## Post-2026-09-23 session (Matthias sponsor review + OPC visibility U-turn)
+
+Worked through a senior sponsor's (Matthias) in-sim feedback plus a
+couple of reviewer follow-ups. All committed and pushed to
+`release-2-partner-detail` (commits `8ad041b` .. `59c4ad6`). `tsc` /
+`eslint` / `vite build` clean throughout.
+
+**OPC Visibility Share peer comparison - stripped then RESTORED (net
+zero, keep the peer figures).** Acting on the (then-current) legal doc,
+first stripped the Visibility Share peer comparison everywhere
+(`8ad041b`): dashboard `peerValue` off all 10 records + `hideComparator`
+on the OPC visibility card, and peer figures removed from R11/R12/R14/
+R18/R19 dialogue + the decoy line. THEN the SME reversed it - the actual
+peer figure for Visibility Share **can** be shared (the legal doc was
+outdated) - so it was all restored (`8028fb0`): `peerValue` back on the
+10 records, card comparator back on, peer figures back in the dialogue.
+**Net: visibility peer comparison stays in the game.** The only lasting
+change from that round trip: **R13 (Ocean View) stays on the
+sell-through/exposure signal** (SME: "R13 can remain as a search price
+signal") - it does NOT lead on a visibility-peer line, because Ocean
+View has no real search-price gap (140 vs 144 peer, competitive) and its
+tell is exposure + sell-through-below-peer. And **R15 (Emerald Peak)
+kept Anouk's exposure reframe** (answer her history question with her own
+recent performance, pivot to exposure) WITH the 17%-vs-26% peer figure
+restored. Both live.
+
+**Other fixes shipped this session:**
+- **Clearance Summary false "below 80%"** (`35d9474`): clearing needs
+  >=80% AND every scorable activity fully attempted; the banner/CTA
+  treated any not-cleared state as "below 80%", so a learner at 86% with
+  one activity unfinished was wrongly told they were below threshold
+  (sponsor hit this). Split the messaging: score<80% -> "Below the 80%
+  threshold"; score>=80% but incomplete -> "You're above the 80% mark,
+  but every activity has to be completed - Finish {activity}". Gate logic
+  unchanged. Verified a normal linear run records exactly gm=14 / D&I=3 /
+  Call Audit=5 / Warm Up=16 and the retry path preserves counts, so no
+  real learner is blocked at 86% - only a reviewer who jumped via DevNav.
+- **Unsold Rooms "(vs peer)" caption** (sim `8b5f8c7`, pack `e568601`):
+  Unsold Rooms carries no peer comparison (SME rule) and the value line
+  already hid it, but the normal-path `SecondaryMetricLabel` was called
+  WITHOUT `hideComparator`, so the "(vs peer)" caption still showed with a
+  blank figure beneath - exactly the sponsor's "says vs peers but no
+  benchmark". Fixed on the main render path; also dropped "(vs peer)"
+  from the review-pack's Unsold Rooms `OPC_LABEL`.
+- **Price bucket Bucket 3 colour** (`2edffd5`): `#c7d04a` was a
+  chartreuse (green channel > red) so a +2.2% eRPD partner (Bucket 3)
+  read as green; nudged to `#e0cf3e` (clean warm yellow). Thresholds/logic
+  unchanged - the bucketing itself is correct (Bucket 3 = 0-3% = yellow).
+- **Decoy "competitive" wording** (`dab3436`): healthy decoys can sit at
+  eRPD just above 0% (Riverside decoy = +2.2%), but the decoy call said
+  "your pricing is competitive" - contradicts the taught definition
+  (competitive = eRPD <= 0%). Softened all decoy learner-facing lines in
+  `healthy-decoys.ts` to "in good shape" / "steady" (Option B - keep the
+  eRPD values, change the word). All decoy dialogue is in that one file.
+- **Key OTA disclaimer note** (`5d8e662`): SME confirmed "Key OTA" stays
+  (kept general by design - can't customise the competitor name per
+  learner market). Added an SME-worded note to the one-time pre-session
+  `DisclaimerModal` explaining it, and that wide-parity markets can
+  proactively discuss alignment with Brand.com and key OTAs where allowed.
+- **Family-product note extended** (`edd95e5`): the "Family Rates active
+  but a pricing opportunity remains" note (already on Ocean View + Noble
+  Falcon) added to **Riverside** and **Palace Grand** `metrics.productsNote`.
+- **Distractor tone sweep** (`fa680d9`): Vincent (Pack 2) flagged wrong
+  options that give themselves away by tone ("honestly / simplest /
+  quickest", "rooms fill on their own"). Applied his Narrow-R1-5 fix
+  across all rounds/regimes - **213 non-optimal distractor options in 43
+  files**, playerDialogue text only. No `compliance`/`optimal`/`style`
+  fields touched (verified), so grading unchanged and no safe/borderline/
+  risky reclassification. Only Vincent flagged this pattern; extending it
+  everywhere was Chris's editorial call.
+- **Warm Up content-extract Word doc** (`59c4ad6`): new one-off generator
+  `client/scripts/make-warmup-pack.mjs` (esbuild-bundles live
+  `miniScenarios` so it can't drift), outputs
+  `docs/review-packs/Rate Right - Warm Up (Clearance Activity) - Content
+  Extract.docx` for legal/SME. Re-run: `node scripts/make-warmup-pack.mjs`.
+
+**Warm Up (mini-scenarios) is REGIME-NEUTRAL** - single flat
+`miniScenarios` array, no regime keying, screen takes no regime prop
+(contrast the Call Audit which IS regime-keyed). The same 4 case files x
+4 steps (16 KC items) show to Wide/Narrow/No-Parity; content is written
+to be compliant in the strictest case (No-Parity), which is why a
+wide-parity reviewer reads some correct answers as "a no-parity answer".
+
+**James's OPC review-pack input (Pack 7 R11-15 + Pack 8 R16-20) - checked,
+implemented.** His main input was TRACKED CHANGES not comments (only 1
+comment - a Pack 8 R16/Priya "Sure, we can look" continuity flag, since
+resolved: that line was reworded to "Okay, but that isn't alarming...").
+His tracked rewrites are in the code, several verbatim (R11 market-soft
+line = line 104; R11 mobile-incrementality "30% more bookings and 25%
+more revenue" = line 248; R12 opener; R14 too-unique reframe; R16 "trial
+last time" opener; R17 EEA Country Rate = line 236). **The one
+systematic difference:** James quoted exact OPC sell-through figures
+(-10% / -8% / 12% behind peer); those were later made qualitative
+("pacing behind your peer group") per **Florian's ruling** that forward
+sell-through/conversion figures can't be shared as exact numbers - so his
+wording is in, minus the numbers.
+
+**Still open (needs SME / design / a decision - NOT actioned):**
+- **Warm Up "correct answer should be A"** (Matthias, wide) on the
+  mobile-gap scenario, + his **sequencing** point (foundations-first but
+  topics can co-occur). SME content calls. His proposed "stronger" mobile
+  line uses "parity clauses" (not partner-facing) + a visibility/
+  conversion promise - do NOT adopt verbatim.
+- **OPC-in-Level-1 restructure** (Matthias: mix OPC in earlier, esp.
+  no-parity). Major design/build.
+- **R11/R12 "weird sentence"** (Matthias: visibility higher vs peers +
+  lesser page views, no data point). Routed to OPC SME; best-guess
+  candidates are R11 line 104 or (more likely, given "visibility higher")
+  the Silver Horizon R12 opener - which is James's own inserted text.
+- **"30% more bookings" enhancement** (Matthias): the base incrementality
+  line is ALREADY in R11 (line 248, "on average" framing - Chris cleared
+  it). Matthias only proposed a stronger version (net-of-existing +
+  personalised-report promise). Awaiting Chris's exact wording/placement
+  nod; NOT yet added.
+- **"blue badge on mobile"** (Matthias, R11) - too vague to action; needs
+  his clarification (he's finished his review).
+- Portfolio-prioritisation confusion (Matthias) was a misread, not a bug -
+  Partner Value IS on the cards; the round tell is the eRPD MoM spike, not
+  RPD x rooms or size. Explained; no change.
+
+**Pre-existing scratch (NOT this session's work, still uncommitted):**
+`client/package.json` + lock (playwright devDeps), `client/_shot.mjs`
+(stray screenshot script), and an untracked "Legal Review Pack 10 ... V4"
+docx. Leave or clean; they predate this session.
+
 ## Things to avoid
 
 - Don't flip the two SME-sheet reconciliation divergences to the raw
