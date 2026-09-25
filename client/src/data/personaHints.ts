@@ -396,7 +396,7 @@ const royalCrestR11Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: 50% unsold and visibility share 10.3% vs 17.9% peer while priced 7% above - he is seen less, not chosen less.',
+      'Anomaly: 50% unsold and visibility share 10% vs 18% peer while priced 7% above - he is seen less, not chosen less.',
   },
 };
 
@@ -415,14 +415,14 @@ const silverHorizonR12Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: visibility above the peer median yet sell-through -8% - the leak is at checkout, not discovery.',
+      'Anomaly: visibility above the peer median yet sell-through below peer - the leak is at checkout, not discovery.',
   },
 };
 
 const oceanViewR13Hints: Partial<Record<PersonaId, PersonaHint>> = {
   'conversation-architect': {
     oneLiner:
-      "Camila is warm and family-led: credit the guest-experience work before the numbers, then reveal the visibility gap.",
+      "Camila is blue/red and evidence-led: acknowledge the guest-experience work, then lead with the data and reveal the family visibility gap.",
   },
   'objection-navigator': {
     oneLiner:
@@ -491,7 +491,7 @@ const oceanfrontR16Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: sell-through -12% and a ~25% US-share loss tied to a +4% search gap, while a fenced US rate leaves domestic rates untouched.',
+      'Anomaly: sell-through below peer and a ~25% US-share loss tied to a +4% search gap, while a fenced US rate leaves domestic rates untouched.',
   },
 };
 
@@ -510,7 +510,7 @@ const palaceGrandR17Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: 21% unsold and sell-through -13% while search price is only +4% overall - the gap hides at +12% in European family searches.',
+      'Anomaly: 21% unsold and sell-through below peer while search price is only about 4% below peer overall - the gap hides at +12% in European family searches.',
   },
 };
 
@@ -567,7 +567,7 @@ const nobleFalconR20Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: search price -15.2% (cheaper than peers) yet conversion 1.3% and visibility 14.5% - the leak is a family-search config, not price.',
+      'Anomaly: search price -15.2% (cheaper than peers) yet conversion 1.3% and visibility 15% - the leak is a family-search config, not price.',
   },
 };
 
