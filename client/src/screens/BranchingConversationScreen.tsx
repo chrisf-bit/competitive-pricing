@@ -191,9 +191,10 @@ export function BranchingConversationScreen({
             gap: 14,
           }}
         >
-          {conversation.choices.length === 0 && (
+          {!isComplete && (
             <button
               onClick={onBack}
+              title="Leave this call and go back to pick another partner. Nothing is scored."
               style={{
                 background: 'rgba(255,255,255,0.10)',
                 border: '1px solid rgba(255,255,255,0.18)',
@@ -217,7 +218,7 @@ export function BranchingConversationScreen({
               }}
             >
               <ArrowLeft size={13} />
-              Back
+              Exit call
             </button>
           )}
 
