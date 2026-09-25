@@ -430,7 +430,7 @@ const oceanViewR13Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   storyteller: {
     oneLiner:
-      'Cheaper on paper, expensive to families: a child-rate misconfig prices kids as adults, so 40% of searches skip her.',
+      'Cheaper on paper, expensive to families: a child-rate misconfig prices kids as adults, so many family searches skip her.',
   },
   'data-detective': {
     oneLiner:
@@ -453,7 +453,7 @@ const riversideR14Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: 24% unsold, visibility 12% vs 21%, and a 15% share loss concentrated in the exact US long-stay segment he prizes.',
+      'Anomaly: 24% unsold, visibility 12% vs 21%, and a share loss concentrated in the exact US long-stay segment he prizes.',
   },
 };
 
@@ -468,7 +468,7 @@ const emeraldPeakR15Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   storyteller: {
     oneLiner:
-      'Nongenuine: she inflates her public price to fund the Genius discount, so her search price runs 10% high and non-logged-in mobile conversion drops 60%.',
+      'Nongenuine: she inflates her public price to fund the Genius discount, so her search price runs 10% high and non-logged-in mobile conversion drops sharply.',
   },
   'data-detective': {
     oneLiner:
@@ -506,11 +506,11 @@ const palaceGrandR17Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   storyteller: {
     oneLiner:
-      'Cheap on average, expensive to European families: children charged as adults plus a missing EEA country rate index families +12%.',
+      'Cheap on average, expensive to European families: children charged as adults plus a missing EEA country rate push family rates well above peers.',
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: 21% unsold and sell-through below peer while search price is only about 4% below peer overall - the gap hides at +12% in European family searches.',
+      'Anomaly: 21% unsold and sell-through below peer while search price is only about 4% below peer overall - the gap hides in European family searches.',
   },
 };
 
@@ -544,11 +544,11 @@ const loftLivingR19Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   storyteller: {
     oneLiner:
-      'Severe leak: 33% unsold, visibility 8% vs 23% peer, and a mobile discount that excludes 70% of mobile searches, dropping mobile conversion 80%.',
+      'Severe leak: 33% unsold, visibility 8% vs 23% peer, and a mobile discount that excludes most mobile searches, dropping mobile conversion sharply.',
   },
   'data-detective': {
     oneLiner:
-      'Anomaly: search price +12% overall but +18% on mobile - weekend and long-window exclusions mean most mobile searches miss his own discount.',
+      'Anomaly: search price +12% overall and steeper on mobile - weekend and long-window exclusions mean most mobile searches miss his own discount.',
   },
 };
 
@@ -563,7 +563,7 @@ const nobleFalconR20Hints: Partial<Record<PersonaId, PersonaHint>> = {
   },
   storyteller: {
     oneLiner:
-      'Cheap but not converting: children charged as adults quote a small family two premium rooms; fixing it is roughly 45 room nights next month.',
+      'Cheap but not converting: children charged as adults quote a small family two premium rooms; fixing it recovers meaningful room nights next month.',
   },
   'data-detective': {
     oneLiner:
