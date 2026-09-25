@@ -98,6 +98,39 @@ for (const { label, regime, priority } of regimes) {
   }
 }
 
+// ── Secondary check: could a learner reading a DIFFERENT visible card
+//    metric (eRPD alone, or Lose Price) be led to a decoy instead of the
+//    priority? These are the other two numbers on the portfolio card.
+console.log(`\n============================================================`);
+console.log(` SECONDARY: decoy out-reads priority on a visible card metric?`);
+console.log(`============================================================`);
+let erpdConfusions = 0;
+let loseConfusions = 0;
+for (const { label, regime, priority } of regimes) {
+  for (let round = 1; round <= 20; round++) {
+    const ids = getPortfolioForRound(regime, round);
+    if (!ids) continue;
+    const priId = priority(round);
+    const rows = ids.map((id) => {
+      const m = applyRoundBaseline(byId.get(id)!, round).metrics;
+      return { id, erpd: m.erpd, lose: m.losePricePublic };
+    });
+    const pri = rows.find((r) => r.id === priId)!;
+    const erpdBeaten = rows.filter((r) => r.id !== priId && r.erpd >= pri.erpd);
+    const loseBeaten = rows.filter((r) => r.id !== priId && r.lose >= pri.lose);
+    const strip = (s: string) => s.replace(`-${regime}`, '').replace('-cross-regional', '');
+    if (erpdBeaten.length) {
+      erpdConfusions++;
+      console.log(`  [${label} R${round}] eRPD: priority ${strip(priId ?? '?')} (${pri.erpd}) NOT highest - ${erpdBeaten.map((r) => `${strip(r.id)} ${r.erpd}`).join(', ')}`);
+    }
+    if (loseBeaten.length) {
+      loseConfusions++;
+      console.log(`  [${label} R${round}] LosePrice: priority ${strip(priId ?? '?')} (${pri.lose}) NOT highest - ${loseBeaten.map((r) => `${strip(r.id)} ${r.lose}`).join(', ')}`);
+    }
+  }
+}
+console.log(`  eRPD-alone confusions: ${erpdConfusions} | Lose-Price confusions: ${loseConfusions}`);
+
 console.log(`\n============================================================`);
 console.log(` SUMMARY: ${fails} round(s) where priority is NOT the max eRPD x Partner Value.`);
 console.log(` PASS* = priority wins, but only because decoy eRPD <= 0 (the "x value" part`);

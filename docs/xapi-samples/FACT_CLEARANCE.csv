@@ -1,0 +1,3 @@
+attempt_id,learner_id,session_registration,level,attempt_number,passed,score,first_attempt,time_to_completion_seconds,attempt_timestamp,raw_statement_id
+00000000-0000-4000-8000-00000000000b,BK-1234,b7a1e7d0-3f9d-4c4e-9a01-000000000001,level-0,1,false,63,true,1240,2026-09-15T09:01:47.000Z,00000000-0000-4000-8000-00000000000b
+00000000-0000-4000-8000-000000000010,BK-1234,b7a1e7d0-3f9d-4c4e-9a01-000000000001,level-0,2,true,88,false,640,2026-09-15T09:02:34.000Z,00000000-0000-4000-8000-000000000010

@@ -4201,6 +4201,128 @@ wording is in, minus the numbers.
 (stray screenshot script), and an untracked "Legal Review Pack 10 ... V4"
 docx. Leave or clean; they predate this session.
 
+## Post-2026-09-24 session (prioritisation bug fix, persona-hint audit, reviewer UX fixes, xAPI samples)
+
+Batch of reviewer-feedback fixes on `release-2-partner-detail`, all committed
+and pushed. `tsc -b` + `vite build` clean throughout.
+
+### Prioritisation now genuinely follows eRPD x Partner Value (commit `0cbfb2c`)
+
+Irene's rule: learners prioritise partners by **eRPD x Partner Value**. It was
+the *stated* rule but never the rule the data was checked against - the priority
+each round was hand-picked to read worst on **Lose Price / eRPD month-on-month**,
+and every integrity check used those tells, not the eRPD x Partner Value product.
+While Partner Values were rough placeholders the two agreed; the real SME Partner
+Values (17 Sep) made some priorities genuinely low-value (Ocean View 1658,
+Oceanfront 917) and, with big hotels now used as healthy decoys (Noble Falcon
+13957), a healthy decoy started out-scoring the priority on eRPD x Partner Value
+in **13** round x regime combos (R2 Silver Horizon, R6 Oceanfront, R3/R13 Ocean
+View, + KAM). Diana Yagui's "R2 Wide went badly though I picked the best answers"
+report was this exact bug - she engaged Riverside (a decoy that out-scored the
+priority on the rule), and wrong partner = automatic 0 stars.
+
+Fix: every healthy decoy now sits at **eRPD <= 0** (the competitive zone) in
+`data/scenarios/healthy-decoys.ts` (the `H_ERPD` table). A competitive decoy's
+eRPD x Partner Value is always <= 0, so it can never beat a real priority
+(positive eRPD x positive value) regardless of its Partner Value. Decoy-metrics
+only - no priority data, conversation trees, or grading touched; decoy dialogue
+cites no metric figures. This reverses the earlier "decoys sit just above 0,
+don't call them competitive" choice (that's fine; the softened "in good
+shape/steady" wording is still accurate). **Two permanent guards** added in
+`client/scripts/` (esbuild-run, untracked bundle files): `prioritization-audit.mjs`
+(asserts the priority tops eRPD x Partner Value AND is highest on eRPD-alone and
+Lose Price across all 80 combos - now 0 fails on all three) and
+`conversation-integrity.mjs` (asserts all 240 cards resolve to a record +
+playable conversation, priority present - no dead-ends). Re-run after any
+data/decoy change.
+
+### Warm Up (mini-scenarios) - one live edit + a pending scope decision
+
+- **Committed (`d1b9072`):** Hotel Castellana Step 1 signal "Brand eRPD is above
+  0%" -> "Brand eRPD is +2%" (a reviewer read "above 0%" as brand being 0%). No
+  conversation/option changes needed - the figure appears only in that one signal
+  bullet.
+- **Decided, NOT yet built (client call):** drop Warm Up from 4 scenarios to
+  **1 scenario per regime** (clearance/warm-up was over-long and out of original
+  scope, and 1-per-regime also fixes the "doesn't reflect my regime" complaint -
+  Warm Up is currently regime-neutral, content written to the strictest No-Parity
+  case). Scoring impact: totals are derived (`miniScenarioTotalItems`), so no code
+  breaks; Warm Up drops to ~4 of ~26 pooled clearance items (was 16 of 38), so it
+  can no longer single-handedly block clearance. Build path = regime-key it like
+  the Call Audit (`miniScenariosByRegime` + `getMiniScenarios(regime)`, thread a
+  `regime` prop into `MiniScenariosScreen`, resolve per-regime totals in the
+  Clearance Summary, keep the `mini-scenario-` itemId prefix). Copy referencing
+  "four/16" needs a sweep and the N=1 summary screen needs simplifying. Gating
+  question: whether the single per-regime scenario needs SME regime-correct
+  answers (option 1) or a config-type theme whose answer is regime-invariant
+  (option 2). Not started.
+
+### Persona "super power" hint audit vs record metrics (commits `bc7daae`, `44835e8`)
+
+Cross-checked all 80 authored persona chips (10 priority partners x L1+L2 x 4
+super-powers) against each partner's record metrics (fanned out to 5 subagents).
+**All Level 1 blocks clean; every issue was a stale L2 (OPC) figure** left over
+from the 17 Sep metrics sheet + the "OPC figures go qualitative" ruling. Fixed:
+- 6 hard data errors: palace-grand R17 search-price wrong sign (+4% -> ~4% below
+  peer, record 239 vs 249) + stale sell-through %; silver-horizon R12 &
+  oceanfront R16 stale sell-through % -> "below peer"; royal-crest R11 visibility
+  "10.3/17.9" -> "10/18"; noble-falcon R20 visibility "14.5" -> "15"; ocean-view
+  R13 architect "warm and family-led" -> blue/red evidence-led (matched her R3
+  hint).
+- 6 unverifiable segment figures made **qualitative** per Chris (mobile/US/family
+  segment numbers not on the dashboard): emerald R15 "60%", ocean-view R13 "40%",
+  riverside R14 "15%", palace R17 "+12%", loft R19 "70/80/+18%", noble R20 "45
+  room nights". On-record figures (eRPD, Lose Price, RPD split, visibility,
+  unsold, search-price vs peer) verified accurate and left intact. Copy-only.
+  Note the persona chip only shows an authored hint at a partner's *priority*
+  round; decoy appearances fall back to a generic style-based chip with no data.
+
+### Reviewer UX fixes
+
+- **Day one with Alex readability (`efed8a7`):** the GM chat renders in the
+  PhoneFrame (capped `min(420px,100%)`, tall 9/19), so on a single fullscreen
+  display it's a narrow ~370-420px column and the options read tiny (reviewer
+  Alessandra Vitali). Low-risk pass: PhoneFrame max width 420 -> 460; message
+  text 14.5 -> 16; option buttons 14 -> 16; "Choose one" label 11 -> 12.5. The
+  structural option (less-tall phone, or breaking out of the frame on big
+  screens) is held pending a design call. Only the Alex chat uses PhoneFrame;
+  Call Audit uses the wider LaptopFrame.
+- **Exit call button (`1c330a6`):** reviewer Valentina Parasmo picked the wrong
+  partner, realised one step in, but couldn't leave - the back button only
+  rendered before the first pick (`choices.length === 0`). Now shows for the
+  whole call (`!isComplete`) in both conversation screens, relabelled "Back" ->
+  "Exit call" with a tooltip. No engine/scoring change: engagement + grading are
+  recorded only on completion (`gameEngine.ts` ~L454), so leaving mid-call
+  records nothing and returns to the portfolio fully re-pickable. Answers the
+  manager-session note about being forced through dead-end generic calls. Decoy
+  calls are already short (~3 steps) so no need to shorten them.
+- **Recurring theme (watch):** two reviewers now (Diana, Matthias) picked a decoy
+  and read the failure as "my answers were wrong" rather than "wrong partner",
+  though the round report already says so ("You spent this round on a partner who
+  was not the one most in need..."). Diana's was caused by the prioritisation bug
+  (now fixed); if confusion persists after the fix deploys, consider making the
+  wrong-partner outcome more prominent on the report.
+
+### xAPI sample dataset for the client (uncommitted -> committed this session)
+
+Booking's data/governance team asked for sample xAPI statements + schema for
+DDF mapping. Generated a full deterministic worked-example playthrough (fictional
+learner BK-1234, 239 statements + per-table CSVs + RAW_STATEMENTS landing table)
+into `docs/xapi-samples/`, by reusing the `xapi-full-data-preview` generator
+headlessly. **Honesty caveat to relay:** gameplay xAPI emission is spec'd but NOT
+built; this is deterministic dummy data from the schema, not captured telemetry -
+structure is identical to what live will emit. Placeholder namespace/identifier
+still pending Booking sign-off (open question 8.1); a successful package test does
+NOT resolve that (an LRS accepts any well-formed IRI). Schema reference is
+`docs/rate-right-learning-insights-data-pipeline-v0.3.md`.
+
+### Fullscreen / resolution (already addressed, confirmed this session)
+
+The "lost buttons after ESC-ing out of fullscreen" class was already fixed in the
+Post-2026-09-11 responsive/scroll pass (`App.tsx` content area `overflow:'hidden
+auto'`); no separate "go fullscreen" prompt was added by design (the format fix
+also covers the LMS iframe). Splash still auto-requests fullscreen on Begin.
+
 ## Things to avoid
 
 - Don't flip the two SME-sheet reconciliation divergences to the raw
