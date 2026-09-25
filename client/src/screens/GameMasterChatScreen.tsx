@@ -316,7 +316,7 @@ function MessageBubble({ msg }: { msg: ChatMessage }) {
           borderRadius: 14,
           background: isGM ? 'rgba(255,255,255,0.07)' : 'var(--brand-yellow)',
           color: isGM ? 'rgba(255,255,255,0.92)' : 'var(--brand-navy)',
-          fontSize: 14.5,
+          fontSize: 16,
           lineHeight: 1.5,
           boxShadow: isGM ? 'none' : '0 4px 12px rgba(254, 186, 2, 0.18)',
           border: isGM ? '1px solid rgba(255,255,255,0.06)' : 'none',
@@ -406,7 +406,7 @@ function ReplyOptions({
     >
       <div
         style={{
-          fontSize: 11,
+          fontSize: 12.5,
           fontWeight: 700,
           color: 'rgba(255,255,255,0.55)',
           textTransform: 'uppercase',
@@ -427,7 +427,7 @@ function ReplyOptions({
             color: 'var(--white)',
             border: '1.5px solid rgba(255,255,255,0.10)',
             borderRadius: 10,
-            fontSize: 14,
+            fontSize: 16,
             fontWeight: 500,
             cursor: 'pointer',
             transition: 'background 0.15s ease, border-color 0.15s ease, transform 0.1s ease',

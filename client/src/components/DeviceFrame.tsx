@@ -79,7 +79,7 @@ export function PhoneFrame({
           // Phone body (the dark bezel)
           position: 'relative',
           zIndex: 1,
-          width: 'min(420px, 100%)',
+          width: 'min(460px, 100%)',
           aspectRatio: '9 / 19',
           maxHeight: '100%',
           background: '#0a0e1a',
