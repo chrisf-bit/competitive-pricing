@@ -124,7 +124,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             />
             <InfoCard
               icon={<TrendingUp size={20} />}
-              title="10 rounds"
+              title="20 rounds"
               text="Decisions compound over time - each round shifts what your partners need from you"
             />
             <InfoCard

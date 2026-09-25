@@ -63,8 +63,8 @@ interface DebriefScreenProps {
   regime: ParityRegime | null;
   /**
    * The learner's selected super-power persona id, or null if none picked.
-   * Drives the aggregate persona block ("X of 10 rounds your strength
-   * carried...") shown at the end of the run.
+   * Drives the aggregate persona block ("X of N rounds played your
+   * strength carried...") shown at the end of the run.
    */
   personaId: string | null;
   /**
