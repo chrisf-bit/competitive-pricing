@@ -101,7 +101,7 @@ const step2Options: BranchingOption[] = [
     description:
       'SME-prescribed handling of the "market is soft / one bad month" objection: accept that past data guides planning, then move to what live demand is doing now - visibility share below the peer median and a search-price gap that loses travelers at the search stage.',
     playerDialogue:
-      "Past months guide our planning, agreed. But your peer group is achieving a higher sell-through rate, which suggests there is active demand in the area. Against that backdrop, your visibility share is 10.3%, compared with 17.9% for your peers. Travelers are searching, but your search price is running about 7% above your peers on key dates, so many may drop off before reaching your page.",
+      "Past months guide our planning, agreed. But your peer group is achieving a higher sell-through rate, which suggests there is active demand in the area. Against that backdrop, your visibility share is 10.3%, compared with 17.9% for your peers. Travelers are searching, but your search price is running about 7% above your peers on key dates, which could be a reason why you are being less visible than your peers.",
     partnerResponse:
       "A 7% difference in search price? We offer a premium experience, Anya. Our repeat guests know our value. I don't buy into these generic platform averages that tell me to drop prices for everyone.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
@@ -199,7 +199,7 @@ const step4Options: BranchingOption[] = [
     playerDialogue:
       "An empty room earns nothing, so instead of touching your base rates, let's capture demand where you're losing it. There's a 40% rise in mobile searches for your area, yet your conversion on mobile is almost zero. Last time we spoke I suggested pairing mobile and country rates, but you tested only country rates.",
     partnerResponse:
-      "Yes, we went with the country rates - I've never been a fan of that green badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
+      "Yes, we went with the country rates - I've never been a fan of that blue badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -243,9 +243,9 @@ const step5Options: BranchingOption[] = [
     id: 'rc-r11-step5-correct',
     label: 'Frame mobile as an incremental last-minute segment',
     description:
-      "SME-prescribed handling of the cannibalization worry: mobile bookers are a distinct, high-intent, last-minute segment. Being 10% more competitive there drives on average 30% more bookings and 25% more revenue, lifting sell-through without changing his wider strategy.",
+      "SME-prescribed handling of the cannibalization worry: mobile bookers are a distinct, high-intent, last-minute segment. A genuine 10% mobile discount drives, on average, 30% incremental (net-new) bookings, lifting sell-through without changing his wider strategy.",
     playerDialogue:
-      "Looking at stays in the next 30 days, mobile bookers are a distinct segment with high intent to stay. They're often incremental to the full-price guests you already attract. Being 10% more competitive with this segment generates, on average, 30% more bookings and 25% more revenue, lifting your sell-through without changing your overall strategy.",
+      "Looking at stays in the next 30 days, mobile bookers are a distinct segment with high intent to stay. They're often incremental to the full-price guests you already attract. We see that partners that activate a genuine 10% mobile discount receive on average 30% incremental bookings. That is net (in addition) to the bookings that you would already have received on mobile. When you activate this product, we will have a personalized report available for you in the Extranet to back these statements up. This would lift your sell-through without changing your overall strategy.",
     partnerResponse:
       "Hmm... a controlled discount aimed at mobile guests booking stays in the next 30 days, to be more competitive against my peers. That's not a bad idea, actually.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
@@ -365,7 +365,7 @@ const steps: BranchingStep[] = [
     id: 'cannibalization',
     label: 'Handle the cannibalization worry',
     partnerPrompt:
-      "Yes, we went with the country rates - I've never been a fan of that green badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
+      "Yes, we went with the country rates - I've never been a fan of that blue badge on mobile. But how does that protect us from cannibalizing guests who'd have booked at full price anyway?",
     options: step5Options,
   },
   {

@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge conversion is 45% above peer, then surface page views down 53% and the pattern - his property appears uncompetitive 66% of the time versus other channels, specifically on mobile and family searches.",
     playerDialogue:
-      "Let's have a look. Your conversion rate is actually 45% higher than your peer group, but your page views are down 53%. Over the past month there's been a shift - your property appears uncompetitive around 60% of the time compared with other channels, and it's concentrated specifically in searches made by families and on mobile devices.",
+      "Let's have a look. Our recent data shows Booking.com's prices are on average 7% more expensive than competitor OTAs, specifically in mobile and family searches. Your conversion rate is actually 45% higher than your peer group, but your page views are down 53% and last 30 days room nights are down 46% vs last year. If you already offer cheaper prices on other channels, also making those prices available on Booking.com can help you stand out from direct competitors, resulting in higher visibility and more bookings.",
     partnerResponse:
       "Diego, we apply the same rates across all online channels to keep things simple. If another platform decides to cut its own margin to lower the public price, that's their choice. If Booking.com wants to compete, you should just do the same.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

@@ -26,7 +26,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge she converts well once seen, surface the -61% page views / -48% bookings visibility problem, then ask her to walk you through the rate strategy before recommending anything.",
     playerDialogue:
-      "You're right. Once travelers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and next-three-month room nights are 48% behind. Can you walk me through the strategy behind the rates you've listed with us?",
+      "You're right. Once travelers reach your page, your portfolio converts well - but there's a visibility problem: your page views are down 61% versus your peer group and next-three-month room nights are 48% behind. Our data shows Booking.com's prices are more expensive than your own brand channel above 90% of the time on average, with rates on Booking.com running on average 5 to 6% higher than your direct channel. Can you walk me through the strategy behind the rates you've listed with us?",
     partnerResponse:
       "Based on my experience, we keep your platform marked up by about 5 to 6% versus our website on purpose. We want guests to discover us on Booking.com, realize it's cheaper to book directly with us and complete the reservation on our site.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

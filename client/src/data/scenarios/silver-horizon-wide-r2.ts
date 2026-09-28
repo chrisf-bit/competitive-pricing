@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: contrast the strong forward volume with the 32% YoY room-night drop and ask an open question about cancellations or a shifting distribution mix before recommending anything.",
     playerDialogue:
-      "I've been reviewing your portfolio. Forward volume for the next three months is strong, but room nights in the last 30 days are down 32% year-on-year. Have you seen more cancellations from our platform, or a shift in your distribution mix?",
+      "I've been reviewing your portfolio and data shows that other OTAs are currently showing cheaper prices on family and international searches compared to Booking. That price gap is part of the influencing factors that explain why room nights in the last 30 days are down 32% year-on-year, even though your forward volume for the next three months remains strong. Have you seen more cancellations from our platform, or a shift in your distribution mix?",
     partnerResponse:
       "Yes, I've seen the drop, and other OTAs have gained share this month. I checked - it's because they are cutting their own margin. I give everyone the same rate. If they want to cut margin to lower the final price, that's on them. Why don't you do the same?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

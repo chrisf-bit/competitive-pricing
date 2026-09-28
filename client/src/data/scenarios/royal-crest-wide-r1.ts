@@ -154,7 +154,7 @@ const wideStep1Probe: BranchingStep = {
       ? {
           ...o,
           playerDialogue:
-            "I know revenue is your top priority. Your page views are 20% up on your peer group, but your future room nights are tracking 20% behind. Also, from the data, we see Booking.com's prices are on average 5% more expensive than your own brand channel. Can you walk me through the strategic considerations behind your current pricing approach?",
+            "I know revenue is your top priority. From the recent data, we see Booking.com's prices are on average 5% more expensive than your own brand channel, and competitor OTAs are showing sharper mobile rates. With this price gap, while your page views are 20% up on your peer group, your future room nights are tracking 20% behind. Can you walk me through the strategic considerations behind your current pricing approach?",
         }
       : o,
   ),

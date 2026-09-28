@@ -26,7 +26,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: acknowledge her conversion is 17% above peer, then surface the hard numbers - page views down 89% vs peers and room nights down 84% year-on-year for the same window.",
     playerDialogue:
-      "That's exactly what I want to address. Your conversion rate is actually 17% higher than your peer group, so travelers who see you are converting well. But your page views are down 89% versus your peers, and your room nights are down 84% year-on-year for the same 30-day window.",
+      "That's exactly what I want to address. Our data shows your prices on Booking.com are almost 10% higher than your direct website across two-thirds of public checks on average. Because travelers compare rates across search channels, large price differences between Booking.com and other channels can erode trust, delay bookings and push travelers towards other properties. Your conversion rate is actually 17% higher than your peer group, so travelers who see you are converting well. But your page views are down 89% versus your peers, and your room nights are down 84% year-on-year for the same 30-day window.",
     partnerResponse:
       "A drop of 89% in page views is significant. Why is the visibility failing so drastically if our conversion is that high?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

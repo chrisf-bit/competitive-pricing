@@ -26,7 +26,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: acknowledge her strong demand, surface that she's losing the price comparison on nearly every public search against both her direct site and the key OTAs, then ask an open question about her strategy and goals before recommending anything.",
     playerDialogue:
-      "Your demand here actually looks strong - your page views and conversion are well up on your peer group. The one thing standing out is price: on Booking.com you're losing on price in virtually every public comparison, against your own direct site. Before I go further - what's your current strategy, and what are your goals with us?",
+      "I've been reviewing your data, and the primary factor standing out is price: on Booking.com, your public rates are on average 12% higher than your own direct site almost all the time. While your demand here actually looks strong - your page views and conversion are well up on your peer group, the gap is capping your ability to capture unbooked inventory and maximize performance on our platform. Before I go further - what's your current strategy, and what are your goals with us?",
     partnerResponse:
       "Let's be direct, Mei. This is an intentional strategy dictated by head office: we keep our website more competitive to own the customer relationship. We know it hits our OTA visibility, but we see Booking.com purely as a channel to boost visibility - travelers see us on your platform and then click to our website to book.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

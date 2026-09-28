@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: his ADR is well above peer, but past and future room nights are dropping severely - around 45% versus peers. Surface it and ask him to help you understand his current pricing approach rather than presuming.",
     playerDialogue:
-      "Your average daily rate is well above your peer group, but your past and future room nights are dropping severely versus peers - around 45%. Have you noticed a recent change in your occupancy? And, could you help me understand your current pricing strategy?",
+      "Looking at your cross-channel data, your overall prices are around 30% more expensive compared to other channels. Our data also shows some rates are originating from wholesalers. With such a big price gap, and the fact that customers compare prices on Booking.com with other offers available online, this can delay bookings and push travelers towards other properties. Your past and future room nights are dropping severely versus peers - around 45%. Have you noticed a recent change in your occupancy? And, could you help me understand your current pricing strategy?",
     partnerResponse:
       "I've noticed it, but frankly I'm frustrated. Booking.com keeps applying those 'Partner Offers' and undercutting my direct rates. It's hurting my price integrity.",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
