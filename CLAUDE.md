@@ -4323,6 +4323,88 @@ Post-2026-09-11 responsive/scroll pass (`App.tsx` content area `overflow:'hidden
 auto'`); no separate "go fullscreen" prompt was added by design (the format fix
 also covers the LMS iframe). Splash still auto-requests fullscreen on Begin.
 
+## Post-2026-09-28 session (legal review pack edits: Packs 1, 6, 7)
+
+Worked through the reviewer legal-review packs one at a time as Chris relayed
+each `.docx` from `~/Downloads`. Committed + pushed to
+`release-2-partner-detail` (commit `d843dc5`). `tsc -b` + `npm run build`
+clean. **11 dialogue edits total across 8 scenario files** - all on optimal or
+partner lines, no `compliance`/`optimal`/`styleMatch`/`trustChange` fields
+touched, so grading is unaffected.
+
+**How to read a legal review pack (method, reusable):** unzip the `.docx`,
+inspect `word/comments.xml` (reviewer comments), and scan
+`word/document.xml` for `w:ins`/`w:del` (tracked changes). A reviewer
+*comment* is context; a *tracked change* is the instruction (Chris's standing
+rule). Reconstruct the intended final text by "accept all" = keep normal runs
++ `w:ins` runs, drop `w:del` runs. **Watch for the opened-but-unmarked case:**
+`settings.xml` with `rsid` entries but no `w:ins`/`w:del`/comments means the
+file was opened in Word but has no tracked markup - to be sure there are no
+*baked-in* (track-changes-off) edits, diff the pack's spoken lines against the
+live scenario JSON AND against the pre-distractor-sweep tree (`fa680d9~1`); any
+line that differs from current code but matches pre-sweep is just drift from
+our own Sept-24 distractor sweep, not reviewer input. In this batch every
+"difference" in the clean packs was drift, not an edit.
+
+**Scope rule confirmed by Chris:** apply an edit only to the regime pack it
+appears in (Wide edits -> Wide files only) "unless they appear in other regime
+packs, which I'll share later." R1 Royal Crest's step-1 optimal is shared in
+`royal-crest-base.ts`, so its Wide edit went through the existing
+`wideStep1Probe` override in `royal-crest-wide-r1.ts` (Narrow/None base
+untouched). R2/R3/R5/R6/R7/R9 have per-regime `-wide-` step-1 files, so those
+edits are inherently Wide-only. L2 (OPC) is regime-neutral (one factory), so
+the Pack 7 R11 edits apply to all regimes and to KAM L2 (which reuses
+`royalCrestR11`).
+
+**Edits applied (all reviewer tracked changes):**
+- **Pack 1 (Wide R1-5), Pei-Shyuan Yu** - optimal step-1 probe reworded to
+  lead with / quantify the price gap (a Wide DO): R1 `royal-crest-wide-r1.ts`
+  (added "competitor OTAs are showing sharper mobile rates"), R2
+  `silver-horizon-wide-r2.ts`, R3 `ocean-view-wide-r3.ts` (added brand-channel
+  gap >90% of the time, 5 to 6% higher), R5 `emerald-peak-wide-r5.ts`. R4 no
+  change.
+- **Pack 6 (Wide R6-10)** - optimal step-1 probe gains proactive cross-channel
+  price-gap framing: R6 `oceanfront-wide-r6.ts` (~10% higher than direct +
+  trust/delay rationale), R7 `palace-grand-wide-r7.ts` (7% vs competitor OTAs,
+  46% YoY drop, "make those prices available" close), R9 `loft-living-wide-r9.ts`
+  (~30% more expensive, some rates originating from wholesalers). One comment
+  (Daria: "feels like same scenario as Round 1 Royal Crest") is informational -
+  R6 Oceanfront and R1 Royal Crest intentionally share the Brand.com Loyalty
+  objection; no change.
+- **Pack 7 (OPC R11)** - `royal-crest-r11.ts` only (R12-15 clean): softened the
+  step-2 search-price causal claim ("so many may drop off before reaching your
+  page" -> "which could be a reason why you are being less visible than your
+  peers"); "green badge on mobile" -> "blue badge" (both occurrences);
+  rewrote the step-5 mobile-incrementality pitch to net/incremental framing +
+  "personalized report available in the Extranet" (also updated the matching
+  internal `description`).
+
+**Minor cleanups I made to the reviewers' raw insertions (all flagged to
+Chris):** British->American (`travellers`->`travelers`, `personalised`->
+`personalized`, `maximise`->`maximize`); a missing space at a delete/insert
+boundary (Pack 6 R7); dropped a doubled "over around 30%" -> "around 30%" (Pack
+6 R9) and a redundant trailing clause (Pack 1 R5); fixed a subject-verb slip
+(Pack 1 R2 "factors that explains" -> "explain"); tilde->words ("5~6%" -> "5 to
+6%", Pack 1 R3). **One judgment call to confirm with the reviewer:** Pack 7
+R11's insertion ended in a truncated "Thi." fragment (unfinished sentence) - I
+dropped the orphan and kept the clean sentence.
+
+**Clean packs (no reviewer feedback):** Pack 2 (Narrow R1-5), Pack 3 (No-Parity
+R1-5), Pack 4 (No-Parity R6-10), Pack 5 (Narrow R6-10), Pack 8 (OPC R16-20),
+Pack 9 (KAM R1-10), Pack 10 (KAM R11-20, all variants). Packs 4/5/9/10 were
+opened in Word (rsid present) but carried no markup - verified their only
+text differences vs live code are pre-Sept-24-sweep distractor drift, not
+edits. Packs 2/3/8 were never opened (no rsid).
+
+**KAM closings (the first file relayed, `...Openings and Closings (1).docx`)** -
+Youvenna's 4 comments (R1-R4 closings "different from / missing vs the Content
+Hub") were flagged on an OLD full-conversation pack that predates the KAM
+closing-statements work. Already resolved in code: `KAM_CLOSINGS` in
+[kam-l1.ts](client/src/data/scenarios/kam-l1.ts) holds the Content Hub AM
+wrap-up lines verbatim (since commit `b8649c0`), stamped via `withHelicopter`
+and rendered on the optimal path. No change needed; the current V3 pack already
+shows them.
+
 ## Things to avoid
 
 - Don't flip the two SME-sheet reconciliation divergences to the raw
