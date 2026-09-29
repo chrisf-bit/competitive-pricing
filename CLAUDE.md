@@ -4405,6 +4405,45 @@ wrap-up lines verbatim (since commit `b8649c0`), stamped via `withHelicopter`
 and rendered on the optimal path. No change needed; the current V3 pack already
 shows them.
 
+## Post-2026-09-29 session (SME prioritization set - R3/R6/R8 decoy swap)
+
+SME sent a confirmed Level 1 prioritization set (priority + 2 distractors per
+round, each with eRPD and Partner Value), flagging changes on rounds 3, 6, 8
+only. Reconciled against the game and applied. Committed + pushed to
+`release-2-partner-detail`. `tsc -b` + `npm run build` clean; both guard
+scripts green.
+
+**What already matched (no change needed):** all ten priority eRPDs and Partner
+Values, and every decoy eRPD (`H_ERPD`). The set was built on the same
+eRPD x Partner Value rule the Sept-24 fix enforced (decoys at eRPD <= 0), so
+only the distractor *composition* on R3/R6/R8 differed.
+
+**The change (two hand-synced tables - always edit both together):**
+`DECOYS_BY_ROUND` in [portfolioByRound.ts](client/src/data/portfolioByRound.ts)
+and `HEALTHY_DECOY_ROUNDS` in
+[healthy-decoys.ts](client/src/data/scenarios/healthy-decoys.ts) (the latter
+drives decoy baselines in `partnerStateByRound.ts` + decoy calls in
+`branchingScenarios.ts`, so a decoy added to a round MUST be added here or its
+card dead-ends):
+- R3 (priority Ocean View): distractors `emerald-peak` -> `oceanfront` (now
+  Oceanfront + Palace Grand).
+- R6 (priority Oceanfront): `noble-falcon` -> `loft-living` (now Hidden Valley +
+  Loft Living).
+- R8 (priority Hidden Valley): `noble-falcon` -> `ocean-view` (now Ocean View +
+  Silver Horizon).
+- Net: Noble Falcon is no longer an L1 distractor at all (only the R10/R20
+  priority). Per-hotel decoy counts are no longer a uniform 4 (e.g. noble-falcon
+  now [13,15] in L2 only; ocean-view/oceanfront/loft-living gained an L1 round) -
+  that's fine, the only invariants that matter are 1 priority + 2 distractors per
+  round, no hotel a decoy in its own priority round, and every card registered.
+
+**Verification:** priority still reads worst on eRPD-alone AND Lose Price in all
+three rounds (R3 OV Lose 97 > decoys 41/29; R6 OB 66 > 44/21; R8 HV 50 > 33/22),
+so no visible-card confusion. `scripts/prioritization-audit.mjs`: 0 failures, 0
+eRPD/Lose-Price confusions across all 80 combos. `scripts/conversation-integrity.mjs`:
+all 240 cards resolve with the priority present. L2 (R11-20) untouched (SME set
+is L1 only). No dialogue/compliance/grading change - portfolio composition only.
+
 ## Things to avoid
 
 - Don't flip the two SME-sheet reconciliation divergences to the raw
