@@ -79,14 +79,14 @@ const HOTEL_META: Record<string, HotelMeta> = {
 export const HEALTHY_DECOY_ROUNDS: Record<string, number[]> = {
   'royal-crest': [7, 9, 14, 16],
   'silver-horizon': [8, 10, 15, 17],
-  'ocean-view': [1, 9, 16, 18],
+  'ocean-view': [1, 8, 9, 16, 18],
   'riverside': [2, 10, 17, 19],
-  'emerald-peak': [1, 3, 18, 20],
-  'oceanfront': [2, 4, 11, 19],
+  'emerald-peak': [1, 18, 20],
+  'oceanfront': [2, 3, 4, 11, 19],
   'palace-grand': [3, 5, 12, 20],
   'hidden-valley': [4, 6, 11, 13],
-  'loft-living': [5, 7, 12, 14],
-  'noble-falcon': [6, 8, 13, 15],
+  'loft-living': [5, 6, 7, 12, 14],
+  'noble-falcon': [13, 15],
 };
 
 // ── Healthy metrics (varied per hotel; clearly better than any
