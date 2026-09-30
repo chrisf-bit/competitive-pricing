@@ -311,7 +311,7 @@ function nobleFalconBase(args: {
         // Sheet 7 places this at Round 10, its target home - now the
         // final Level 1 round with the SME Round 10 content (Adam Cole,
         // The Risky Guest, strong-no ending). Full-year 2025 ABRN.
-        partnerValueAbrn: 13957,
+        partnerValueAbrn: 1158,
         // SME-confirmed note (Irene, 2026-09-14, Pack 5 c21/c24): keep
         // Family Rates Active (the product is implemented) and flag the
         // pricing opportunity in a note rather than marking it Inactive.
@@ -753,7 +753,7 @@ function royalCrestBase(args: {
         pricingCoverageQTD: 20,
         // SME metrics sheet (Partner Value ABRN 2025). Royal Crest is
         // the R1 call on pricing risk (99% Lose Price / Bucket 4).
-        partnerValueAbrn: 4386,
+        partnerValueAbrn: 365,
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM), so it
         // is invisible at Round 1 but ready for the future round.
@@ -870,7 +870,7 @@ function silverHorizonBase(args: {
         pricingCoverageQTD: 14,
         // SME metrics sheet (Partner Value ABRN 2025). Silver Horizon is
         // the R2 call on the sharp eRPD spike and segment leakage.
-        partnerValueAbrn: 6283,
+        partnerValueAbrn: 538,
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
@@ -993,7 +993,7 @@ function oceanViewBase(args: {
         pricingCoverageQTD: 0,
         // SME metrics sheet (Partner Value ABRN 2025). Ocean View is the
         // R3 call on visibility debt (97% Lose Price, page views -61%).
-        partnerValueAbrn: 1658,
+        partnerValueAbrn: 142,
         // SME-confirmed note (Irene, 2026-09-14): Family Rates stay Active
         // (the partner has implemented the product) but the data still
         // shows a family pricing opportunity - so flag it rather than
@@ -1118,7 +1118,7 @@ function riversideBase(args: {
         pricingCoverageQTD: 13,
         // SME metrics sheet (Partner Value ABRN 2025). The SME flags
         // eRPD x Partner Value as high for R4.
-        partnerValueAbrn: 5920,
+        partnerValueAbrn: 472,
         // Family Rates stay Active (the product is implemented) but the
         // data still shows a family pricing opportunity - the family
         // occupancy setup is not correctly configured, so family searches
@@ -1240,7 +1240,7 @@ function emeraldPeakBase(args: {
         pricingCoverageQTD: 0,
         // SME metrics sheet (Partner Value ABRN 2025). Emerald Peak is
         // the R5 call on Bucket 6 / 100% Lose Price.
-        partnerValueAbrn: 3584,
+        partnerValueAbrn: 287,
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
@@ -1359,7 +1359,7 @@ function oceanfrontBase(args: {
         pricingCoverageQTD: 0,
         // SME metrics sheet (Partner Value ABRN 2025). Oceanfront is the
         // R6 call on Bucket 6 / visibility debt.
-        partnerValueAbrn: 917,
+        partnerValueAbrn: 1940,
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM).
         opcMetrics: {
@@ -1461,7 +1461,7 @@ function palaceGrandBase(args: {
         pricingCoverageQTD: 0,
         // SME metrics sheet (Partner Value ABRN 2025). Palace Grand is
         // the R7 call on Bucket 5 / +10.95 spike.
-        partnerValueAbrn: 5069,
+        partnerValueAbrn: 433,
         // Family Rates stay Active (the product is implemented) but the
         // data still shows a family pricing opportunity - the family setup
         // can be optimized to capture more of the family demand. Flag it
@@ -1571,7 +1571,7 @@ function hiddenValleyBase(args: {
         pricingCoverageQTD: 0,
         // SME metrics sheet (Partner Value ABRN 2025). Hidden Valley is
         // the R8 call on Bucket 5 / structural Brand gap.
-        partnerValueAbrn: 2663,
+        partnerValueAbrn: 218,
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM). Search
         // price €175 vs €159 peer with visibility share 21% vs 28% median.
@@ -1674,7 +1674,7 @@ function loftLivingBase(args: {
         pricingCoverageQTD: 20,
         // SME metrics sheet (Partner Value ABRN 2025). Bucket 7 alone
         // makes Loft Living the obvious R9 call.
-        partnerValueAbrn: 2458,
+        partnerValueAbrn: 216,
         // OPC layer from the SME sheet - only surfaced when the On
         // Platform Competitiveness tab unlocks (Level 2 / KAM). Search
         // price €67 vs €60 peer, visibility 8% vs 23% median.
