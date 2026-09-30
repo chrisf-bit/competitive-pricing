@@ -601,10 +601,10 @@ function getGuideContent(
           },
           {
             icon: <Unlock size={13} />,
-            text: 'Access your toolkit',
+            text: 'Access your Commercial Guide',
             active: true,
             // href to be provided later - the button is a no-op until then.
-            cta: { label: 'Toolkit' },
+            cta: { label: 'Commercial Guide' },
           },
         ],
         tips: [
