@@ -27,7 +27,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
           padding: '0 40px',
         }}
       >
-        <div style={{ maxWidth: 720, width: '100%' }}>
+        <div style={{ maxWidth: 960, width: '100%' }}>
           {/* Logo */}
           <div
             style={{
@@ -73,7 +73,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
               flexDirection: 'column',
               gap: 14,
               marginBottom: 36,
-              maxWidth: 600,
+              maxWidth: 860,
               fontSize: 16,
               color: 'rgba(255,255,255,0.92)',
               lineHeight: 1.6,
@@ -172,15 +172,19 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Footer. Left padding is bumped so the "Business Simulation" label
+          clears the fixed Feedback button pinned to the bottom-left corner. */}
       <div
         style={{
           padding: '16px 40px',
+          paddingLeft: 170,
           borderTop: '1px solid rgba(255,255,255,0.1)',
           fontSize: 12,
           color: 'rgba(255,255,255,0.35)',
           display: 'flex',
           justifyContent: 'space-between',
+          gap: 16,
+          flexWrap: 'wrap',
         }}
       >
         <span>Business Simulation</span>
