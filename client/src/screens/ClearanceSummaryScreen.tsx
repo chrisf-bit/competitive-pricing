@@ -13,7 +13,7 @@ import type { GameState, KnowledgeCheckResult, ParityRegime } from '../types';
 import { gmScript } from '../data/gameMasterScript';
 import { getEmailAudit } from '../data/emailAudit';
 import { dataInsightsChallenges } from '../data/dashboardHotspot';
-import { miniScenarios, miniScenarioTotalItems } from '../data/miniScenarios';
+import { getMiniScenarios, getMiniScenarioTotalItems } from '../data/miniScenarios';
 
 interface ClearanceSummaryScreenProps {
   results: KnowledgeCheckResult[];
@@ -90,10 +90,12 @@ const activities: ActivityDef[] = [
   {
     id: 'mini-scenarios',
     label: 'Warm Up',
-    description: 'Four case files walked step by step: signal, diagnose, narrative, next step',
+    description: 'A case file walked step by step: signal, diagnose, narrative, next step',
     screen: 'l0-mini-scenarios',
     itemMatcher: (id) => id.startsWith('mini-scenario-'),
-    totalItems: miniScenarioTotalItems,
+    // Placeholder; the real per-regime total is resolved in the map below
+    // (the Warm Up is now a single regime-specific case file).
+    totalItems: 4,
   },
   {
     id: 'issue-tree',
@@ -200,7 +202,7 @@ function getMissedItemDetail(
   // prefix it with the case-file name + step label so the learner can
   // orient themselves before hitting Retry.
   if (itemId.startsWith('mini-scenario-')) {
-    for (const scenario of miniScenarios) {
+    for (const scenario of getMiniScenarios(regime)) {
       for (const step of scenario.steps) {
         if (itemId === `mini-scenario-${scenario.id}-${step.id}`) {
           return {
@@ -249,7 +251,9 @@ export function ClearanceSummaryScreen({
     scoreActivity(
       a.id === 'email-audit'
         ? { ...a, totalItems: getEmailAudit(regime).phrases.length }
-        : a,
+        : a.id === 'mini-scenarios'
+          ? { ...a, totalItems: getMiniScenarioTotalItems(regime) }
+          : a,
       results,
     ),
   );

@@ -13,12 +13,13 @@ import {
   AlertTriangle,
 } from 'lucide-react';
 import {
-  miniScenarios,
+  getMiniScenarios,
   miniScenarioItemId,
   type MiniScenario,
   type MiniScenarioStep,
   type MiniScenarioTheme,
 } from '../data/miniScenarios';
+import type { ParityRegime } from '../types';
 import { resolvePropertyImage } from '../data/propertyImages';
 import type { KnowledgeCheckResult } from '../types';
 
@@ -44,6 +45,8 @@ import type { KnowledgeCheckResult } from '../types';
 
 interface MiniScenariosScreenProps {
   onComplete: (results: KnowledgeCheckResult[]) => void;
+  /** Learner's selected parity regime - picks the case-file variant. */
+  regime: ParityRegime | null;
   /**
    * When set, restricts the activity to only scenarios that contain
    * at least one of the listed failed itemIds. Retry runs the whole
@@ -61,16 +64,18 @@ type ScenarioProgress = {
 
 export function MiniScenariosScreen({
   onComplete,
+  regime,
   retryItemIds,
 }: MiniScenariosScreenProps) {
   // Filter to scenarios that carry any of the failed itemIds on retry.
   const scenarios = useMemo(() => {
-    if (!retryItemIds || retryItemIds.length === 0) return miniScenarios;
+    const all = getMiniScenarios(regime);
+    if (!retryItemIds || retryItemIds.length === 0) return all;
     const failed = new Set(retryItemIds);
-    return miniScenarios.filter((sc) =>
+    return all.filter((sc) =>
       sc.steps.some((st) => failed.has(miniScenarioItemId(sc.id, st.id))),
     );
-  }, [retryItemIds]);
+  }, [regime, retryItemIds]);
 
   const [scenarioIndex, setScenarioIndex] = useState(0);
   const [stepIndex, setStepIndex] = useState(0);
@@ -131,7 +136,7 @@ export function MiniScenariosScreen({
     setShowOutcome(false);
     if (isLastScenario) {
       // Reveal the summary before firing onComplete so the learner
-      // gets a recap of how they did across the four case files.
+      // gets a recap of how they did on the case file.
       setShowSummary(true);
       return;
     }
@@ -314,7 +319,9 @@ function ScenarioProgressStrip({
           color: 'var(--brand-navy)',
         }}
       >
-        Scenario {currentIndex + 1} of {scenarios.length}
+        {scenarios.length > 1
+          ? `Scenario ${currentIndex + 1} of ${scenarios.length}`
+          : 'Warm Up'}
       </span>
       <div style={{ display: 'flex', gap: 6, flex: 1 }}>
         {scenarios.map((sc, i) => {
@@ -1141,7 +1148,7 @@ function SummaryPanel({
   progress: ScenarioProgress[];
   onFinish: () => void;
 }) {
-  // Aggregate across all four scenarios: total correct steps and
+  // Aggregate across the case file(s): total correct steps and
   // per-scenario step counts.
   const perScenario = scenarios.map((sc) => {
     const scProg = progress.find((p) => p.scenarioId === sc.id);
@@ -1151,7 +1158,6 @@ function SummaryPanel({
   });
   const totalCorrect = perScenario.reduce((s, r) => s + r.correct, 0);
   const totalSteps = perScenario.reduce((s, r) => s + r.total, 0);
-  const perfectCount = perScenario.filter((r) => r.allCorrect).length;
 
   return (
     <motion.div
@@ -1202,7 +1208,7 @@ function SummaryPanel({
               letterSpacing: '-0.02em',
             }}
           >
-            How you handled the four case files
+            How you handled the case file
           </h1>
         </div>
 
@@ -1222,17 +1228,6 @@ function SummaryPanel({
           <StatBlock
             value={`${totalCorrect} / ${totalSteps}`}
             label="Correct decisions"
-          />
-          <div
-            style={{
-              width: 1,
-              height: 40,
-              background: 'rgba(0, 30, 60, 0.12)',
-            }}
-          />
-          <StatBlock
-            value={`${perfectCount} / ${scenarios.length}`}
-            label="Perfect case files"
           />
         </div>
 

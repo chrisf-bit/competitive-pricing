@@ -266,6 +266,7 @@ export default function App() {
           {state.screen === 'l0-mini-scenarios' && (
             <ClearanceShell currentScreen={state.screen}>
               <MiniScenariosScreen
+                regime={state.learnerProfile.market?.parityRegime ?? null}
                 retryItemIds={state.level0RetryItemIds}
                 onComplete={(results) =>
                   game.finishLevel0Activity('l0-issue-tree-reveal', results)
