@@ -4478,6 +4478,53 @@ confusions; conversation-integrity all 240 cards. Parked/retired records (John,
 Stavros, Marina, Carlos, Crystal Water, etc.) were NOT touched - not in the SME
 set and unused. `tsc -b` + `npm run build` clean.
 
+## Post-2026-09-29 session (Warm Up -> single regime-specific case file)
+
+Matthias/SME decision (previously logged as "decided, not built"): the Warm Up
+clearance activity dropped from **four regime-neutral case files (16 KC items)**
+to **one regime-specific case file (4 KC items)** - Coastal View Resort, "The
+Mobile and App Gap". Source: `Rate Right - Warm Up (Clearance Activity) - Content
+Extract.docx`, which supplied three full variants (Wide / Narrow / No Parity).
+Built and pushed to `release-2-partner-detail`. `tsc` / `eslint` / `vite build`
+all clean.
+
+**Same device-specific mobile-gap scenario across regimes; only the compliance
+framing changes** (what the AM may reference): No Parity = neither OTA nor
+proactive cross-channel; Wide = cross-channel RPD data + Key OTA openly; Narrow =
+Brand.com only, never other OTAs. Correct-answer pattern is identical in all
+three (signal C, diagnose A, narrative B, next-step C) - only the option wording
+and coaching differ by regime.
+
+**Regime-keyed exactly like the Call Audit.** [miniScenarios.ts](client/src/data/miniScenarios.ts)
+now exports `miniScenariosByRegime` (wide/narrow/none, one scenario each) +
+`getMiniScenarios(regime)` + `getMiniScenarioTotalItems(regime)`; the flat
+`miniScenarios` array and static `miniScenarioTotalItems` are gone.
+`getMiniScenarios` falls back to **No Parity** for null / cross-regional
+(strictest; no dedicated KAM variant authored - flag if SME wants one). All three
+variants keep `id: 'mobile-gap'` so the itemIds stay `mini-scenario-mobile-gap-{step}`
+(regime-agnostic; the learner only ever runs their own regime's variant).
+
+**Wiring touched:**
+- [MiniScenariosScreen.tsx](client/src/screens/MiniScenariosScreen.tsx): new
+  `regime` prop -> `getMiniScenarios(regime)`; summary simplified for N=1 (heading
+  "How you handled the case file", dropped the "Perfect case files X/1" stat,
+  "Scenario X of N" hidden when a single scenario).
+- [App.tsx](client/src/App.tsx): passes `regime={...parityRegime ?? null}` (same
+  source as EmailAuditScreen).
+- [ClearanceSummaryScreen.tsx](client/src/screens/ClearanceSummaryScreen.tsx): the
+  Warm Up `totalItems` is now resolved per-regime in the activity map (same override
+  pattern as the Call Audit's `getEmailAudit(regime).phrases.length`), and the
+  missed-item resolver loops `getMiniScenarios(regime)`. Warm Up is now ~4 of ~26
+  pooled clearance items (was 16 of 38), so it can no longer single-handedly block
+  the 80% gate.
+- [clearanceActivities.ts](client/src/data/clearanceActivities.ts): title/subtitle
+  singular + "tailored to your market".
+
+Copy transcribed from the doc, normalized to American English + plain hyphens +
+straight quotes. "Warm Up" stays the learner-facing label; internal identifiers
+(`mini-scenarios`, `mini-scenario-` itemId prefix) unchanged. The old three
+scenarios (brand-gap / genius-offset / family-undercut) are removed from source.
+
 ## Things to avoid
 
 - Don't flip the two SME-sheet reconciliation divergences to the raw
