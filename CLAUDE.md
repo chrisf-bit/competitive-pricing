@@ -4444,6 +4444,40 @@ eRPD/Lose-Price confusions across all 80 combos. `scripts/conversation-integrity
 all 240 cards resolve with the priority present. L2 (R11-20) untouched (SME set
 is L1 only). No dialogue/compliance/grading change - portfolio composition only.
 
+**PARTNER VALUE CORRECTION (same session, later).** The SME then flagged that the
+Partner Value data originally shared (the "ABRN 2025" column that seeded the
+Post-2026-09-17 values) was WRONG, and supplied corrected figures in column I
+("Updated Partner Value (2026 Sep 29)") of ` Partner Data Set 46` in
+`2026 Pricing Learning - Data examples (4).xlsx`. Updated `partnerValueAbrn` on
+all ten priority base helpers in [partners.ts](client/src/data/partners.ts) (the
+per-hotel identity value; `applyRoundBaseline` keeps it for decoy appearances,
+and the KAM `-cross-regional` records inherit it via the base helper):
+
+| Hotel | old (wrong) | corrected |
+|---|---|---|
+| Royal Crest | 4386 | 365 |
+| Silver Horizon | 6283 | 538 |
+| Ocean View | 1658 | 142 |
+| Riverside | 5920 | 472 |
+| Emerald Peak | 3584 | 287 |
+| Oceanfront | 917 | 1940 |
+| Palace Grand | 5069 | 433 |
+| Hidden Valley | 2663 | 218 |
+| Loft Living | 2458 | 216 |
+| Noble Falcon | 13957 | 1158 |
+
+This **supersedes the Partner Values listed in the Post-2026-09-17 note** (those
+are now the wrong "ABRN 2025" figures - the OPC/metrics reconciliations in that
+note still stand, only the Partner Values changed). Prioritization is unaffected
+by construction: every decoy sits at eRPD <= 0, so a priority's positive
+eRPD x PV always beats a decoy's non-positive product no matter the PV magnitude
+(the whole point of the Sept-24 decoys-at-eRPD<=0 fix). The R3/R6/R8 decoy set
+above was likewise built on the old PVs but is unaffected for the same reason.
+Guards re-run green: prioritization-audit 0 failures / 0 eRPD / 0 Lose-Price
+confusions; conversation-integrity all 240 cards. Parked/retired records (John,
+Stavros, Marina, Carlos, Crystal Water, etc.) were NOT touched - not in the SME
+set and unused. `tsc -b` + `npm run build` clean.
+
 ## Things to avoid
 
 - Don't flip the two SME-sheet reconciliation divergences to the raw
