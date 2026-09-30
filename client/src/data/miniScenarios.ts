@@ -66,6 +66,14 @@ export interface MiniScenario {
   scenarioTitle: string;
   /** Player-facing objective line shown beneath the title. */
   objective: string;
+  /**
+   * Optional explicit market-regime label shown on the case-file cover.
+   * Set ONLY for the Cross-Regional (KAM) variant, whose learner has no
+   * single selected regime and therefore needs to be told which parity
+   * rules apply to answer correctly. The three standard regime variants
+   * leave it unset - those learners picked their regime at Market Select.
+   */
+  marketLabel?: string;
   /** Visual theme - drives cover-card gradient + icon selection. */
   theme: MiniScenarioTheme;
   /**
@@ -421,6 +429,15 @@ const coastalViewNarrow: MiniScenario = {
     'You referenced competitor OTA pricing in your pitch, asked for alignment beyond Brand.com, or pushed a broad price change instead of a mobile-specific fix.',
 };
 
+// Cross-Regional (KAM) uses the No-Parity case file, but the learner has
+// no single selected regime, so the cover must spell out that this partner
+// is in a No-Parity market - otherwise they can't know which rules apply.
+// Identical content to coastalViewNone otherwise.
+const coastalViewCrossRegional: MiniScenario = {
+  ...coastalViewNone,
+  marketLabel: 'No Parity market',
+};
+
 /**
  * The Warm Up case file per parity regime. One scenario each; the
  * learner only ever runs the variant for their selected market.
@@ -433,14 +450,15 @@ export const miniScenariosByRegime: Record<'wide' | 'narrow' | 'none', MiniScena
 
 /**
  * Resolve the Warm Up case file(s) for a regime. Mirrors the Call
- * Audit's getEmailAudit: null defaults to No Parity, and Cross-Regional
- * (no dedicated variant authored) falls back to No Parity - the
- * strictest / most compliance-conservative framing.
+ * Audit's getEmailAudit: null defaults to No Parity. Cross-Regional (KAM)
+ * uses the No-Parity content but with an explicit "No Parity market"
+ * label, since a KAM learner has no single selected regime.
  */
 export function getMiniScenarios(
   regime: ParityRegime | null | undefined,
 ): MiniScenario[] {
-  if (!regime || regime === 'cross-regional') return miniScenariosByRegime.none;
+  if (regime === 'cross-regional') return [coastalViewCrossRegional];
+  if (!regime) return miniScenariosByRegime.none;
   return miniScenariosByRegime[regime] ?? miniScenariosByRegime.none;
 }
 

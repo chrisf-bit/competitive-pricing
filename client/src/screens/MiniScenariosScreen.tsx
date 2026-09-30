@@ -459,6 +459,26 @@ function ScenarioCover({
         >
           {scenario.scenarioTitle}
         </h2>
+        {scenario.marketLabel && (
+          <div
+            style={{
+              display: 'inline-block',
+              marginTop: 12,
+              padding: '5px 12px',
+              borderRadius: 999,
+              background: 'rgba(244, 180, 0, 0.18)',
+              border: '1px solid rgba(244, 180, 0, 0.55)',
+              color: 'var(--brand-yellow)',
+              fontSize: 12,
+              fontWeight: 800,
+              textTransform: 'uppercase',
+              letterSpacing: '0.08em',
+              alignSelf: 'flex-start',
+            }}
+          >
+            {scenario.marketLabel}
+          </div>
+        )}
       </div>
 
       {/* Photo fills the remainder. Gradient overlay at the top of the

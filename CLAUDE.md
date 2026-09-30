@@ -4499,10 +4499,15 @@ and coaching differ by regime.
 now exports `miniScenariosByRegime` (wide/narrow/none, one scenario each) +
 `getMiniScenarios(regime)` + `getMiniScenarioTotalItems(regime)`; the flat
 `miniScenarios` array and static `miniScenarioTotalItems` are gone.
-`getMiniScenarios` falls back to **No Parity** for null / cross-regional
-(strictest; no dedicated KAM variant authored - flag if SME wants one). All three
-variants keep `id: 'mobile-gap'` so the itemIds stay `mini-scenario-mobile-gap-{step}`
-(regime-agnostic; the learner only ever runs their own regime's variant).
+`getMiniScenarios` falls back to **No Parity** for null. **Cross-Regional (KAM)
+uses the No-Parity content but with an explicit "No Parity market" label on the
+case-file cover** (`MiniScenario.marketLabel`, a yellow pill) - a KAM learner has
+no single selected regime, so they must be told which parity rules apply to answer
+correctly (Chris, 2026-09-29). Standard No-Parity learners see no label (they
+picked the regime at Market Select), and it is the only thing that differs for
+KAM. All variants keep `id: 'mobile-gap'` so the itemIds stay
+`mini-scenario-mobile-gap-{step}` (regime-agnostic; the learner only ever runs
+their own regime's variant).
 
 **Wiring touched:**
 - [MiniScenariosScreen.tsx](client/src/screens/MiniScenariosScreen.tsx): new
