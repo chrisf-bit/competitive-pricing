@@ -177,9 +177,9 @@ const PORTFOLIO_STEPS: TutorialStep[] = [
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginTop: 8 }}>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
           {[
-            { range: 'B1', label: '≤ -3% · most competitive', color: 'var(--success)' },
-            { range: 'B4', label: '3% to 6% · drifting', color: 'var(--warning)' },
-            { range: 'B7', label: '> 12% · least competitive', color: 'var(--danger)' },
+            { range: 'Bucket 1', label: '≤ -3% · most competitive', color: 'var(--success)' },
+            { range: 'Bucket 4', label: '3% to 6% · drifting', color: 'var(--warning)' },
+            { range: 'Bucket 7', label: '> 12% · least competitive', color: 'var(--danger)' },
           ].map((tier) => (
             <div
               key={tier.range}
@@ -248,7 +248,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-tabs',
     title: 'Metrics tabs',
     description:
-      "Driving Metrics shows the headline KPIs, the eRPD Price Bucket strip, and the secondary metric tiles. On Platform Competitiveness holds the on-platform competitiveness metrics and unlocks in the later rounds.",
+      "Driving Metrics shows eRPD and key pricing metrics, the eRPD Price Bucket strip, and the secondary metric tiles. On Platform Competitiveness holds the on-platform competitiveness metrics and unlocks in the later rounds.",
     icon: <Layers size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
   },
@@ -256,7 +256,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-bucket-strip',
     title: 'eRPD Price Bucket',
     description:
-      "Seven segments from B1 (most competitive, eRPD ≤ -3%) to B7 (least competitive, eRPD > 12%). The bucket the partner sits in pins their eRPD visually next to the threshold band.",
+      "Seven segments from Bucket 1 (most competitive, eRPD ≤ -3%) to Bucket 7 (least competitive, eRPD > 12%). The bucket the partner sits in pins their eRPD visually next to the threshold band.",
     icon: <Gauge size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'bottom',
     detail: (

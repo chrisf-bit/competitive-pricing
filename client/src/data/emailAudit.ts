@@ -139,9 +139,9 @@ const wideParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          "Right call. Recommending that a partner stop working with other OTAs or wholesalers is a hard Wide Parity DON'T. We can ask for rate alignment but never dictate the channels they distribute through.",
+          "Right call. Recommending that a partner stop working with other OTAs or wholesalers is a hard DON'T across any parity regime.",
         incorrect:
-          "This one is unsafe. Recommending that a partner stop working with other OTAs or wholesalers is a hard Wide Parity DON'T. We can ask for rate alignment but never dictate the channels they distribute through.",
+          "This one is unsafe. Recommending that a partner stop working with other OTAs or wholesalers is a hard DON'T across any parity regime.",
       },
       source: "Legal Compliance | Wide Parity Markets | Don't",
     },

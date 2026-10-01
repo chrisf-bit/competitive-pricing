@@ -123,6 +123,12 @@ export default function App() {
   // otherwise it sits beside the report showing empty section headers.
   const isReportMoment = state.screen === 'conversation-report';
   const showGuide = !isLevel0Chrome && !isReportMoment;
+  // The guided tour only has content for the Portfolio and Partner Detail
+  // screens. Scope both the Help affordance and the overlay render to those
+  // two so it can't leak onto screens with no matching targets (e.g. the
+  // Debrief, Round Select) and render as a stray, unanchored banner.
+  const screenHasTutorial =
+    state.screen === 'portfolio' || state.screen === 'partner-detail';
   const selectedPartner =
     state.selectedPartnerId
       ? state.partners.find((p) => p.persona.id === state.selectedPartnerId) ?? null
@@ -136,7 +142,7 @@ export default function App() {
         <Header
           currentRound={state.currentRound}
           screen={state.screen}
-          onTutorial={() => setShowTutorial(true)}
+          onTutorial={screenHasTutorial ? () => setShowTutorial(true) : undefined}
           onRoundSelect={() => game.goToScreen('round-select')}
         />
       )}
@@ -488,7 +494,7 @@ export default function App() {
         </div>
       </div>
 
-      {showTutorial && (
+      {showTutorial && screenHasTutorial && (
         <TutorialOverlay
           // Route the Help icon to the step set matching the current
           // screen. Anywhere outside Partner Detail falls back to the

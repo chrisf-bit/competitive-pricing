@@ -88,7 +88,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: he's completely free to choose his distribution strategy, but adjusting it could capture more demand against similar properties. Cross-channel discrepancies confuse guests, and offering his best price here is an investment in high-value audience acquisition without devaluing his brand.",
     playerDialogue:
-      "You're completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com. Offering your best price here acts as an investment in high-value audience acquisition, without devaluing your brand's market position.",
+      "You're completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com. Interestingly, your Genius-enrolled guests already see a competitive price - it's your public pricing where the gap sits. Offering your best price here acts as an investment in high-value audience acquisition, without devaluing your brand's market position.",
     partnerResponse:
       "That makes sense - it's about protecting brand value. But what about the family segment? We intentionally push back on offering family rooms on OTAs because of the operational complexity of handling extra beds and cots.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: the platform channels incremental demand, especially in low season. His distribution strategy is entirely up to him, but offering accurate child rates and cots lets him capture that value without discounting his rates.",
     playerDialogue:
-      "That's exactly where our platform makes the difference - we can channel incremental demand to your property, especially in that low season. Your distribution strategy is entirely up to you, but by offering accurate child rates and cots here, you can capture that value without discounting your rates.",
+      "That's exactly where our platform makes the difference - we can channel incremental demand to your property, especially in that low season. Your forward bookings for the next three months are already trending 9% behind your peer group, so capturing families now has a direct impact on filling those softer periods. Your distribution strategy is entirely up to you, but by offering accurate child rates and cots here, you can capture that value without discounting your rates.",
     partnerResponse:
       "This aligns perfectly with our goal of making data-driven decisions to optimize the channel mix. If we can capture that high-spending family segment safely, that's already an impactful step forward. Let's test it.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

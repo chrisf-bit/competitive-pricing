@@ -83,7 +83,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: acknowledge the loyalty concern as common, then ask - to understand her perspective - what occupancy looks like and how much she spends on marketing and new-guest acquisition.",
     playerDialogue:
-      "That's a very common concern. To understand your perspective better - what does your occupancy look like at the moment?",
+      "That's a very common concern. To understand your perspective better - what does your occupancy look like at the moment, and how much are you currently spending on acquiring new guests through your own marketing?",
     partnerResponse:
       "Occupancy is definitely an issue at the moment. I see the same trend also from other channels and acquisition costs are quite high right now, especially when trying to reach international travelers through paid ads.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

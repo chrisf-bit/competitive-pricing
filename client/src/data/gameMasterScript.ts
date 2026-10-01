@@ -131,7 +131,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A5',
       prompt:
-        'Roughly how much room night growth do we get for every 1% improvement in RPD?',
+        'Roughly how much room night growth do we get for every 1% improvement in RPD on our platform?',
       options: [
         { text: 'About 0.5%', isCorrect: false },
         { text: 'About 2 to 3%', isCorrect: true },
@@ -228,7 +228,7 @@ export const gmScript: GMBeat[] = [
         { text: 'Search Price', isCorrect: true },
         { text: 'Visibility Share', isCorrect: false },
         { text: 'Sell Through Rate', isCorrect: false },
-        { text: 'Net Booked Share', isCorrect: false },
+        { text: 'Net Booked Share (NBS)', isCorrect: false },
       ],
       followUp: {
         correct:
@@ -295,7 +295,7 @@ export const gmScript: GMBeat[] = [
     question: {
       itemId: 'A12',
       prompt:
-        "Net Booked Share is Booking.com's share of a partner's total capacity, either historically or forward-looking. How does it relate to eRPD?",
+        "Net Booked Share (NBS) is Booking.com's share of a partner's total capacity, either historically or forward-looking. How does it relate to eRPD?",
       options: [
         {
           text: "It's a compound outcome; competitive eRPD tends to grow Net Booked Share over time, alongside visibility and inventory decisions",

@@ -30,7 +30,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed reveal: her conversion and next-3-month room nights are pacing slowly while her peer group performs better. Probe neutrally - understand her current strategy and whether promotions she runs are fully mirrored and correctly targeted on the platform.",
     playerDialogue:
-      "Your conversion and room nights for the next three months are pacing slowly, and your peer group is performing better. I'd like to understand your current strategy - and whether there are specific promotions you're running that might not be fully mirrored, or correctly targeted to the right audience, on our platform.",
+      "Your recent performance has been strong - revenue is up 65% year on year - but looking ahead, your room nights for the next three months are pacing 50% behind your peer group. That's a significant forward gap. I'd like to understand your current strategy - and whether there are specific promotions you're running that might not be fully mirrored, or correctly targeted to the right audience, on our platform.",
     partnerResponse:
       "To be completely transparent, we intentionally keep our website cheaper to own the guest relationship. We know it impacts our visibility on Booking.com, but direct acquisition is our primary goal.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -254,7 +254,7 @@ const step5Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: guests with a less positive experience often just want to be heard; acknowledging feedback shows improvement. Separate that from the price opportunity - BSB isn't a discount per se but a tool to convert demand, and she can still run targeted promotions or campaigns.",
     playerDialogue:
-      "Sometimes guests with a less positive experience simply want to be heard - acknowledging their feedback signals what you're doing to improve. Let's separate that from the price opportunity, though. You can keep competitive prices to stay visible in search, and BSB isn't a discount per se - it's a tool that helps convert demand that might otherwise not book. None of this stops you running targeted promotions or campaigns to reach the audience you want.",
+      "Sometimes guests with a less positive experience simply want to be heard - acknowledging their feedback signals what you're doing to improve. Let's separate that from the price opportunity, though. BSB isn't a discount per se - it's a tool that helps convert demand that might otherwise not book. And it doesn't stop you from running targeted promotions or campaigns to reach the audience you want. In fact, targeted programs could give you more control over which guest segments see a better price - rather than relying on BSB alone.",
     partnerResponse:
       "Okay, I can't make a decision right now - let me reconsider all of this and let's connect next month.",
     styleMatch: { red: 1, yellow: 1, green: 2, blue: 1 },
