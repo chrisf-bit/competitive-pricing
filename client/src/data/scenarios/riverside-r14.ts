@@ -236,7 +236,7 @@ const step5Options: BranchingOption[] = [
     playerDialogue:
       "So this isn't about competing with three-star properties - it's about winning the exact high-value travelers you want. We'd use a targeted tool: a Country Rate fenced specifically to travelers searching from the US. It applies a closed incentive to that segment only, so you recover those bookings without an across-the-board rate reset or touching your brand elsewhere.",
     partnerResponse:
-      "A targeted Country Rate for the US market... What kind of concrete return does that actually give us? And does it show a badge on the results? How does it interact with the Genius programme - I fixed that setup last time and I don't want a huge stacked discount for US travelers.",
+      "A targeted Country Rate for the US market... What kind of concrete return does that actually give us? How does it interact with the Genius programme - I fixed that setup last time and I don't want a huge stacked discount for US travelers.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -278,7 +278,7 @@ const step5Options: BranchingOption[] = [
 const step6Options: BranchingOption[] = [
   {
     id: 'rv-r14-step6-correct',
-    label: 'Answer the badge/Genius questions honestly, then close',
+    label: 'Answer the Genius-stacking question honestly, then close',
     description:
       "SME-prescribed close: it's an opaque promotion and it does stack with Genius on the programme's room types; and since around 60% of users aren't logged in when they land, the more attractive desktop price makes a real first-glance difference. Let him own the setup.",
     playerDialogue:
@@ -361,7 +361,7 @@ const steps: BranchingStep[] = [
     id: 'close',
     label: 'Answer the mechanics and close',
     partnerPrompt:
-      "A targeted Country Rate for the US market... What kind of concrete return does that give us? And does it show a badge on the results? How does it interact with the Genius programme - I don't want a huge stacked discount for US travelers.",
+      "A targeted Country Rate for the US market... What kind of concrete return does that give us? How does it interact with the Genius programme - I don't want a huge stacked discount for US travelers.",
     options: step6Options,
   },
 ];
