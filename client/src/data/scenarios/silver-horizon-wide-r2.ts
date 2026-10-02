@@ -143,7 +143,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "When travelers on our platform see your price is higher, conversion is likely to drop and they book elsewhere on our platform. To maximize traffic, we'd ask you to provide the same rates and conditions you already give other third-party channels, focus on family and international demand where an additional booking could be incremental. How are you currently managing those segments?",
     partnerResponse:
-      "Families are a headache for vacation rentals. We restrict our double rooms from family searches and don't offer free cots - we prefer to sell those larger units directly, where we control the guest risk. For international bookers we're not running any specific campaigns.",
+      "Families are a headache for vacation rentals. We don't make our family rooms available to your bookers and we don't offer free cots - we'd rather keep them on our own website, where we can block one-night weekend stays with a minimum stay and control the guest risk. For international bookers we're not running any specific campaigns.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -212,7 +212,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right segment, wrong handling - it tells her to open the rooms and add cots while ignoring the operational-risk concern she just raised, so it earns a no.",
     playerDialogue:
-      "Just open your double rooms up to family searches and add free cots across the board - that's genuinely one way to fill those larger units on the quiet nights and lift your numbers straight away. Turn it on now and you'll see the family bookings start flowing in almost immediately.",
+      "Just open your family rooms up to our bookers and add free cots across the board - that's genuinely one way to fill those larger units on the quiet nights and lift your numbers straight away. Turn it on now and you'll see the family bookings start flowing in almost immediately.",
     partnerResponse:
       "You just ignored everything I said about operational risk. No.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -240,7 +240,7 @@ const step4: BranchingStep = {
   id: 'family-value',
   label: 'Turn the family pushback into an opportunity',
   partnerPrompt:
-    "Families are a headache for vacation rentals. We restrict our double rooms from family searches and don't offer free cots - we prefer to sell those larger units directly, where we control the guest risk. For international bookers we're not running any specific campaigns.",
+    "Families are a headache for vacation rentals. We don't make our family rooms available to your bookers and we don't offer free cots - we'd rather keep them on our own website, where we can block one-night weekend stays with a minimum stay and control the guest risk. For international bookers we're not running any specific campaigns.",
   options: step4Options,
 };
 

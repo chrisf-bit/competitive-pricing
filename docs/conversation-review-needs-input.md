@@ -169,15 +169,8 @@ Reviewer: I dont see any data in the partner card supporting the us country rate
 
 ## Parked follow-ups (owner: us) - added 2026-10-02
 
-**P1. R2 Silver Horizon (wide) - extend the family-rooms mechanics fix**  
-The No Parity R2 was corrected so the family issue reads as "family rooms
-not available to our bookers" (a room type to add, then min-stay), rather
-than the mechanically-wrong "restricting double rooms from family searches"
-(min stay applies per room type, not per booker). Narrow R2 already uses the
-correct model. **Wide R2 still uses the old framing** in Chloe's opening line
-("We restrict our double rooms from family searches and don't offer free
-cots..."), a distractor ("Just open your double rooms up to family
-searches..."), while downstream it already says "minimum length of stay on
-family rooms". Decide whether to apply the same correction to Wide (wording
-needs adapting, since Chloe's Wide line is her opening statement, not a
-response). Files: `silver-horizon-wide-r2.ts`.
+**P1. R2 Silver Horizon - extend the family-rooms mechanics fix - RESOLVED 2026-10-02.**
+The family-rooms-not-available (room type + min-stay) reframe is now applied
+across all three regimes: No Parity and Wide corrected, Narrow already used the
+correct model. No "double rooms from family searches" framing remains in any R2
+file.
