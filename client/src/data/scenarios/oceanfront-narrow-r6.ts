@@ -166,7 +166,7 @@ const step3Options: BranchingOption[] = [
     description:
       "Ask her to make sure she isn't pricier than the other OTAs and match them here. In a Narrow market you may only align with Brand.com - policing other-OTA prices oversteps.",
     playerDialogue:
-      "And while we're at it, make sure you're not sitting any pricier than the other big OTAs are showing either - go through their rates, match whatever they've got you listed at, and bring yourself into line here so you stay competitive everywhere.",
+      "While we're at it, make sure you're not sitting any pricier than the other big OTAs are showing either - go through their rates, match whatever they've got you listed at, and bring yourself into line here so you stay competitive everywhere.",
     partnerResponse:
       "You can't ask me to price against the other OTAs in this market.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

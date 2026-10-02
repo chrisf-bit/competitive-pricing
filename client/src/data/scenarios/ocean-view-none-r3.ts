@@ -26,9 +26,9 @@ const step1Options: BranchingOption[] = [
     id: 'ov-r3-none-step1-correct',
     label: 'Credit the conversion, name the downward trend, probe neutrally',
     description:
-      "SME-prescribed reveal: credit her strong on-page conversion (+39% vs peer), note that page views and future bookings are trending down and her prices read as consistently higher here, then ask - neutrally - about her strategy.",
+      "SME-prescribed reveal: credit her strong on-page conversion vs peers, note that page views and future bookings are trending down (she converts well when seen, but fewer travelers are reaching her page), then ask - neutrally - about her strategy. No proactive cross-channel comparison (forbidden in No Parity).",
     playerDialogue:
-      "Regarding your performance with us: we see that you are barely generating any bookings compared to last year. While there are some positive signs regarding your conversion compared to your peers on our platform, both your page views and future bookings are trending down. We can see your prices here are consistently higher than on other channels. Can you tell me more about the strategy?",
+      "Regarding your performance with us: your bookings have declined significantly compared to last year. While there are some positive signs, your conversion is strong compared to peers on our platform, both your page views and future bookings are trending down. That suggests the property converts well when seen, but fewer travelers are reaching your page compared to your peer group. I'd like to understand your current strategy and whether there's something in the setup we can look at together.",
     partnerResponse:
       "It's about channel costs. We intentionally keep our website prices lower to stimulate travelers to leave the OTAs and book directly with us. We see your search results as a powerful 'window' to get our name out - but we want the transaction on our website.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -84,7 +84,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed counter: travelers don't open a new window to find her direct site - they pick a better-value alternative on the same page. Her strategy is hers, but her best price protects those bookings. Then ask for her biggest concern.",
     playerDialogue:
-      "Thank you for sharing. But when your prices aren't competitive here, travelers don't open a new window to find your direct site - they gravitate to better-value alternatives on the same search page. Your pricing strategy is entirely up to you, but providing the best price you can make available to us improves your discovery and fill empty rooms. What's your biggest concern?",
+      "Thank you for sharing. But when your prices aren't competitive compared to similar properties on our platform, travelers don't open a new window to find your direct site - they gravitate to better-value alternatives on the same search page. Your pricing strategy is entirely up to you, but providing the best price you can make available to us improves your discovery and fill empty rooms. What's your biggest concern?",
     partnerResponse:
       "My main concern is that if I offer my lowest public price on Booking.com, I'm giving up my unique commercial advantage.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

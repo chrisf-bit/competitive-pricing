@@ -279,7 +279,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Direct her to stop feeding the other OTAs and give the good rates only to Booking.com. Instructing an owner on her external channel mix oversteps even in a Wide market.",
     playerDialogue:
-      "And if you really want to fix this properly, the move is to stop feeding all of your best rates and availability to the other OTAs you're working with - pull them right back and keep the strongest rates exclusive to us. That way we're the obvious place to book, and those other platforms stop eating into what should be coming through here.",
+      "If you really want to fix this properly, the move is to stop feeding all of your best rates and availability to the other OTAs you're working with - pull them right back and keep the strongest rates exclusive to us. That way we're the obvious place to book, and those other platforms stop eating into what should be coming through here.",
     partnerResponse:
       "You don't get to tell me which channels I work with. That's my call.",
     styleMatch: { red: 0, yellow: -1, green: -2, blue: -2 },

@@ -120,7 +120,7 @@ export function BriefingScreen({ onStart, hasCleared }: BriefingScreenProps) {
             <InfoCard
               icon={<Users size={20} />}
               title="A portfolio"
-              text="Real partner accounts, each with different pricing problems and ways of communicating"
+              text="Real partner accounts that have been anonymized"
             />
             <InfoCard
               icon={<TrendingUp size={20} />}

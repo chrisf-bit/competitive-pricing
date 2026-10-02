@@ -280,7 +280,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Push her to price below her own site so she's the cheapest anywhere. Requiring a partner to be the cheapest is forbidden in a No Parity market.",
     playerDialogue:
-      "And if you really want to win this, make sure the price you show here on our platform is the lowest one you have anywhere at all - set it deliberately below what you charge on your own website, so no other channel can undercut you on the way to a booking.",
+      "If you really want to win this, make sure the price you show here on our platform is the lowest one you have anywhere at all - set it deliberately below what you charge on your own website, so no other channel can undercut you on the way to a booking.",
     partnerResponse:
       "Pricing below my own site to be cheapest everywhere is off the table.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

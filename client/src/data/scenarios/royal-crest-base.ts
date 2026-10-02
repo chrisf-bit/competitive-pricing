@@ -94,7 +94,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Warm, agenda-free check-in with no data. The wrong register for a time-pressured, profit-first property manager who wants a commercial point.',
     playerDialogue:
-      "Hi Liam, no agenda today - I just wanted to check in and see how you're feeling about the partnership, whether the team's been looking after you well, and if there's anything on your mind about how things are going for you overall this year.",
+      "No agenda today - I just wanted to check in and see how you're feeling about the partnership, whether the team's been looking after you well, and if there's anything on your mind about how things are going for you overall this year.",
     partnerResponse:
       "I'm a busy man. If there's a commercial point, make it - otherwise I'll jump off.",
     styleMatch: { red: -2, yellow: 1, green: 1, blue: -1 },

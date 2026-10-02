@@ -141,9 +141,9 @@ const step3Options: BranchingOption[] = [
     description:
       "SME-prescribed pivot: the platform is an acquisition tool, so instead of a general discount, target high-value segments - international and family. Then probe the reason behind her family-room restriction rather than assuming it.",
     playerDialogue:
-      "That is a valid concern. However, 90% of bookings on our platform originate from customers discovering an accommodation they want to stay at directly on Booking.com. This means that not having a great price here might send travelers to a competitor's property. Instead of giving a general discount, what about targeting high-value segments? We can see you're currently restricting double rooms from family searches - what's the main reason behind that?",
+      "That is a valid concern. However, 90% of bookings on our platform originate from customers discovering an accommodation they want to stay at directly on Booking.com. This means that not having a great price here might send travelers to a competitor's property. Instead of giving a general discount, what about targeting high-value segments? We can see you're currently not making family rooms available to our bookers - what's the main reason behind that?",
     partnerResponse:
-      "Families are operationally expensive - cots, extra linen, higher risk of damage. I'd rather keep those rooms for couples, and I don't want one-night weekend bookings blocking longer stays.",
+      "Families are operationally expensive - cots, extra linen, higher risk of damage. I'd rather keep those family rooms only on my website where I can block one-night weekend reservations with a minimum stay and reduce the costs.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -240,7 +240,7 @@ const step4: BranchingStep = {
   id: 'family-value',
   label: 'Turn the family pushback into an opportunity',
   partnerPrompt:
-    "Families are operationally expensive - cots, extra linen, higher risk of damage. I'd rather keep those rooms for couples, and I don't want one-night weekend bookings blocking longer stays.",
+    "Families are operationally expensive - cots, extra linen, higher risk of damage. I'd rather keep those family rooms only on my website where I can block one-night weekend reservations with a minimum stay and reduce the costs.",
   options: step4Options,
 };
 

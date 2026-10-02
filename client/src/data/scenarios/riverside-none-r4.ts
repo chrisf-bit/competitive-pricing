@@ -53,11 +53,11 @@ const step1Options: BranchingOption[] = [
   },
   {
     id: 'rb-r4-none-step1-lift-cap',
-    label: 'Tell him to lift the 30% cap',
+    label: 'Dictate his channel strategy before hearing it',
     description:
       "Dictate his channel strategy before understanding it - dismissing the autonomy a Marketing-Contract-Only GM guards most.",
     playerDialogue:
-      "Whatever the reason, the 30% cap is the problem, so you should lift it and let us drive most of your business - that is the only way you get your visibility back and stop handing those family bookings to your competitors.",
+      "Let's cut straight to it - the quickest fix here is to open up far more of your availability to us and let us drive the bulk of your bookings. That's really the only way you win your visibility back and stop handing those family bookings to your competitors.",
     partnerResponse:
       "You haven't heard my strategy and you're already telling me how to run my business. Careful.",
     styleMatch: { red: 1, yellow: -1, green: -2, blue: -2 },
