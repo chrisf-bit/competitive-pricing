@@ -134,17 +134,23 @@ export function clearPersistedState(): void {
 }
 
 /**
- * Learner name from the LMS launch actor, when available. Used at boot to
- * pre-populate `learnerProfile.playerName` instead of the `Name_Var`
- * default. The LMS may return "Last, First" - flip to "First Last" for the
- * game's first-name-friendly copy. Null outside a launch.
+ * Learner's FIRST name from the LMS launch actor, when available. Used at
+ * boot to pre-populate `learnerProfile.playerName` instead of the
+ * `Name_Var` default. The sim's copy is first-name-friendly ("Hi
+ * Christopher", "Ten out of ten, Christopher"), so we take just the first
+ * name rather than the full "First Last" the LMS sends. Handles both
+ * "First Last" and "Last, First" forms. The full name is still carried in
+ * the xAPI actor for reporting. Null outside a launch.
  */
 export function getLmsStudentName(): string | null {
   const raw = (launchActorName() || '').trim();
   if (!raw) return null;
   const commaIdx = raw.indexOf(',');
-  if (commaIdx === -1) return raw;
-  const last = raw.slice(0, commaIdx).trim();
-  const first = raw.slice(commaIdx + 1).trim();
-  return first ? `${first} ${last}`.trim() : raw;
+  // "Last, First [Middle]" -> the first token after the comma.
+  if (commaIdx !== -1) {
+    const after = raw.slice(commaIdx + 1).trim();
+    return after.split(/\s+/)[0] || raw;
+  }
+  // "First Last" -> the first token.
+  return raw.split(/\s+/)[0] || raw;
 }
