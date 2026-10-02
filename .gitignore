@@ -15,3 +15,6 @@ rate-right-test/
 *.njsproj
 *.sln
 *.sw?
+
+# Tin Can / xAPI build output (regenerate with npm run build:xapi)
+rate-right-xapi.zip

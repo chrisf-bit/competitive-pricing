@@ -603,8 +603,10 @@ function getGuideContent(
             icon: <Unlock size={13} />,
             text: 'Access your Commercial Guide',
             active: true,
-            // href to be provided later - the button is a no-op until then.
-            cta: { label: 'Commercial Guide' },
+            cta: {
+              label: 'Commercial Guide',
+              href: 'https://cdn5.dcbstatic.com/files/b/o/booking_docebosaas_com/1790956800/V3PMa_5hjgN87bCXAj7Z8Q/tincan/40777_1790947122_o_1k3uc8bmo1pj51pl51q601bcd514b_zip/index.html',
+            },
           },
         ],
         tips: [

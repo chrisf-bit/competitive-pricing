@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useState, type ReactNode } from 'react';
 import {
   Heart,
   Star,
@@ -26,7 +26,6 @@ import type {
 import { getCorrectPartnerForRound } from '../data/correctPartnerPerRound';
 import { TOTAL_ROUNDS } from '../engine/gameEngine';
 import { getPersonaById } from '../data/characters';
-import { reportLessonStatus } from '../util/persistence';
 import { downloadDebriefPdf } from '../util/debriefPdf';
 import { ScoringModal } from '../components/ScoringModal';
 
@@ -134,12 +133,8 @@ export function DebriefScreen({
     })
     .sort((a, b) => a.round - b.round);
 
-  // Tell the LMS the sim is complete the moment the debrief mounts.
-  // Idempotent at the LMS level - repeat mounts (e.g. returning from
-  // practice mode) just re-write the same terminal status.
-  useEffect(() => {
-    reportLessonStatus('completed');
-  }, []);
+  // Completion is emitted from App.tsx (on the Level 2 celebration, with
+  // the Debrief as a fallback), so the Debrief itself no longer reports it.
 
   // Aggregate persona block over the rounds actually played (roundStars
   // only stores rounds the learner cleared). Strength = a clean pass

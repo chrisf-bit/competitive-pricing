@@ -22,10 +22,12 @@ import {
 } from '../engine/gameEngine';
 import {
   loadPersistedState,
+  loadResumeState,
   savePersistedState,
   clearPersistedState,
   getLmsStudentName,
 } from '../util/persistence';
+import { isXapiLaunch, xapiInitialized } from '../util/xapi';
 
 export function useGame() {
   const [state, setState] = useState<GameState>(() => {
@@ -60,6 +62,36 @@ export function useGame() {
     }
     return createInitialState();
   });
+
+  // Fire the session-start statement once, and in an LMS launch hydrate the
+  // durable slice from the LRS State API (the cross-device source of truth).
+  // Runs once on mount, before the learner has navigated past the splash, so
+  // rebuilding the initial state from the resume document is safe.
+  const hydratedRef = useRef(false);
+  useEffect(() => {
+    xapiInitialized();
+    if (!isXapiLaunch() || hydratedRef.current) return;
+    hydratedRef.current = true;
+    let cancelled = false;
+    void (async () => {
+      const resumed = await loadResumeState();
+      if (cancelled || !resumed) return;
+      setState(() =>
+        createInitialState({
+          learnerProfile: resumed.learnerProfile,
+          level0Cleared: resumed.level0Cleared,
+          level0ClearedForRegime: resumed.level0ClearedForRegime,
+          roundStars: resumed.roundStars,
+          tutorialShown: resumed.tutorialShown,
+          partnerDetailTutorialShown: resumed.partnerDetailTutorialShown,
+          disclaimerAcknowledged: resumed.disclaimerAcknowledged,
+        }),
+      );
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Persist the durable slice of state whenever any of its inputs change.
   // Tracked fields are intentionally narrow so we don't write to storage on

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './index.css';
 import { useGame } from './hooks/useGame';
+import { TOTAL_ROUNDS } from './engine/gameEngine';
 import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
-import { DevNav } from './components/DevNav';
 import { FeedbackButton } from './components/FeedbackButton';
 import { DisclaimerModal } from './components/DisclaimerModal';
 import { ClearanceShell } from './components/ClearanceShell';
@@ -29,7 +29,12 @@ import { ConversationScreen } from './screens/ConversationScreen';
 import { BranchingConversationScreen } from './screens/BranchingConversationScreen';
 import { ConversationReportScreen } from './screens/ConversationReportScreen';
 import { DebriefScreen } from './screens/DebriefScreen';
-import { reportLessonStatus, reportScore } from './util/persistence';
+import {
+  xapiClearancePassed,
+  xapiLevelMilestone,
+  xapiCompleted,
+  xapiRoundCompleted,
+} from './util/xapi';
 import { getPortfolioForRound } from './data/portfolioByRound';
 
 export default function App() {
@@ -81,33 +86,47 @@ export default function App() {
     }
   }, [state.screen, state.partnerDetailTutorialShown, showTutorial, showSplash, game]);
 
-  if (showSplash) {
-    return (
-      <>
-        <SplashScreen
-          onBegin={() => setShowSplash(false)}
-          onResetProgress={() => {
-            // game.onRestart already calls clearPersistedState and
-            // hands us a fresh in-memory GameState. Stay on the
-            // splash screen so the next Begin click runs the
-            // full clearance / regime / persona flow from scratch.
-            game.onRestart();
-          }}
-        />
-        <DevNav
-          currentScreen={state.screen}
-          onJump={(screen) => {
-            setShowSplash(false);
-            game.goToScreen(screen);
-          }}
-          onShowSplash={() => setShowSplash(true)}
-          onRestart={() => {
-            game.onRestart();
-            setShowSplash(true);
-          }}
-        />
-      </>
+  // Emit xAPI statements at key milestones. Declarative - watch the screen
+  // and the graded round; refs guard against re-emitting on re-render or
+  // revisit. Everything no-ops outside an LMS launch (the sender checks).
+  const emittedRounds = useRef<Set<number>>(new Set());
+  const emittedScreens = useRef<Set<string>>(new Set());
+  useEffect(() => {
+    const totalStars = Object.values(state.roundStars).reduce<number>(
+      (a, s) => a + (s ?? 0),
+      0,
     );
+    const completionPct = Math.round((totalStars / (TOTAL_ROUNDS * 3)) * 100);
+
+    if (state.screen === 'conversation-report') {
+      const round = state.currentRound;
+      if (!emittedRounds.current.has(round)) {
+        emittedRounds.current.add(round);
+        xapiRoundCompleted(round, round > 10 ? 'L2' : 'L1', state.roundStars[round] ?? 0);
+      }
+    }
+    if (state.screen === 'level-1-complete' && !emittedScreens.current.has('m-l1')) {
+      emittedScreens.current.add('m-l1');
+      xapiLevelMilestone('L1', { roundsCompleted: 10, totalStars });
+    }
+    if (state.screen === 'level-2-complete' && !emittedScreens.current.has('m-l2')) {
+      emittedScreens.current.add('m-l2');
+      xapiLevelMilestone('L2', { roundsCompleted: 10, totalStars });
+    }
+    // Final completion fires on the Level 2 celebration (the real "finished
+    // all 20 rounds" moment), with the Debrief as a harmless fallback so it
+    // still lands via Play Again / legacy paths. Idempotent via one guard.
+    if (
+      (state.screen === 'level-2-complete' || state.screen === 'debrief') &&
+      !emittedScreens.current.has('completed')
+    ) {
+      emittedScreens.current.add('completed');
+      xapiCompleted(completionPct);
+    }
+  }, [state.screen, state.currentRound, state.roundStars]);
+
+  if (showSplash) {
+    return <SplashScreen onBegin={() => setShowSplash(false)} />;
   }
 
   // Level 0 screens (and briefing) run chrome-free - no Header, no GuidePanel.
@@ -294,9 +313,9 @@ export default function App() {
                 regime={state.learnerProfile.market?.parityRegime ?? null}
                 onContinue={(cleared, scorePct) => {
                   game.markLevel0Cleared();
-                  reportScore(Math.round(scorePct * 100));
                   if (cleared) {
-                    reportLessonStatus('passed');
+                    xapiClearancePassed(scorePct * 100);
+                    xapiLevelMilestone('L0', { roundsCompleted: 0 });
                     // Show the celebration before the tutorial fires.
                     game.goToScreen('l0-cleared-celebration');
                   } else {
@@ -504,16 +523,6 @@ export default function App() {
           onStartGame={() => setShowTutorial(false)}
         />
       )}
-
-      <DevNav
-        currentScreen={state.screen}
-        onJump={(screen) => game.goToScreen(screen)}
-        onShowSplash={() => setShowSplash(true)}
-        onRestart={() => {
-          game.onRestart();
-          setShowSplash(true);
-        }}
-      />
 
       <FeedbackButton
         context={{

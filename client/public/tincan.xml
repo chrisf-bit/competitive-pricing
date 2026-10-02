@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Tin Can / xAPI launch manifest. A Tin Can-capable LMS reads this on
+  upload, then launches index.html with the xAPI launch params on the
+  query string (endpoint, auth, actor, registration, activity_id). The
+  app reads them in src/util/xapi.ts.
+-->
+<tincan xmlns="http://projecttincan.com/tincan.xsd">
+  <activities>
+    <activity id="https://booking.com/xapi/rate-right" type="http://adlnet.gov/expapi/activities/course">
+      <name>Rate Right</name>
+      <description lang="en-US">Booking.com pricing learning simulation.</description>
+      <launch lang="en-US">index.html</launch>
+    </activity>
+  </activities>
+</tincan>
