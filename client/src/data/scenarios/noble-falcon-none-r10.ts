@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who agreed to align on strategy.",
     playerDialogue:
-      "I really wouldn't overthink one slow stretch like this - these things tend to move around from week to week and generally even themselves out across a full quarter, so I'd just sit tight for now.",
+      "Honestly, before we get into the figures - I really wouldn't worry too much. Performance naturally moves around from week to week and tends to even itself out across a full quarter, so I'd just sit tight for now.",
     partnerResponse:
       "I made time to align on strategy. 'It'll even out' isn't that.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },

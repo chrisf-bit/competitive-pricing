@@ -111,20 +111,6 @@ const step2Options: BranchingOption[] = [
     trustChange: -5,
   },
   {
-    id: 'll-r9-none-step2-empathize',
-    label: 'Acknowledge the frustration without explaining the leak',
-    description:
-      "Genuine, understanding reply - but it stops at empathy and never explains that the Partner Offer price comes from his own leaked wholesale rate, so it leaves a data-led partner without the answer he needs. Safe to say, just not the strongest move.",
-    playerDialogue:
-      "You're right to be frustrated, and I completely understand - when Partner Offer prices appear lower than your direct rates, it does feel like you've lost control of your pricing. I can see how that's difficult from your side.",
-    partnerResponse:
-      "I appreciate the understanding, but sympathy doesn't put money back in my pocket. What are you actually going to do about it?",
-    styleMatch: { red: 0, yellow: 0, green: 1, blue: -1 },
-    assertiveness: 1,
-    compliance: 'safe',
-    trustChange: -3,
-  },
-  {
     id: 'll-r9-none-step2-blame',
     label: 'Tell him the leak is his problem to solve alone',
     description:

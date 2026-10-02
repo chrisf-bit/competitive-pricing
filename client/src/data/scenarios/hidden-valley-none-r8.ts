@@ -59,7 +59,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a revenue manager who came to look at the trends.",
     playerDialogue:
-      "I wouldn't overthink it - these dips usually even themselves out over a quarter or so, and I'd hate for you to lose sleep over a bit of noise in the numbers. You run a lovely property and the guests clearly love it, so I'm confident things will bounce back on their own before long. Let's not read too much into a quiet stretch.",
+      "Honestly, before we dig into the figures - I really wouldn't worry too much. Performance like yours naturally moves in cycles and tends to settle out over a quarter or so, so I'd hate for you to lose sleep over any of it. You run a lovely property and the guests clearly love it, so I'm confident things stay on track. Let's not get too deep into the numbers today.",
     partnerResponse:
       "You said you had trends to show me. 'It'll even out' isn't a trend.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },

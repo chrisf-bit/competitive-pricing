@@ -58,7 +58,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a process-led revenue manager who just agreed to look at the insights.",
     playerDialogue:
-      "Adam, I really wouldn't read too much into a slow patch like this as this strategy is not new for you - in my experience these things tend to even out on their own, and a quiet stretch one quarter usually turns around the next without anyone needing to touch a thing if you are after getting the regular share with us and not per se increased business.",
+      "Honestly, Adam, I really wouldn't worry too much - your approach here isn't new, and in my experience performance tends to even out on its own. A quieter stretch one quarter usually turns around the next without anyone needing to touch a thing.",
     partnerResponse:
       "I set aside this time for the numbers. 'It'll sort itself out' isn't insight.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },

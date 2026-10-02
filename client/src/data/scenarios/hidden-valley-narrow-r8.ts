@@ -60,7 +60,7 @@ const step1Options: BranchingOption[] = [
     description:
       "Warm, but it wastes the slot for a revenue manager who asked to get straight to the data.",
     playerDialogue:
-      "I really wouldn't read too much into a dip like this - a slow patch tends to sort itself out over the quarter without anyone needing to do much about it. Let's not get bogged down in the numbers today; these things ebb and flow, and I'm sure you'll see it bounce back on its own before long.",
+      "Honestly, before we get into the figures - I really wouldn't worry too much. A property like yours naturally moves through busier and quieter patches, and these things tend to sort themselves out over the quarter without anyone needing to do much. Let's not get bogged down in the numbers today; I'm sure it'll be fine on its own before long.",
     partnerResponse:
       "I asked to get straight to the point. 'It'll sort itself out' isn't the data.",
     styleMatch: { red: -1, yellow: 1, green: 0, blue: -2 },

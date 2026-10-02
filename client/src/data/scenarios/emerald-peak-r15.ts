@@ -94,7 +94,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling (Anouk reframe): answer her 'vs history' question with her own strong recent performance - room nights up, conversion above peers once travelers reach the page - then pivot to exposure: 12% unsold and visibility at 17% against a peer group at 26% mean travelers convert when they find her; the gap is how many find her.",
     playerDialogue:
-      "Happy to. Recently you're performing strongly - your room nights sold are up 110% on your peer group over the last 30 days, and once travelers reach your page your conversion sits above your peer group too. So demand and closing are both working in your favour. The gap is earlier in the journey: 12% of your rooms went unsold last month, and your visibility share is only 17%, against a peer group at 26%, so a large share of travelers never reach your page. Your guests convert when they find you - the real question is how many find you.",
+      "Happy to dig into that. Recently you're performing strongly - your room nights sold are up 110% on your peer group over the last 30 days, and once travelers reach your page your conversion sits above your peer group too. So demand and closing are both working in your favour. The gap is earlier in the journey: 12% of your rooms went unsold last month, and your visibility share is only 17%, against a peer group at 26%, so a large share of travelers never reach your page. Your guests convert when they find you - the real question is how many find you.",
     partnerResponse:
       "Mmh, okay... so what's actually happening at the searching stage that drives that difference?",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
