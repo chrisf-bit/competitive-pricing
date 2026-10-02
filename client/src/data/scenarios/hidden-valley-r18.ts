@@ -137,9 +137,9 @@ const step3Options: BranchingOption[] = [
     id: 'hv-r18-step3-correct',
     label: 'Share the visibility and search-price gap',
     description:
-      "SME-prescribed handling of the Money-in-Bank trade-off: there's still room to improve. Two metrics - her visibility share is 21%, about 7% behind her peer group, and the price travelers see in search is 10% higher than peers.",
+      "SME-prescribed handling of the Money-in-Bank trade-off: there's still room to improve. Two metrics - her visibility share is 21% vs 28% for her peer group, and the search price travelers see is 175 vs a peer median of 159.",
     playerDialogue:
-      "I hear you, and it's a fair trade-off to weigh. But there's still room to improve. Two metrics worth sharing: your visibility share is 21%, about 7% behind your peer group, and the price travelers see when they search is running about 10% higher than your peers.",
+      "I hear you, and it's a fair trade-off to weigh. But there's still room to improve. Two metrics worth sharing: your visibility share is 21%, compared with 28% for your peer group, and the search price travelers see is 175, compared with a peer median of 159.",
     partnerResponse:
       "10% more expensive than competitors. But Oliver, as we discussed, when automated programs like the Booking Sponsored Benefit kick in to adjust the price, it feels like we lose control of our own strategy. I don't want guests seeing us as an 'affordable' option or booking purely on price.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -233,9 +233,9 @@ const step5Options: BranchingOption[] = [
     id: 'hv-r18-step5-correct',
     label: 'Show the residual gap, propose a targeted mobile rate',
     description:
-      "SME-prescribed handling: even with BSB, her search price is still 10% above peers, which likely caps her visibility and loses travelers at search. Propose a targeted tool rather than a general cut - a mobile rate, since over 60% of searches are on mobile, applying a closed incentive only to mobile searchers.",
+      "SME-prescribed handling: even with BSB, her search price is still 175 vs a peer median of 159, which likely caps her visibility and loses travelers at search. Propose a targeted tool rather than a general cut - a mobile rate, since over 60% of searches are on mobile, applying a closed incentive only to mobile searchers.",
     playerDialogue:
-      "Even with that program, your search price is still about 10% above your peers, which likely caps your visibility - travelers compare and finish the booking elsewhere, and an empty room is a missed opportunity. Rather than a general rate cut, we'd use a targeted tool: a mobile rate. Over 60% of searches come from mobile, and it applies a closed incentive strictly to mobile searchers.",
+      "Even with that program, your search price is still 175, compared with a peer median of 159, which likely caps your visibility - travelers compare and finish the booking elsewhere, and an empty room is a missed opportunity. Rather than a general rate cut, we'd use a targeted tool: a mobile rate. Over 60% of searches come from mobile, and it applies a closed incentive strictly to mobile searchers.",
     partnerResponse:
       "Hmm, when you frame it around uncaptured search traffic, I see the logic. A targeted mobile adjustment... oh, sorry - actually we're not allowed to do that, it's against our brand rules and we could be fined. Is there another targeted deal we could use instead?",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },

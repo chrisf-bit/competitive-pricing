@@ -135,9 +135,9 @@ const step3Options: BranchingOption[] = [
     id: 'pg-r17-step3-correct',
     label: 'Rule out a price war, point to a segment',
     description:
-      "SME-prescribed handling: a price war isn't the recommendation. The gap is only around 5% overall, but it concentrates in specific high-value segments - the goal is to recover conversion and reduce unsold inventory there, not to cut rates across the board.",
+      "SME-prescribed handling: a price war isn't the recommendation. The overall search price (239 vs a peer median of 249) is competitive; the issue concentrates in specific high-value segments - the goal is to recover conversion and reduce unsold inventory there, not to cut rates across the board.",
     playerDialogue:
-      "A price war isn't what I'd recommend at all. The overall gap is only around 5%, but it lands hardest on specific high-value segments - that's where the demand is hardest to convert. The aim is to recover that conversion and reduce your unsold inventory, not to touch your rate everywhere.",
+      "A price war isn't what I'd recommend at all. Your overall search price is 239, 5% below the peer median of 249. The issue is not a blanket price gap; it lands hardest on specific high-value segments. The aim is to recover that conversion and reduce your unsold inventory, not to touch your rate everywhere.",
     partnerResponse:
       "Alright. So where does this gap actually sit in the data?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -183,9 +183,9 @@ const step4Options: BranchingOption[] = [
     id: 'pg-r17-step4-correct',
     label: 'Name the European family-search gap',
     description:
-      "SME-prescribed diagnosis: the gap is concentrated in European family searches, where the search price runs 12% higher because children are currently charged as adults from a misconfiguration in the extranet.",
+      "SME-prescribed diagnosis: the overall search price (239 vs a peer median of 249) is competitive, but European family searches show a higher total because children are currently charged as adults (an extranet misconfiguration), which pushes those bookers to a competitor.",
     playerDialogue:
-      "It's concentrated in European family searches. For those queries your search price comes up about 12% higher than your peer group - making it harder to compete. That 12% is what pushes those bookers to abandon and pick a competitor.",
+      "It's concentrated in European family searches. Your overall search price is 239, below the peer median of 249, but families can still see a higher total because children are currently being charged as adults. That family-search configuration is what pushes those bookers toward a competitor.",
     partnerResponse:
       "Sorry Diego, I thought we already worked on the family segment to make the property attractive for families - it's a high-spending, growing segment. Is that still not working properly?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },

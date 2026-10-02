@@ -136,9 +136,9 @@ const step3Options: BranchingOption[] = [
     id: 'll-r19-step3-correct',
     label: 'Show the visibility and search-price drop-off',
     description:
-      "SME-prescribed diagnosis: despite rising visibility versus last year, his share versus peers is falling 15% behind, and his search price averages 12% higher than theirs - so travelers see him much less, and when they do the offer isn't attractive, so volume drops.",
+      "SME-prescribed diagnosis: his visibility share is 8% vs 23% for his peer group, and his search price averages 67 vs a peer median of 60 - so travelers see him much less, and when they do the offer isn't attractive, so volume drops.",
     playerDialogue:
-      "Let's look at exactly where travelers dropped off. Even with your visibility share up vs last year, your visibility share vs the peer group is falling about 15% behind, and your search price averages 12% higher than theirs. So travelers see you less than your peers - and when they do, the offer isn't attractive enough - the travelers do not click on your property page, potentially due to your search price.",
+      "Let's look at exactly where users drop out. Your visibility share is 8%, compared with 23% for your peer group, and your search price averages 67, versus a peer median of 60. So travelers see you less than your peers, and when they do, the offer isn't attractive enough - which is quietly dragging down your volume.",
     partnerResponse:
       "Hmm, got it. But my regional office won't allow rate cuts, especially with all the noise from those leaked wholesale rates.",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },

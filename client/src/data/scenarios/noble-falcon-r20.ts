@@ -44,11 +44,11 @@ const step1Options: BranchingOption[] = [
     id: 'nf-r20-step1-correct',
     label: 'Frame July as the opportunity, name the paradox',
     description:
-      "SME-prescribed open: demand is strong and his page views prove it - July is his biggest opportunity of the year. But performance is below peer, with conversion at 1.3% and visibility share at 14.5%. Ask him why he thinks the property isn't capturing that demand.",
+      "SME-prescribed open: demand is strong and his page views prove it - July is his biggest opportunity of the year. But performance is below peer: search price 73 vs a peer median of 86, visibility share 15% vs 16% for peers, and conversion running lower than peers. Ask him why he thinks the property isn't capturing that demand.",
     playerDialogue:
-      "Your demand picture is strong - page views are running 26% above peers, and forward room nights for the next three months are 81% above. July is clearly your biggest window of the year. Where I'd want us to look together is a gap underneath that: your search price is 15% below peers, which should be converting well, but your conversion is running lower than your peer group and your visibility share at 14.5%. Somewhere in between the search to booking funnel guests are lost and not converting to an actual booking. What's your read on why that might be?",
+      "Your demand picture is strong - page views are running 26% above peers, and forward room nights for the next three months are 81% above. July is clearly your biggest window of the year. Where I'd want us to look together is a gap underneath that: your search price is 73, compared with a peer median of 86, which should be converting well, but your conversion is running lower than your peer group and your visibility share is 15%, compared with 16% for your peer group. Somewhere in between the search-to-booking funnel guests are being lost and not converting to an actual booking. What's your read on why that might be?",
     partnerResponse:
-      "Well, I'm not sure... July is traditionally our highest-demand month, so expectations are high. Total revenue is steady, but frankly our pickup for the second half of the month feels slow versus last year. Our benchmarking says our general rate here sits roughly 15% below our local peers. If the price is that competitive, why is our conversion not in line with our visibility?",
+      "Well, I'm not sure... July is traditionally our highest-demand month, so expectations are high. Total revenue is steady, but frankly our pickup for the second half of the month feels slow versus last year. Our benchmarking says our search price is 73, compared with a peer median of 86. If the price is that competitive, why is our conversion not in line with our visibility?",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -337,7 +337,7 @@ const steps: BranchingStep[] = [
     id: 'family-search',
     label: 'Reveal the granular family search',
     partnerPrompt:
-      "Well, I don't know... July is traditionally our highest-demand month, so expectations are high. Total revenue is steady, but our pickup for the second half of July feels slow versus last year. Our benchmarking says our general rate here sits roughly 15% below our local peers. If the price is that competitive, why is our conversion not in line with our visibility?",
+      "Well, I don't know... July is traditionally our highest-demand month, so expectations are high. Total revenue is steady, but our pickup for the second half of July feels slow versus last year. Our benchmarking says our search price is 73, compared with a peer median of 86. If the price is that competitive, why is our conversion not in line with our visibility?",
     options: step2Options,
   },
   {
