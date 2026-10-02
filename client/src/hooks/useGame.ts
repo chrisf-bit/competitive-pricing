@@ -32,14 +32,15 @@ import { isXapiLaunch, xapiInitialized } from '../util/xapi';
 export function useGame() {
   const [state, setState] = useState<GameState>(() => {
     const persisted = loadPersistedState();
+    // The LMS launch name (first name) is authoritative: the learner can't
+    // rename themselves in-sim, so it always wins over a persisted value -
+    // which may be stale (e.g. a full name stored by an earlier build).
+    const lmsName = getLmsStudentName();
     if (persisted) {
-      // Persisted learnerProfile.playerName takes precedence over the
-      // LMS student_name: the persisted value was set deliberately
-      // (either auto-populated from a prior LMS launch, or edited by
-      // the learner in Character Build) and we don't want to clobber
-      // it on every resume.
       return createInitialState({
-        learnerProfile: persisted.learnerProfile,
+        learnerProfile: lmsName
+          ? { ...persisted.learnerProfile, playerName: lmsName }
+          : persisted.learnerProfile,
         level0Cleared: persisted.level0Cleared,
         level0ClearedForRegime: persisted.level0ClearedForRegime,
         roundStars: persisted.roundStars,
@@ -48,11 +49,8 @@ export function useGame() {
         disclaimerAcknowledged: persisted.disclaimerAcknowledged,
       });
     }
-    // Fresh boot - if the LMS provided a student name, seed the
-    // default learnerProfile.playerName with it so the GM chat and
-    // celebration screens address the learner correctly from the
-    // start.
-    const lmsName = getLmsStudentName();
+    // Fresh boot - seed playerName from the LMS name so the GM chat and
+    // celebration screens address the learner correctly from the start.
     if (lmsName) {
       const fresh = createInitialState();
       return {
@@ -76,9 +74,13 @@ export function useGame() {
     void (async () => {
       const resumed = await loadResumeState();
       if (cancelled || !resumed) return;
+      // Launch name wins over the resumed (possibly stale) playerName too.
+      const lmsName = getLmsStudentName();
       setState(() =>
         createInitialState({
-          learnerProfile: resumed.learnerProfile,
+          learnerProfile: lmsName
+            ? { ...resumed.learnerProfile, playerName: lmsName }
+            : resumed.learnerProfile,
           level0Cleared: resumed.level0Cleared,
           level0ClearedForRegime: resumed.level0ClearedForRegime,
           roundStars: resumed.roundStars,
