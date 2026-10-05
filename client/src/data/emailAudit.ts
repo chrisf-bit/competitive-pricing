@@ -328,9 +328,9 @@ const noParityScenario: EmailAuditScenario = {
       isSafe: false,
       rationale: {
         correct:
-          "Right call. You shouldn't raise cross-channel price discrepancies proactively. Even in a reactive raise, this phrasing presumes a strategy and pressures the partner to justify their intent. Reactive neutral phrasing could be: 'You explain that your prices are often lower on another channel, is that part of your pricing strategy? You are completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com.'",
+          "Right call. You shouldn't raise cross-channel price discrepancies proactively. Even in a reactive raise, this phrasing presumes a strategy and pressures the partner to justify their intent. Reactive neutral phrasing could be: 'We note that your prices are often lower on another channel - is that part of your pricing strategy? You are completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com.'",
         incorrect:
-          "Actually this one is unsafe. You shouldn't raise cross-channel price discrepancies proactively. The statement also presumes a strategy and pressures the partner to justify their intent, which is off-side even in a reactive raise. Reactive neutral phrasing could be: 'You explain that your prices are often lower on another channel, is that part of your pricing strategy? You are completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com.'",
+          "Actually this one is unsafe. You shouldn't raise cross-channel price discrepancies proactively. The statement also presumes a strategy and pressures the partner to justify their intent, which is off-side even in a reactive raise. Reactive neutral phrasing could be: 'We note that your prices are often lower on another channel - is that part of your pricing strategy? You are completely free to choose your distribution strategy, but adjusting it could help you capture more demand against similar properties on Booking.com.'",
       },
       source: "Legal Compliance | No Parity Markets | Don't (SME refinement)",
     },
