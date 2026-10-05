@@ -31,9 +31,6 @@ interface ConversationReportScreenProps {
   bestStars: number;
 }
 
-const STYLE_STRONG_THRESHOLD = 5;
-const STYLE_OPTIMAL_THRESHOLD = 6;
-
 export function ConversationReportScreen({
   grade,
   partners,
@@ -207,18 +204,22 @@ export function ConversationReportScreen({
             style={{
               fontWeight: 700,
               color:
-                grade.styleSum >= STYLE_OPTIMAL_THRESHOLD
+                grade.stars === 3
                   ? 'var(--brand-yellow)'
-                  : grade.styleSum >= STYLE_STRONG_THRESHOLD
+                  : grade.stars === 2
                     ? 'var(--brand-blue-light, #62B6FF)'
                     : 'rgba(255,255,255,0.65)',
             }}
           >
-            {grade.styleSum >= STYLE_OPTIMAL_THRESHOLD
+            {/* Keyed off the star tier so this label can never contradict
+                the award. The tiers already encode the per-step style
+                average the grader uses (3 = optimal, 2 = strong, 1 = floor
+                met but style only neutral). */}
+            {grade.stars === 3
               ? 'Optimal'
-              : grade.styleSum >= STYLE_STRONG_THRESHOLD
+              : grade.stars === 2
                 ? 'Strong'
-                : grade.stars >= 1
+                : grade.stars === 1
                   ? 'Neutral'
                   : 'Off-pitch'}
           </span>
