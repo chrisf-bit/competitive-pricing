@@ -1109,17 +1109,16 @@ function applyMetricEffects(
   metrics: PartnerMetrics,
   effects: Partial<PartnerMetrics>,
 ): PartnerMetrics {
+  // Spread all existing metrics through unchanged, then recompute only the
+  // legacy fields the effects operate on. Spreading (rather than listing
+  // fields) is essential: it preserves everything else on the record -
+  // partnerValueAbrn, secondaryMetrics, opcMetrics, discountProducts,
+  // lastPricingContactDaysAgo, pricingCoverageQTD, activeScenarioNames,
+  // productsNote, the new KPIs - which an explicit field list silently
+  // dropped for every unengaged partner from round 2 onward.
   return {
-    // New KPIs - pass through unchanged for now; conversation effects
-    // still operate on the legacy fields. Will be rewired post-MVP.
-    erpd: metrics.erpd,
-    erpdChange: metrics.erpdChange,
-    rpdPublic: metrics.rpdPublic,
-    rpdLoyal: metrics.rpdLoyal,
-    losePricePublic: metrics.losePricePublic,
-    activeScenarios: metrics.activeScenarios,
-    competitor: metrics.competitor,
-    // Legacy fields - effects still land here
+    ...metrics,
+    // Legacy fields - conversation/neglect effects still land here
     experiencedRPD: clamp(
       metrics.experiencedRPD + (effects.experiencedRPD ?? 0),
       0,
@@ -1133,7 +1132,6 @@ function applyMetricEffects(
       0,
       100,
     ),
-    rateParity: metrics.rateParity,
   };
 }
 
