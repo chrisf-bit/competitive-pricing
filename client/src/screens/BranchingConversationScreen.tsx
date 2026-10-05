@@ -70,6 +70,17 @@ function formatDuration(seconds: number): string {
   return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
 }
 
+// Parity regime label shown in the call header. The regime drives which
+// pricing language is compliant, and it changes per round in the
+// Cross-Regional journey - so it is surfaced on the call as a standing
+// reminder of which rules apply.
+const REGIME_LABEL: Record<string, string> = {
+  wide: 'Wide Parity',
+  narrow: 'Narrow Parity',
+  none: 'No Parity',
+  'cross-regional': 'Cross-Regional',
+};
+
 export function BranchingConversationScreen({
   partner,
   currentRound,
@@ -269,6 +280,28 @@ export function BranchingConversationScreen({
                 marginTop: 2,
               }}
             >
+              {partner.persona.parityRegime && (
+                <>
+                  <span
+                    style={{
+                      padding: '2px 8px',
+                      borderRadius: 999,
+                      border: '1px solid rgba(255,255,255,0.28)',
+                      fontSize: 10,
+                      fontWeight: 800,
+                      letterSpacing: '0.04em',
+                      textTransform: 'uppercase',
+                      color: 'rgba(255,255,255,0.92)',
+                      flexShrink: 0,
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {REGIME_LABEL[partner.persona.parityRegime] ??
+                      partner.persona.parityRegime}
+                  </span>
+                  <span style={{ color: 'rgba(255,255,255,0.3)' }}>·</span>
+                </>
+              )}
               <span
                 style={{
                   whiteSpace: 'nowrap',
