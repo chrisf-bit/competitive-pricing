@@ -26,7 +26,7 @@
  * normalised to plain hyphens per the house style rule.
  */
 
-export type PathwayContentPhase = 'Prioritise' | 'Diagnose' | 'Act';
+export type PathwayContentPhase = 'Prioritize' | 'Diagnose' | 'Act';
 
 export interface PathwayStepContent {
   /** 1-6, matches the six road nodes Trigger..Hook. */
@@ -69,7 +69,7 @@ const royalCrestR1: PricingPathwayContent = {
   steps: [
     {
       stepNumber: 1,
-      phase: 'Prioritise',
+      phase: 'Prioritize',
       title: 'Trigger - What am I seeing?',
       intro: "Looking at the partner's data, which trigger is the loudest?",
       body: "Based on the information available in this section, a clear trigger here is a data signal: Royal Crest Hotel's Brand.com eRPD sits at 5.2% and has been deteriorating, increasing by 0.6 percentage points month over month. This is a worsening price gap that signals a pricing opportunity worth investigating.",
@@ -77,7 +77,7 @@ const royalCrestR1: PricingPathwayContent = {
     },
     {
       stepNumber: 2,
-      phase: 'Prioritise',
+      phase: 'Prioritize',
       title: 'Primary pricing gaps - Where are the primary pricing gaps?',
       body: "In this case (game predefined), the partner's primary pricing gap is about Brand.com eRPD is not competitive. The partner's eRPD of 5.2% and Lose Price 99% tells us that travellers consistently find a better price on the partner's own website than on Booking.com. This is where the largest commercial gap sits for this partner.",
       note: "For each game round, we use one predefined primary comparison player, either Brand.com or the Key OTA, for the eRPD and price metrics so the simulation stays focused. In practice, you should follow office-country's eRPD objectives direction and use pricing dashboard insights, with manager guidance, to prioritize between Brand.com and Key OTA, based on potential eRPD impact, partner value, observed trends, and parity guardrails.",
@@ -108,7 +108,7 @@ const royalCrestR1: PricingPathwayContent = {
       phase: 'Act',
       title: "Conversation angle - What's my conversation angle?",
       intro: 'You have the diagnosis and the plan. Now pick the most effective angle that will make this partner lean in.',
-      body: "In this case, lead with the Brand.com opportunity - the structural Brand eRPD gap is the strongest signal, making it the most credible angle to open the conversation. The App and Mdot scenarios identified against the Key OTA can serve as supporting levers, that targeted discounts for specific audiences could further improve the partner's price competitiveness without requiring a full rate restructure. This gives the partner a graduated path - start with base rate discussion, then optimise with targeted discounts where it makes sense.",
+      body: "In this case, lead with the Brand.com opportunity - the structural Brand eRPD gap is the strongest signal, making it the most credible angle to open the conversation. The App and Mdot scenarios identified against the Key OTA can serve as supporting levers, that targeted discounts for specific audiences could further improve the partner's price competitiveness without requiring a full rate restructure. This gives the partner a graduated path - start with base rate discussion, then optimize with targeted discounts where it makes sense.",
     },
   ],
   summary: {
@@ -125,7 +125,7 @@ const royalCrestR1: PricingPathwayContent = {
         value: "Neutrally understand the partner's pricing strategy and agree on a timeline to test and review adjustments outcome.",
       },
     ],
-    hook: 'Lead with the Brand.com opportunity. The App and Mdot scenarios vs Key OTA can serve as supporting levers - start with base rate discussion, then optimise with targeted discounts where it makes sense.',
+    hook: 'Lead with the Brand.com opportunity. The App and Mdot scenarios vs Key OTA can serve as supporting levers - start with base rate discussion, then optimize with targeted discounts where it makes sense.',
   },
 };
 
@@ -138,14 +138,14 @@ const royalCrestR11: PricingPathwayContent = {
   steps: [
     {
       stepNumber: 1,
-      phase: 'Prioritise',
+      phase: 'Prioritize',
       title: 'Trigger - What am I seeing?',
       body: "Based on the information available in this section, a clear trigger is a performance outcome: 50% of the partner's rooms are unsold, while Sell Through Rate is below the peer group. This indicates a meaningful on-platform performance issue worth investigating.",
       note: 'The trigger shows where to start the investigation, but not yet why the issue is happening. Continue through the pathway before deciding on an action.',
     },
     {
       stepNumber: 2,
-      phase: 'Prioritise',
+      phase: 'Prioritize',
       title: 'Primary pricing gaps - Where are the primary pricing gaps?',
       body: "In this case, the partner's primary gap is on-platform competitiveness. The partner is being seen less, not chosen less: Visibility Share is 10.3% compared with 17.9% for the peer group, while Search Price is 7% above peers. This suggests that the main opportunity is to understand how the partner's price and offer conditions affect their visibility and ability to attract travellers on Booking.com.",
       note: 'In an On-Platform Competitiveness context, the primary pricing gap can be translated to Performance Gap. In this example, the performance gap appears to be in the upper funnel.',
@@ -208,13 +208,13 @@ const genericPathway: PricingPathwayContent = {
   steps: [
     {
       stepNumber: 1,
-      phase: 'Prioritise',
+      phase: 'Prioritize',
       title: 'Trigger - What am I seeing?',
       body: "Something flagged for this partner. Before you dive in, identify what type of signal you're reacting to - is it a performance drop (room nights, conversion), a pricing (e-RPD) or a EPO-gating programme eligibility change? The trigger indicates a pricing opportunity or problem for you to look into.",
     },
     {
       stepNumber: 2,
-      phase: 'Prioritise',
+      phase: 'Prioritize',
       title: 'Primary pricing gaps - Where are the primary pricing gaps?',
       body: "You've seen the signal - now pinpoint where the primary gap sits. Check: is the partner less competitive versus their own website (Brand.com), versus a Key OTA, or versus their peer group on-platform (OPC)? One partner can have multiple gaps - your job is to identify the primary one that's driving the most impact.",
     },

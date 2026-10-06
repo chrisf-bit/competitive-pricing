@@ -139,7 +139,7 @@ export const johnR1: BranchingConversationTree = {
           label: 'Warn him about losing visibility',
           description: 'Push the consequence of de-prioritizing Booking.com.',
           playerDialogue:
-            "If you keep deprioritising us, your ranking will slip and you'll lose visibility. Fewer people see you, fewer book, and that ends up hurting both of us.",
+            "If you keep deprioritizing us, your ranking will slip and you'll lose visibility. Fewer people see you, fewer book, and that ends up hurting both of us.",
           partnerResponse:
             "That sounds like a threat. I'm free to choose my channel mix - that's my call to make.",
           styleMatch: { red: 1, yellow: -2, green: -2, blue: -1 },

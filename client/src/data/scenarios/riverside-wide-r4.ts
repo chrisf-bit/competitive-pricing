@@ -28,7 +28,7 @@ const step1Options: BranchingOption[] = [
     description:
       "SME-prescribed probe: surface that his rates run higher than the Key OTA on family occupancy and that Genius isn't performing, then ask an open question about his goals before recommending anything.",
     playerDialogue:
-      "I've been looking at your pricing with us, and your rates are running higher than other OTA - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
+      "I've been looking at your pricing with us, and your rates are running higher than the other OTAs - specifically on family occupancy. The Genius program also isn't performing the way it should. Before I go further, what are your goals with us?",
     partnerResponse:
       "Let me share our strategy. We deliberately cap our Booking.com volume at 30% to protect our own website - so if Genius isn't pulling numbers, that's by design. The family rates, though, aren't intentional. I'd happily give you the same rates as the other OTAs. How much am I leaving on the table on the family segment?",
     styleMatch: { red: 0, yellow: 0, green: 1, blue: 2 },
@@ -154,9 +154,9 @@ const step3Options: BranchingOption[] = [
     description:
       "Takes the 30% ceiling at face value and moves on - the opposite of the Value-Proposition-Wall break, which is to test whether the cap is even binding.",
     playerDialogue:
-      "Understood - the 30% cap is entirely your call. Let's just work within that ceiling and make the most of Genius on the share you do give us. If that's the box we're operating in, I'll focus on getting the programme right and leave the volume where you've set it.",
+      "Understood - the 30% cap is entirely your call. Let's just work within that ceiling and make the most of Genius on the share you do give us. If that's the box we're operating in, I'll focus on getting the program right and leave the volume where you've set it.",
     partnerResponse:
-      "Fair enough - you've respected the cap. I did think you had something to help me get more out of the share I already give you, though, not just manage the programme.",
+      "Fair enough - you've respected the cap. I did think you had something to help me get more out of the share I already give you, though, not just manage the program.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
     compliance: 'safe',
@@ -266,7 +266,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Treats the symptom, not the cause - a deeper Genius discount on top of an inflated base doesn't restore genuine value, it just widens the same offset.",
     playerDialogue:
-      "Just deepen your Genius discount - take it up to 20% - and the Genius travelers will start coming back to you. A bigger headline saving is what catches their eye, so make the discount look more generous and let that pull the bookings through. Leave the base rate exactly where it is; you don't need to touch that, just widen the gap on the Genius side and lean into the deeper offer. That's one way to get the programme moving again without reworking anything underneath it.",
+      "Just deepen your Genius discount - take it up to 20% - and the Genius travelers will start coming back to you. A bigger headline saving is what catches their eye, so make the discount look more generous and let that pull the bookings through. Leave the base rate exactly where it is; you don't need to touch that, just widen the gap on the Genius side and lean into the deeper offer. That's one way to get the program moving again without reworking anything underneath it.",
     partnerResponse:
       "Deepen the discount? I've spent this whole conversation trying to protect my rate, not cut it further - I'm not convinced a bigger discount is what turns this around.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

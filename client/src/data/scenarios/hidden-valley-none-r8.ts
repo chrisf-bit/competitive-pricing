@@ -140,9 +140,9 @@ const step3Options: BranchingOption[] = [
     id: 'hv-r8-none-step3-correct',
     label: 'Explain BSB is Booking-funded, converts demand, and is prepaid',
     description:
-      "SME-prescribed explanation: BSB is a customer-facing product funded by Booking.com to attract guests and convert demand that might otherwise not book, and because these reservations require pre-payment they're less likely to be cancelled - a win-win.",
+      "SME-prescribed explanation: BSB is a customer-facing product funded by Booking.com to attract guests and convert demand that might otherwise not book, and because these reservations require pre-payment they're less likely to be canceled - a win-win.",
     playerDialogue:
-      "Let me clarify how that works: BSB is a customer-facing product funded by Booking.com, designed to attract guests to your property and convert demand that might otherwise not book. And since these reservations require pre-payment from the guest, they're less likely to be cancelled - so it works out as a win-win.",
+      "Let me clarify how that works: BSB is a customer-facing product funded by Booking.com, designed to attract guests to your property and convert demand that might otherwise not book. And since these reservations require pre-payment from the guest, they're less likely to be canceled - so it works out as a win-win.",
     partnerResponse:
       "I don't see any benefit in showing a lower price to guests, even if it isn't a revenue loss for me. It's about my brand reputation - that customer will never book with me again if the lowest price is always on Booking.com!",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -198,7 +198,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: BSB isn't applied to all bookings and is only offered to a limited audience; the partial room cost is paid by Booking.com and she incurs no additional fees, still receiving the full room price she set.",
     playerDialogue:
-      "BSB is not something we apply to all of your bookings. Our algorithm determines when BSB applies to encourage travellers to book, based on factors such as search criteria. That partial room cost is paid by Booking.com on behalf of the guests and you do not incur any additional fees.",
+      "BSB is not something we apply to all of your bookings. Our algorithm determines when BSB applies to encourage travelers to book, based on factors such as search criteria. That partial room cost is paid by Booking.com on behalf of the guests and you do not incur any additional fees.",
     partnerResponse:
       "I don't want to win guests just on price - I want them to choose me for the view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

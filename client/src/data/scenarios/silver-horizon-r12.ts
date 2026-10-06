@@ -20,7 +20,7 @@ import { silverHorizonR2IssueTreePath } from './silver-horizon-base';
  * as an acceptable trade-off) and The Regional Office Shield / external
  * blame ("other OTAs are cutting margin and selling B2B as B2C - it's
  * their fault, not my price"). The win is to stop chasing the external
- * source, keep the conversation to on-platform traveler behaviour, and
+ * source, keep the conversation to on-platform traveler behavior, and
  * land a fenced Getaway Deal campaign scoped to the next 3 months.
  *
  * Regime-neutral; safe across all three regimes. No parity language, no
@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right that it matters, wrong register - dramatizing a 6% gap as her business 'bleeding out' reads as pressure to a measured operator and invites her to push back on the exaggeration rather than the point.",
     playerDialogue:
-      "This is quietly bleeding your business dry, Chloe - every single day you leave it sitting like this, you're haemorrhaging bookings you are never going to get back, and it compounds. I can't stress it enough, this is genuinely urgent and every week that passes is money walking straight out the door.",
+      "This is quietly bleeding your business dry, Chloe - every single day you leave it sitting like this, you're hemorrhaging bookings you are never going to get back, and it compounds. I can't stress it enough, this is genuinely urgent and every week that passes is money walking straight out the door.",
     partnerResponse:
       "Bleeding dry? I've got strong traffic and a healthy group. Let's keep the drama out of it.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -310,7 +310,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach past the fenced scope she agreed - all rooms, all dates. Reopens the exact margin fight with her owners she just told you to avoid.",
     playerDialogue:
-      "Perfect - and let's not bother fencing it to specific rooms after all; let's just run the whole thing across every room type and every date so we really maximise the volume while we've got the momentum. The wider we cast it, the more inventory moves, so let's open it right up rather than hold any rooms back.",
+      "Perfect - and let's not bother fencing it to specific rooms after all; let's just run the whole thing across every room type and every date so we really maximize the volume while we've got the momentum. The wider we cast it, the more inventory moves, so let's open it right up rather than hold any rooms back.",
     partnerResponse:
       "No - I said specific rooms for a reason. Widen it to everything and my owners are back on my case.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },

@@ -81,7 +81,7 @@ export const gmScript: GMBeat[] = [
         correct:
           "Exactly. eRPD below 0% means we're cheaper relative to competitors on average. The goal is literally to get this number lower vs last year.",
         incorrect:
-          "Other way around. eRPD below 0% means we're cheaper relative to competitors - so going DOWN is what we want. The 2026 objective is explicitly to lower it vs last year.",
+          "Other way around. eRPD below 0% means we're cheaper relative to competitors - so going DOWN is what we want. The objective is explicitly to lower it vs last year.",
       },
     },
   },

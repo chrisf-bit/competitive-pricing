@@ -79,14 +79,14 @@ export const metricDefinitions = {
       'Average Daily Rate over the last 30 days - the average price paid per room per night. Compared vs peer group.',
   },
   last90dPageViews: {
-    label: 'Last 30D Page Views',
+    label: 'Last 90D Page Views',
     helpText:
-      "Number of times users clicked through to the hotel's detail page on Booking.com from search results over the last 30 days. Compared with the partner's peer group in the same period. Negative % = the property is being seen less than peers.",
+      "Number of times users clicked through to the hotel's detail page on Booking.com from search results over the last 90 days. Compared with the partner's peer group in the same period. Negative % = the property is being seen less than peers.",
   },
   last90dConversion: {
-    label: 'Last 30D Conversion',
+    label: 'Last 90D Conversion',
     helpText:
-      'Share of page views that converted into bookings over the last 30 days, vs peer group conversion. Negative comparator = the page is converting worse than peers.',
+      'Share of page views that converted into bookings over the last 90 days, vs peer group conversion. Negative comparator = the page is converting worse than peers.',
   },
   next3mRoomNights: {
     label: 'Next 3M Room Nights',

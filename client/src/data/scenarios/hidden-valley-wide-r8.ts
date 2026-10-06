@@ -140,9 +140,9 @@ const step3Options: BranchingOption[] = [
     id: 'hv-r8-wide-step3-correct',
     label: 'Name BSB and explain it is Booking-funded and prepaid',
     description:
-      "SME-prescribed explanation: that's the Booking Sponsored Benefit - a customer-facing product entirely funded by Booking.com to attract guests, and BSB reservations require pre-payment, so they're less likely to be cancelled.",
+      "SME-prescribed explanation: that's the Booking Sponsored Benefit - a customer-facing product entirely funded by Booking.com to attract guests, and BSB reservations require pre-payment, so they're less likely to be canceled.",
     playerDialogue:
-      "You mean the Booking Sponsored Benefit. It's a customer-facing product entirely funded by us and designed to help attract guests to your property. And because BSB reservations require pre-payment from the guest, they're less likely to be cancelled.",
+      "You mean the Booking Sponsored Benefit. It's a customer-facing product entirely funded by us and designed to help attract guests to your property. And because BSB reservations require pre-payment from the guest, they're less likely to be canceled.",
     partnerResponse:
       "I don't see any benefit in showing a lower price to guests, even if it isn't a revenue loss for me. It's about my brand reputation - guests will never book with me again if the lowest price is always on Booking.com!",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -200,7 +200,7 @@ const step4Options: BranchingOption[] = [
     playerDialogue:
       "BSB does not make you lose revenue or incur any additional fees - the partial room cost is paid by Booking.com on behalf of the guests. This is also not something we apply to all of your bookings. We position it as a win-win: travelers see a better price, you get stronger conversion, and because these bookings are paid in advance, cancellation risk is lower.",
     partnerResponse:
-      "I don't want to win guests just on price - I want them to choose me for the outstanding view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews. Given you're already discounting my rate, why should I join any of your programmes or campaigns?",
+      "I don't want to win guests just on price - I want them to choose me for the outstanding view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews. Given you're already discounting my rate, why should I join any of your programs or campaigns?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -297,7 +297,7 @@ const step5: BranchingStep = {
   id: 'separate-reviews',
   label: 'Separate price from review risk',
   partnerPrompt:
-    "I don't want to win guests just on price - I want them to choose me for the outstanding view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews. Given you're already discounting my rate, why should I join any of your programmes or campaigns?",
+    "I don't want to win guests just on price - I want them to choose me for the outstanding view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews. Given you're already discounting my rate, why should I join any of your programs or campaigns?",
   options: step5Options,
 };
 

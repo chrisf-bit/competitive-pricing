@@ -445,7 +445,7 @@ interface RoundView {
 
 const STYLE_NAMES: Record<string, string> = {
   red: 'Director',
-  yellow: 'Socialiser',
+  yellow: 'Socializer',
   green: 'Nurturer',
   blue: 'Thinker',
 };

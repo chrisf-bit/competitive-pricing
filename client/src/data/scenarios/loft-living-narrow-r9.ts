@@ -86,7 +86,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: acknowledge the frustration, then identify that static B2B rates intended for wholesalers are leaking publicly - acting as a tax on his brand rather than delivering opaque incremental volume. Probe whether there's a discrepancy in how his base rate or occupancy is set up here versus his other channels.",
     playerDialogue:
-      "It's understandable to feel that way. We've identified static B2B rates intended for wholesale packaging, are leaking unpackaged on public channels. Besides that, there seem to be some further rate differences - could there be a discrepancy in how your base rates are set up on Booking.com compared to your other channels?",
+      "It's understandable to feel that way. We've identified static B2B rates, intended for wholesale packaging, leaking unpackaged onto public channels. Besides that, there seem to be some further rate differences - could there be a discrepancy in how your base rates are set up on Booking.com compared to your other channels?",
     partnerResponse:
       "Wholesale rates coming online is something I will review in addressing. Besides that, my website has our best-rate guarantee, and with the other OTAs I have more or less aligned agreements. I know you're about to ask me to match my direct rate on Booking.com - but if I do that, I risk shifting my direct bookings over to you.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -198,7 +198,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: it works only when he has visibility - if travelers can't find him because his ranking dropped, they never search his direct site. Aligning his Booking.com rate with his own website keeps a consistent presence. Propose a temporary alignment test to see if it lifts his overall direct traffic.",
     playerDialogue:
-      "It does - but only when you have great visibility. If travelers do not find you on Booking.com in the first place, or find you less attractive versus higher ranked and better priced offers of competitors they won't even go looking for your direct site. Aligning your Booking.com rate with your own website improves your pricepoint automatically versus your peers on our website, which impacts your visibility positively. Would you be open to testing a temporary alignment to see if it lifts your overall direct traffic?",
+      "It does - but only when you have great visibility. If travelers do not find you on Booking.com in the first place, or find you less attractive versus higher ranked and better priced offers of competitors they won't even go looking for your direct site. Aligning your Booking.com rate with your own website improves your price point automatically versus your peers on our website, which impacts your visibility positively. Would you be open to testing a temporary alignment to see if it lifts your overall direct traffic?",
     partnerResponse:
       "I'd need to see that my total revenue across both channels actually goes up - I don't want to pay more commission for the same bookings. Also, what about the Partner Offer? I need it to disappear from my page on your platform.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -227,7 +227,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Right idea, but with no test or metric attached, a proof-driven MPP has nothing concrete to say yes to.",
     playerDialogue:
-      "Aligning will definitely help your visibility here as you will improve pricepoint versus your competition - it's genuinely the right thing to do, so my honest advice is to just go ahead and do it. You don't really need to overthink it or set up some elaborate measurement around it; it's a sound move and it'll work in your favour. Trust that it's the correct call and put it in place, and I'm confident you'll be glad you did.",
+      "Aligning will definitely help your visibility here as you will improve price point versus your competition - it's genuinely the right thing to do, so my honest advice is to just go ahead and do it. You don't really need to overthink it or set up some elaborate measurement around it; it's a sound move and it'll work in your favor. Trust that it's the correct call and put it in place, and I'm confident you'll be glad you did.",
     partnerResponse:
       "'Definitely' based on what? I don't move on adjectives, I move on numbers.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },

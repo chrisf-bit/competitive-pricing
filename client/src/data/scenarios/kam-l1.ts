@@ -116,7 +116,7 @@ export const KAM_L2_OPENINGS: Record<
     openingAm:
       "Hello Priya. Following up on our last discussion, our local account manager confirmed that your distribution team successfully aligned the rates for Oceanfront Bliss Lodge. While the trial delivered positive results, we still see an opportunity to optimize its conversion.",
     firstPartnerReply:
-      "Hey Kai! We've been super focused on some marketing campaigns and looking over our internal reports. Things look ok on our end, so I'm curious to see what you wanted to run through today!",
+      "Hey! We've been super focused on some marketing campaigns and looking over our internal reports. Things look ok on our end, so I'm curious to see what you wanted to run through today!",
   },
   17: {
     openingAm:
@@ -241,8 +241,8 @@ export function oceanfrontKamR6(partnerId: string): BranchingConversationTree {
   return withHelicopter(
     oceanfrontWideR6,
     partnerId,
-    "Hi Priya, thanks for making time today. I have analysed the performance trends across your portfolio, overall production is steady, but Oceanfront Bliss Lodge stands out as a lagging asset within your group. Specifically, a sharp drop in traffic is impacting its market presence over the last month.",
-    "Hello Zara. Thanks for doing that. I see our production on your platform is dropping. What exactly does the data show? Our direct channel is holding strong, which is our primary focus, but I've noticed our room nights with you are down.",
+    "Hi Priya, thanks for making time today. I have analyzed the performance trends across your portfolio, overall production is steady, but Oceanfront Bliss Lodge stands out as a lagging asset within your group. Specifically, a sharp drop in traffic is impacting its market presence over the last month.",
+    "Hello. Thanks for doing that. I see our production on your platform is dropping. What exactly does the data show? Our direct channel is holding strong, which is our primary focus, but I've noticed our room nights with you are down.",
   );
 }
 

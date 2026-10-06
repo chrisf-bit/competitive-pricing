@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I've noticed your bookings have slowed down, and it seems to be because prices on our platform are currently around 20% higher than the rates on your website. Can you walk me through the strategy behind this setup?",
     partnerResponse:
-      "Morning, Mark. It's simple: we want direct conversion. If a traveler sees it's cheaper on our site, they will likely not book on your platform but directly with us.",
+      "Morning. It's simple: we want direct conversion. If a traveler sees it's cheaper on our site, they will likely not book on your platform but directly with us.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -85,7 +85,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: guest search behavior shows a different pattern - when travelers see a higher price here than on his website, they don't jump to his site, they click a cheaper competitor on the same search page. Ask how he evaluates that risk of losing the customer entirely.",
     playerDialogue:
-      "I understand the logic. But you risk sit with all guests that do not go to your website as a first step - up to 90% of customers who book with Booking.com discover the property on the platform first. Guest search behavior on our platform shows a different pattern - when they search on our website they compare properties against each other, and with such a high price you risk them not clicking on your property in the first place and others having better visibility. This way they do not even start the journey that leads them to click on your website to get your best price.",
+      "I understand the logic. But you risk being left with all the guests who do not go to your website as a first step - up to 90% of customers who book with Booking.com discover the property on the platform first. Guest search behavior on our platform shows a different pattern - when they search on our website they compare properties against each other, and with such a high price you risk them not clicking on your property in the first place and others having better visibility. This way they do not even start the journey that leads them to click on your website to get your best price.",
     partnerResponse:
       "Our data suggests our brand pull is strong enough to capture them already directly.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
@@ -128,7 +128,7 @@ const step2: BranchingStep = {
   id: 'search-behavior',
   label: 'Search behavior; probe the risk of losing the guest',
   partnerPrompt:
-    "Morning, Mark. It's simple: we want direct conversion. If a traveler sees it's cheaper on our site, they leave your platform and book with us.",
+    "Morning. It's simple: we want direct conversion. If a traveler sees it's cheaper on our site, they leave your platform and book with us.",
   options: step2Options,
 };
 

@@ -261,7 +261,7 @@ const step5Options: BranchingOption[] = [
     id: 'ov-r13-step5-minimise',
     label: 'Downplay it as barely worth doing',
     description:
-      "Undersells the fix as a minor tidy-up - which deflates the value and gives a partner nervous about effort an easy reason to deprioritise it.",
+      "Undersells the fix as a minor tidy-up - which deflates the value and gives a partner nervous about effort an easy reason to deprioritize it.",
     playerDialogue:
       "It's a really small thing when you get down to it - just a little bit of housekeeping tucked away in the settings, nothing that's going to take any real time. Fix it whenever you happen to get a spare moment, there's genuinely no rush on it at all, so just slot it in around everything else.",
     partnerResponse:

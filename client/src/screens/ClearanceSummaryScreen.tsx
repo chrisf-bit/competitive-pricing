@@ -81,7 +81,7 @@ const activities: ActivityDef[] = [
   },
   {
     id: 'email-audit',
-    label: 'Call transcript audit',
+    label: 'Call Audit',
     description: 'Safe vs unsafe pricing phrases in a colleague\'s call transcript',
     screen: 'l0-email-audit',
     itemMatcher: (id) => id.startsWith('email-audit-'),

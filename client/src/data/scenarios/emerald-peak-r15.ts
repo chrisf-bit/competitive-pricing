@@ -94,7 +94,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handling (Anouk reframe): answer her 'vs history' question with her own strong recent performance - room nights up, conversion above peers once travelers reach the page - then pivot to exposure: 12% unsold and visibility at 17% against a peer group at 26% mean travelers convert when they find her; the gap is how many find her.",
     playerDialogue:
-      "Happy to dig into that. Recently you're performing strongly - your room nights sold are up 110% on your peer group over the last 30 days, and once travelers reach your page your conversion sits above your peer group too. So demand and closing are both working in your favour. The gap is earlier in the journey: 12% of your rooms went unsold last month, and your visibility share is only 17%, against a peer group at 26%, so a large share of travelers never reach your page. Your guests convert when they find you - the real question is how many find you.",
+      "Happy to dig into that. Recently you're performing strongly - your room nights sold are up 110% on your peer group over the last 30 days, and once travelers reach your page your conversion sits above your peer group too. So demand and closing are both working in your favor. The gap is earlier in the journey: 12% of your rooms went unsold last month, and your visibility share is only 17%, against a peer group at 26%, so a large share of travelers never reach your page. Your guests convert when they find you - the real question is how many find you.",
     partnerResponse:
       "Mmh, okay... so what's actually happening at the searching stage that drives that difference?",
     styleMatch: { red: 2, yellow: 0, green: 1, blue: 2 },
@@ -192,7 +192,7 @@ const step4Options: BranchingOption[] = [
     playerDialogue:
       "I understand the strategy is to keep your own site cheaper to own the guest. But raising your public price to fund the Genius discount is exactly what's making your search price 10% uncompetitive. That's what drops your share to 17% - and it's costing you a significant fall in last-minute mobile conversions.",
     partnerResponse:
-      "A drop that large, specifically on mobile searches? Why would that be? I've made sure our Genius programme is correctly set up and shown to your users.",
+      "A drop that large, specifically on mobile searches? Why would that be? I've made sure our Genius program is correctly set up and shown to your users.",
     styleMatch: { red: 2, yellow: 0, green: 0, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -236,7 +236,7 @@ const step5Options: BranchingOption[] = [
     id: 'ep-r15-step5-correct',
     label: 'Explain non-logged-in mobile and partial Genius coverage',
     description:
-      "SME-prescribed handling: the Genius programme is set up, but non-logged-in mobile searchers don't see the Genius discount at first glance, so they drift to competitors showing a mobile badge. And Genius is active on only one room type, so it covers a slice of inventory - a mobile rate would cover it all and lift visibility.",
+      "SME-prescribed handling: the Genius program is set up, but non-logged-in mobile searchers don't see the Genius discount at first glance, so they drift to competitors showing a mobile badge. And Genius is active on only one room type, so it covers a slice of inventory - a mobile rate would cover it all and lift visibility.",
     playerDialogue:
       "Your Genius setup is fine - the gap is non-logged-in mobile searchers. They don't see the Genius discount at first glance, so they gravitate to a local competitor showing a mobile badge. And Genius is active on just one of your room types, so it only reaches a slice of your inventory. A mobile rate would reach all of it and lift your visibility at the same time.",
     partnerResponse:
@@ -358,7 +358,7 @@ const steps: BranchingStep[] = [
     id: 'mobile-genius',
     label: 'Non-logged-in mobile + Genius coverage',
     partnerPrompt:
-      "A drop that large, specifically on mobile searches? Why would that be? I've made sure our Genius programme is correctly set up and shown to your users.",
+      "A drop that large, specifically on mobile searches? Why would that be? I've made sure our Genius program is correctly set up and shown to your users.",
     options: step5Options,
   },
   {

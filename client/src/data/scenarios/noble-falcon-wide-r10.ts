@@ -31,7 +31,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I noticed your price competitiveness has dropped significantly this month - around a 20% gap compared to your website. How does that align with your current strategy?",
     partnerResponse:
-      "Hi Mark. This is actually an intentional directive from the head office. We maintain a strict policy to keep our website at least 15% cheaper, to own the customer relationship.",
+      "This is actually an intentional directive from the head office. We maintain a strict policy to keep our website at least 15% cheaper, to own the customer relationship.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -128,7 +128,7 @@ const step2: BranchingStep = {
   id: 'visibility',
   label: 'Visibility logic; surface guest behavior',
   partnerPrompt:
-    "Hi Mark. This is actually an intentional directive from head office. We maintain a strict policy to keep our website at least 15% cheaper, to own the customer relationship.",
+    "This is actually an intentional directive from head office. We maintain a strict policy to keep our website at least 15% cheaper, to own the customer relationship.",
   options: step2Options,
 };
 
