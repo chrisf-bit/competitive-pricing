@@ -5853,7 +5853,7 @@ var step1Options17 = [
     label: "Name the gap, where it concentrates, and ask if it is intentional",
     description: "SME-prescribed reveal: the property converts incredibly well, but its prices often appear uncompetitive, a gap that has grown over the last month and concentrates on mobile and family searches. Close with a neutral, reactive question - is that part of his strategy?",
     playerDialogue: "Let's have a look. While the property converts incredibly well once guests arrive, your prices on the platform often appear less attractive. That gap has increased over the last month, and it's concentrated when travelers search on mobile, or when families look for accommodation. Is that part of your strategy?",
-    partnerResponse: "Yes, I see those specific gaps in our reports. To be completely transparent, my boss has a very firm strategy across all OTAs - he gives everyone the same rates, so when other platforms cut their margins or offer coupons, he feels it's not our problem and that Booking.com should do the same to stay competitive.",
+    partnerResponse: "Yes, I see those specific gaps in our reports. To be completely transparent, I run a very firm strategy across all OTAs - I give everyone the same rates, so when other platforms cut their margins or offer coupons, I feel that's not our problem and that Booking.com should do the same to stay competitive.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: "safe",
@@ -5906,7 +5906,7 @@ var step2Options19 = [
     id: "pg-r7-none-step2-concede",
     label: "Agree the same-net approach is fine",
     description: "Concedes the Same Net premise instead of reframing it - if you agree it's not his problem when competitors discount, there's nothing left to fix and the visibility gap stands.",
-    playerDialogue: "That's fair enough - if your boss gives everyone the same rate across the board, then the competitors cutting their own margins or throwing coupons around really isn't something you should have to answer for. You're holding a consistent line, which is a perfectly reasonable way to run things, and it's hard to argue you're the one who needs to move when they're the ones discounting.",
+    playerDialogue: "That's fair enough - if you give everyone the same rate across the board, then the competitors cutting their own margins or throwing coupons around really isn't something you should have to answer for. You're holding a consistent line, which is a perfectly reasonable way to run things, and it's hard to argue you're the one who needs to move when they're the ones discounting.",
     partnerResponse: "So we agree the approach is fine? Then I'm not sure what we're fixing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 1,
@@ -5928,7 +5928,7 @@ var step2Options19 = [
 var step219 = {
   id: "same-net",
   label: "Handle Same Net via autonomy + best price",
-  partnerPrompt: "Yes, I see those specific gaps in our reports. To be completely transparent, my boss has a very firm strategy across all OTAs - he gives everyone the same rates, so when other platforms cut their margins or offer coupons, he feels it's not our problem and that Booking.com should do the same to stay competitive.",
+  partnerPrompt: "Yes, I see those specific gaps in our reports. To be completely transparent, I run a very firm strategy across all OTAs - I give everyone the same rates, so when other platforms cut their margins or offer coupons, I feel that's not our problem and that Booking.com should do the same to stay competitive.",
   options: step2Options19
 };
 var step3Options19 = [
@@ -11619,10 +11619,12 @@ var H_ERPD = [-1.6, -0.6, -0.4, -0.9, -0.8, -1.1, -0.3, -1.3, -1.2, -0.5];
 var H_ERPD_CHG = [-0.4, -0.9, 0.3, -0.2, -0.6, 0.1, -0.3, -0.7, -0.5, 0.2];
 var H_LOSE = [26, 33, 22, 38, 24, 41, 29, 44, 21, 31];
 var H_UNSOLD = [9, 12, 8, 14, 10, 13, 11, 7, 12, 9];
-var H_SELL = [4, 2, 5, 1, 3, 2, 4, 6, 2, 3];
+var H_SELL = [55, 52, 58, 50, 54, 51, 56, 60, 52, 57];
 var H_VIS = [24, 21, 26, 19, 23, 20, 22, 27, 20, 25];
 var H_VIS_PEER = [20, 19, 22, 17, 20, 18, 19, 23, 18, 21];
-var H_SEARCH = [-1, 0, -2, 1, -1, 0, -1, -2, 0, -1];
+var H_SEARCH = [138, 142, 135, 145, 140, 143, 139, 133, 141, 137];
+var H_CTR = [5.2, 4.8, 5.5, 4.6, 5, 4.7, 5.3, 5.8, 4.9, 5.1];
+var H_CONV = [2.4, 2.1, 2.6, 2, 2.3, 2.2, 2.5, 2.8, 2.1, 2.4];
 var H_CONTACT_DAYS = [24, 31, 19, 36, 22, 40, 27, 44, 20, 33];
 var H_COVERAGE = [58, 52, 61, 48, 55, 46, 57, 44, 60, 50];
 function healthyMetrics(i) {
@@ -11648,9 +11650,11 @@ function healthyMetrics(i) {
     },
     opcMetrics: {
       unsoldRooms: { value: H_UNSOLD[i] },
-      sellThroughRate: { value: H_SELL[i] },
+      sellThroughRate: { value: H_SELL[i], peerLabel: "above" },
       visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
-      searchPrice: { value: H_SEARCH[i] }
+      clickThroughRate: { value: H_CTR[i], peerLabel: "above" },
+      conversion: { value: H_CONV[i], peerLabel: "above" },
+      searchPrice: { value: H_SEARCH[i], peerValue: H_SEARCH[i] + 5 }
     },
     lastPricingContactDaysAgo: H_CONTACT_DAYS[i],
     pricingCoverageQTD: H_COVERAGE[i],
@@ -11684,9 +11688,11 @@ function closeDecoyMetricsFor(baseId) {
     },
     opcMetrics: {
       unsoldRooms: { value: 16 + i % 4 * 2 },
-      sellThroughRate: { value: -2 - i % 2 },
+      sellThroughRate: { value: 44 - i % 3, peerLabel: "below" },
       visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
-      searchPrice: { value: 1 + i % 2 }
+      clickThroughRate: { value: Math.round((H_CTR[i] - 0.4) * 10) / 10, peerLabel: "in-line" },
+      conversion: { value: Math.round((H_CONV[i] - 0.2) * 10) / 10, peerLabel: "in-line" },
+      searchPrice: { value: H_SEARCH[i] + 6, peerValue: H_SEARCH[i] + 1 }
     }
   };
 }

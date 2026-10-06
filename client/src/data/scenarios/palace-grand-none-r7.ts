@@ -34,7 +34,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "Let's have a look. While the property converts incredibly well once guests arrive, your prices on the platform often appear less attractive. That gap has increased over the last month, and it's concentrated when travelers search on mobile, or when families look for accommodation. Is that part of your strategy?",
     partnerResponse:
-      "Yes, I see those specific gaps in our reports. To be completely transparent, my boss has a very firm strategy across all OTAs - he gives everyone the same rates, so when other platforms cut their margins or offer coupons, he feels it's not our problem and that Booking.com should do the same to stay competitive.",
+      "Yes, I see those specific gaps in our reports. To be completely transparent, I run a very firm strategy across all OTAs - I give everyone the same rates, so when other platforms cut their margins or offer coupons, I feel that's not our problem and that Booking.com should do the same to stay competitive.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -103,7 +103,7 @@ const step2Options: BranchingOption[] = [
     description:
       "Concedes the Same Net premise instead of reframing it - if you agree it's not his problem when competitors discount, there's nothing left to fix and the visibility gap stands.",
     playerDialogue:
-      "That's fair enough - if your boss gives everyone the same rate across the board, then the competitors cutting their own margins or throwing coupons around really isn't something you should have to answer for. You're holding a consistent line, which is a perfectly reasonable way to run things, and it's hard to argue you're the one who needs to move when they're the ones discounting.",
+      "That's fair enough - if you give everyone the same rate across the board, then the competitors cutting their own margins or throwing coupons around really isn't something you should have to answer for. You're holding a consistent line, which is a perfectly reasonable way to run things, and it's hard to argue you're the one who needs to move when they're the ones discounting.",
     partnerResponse:
       "So we agree the approach is fine? Then I'm not sure what we're fixing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
@@ -131,7 +131,7 @@ const step2: BranchingStep = {
   id: 'same-net',
   label: 'Handle Same Net via autonomy + best price',
   partnerPrompt:
-    "Yes, I see those specific gaps in our reports. To be completely transparent, my boss has a very firm strategy across all OTAs - he gives everyone the same rates, so when other platforms cut their margins or offer coupons, he feels it's not our problem and that Booking.com should do the same to stay competitive.",
+    "Yes, I see those specific gaps in our reports. To be completely transparent, I run a very firm strategy across all OTAs - I give everyone the same rates, so when other platforms cut their margins or offer coupons, I feel that's not our problem and that Booking.com should do the same to stay competitive.",
   options: step2Options,
 };
 
