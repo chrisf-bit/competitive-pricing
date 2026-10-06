@@ -31,7 +31,7 @@ import { riversideR4IssueTreePath } from './riverside-base';
  */
 
 const openingAm =
-  "Good morning, Anton. Nice to speak with you again. I've been analysing your performance for the next 90 days to spot a couple of opportunities. Do you have a moment to look at the data?";
+  "Good morning, Anton. Nice to speak with you again. I've been analyzing your performance for the next 90 days to spot a couple of opportunities. Do you have a moment to look at the data?";
 
 // ───────── Step 1 - Open briefly on the signal ─────────
 
@@ -236,7 +236,7 @@ const step5Options: BranchingOption[] = [
     playerDialogue:
       "So this isn't about competing with three-star properties - it's about winning the exact high-value travelers you want. We'd use a targeted tool: a Country Rate fenced specifically to travelers searching from the US. It applies a closed incentive to that segment only, so you recover those bookings without an across-the-board rate reset or touching your brand elsewhere.",
     partnerResponse:
-      "A targeted Country Rate for the US market... What kind of concrete return does that actually give us? How does it interact with the Genius programme - I fixed that setup last time and I don't want a huge stacked discount for US travelers.",
+      "A targeted Country Rate for the US market... What kind of concrete return does that actually give us? How does it interact with the Genius program - I fixed that setup last time and I don't want a huge stacked discount for US travelers.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -280,9 +280,9 @@ const step6Options: BranchingOption[] = [
     id: 'rv-r14-step6-correct',
     label: 'Answer the Genius-stacking question honestly, then close',
     description:
-      "SME-prescribed close: it's an opaque promotion and it does stack with Genius on the programme's room types; and since around 60% of users aren't logged in when they land, the more attractive desktop price makes a real first-glance difference. Let him own the setup.",
+      "SME-prescribed close: it's an opaque promotion and it does stack with Genius on the program's room types; and since around 60% of users aren't logged in when they land, the more attractive desktop price makes a real first-glance difference. Let him own the setup.",
     playerDialogue:
-      "Straight answers: it does stack with the Genius discount on the room types in the programme. But there is a decent amount of searches on our platform that are not just from signed-in members, so the attractive public prices on our platform to travelers makes a difference and drives demand.",
+      "Straight answers: it does stack with the Genius discount on the room types in the program. But there is a decent amount of searches on our platform that are not just from signed-in members, so the attractive public prices on our platform to travelers makes a difference and drives demand.",
     partnerResponse:
       "Fair enough. Let's set the US Country Rate up - I'll implement it myself so I can check the stay dates and apply a few exceptions.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the yes to reach past the fenced US segment he agreed - rolling it out to more markets 'while we're at it'. Reopens the ADR and brand worry he only just set aside.",
     playerDialogue:
-      "Great - and while we've got the setup open, let's not stop at the US; let's extend the very same rate out to a few more of your strongest source markets at the same time, so we really maximise the reach while the momentum's there. It makes sense to get it all switched on in one go rather than coming back to layer more on piece by piece later.",
+      "Great - and while we've got the setup open, let's not stop at the US; let's extend the very same rate out to a few more of your strongest source markets at the same time, so we really maximize the reach while the momentum's there. It makes sense to get it all switched on in one go rather than coming back to layer more on piece by piece later.",
     partnerResponse:
       "No. I agreed to a fenced US rate for a reason. Widen it and we're back to eroding the brand everywhere.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -361,7 +361,7 @@ const steps: BranchingStep[] = [
     id: 'close',
     label: 'Answer the mechanics and close',
     partnerPrompt:
-      "A targeted Country Rate for the US market... What kind of concrete return does that give us? How does it interact with the Genius programme - I don't want a huge stacked discount for US travelers.",
+      "A targeted Country Rate for the US market... What kind of concrete return does that give us? How does it interact with the Genius program - I don't want a huge stacked discount for US travelers.",
     options: step6Options,
   },
 ];

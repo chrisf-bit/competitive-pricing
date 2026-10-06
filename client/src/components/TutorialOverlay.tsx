@@ -291,7 +291,7 @@ const PARTNER_DETAIL_STEPS: TutorialStep[] = [
     target: 'partner-detail-discounts',
     title: 'Discount Products',
     description:
-      'Eleven products in three columns: Public Pricing, Genius Pricing, Foundations & Payments. Each row reads active or inactive. The shape of what is on vs off tells you which levers the partner is using.',
+      'Discount products in three columns: Public Pricing, Genius Pricing, Foundations & Payments. Each row reads active or inactive. The shape of what is on vs off tells you which levers the partner is using.',
     icon: <Tag size={18} style={{ color: 'var(--brand-yellow)' }} />,
     position: 'top',
   },

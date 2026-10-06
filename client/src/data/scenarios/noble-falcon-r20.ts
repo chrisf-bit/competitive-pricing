@@ -63,7 +63,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "Your conversion's on the low side, so one move here is to get you more competitive still - bring your headline rate down a notch, maybe test a small reduction across your main room types, and I'd expect the bookings to start following once you're clearly the cheapest option travelers see.",
     partnerResponse:
-      "We're already 15% below our peers, Mark. If price were the issue, we'd be converting - so cutting further makes no sense to me.",
+      "We're already 15% below our peers. If price were the issue, we'd be converting - so cutting further makes no sense to me.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },
     assertiveness: 2,
     compliance: 'borderline',
@@ -144,7 +144,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "The channel manager mapping is consistent and this isn't a rate issue. It's a configuration gap in the Extranet: your child age categories aren't set up correctly, so the platform charges children as adults. That's what pushes a small family into two rooms instead of one. You can see it yourself by running that same family search: two adults, one child aged four.",
     partnerResponse:
-      "I see. I thought I'd been quite strict about the family configuration, but I didn't realise it was like this - I've honestly never searched as a specific guest type like a couple or a family. That's a good tip, actually.",
+      "I see. I thought I'd been quite strict about the family configuration, but I didn't realize it was like this - I've honestly never searched as a specific guest type like a couple or a family. That's a good tip, actually.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -203,11 +203,11 @@ const step4Options: BranchingOption[] = [
     id: 'nf-r20-step4-move-on',
     label: 'Move on without sizing it',
     description:
-      "Right that the fix is clear, but skipping past why it matters - a commercially-minded manager wants the family segment's value named before he prioritises the work over everything else on his plate.",
+      "Right that the fix is clear, but skipping past why it matters - a commercially-minded manager wants the family segment's value named before he prioritizes the work over everything else on his plate.",
     playerDialogue:
       "Great, so that's the fix identified - just correct the child categories in the extranet and the two-room problem goes away on its own. I'd say we've got what we came for, so let's not overthink it - I'll make a note to check the setup's gone through, and then we can move on to the next thing on the list.",
     partnerResponse:
-      "Before we move on - how much is this actually worth? I need to know it's worth prioritising.",
+      "Before we move on - how much is this actually worth? I need to know it's worth prioritizing.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },
     assertiveness: 2,
     compliance: 'safe',
@@ -267,7 +267,7 @@ const step5Options: BranchingOption[] = [
     description:
       "Turns a clean, quantified win into an immediate upsell of paid campaigns - reaching for more before the agreed fix is even in, which undercuts the trust the honest number just built.",
     playerDialogue:
-      "And to really capitalise on this while we're here, let's not stop at the fix - I'd layer on a couple of paid campaigns and a visibility booster on top, so the moment those family searches start resolving properly, you're also pushing hard on placement while peak demand is at its highest. We could get the campaigns live alongside the configuration change, run them right through the back half of July, and stack every lever you've got to make the most of the window.",
+      "And to really capitalize on this while we're here, let's not stop at the fix - I'd layer on a couple of paid campaigns and a visibility booster on top, so the moment those family searches start resolving properly, you're also pushing hard on placement while peak demand is at its highest. We could get the campaigns live alongside the configuration change, run them right through the back half of July, and stack every lever you've got to make the most of the window.",
     partnerResponse:
       "Let's get the actual fix in and see the result first before we start adding paid products on top.",
     styleMatch: { red: 0, yellow: 0, green: -1, blue: -1 },
@@ -330,7 +330,7 @@ const steps: BranchingStep[] = [
     id: 'open',
     label: 'Open on the conversion-vs-visibility paradox',
     partnerPrompt:
-      "Morning, Mark. Yes, let's start! What trends are you noticing on your end?",
+      "Morning. Yes, let's start! What trends are you noticing on your end?",
     options: step1Options,
   },
   {

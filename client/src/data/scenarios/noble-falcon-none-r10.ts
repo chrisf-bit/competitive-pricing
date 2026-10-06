@@ -73,7 +73,7 @@ const step1: BranchingStep = {
   id: 'reveal',
   label: 'Reveal the conversion hit; probe what changed',
   partnerPrompt:
-    "Hi Mark, yes, let's do that!",
+    "Yes, let's do that!",
   options: step1Options,
 };
 

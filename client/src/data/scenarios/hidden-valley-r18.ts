@@ -285,7 +285,7 @@ const step6Options: BranchingOption[] = [
     playerDialogue:
       "I'd double-check that rule with head office, honestly - it doesn't read as a blocker in my records. But to recover visibility quickly in the meantime, why don't we optimize the deals you already run? Your early and last-minute deals are currently set to non-refundable only, with a very limited booking window - loosening that would help without touching your ADR.",
     partnerResponse:
-      "I didn't realise they were so restricted. Let's make the flexible rate more attractive and extend the window travelers can book in. That addresses the visibility gap and keeps us in full control - we run these on a quarterly basis anyway.",
+      "I didn't realize they were so restricted. Let's make the flexible rate more attractive and extend the window travelers can book in. That addresses the visibility gap and keeps us in full control - we run these on a quarterly basis anyway.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',

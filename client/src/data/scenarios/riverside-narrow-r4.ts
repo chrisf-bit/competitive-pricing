@@ -208,7 +208,7 @@ const step4Options: BranchingOption[] = [
     description:
       "Compliant ask but bare - 'align your website rates and you'll be fine.' An analytical GM won't act without the numbers.",
     playerDialogue:
-      "You should bring in line your rates here with what you're already showing on your own website and you'll be fine - that's really all it takes. Once they match, everything else tends to sort itself out on its own, so there's no need to overthink it. Get the website rates aligned here and you'll see things move in the right direction.",
+      "You should bring your rates here in line with what you're already showing on your own website and you'll be fine - that's really all it takes. Once they match, everything else tends to sort itself out on its own, so there's no need to overthink it. Get the website rates aligned here and you'll see things move in the right direction.",
     partnerResponse:
       "'You'll be fine' isn't a business case. Show me the numbers.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -1 },

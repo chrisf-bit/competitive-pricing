@@ -546,7 +546,7 @@ function getGuideContent(
           },
           {
             icon: <Zap size={13} />,
-            text: 'Handle objections',
+            text: 'Respond and close',
             done: conversationComplete,
             active: conversationPhase === 2 && !conversationComplete,
           },
@@ -572,8 +572,8 @@ function getGuideContent(
               ...(conversationPhase === 2
                 ? [{
                     icon: <Lightbulb size={12} />,
-                    title: 'Objections = opportunity',
-                    text: 'Good handling builds lasting trust.',
+                    title: 'Close with clarity',
+                    text: 'A clear, agreed next step is the win.',
                   }]
                 : []),
             ],

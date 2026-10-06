@@ -11,7 +11,7 @@ import { oceanfrontR6IssueTreePath } from './oceanfront-base';
  *
  * Source: SME "Round 16" doc, OPC Conversation Example 8 (Oceanfront
  * Bliss Lodge, Hotel ID 132). Follow-up to the Round 6 call - Priya
- * Singh (blue/red), an owner whose loyalty programme is her main engine
+ * Singh (blue/red), an owner whose loyalty program is her main engine
  * and who leans on her own marketing to grow her direct site. She's
  * warm but sceptical of OTAs. The unlock is the billboard reframe
  * (exposure on the platform has no marketing cost) plus one concrete
@@ -50,7 +50,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "First, I want to acknowledge that the trial last time had a genuinely impressive outcome. Offering your best price clearly lifted conversion, which shows guests respond when you're competitive. Looking ahead over the next 3 months, though, your sell-through is pacing behind your peer group, so there's an opportunity to build on that success and close the gap.",
     partnerResponse:
-      "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty programme is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
+      "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty program is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -98,7 +98,7 @@ const step2Options: BranchingOption[] = [
     playerDialogue:
       "I respect that. Let me ask you this, though - the marketing campaigns you mentioned: are they strictly to grow your own website, or are you really after a general increase in visibility, no matter where the guest first finds you?",
     partnerResponse:
-      "Well, we run ads in a few key overseas markets, and our loyalty programme captures the repeat visitors. I'm not chasing visibility on OTAs, to be honest - I'd like to see our own website growing right now.",
+      "Well, we run ads in a few key overseas markets, and our loyalty program captures the repeat visitors. I'm not chasing visibility on OTAs, to be honest - I'd like to see our own website growing right now.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -146,7 +146,7 @@ const step3Options: BranchingOption[] = [
     playerDialogue:
       "That marketing push definitely builds awareness. But consider this: exposure on our platform costs you nothing in marketing spend. We act as a global search engine where up to 90% of travelers discover a property first - and you can use that discovery to serve your own revenue goals, not just ours.",
     partnerResponse:
-      "I know, but we also want to be the ones who are discovered first, so we can attract guests with our loyalty programme and exclusive member value-adds.",
+      "I know, but we also want to be the ones who are discovered first, so we can attract guests with our loyalty program and exclusive member value-adds.",
     styleMatch: { red: 1, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -339,21 +339,21 @@ const steps: BranchingStep[] = [
     id: 'probe-visibility',
     label: 'Probe: website-only or general visibility?',
     partnerPrompt:
-      "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty programme is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
+      "Okay, but that isn't alarming for us during low-demand periods - our occupancy is where we expect it. Our brand loyalty program is our main engine, and we'd rather keep a few rooms unbooked than alter our OTA strategy to chase extra room nights.",
     options: step2Options,
   },
   {
     id: 'billboard',
     label: 'The billboard reframe',
     partnerPrompt:
-      "Well, we run ads in a few key overseas markets, and our loyalty programme captures the repeat visitors. I'm not chasing visibility on OTAs - I'd like to see our own website growing right now.",
+      "Well, we run ads in a few key overseas markets, and our loyalty program captures the repeat visitors. I'm not chasing visibility on OTAs - I'd like to see our own website growing right now.",
     options: step3Options,
   },
   {
     id: 'us-segment',
     label: 'Connect to the US segment',
     partnerPrompt:
-      "I know, but we also want to be the ones who are discovered first, so we can attract guests with our loyalty programme and exclusive member value-adds.",
+      "I know, but we also want to be the ones who are discovered first, so we can attract guests with our loyalty program and exclusive member value-adds.",
     options: step4Options,
   },
   {

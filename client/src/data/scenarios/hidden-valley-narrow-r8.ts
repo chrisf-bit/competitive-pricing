@@ -141,9 +141,9 @@ const step3Options: BranchingOption[] = [
     id: 'hv-r8-narrow-step3-correct',
     label: 'Explain BSB is Booking-funded and prepaid',
     description:
-      "SME-prescribed explanation: BSB is a customer-facing product entirely funded by Booking.com to attract guests, and because BSB reservations require pre-payment they're less likely to be cancelled - a win-win of better price, stronger conversion, and lower cancellation risk.",
+      "SME-prescribed explanation: BSB is a customer-facing product entirely funded by Booking.com to attract guests, and because BSB reservations require pre-payment they're less likely to be canceled - a win-win of better price, stronger conversion, and lower cancellation risk.",
     playerDialogue:
-      "Booking Sponsored Benefit is a customer-facing product entirely funded by us and designed to attract guests to your property. Plus, BSB reservations require pre-payment from the guest, they're less likely to be cancelled. It's a win-win: travelers see a better price, you get stronger conversion, and cancellation risk is lower.",
+      "Booking Sponsored Benefit is a customer-facing product entirely funded by us and designed to attract guests to your property. Plus, BSB reservations require pre-payment from the guest, they're less likely to be canceled. It's a win-win: travelers see a better price, you get stronger conversion, and cancellation risk is lower.",
     partnerResponse:
       "I don't see any benefit in showing a lower price to guests, even if it isn't a revenue loss for me. It's about my brand reputation - guests will never book with me again if the lowest price is always on Booking.com!",
     styleMatch: { red: 1, yellow: 0, green: 0, blue: 2 },
@@ -199,7 +199,7 @@ const step4Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: BSB isn't applied to all bookings and is only offered to a limited audience; the partial room cost is paid by Booking.com and she incurs no additional fees, still receiving the full room price she set.",
     playerDialogue:
-      "BSB incentives are only applied to some reservations and are designed to help attract guests to your property. Our algorithm determines when BSB applies to encourage travelers to book, to help convert demand that might otherwise not book. This price reduction reflects the partial payment we make on behalf of the traveller. You always receive the full transaction value of each booking.",
+      "BSB incentives are only applied to some reservations and are designed to help attract guests to your property. Our algorithm determines when BSB applies to encourage travelers to book, to help convert demand that might otherwise not book. This price reduction reflects the partial payment we make on behalf of the traveler. You always receive the full transaction value of each booking.",
     partnerResponse:
       "I don't want to win guests just on price - I want them to choose me for the view, the service, the comfort. This way you're making me look 'affordable,' and Booking guests are always harder to please and leave bad reviews.",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

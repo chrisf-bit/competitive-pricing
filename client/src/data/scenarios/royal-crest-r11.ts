@@ -82,7 +82,7 @@ const step1Options: BranchingOption[] = [
     description:
       'Skips the diagnosis and prescribes the one move his margin-first strategy exists to prevent - an across-the-board price drop. A driver reads it as being sold to.',
     playerDialogue:
-      "Your rooms aren't selling right now, so one and cleanest fix here is to bring your rates down across the board until occupancy climbs back to where you want it. We can get that lower pricing set up together today and start filling those empty nights.",
+      "Your rooms aren't selling right now, so the cleanest fix here is to bring your rates down across the board until occupancy climbs back to where you want it. We can get that lower pricing set up together today and start filling those empty nights.",
     partnerResponse:
       "Dropping my rates across the board is exactly what I will not do. That protects nothing and trains guests to wait for a discount. Next idea.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -2 },

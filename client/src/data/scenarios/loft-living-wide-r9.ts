@@ -87,7 +87,7 @@ const step2Options: BranchingOption[] = [
     description:
       "SME-prescribed handle: acknowledge the frustration - B2B distribution is built for opaque volume, but the moment it leaks into B2C it becomes a leakage tax on his brand. In a Wide market you can ask for the same rates he makes available to third parties and his direct channel, so his direct offering isn't undercut.",
     playerDialogue:
-      "B2B distribution is designed for filling rooms that would otherwise stay empty through closed user groups. The moment a B2B rate 'leaks' into the B2C space, it stops being a volume tool and starts resulting in potentially less business in the otherwise higher-performing, higher-ADR channels. While we currently lack extranet data to show the exact roomnights impacted by Partner Offer, we ask that you provide us the same rates available to third parties and your direct channel so your direct offering isn't undercut.",
+      "B2B distribution is designed for filling rooms that would otherwise stay empty through closed user groups. The moment a B2B rate 'leaks' into the B2C space, it stops being a volume tool and starts resulting in potentially less business in the otherwise higher-performing, higher-ADR channels. While we currently lack extranet data to show the exact room nights impacted by Partner Offer, we ask that you provide us the same rates available to third parties and your direct channel so your direct offering isn't undercut.",
     partnerResponse:
       "But these 'offers' are displayed on your platform. How am I even supposed to understand where they come from?",
     styleMatch: { red: 1, yellow: 0, green: 1, blue: 2 },

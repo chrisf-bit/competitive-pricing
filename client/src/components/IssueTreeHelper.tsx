@@ -312,7 +312,7 @@ export function IssueTreeHelper({
 }
 
 const PHASE_LABEL: Record<PathwayStepContent['phase'], string> = {
-  Prioritise: 'Phase 1 - Prioritise',
+  Prioritize: 'Phase 1 - Prioritize',
   Diagnose: 'Phase 2 - Diagnose',
   Act: 'Phase 3 - Act',
 };

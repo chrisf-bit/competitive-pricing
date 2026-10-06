@@ -44,7 +44,7 @@ const step1Options: BranchingOption[] = [
     playerDialogue:
       "I understand that, Lucas, and I get the frustration. On the wholesale leak itself there's little we can do directly from here - my honest recommendation would be to review those reservations individually to trace where they're coming from. What I can help with today is your performance on our platform: when you look at your inventory over the next 90 days, what's your strategy?",
     partnerResponse:
-      "Our priority is to maximise margins - we're in the middle of peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect. We're trying to work out why conversion stays low despite solid demand in our destination.",
+      "Our priority is to maximize margins - we're in the middle of peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect. We're trying to work out why conversion stays low despite solid demand in our destination.",
     styleMatch: { red: 2, yellow: 1, green: 1, blue: 2 },
     assertiveness: 2,
     compliance: 'safe',
@@ -107,7 +107,7 @@ const step2Options: BranchingOption[] = [
     playerDialogue:
       "Lucas, it's nothing too dramatic - conversion has dipped a touch and yes there's a bit of unsold inventory sitting there, but broadly you're in reasonable shape for the season and I wouldn't lose sleep over it. Let's not blow it out of proportion when your wholesale headache is the bigger fire to put out right now.",
     partnerResponse:
-      "A touch? If it's minor, then I won't prioritise it over the wholesale problem that's actually eating my margin.",
+      "A touch? If it's minor, then I won't prioritize it over the wholesale problem that's actually eating my margin.",
     styleMatch: { red: -1, yellow: 0, green: 0, blue: -2 },
     assertiveness: 1,
     compliance: 'safe',
@@ -245,13 +245,13 @@ const step5Options: BranchingOption[] = [
   },
   {
     id: 'll-r19-step5-vague-mobile',
-    label: "Say his mobile setup is \"not optimised\"",
+    label: "Say his mobile setup is \"not optimized\"",
     description:
-      "Right area, no mechanism - 'your mobile setup isn't optimised' without the weekend/window exclusions and the 80% drop-off gives a numbers-led operator nothing precise to correct.",
+      "Right area, no mechanism - 'your mobile setup isn't optimized' without the weekend/window exclusions and the 80% drop-off gives a numbers-led operator nothing precise to correct.",
     playerDialogue:
-      "The short version, Lucas, is that your mobile setup just isn't optimised the way it should be - there's clearly a good chunk of performance being left on the table on mobile compared to where it could sit, and it's dragging on your wider numbers. It's an area I'd definitely get someone to take a proper look at.",
+      "The short version, Lucas, is that your mobile setup just isn't optimized the way it should be - there's clearly a good chunk of performance being left on the table on mobile compared to where it could sit, and it's dragging on your wider numbers. It's an area I'd definitely get someone to take a proper look at.",
     partnerResponse:
-      "Not optimised how? I need to know what's actually misconfigured before I touch it.",
+      "Not optimized how? I need to know what's actually misconfigured before I touch it.",
     styleMatch: { red: 0, yellow: 0, green: 0, blue: -2 },
     assertiveness: 1,
     compliance: 'safe',
@@ -311,7 +311,7 @@ const step6Options: BranchingOption[] = [
     description:
       "Uses the opening to pile on more - stack campaigns and deals on top of the mobile rate. Overwhelms a partner already frustrated by stacking complexity and muddies a clean, targeted fix.",
     playerDialogue:
-      "Perfect - and while we're at it, Lucas, let's not stop at just the mobile rate. Let's stack a couple of campaigns and a targeted deal right on top of it as well, layer in a genius offer where we can, and really maximise the whole push across every channel we've got. The more we pile on together now, the harder your mobile numbers will work for you this season.",
+      "Perfect - and while we're at it, Lucas, let's not stop at just the mobile rate. Let's stack a couple of campaigns and a targeted deal right on top of it as well, layer in a genius offer where we can, and really maximize the whole push across every channel we've got. The more we pile on together now, the harder your mobile numbers will work for you this season.",
     partnerResponse:
       "I just told you I'm drowning in stacked promotions. Piling more on is the opposite of what I need.",
     styleMatch: { red: 0, yellow: -1, green: -1, blue: -1 },
@@ -326,14 +326,14 @@ const steps: BranchingStep[] = [
     id: 'open',
     label: 'Set the wholesaler noise aside, probe strategy',
     partnerPrompt:
-      "Hello, Elena. I'm ready, thanks! To be completely honest, I'm still struggling with those wholesale rates ending up online as B2C offers. What does your internal data show us right now?",
+      "Hello. I'm ready, thanks! To be completely honest, I'm still struggling with those wholesale rates ending up online as B2C offers. What does your internal data show us right now?",
     options: step1Options,
   },
   {
     id: 'present-gap',
     label: 'Present the severe conversion gap',
     partnerPrompt:
-      "Our priority is to maximise margins - we're mid peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect, and we're trying to work out why conversion stays low despite solid demand.",
+      "Our priority is to maximize margins - we're mid peak season. But frankly, forward bookings for the next three months are pacing slower than we'd expect, and we're trying to work out why conversion stays low despite solid demand.",
     options: step2Options,
   },
   {
