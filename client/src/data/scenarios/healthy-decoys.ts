@@ -103,10 +103,12 @@ const H_ERPD = [-1.6, -0.6, -0.4, -0.9, -0.8, -1.1, -0.3, -1.3, -1.2, -0.5];
 const H_ERPD_CHG = [-0.4, -0.9, 0.3, -0.2, -0.6, 0.1, -0.3, -0.7, -0.5, 0.2];
 const H_LOSE = [26, 33, 22, 38, 24, 41, 29, 44, 21, 31];
 const H_UNSOLD = [9, 12, 8, 14, 10, 13, 11, 7, 12, 9];
-const H_SELL = [4, 2, 5, 1, 3, 2, 4, 6, 2, 3];
+const H_SELL = [55, 52, 58, 50, 54, 51, 56, 60, 52, 57];
 const H_VIS = [24, 21, 26, 19, 23, 20, 22, 27, 20, 25];
 const H_VIS_PEER = [20, 19, 22, 17, 20, 18, 19, 23, 18, 21];
-const H_SEARCH = [-1, 0, -2, 1, -1, 0, -1, -2, 0, -1];
+const H_SEARCH = [138, 142, 135, 145, 140, 143, 139, 133, 141, 137];
+const H_CTR = [5.2, 4.8, 5.5, 4.6, 5, 4.7, 5.3, 5.8, 4.9, 5.1];
+const H_CONV = [2.4, 2.1, 2.6, 2, 2.3, 2.2, 2.5, 2.8, 2.1, 2.4];
 const H_CONTACT_DAYS = [24, 31, 19, 36, 22, 40, 27, 44, 20, 33];
 const H_COVERAGE = [58, 52, 61, 48, 55, 46, 57, 44, 60, 50];
 
@@ -134,9 +136,11 @@ function healthyMetrics(i: number): PartnerMetrics {
     },
     opcMetrics: {
       unsoldRooms: { value: H_UNSOLD[i] },
-      sellThroughRate: { value: H_SELL[i] },
+      sellThroughRate: { value: H_SELL[i], peerLabel: 'above' },
       visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
-      searchPrice: { value: H_SEARCH[i] },
+      clickThroughRate: { value: H_CTR[i], peerLabel: 'above' },
+      conversion: { value: H_CONV[i], peerLabel: 'above' },
+      searchPrice: { value: H_SEARCH[i], peerValue: H_SEARCH[i] + 5 },
     },
     lastPricingContactDaysAgo: H_CONTACT_DAYS[i],
     pricingCoverageQTD: H_COVERAGE[i],
@@ -178,7 +182,7 @@ export function closeDecoyMetricsFor(baseId: string): PartnerMetrics {
   // structural gap, not the level) - so a near-miss that carried an eRPD /
   // Lose-Price flag could wrongly out-worst a subtle priority. The single
   // soft flag lives on the FORWARD BOOK instead: pace behind peers, ABRN
-  // dipping, unsold creeping up, sell-through slightly negative. Enough to
+  // dipping, unsold creeping up, sell-through a touch behind peers. Enough to
   // be "worth a look", never worse than the round's real priority.
   return {
     ...m,
@@ -192,9 +196,11 @@ export function closeDecoyMetricsFor(baseId: string): PartnerMetrics {
     },
     opcMetrics: {
       unsoldRooms: { value: 16 + (i % 4) * 2 },
-      sellThroughRate: { value: -2 - (i % 2) },
+      sellThroughRate: { value: 44 - (i % 3), peerLabel: 'below' },
       visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
-      searchPrice: { value: 1 + (i % 2) },
+      clickThroughRate: { value: Math.round((H_CTR[i] - 0.4) * 10) / 10, peerLabel: 'in-line' },
+      conversion: { value: Math.round((H_CONV[i] - 0.2) * 10) / 10, peerLabel: 'in-line' },
+      searchPrice: { value: H_SEARCH[i] + 6, peerValue: H_SEARCH[i] + 1 },
     },
   };
 }
