@@ -22,6 +22,31 @@ const ACT = 'http://adlnet.gov/expapi/activities';
 const CMII = `${ACT}/cmi.interaction`;
 const COURSE = `${ACT}/course`;
 
+// ───────── Rollback switch ─────────
+// The HIGH-LEVEL statement set (initialized, clearance passed, round
+// completed, level milestones, completed) ALWAYS fires - that set is the
+// proven-in-Docebo baseline and drives LMS completion + score.
+// EMIT_GRANULAR additionally fires the fine-grained trail: one `answered`
+// per conversation decision, one per clearance knowledge-check item, and
+// an `attempted` per round start. Flip this to `false` (and rebuild) to
+// roll back to the high-level-only package. `?granular=0` on the launch
+// URL disables it at runtime without a rebuild, for a side-by-side check
+// in the same build.
+const EMIT_GRANULAR: boolean = (() => {
+  try {
+    const q = new URLSearchParams(window.location.search);
+    if (q.get('granular') === '0') return false;
+  } catch {
+    /* no window / no query - default on */
+  }
+  return true;
+})();
+
+/** Whether the granular decision/item/round-started trail is emitting. */
+export function granularEnabled(): boolean {
+  return EMIT_GRANULAR;
+}
+
 export type XapiActor = {
   objectType?: string;
   name?: string;
@@ -129,6 +154,12 @@ type ContextExtras = {
   'normalized-score'?: number;
   'rounds-completed'?: number;
   'total-stars'?: number;
+  'step-id'?: string;
+  'partner-id'?: string;
+  'option-id'?: string;
+  compliance?: string;
+  'style-match'?: number;
+  optimal?: boolean;
   mode?: string;
 };
 
@@ -250,6 +281,7 @@ export function xapiInitialized() {
 
 /** A clearance knowledge-check answer. */
 export function xapiClearanceItem(itemId: string, correct: boolean, response?: string) {
+  if (!EMIT_GRANULAR) return;
   emitInteraction('answered', `/clearance/${itemId}`, `Clearance - ${itemId}`, {
     level: 'L0',
     'item-code': itemId,
@@ -269,9 +301,10 @@ export function xapiClearancePassed(pct: number) {
 
 /** A round started. */
 export function xapiRoundStarted(round: number, level: Level) {
+  if (!EMIT_GRANULAR) return;
   post(
     statement(
-      { id: 'initialized', word: 'initialized' },
+      { id: 'attempted', word: 'attempted' },
       interaction(`/round-${round}`, `Round ${round}`),
       { level, round },
     ),
@@ -282,20 +315,37 @@ export function xapiRoundStarted(round: number, level: Level) {
 export function xapiDecision(args: {
   round: number;
   level: Level;
+  partnerId: string;
+  stepId: string;
+  optionId: string;
+  compliance: string;
+  styleMatch: number;
+  optimal: boolean;
   itemCode?: string;
   capabilityCode?: string;
   objectionCode?: string;
-  response?: string;
-  stars: number;
 }) {
-  emitInteraction('answered', `/l${args.level === 'L2' ? 2 : 1}/r${args.round}/decision`, `Round ${args.round} decision`, {
-    level: args.level,
-    round: args.round,
-    'item-code': args.itemCode,
-    'capability-code': args.capabilityCode,
-    'objection-type': args.objectionCode,
-    'normalized-score': Math.round((args.stars / 3) * 100),
-  }, { response: args.response, stars: args.stars, success: args.stars > 0 });
+  if (!EMIT_GRANULAR) return;
+  const lvl = args.level === 'L2' ? 2 : 1;
+  emitInteraction(
+    'answered',
+    `/l${lvl}/r${args.round}/${args.stepId}`,
+    `Round ${args.round} - ${args.stepId}`,
+    {
+      level: args.level,
+      round: args.round,
+      'step-id': args.stepId,
+      'partner-id': args.partnerId,
+      'option-id': args.optionId,
+      compliance: args.compliance,
+      'style-match': args.styleMatch,
+      optimal: args.optimal,
+      'item-code': args.itemCode,
+      'capability-code': args.capabilityCode,
+      'objection-type': args.objectionCode,
+    },
+    { response: args.optionId, success: args.optimal },
+  );
 }
 
 /** A round completed with its star score. */

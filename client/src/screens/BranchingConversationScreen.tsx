@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import type { PartnerState } from '../types';
 import { getBranchingScenario } from '../data/branchingScenarios';
+import { xapiDecision } from '../util/xapi';
 
 interface BranchingConversationScreenProps {
   partner: PartnerState;
@@ -150,6 +151,23 @@ export function BranchingConversationScreen({
     : [];
 
   const handleSelect = (optionId: string) => {
+    // xAPI: emit one `answered` per decision with the option's own
+    // compliance / style-match / optimal metadata (granular trail;
+    // no-ops when EMIT_GRANULAR is off or outside an LMS launch).
+    const step = tree.steps[conversation.phaseIndex];
+    const picked = step?.options.find((o) => o.id === optionId);
+    if (step && picked) {
+      xapiDecision({
+        round: currentRound,
+        level: currentRound > 10 ? 'L2' : 'L1',
+        partnerId: partner.persona.id,
+        stepId: step.id,
+        optionId,
+        compliance: picked.compliance,
+        styleMatch: picked.styleMatch[partner.persona.style] ?? 0,
+        optimal: !!picked.optimal,
+      });
+    }
     setSelectedOption(optionId);
     setTimeout(() => {
       onChoice(optionId);

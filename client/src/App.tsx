@@ -34,6 +34,7 @@ import {
   xapiLevelMilestone,
   xapiCompleted,
   xapiRoundCompleted,
+  xapiRoundStarted,
 } from './util/xapi';
 import { getPortfolioForRound } from './data/portfolioByRound';
 
@@ -90,6 +91,7 @@ export default function App() {
   // and the graded round; refs guard against re-emitting on re-render or
   // revisit. Everything no-ops outside an LMS launch (the sender checks).
   const emittedRounds = useRef<Set<number>>(new Set());
+  const startedRounds = useRef<Set<number>>(new Set());
   const emittedScreens = useRef<Set<string>>(new Set());
   useEffect(() => {
     const totalStars = Object.values(state.roundStars).reduce<number>(
@@ -97,6 +99,15 @@ export default function App() {
       0,
     );
     const completionPct = Math.round((totalStars / (TOTAL_ROUNDS * 3)) * 100);
+
+    // Round started: fire once per round when a conversation opens.
+    if (
+      state.conversationInProgress &&
+      !startedRounds.current.has(state.currentRound)
+    ) {
+      startedRounds.current.add(state.currentRound);
+      xapiRoundStarted(state.currentRound, state.currentRound > 10 ? 'L2' : 'L1');
+    }
 
     if (state.screen === 'conversation-report') {
       const round = state.currentRound;
@@ -123,7 +134,7 @@ export default function App() {
       emittedScreens.current.add('completed');
       xapiCompleted(completionPct);
     }
-  }, [state.screen, state.currentRound, state.roundStars]);
+  }, [state.screen, state.currentRound, state.roundStars, state.conversationInProgress]);
 
   if (showSplash) {
     return <SplashScreen onBegin={() => setShowSplash(false)} />;

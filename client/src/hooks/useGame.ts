@@ -27,7 +27,7 @@ import {
   clearPersistedState,
   getLmsStudentName,
 } from '../util/persistence';
-import { isXapiLaunch, xapiInitialized } from '../util/xapi';
+import { isXapiLaunch, xapiInitialized, xapiClearanceItem } from '../util/xapi';
 
 export function useGame() {
   const [state, setState] = useState<GameState>(() => {
@@ -340,6 +340,9 @@ export function useGame() {
    */
   const finishLevel0Activity = useCallback(
     (defaultNext: GameState['screen'], results: KnowledgeCheckResult[]) => {
+      // xAPI: one `answered` per knowledge-check item (granular trail;
+      // no-ops when EMIT_GRANULAR is off or outside an LMS launch).
+      results.forEach((r) => xapiClearanceItem(r.itemId, r.correct));
       setState((s) => {
         const target = s.level0ReturnTo ?? defaultNext;
         return {
