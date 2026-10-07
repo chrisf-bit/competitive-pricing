@@ -60,6 +60,28 @@ export function SplashScreen({ onBegin, onResetProgress }: SplashScreenProps) {
         }}
       />
 
+      {/* Discreet build marker. Lets a returning learner (or Adriana)
+          confirm at a glance whether a fresh launch picked up the new
+          build rather than a cached old one. Deliberately low-contrast
+          so it never competes with the title. Bump the string on each
+          build the client should re-check (V5, V6, ...). */}
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 10,
+          right: 14,
+          zIndex: 2,
+          fontSize: 11,
+          fontWeight: 600,
+          letterSpacing: '0.08em',
+          color: 'rgba(255,255,255,0.28)',
+          userSelect: 'none',
+          pointerEvents: 'none',
+        }}
+      >
+        V5
+      </div>
+
       {/* Centered content group: title + Begin/loader + Reset. In normal
           flow inside the scrollable flex root, centered via margin:auto so
           the whole group stays reachable (and scrolls) on a short viewport
