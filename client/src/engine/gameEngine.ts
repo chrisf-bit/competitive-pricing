@@ -1008,7 +1008,7 @@ export function calculateScore(state: GameState): ScoreBreakdown {
     const style = partner.persona.style;
     const styleNames: Record<string, string> = {
       red: 'Director',
-      yellow: 'Socialiser',
+      yellow: 'Socializer',
       green: 'Nurturer',
       blue: 'Thinker',
     };
