@@ -278,11 +278,15 @@ export function gradeBranchingRound(input: {
     optimalNonFinal >= Math.ceil(nonFinalPicks.length / 2);
   const pitchCorrect = !!finalPick?.optimal;
 
+  // Hard floor (any failure = 0 stars): right partner, the optimal PITCH
+  // (final close), every pick compliant, and no active style mismatch.
+  // Diagnosis quality is NO LONGER part of the floor (see tiering below) -
+  // a solid, compliant, right-partner call that simply didn't take the
+  // optimal diagnostic route earns partial credit rather than dropping to
+  // 0. A compliance breach or the wrong recommendation still fails hard.
   let failureReason: GradingFailureReason | null = null;
   if (!rightPartner) {
     failureReason = 'wrong-partner';
-  } else if (!diagnosisCorrect) {
-    failureReason = 'wrong-diagnosis';
   } else if (!pitchCorrect) {
     failureReason = 'wrong-pitch';
   } else if (!allCompliant) {
@@ -291,24 +295,24 @@ export function gradeBranchingRound(input: {
     failureReason = 'style-mismatch';
   }
 
-  // Above-floor tiers key off the AVERAGE style match per step, not the
-  // raw sum. Branching scenarios run 4-6 steps, so a summed threshold
-  // made 3 stars easier the longer the call (more steps to accumulate
-  // points). Averaging holds every round to the same per-step quality
-  // bar regardless of length. Integer-safe form of avg >= 4/3 and
-  // avg >= 1 (styleSum / styleCount): 3 stars at avg >= 1.33, 2 at >= 1.0.
-  // The 1.33 bar is set to the weakest SME-optimal path (an 8-over-6-step
-  // scenario), so every scenario's optimal path still earns 3 stars.
+  // Tiering (Option B, 2026-10). A call that clears the floor always scores
+  // at least 1 star, so "ok but not optimal" lands at 1-2 stars (33-67%)
+  // instead of the old all-or-nothing 0/100. Diagnosis quality and style
+  // each lift the tier by one:
+  //   base 1  (+1 if the diagnosis was optimal)  (+1 if strong style)  cap 3.
+  // Strong style is the per-step AVERAGE >= 1.33 (integer-safe
+  // styleSum*3 >= styleCount*4), set to the weakest SME-optimal path so the
+  // fully-optimal route keeps BOTH bonuses and still scores 3 stars.
   const styleCount = styleScores.length;
+  const strongStyle = styleCount > 0 && styleSum * 3 >= styleCount * 4;
   let stars: 0 | 1 | 2 | 3;
   if (failureReason !== null) {
     stars = 0;
-  } else if (styleCount > 0 && styleSum * 3 >= styleCount * 4) {
-    stars = 3;
-  } else if (styleCount > 0 && styleSum >= styleCount) {
-    stars = 2;
   } else {
-    stars = 1;
+    let s = 1;
+    if (diagnosisCorrect) s += 1;
+    if (strongStyle) s += 1;
+    stars = Math.min(3, s) as 1 | 2 | 3;
   }
 
   return {
