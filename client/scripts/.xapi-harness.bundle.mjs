@@ -13548,8 +13548,6 @@ function gradeBranchingRound(input) {
   let failureReason = null;
   if (!rightPartner) {
     failureReason = "wrong-partner";
-  } else if (!diagnosisCorrect) {
-    failureReason = "wrong-diagnosis";
   } else if (!pitchCorrect) {
     failureReason = "wrong-pitch";
   } else if (!allCompliant) {
@@ -13558,15 +13556,15 @@ function gradeBranchingRound(input) {
     failureReason = "style-mismatch";
   }
   const styleCount = styleScores.length;
+  const strongStyle = styleCount > 0 && styleSum * 3 >= styleCount * 4;
   let stars;
   if (failureReason !== null) {
     stars = 0;
-  } else if (styleCount > 0 && styleSum * 3 >= styleCount * 4) {
-    stars = 3;
-  } else if (styleCount > 0 && styleSum >= styleCount) {
-    stars = 2;
   } else {
-    stars = 1;
+    let s = 1;
+    if (diagnosisCorrect) s += 1;
+    if (strongStyle) s += 1;
+    stars = Math.min(3, s);
   }
   return {
     stars,
@@ -13755,6 +13753,45 @@ if (startedIds.size !== 20) bad(`round-started distinct rounds ${startedIds.size
 if (decisionCount !== expectedDecisions) bad(`decision count ${decisionCount} != ${expectedDecisions}`);
 if (total !== expectedTotal) bad(`total ${total} != expected ${expectedTotal}`);
 if (!xapi.granularEnabled()) bad("granularEnabled() is false with no ?granular=0");
+var priId1 = getCorrectPartnerForRound2("none", 1);
+var mkOpt = (o) => ({
+  id: o.id,
+  label: o.id,
+  description: "",
+  playerDialogue: "",
+  partnerResponse: "",
+  styleMatch: { red: o.blue, yellow: o.blue, green: o.blue, blue: o.blue },
+  compliance: o.compliance,
+  trustChange: 0,
+  optimal: o.optimal
+});
+var mkTree = (steps11) => ({
+  round: 1,
+  steps: steps11.map((opts, i) => ({ id: `s${i + 1}`, partnerPrompt: "", options: opts.map(mkOpt) }))
+});
+var grade = (tree, choices) => gradeBranchingRound2({ tree, choices, selectedPartnerId: priId1, regime: "none", partnerPrimaryStyle: "blue" }).stars;
+var strongAlt = mkTree([
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2)],
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2)],
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2)]
+]);
+var weakAlt = mkTree([
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 0)],
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 0)],
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 0)]
+]);
+function mkOpt2(id, optimal, compliance, blue) {
+  return { id, optimal, compliance, blue };
+}
+var expect = (label, got, want) => {
+  if (got !== want) bad(`tier: ${label} -> ${got} stars, expected ${want}`);
+};
+expect("all-optimal", grade(strongAlt, ["o", "o", "o"]), 3);
+expect("non-optimal diagnosis, strong style, optimal pitch", grade(strongAlt, ["a", "a", "o"]), 2);
+expect("non-optimal diagnosis, weak style, optimal pitch", grade(weakAlt, ["a", "a", "o"]), 1);
+expect("wrong pitch (final not optimal)", grade(strongAlt, ["o", "o", "a"]), 0);
+expect("compliance breach (borderline pick)", grade(strongAlt, ["r", "o", "o"]), 0);
+console.log("\nOption B tier spread: 3/2/1/0/0 cases checked");
 console.log(`
 ${fail === 0 ? "PASS" : "FAIL"} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);

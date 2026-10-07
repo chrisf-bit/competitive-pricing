@@ -225,5 +225,58 @@ if (decisionCount !== expectedDecisions) bad(`decision count ${decisionCount} !=
 if (total !== expectedTotal) bad(`total ${total} != expected ${expectedTotal}`);
 if (!xapi.granularEnabled()) bad('granularEnabled() is false with no ?granular=0');
 
+// ───────────────── PART 4 - Option B tier spread (synthetic) ─────────────
+// Prove the softened grader: a compliant, right-partner, optimal-PITCH call
+// earns partial credit (1-2 stars) when the diagnosis/style aren't optimal,
+// instead of the old all-or-nothing 0. Compliance breach / wrong pitch still 0.
+const priId1 = getCorrectPartnerForRound('none', 1)!;
+type Opt = { id: string; optimal?: boolean; compliance: string; blue: number };
+const mkOpt = (o: Opt) => ({
+  id: o.id,
+  label: o.id,
+  description: '',
+  playerDialogue: '',
+  partnerResponse: '',
+  styleMatch: { red: o.blue, yellow: o.blue, green: o.blue, blue: o.blue },
+  compliance: o.compliance,
+  trustChange: 0,
+  optimal: o.optimal,
+});
+const mkTree = (steps: Opt[][]) =>
+  ({
+    round: 1,
+    steps: steps.map((opts, i) => ({ id: `s${i + 1}`, partnerPrompt: '', options: opts.map(mkOpt) })),
+  } as unknown as Parameters<typeof gradeBranchingRound>[0]['tree']);
+
+const grade = (tree: ReturnType<typeof mkTree>, choices: string[]) =>
+  gradeBranchingRound({ tree, choices, selectedPartnerId: priId1, regime: 'none', partnerPrimaryStyle: 'blue' }).stars;
+
+// Tree where alternates are strong-style + safe.
+const strongAlt = mkTree([
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2)],
+] as unknown as Opt[][]);
+// Tree where alternates are weak-style + safe.
+const weakAlt = mkTree([
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 0)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 0)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 0)],
+] as unknown as Opt[][]);
+
+function mkOpt2(id: string, optimal: boolean, compliance: string, blue: number): Opt {
+  return { id, optimal, compliance, blue };
+}
+
+const expect = (label: string, got: number, want: number) => {
+  if (got !== want) bad(`tier: ${label} -> ${got} stars, expected ${want}`);
+};
+expect('all-optimal', grade(strongAlt, ['o', 'o', 'o']), 3);
+expect('non-optimal diagnosis, strong style, optimal pitch', grade(strongAlt, ['a', 'a', 'o']), 2);
+expect('non-optimal diagnosis, weak style, optimal pitch', grade(weakAlt, ['a', 'a', 'o']), 1);
+expect('wrong pitch (final not optimal)', grade(strongAlt, ['o', 'o', 'a']), 0);
+expect('compliance breach (borderline pick)', grade(strongAlt, ['r', 'o', 'o']), 0);
+console.log('\nOption B tier spread: 3/2/1/0/0 cases checked');
+
 console.log(`\n${fail === 0 ? 'PASS' : 'FAIL'} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);
