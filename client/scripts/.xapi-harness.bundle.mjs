@@ -195,11 +195,10 @@ function xapiRoundStarted(round, level) {
 }
 function xapiDecision(args) {
   if (!EMIT_GRANULAR) return;
-  const lvl = args.level === "L2" ? 2 : 1;
   emitInteraction(
     "answered",
-    `/l${lvl}/r${args.round}/${args.stepId}`,
-    `Round ${args.round} - ${args.stepId}`,
+    `/round-${args.round}`,
+    `Round ${args.round}`,
     {
       level: args.level,
       round: args.round,
@@ -13548,8 +13547,6 @@ function gradeBranchingRound(input) {
   let failureReason = null;
   if (!rightPartner) {
     failureReason = "wrong-partner";
-  } else if (!pitchCorrect) {
-    failureReason = "wrong-pitch";
   } else if (!allCompliant) {
     failureReason = "unsafe-pick";
   } else if (!noActiveMismatch) {
@@ -13560,6 +13557,8 @@ function gradeBranchingRound(input) {
   let stars;
   if (failureReason !== null) {
     stars = 0;
+  } else if (!pitchCorrect) {
+    stars = 1;
   } else {
     let s = 1;
     if (diagnosisCorrect) s += 1;
@@ -13726,21 +13725,25 @@ for (const c of captured) {
       if (!k.startsWith("http")) bad(`extension key not IRI: ${k} (${vword})`);
     }
   }
-  if (vword === "answered" && typeof object?.id === "string" && /\/l[12]\/r\d+\//.test(object.id)) {
-    const ext = ctx?.extensions ?? {};
-    const has = (suffix) => Object.keys(ext).some((k) => k.endsWith("/" + suffix));
-    if (!has("compliance")) bad(`decision missing compliance ext (${object.id})`);
-    if (!has("optimal")) bad(`decision missing optimal ext (${object.id})`);
-    if (!has("step-id")) bad(`decision missing step-id ext (${object.id})`);
-    if (!has("partner-id")) bad(`decision missing partner-id ext (${object.id})`);
+  const decExt = ctx?.extensions ?? {};
+  const isDecisionStmt = vword === "answered" && Object.keys(decExt).some((k) => k.endsWith("/step-id"));
+  if (isDecisionStmt) {
+    const has = (suffix) => Object.keys(decExt).some((k) => k.endsWith("/" + suffix));
+    if (!has("compliance")) bad(`decision missing compliance ext (${object?.id})`);
+    if (!has("optimal")) bad(`decision missing optimal ext (${object?.id})`);
+    if (!has("partner-id")) bad(`decision missing partner-id ext (${object?.id})`);
+    if (!String(object?.id ?? "").includes("/round-"))
+      bad(`decision object should be /round-N (LRS-accepted), got ${object?.id}`);
   }
 }
 var startedIds = new Set(
   captured.filter((c) => c.stmt.verb.id.endsWith("/attempted")).map((c) => c.stmt.object.id)
 );
-var decisionCount = captured.filter(
-  (c) => c.stmt.verb.id.endsWith("/answered") && /\/l[12]\/r\d+\//.test(c.stmt.object.id)
-).length;
+var decisionCount = captured.filter((c) => {
+  const v = c.stmt.verb.id;
+  const ext = c.stmt.context.extensions ?? {};
+  return v.endsWith("/answered") && Object.keys(ext).some((k) => k.endsWith("/step-id"));
+}).length;
 var total = captured.length;
 var expectedTotal = 1 + clearanceItems.length + 1 + 1 + 20 + expectedDecisions + 20 + 2 + 1;
 console.log("\nStatement breakdown (full playthrough, granular ON):");
@@ -13789,9 +13792,10 @@ var expect = (label, got, want) => {
 expect("all-optimal", grade(strongAlt, ["o", "o", "o"]), 3);
 expect("non-optimal diagnosis, strong style, optimal pitch", grade(strongAlt, ["a", "a", "o"]), 2);
 expect("non-optimal diagnosis, weak style, optimal pitch", grade(weakAlt, ["a", "a", "o"]), 1);
-expect("wrong pitch (final not optimal)", grade(strongAlt, ["o", "o", "a"]), 0);
-expect("compliance breach (borderline pick)", grade(strongAlt, ["r", "o", "o"]), 0);
-console.log("\nOption B tier spread: 3/2/1/0/0 cases checked");
+expect("wrong pitch but compliant (now passes at 1)", grade(strongAlt, ["o", "o", "a"]), 1);
+expect("compliance breach (borderline pick) still 0", grade(strongAlt, ["r", "o", "o"]), 0);
+expect("wrong partner still 0", gradeBranchingRound2({ tree: strongAlt, choices: ["o", "o", "o"], selectedPartnerId: "not-the-priority", regime: "none", partnerPrimaryStyle: "blue" }).stars, 0);
+console.log("\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch-compliant=1, breach=0, wrong-partner=0");
 console.log(`
 ${fail === 0 ? "PASS" : "FAIL"} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);

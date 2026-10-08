@@ -278,36 +278,34 @@ export function gradeBranchingRound(input: {
     optimalNonFinal >= Math.ceil(nonFinalPicks.length / 2);
   const pitchCorrect = !!finalPick?.optimal;
 
-  // Hard floor (any failure = 0 stars): right partner, the optimal PITCH
-  // (final close), every pick compliant, and no active style mismatch.
-  // Diagnosis quality is NO LONGER part of the floor (see tiering below) -
-  // a solid, compliant, right-partner call that simply didn't take the
-  // optimal diagnostic route earns partial credit rather than dropping to
-  // 0. A compliance breach or the wrong recommendation still fails hard.
+  // Hard floor (any failure = 0 stars): right partner, every pick
+  // compliant, and no active style mismatch. Neither the diagnosis NOR the
+  // recommendation (pitch) is a hard gate any more - a compliant,
+  // right-partner call earns at least 1 star even if the recommendation
+  // was wrong. A compliance breach or the wrong partner still fails hard.
   let failureReason: GradingFailureReason | null = null;
   if (!rightPartner) {
     failureReason = 'wrong-partner';
-  } else if (!pitchCorrect) {
-    failureReason = 'wrong-pitch';
   } else if (!allCompliant) {
     failureReason = 'unsafe-pick';
   } else if (!noActiveMismatch) {
     failureReason = 'style-mismatch';
   }
 
-  // Tiering (Option B, 2026-10). A call that clears the floor always scores
-  // at least 1 star, so "ok but not optimal" lands at 1-2 stars (33-67%)
-  // instead of the old all-or-nothing 0/100. Diagnosis quality and style
-  // each lift the tier by one:
-  //   base 1  (+1 if the diagnosis was optimal)  (+1 if strong style)  cap 3.
-  // Strong style is the per-step AVERAGE >= 1.33 (integer-safe
-  // styleSum*3 >= styleCount*4), set to the weakest SME-optimal path so the
-  // fully-optimal route keeps BOTH bonuses and still scores 3 stars.
+  // Tiering. Base 1 for clearing the floor. The call can only climb above
+  // 1 star if the RECOMMENDATION (pitch) was right: +1 when the diagnosis
+  // was also optimal, +1 for strong style - so the fully-optimal route
+  // still scores 3. A wrong recommendation caps the call at 1 star (it
+  // passed compliantly, but it would not have fixed the issue). Strong
+  // style is the per-step AVERAGE >= 1.33 (integer-safe
+  // styleSum*3 >= styleCount*4).
   const styleCount = styleScores.length;
   const strongStyle = styleCount > 0 && styleSum * 3 >= styleCount * 4;
   let stars: 0 | 1 | 2 | 3;
   if (failureReason !== null) {
     stars = 0;
+  } else if (!pitchCorrect) {
+    stars = 1;
   } else {
     let s = 1;
     if (diagnosisCorrect) s += 1;

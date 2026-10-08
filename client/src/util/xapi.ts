@@ -326,11 +326,17 @@ export function xapiDecision(args: {
   objectionCode?: string;
 }) {
   if (!EMIT_GRANULAR) return;
-  const lvl = args.level === 'L2' ? 2 : 1;
+  // Emit the decision against the ROUND activity (/round-{n}) - the same
+  // object id round-started / round-completed use, which the LRS stores
+  // reliably. The earlier per-step id (/l{n}/r{n}/{step}) was a novel
+  // activity Docebo's LRS rejected, so those statements never landed. The
+  // per-decision detail (step, option, compliance, capability, objection,
+  // optimal, outcome) rides in the extensions + result, which is where the
+  // reporting pipeline reads it anyway - so no data is lost.
   emitInteraction(
     'answered',
-    `/l${lvl}/r${args.round}/${args.stepId}`,
-    `Round ${args.round} - ${args.stepId}`,
+    `/round-${args.round}`,
+    `Round ${args.round}`,
     {
       level: args.level,
       round: args.round,

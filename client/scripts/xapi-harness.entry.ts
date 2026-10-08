@@ -179,14 +179,19 @@ for (const c of captured) {
       if (!k.startsWith('http')) bad(`extension key not IRI: ${k} (${vword})`);
     }
   }
-  // Decision statements carry the decision metadata.
-  if (vword === 'answered' && typeof object?.id === 'string' && /\/l[12]\/r\d+\//.test(object.id)) {
-    const ext = ctx?.extensions ?? {};
-    const has = (suffix: string) => Object.keys(ext).some((k) => k.endsWith('/' + suffix));
-    if (!has('compliance')) bad(`decision missing compliance ext (${object.id})`);
-    if (!has('optimal')) bad(`decision missing optimal ext (${object.id})`);
-    if (!has('step-id')) bad(`decision missing step-id ext (${object.id})`);
-    if (!has('partner-id')) bad(`decision missing partner-id ext (${object.id})`);
+  // Decision statements: verb `answered` carrying a step-id extension
+  // (clearance `answered` has no step-id; rounds are attempted/completed).
+  // Decisions now target the /round-N object (the LRS-accepted id), with
+  // all per-pick detail in the extensions.
+  const decExt = ctx?.extensions ?? {};
+  const isDecisionStmt = vword === 'answered' && Object.keys(decExt).some((k) => k.endsWith('/step-id'));
+  if (isDecisionStmt) {
+    const has = (suffix: string) => Object.keys(decExt).some((k) => k.endsWith('/' + suffix));
+    if (!has('compliance')) bad(`decision missing compliance ext (${object?.id})`);
+    if (!has('optimal')) bad(`decision missing optimal ext (${object?.id})`);
+    if (!has('partner-id')) bad(`decision missing partner-id ext (${object?.id})`);
+    if (!String(object?.id ?? '').includes('/round-'))
+      bad(`decision object should be /round-N (LRS-accepted), got ${object?.id}`);
   }
 }
 
@@ -195,11 +200,11 @@ const startedIds = new Set(
   captured.filter((c) => (c.stmt.verb as { id: string }).id.endsWith('/attempted')).map((c) => (c.stmt.object as { id: string }).id),
 );
 
-const decisionCount = captured.filter(
-  (c) =>
-    (c.stmt.verb as { id: string }).id.endsWith('/answered') &&
-    /\/l[12]\/r\d+\//.test((c.stmt.object as { id: string }).id),
-).length;
+const decisionCount = captured.filter((c) => {
+  const v = (c.stmt.verb as { id: string }).id;
+  const ext = (c.stmt.context as { extensions?: Record<string, unknown> }).extensions ?? {};
+  return v.endsWith('/answered') && Object.keys(ext).some((k) => k.endsWith('/step-id'));
+}).length;
 
 const total = captured.length;
 const expectedTotal =
@@ -274,9 +279,10 @@ const expect = (label: string, got: number, want: number) => {
 expect('all-optimal', grade(strongAlt, ['o', 'o', 'o']), 3);
 expect('non-optimal diagnosis, strong style, optimal pitch', grade(strongAlt, ['a', 'a', 'o']), 2);
 expect('non-optimal diagnosis, weak style, optimal pitch', grade(weakAlt, ['a', 'a', 'o']), 1);
-expect('wrong pitch (final not optimal)', grade(strongAlt, ['o', 'o', 'a']), 0);
-expect('compliance breach (borderline pick)', grade(strongAlt, ['r', 'o', 'o']), 0);
-console.log('\nOption B tier spread: 3/2/1/0/0 cases checked');
+expect('wrong pitch but compliant (now passes at 1)', grade(strongAlt, ['o', 'o', 'a']), 1);
+expect('compliance breach (borderline pick) still 0', grade(strongAlt, ['r', 'o', 'o']), 0);
+expect('wrong partner still 0', gradeBranchingRound({ tree: strongAlt, choices: ['o', 'o', 'o'], selectedPartnerId: 'not-the-priority', regime: 'none', partnerPrimaryStyle: 'blue' }).stars, 0);
+console.log('\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch-compliant=1, breach=0, wrong-partner=0');
 
 console.log(`\n${fail === 0 ? 'PASS' : 'FAIL'} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);
