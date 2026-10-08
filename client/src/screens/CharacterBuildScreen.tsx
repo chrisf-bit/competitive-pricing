@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Check } from 'lucide-react';
 import {
@@ -8,6 +8,7 @@ import {
   type SuperPowerPersona,
 } from '../data/characters';
 import type { CharacterArchetype } from '../types';
+import { AUTOPILOT_ENABLED } from '../util/autopilot';
 
 interface CharacterBuildScreenProps {
   selectedAvatarId: string | null;
@@ -16,6 +17,8 @@ interface CharacterBuildScreenProps {
   onSelectAvatar: (avatarId: string) => void;
   onSelectArchetype: (archetype: CharacterArchetype) => void;
   onContinue: () => void;
+  /** TEST ONLY: hidden autopilot tile handler (see util/autopilot.ts). */
+  onAutopilot?: (onProgress: (sent: number, total: number) => void) => Promise<void>;
 }
 
 export function CharacterBuildScreen({
@@ -25,8 +28,25 @@ export function CharacterBuildScreen({
   onSelectAvatar,
   onSelectArchetype,
   onContinue,
+  onAutopilot,
 }: CharacterBuildScreenProps) {
   const bothPicked = !!selectedAvatarId && !!selectedArchetype;
+
+  // Hidden test-run tile: triple-click the top-right corner to generate a
+  // full xAPI dataset without playing (see util/autopilot.ts). Gated by
+  // AUTOPILOT_ENABLED - flip that to false and rebuild to remove it.
+  const [autopilotProgress, setAutopilotProgress] = useState<{ sent: number; total: number } | null>(null);
+  const secretClicks = useRef<number[]>([]);
+  const handleSecretClick = () => {
+    if (!onAutopilot || autopilotProgress) return;
+    const now = Date.now();
+    secretClicks.current = [...secretClicks.current.filter((t) => now - t < 700), now];
+    if (secretClicks.current.length >= 3) {
+      secretClicks.current = [];
+      setAutopilotProgress({ sent: 0, total: 0 });
+      void onAutopilot((sent, total) => setAutopilotProgress({ sent, total }));
+    }
+  };
 
   // Preload every avatar before painting the grid. Otherwise each
   // <img> hits the network independently and the tiles fill in one
@@ -80,6 +100,46 @@ export function CharacterBuildScreen({
         overflow: 'auto',
       }}
     >
+      {AUTOPILOT_ENABLED && onAutopilot && (
+        <>
+          <div
+            onClick={handleSecretClick}
+            aria-hidden
+            style={{
+              position: 'fixed',
+              top: 0,
+              right: 0,
+              width: 46,
+              height: 46,
+              zIndex: 9999,
+              opacity: 0,
+              cursor: 'default',
+            }}
+          />
+          {autopilotProgress && (
+            <div
+              style={{
+                position: 'fixed',
+                inset: 0,
+                zIndex: 10000,
+                background: 'rgba(6, 18, 42, 0.9)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 12,
+                color: 'var(--white)',
+              }}
+            >
+              <div style={{ fontSize: 18, fontWeight: 800 }}>Generating test run</div>
+              <div style={{ fontSize: 14, opacity: 0.8 }}>
+                Sending {autopilotProgress.sent}
+                {autopilotProgress.total ? ` / ${autopilotProgress.total}` : ''} xAPI statements...
+              </div>
+            </div>
+          )}
+        </>
+      )}
       <div
         style={{
           flex: 1,

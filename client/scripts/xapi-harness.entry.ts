@@ -59,6 +59,7 @@ const { getCorrectPartnerForRound } = await import('../src/data/correctPartnerPe
 const { kamCorrectId } = await import('../src/data/kamLayout');
 const { initialPartners } = await import('../src/data/partners');
 const { gradeBranchingRound } = await import('../src/engine/grading');
+const { runAutopilot } = await import('../src/util/autopilot');
 
 const partnerById = new Map(initialPartners.map((p) => [p.persona.id, p]));
 let fail = 0;
@@ -284,6 +285,29 @@ expect('borderline pick now passes at 1 (no forced retake)', grade(strongAlt, ['
 expect('risky pick (legal breach) still 0', grade(strongAlt, ['x', 'o', 'o']), 0);
 expect('wrong partner still 0', gradeBranchingRound({ tree: strongAlt, choices: ['o', 'o', 'o'], selectedPartnerId: 'not-the-priority', regime: 'none', partnerPrimaryStyle: 'blue' }).stars, 0);
 console.log('\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch=1, borderline=1, risky=0, wrong-partner=0');
+
+// ───────────────── PART 5 - autopilot test-run dataset ───────────────────
+// The hidden autopilot must produce a full, MIXED, sequentially-sent dataset.
+captured.length = 0;
+const ap = await runAutopilot('none', undefined, 0);
+const apDecisions = captured.filter((c) => {
+  const v = (c.stmt.verb as { id: string }).id;
+  const ext = (c.stmt.context as { extensions?: Record<string, unknown> }).extensions ?? {};
+  return v.endsWith('/answered') && Object.keys(ext).some((k) => k.endsWith('/step-id'));
+}).length;
+const apStars = Object.values(ap.roundStars);
+const apMixed = apStars.includes(3) && apStars.some((s) => s < 3);
+for (const c of captured) {
+  const o = c.stmt.object as { id?: string };
+  if (!o?.id || !o.id.startsWith('http')) bad('autopilot stmt object not an IRI');
+}
+console.log(`\nAutopilot: ${ap.total} statements sent, ${apDecisions} decisions, round stars ${JSON.stringify(ap.roundStars)}`);
+if (ap.total < 100) bad(`autopilot emitted only ${ap.total} statements (expected ~180+)`);
+if (apDecisions < 50) bad(`autopilot decisions ${apDecisions} too few`);
+if (!apMixed) bad(`autopilot stars should be a MIX of 3 and <3, got ${apStars.join(',')}`);
+if (apStars.some((s) => s === 0)) bad(`autopilot produced a failed (0-star) round: ${apStars.join(',')}`);
+if (apStars.length !== 20) bad(`autopilot graded ${apStars.length} rounds (expected 20)`);
+if (captured.length !== ap.total) bad(`autopilot sent ${captured.length} but reported ${ap.total}`);
 
 console.log(`\n${fail === 0 ? 'PASS' : 'FAIL'} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);

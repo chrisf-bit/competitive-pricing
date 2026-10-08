@@ -11,6 +11,8 @@ var __export = (target, all) => {
 // src/util/xapi.ts
 var xapi_exports = {};
 __export(xapi_exports, {
+  beginAutopilotCapture: () => beginAutopilotCapture,
+  flushAutopilot: () => flushAutopilot,
   getState: () => getState,
   granularEnabled: () => granularEnabled,
   isXapiLaunch: () => isXapiLaunch,
@@ -135,8 +137,38 @@ function buffer(s) {
   } catch {
   }
 }
+function beginAutopilotCapture() {
+  autopilotQueue = [];
+}
+async function flushAutopilot(onProgress, delayMs = 70) {
+  const q = autopilotQueue ?? [];
+  autopilotQueue = null;
+  const total2 = q.length;
+  if (!isXapiLaunch()) {
+    for (let i = 0; i < total2; i++) onProgress?.(i + 1, total2);
+    return total2;
+  }
+  for (let i = 0; i < total2; i++) {
+    try {
+      await fetch(`${LAUNCH.endpoint}statements`, {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify([q[i]]),
+        keepalive: true
+      });
+    } catch {
+    }
+    onProgress?.(i + 1, total2);
+    if (delayMs) await sleep(delayMs);
+  }
+  return total2;
+}
 function post(s) {
   buffer(s);
+  if (autopilotQueue) {
+    autopilotQueue.push(s);
+    return;
+  }
   if (!isXapiLaunch()) return;
   try {
     void fetch(`${LAUNCH.endpoint}statements`, {
@@ -284,7 +316,7 @@ function putState(stateId, data) {
   } catch {
   }
 }
-var XAPI_VERSION, NS, EXT, ADL, ACT, CMII, COURSE, EMIT_GRANULAR, LAUNCH, STORAGE_BUFFER;
+var XAPI_VERSION, NS, EXT, ADL, ACT, CMII, COURSE, EMIT_GRANULAR, LAUNCH, STORAGE_BUFFER, autopilotQueue, sleep;
 var init_xapi = __esm({
   "src/util/xapi.ts"() {
     XAPI_VERSION = "1.0.2";
@@ -304,6 +336,8 @@ var init_xapi = __esm({
     })();
     LAUNCH = readLaunch();
     STORAGE_BUFFER = "rateRight:xapi:buffer";
+    autopilotQueue = null;
+    sleep = (ms) => new Promise((r) => window.setTimeout(r, ms));
   }
 });
 
@@ -10356,6 +10390,75 @@ var init_noble_falcon_r20 = __esm({
 });
 
 // src/data/scenarios/healthy-decoys.ts
+function healthyMetrics(i) {
+  const erpd = H_ERPD[i];
+  return {
+    erpd,
+    erpdChange: H_ERPD_CHG[i],
+    // Public sits a touch above eRPD; Loyal a healthy ~9 points below
+    // Public (the Genius discount doing real work) - a clean profile.
+    rpdPublic: Math.round((erpd + 1.2) * 10) / 10,
+    rpdLoyal: Math.round((erpd - 8.4) * 10) / 10,
+    losePricePublic: H_LOSE[i],
+    activeScenarios: 2 + i % 2,
+    activeScenarioNames: i % 2 === 0 ? ["Brand.com", "App"] : ["Key OTA", "Mobile"],
+    competitor: i % 3 === 0 ? "keyota" : "brand",
+    secondaryMetrics: {
+      last30dAbrn: { value: 700 + i * 35, deltaPct: 3 + i % 3 },
+      last30dRoomNights: { value: 420 + i * 22, deltaPct: 4 + i % 2 },
+      last30dAdr: { value: 138 + i * 3, deltaPct: 1 },
+      last90dPageViews: { value: 42e3 + i * 2600, deltaPct: 3 + i % 3 },
+      last90dConversion: { value: 2.4 + i % 4 * 0.1, deltaPct: 2 },
+      next3mRoomNights: { value: 90 + i * 4, deltaPct: 3 + i % 2 }
+    },
+    opcMetrics: {
+      unsoldRooms: { value: H_UNSOLD[i] },
+      sellThroughRate: { value: H_SELL[i], peerLabel: "above" },
+      visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
+      clickThroughRate: { value: H_CTR[i], peerLabel: "above" },
+      conversion: { value: H_CONV[i], peerLabel: "above" },
+      searchPrice: { value: H_SEARCH[i], peerValue: H_SEARCH[i] + 5 }
+    },
+    lastPricingContactDaysAgo: H_CONTACT_DAYS[i],
+    pricingCoverageQTD: H_COVERAGE[i],
+    // partnerValueAbrn intentionally omitted - the merge keeps the
+    // hotel's real (identity) value from its record.
+    experiencedRPD: 70 + i % 5,
+    visibility: 76 + i % 6,
+    conversion: 58 + i % 5,
+    revenue: 66 + i % 5,
+    discountQuality: 62 + i % 6,
+    rateParity: "clean"
+  };
+}
+function healthyDecoyMetricsFor(baseId) {
+  const i = HEALTHY_HOTELS.indexOf(baseId);
+  return healthyMetrics(i < 0 ? 0 : i);
+}
+function closeDecoyMetricsFor(baseId) {
+  const raw = HEALTHY_HOTELS.indexOf(baseId);
+  const i = raw < 0 ? 0 : raw;
+  const m = healthyMetrics(i);
+  return {
+    ...m,
+    secondaryMetrics: {
+      last30dAbrn: { value: 640 + i * 30, deltaPct: -3 - i % 2 },
+      last30dRoomNights: { value: 360 + i * 18, deltaPct: -1 },
+      last30dAdr: { value: 140 + i * 3, deltaPct: 1 },
+      last90dPageViews: { value: 4e4 + i * 2400, deltaPct: 2 - i % 2 },
+      last90dConversion: { value: 2.3 + i % 4 * 0.1, deltaPct: -1 },
+      next3mRoomNights: { value: 84 + i * 4, deltaPct: -7 - i % 3 }
+    },
+    opcMetrics: {
+      unsoldRooms: { value: 16 + i % 4 * 2 },
+      sellThroughRate: { value: 44 - i % 3, peerLabel: "below" },
+      visibilityShare: { value: H_VIS[i], peerValue: H_VIS_PEER[i] },
+      clickThroughRate: { value: Math.round((H_CTR[i] - 0.4) * 10) / 10, peerLabel: "in-line" },
+      conversion: { value: Math.round((H_CONV[i] - 0.2) * 10) / 10, peerLabel: "in-line" },
+      searchPrice: { value: H_SEARCH[i] + 6, peerValue: H_SEARCH[i] + 1 }
+    }
+  };
+}
 function stylePlus(primary, v) {
   const base = { red: 0, yellow: 0, green: 0, blue: 0 };
   base[primary] = v;
@@ -10645,9 +10748,21 @@ function buildCloseDecoyScenario(partnerId, round) {
     steps: closeSteps(meta)
   };
 }
-var HOTEL_META, HEALTHY_DECOY_ROUNDS;
+var HEALTHY_HOTELS, HOTEL_META, HEALTHY_DECOY_ROUNDS, H_ERPD, H_ERPD_CHG, H_LOSE, H_UNSOLD, H_SELL, H_VIS, H_VIS_PEER, H_SEARCH, H_CTR, H_CONV, H_CONTACT_DAYS, H_COVERAGE;
 var init_healthy_decoys = __esm({
   "src/data/scenarios/healthy-decoys.ts"() {
+    HEALTHY_HOTELS = [
+      "royal-crest",
+      "silver-horizon",
+      "ocean-view",
+      "riverside",
+      "emerald-peak",
+      "oceanfront",
+      "palace-grand",
+      "hidden-valley",
+      "loft-living",
+      "noble-falcon"
+    ];
     HOTEL_META = {
       "royal-crest": { contact: "Liam", style: "red", healthyNote: "occupancy's holding up and the numbers look steady" },
       "silver-horizon": { contact: "Chloe", style: "blue", healthyNote: "the group's pacing nicely this quarter" },
@@ -10672,6 +10787,18 @@ var init_healthy_decoys = __esm({
       "loft-living": [5, 6, 7, 12, 14],
       "noble-falcon": [13, 15]
     };
+    H_ERPD = [-1.6, -0.6, -0.4, -0.9, -0.8, -1.1, -0.3, -1.3, -1.2, -0.5];
+    H_ERPD_CHG = [-0.4, -0.9, 0.3, -0.2, -0.6, 0.1, -0.3, -0.7, -0.5, 0.2];
+    H_LOSE = [26, 33, 22, 38, 24, 41, 29, 44, 21, 31];
+    H_UNSOLD = [9, 12, 8, 14, 10, 13, 11, 7, 12, 9];
+    H_SELL = [55, 52, 58, 50, 54, 51, 56, 60, 52, 57];
+    H_VIS = [24, 21, 26, 19, 23, 20, 22, 27, 20, 25];
+    H_VIS_PEER = [20, 19, 22, 17, 20, 18, 19, 23, 18, 21];
+    H_SEARCH = [138, 142, 135, 145, 140, 143, 139, 133, 141, 137];
+    H_CTR = [5.2, 4.8, 5.5, 4.6, 5, 4.7, 5.3, 5.8, 4.9, 5.1];
+    H_CONV = [2.4, 2.1, 2.6, 2, 2.3, 2.2, 2.5, 2.8, 2.1, 2.4];
+    H_CONTACT_DAYS = [24, 31, 19, 36, 22, 40, 27, 44, 20, 33];
+    H_COVERAGE = [58, 52, 61, 48, 55, 46, 57, 44, 60, 50];
   }
 });
 
@@ -13585,6 +13712,982 @@ var init_grading = __esm({
   }
 });
 
+// src/data/market.ts
+var init_market = __esm({
+  "src/data/market.ts"() {
+  }
+});
+
+// src/data/conversations-carlos.ts
+var init_conversations_carlos = __esm({
+  "src/data/conversations-carlos.ts"() {
+  }
+});
+
+// src/data/conversations-priya.ts
+var init_conversations_priya = __esm({
+  "src/data/conversations-priya.ts"() {
+  }
+});
+
+// src/data/conversations-yuki.ts
+var init_conversations_yuki = __esm({
+  "src/data/conversations-yuki.ts"() {
+  }
+});
+
+// src/data/conversations-raven-inn.ts
+var init_conversations_raven_inn = __esm({
+  "src/data/conversations-raven-inn.ts"() {
+  }
+});
+
+// src/data/conversations-driftwood-bay.ts
+var init_conversations_driftwood_bay = __esm({
+  "src/data/conversations-driftwood-bay.ts"() {
+  }
+});
+
+// src/data/conversations.ts
+var init_conversations = __esm({
+  "src/data/conversations.ts"() {
+    init_conversations_carlos();
+    init_conversations_priya();
+    init_conversations_yuki();
+    init_conversations_raven_inn();
+    init_conversations_driftwood_bay();
+  }
+});
+
+// src/data/partnerStateByRound.ts
+function nobleFalconR3Metrics() {
+  return {
+    erpd: 17,
+    erpdChange: 21.42,
+    rpdPublic: 20,
+    rpdLoyal: 5.9,
+    losePricePublic: 93,
+    activeScenarios: 4,
+    activeScenarioNames: [
+      "Brand Scenario",
+      "Family 2+1",
+      "Family 2+2",
+      "App"
+    ],
+    competitor: "brand",
+    secondaryMetrics: {
+      last30dAbrn: { value: 1306, deltaPct: -18 },
+      last30dRoomNights: { value: 1113, deltaPct: 49 },
+      last30dAdr: { value: 70, deltaPct: -17 },
+      last90dPageViews: { value: 74948, deltaPct: 26 },
+      last90dConversion: { value: 1.4, deltaPct: -17 },
+      next3mRoomNights: { value: 1515, deltaPct: 81 }
+    },
+    // Encoded relative to the authoring date of 2026-06-04 - 22
+    // days behind. Renders as `today - 22 days` so the gap stays
+    // constant across replays.
+    lastPricingContactDaysAgo: 22,
+    pricingCoverageQTD: 64,
+    experiencedRPD: 35,
+    visibility: 42,
+    conversion: 28,
+    revenue: 32,
+    discountQuality: 30,
+    rateParity: "major"
+  };
+}
+function marinaL2DecoyMetrics() {
+  return {
+    erpd: 2.1,
+    erpdChange: -0.6,
+    rpdPublic: 3.1,
+    rpdLoyal: -0.7,
+    losePricePublic: 29,
+    activeScenarios: 2,
+    activeScenarioNames: ["Brand.com", "Mobile"],
+    competitor: "brand",
+    secondaryMetrics: {
+      last30dAbrn: { value: 980, deltaPct: 4 },
+      last30dRoomNights: { value: 610, deltaPct: 5 },
+      last30dAdr: { value: 151, deltaPct: 1 },
+      last90dPageViews: { value: 0 },
+      last90dConversion: { value: 2.5, deltaPct: 2 },
+      next3mRoomNights: { value: 112, deltaPct: 4 }
+    },
+    // Healthy OPC: rooms are selling, visibility sits above the peer
+    // median, and the search price is essentially at parity.
+    opcMetrics: {
+      unsoldRooms: { value: 8 },
+      sellThroughRate: { value: 4 },
+      visibilityShare: { value: 22, peerValue: 20 },
+      searchPrice: { value: -1 }
+    },
+    lastPricingContactDaysAgo: 30,
+    pricingCoverageQTD: 55,
+    experiencedRPD: 72,
+    visibility: 80,
+    conversion: 61,
+    revenue: 70,
+    discountQuality: 65,
+    rateParity: "clean"
+  };
+}
+function carlosL2DecoyMetrics() {
+  return {
+    erpd: 2.6,
+    erpdChange: -0.3,
+    rpdPublic: 3.4,
+    rpdLoyal: -0.5,
+    losePricePublic: 33,
+    activeScenarios: 2,
+    activeScenarioNames: ["Brand.com", "Country"],
+    competitor: "keyota",
+    secondaryMetrics: {
+      last30dAbrn: { value: 640, deltaPct: 3 },
+      last30dRoomNights: { value: 410, deltaPct: 3 },
+      last30dAdr: { value: 132, deltaPct: 1 },
+      last90dPageViews: { value: 0 },
+      last90dConversion: { value: 2.3, deltaPct: 1 },
+      next3mRoomNights: { value: 78, deltaPct: 3 }
+    },
+    opcMetrics: {
+      unsoldRooms: { value: 10 },
+      sellThroughRate: { value: 2 },
+      visibilityShare: { value: 19, peerValue: 18 },
+      searchPrice: { value: 0 }
+    },
+    lastPricingContactDaysAgo: 26,
+    pricingCoverageQTD: 58,
+    experiencedRPD: 70,
+    visibility: 77,
+    conversion: 59,
+    revenue: 67,
+    discountQuality: 63,
+    rateParity: "clean"
+  };
+}
+var partnerStateByRound;
+var init_partnerStateByRound = __esm({
+  "src/data/partnerStateByRound.ts"() {
+    init_healthy_decoys();
+    init_kamLayout();
+    partnerStateByRound = {
+      marina: {
+        1: {
+          metrics: {
+            // R1 distractor profile: clearly milder than Crystal Water
+            // (eRPD 5.2% / Bucket 4 / Lose Price 99%). Marina reads
+            // as a healthy boutique - Bucket 3, Lose Price 42% - so
+            // the priority signal points unambiguously at Crystal
+            // Water. The mobile-gap story stays in R2 where she
+            // becomes the placeholder priority at sharper numbers.
+            erpd: 2.4,
+            erpdChange: 0.5,
+            rpdPublic: 2.8,
+            rpdLoyal: 1.6,
+            losePricePublic: 42,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 820 },
+              last30dRoomNights: { value: 520 },
+              last30dAdr: { value: 145, deltaPct: -1 },
+              last90dPageViews: { value: -2 },
+              last90dConversion: { value: 1.8, deltaPct: -1 },
+              next3mRoomNights: { value: 89, deltaPct: -3 }
+            },
+            lastPricingContactDaysAgo: 110,
+            pricingCoverageQTD: 32,
+            experiencedRPD: 68,
+            visibility: 70,
+            conversion: 55,
+            revenue: 60,
+            discountQuality: 50,
+            rateParity: "clean"
+          }
+        },
+        2: {
+          metrics: {
+            erpd: 9.4,
+            erpdChange: 3.1,
+            rpdPublic: 11.2,
+            rpdLoyal: 6.4,
+            losePricePublic: 82,
+            activeScenarios: 2,
+            activeScenarioNames: ["Brand.com", "Mobile"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 740 },
+              last30dRoomNights: { value: 460 },
+              last30dAdr: { value: 148, deltaPct: 0 },
+              last90dPageViews: { value: -5 },
+              last90dConversion: { value: 1.5, deltaPct: -3 },
+              next3mRoomNights: { value: 78, deltaPct: -7 }
+            },
+            lastPricingContactDaysAgo: 110,
+            pricingCoverageQTD: 32,
+            experiencedRPD: 52,
+            visibility: 56,
+            conversion: 38,
+            revenue: 48,
+            discountQuality: 38,
+            rateParity: "clean"
+          }
+        },
+        3: {
+          metrics: {
+            erpd: 5.1,
+            erpdChange: -4.3,
+            rpdPublic: 5.8,
+            rpdLoyal: 4,
+            losePricePublic: 58,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 880 },
+              last30dRoomNights: { value: 540 },
+              last30dAdr: { value: 144, deltaPct: -1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2, deltaPct: 1 },
+              next3mRoomNights: { value: 92, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 94,
+            pricingCoverageQTD: 38,
+            experiencedRPD: 64,
+            visibility: 68,
+            conversion: 52,
+            revenue: 60,
+            discountQuality: 55,
+            rateParity: "clean"
+          }
+        },
+        // R4 decoy profile: healthy Bucket 3 so Riverside Boutique's sharp
+        // +6.56 eRPD spike and family gap read as the clear R4 priority.
+        4: {
+          metrics: {
+            erpd: 2,
+            erpdChange: -1.2,
+            rpdPublic: 3.2,
+            rpdLoyal: -0.8,
+            losePricePublic: 30,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 910, deltaPct: 3 },
+              last30dRoomNights: { value: 560, deltaPct: 4 },
+              last30dAdr: { value: 146, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.2, deltaPct: 2 },
+              next3mRoomNights: { value: 98, deltaPct: 3 }
+            },
+            lastPricingContactDaysAgo: 40,
+            pricingCoverageQTD: 42,
+            experiencedRPD: 66,
+            visibility: 70,
+            conversion: 54,
+            revenue: 62,
+            discountQuality: 58,
+            rateParity: "clean"
+          }
+        },
+        // R5 decoy profile: healthy Bucket 3 against Emerald Peak's Bucket 6
+        // / 100% Lose Price, so the priority is unmistakable.
+        5: {
+          metrics: {
+            erpd: 1.8,
+            erpdChange: -0.9,
+            rpdPublic: 3,
+            rpdLoyal: -1,
+            losePricePublic: 28,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 930, deltaPct: 4 },
+              last30dRoomNights: { value: 575, deltaPct: 5 },
+              last30dAdr: { value: 147, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.3, deltaPct: 2 },
+              next3mRoomNights: { value: 101, deltaPct: 4 }
+            },
+            lastPricingContactDaysAgo: 36,
+            pricingCoverageQTD: 44,
+            experiencedRPD: 68,
+            visibility: 72,
+            conversion: 56,
+            revenue: 64,
+            discountQuality: 60,
+            rateParity: "clean"
+          }
+        },
+        // R6 decoy profile: healthy Bucket 3 against Oceanfront Bliss's
+        // Bucket 6 / visibility-debt collapse, so the priority is clear.
+        6: {
+          metrics: {
+            erpd: 2.1,
+            erpdChange: -0.7,
+            rpdPublic: 3.1,
+            rpdLoyal: -0.9,
+            losePricePublic: 31,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 940, deltaPct: 3 },
+              last30dRoomNights: { value: 580, deltaPct: 4 },
+              last30dAdr: { value: 148, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.3, deltaPct: 2 },
+              next3mRoomNights: { value: 102, deltaPct: 3 }
+            },
+            lastPricingContactDaysAgo: 34,
+            pricingCoverageQTD: 45,
+            experiencedRPD: 68,
+            visibility: 74,
+            conversion: 56,
+            revenue: 65,
+            discountQuality: 60,
+            rateParity: "clean"
+          }
+        },
+        7: {
+          metrics: {
+            erpd: 2.3,
+            erpdChange: -0.5,
+            rpdPublic: 3.3,
+            rpdLoyal: -0.7,
+            losePricePublic: 33,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 955, deltaPct: 3 },
+              last30dRoomNights: { value: 590, deltaPct: 4 },
+              last30dAdr: { value: 149, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.3, deltaPct: 2 },
+              next3mRoomNights: { value: 104, deltaPct: 3 }
+            },
+            lastPricingContactDaysAgo: 29,
+            pricingCoverageQTD: 48,
+            experiencedRPD: 68,
+            visibility: 75,
+            conversion: 57,
+            revenue: 66,
+            discountQuality: 61,
+            rateParity: "clean"
+          }
+        },
+        8: {
+          metrics: {
+            erpd: 2,
+            erpdChange: -0.4,
+            rpdPublic: 3,
+            rpdLoyal: -0.8,
+            losePricePublic: 30,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 960, deltaPct: 3 },
+              last30dRoomNights: { value: 595, deltaPct: 4 },
+              last30dAdr: { value: 150, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.4, deltaPct: 2 },
+              next3mRoomNights: { value: 106, deltaPct: 3 }
+            },
+            lastPricingContactDaysAgo: 26,
+            pricingCoverageQTD: 50,
+            experiencedRPD: 69,
+            visibility: 76,
+            conversion: 58,
+            revenue: 67,
+            discountQuality: 62,
+            rateParity: "clean"
+          }
+        },
+        9: {
+          metrics: {
+            erpd: 2.4,
+            erpdChange: -0.3,
+            rpdPublic: 3.4,
+            rpdLoyal: -0.6,
+            losePricePublic: 32,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 970, deltaPct: 3 },
+              last30dRoomNights: { value: 600, deltaPct: 4 },
+              last30dAdr: { value: 151, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.4, deltaPct: 2 },
+              next3mRoomNights: { value: 108, deltaPct: 3 }
+            },
+            lastPricingContactDaysAgo: 22,
+            pricingCoverageQTD: 52,
+            experiencedRPD: 70,
+            visibility: 77,
+            conversion: 59,
+            revenue: 68,
+            discountQuality: 63,
+            rateParity: "clean"
+          }
+        },
+        10: {
+          metrics: {
+            erpd: 2.2,
+            erpdChange: -0.4,
+            rpdPublic: 3.2,
+            rpdLoyal: -0.8,
+            losePricePublic: 31,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 975, deltaPct: 3 },
+              last30dRoomNights: { value: 605, deltaPct: 4 },
+              last30dAdr: { value: 151, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2.4, deltaPct: 2 },
+              next3mRoomNights: { value: 110, deltaPct: 3 }
+            },
+            lastPricingContactDaysAgo: 20,
+            pricingCoverageQTD: 54,
+            experiencedRPD: 71,
+            visibility: 78,
+            conversion: 60,
+            revenue: 69,
+            discountQuality: 64,
+            rateParity: "clean"
+          }
+        },
+        // Level 2 (R11-R16): Marina is a healthy decoy across all six OPC
+        // rounds so the reused lead partner reads as the clear priority on
+        // the unlocked OPC lens. Same clean profile each round.
+        11: { metrics: marinaL2DecoyMetrics() },
+        12: { metrics: marinaL2DecoyMetrics() },
+        13: { metrics: marinaL2DecoyMetrics() },
+        14: { metrics: marinaL2DecoyMetrics() },
+        15: { metrics: marinaL2DecoyMetrics() },
+        16: { metrics: marinaL2DecoyMetrics() },
+        17: { metrics: marinaL2DecoyMetrics() },
+        18: { metrics: marinaL2DecoyMetrics() },
+        19: { metrics: marinaL2DecoyMetrics() },
+        20: { metrics: marinaL2DecoyMetrics() }
+      },
+      // John's baselines are retained even though John moved to
+      // pendingPartners in June 2026 - keeps the data on disk in case
+      // John is re-spliced back into the active roster. applyRoundBaseline
+      // is a no-op for partners that aren't in initialPartners, so this
+      // is harmless dead data.
+      john: {
+        1: {
+          metrics: {
+            erpd: 9.5,
+            erpdChange: 0.4,
+            rpdPublic: 10.8,
+            rpdLoyal: 7.2,
+            losePricePublic: 81,
+            activeScenarios: 2,
+            activeScenarioNames: ["Brand.com", "App"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1500 },
+              last30dRoomNights: { value: 750 },
+              last30dAdr: { value: 129, deltaPct: 5 },
+              last90dConversion: { value: 2, deltaPct: -3 },
+              next3mRoomNights: { value: 67, deltaPct: -8 }
+            },
+            lastPricingContactDaysAgo: 126,
+            pricingCoverageQTD: 24,
+            experiencedRPD: 42,
+            visibility: 48,
+            conversion: 36,
+            revenue: 38,
+            discountQuality: 30,
+            rateParity: "clean"
+          }
+        }
+      },
+      // The Noble Falcon Inn - same baseline metrics across all three
+      // regime variants (Wide / Narrow / None). The regime changes the
+      // dialogue and compliance shape of the conversation, not the
+      // partner data. nobleFalconR1 is defined below and re-used per
+      // partner id - if SME updates a number, it lands in all three
+      // variants automatically.
+      "noble-falcon-wide": { 3: { metrics: nobleFalconR3Metrics() } },
+      "noble-falcon-narrow": { 3: { metrics: nobleFalconR3Metrics() } },
+      "noble-falcon-none": { 3: { metrics: nobleFalconR3Metrics() } },
+      carlos: {
+        1: {
+          metrics: {
+            // R1 distractor profile: drop to Bucket 3 so Crystal Water
+            // (Bucket 4) sits visibly higher on the eRPD strip. The
+            // misconfigured Country Rate is still the discoverable
+            // trap that compounds across rounds - it's the only red
+            // flag in his otherwise healthy R1 picture and pays off
+            // at R3 (where the legacy Carlos R3 baseline ramps eRPD).
+            erpd: 1.8,
+            erpdChange: -0.4,
+            rpdPublic: 2.3,
+            rpdLoyal: 1.1,
+            losePricePublic: 36,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1180, deltaPct: 3 },
+              last30dRoomNights: { value: 680, deltaPct: 2 },
+              last30dAdr: { value: 118, deltaPct: 2 },
+              last90dPageViews: { value: 1, deltaPct: 1 },
+              last90dConversion: { value: 2.1, deltaPct: 0 },
+              next3mRoomNights: { value: 95, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 102,
+            pricingCoverageQTD: 41,
+            experiencedRPD: 72,
+            visibility: 76,
+            conversion: 62,
+            revenue: 68,
+            discountQuality: 60,
+            rateParity: "minor"
+          }
+        },
+        2: {
+          metrics: {
+            erpd: 5.6,
+            erpdChange: 2.2,
+            rpdPublic: 6.8,
+            rpdLoyal: 4,
+            losePricePublic: 61,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1150, deltaPct: 2 },
+              last30dRoomNights: { value: 665, deltaPct: 1 },
+              last30dAdr: { value: 120, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2, deltaPct: -1 },
+              next3mRoomNights: { value: 93, deltaPct: 1 }
+            },
+            lastPricingContactDaysAgo: 102,
+            pricingCoverageQTD: 41,
+            experiencedRPD: 60,
+            visibility: 64,
+            conversion: 50,
+            revenue: 58,
+            discountQuality: 52,
+            rateParity: "minor"
+          }
+        },
+        3: {
+          metrics: {
+            erpd: 10.8,
+            erpdChange: 5.2,
+            rpdPublic: 12.4,
+            rpdLoyal: 8.6,
+            losePricePublic: 84,
+            activeScenarios: 2,
+            activeScenarioNames: ["Brand.com", "Country Rate"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1080, deltaPct: -1 },
+              last30dRoomNights: { value: 610, deltaPct: -3 },
+              last30dAdr: { value: 122, deltaPct: 1 },
+              last90dPageViews: { value: -3 },
+              last90dConversion: { value: 1.7, deltaPct: -4 },
+              next3mRoomNights: { value: 86, deltaPct: -6 }
+            },
+            lastPricingContactDaysAgo: 84,
+            pricingCoverageQTD: 39,
+            experiencedRPD: 48,
+            visibility: 52,
+            conversion: 40,
+            revenue: 46,
+            discountQuality: 42,
+            rateParity: "minor"
+          }
+        },
+        // R4 decoy profile: healthy Bucket 3, clearly less urgent than
+        // Riverside Boutique's spike + family/Genius gaps.
+        4: {
+          metrics: {
+            erpd: 2.6,
+            erpdChange: 0.4,
+            rpdPublic: 3.6,
+            rpdLoyal: -0.4,
+            losePricePublic: 36,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1120, deltaPct: 2 },
+              last30dRoomNights: { value: 640, deltaPct: 3 },
+              last30dAdr: { value: 124, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 1.9, deltaPct: 1 },
+              next3mRoomNights: { value: 94, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 46,
+            pricingCoverageQTD: 40,
+            experiencedRPD: 54,
+            visibility: 60,
+            conversion: 46,
+            revenue: 52,
+            discountQuality: 48,
+            rateParity: "clean"
+          }
+        },
+        // R5 decoy profile: healthy Bucket 3, clearly less urgent than
+        // Emerald Peak's Bucket 6 / 100% Lose Price.
+        5: {
+          metrics: {
+            erpd: 2.4,
+            erpdChange: 0.2,
+            rpdPublic: 3.4,
+            rpdLoyal: -0.6,
+            losePricePublic: 34,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1140, deltaPct: 3 },
+              last30dRoomNights: { value: 650, deltaPct: 3 },
+              last30dAdr: { value: 125, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2, deltaPct: 1 },
+              next3mRoomNights: { value: 96, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 42,
+            pricingCoverageQTD: 41,
+            experiencedRPD: 56,
+            visibility: 62,
+            conversion: 48,
+            revenue: 54,
+            discountQuality: 50,
+            rateParity: "clean"
+          }
+        },
+        // R6 decoy profile: healthy Bucket 3, clearly less urgent than
+        // Oceanfront Bliss's Bucket 6 gap.
+        6: {
+          metrics: {
+            erpd: 2.7,
+            erpdChange: 0.3,
+            rpdPublic: 3.7,
+            rpdLoyal: -0.3,
+            losePricePublic: 37,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1130, deltaPct: 2 },
+              last30dRoomNights: { value: 645, deltaPct: 3 },
+              last30dAdr: { value: 125, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 1.9, deltaPct: 1 },
+              next3mRoomNights: { value: 95, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 44,
+            pricingCoverageQTD: 42,
+            experiencedRPD: 55,
+            visibility: 61,
+            conversion: 47,
+            revenue: 53,
+            discountQuality: 49,
+            rateParity: "clean"
+          }
+        },
+        7: {
+          metrics: {
+            erpd: 2.9,
+            erpdChange: 0.2,
+            rpdPublic: 3.9,
+            rpdLoyal: -0.1,
+            losePricePublic: 38,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1150, deltaPct: 2 },
+              last30dRoomNights: { value: 655, deltaPct: 3 },
+              last30dAdr: { value: 126, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 1.9, deltaPct: 1 },
+              next3mRoomNights: { value: 97, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 39,
+            pricingCoverageQTD: 44,
+            experiencedRPD: 55,
+            visibility: 62,
+            conversion: 48,
+            revenue: 54,
+            discountQuality: 50,
+            rateParity: "clean"
+          }
+        },
+        8: {
+          metrics: {
+            erpd: 2.6,
+            erpdChange: 0.2,
+            rpdPublic: 3.6,
+            rpdLoyal: -0.2,
+            losePricePublic: 36,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1160, deltaPct: 2 },
+              last30dRoomNights: { value: 660, deltaPct: 3 },
+              last30dAdr: { value: 127, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2, deltaPct: 1 },
+              next3mRoomNights: { value: 98, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 35,
+            pricingCoverageQTD: 46,
+            experiencedRPD: 56,
+            visibility: 63,
+            conversion: 49,
+            revenue: 55,
+            discountQuality: 51,
+            rateParity: "clean"
+          }
+        },
+        9: {
+          metrics: {
+            erpd: 2.8,
+            erpdChange: 0.2,
+            rpdPublic: 3.8,
+            rpdLoyal: -0.1,
+            losePricePublic: 37,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1170, deltaPct: 2 },
+              last30dRoomNights: { value: 665, deltaPct: 3 },
+              last30dAdr: { value: 128, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2, deltaPct: 1 },
+              next3mRoomNights: { value: 99, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 31,
+            pricingCoverageQTD: 47,
+            experiencedRPD: 57,
+            visibility: 64,
+            conversion: 50,
+            revenue: 56,
+            discountQuality: 52,
+            rateParity: "clean"
+          }
+        },
+        10: {
+          metrics: {
+            erpd: 2.9,
+            erpdChange: 0.2,
+            rpdPublic: 3.9,
+            rpdLoyal: -0.1,
+            losePricePublic: 38,
+            activeScenarios: 1,
+            activeScenarioNames: ["Brand.com"],
+            competitor: "brand",
+            secondaryMetrics: {
+              last30dAbrn: { value: 1175, deltaPct: 2 },
+              last30dRoomNights: { value: 670, deltaPct: 3 },
+              last30dAdr: { value: 128, deltaPct: 1 },
+              last90dPageViews: { value: 0 },
+              last90dConversion: { value: 2, deltaPct: 1 },
+              next3mRoomNights: { value: 100, deltaPct: 2 }
+            },
+            lastPricingContactDaysAgo: 28,
+            pricingCoverageQTD: 49,
+            experiencedRPD: 58,
+            visibility: 65,
+            conversion: 51,
+            revenue: 57,
+            discountQuality: 53,
+            rateParity: "clean"
+          }
+        },
+        // Level 2 (R11-R16): Carlos is a healthy decoy across all six OPC
+        // rounds, same as Marina, so the reused lead partner is the clear
+        // priority on the unlocked OPC lens.
+        11: { metrics: carlosL2DecoyMetrics() },
+        12: { metrics: carlosL2DecoyMetrics() },
+        13: { metrics: carlosL2DecoyMetrics() },
+        14: { metrics: carlosL2DecoyMetrics() },
+        15: { metrics: carlosL2DecoyMetrics() },
+        16: { metrics: carlosL2DecoyMetrics() },
+        17: { metrics: carlosL2DecoyMetrics() },
+        18: { metrics: carlosL2DecoyMetrics() },
+        19: { metrics: carlosL2DecoyMetrics() },
+        20: { metrics: carlosL2DecoyMetrics() }
+      }
+    };
+    for (const [baseId, rounds] of Object.entries(HEALTHY_DECOY_ROUNDS)) {
+      const entry = partnerStateByRound[baseId] ??= {};
+      for (const round of rounds) {
+        entry[round] = { metrics: healthyDecoyMetricsFor(baseId) };
+      }
+    }
+    for (let round = 1; round <= 20; round++) {
+      const closeId = `${KAM_CLOSE_BY_ROUND[round]}-cross-regional`;
+      (partnerStateByRound[closeId] ??= {})[round] = {
+        metrics: closeDecoyMetricsFor(KAM_CLOSE_BY_ROUND[round])
+      };
+      const distId = `${KAM_DIST_BY_ROUND[round]}-cross-regional`;
+      (partnerStateByRound[distId] ??= {})[round] = {
+        metrics: healthyDecoyMetricsFor(KAM_DIST_BY_ROUND[round])
+      };
+    }
+  }
+});
+
+// src/engine/gameEngine.ts
+var TOTAL_ROUNDS;
+var init_gameEngine = __esm({
+  "src/engine/gameEngine.ts"() {
+    init_partners();
+    init_market();
+    init_conversations();
+    init_branchingScenarios();
+    init_partnerStateByRound();
+    init_correctPartnerPerRound();
+    init_grading();
+    TOTAL_ROUNDS = 20;
+  }
+});
+
+// src/util/autopilot.ts
+var autopilot_exports = {};
+__export(autopilot_exports, {
+  AUTOPILOT_ENABLED: () => AUTOPILOT_ENABLED,
+  runAutopilot: () => runAutopilot
+});
+function buildChoices(tree, round, primaryStyle) {
+  const choices = tree.steps.map((s) => (s.options.find((o) => o.optimal) ?? s.options[0]).id);
+  const lastIdx = tree.steps.length - 1;
+  const safeStyle = (o) => (o.styleMatch[primaryStyle] ?? 0) > -2;
+  const pick = (test) => {
+    for (let i = 0; i < lastIdx; i++) {
+      const alt = tree.steps[i].options.find((o) => test(o) && safeStyle(o));
+      if (alt) {
+        choices[i] = alt.id;
+        return;
+      }
+    }
+  };
+  if (round % 5 === 0) pick((o) => !o.optimal && o.compliance === "borderline");
+  else if (round % 3 === 0) pick((o) => !o.optimal && o.compliance === "safe");
+  return choices;
+}
+async function runAutopilot(regime, onProgress, delayMs = 70) {
+  beginAutopilotCapture();
+  xapiInitialized();
+  let correct = 0;
+  for (const id of CLEARANCE_ITEMS) {
+    const isCorrect = !CLEARANCE_WRONG.has(id);
+    if (isCorrect) correct += 1;
+    xapiClearanceItem(id, isCorrect);
+  }
+  xapiClearancePassed(Math.round(correct / CLEARANCE_ITEMS.length * 100));
+  xapiLevelMilestone("L0", { roundsCompleted: 0 });
+  const roundStars = {};
+  let totalStars = 0;
+  for (let round = 1; round <= TOTAL_ROUNDS; round++) {
+    const level = round > 10 ? "L2" : "L1";
+    const correctId = getCorrectPartnerForRound(regime, round);
+    const tree = correctId ? getBranchingScenario(correctId, round) : null;
+    if (!correctId || !tree) continue;
+    const primaryStyle = styleById.get(correctId) ?? "blue";
+    const gradeOf = (c) => gradeBranchingRound({
+      tree,
+      choices: c,
+      selectedPartnerId: correctId,
+      regime,
+      partnerPrimaryStyle: primaryStyle
+    }).stars;
+    let choices = buildChoices(tree, round, primaryStyle);
+    let stars = gradeOf(choices);
+    if (stars === 0) {
+      choices = tree.steps.map((s) => (s.options.find((o) => o.optimal) ?? s.options[0]).id);
+      stars = gradeOf(choices);
+    }
+    xapiRoundStarted(round, level);
+    choices.forEach((optionId, idx) => {
+      const step = tree.steps[idx];
+      const opt = step?.options.find((o) => o.id === optionId);
+      if (!step || !opt) return;
+      xapiDecision({
+        round,
+        level,
+        partnerId: correctId,
+        stepId: step.id,
+        optionId,
+        compliance: opt.compliance,
+        styleMatch: opt.styleMatch[primaryStyle] ?? 0,
+        optimal: !!opt.optimal
+      });
+    });
+    roundStars[round] = stars;
+    totalStars += stars;
+    xapiRoundCompleted(round, level, stars);
+    if (round === 10) xapiLevelMilestone("L1", { roundsCompleted: 10, totalStars });
+    if (round === 20) xapiLevelMilestone("L2", { roundsCompleted: 10, totalStars });
+  }
+  xapiCompleted(Math.round(totalStars / (TOTAL_ROUNDS * 3) * 100));
+  const total2 = await flushAutopilot(onProgress, delayMs);
+  return { total: total2, roundStars };
+}
+var AUTOPILOT_ENABLED, styleById, CLEARANCE_ITEMS, CLEARANCE_WRONG;
+var init_autopilot = __esm({
+  "src/util/autopilot.ts"() {
+    init_xapi();
+    init_correctPartnerPerRound();
+    init_branchingScenarios();
+    init_grading();
+    init_gameEngine();
+    init_partners();
+    AUTOPILOT_ENABLED = true;
+    styleById = new Map(initialPartners.map((p) => [p.persona.id, p.persona.style]));
+    CLEARANCE_ITEMS = [
+      "A1",
+      "A2",
+      "A3",
+      "A4",
+      "A5",
+      "A6",
+      "A7",
+      "A8",
+      "A9",
+      "A10",
+      "A11",
+      "A12",
+      "B1",
+      "B2",
+      "data-insights-priority",
+      "data-insights-improving",
+      "data-insights-public-vs-loyal",
+      "email-audit-p1",
+      "email-audit-p2",
+      "email-audit-p3",
+      "email-audit-p4",
+      "email-audit-p5",
+      "mini-scenario-mobile-gap-signal",
+      "mini-scenario-mobile-gap-diagnose",
+      "mini-scenario-mobile-gap-narrative",
+      "mini-scenario-mobile-gap-next-step"
+    ];
+    CLEARANCE_WRONG = /* @__PURE__ */ new Set(["mini-scenario-mobile-gap-signal"]);
+  }
+});
+
 // scripts/xapi-harness.entry.ts
 var captured = [];
 var actorParam = encodeURIComponent(
@@ -13621,6 +14724,7 @@ var { getCorrectPartnerForRound: getCorrectPartnerForRound2 } = await Promise.re
 var { kamCorrectId: kamCorrectId2 } = await Promise.resolve().then(() => (init_kamLayout(), kamLayout_exports));
 var { initialPartners: initialPartners2 } = await Promise.resolve().then(() => (init_partners(), partners_exports));
 var { gradeBranchingRound: gradeBranchingRound2 } = await Promise.resolve().then(() => (init_grading(), grading_exports));
+var { runAutopilot: runAutopilot2 } = await Promise.resolve().then(() => (init_autopilot(), autopilot_exports));
 var partnerById = new Map(initialPartners2.map((p) => [p.persona.id, p]));
 var fail = 0;
 var bad = (m) => {
@@ -13799,6 +14903,27 @@ expect("borderline pick now passes at 1 (no forced retake)", grade(strongAlt, ["
 expect("risky pick (legal breach) still 0", grade(strongAlt, ["x", "o", "o"]), 0);
 expect("wrong partner still 0", gradeBranchingRound2({ tree: strongAlt, choices: ["o", "o", "o"], selectedPartnerId: "not-the-priority", regime: "none", partnerPrimaryStyle: "blue" }).stars, 0);
 console.log("\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch=1, borderline=1, risky=0, wrong-partner=0");
+captured.length = 0;
+var ap = await runAutopilot2("none", void 0, 0);
+var apDecisions = captured.filter((c) => {
+  const v = c.stmt.verb.id;
+  const ext = c.stmt.context.extensions ?? {};
+  return v.endsWith("/answered") && Object.keys(ext).some((k) => k.endsWith("/step-id"));
+}).length;
+var apStars = Object.values(ap.roundStars);
+var apMixed = apStars.includes(3) && apStars.some((s) => s < 3);
+for (const c of captured) {
+  const o = c.stmt.object;
+  if (!o?.id || !o.id.startsWith("http")) bad("autopilot stmt object not an IRI");
+}
+console.log(`
+Autopilot: ${ap.total} statements sent, ${apDecisions} decisions, round stars ${JSON.stringify(ap.roundStars)}`);
+if (ap.total < 100) bad(`autopilot emitted only ${ap.total} statements (expected ~180+)`);
+if (apDecisions < 50) bad(`autopilot decisions ${apDecisions} too few`);
+if (!apMixed) bad(`autopilot stars should be a MIX of 3 and <3, got ${apStars.join(",")}`);
+if (apStars.some((s) => s === 0)) bad(`autopilot produced a failed (0-star) round: ${apStars.join(",")}`);
+if (apStars.length !== 20) bad(`autopilot graded ${apStars.length} rounds (expected 20)`);
+if (captured.length !== ap.total) bad(`autopilot sent ${captured.length} but reported ${ap.total}`);
 console.log(`
 ${fail === 0 ? "PASS" : "FAIL"} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);

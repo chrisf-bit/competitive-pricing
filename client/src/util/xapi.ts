@@ -230,8 +230,55 @@ function buffer(s: Statement) {
   }
 }
 
+// ───────── Autopilot (test-run) sequential sender ─────────
+// When capturing, post() enqueues here instead of firing; flushAutopilot
+// then sends each statement one at a time (awaited, spaced) so none are
+// dropped by batch rejection. Used only by the hidden test-run tile.
+let autopilotQueue: Statement[] | null = null;
+const sleep = (ms: number) => new Promise<void>((r) => window.setTimeout(r, ms));
+
+export function beginAutopilotCapture(): void {
+  autopilotQueue = [];
+}
+
+export async function flushAutopilot(
+  onProgress?: (sent: number, total: number) => void,
+  delayMs = 70,
+): Promise<number> {
+  const q = autopilotQueue ?? [];
+  autopilotQueue = null;
+  const total = q.length;
+  if (!isXapiLaunch()) {
+    // Dev / preview: no LRS to send to, but still report progress so the
+    // UI animates to completion.
+    for (let i = 0; i < total; i++) onProgress?.(i + 1, total);
+    return total;
+  }
+  for (let i = 0; i < total; i++) {
+    try {
+      await fetch(`${LAUNCH.endpoint}statements`, {
+        method: 'POST',
+        headers: headers(),
+        body: JSON.stringify([q[i]]),
+        keepalive: true,
+      });
+    } catch {
+      /* skip a failed one, keep going */
+    }
+    onProgress?.(i + 1, total);
+    if (delayMs) await sleep(delayMs);
+  }
+  return total;
+}
+
 function post(s: Statement) {
   buffer(s);
+  // Autopilot capture: defer to the sequential sender rather than the
+  // normal fire-and-forget path, so a full test run posts one at a time.
+  if (autopilotQueue) {
+    autopilotQueue.push(s);
+    return;
+  }
   if (!isXapiLaunch()) return;
   // One statement per request - a rejected statement can never drop
   // others, and the LMS marks completion from the launched-activity one.
