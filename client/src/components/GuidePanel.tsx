@@ -605,7 +605,7 @@ function getGuideContent(
             active: true,
             cta: {
               label: 'Commercial Guide',
-              href: 'https://cdn5.dcbstatic.com/files/b/o/booking_docebosaas_com/1790956800/V3PMa_5hjgN87bCXAj7Z8Q/tincan/40777_1790947122_o_1k3uc8bmo1pj51pl51q601bcd514b_zip/index.html',
+              href: 'https://booking.docebosaas.com/learn/courses/29165/rate-right-competitive-pricing-simulation-game/lessons/62276/rate-right-commercial-guide',
             },
           },
         ],

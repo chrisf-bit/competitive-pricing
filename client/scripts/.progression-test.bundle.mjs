@@ -17873,6 +17873,8 @@ function gradeBranchingRound(input) {
     (choiceId, idx) => tree2.steps[idx]?.options.find((o) => o.id === choiceId)
   ).filter((o) => !!o);
   const allCompliant = pickedOptions.every((o) => o.compliance === "safe");
+  const hasRisky = pickedOptions.some((o) => o.compliance === "risky");
+  const hasBorderline = pickedOptions.some((o) => o.compliance === "borderline");
   const styleScores = pickedOptions.map(
     (o) => o.styleMatch[partnerPrimaryStyle] ?? 0
   );
@@ -17886,7 +17888,7 @@ function gradeBranchingRound(input) {
   let failureReason = null;
   if (!rightPartner) {
     failureReason = "wrong-partner";
-  } else if (!allCompliant) {
+  } else if (hasRisky) {
     failureReason = "unsafe-pick";
   } else if (!noActiveMismatch) {
     failureReason = "style-mismatch";
@@ -17896,7 +17898,7 @@ function gradeBranchingRound(input) {
   let stars2;
   if (failureReason !== null) {
     stars2 = 0;
-  } else if (!pitchCorrect) {
+  } else if (!pitchCorrect || hasBorderline) {
     stars2 = 1;
   } else {
     let s2 = 1;

@@ -13534,6 +13534,8 @@ function gradeBranchingRound(input) {
     (choiceId, idx) => tree.steps[idx]?.options.find((o) => o.id === choiceId)
   ).filter((o) => !!o);
   const allCompliant = pickedOptions.every((o) => o.compliance === "safe");
+  const hasRisky = pickedOptions.some((o) => o.compliance === "risky");
+  const hasBorderline = pickedOptions.some((o) => o.compliance === "borderline");
   const styleScores = pickedOptions.map(
     (o) => o.styleMatch[partnerPrimaryStyle] ?? 0
   );
@@ -13547,7 +13549,7 @@ function gradeBranchingRound(input) {
   let failureReason = null;
   if (!rightPartner) {
     failureReason = "wrong-partner";
-  } else if (!allCompliant) {
+  } else if (hasRisky) {
     failureReason = "unsafe-pick";
   } else if (!noActiveMismatch) {
     failureReason = "style-mismatch";
@@ -13557,7 +13559,7 @@ function gradeBranchingRound(input) {
   let stars;
   if (failureReason !== null) {
     stars = 0;
-  } else if (!pitchCorrect) {
+  } else if (!pitchCorrect || hasBorderline) {
     stars = 1;
   } else {
     let s = 1;
@@ -13774,9 +13776,9 @@ var mkTree = (steps11) => ({
 });
 var grade = (tree, choices) => gradeBranchingRound2({ tree, choices, selectedPartnerId: priId1, regime: "none", partnerPrimaryStyle: "blue" }).stars;
 var strongAlt = mkTree([
-  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2)],
-  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2)],
-  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2)]
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2), mkOpt2("x", false, "risky", 2)],
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2), mkOpt2("x", false, "risky", 2)],
+  [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 2), mkOpt2("r", false, "borderline", 2), mkOpt2("x", false, "risky", 2)]
 ]);
 var weakAlt = mkTree([
   [mkOpt2("o", true, "safe", 2), mkOpt2("a", false, "safe", 0)],
@@ -13793,9 +13795,10 @@ expect("all-optimal", grade(strongAlt, ["o", "o", "o"]), 3);
 expect("non-optimal diagnosis, strong style, optimal pitch", grade(strongAlt, ["a", "a", "o"]), 2);
 expect("non-optimal diagnosis, weak style, optimal pitch", grade(weakAlt, ["a", "a", "o"]), 1);
 expect("wrong pitch but compliant (now passes at 1)", grade(strongAlt, ["o", "o", "a"]), 1);
-expect("compliance breach (borderline pick) still 0", grade(strongAlt, ["r", "o", "o"]), 0);
+expect("borderline pick now passes at 1 (no forced retake)", grade(strongAlt, ["r", "o", "o"]), 1);
+expect("risky pick (legal breach) still 0", grade(strongAlt, ["x", "o", "o"]), 0);
 expect("wrong partner still 0", gradeBranchingRound2({ tree: strongAlt, choices: ["o", "o", "o"], selectedPartnerId: "not-the-priority", regime: "none", partnerPrimaryStyle: "blue" }).stars, 0);
-console.log("\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch-compliant=1, breach=0, wrong-partner=0");
+console.log("\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch=1, borderline=1, risky=0, wrong-partner=0");
 console.log(`
 ${fail === 0 ? "PASS" : "FAIL"} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);

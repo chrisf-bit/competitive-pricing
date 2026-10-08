@@ -258,9 +258,9 @@ const grade = (tree: ReturnType<typeof mkTree>, choices: string[]) =>
 
 // Tree where alternates are strong-style + safe.
 const strongAlt = mkTree([
-  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2)],
-  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2)],
-  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2), mkOpt2('x', false, 'risky', 2)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2), mkOpt2('x', false, 'risky', 2)],
+  [mkOpt2('o', true, 'safe', 2), mkOpt2('a', false, 'safe', 2), mkOpt2('r', false, 'borderline', 2), mkOpt2('x', false, 'risky', 2)],
 ] as unknown as Opt[][]);
 // Tree where alternates are weak-style + safe.
 const weakAlt = mkTree([
@@ -280,9 +280,10 @@ expect('all-optimal', grade(strongAlt, ['o', 'o', 'o']), 3);
 expect('non-optimal diagnosis, strong style, optimal pitch', grade(strongAlt, ['a', 'a', 'o']), 2);
 expect('non-optimal diagnosis, weak style, optimal pitch', grade(weakAlt, ['a', 'a', 'o']), 1);
 expect('wrong pitch but compliant (now passes at 1)', grade(strongAlt, ['o', 'o', 'a']), 1);
-expect('compliance breach (borderline pick) still 0', grade(strongAlt, ['r', 'o', 'o']), 0);
+expect('borderline pick now passes at 1 (no forced retake)', grade(strongAlt, ['r', 'o', 'o']), 1);
+expect('risky pick (legal breach) still 0', grade(strongAlt, ['x', 'o', 'o']), 0);
 expect('wrong partner still 0', gradeBranchingRound({ tree: strongAlt, choices: ['o', 'o', 'o'], selectedPartnerId: 'not-the-priority', regime: 'none', partnerPrimaryStyle: 'blue' }).stars, 0);
-console.log('\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch-compliant=1, breach=0, wrong-partner=0');
+console.log('\nTier spread: optimal=3, ok=2, weak=1, wrong-pitch=1, borderline=1, risky=0, wrong-partner=0');
 
 console.log(`\n${fail === 0 ? 'PASS' : 'FAIL'} - xAPI harness: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);
