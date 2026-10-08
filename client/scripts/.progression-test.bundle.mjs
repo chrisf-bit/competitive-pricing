@@ -17886,8 +17886,6 @@ function gradeBranchingRound(input) {
   let failureReason = null;
   if (!rightPartner) {
     failureReason = "wrong-partner";
-  } else if (!pitchCorrect) {
-    failureReason = "wrong-pitch";
   } else if (!allCompliant) {
     failureReason = "unsafe-pick";
   } else if (!noActiveMismatch) {
@@ -17898,6 +17896,8 @@ function gradeBranchingRound(input) {
   let stars2;
   if (failureReason !== null) {
     stars2 = 0;
+  } else if (!pitchCorrect) {
+    stars2 = 1;
   } else {
     let s2 = 1;
     if (diagnosisCorrect) s2 += 1;
