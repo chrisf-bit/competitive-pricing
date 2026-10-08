@@ -32,6 +32,8 @@ g.window = {
       `&actor=${actorParam}`,
   },
   crypto: { randomUUID: () => `uuid-${(n++).toString(16).padStart(8, '0')}` },
+  setTimeout: (fn: () => void, ms: number) => globalThis.setTimeout(fn, ms),
+  clearTimeout: (id: number) => globalThis.clearTimeout(id),
 };
 g.localStorage = (() => {
   const m = new Map<string, string>();

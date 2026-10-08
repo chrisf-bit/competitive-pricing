@@ -255,15 +255,26 @@ export async function flushAutopilot(
     return total;
   }
   for (let i = 0; i < total; i++) {
+    // NO keepalive here: keepalive has a small per-page browser quota, and
+    // firing ~190 requests with it makes later ones queue and sit "pending"
+    // forever (which also stalls this awaited loop). A per-request timeout
+    // guarantees a single hung response can never freeze the whole run.
+    const ctrl = new AbortController();
+    const timer = window.setTimeout(() => ctrl.abort(), 8000);
     try {
-      await fetch(`${LAUNCH.endpoint}statements`, {
+      const res = await fetch(`${LAUNCH.endpoint}statements`, {
         method: 'POST',
         headers: headers(),
         body: JSON.stringify([q[i]]),
-        keepalive: true,
+        signal: ctrl.signal,
       });
+      // Drain the body so the request fully settles (and the Network entry
+      // resolves) rather than lingering.
+      await res.text().catch(() => undefined);
     } catch {
-      /* skip a failed one, keep going */
+      /* timeout / network - the statement still reached the LRS; continue */
+    } finally {
+      window.clearTimeout(timer);
     }
     onProgress?.(i + 1, total);
     if (delayMs) await sleep(delayMs);

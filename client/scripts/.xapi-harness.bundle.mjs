@@ -149,14 +149,19 @@ async function flushAutopilot(onProgress, delayMs = 70) {
     return total2;
   }
   for (let i = 0; i < total2; i++) {
+    const ctrl = new AbortController();
+    const timer = window.setTimeout(() => ctrl.abort(), 8e3);
     try {
-      await fetch(`${LAUNCH.endpoint}statements`, {
+      const res = await fetch(`${LAUNCH.endpoint}statements`, {
         method: "POST",
         headers: headers(),
         body: JSON.stringify([q[i]]),
-        keepalive: true
+        signal: ctrl.signal
       });
+      await res.text().catch(() => void 0);
     } catch {
+    } finally {
+      window.clearTimeout(timer);
     }
     onProgress?.(i + 1, total2);
     if (delayMs) await sleep(delayMs);
@@ -14699,7 +14704,9 @@ g.window = {
   location: {
     search: `?endpoint=${encodeURIComponent("https://lrs.example/")}&auth=${encodeURIComponent("Basic Zm9vOmJhcg==")}&registration=reg-123&activity_id=${encodeURIComponent("https://booking.com/xapi/rate-right")}&actor=${actorParam}`
   },
-  crypto: { randomUUID: () => `uuid-${(n++).toString(16).padStart(8, "0")}` }
+  crypto: { randomUUID: () => `uuid-${(n++).toString(16).padStart(8, "0")}` },
+  setTimeout: (fn, ms) => globalThis.setTimeout(fn, ms),
+  clearTimeout: (id) => globalThis.clearTimeout(id)
 };
 g.localStorage = /* @__PURE__ */ (() => {
   const m = /* @__PURE__ */ new Map();
