@@ -255,6 +255,11 @@ export function gradeBranchingRound(input: {
     .filter((o): o is NonNullable<typeof o> => !!o);
 
   const allCompliant = pickedOptions.every((o) => o.compliance === 'safe');
+  // Split the two non-safe tiers: a RISKY pick is an actual legal breach
+  // (hard 0); a BORDERLINE pick is legal but commercially off - it caps
+  // the score but does NOT zero the round (so it never forces a retake).
+  const hasRisky = pickedOptions.some((o) => o.compliance === 'risky');
+  const hasBorderline = pickedOptions.some((o) => o.compliance === 'borderline');
 
   const styleScores = pickedOptions.map(
     (o) => o.styleMatch[partnerPrimaryStyle] ?? 0,
@@ -278,33 +283,34 @@ export function gradeBranchingRound(input: {
     optimalNonFinal >= Math.ceil(nonFinalPicks.length / 2);
   const pitchCorrect = !!finalPick?.optimal;
 
-  // Hard floor (any failure = 0 stars): right partner, every pick
-  // compliant, and no active style mismatch. Neither the diagnosis NOR the
-  // recommendation (pitch) is a hard gate any more - a compliant,
-  // right-partner call earns at least 1 star even if the recommendation
-  // was wrong. A compliance breach or the wrong partner still fails hard.
+  // Hard floor (any failure = 0 stars): right partner, no RISKY pick (an
+  // actual legal breach), and no active style mismatch. A BORDERLINE pick
+  // (legal but commercially off) no longer zeroes the round - it caps the
+  // score instead (see tiering). So only a true breach, the wrong partner,
+  // or a hard style mismatch forces a retake; neither the diagnosis nor the
+  // recommendation is a hard gate.
   let failureReason: GradingFailureReason | null = null;
   if (!rightPartner) {
     failureReason = 'wrong-partner';
-  } else if (!allCompliant) {
+  } else if (hasRisky) {
     failureReason = 'unsafe-pick';
   } else if (!noActiveMismatch) {
     failureReason = 'style-mismatch';
   }
 
-  // Tiering. Base 1 for clearing the floor. The call can only climb above
-  // 1 star if the RECOMMENDATION (pitch) was right: +1 when the diagnosis
-  // was also optimal, +1 for strong style - so the fully-optimal route
-  // still scores 3. A wrong recommendation caps the call at 1 star (it
-  // passed compliantly, but it would not have fixed the issue). Strong
-  // style is the per-step AVERAGE >= 1.33 (integer-safe
-  // styleSum*3 >= styleCount*4).
+  // Tiering. Base 1 for clearing the floor. A call climbs above 1 star only
+  // if the RECOMMENDATION (pitch) was right AND every pick stayed fully
+  // compliant (no borderline): +1 when the diagnosis was also optimal, +1
+  // for strong style - so the fully-optimal route scores 3. A wrong
+  // recommendation OR a borderline (commercially-off) pick caps the call at
+  // 1 star: it passes, but it is not a clean call. Strong style is the
+  // per-step AVERAGE >= 1.33 (integer-safe styleSum*3 >= styleCount*4).
   const styleCount = styleScores.length;
   const strongStyle = styleCount > 0 && styleSum * 3 >= styleCount * 4;
   let stars: 0 | 1 | 2 | 3;
   if (failureReason !== null) {
     stars = 0;
-  } else if (!pitchCorrect) {
+  } else if (!pitchCorrect || hasBorderline) {
     stars = 1;
   } else {
     let s = 1;
