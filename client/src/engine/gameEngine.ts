@@ -741,6 +741,31 @@ export function endConversation(state: GameState): GameState {
 // learner's action budget for the round, and clears the failed grade.
 // The learner lands back on the portfolio able to engage any partner
 // (typically the one they should have picked) afresh.
+/**
+ * Whether `partnerId` should read as "already engaged this round" for the
+ * Begin Conversation gate. A partner counts as engaged once they're in
+ * actionsThisRound or previouslyEngagedThisRound. The ONE exception: the
+ * round's CORRECT priority partner stays engageable until the round is
+ * actually passed (>= 1 star). This stops a hard lockout - a learner who
+ * tried every card, or who left a failed call via Round Select instead of
+ * the Retake button, can never be shut out of the only partner that can
+ * earn them the star. Wrong-pick decoys stay locked so a retake isn't
+ * wasted re-calling them.
+ */
+export function isAlreadyEngaged(state: GameState, partnerId: string): boolean {
+  const engaged =
+    state.actionsThisRound.includes(partnerId) ||
+    state.previouslyEngagedThisRound.includes(partnerId);
+  if (!engaged) return false;
+  const regime = state.learnerProfile.market?.parityRegime ?? null;
+  const correctId = regime
+    ? getCorrectPartnerForRound(regime, state.currentRound)
+    : null;
+  const roundPassed = (state.roundStars[state.currentRound] ?? 0) >= 1;
+  if (partnerId === correctId && !roundPassed) return false;
+  return true;
+}
+
 export function resetRoundForRetake(state: GameState): GameState {
   const conv = state.conversationInProgress;
   if (!conv) {

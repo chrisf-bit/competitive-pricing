@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './index.css';
 import { useGame } from './hooks/useGame';
-import { TOTAL_ROUNDS } from './engine/gameEngine';
+import { TOTAL_ROUNDS, isAlreadyEngaged } from './engine/gameEngine';
 import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
@@ -434,10 +434,7 @@ export default function App() {
             <PartnerDetailScreen
               partner={partner}
               currentRound={state.currentRound}
-              alreadyEngaged={
-                state.actionsThisRound.includes(partner.persona.id) ||
-                state.previouslyEngagedThisRound.includes(partner.persona.id)
-              }
+              alreadyEngaged={isAlreadyEngaged(state, partner.persona.id)}
               personaId={state.learnerProfile.archetype?.id ?? null}
               issueTreeHelperStates={state.issueTreeHelperStates}
               onSetIssueTreeHelperState={game.setIssueTreeHelperState}

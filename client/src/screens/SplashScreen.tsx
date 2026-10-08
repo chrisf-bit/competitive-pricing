@@ -75,7 +75,7 @@ export function SplashScreen({ onBegin }: SplashScreenProps) {
           pointerEvents: 'none',
         }}
       >
-        V5
+        V6
       </div>
 
       {/* Centered content group: title + Begin/loader + Reset. In normal
