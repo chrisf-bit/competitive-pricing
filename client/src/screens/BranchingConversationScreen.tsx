@@ -162,6 +162,7 @@ export function BranchingConversationScreen({
         level: currentRound > 10 ? 'L2' : 'L1',
         partnerId: partner.persona.id,
         stepId: step.id,
+        stepNumber: conversation.phaseIndex + 1,
         optionId,
         compliance: picked.compliance,
         styleMatch: picked.styleMatch[partner.persona.style] ?? 0,

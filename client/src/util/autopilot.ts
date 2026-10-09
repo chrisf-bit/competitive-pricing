@@ -20,7 +20,6 @@ import {
   xapiRoundStarted,
   xapiDecision,
   xapiRoundCompleted,
-  xapiCompleted,
   beginAutopilotCapture,
   flushAutopilot,
   type Level,
@@ -131,6 +130,7 @@ export async function runAutopilot(
         level,
         partnerId: correctId,
         stepId: step.id,
+        stepNumber: idx + 1,
         optionId,
         compliance: opt.compliance,
         styleMatch: opt.styleMatch[primaryStyle] ?? 0,
@@ -146,8 +146,10 @@ export async function runAutopilot(
     if (round === 20) xapiLevelMilestone('L2', { roundsCompleted: 10, totalStars });
   }
 
-  xapiCompleted(Math.round((totalStars / (TOTAL_ROUNDS * 3)) * 100));
-
+  // NOTE: completion is emitted ONCE by the app when it routes to the
+  // Debrief after this returns (applyAutopilotCompletion -> debrief ->
+  // the App xAPI effect). Emitting it here too produced a duplicate
+  // `completed` statement, so it's intentionally left to the app.
   const total = await flushAutopilot(onProgress, delayMs);
   return { total, roundStars };
 }

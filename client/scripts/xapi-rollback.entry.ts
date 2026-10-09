@@ -60,6 +60,7 @@ xapi.xapiDecision({
   level: 'L1',
   partnerId: 'royal-crest',
   stepId: 's1',
+  stepNumber: 1,
   optionId: 'o1',
   compliance: 'safe',
   styleMatch: 2,

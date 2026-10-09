@@ -136,7 +136,7 @@ for (let round = 1; round <= 20; round++) {
   const tree = getBranchingScenario(priId, round)!;
   const partner = partnerById.get(priId)!;
   xapi.xapiRoundStarted(round, level);
-  for (const step of tree.steps) {
+  tree.steps.forEach((step, si) => {
     const opt = step.options.find((o) => o.optimal) ?? step.options[0];
     expectedDecisions++;
     xapi.xapiDecision({
@@ -144,12 +144,13 @@ for (let round = 1; round <= 20; round++) {
       level,
       partnerId: priId,
       stepId: step.id,
+      stepNumber: si + 1,
       optionId: opt.id,
       compliance: opt.compliance,
       styleMatch: opt.styleMatch[partner.persona.style as CommunicationStyle] ?? 0,
       optimal: !!opt.optimal,
     });
-  }
+  });
   xapi.xapiRoundCompleted(round, level, 3);
   if (round === 10) xapi.xapiLevelMilestone('L1', { roundsCompleted: 10, totalStars: 30 });
   if (round === 20) xapi.xapiLevelMilestone('L2', { roundsCompleted: 10, totalStars: 60 });

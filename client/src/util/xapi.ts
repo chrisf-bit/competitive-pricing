@@ -155,6 +155,7 @@ type ContextExtras = {
   'rounds-completed'?: number;
   'total-stars'?: number;
   'step-id'?: string;
+  'step-number'?: number;
   'partner-id'?: string;
   'option-id'?: string;
   compliance?: string;
@@ -375,6 +376,7 @@ export function xapiDecision(args: {
   level: Level;
   partnerId: string;
   stepId: string;
+  stepNumber: number;
   optionId: string;
   compliance: string;
   styleMatch: number;
@@ -384,21 +386,21 @@ export function xapiDecision(args: {
   objectionCode?: string;
 }) {
   if (!EMIT_GRANULAR) return;
-  // Emit the decision against the ROUND activity (/round-{n}) - the same
-  // object id round-started / round-completed use, which the LRS stores
-  // reliably. The earlier per-step id (/l{n}/r{n}/{step}) was a novel
-  // activity Docebo's LRS rejected, so those statements never landed. The
-  // per-decision detail (step, option, compliance, capability, objection,
-  // optimal, outcome) rides in the extensions + result, which is where the
-  // reporting pipeline reads it anyway - so no data is lost.
+  // Each decision is a UNIQUE object per step (/round-{n}/step-{m}) with a
+  // readable name, mirroring the clearance items - so each shows as its own
+  // "Round N - Step M" line in Docebo AND the LRS keys them separately. The
+  // per-decision detail (step id/number, option, compliance, style, optimal,
+  // and the optional capability/objection codes) rides in the extensions +
+  // result, which is what the reporting pipeline reads.
   emitInteraction(
     'answered',
-    `/round-${args.round}`,
-    `Round ${args.round}`,
+    `/round-${args.round}/step-${args.stepNumber}`,
+    `Round ${args.round} - Step ${args.stepNumber}`,
     {
       level: args.level,
       round: args.round,
       'step-id': args.stepId,
+      'step-number': args.stepNumber,
       'partner-id': args.partnerId,
       'option-id': args.optionId,
       compliance: args.compliance,

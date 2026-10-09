@@ -11,6 +11,8 @@ var __export = (target, all) => {
 // src/util/xapi.ts
 var xapi_exports = {};
 __export(xapi_exports, {
+  beginAutopilotCapture: () => beginAutopilotCapture,
+  flushAutopilot: () => flushAutopilot,
   getState: () => getState,
   granularEnabled: () => granularEnabled,
   isXapiLaunch: () => isXapiLaunch,
@@ -135,8 +137,43 @@ function buffer(s) {
   } catch {
   }
 }
+function beginAutopilotCapture() {
+  autopilotQueue = [];
+}
+async function flushAutopilot(onProgress, delayMs = 70) {
+  const q = autopilotQueue ?? [];
+  autopilotQueue = null;
+  const total = q.length;
+  if (!isXapiLaunch()) {
+    for (let i = 0; i < total; i++) onProgress?.(i + 1, total);
+    return total;
+  }
+  for (let i = 0; i < total; i++) {
+    const ctrl = new AbortController();
+    const timer = window.setTimeout(() => ctrl.abort(), 8e3);
+    try {
+      const res = await fetch(`${LAUNCH.endpoint}statements`, {
+        method: "POST",
+        headers: headers(),
+        body: JSON.stringify([q[i]]),
+        signal: ctrl.signal
+      });
+      await res.text().catch(() => void 0);
+    } catch {
+    } finally {
+      window.clearTimeout(timer);
+    }
+    onProgress?.(i + 1, total);
+    if (delayMs) await sleep(delayMs);
+  }
+  return total;
+}
 function post(s) {
   buffer(s);
+  if (autopilotQueue) {
+    autopilotQueue.push(s);
+    return;
+  }
   if (!isXapiLaunch()) return;
   try {
     void fetch(`${LAUNCH.endpoint}statements`, {
@@ -195,15 +232,15 @@ function xapiRoundStarted(round, level) {
 }
 function xapiDecision(args) {
   if (!EMIT_GRANULAR) return;
-  const lvl = args.level === "L2" ? 2 : 1;
   emitInteraction(
     "answered",
-    `/l${lvl}/r${args.round}/${args.stepId}`,
-    `Round ${args.round} - ${args.stepId}`,
+    `/round-${args.round}/step-${args.stepNumber}`,
+    `Round ${args.round} - Step ${args.stepNumber}`,
     {
       level: args.level,
       round: args.round,
       "step-id": args.stepId,
+      "step-number": args.stepNumber,
       "partner-id": args.partnerId,
       "option-id": args.optionId,
       compliance: args.compliance,
@@ -285,7 +322,7 @@ function putState(stateId, data) {
   } catch {
   }
 }
-var XAPI_VERSION, NS, EXT, ADL, ACT, CMII, COURSE, EMIT_GRANULAR, LAUNCH, STORAGE_BUFFER;
+var XAPI_VERSION, NS, EXT, ADL, ACT, CMII, COURSE, EMIT_GRANULAR, LAUNCH, STORAGE_BUFFER, autopilotQueue, sleep;
 var init_xapi = __esm({
   "src/util/xapi.ts"() {
     XAPI_VERSION = "1.0.2";
@@ -305,6 +342,8 @@ var init_xapi = __esm({
     })();
     LAUNCH = readLaunch();
     STORAGE_BUFFER = "rateRight:xapi:buffer";
+    autopilotQueue = null;
+    sleep = (ms) => new Promise((r) => window.setTimeout(r, ms));
   }
 });
 
@@ -349,6 +388,7 @@ xapi.xapiDecision({
   level: "L1",
   partnerId: "royal-crest",
   stepId: "s1",
+  stepNumber: 1,
   optionId: "o1",
   compliance: "safe",
   styleMatch: 2,

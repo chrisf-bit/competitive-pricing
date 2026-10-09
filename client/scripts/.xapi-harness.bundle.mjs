@@ -234,12 +234,13 @@ function xapiDecision(args) {
   if (!EMIT_GRANULAR) return;
   emitInteraction(
     "answered",
-    `/round-${args.round}`,
-    `Round ${args.round}`,
+    `/round-${args.round}/step-${args.stepNumber}`,
+    `Round ${args.round} - Step ${args.stepNumber}`,
     {
       level: args.level,
       round: args.round,
       "step-id": args.stepId,
+      "step-number": args.stepNumber,
       "partner-id": args.partnerId,
       "option-id": args.optionId,
       compliance: args.compliance,
@@ -14634,6 +14635,7 @@ async function runAutopilot(regime, onProgress, delayMs = 70) {
         level,
         partnerId: correctId,
         stepId: step.id,
+        stepNumber: idx + 1,
         optionId,
         compliance: opt.compliance,
         styleMatch: opt.styleMatch[primaryStyle] ?? 0,
@@ -14646,7 +14648,6 @@ async function runAutopilot(regime, onProgress, delayMs = 70) {
     if (round === 10) xapiLevelMilestone("L1", { roundsCompleted: 10, totalStars });
     if (round === 20) xapiLevelMilestone("L2", { roundsCompleted: 10, totalStars });
   }
-  xapiCompleted(Math.round(totalStars / (TOTAL_ROUNDS * 3) * 100));
   const total2 = await flushAutopilot(onProgress, delayMs);
   return { total: total2, roundStars };
 }
@@ -14796,7 +14797,7 @@ for (let round = 1; round <= 20; round++) {
   const tree = getBranchingScenario2(priId, round);
   const partner = partnerById.get(priId);
   xapi.xapiRoundStarted(round, level);
-  for (const step of tree.steps) {
+  tree.steps.forEach((step, si) => {
     const opt = step.options.find((o) => o.optimal) ?? step.options[0];
     expectedDecisions++;
     xapi.xapiDecision({
@@ -14804,12 +14805,13 @@ for (let round = 1; round <= 20; round++) {
       level,
       partnerId: priId,
       stepId: step.id,
+      stepNumber: si + 1,
       optionId: opt.id,
       compliance: opt.compliance,
       styleMatch: opt.styleMatch[partner.persona.style] ?? 0,
       optimal: !!opt.optimal
     });
-  }
+  });
   xapi.xapiRoundCompleted(round, level, 3);
   if (round === 10) xapi.xapiLevelMilestone("L1", { roundsCompleted: 10, totalStars: 30 });
   if (round === 20) xapi.xapiLevelMilestone("L2", { roundsCompleted: 10, totalStars: 60 });
