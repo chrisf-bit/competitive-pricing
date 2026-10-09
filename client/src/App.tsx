@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import './index.css';
 import { useGame } from './hooks/useGame';
 import { TOTAL_ROUNDS, isAlreadyEngaged } from './engine/gameEngine';
-import { runAutopilot } from './util/autopilot';
 import { Header } from './components/Header';
 import { GuidePanel } from './components/GuidePanel';
 import { TutorialOverlay } from './components/TutorialOverlay';
@@ -254,12 +253,6 @@ export default function App() {
                     return;
                   }
                   game.goToScreen('round-select');
-                }}
-                onAutopilot={async (onProgress) => {
-                  const regime =
-                    state.learnerProfile.market?.parityRegime ?? 'none';
-                  const { roundStars } = await runAutopilot(regime, onProgress);
-                  game.applyAutopilotCompletion(roundStars);
                 }}
               />
             </ClearanceShell>

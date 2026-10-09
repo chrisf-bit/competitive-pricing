@@ -18235,14 +18235,69 @@ function processBranchingChoice(state, optionId) {
     }
   };
 }
+function endConversation(state) {
+  const conv = state.conversationInProgress;
+  if (!conv) return state;
+  const hasGrade = state.lastConversationGrade !== null;
+  return {
+    ...state,
+    screen: hasGrade ? "conversation-report" : "portfolio",
+    conversationInProgress: hasGrade ? state.conversationInProgress : null,
+    selectedPartnerId: hasGrade ? state.selectedPartnerId : null
+  };
+}
 function isAlreadyEngaged(state, partnerId) {
   const engaged = state.actionsThisRound.includes(partnerId) || state.previouslyEngagedThisRound.includes(partnerId);
   if (!engaged) return false;
-  const regime2 = state.learnerProfile.market?.parityRegime ?? null;
-  const correctId2 = regime2 ? getCorrectPartnerForRound(regime2, state.currentRound) : null;
+  const regime2 = state.learnerProfile.market?.parityRegime ?? "none";
+  const correctId2 = getCorrectPartnerForRound(regime2, state.currentRound);
   const roundPassed = (state.roundStars[state.currentRound] ?? 0) >= 1;
   if (partnerId === correctId2 && !roundPassed) return false;
   return true;
+}
+function resetRoundForRetake(state) {
+  const conv = state.conversationInProgress;
+  if (!conv) {
+    return {
+      ...state,
+      screen: "portfolio",
+      lastConversationGrade: null,
+      selectedPartnerId: null
+    };
+  }
+  const snapshot = conv.partnerSnapshot;
+  const newPartners = state.partners.map(
+    (p) => p.persona.id === conv.partnerId ? snapshot : p
+  );
+  const regime2 = state.learnerProfile.market?.parityRegime ?? null;
+  const correctPartnerId = regime2 ? getCorrectPartnerForRound(regime2, state.currentRound) : null;
+  const wasWrongPartner = correctPartnerId !== null && conv.partnerId !== correctPartnerId;
+  return {
+    ...state,
+    screen: "portfolio",
+    partners: newPartners,
+    actionsThisRound: state.actionsThisRound.filter(
+      (id) => id !== conv.partnerId
+    ),
+    // Retake undoes the engagement from the durable list too: the
+    // partner's state is snapshot-reverted (above), so from the
+    // debrief's perspective the wrong pick "didn't happen". Without
+    // this filter, a 0-star wrong-pick would still surface in the
+    // Debrief's Partner Outcomes + insights as an engaged partner.
+    engagedPartnerIds: state.engagedPartnerIds.filter(
+      (id) => id !== conv.partnerId
+    ),
+    // Keep the WRONG-pick partner flagged as "engaged this round" on
+    // the Portfolio + Partner Detail so the learner sees they've
+    // already tried that partner and doesn't waste the retake
+    // re-picking the same wrong call. Right partner + bad responses
+    // = the flag is skipped so the learner can retake with the same
+    // correct partner without Begin Conversation being disabled.
+    previouslyEngagedThisRound: wasWrongPartner ? state.previouslyEngagedThisRound.includes(conv.partnerId) ? state.previouslyEngagedThisRound : [...state.previouslyEngagedThisRound, conv.partnerId] : state.previouslyEngagedThisRound,
+    selectedPartnerId: null,
+    conversationInProgress: null,
+    lastConversationGrade: null
+  };
 }
 function advanceRound(state) {
   const starsThisRound = state.roundStars[state.currentRound] ?? 0;
@@ -18385,6 +18440,42 @@ var round = 1;
 var correctId = getCorrectPartnerForRound(regime, round);
 var cardIds = getPortfolioForRound(regime, round);
 var decoyIds = cardIds.filter((id) => id !== correctId);
+var ALL_REGIMES = ["none", "narrow", "wide", "cross-regional"];
+var combos = 0;
+for (const rg of ALL_REGIMES) {
+  for (let r = 1; r <= 20; r++) {
+    const cid = getCorrectPartnerForRound(rg, r);
+    const cards = getPortfolioForRound(rg, r);
+    if (!cid || !cards || cards.length !== 3) {
+      bad(`[${rg} R${r}] no correct partner / 3-card portfolio`);
+      continue;
+    }
+    combos++;
+    const decoys = cards.filter((id) => id !== cid);
+    const prof = {
+      ...profile,
+      market: { parityRegime: rg, country: "X", countryCode: "X", flag: "", city: "" }
+    };
+    const stuckAll = {
+      ...base,
+      learnerProfile: prof,
+      currentRound: r,
+      actionsThisRound: [cid],
+      previouslyEngagedThisRound: [...decoys],
+      roundStars: {}
+    };
+    if (isAlreadyEngaged(stuckAll, cid))
+      bad(`[${rg} R${r}] correct partner LOCKED OUT while round unpassed`);
+    for (const d of decoys)
+      if (!isAlreadyEngaged(stuckAll, d)) bad(`[${rg} R${r}] decoy ${d} not locked`);
+    const passedAll = { ...stuckAll, roundStars: { [r]: 2 } };
+    if (!isAlreadyEngaged(passedAll, cid))
+      bad(`[${rg} R${r}] correct partner not locked after the round is passed`);
+  }
+}
+console.log(
+  `Exhaustive no-lockout check: ${combos} round/regime combos - correct partner always callable while unpassed, decoys locked, correct locks after pass`
+);
 var stuck = {
   ...base,
   currentRound: round,
@@ -18419,6 +18510,48 @@ var zero = { ...base, currentRound: round, roundStars: { [round]: 0 } };
 var noAdvance = advanceRound(zero);
 if (noAdvance.currentRound !== round) bad("advanceRound advanced a 0-star round (gate broken)");
 else ok("0-star round correctly does NOT advance");
+var bo = { ...base, currentRound: round, hasOpenedIssueTreeHelper: true };
+bo = startConversation(bo, correctId);
+var boTree = getBranchingScenario(correctId, round);
+if (boTree.steps.length > 1) {
+  const firstOpt = boTree.steps[0].options.find((o) => o.optimal) ?? boTree.steps[0].options[0];
+  bo = processConversationChoice(bo, firstOpt.id);
+}
+bo = endConversation(bo);
+if (bo.conversationInProgress) bad("backing out left a conversation in progress");
+if (bo.actionsThisRound.includes(correctId)) bad("backing out mid-call wrongly recorded engagement");
+if (isAlreadyEngaged(bo, correctId)) bad("correct partner LOCKED OUT after starting a call then backing out");
+else ok("start a call then back out -> correct partner stays callable");
+var reopened = startConversation(bo, correctId);
+if (!reopened.conversationInProgress) bad("could not re-start the call after backing out");
+else ok("can re-start the call with the correct partner after backing out");
+var z = { ...base, currentRound: round, hasOpenedIssueTreeHelper: true };
+z = startConversation(z, correctId);
+var zTree = getBranchingScenario(correctId, round);
+var zChoices = zTree.steps.map((s2) => (s2.options.find((o) => o.optimal) ?? s2.options[0]).id);
+var injectedRisky = false;
+for (let i = 0; i < zTree.steps.length; i++) {
+  const risky = zTree.steps[i].options.find((o) => o.compliance === "risky");
+  if (risky) {
+    zChoices[i] = risky.id;
+    injectedRisky = true;
+    break;
+  }
+}
+if (injectedRisky) {
+  for (const cid of zChoices) z = processConversationChoice(z, cid);
+  const zStars = z.lastConversationGrade?.stars ?? -1;
+  if (zStars !== 0) bad(`right-partner call with a risky pick expected 0 stars, got ${zStars}`);
+  else ok("right partner + a risky pick scores 0 (as designed)");
+  if (!z.actionsThisRound.includes(correctId)) bad("completing a call did not record engagement");
+  if (isAlreadyEngaged(z, correctId)) bad("right partner LOCKED OUT after completing with 0 stars");
+  else ok("right partner + 0 stars -> stays callable (NOT locked out)");
+  const retaken = resetRoundForRetake(z);
+  if (retaken.actionsThisRound.includes(correctId)) bad("retake did not clear engagement for the right partner");
+  else ok("retake clears engagement -> right partner fully re-engageable");
+} else {
+  console.log(`  (skip) round ${round} tree has no risky option to force a 0`);
+}
 console.log(`
 ${fail === 0 ? "PASS" : "FAIL"} - progression test: ${fail} failure(s)`);
 if (fail > 0) process.exit(1);

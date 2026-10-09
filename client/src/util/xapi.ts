@@ -231,66 +231,8 @@ function buffer(s: Statement) {
   }
 }
 
-// ───────── Autopilot (test-run) sequential sender ─────────
-// When capturing, post() enqueues here instead of firing; flushAutopilot
-// then sends each statement one at a time (awaited, spaced) so none are
-// dropped by batch rejection. Used only by the hidden test-run tile.
-let autopilotQueue: Statement[] | null = null;
-const sleep = (ms: number) => new Promise<void>((r) => window.setTimeout(r, ms));
-
-export function beginAutopilotCapture(): void {
-  autopilotQueue = [];
-}
-
-export async function flushAutopilot(
-  onProgress?: (sent: number, total: number) => void,
-  delayMs = 70,
-): Promise<number> {
-  const q = autopilotQueue ?? [];
-  autopilotQueue = null;
-  const total = q.length;
-  if (!isXapiLaunch()) {
-    // Dev / preview: no LRS to send to, but still report progress so the
-    // UI animates to completion.
-    for (let i = 0; i < total; i++) onProgress?.(i + 1, total);
-    return total;
-  }
-  for (let i = 0; i < total; i++) {
-    // NO keepalive here: keepalive has a small per-page browser quota, and
-    // firing ~190 requests with it makes later ones queue and sit "pending"
-    // forever (which also stalls this awaited loop). A per-request timeout
-    // guarantees a single hung response can never freeze the whole run.
-    const ctrl = new AbortController();
-    const timer = window.setTimeout(() => ctrl.abort(), 8000);
-    try {
-      const res = await fetch(`${LAUNCH.endpoint}statements`, {
-        method: 'POST',
-        headers: headers(),
-        body: JSON.stringify([q[i]]),
-        signal: ctrl.signal,
-      });
-      // Drain the body so the request fully settles (and the Network entry
-      // resolves) rather than lingering.
-      await res.text().catch(() => undefined);
-    } catch {
-      /* timeout / network - the statement still reached the LRS; continue */
-    } finally {
-      window.clearTimeout(timer);
-    }
-    onProgress?.(i + 1, total);
-    if (delayMs) await sleep(delayMs);
-  }
-  return total;
-}
-
 function post(s: Statement) {
   buffer(s);
-  // Autopilot capture: defer to the sequential sender rather than the
-  // normal fire-and-forget path, so a full test run posts one at a time.
-  if (autopilotQueue) {
-    autopilotQueue.push(s);
-    return;
-  }
   if (!isXapiLaunch()) return;
   // One statement per request - a rejected statement can never drop
   // others, and the LMS marks completion from the launched-activity one.

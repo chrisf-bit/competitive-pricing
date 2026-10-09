@@ -19,7 +19,6 @@ import {
   resetForPlayAgain,
   startPracticeRound,
   calculateScore,
-  TOTAL_ROUNDS,
 } from '../engine/gameEngine';
 import {
   loadPersistedState,
@@ -442,32 +441,6 @@ export function useGame() {
   }, []);
 
   /**
-   * TEST ONLY (autopilot tile). Jump the sim to a completed state after the
-   * hidden test-run has emitted its xAPI dataset: mark clearance cleared,
-   * stamp the generated round stars, and route to the Debrief (so the
-   * Commercial Guide unlock can be checked). Not part of the normal flow.
-   */
-  const applyAutopilotCompletion = useCallback(
-    (roundStars: Record<number, 0 | 1 | 2 | 3>) => {
-      setState((s) => ({
-        ...s,
-        level0Progress: {
-          ...s.level0Progress,
-          cleared: true,
-          clearedForRegime: s.learnerProfile.market?.parityRegime ?? null,
-        },
-        roundStars,
-        currentRound: TOTAL_ROUNDS,
-        disclaimerAcknowledged: true,
-        gameComplete: true,
-        conversationInProgress: null,
-        screen: 'debrief',
-      }));
-    },
-    [],
-  );
-
-  /**
    * Mark an activity for retry from the Clearance Summary. Identifies
    * which items the learner got wrong (from existing results), drops
    * those wrong results so the new attempt can replace them, and
@@ -541,6 +514,5 @@ export function useGame() {
     markIssueTreeHelperOpened,
     markLevel0Cleared,
     markClearedForCurrentRegime,
-    applyAutopilotCompletion,
   };
 }
