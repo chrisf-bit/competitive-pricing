@@ -757,11 +757,16 @@ export function isAlreadyEngaged(state: GameState, partnerId: string): boolean {
     state.actionsThisRound.includes(partnerId) ||
     state.previouslyEngagedThisRound.includes(partnerId);
   if (!engaged) return false;
-  const regime = state.learnerProfile.market?.parityRegime ?? null;
-  const correctId = regime
-    ? getCorrectPartnerForRound(regime, state.currentRound)
-    : null;
+  // Default a missing regime to 'none' (same fallback the portfolio + grader
+  // use) so the round's correct partner always resolves - the exception below
+  // can never be skipped by a null regime.
+  const regime = state.learnerProfile.market?.parityRegime ?? 'none';
+  const correctId = getCorrectPartnerForRound(regime, state.currentRound);
   const roundPassed = (state.roundStars[state.currentRound] ?? 0) >= 1;
+  // The round's correct partner is ALWAYS engageable until the round is passed,
+  // no matter how the learner got here (backed out of a call, completed with
+  // 0 stars, engaged decoys first, navigated away, etc.). This one rule makes
+  // the lockout structurally impossible rather than per-scenario.
   if (partnerId === correctId && !roundPassed) return false;
   return true;
 }
