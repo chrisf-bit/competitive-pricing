@@ -733,6 +733,7 @@ export interface LastConversationGrade {
   pitchCorrect: boolean;
   noActiveMismatch: boolean;
   styleSum: number;
+  strongStyle: boolean;
   failureReason:
     | 'wrong-partner'
     | 'wrong-diagnosis'

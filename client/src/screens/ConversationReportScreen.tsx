@@ -203,25 +203,24 @@ export function ConversationReportScreen({
           <span
             style={{
               fontWeight: 700,
-              color:
-                grade.stars === 3
-                  ? 'var(--brand-yellow)'
-                  : grade.stars === 2
-                    ? 'var(--brand-blue-light, #62B6FF)'
-                    : 'rgba(255,255,255,0.65)',
+              color: grade.strongStyle
+                ? 'var(--brand-yellow)'
+                : grade.styleSum > 0
+                  ? 'var(--brand-blue-light, #62B6FF)'
+                  : 'rgba(255,255,255,0.65)',
             }}
           >
-            {/* Keyed off the star tier so this label can never contradict
-                the award. The tiers already encode the per-step style
-                average the grader uses (3 = optimal, 2 = strong, 1 = floor
-                met but style only neutral). */}
-            {grade.stars === 3
-              ? 'Optimal'
-              : grade.stars === 2
-                ? 'Strong'
-                : grade.stars === 1
+            {/* Keyed off actual style (strongStyle / styleSum), NOT the
+                star tier - so a 1-star call capped by a wrong pitch or a
+                borderline pick still reports the strong style it had,
+                rather than being mislabelled "Neutral". */}
+            {grade.strongStyle
+              ? 'Strong'
+              : grade.styleSum > 0
+                ? 'Positive'
+                : grade.styleSum === 0
                   ? 'Neutral'
-                  : 'Off-pitch'}
+                  : 'Mixed'}
           </span>
         </div>
 
@@ -410,10 +409,23 @@ function sublineFor(grade: LastConversationGrade): string {
     return "You spotted the right partner, named the right problem, recommended the right fix, and matched their style throughout. That's how it's done.";
   }
   if (grade.stars === 2) {
-    return 'You spotted the right partner, identified the issue and recommended the right fix - and you read their communication style well too.';
+    // At 2 stars the pitch is always right and every pick is compliant
+    // (either would cap at 1). The missing third star is one of diagnosis
+    // or style - say which, so the copy can't contradict the ticks.
+    return grade.diagnosisCorrect
+      ? 'Right partner, right diagnosis, and the right recommendation. Read their communication style a touch more closely for the third star.'
+      : 'Right partner, the right recommendation, and you read their style well. The diagnosis did not fully fit the data - that is the third star.';
   }
   if (grade.stars === 1) {
-    return 'You identified the issue and recommended the right fix on the right partner. There is room to read their style more closely next time.';
+    // A 1-star pass cleared the floor but was capped. Name the actual
+    // cause so the subline agrees with the criterion ticks above.
+    if (!grade.pitchCorrect) {
+      return 'Right partner, and a compliant call - but the recommendation you landed on would not have fixed the underlying issue. Nail the close to climb.';
+    }
+    if (!grade.allCompliant) {
+      return 'Right partner and the right recommendation, but one pick was commercially off. It stays within the rules, but it is not a call you would want to make - keep every pick clean to climb.';
+    }
+    return 'Right partner and the right recommendation. The diagnosis did not fully land and the style read was neutral - tighten both to climb.';
   }
   switch (grade.failureReason) {
     case 'wrong-partner':

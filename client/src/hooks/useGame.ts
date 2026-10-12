@@ -195,7 +195,14 @@ export function useGame() {
    */
   const onEnterRound = useCallback((round: number) => {
     setState((s) => {
-      if (round === s.currentRound) {
+      // The learner's genuine current round (the tile Round Select marks
+      // "Current") enters the real main run; any already-cleared round is
+      // a retry and goes to Practice Mode. Keying off !cleared (not just
+      // round === currentRound) means a resumed learner continues their
+      // run instead of being dropped into practice, and a cleared tile is
+      // always a practice retry even if currentRound happens to match it.
+      const cleared = (s.roundStars[round] ?? 0) >= 1;
+      if (round === s.currentRound && !cleared) {
         return enterRound(s, round);
       }
       return startPracticeRound(s, round);

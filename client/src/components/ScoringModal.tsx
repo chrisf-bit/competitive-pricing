@@ -115,24 +115,24 @@ export function ScoringModal({
           }}
         >
           <li>You called the <strong style={{ color: t.strong }}>right partner</strong> - the one who needed you most that round.</li>
-          <li>You <strong style={{ color: t.strong }}>diagnosed</strong> the real issue.</li>
-          <li>You closed with the <strong style={{ color: t.strong }}>strongest pitch</strong>.</li>
-          <li>You stayed <strong style={{ color: t.strong }}>compliant</strong> the whole way.</li>
-          <li>Your approach <strong style={{ color: t.strong }}>fit the partner's personality</strong> (no badly mismatched choices).</li>
+          <li>Every choice stayed <strong style={{ color: t.strong }}>compliant</strong> - no line that breaks the rules.</li>
+          <li>You never <strong style={{ color: t.strong }}>badly misjudged the partner's personality</strong> (no sharply mismatched choice).</li>
         </ul>
 
         <p style={{ fontSize: 14, color: t.body, lineHeight: 1.6, margin: '0 0 16px' }}>
           Miss any one of those and the round scores{' '}
           <strong style={{ color: t.strong }}>zero</strong> - but you can always
-          retake it. Once you clear that bar, your star count reflects{' '}
-          <strong style={{ color: t.strong }}>how closely you matched each partner's
-          communication style</strong>:
+          retake it. Clear that bar and you pass with at least one star. From
+          there, <strong style={{ color: t.strong }}>diagnosing the real issue</strong>,{' '}
+          <strong style={{ color: t.strong }}>closing with the right recommendation</strong>,
+          and <strong style={{ color: t.strong }}>matching the partner's style</strong>{' '}
+          lift you higher:
         </p>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginBottom: 18 }}>
-          <StarRow n={3} label="Consistently well matched to the partner" emptyColor={t.starEmpty} labelColor={t.body} />
-          <StarRow n={2} label="Mostly well matched" emptyColor={t.starEmpty} labelColor={t.body} />
-          <StarRow n={1} label="Cleared the basics, but the style was uneven" emptyColor={t.starEmpty} labelColor={t.body} />
+          <StarRow n={3} label="Right diagnosis, right recommendation, and well matched to their style" emptyColor={t.starEmpty} labelColor={t.body} />
+          <StarRow n={2} label="Right recommendation, with either the diagnosis or the style on point" emptyColor={t.starEmpty} labelColor={t.body} />
+          <StarRow n={1} label="Cleared the basics, but the recommendation or a borderline choice held it back" emptyColor={t.starEmpty} labelColor={t.body} />
         </div>
 
         <div
