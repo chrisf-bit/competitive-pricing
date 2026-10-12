@@ -1,5 +1,6 @@
 import { BarChart3, HelpCircle, LayoutGrid } from 'lucide-react';
 import type { GameScreen } from '../types';
+import { TOTAL_ROUNDS } from '../engine/gameEngine';
 
 interface HeaderProps {
   currentRound: number;
@@ -10,13 +11,8 @@ interface HeaderProps {
   onRoundSelect?: () => void;
 }
 
-// Capped at the contiguous max of SME-approved priority content.
-// Today: R1 John (placeholder), R2 Marina (placeholder), R3 Noble
-// Falcon (SME-approved). Bump as each new priority drop lands.
-// Mirror of the engine TOTAL_ROUNDS - the overall contiguous cap of
-// authored rounds (Level 1 R1-R10 + Level 2 OPC R11-R20). Keep in sync
-// with engine/gameEngine.ts.
-const TOTAL_ROUNDS = 20;
+// TOTAL_ROUNDS is imported from the engine (single source of truth) so
+// the dot count + "Round X of N" can't desync from the engine constant.
 
 // Screens where a "Round X of 20" tracker is meaningless: the Debrief
 // is the final wrap and Round Select is a hub for picking a round, not

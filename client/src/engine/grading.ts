@@ -66,6 +66,13 @@ export interface GradingResult {
   noActiveMismatch: boolean;
   /** Sum of partner-primary-style scores across all three phase picks. */
   styleSum: number;
+  /**
+   * True when the per-step style average cleared the "strong style" bar
+   * (>= 1.33). Decoupled from the star tier so the Report's style readout
+   * can reflect actual style rather than the overall award (a 1-star call
+   * capped by a wrong pitch / borderline pick can still have strong style).
+   */
+  strongStyle: boolean;
   /** Which floor criterion failed, or null when the floor was met. */
   failureReason: GradingFailureReason | null;
 }
@@ -196,6 +203,9 @@ export function gradeRound(input: GradingInput): GradingResult {
     pitchCorrect,
     noActiveMismatch,
     styleSum,
+    // Legacy 3-phase tier bar (absolute styleSum); dead today (no round
+    // routes here) but kept type-consistent with the branching grader.
+    strongStyle: styleSum >= 6,
     failureReason,
   };
 }
@@ -308,7 +318,10 @@ export function gradeBranchingRound(input: {
   const styleCount = styleScores.length;
   const strongStyle = styleCount > 0 && styleSum * 3 >= styleCount * 4;
   let stars: 0 | 1 | 2 | 3;
-  if (failureReason !== null) {
+  if (failureReason !== null || pickedOptions.length === 0) {
+    // A floor failure, or a degenerate empty/short call with no picks
+    // resolved, scores zero (defensive: the UI only grades after picks
+    // accumulate, but the grader shouldn't award a star for nothing).
     stars = 0;
   } else if (!pitchCorrect || hasBorderline) {
     stars = 1;
@@ -328,6 +341,7 @@ export function gradeBranchingRound(input: {
     pitchCorrect,
     noActiveMismatch,
     styleSum,
+    strongStyle,
     failureReason,
   };
 }

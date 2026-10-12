@@ -73,6 +73,26 @@ const LEVEL_2_LAST_ROUND = 20;
 const NEGLECT_TRUST_PENALTY = -5;
 const NEGLECT_METRIC_DECAY = -3;
 
+/**
+ * The first round the learner has NOT yet cleared (star < 1), scanning
+ * 1..TOTAL_ROUNDS; null when every round is cleared. This is the
+ * learner's genuine "current" round - the tile Round Select highlights.
+ * Used to resync `currentRound` on boot: persistence restores
+ * `roundStars` but always rebuilds `currentRound` as 1, so without this a
+ * resumed learner whose real next round is (say) 5 would be dropped into
+ * Practice Mode (`onEnterRound` saw 5 !== currentRound(1)), silently
+ * suppressing celebrations, milestone xAPI, and Debrief engagement data
+ * for the rest of the run.
+ */
+export function firstUnclearedRound(
+  roundStars: GameState['roundStars'],
+): number | null {
+  for (let r = 1; r <= TOTAL_ROUNDS; r++) {
+    if ((roundStars[r] ?? 0) < 1) return r;
+  }
+  return null;
+}
+
 // ── Create initial game state ──
 /**
  * Build a fresh game state. Optional overrides let a returning learner
@@ -94,12 +114,18 @@ export function createInitialState(overrides?: {
   partnerDetailTutorialShown?: boolean;
   disclaimerAcknowledged?: boolean;
 }): GameState {
+  // Resume at the learner's genuine current round, not always 1. A
+  // returning learner has their roundStars restored by persistence but
+  // currentRound rebuilt as 1; starting the partner baseline + round
+  // pointer here keeps the resumed run a real main run (see
+  // firstUnclearedRound + onEnterRound).
+  const startRound = firstUnclearedRound(overrides?.roundStars ?? {}) ?? 1;
   const partners = initialPartners.map((p) => {
-    // Apply the Round 1 baseline so the partner data the learner sees
-    // on first portfolio render matches the scripted narrative arc.
+    // Apply the current round's baseline so the partner data the learner
+    // sees on first portfolio render matches the scripted narrative arc.
     // For partners without a baseline (currently anyone outside No-
     // Parity), this just passes the partner through unchanged.
-    const withBaseline = applyRoundBaseline(p, 1);
+    const withBaseline = applyRoundBaseline(p, startRound);
     return {
       ...withBaseline,
       metricHistory: [{ round: 0, metrics: { ...withBaseline.metrics } }],
@@ -134,7 +160,7 @@ export function createInitialState(overrides?: {
     disclaimerAcknowledged: overrides?.disclaimerAcknowledged ?? false,
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
-    currentRound: 1,
+    currentRound: startRound,
     actionsThisRound: [],
     previouslyEngagedThisRound: [],
     engagedPartnerIds: [],
@@ -143,7 +169,7 @@ export function createInitialState(overrides?: {
     partners,
     marketContext: getMarketContext(
       overrides?.learnerProfile?.market?.parityRegime ?? null,
-      1,
+      startRound,
     ),
     roundSummaries: [],
     roundStars: overrides?.roundStars ?? {},
@@ -202,10 +228,17 @@ export function resetForPlayAgain(state: GameState): GameState {
       1,
     ),
     roundSummaries: [],
-    // Play Again preserves the learner's best round stars (and attempt
-    // counts) - a replay can only raise a score, never wipe it. Only a
-    // true reset (Splash "Reset progress" / DevNav) clears the star
-    // history via onRestart.
+    // Play Again is a fresh sequential journey (per this function's
+    // docstring + CLAUDE.md): wipe roundStars and roundAttempts so
+    // currentRound 1 is genuinely the current round again. Without this,
+    // every round still read "cleared" -> Round Select showed no
+    // "Current" tile (activeRound null) and the journey looked already
+    // done, so Play Again couldn't actually replay. Clearance status and
+    // identity are still preserved above (that is what separates this
+    // from the destructive onRestart). The "stars only go up" rule
+    // governs retakes / Practice within a run, not a deliberate replay.
+    roundStars: {},
+    roundAttempts: {},
     issueTreeHelperStates: {},
     hasOpenedIssueTreeHelper: false,
     conversationInProgress: null,
@@ -794,10 +827,19 @@ export function resetRoundForRetake(state: GameState): GameState {
   // partner as previously engaged disables their Begin Conversation
   // button (via alreadyEngaged in App.tsx), which would leave the
   // learner stuck on retake with no valid partner to call.
-  const regime = state.learnerProfile.market?.parityRegime ?? null;
-  const correctPartnerId = regime
-    ? getCorrectPartnerForRound(regime, state.currentRound)
-    : null;
+  // Default the regime to 'none' (NOT null) to match every other site -
+  // isAlreadyEngaged, both graders, and the portfolio resolver all use
+  // `?? 'none'`. With `?? null`, a no-market session (a DevNav jump
+  // straight to Portfolio, skipping Market Select) left correctPartnerId
+  // null, so wasWrongPartner was always false - the retaken decoy was
+  // dropped from actionsThisRound but never added to
+  // previouslyEngagedThisRound, so its "Engaged this round" flag vanished
+  // (and a second decoy wiped the first's too).
+  const regime = state.learnerProfile.market?.parityRegime ?? 'none';
+  const correctPartnerId = getCorrectPartnerForRound(
+    regime,
+    state.currentRound,
+  );
   const wasWrongPartner =
     correctPartnerId !== null && conv.partnerId !== correctPartnerId;
 
@@ -977,6 +1019,11 @@ export function enterRound(state: GameState, round: number): GameState {
     screen: 'portfolio',
     currentRound: round,
     selectedPartnerId: null,
+    // Clear any finished-call state so leaving a report via the Header
+    // "Round Select" and re-entering the round doesn't carry a stale
+    // conversation / grade into the portfolio.
+    conversationInProgress: null,
+    lastConversationGrade: null,
   };
 }
 
@@ -1071,8 +1118,15 @@ export function calculateScore(state: GameState): ScoreBreakdown {
   for (const round of Object.keys(state.roundStars)) {
     totalStars += state.roundStars[Number(round)] ?? 0;
   }
-  const maxStars = TOTAL_ROUNDS * 3;
-  const starsPct = maxStars > 0 ? totalStars / maxStars : 0;
+  // Grade out of the rounds actually played, not a fixed TOTAL_ROUNDS*3.
+  // On the normal end-of-journey path every round is cleared (you can't
+  // reach round N+1 without clearing N), so this is still 60 for a full
+  // run - but a partial-run debrief (practice / DevNav / "View your
+  // debrief" mid-journey) now reads an honest grade instead of one
+  // deflated by the rounds the learner never reached.
+  const playedRounds = Object.keys(state.roundStars).length;
+  const maxStars = Math.max(1, playedRounds) * 3;
+  const starsPct = totalStars / maxStars;
 
   let grade: 'A' | 'B' | 'C' | 'D';
   if (starsPct >= 0.89) grade = 'A';
